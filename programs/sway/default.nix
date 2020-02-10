@@ -105,6 +105,9 @@ in
     };
 
     home-manager.users.charlotte = { pkgs, ... }: {
+      nixpkgs.config.packageOverrides = pkgs: {
+        waybar = pkgs.waybar.override { pulseSupport = true; mpdSupport = false; };
+      };
       xdg.configFile."sway/config".text = ''
         # Config for sway
         #
