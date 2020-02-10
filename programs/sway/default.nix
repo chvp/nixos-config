@@ -104,6 +104,21 @@ let
       ${pkgs.sway}/bin/swaymsg exec "${pkgs.kitty}/bin/kitty -e ssh $1"
     }
 
+    systemctl_options() {
+      echo systemctl hibernate
+      echo systemctl poweroff
+      echo systemctl reboot
+      echo systemctl suspend
+    }
+
+    tmuxinator_options() {
+      ls ~/.config/tmuxinator | sed "s/\.yml$//" | sed "s/^/tmuxinator /"
+    }
+
+    tmuxinator() {
+      ${pkgs.sway}/bin/swaymsg exec "${pkgs.kitty}/bin/kitty -e ${pkgs.tmuxinator}/bin/tmuxinator start $1"
+    }
+
     windows_options() {
       ${pkgs.sway}/bin/swaymsg -t get_tree | ${pkgs.jq}/bin/jq -r 'recurse(.nodes[]?)|recurse(.floating_nodes[]?)|select(.layout=="none")|select(.app_id!="launcher")|select(.type=="con"),select(.type=="floating_con")|(if .app_id then .app_id else .window_properties.class end)+": "+.name+" ("+(.id|tostring)+")"' | sed "s/^/windows /"
     }
@@ -113,7 +128,7 @@ let
       ${pkgs.sway}/bin/swaymsg \[con_id="$window"\] focus
     }
 
-    CHOSEN=$(cat <(windows_options) <(ssh_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | ${pkgs.fzy}/bin/fzy --lines 36 | tail -n1)
+    CHOSEN=$(cat <(windows_options) <(tmuxinator_options) <(ssh_options) <(systemctl_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | ${pkgs.fzy}/bin/fzy --lines 36 | tail -n1)
 
     if [ -n "$CHOSEN" ]
     then
