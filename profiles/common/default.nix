@@ -3,6 +3,7 @@
 {
   imports = [
     ./secret.nix
+    ../../programs/direnv/default.nix
     ../../programs/git/default.nix
     ../../programs/ssh/default.nix
     ../../programs/tmux/default.nix

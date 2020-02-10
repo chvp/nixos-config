@@ -20,6 +20,10 @@
         };
       };
       ignores = [
+        ".envrc"
+        "shell.nix"
+        # Ruby dependencies in source tree
+        "/vendor/bundler"
         "**/*.patch"
       ];
       userEmail = config.custom.git.email;
