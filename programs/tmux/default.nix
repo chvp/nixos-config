@@ -13,5 +13,8 @@
       keyMode = "vi";
       tmuxinator.enable = true;
     };
+    xdg.configFile = {
+      "tmuxinator/accentor.yml".source = ./accentor.yml;
+    };
   };
 }

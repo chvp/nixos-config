@@ -1,0 +1,31 @@
+name: accentor
+project_root: "/home/charlotte/repos/accentor"
+windows:
+- api:
+    root: "/home/charlotte/repos/accentor/api"
+    layout: main-vertical
+    panes:
+    - nvim
+    - git status
+- web:
+    root: "/home/charlotte/repos/accentor/web"
+    layout: main-vertical
+    panes:
+    - nvim
+    - git status
+- run:
+    layout: even-horizontal
+    panes:
+      - postgres:
+        - cd api
+        - postgres
+      - rails:
+        - cd api
+        - bundle exec rails s
+      - delayed_job:
+        - cd api
+        - bundle exec rails jobs:work
+      - vue:
+        - cd web
+        - yarn run serve
+
