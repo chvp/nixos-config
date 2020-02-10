@@ -129,8 +129,7 @@ in
         set $menu $term --class launcher -e ${launcher}
 
         ### Output configuration
-
-        exec ${pkgs.kanshi}/bin/kanshi
+        exec_always pkill kanshi; exec ${pkgs.kanshi}/bin/kanshi
 
         workspace 1 output eDP-1
         workspace 2 output DP-3 DP-4 DP-5 HDMI-A-1 eDP-1
