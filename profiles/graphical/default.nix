@@ -10,6 +10,9 @@
     ../../programs/sway/default.nix
   ];
 
+  # Use LTS kernel until intel driver hangs are fixed
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
+
   services.pcscd = {
     enable = true;
     plugins = [ pkgs.ccid ];
