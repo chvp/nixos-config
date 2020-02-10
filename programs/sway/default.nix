@@ -33,6 +33,24 @@ let
   launcher = pkgs.writeScript "launcher" ''
     #!${pkgs.zsh}/bin/zsh
 
+    _sighandler() {
+      kill -INT "$child" 2>/dev/null
+    }
+
+    calc_options() {
+      echo "calc "
+    }
+
+    calc() {
+      if [ -n "$1" ]
+      then
+        ${pkgs.libqalculate}/bin/qalc "$1"
+        sleep 5
+      else
+        ${pkgs.libqalculate}/bin/qalc
+      fi
+    }
+
     emoji_options() {
       cat ${emoji_list} | sed "s/^/emoji /"
     }
@@ -40,6 +58,34 @@ let
     emoji() {
       char=$(echo -n "$1" | sed "s/^\([^ ]*\) .*/\1/")
       ${pkgs.sway}/bin/swaymsg exec -- "echo -n $char | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+    }
+
+    record_options() {
+      ${pkgs.sway}/bin/swaymsg -t get_outputs | ${pkgs.jq}/bin/jq -r '.[]["name"]' | sed "s/^/record /"
+      echo record select
+    }
+
+    record() {
+      filename="$(${xdg-user-dirs}/bin/xdg-user-dir VIDEOS)/$(date +'screenrecording_%y-%m-%d-%H%M%S.mp4')"
+
+      trap _sighandler SIGINT
+      if [[ "$1" = "select" ]]
+      then
+        ${pkgs.wf-recorder}/bin/wf-recorder -g "$(${pkgs.slurp}/bin/slurp)" -f "$filename" &
+      else
+        wf-recorder -o $! -f "$filename" &
+      fi
+      child=$!
+      wait "$child"
+      # We wait two times, because the first wait exits when the process receives a signal. The process might have finished though, so we ignore errors.
+      wait "$child" 2>/dev/null
+      if [ -f "$filename" ]
+      then
+        echo "Saved as $filename"
+      else
+        echo "Something went wrong while recording"
+      fi
+      sleep 5
     }
 
     run_options() {
@@ -67,7 +113,7 @@ let
       ${pkgs.sway}/bin/swaymsg \[con_id="$window"\] focus
     }
 
-    CHOSEN=$(cat <(windows_options) <(ssh_options) <(run_options) <(emoji_options) | ${pkgs.fzy}/bin/fzy --lines 36 | tail -n1)
+    CHOSEN=$(cat <(windows_options) <(ssh_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | ${pkgs.fzy}/bin/fzy --lines 36 | tail -n1)
 
     if [ -n "$CHOSEN" ]
     then
@@ -77,7 +123,6 @@ let
       $PREFIX $WORD
     fi
   '';
-
 in
   {
     imports = [
@@ -87,10 +132,7 @@ in
     programs = {
       sway = {
         enable = true;
-        extraPackages = with pkgs; [
-          wf-recorder
-          xwayland
-        ];
+        extraPackages = [ pkgs.xwayland ];
         extraSessionCommands = ''
           export XDG_SESSION_TYPE=wayland
           export QT_WAYLAND_DISABLE_WINDOWDECORATION=1

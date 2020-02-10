@@ -63,9 +63,11 @@
         okular
         rambox
         ranger
+        slurp
         sshfs
         thunderbird
         vanilla-dmz
+        wf-recorder
         wl-clipboard
       ];
       file = {
