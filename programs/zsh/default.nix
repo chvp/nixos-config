@@ -8,8 +8,12 @@
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
+      autocd = true;
       dotDir = ".config/zsh";
-      history.path = "\$HOME/.config/zsh/zsh_history";
+      history = {
+        expireDuplicatesFirst = true;
+        path = "\$HOME/.config/zsh/zsh_history";
+      };
       oh-my-zsh = {
         enable = true;
         plugins = [
