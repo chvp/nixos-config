@@ -10,13 +10,13 @@
     ../../programs/sway/default.nix
   ];
 
-  # Use LTS kernel until intel driver hangs are fixed
-  boot.kernelPackages = pkgs.linuxPackages_4_19;
-
   services.pcscd = {
     enable = true;
     plugins = [ pkgs.ccid ];
   };
+
+  # Early KMS start
+  boot.initrd.kernelModules = [ "i915" ];
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -69,6 +69,7 @@
         vanilla-dmz
         wf-recorder
         wl-clipboard
+        xdg-user-dirs
       ];
       file = {
         ".icons/default/index.theme".text = ''
@@ -79,6 +80,11 @@
         '';
       };
     };
+    programs.zsh.loginExtra = ''
+      if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
+        exec sway
+      fi
+    '';
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         gtk-theme = "Arc";

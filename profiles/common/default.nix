@@ -10,6 +10,9 @@
     ../../programs/zsh/default.nix
   ];
 
+  # Use latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   i18n = {
     defaultLocale = "en_IE.UTF-8";
     extraLocaleSettings = {
