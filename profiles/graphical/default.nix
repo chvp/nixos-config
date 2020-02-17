@@ -15,9 +15,6 @@
     plugins = [ pkgs.ccid ];
   };
 
-  # Early KMS start
-  boot.initrd.kernelModules = [ "i915" ];
-
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
