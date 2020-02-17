@@ -61,6 +61,7 @@
         moreutils
         mpv
         okular
+        pavucontrol
         rambox
         ranger
         slurp
