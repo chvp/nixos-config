@@ -138,6 +138,14 @@ let
       $PREFIX $WORD
     fi
   '';
+
+  color-picker = pkgs.writeScriptBin "color_picker" ''
+    #!${pkgs.zsh}/bin/zsh
+
+    color=$(${pkgs.grim}/bin/grim -t png -g "$(${pkgs.slurp}/bin/slurp -p)" - | ${pkgs.imagemagick}/bin/convert png:- -unique-colors txt:- | grep -o '#[A-F0-9]\+')
+
+    ${pkgs.sway}/bin/swaymsg exec -- "echo -n '$color' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+  '';
 in
   {
     imports = [
@@ -165,6 +173,7 @@ in
       nixpkgs.config.packageOverrides = pkgs: {
         waybar = pkgs.waybar.override { pulseSupport = true; mpdSupport = false; };
       };
+      home.packages = [ color-picker ];
       xdg.configFile."sway/config".text = ''
         # Config for sway
         #
