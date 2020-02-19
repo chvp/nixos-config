@@ -146,6 +146,43 @@ let
 
     ${pkgs.sway}/bin/swaymsg exec -- "echo -n '$color' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
   '';
+
+  screenshot = pkgs.writeScript "screenshot" ''
+    #!${pkgs.zsh}/bin/zsh
+
+    while getopts ":rd" opt
+    do
+      case "''${opt}" in
+        r)
+          remote=true
+          ;;
+        d)
+          delay=true
+          ;;
+      esac
+    done
+
+    dims="$(${pkgs.slurp}/bin/slurp)"
+
+    if [[ -n "$delay" ]]
+    then
+      sleep 5
+    fi
+
+    if [[ -n "$remote" ]]
+    then
+      name=$(${pkgs.utillinux}/bin/uuidgen).png
+      ${pkgs.grim}/bin/grim -t png -g "$dims" - | ${pkgs.openssh}/bin/ssh sunspear "cat > /usr/share/nginx/html/screenshots/$name"
+      path="https://cvpetegem.be/screenshots/$name"
+    else
+      name=$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
+      path="$(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/$name"
+      ${pkgs.grim}/bin/grim -g "$dims" "$path"
+    fi
+
+    ${pkgs.sway}/bin/swaymsg exec -- "echo -n '$path' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+    ${pkgs.libnotify}/bin/notify-send "Screenshot taken" "$path"
+  '';
 in
   {
     imports = [
@@ -260,14 +297,12 @@ in
           xkb_layout "us"
           xkb_variant "altgr-intl"
           xkb_numlock enabled
-          xkb_options "compose:caps"
         }
 
         input "1241:513:USB-HID_Keyboard" {
           xkb_layout "us"
           xkb_variant "altgr-intl"
           xkb_numlock enabled
-          xkb_options "compose:caps"
         }
 
         input "2:7:SynPS/2_Synaptics_TouchPad" {
@@ -307,7 +342,10 @@ in
         bindsym $mod+c exec ${pkgs.swaylock}/bin/swaylock -f -c 000000
 
         # screenshot
-        bindsym Print exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" $(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/$(${pkgs.coreutils}/bin/date +'screenshot_%Y-%m-%d-%H%M%S.png')
+        bindsym Print exec ${screenshot}
+        bindsym Alt+Print exec ${screenshot} -d
+        bindsym Shift+Print exec ${screenshot} -r
+        bindsym Alt+Shift+Print exec ${screenshot} -r -d
 
         # audio
         bindsym XF86AudioRaiseVolume exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pacmd list-sinks |${pkgs.gawk}/bin/awk '/* index:/{print $3}') +5%
