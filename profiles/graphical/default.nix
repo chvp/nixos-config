@@ -42,6 +42,10 @@
 
   users.users.charlotte.extraGroups = [ "networkmanager" "video" "input" ];
 
+  environment.systemPackages = with pkgs; [ eid-mw ];
+
+  system.autoUpgrade.enable = true;
+
   home-manager.users.charlotte = { pkgs, ... }: {
     nixpkgs = {
       config = {
@@ -51,7 +55,6 @@
     home = {
       packages = with pkgs; [
         chromium
-        eid-mw
         firefox
         hledger
         libreoffice

@@ -15,11 +15,11 @@
   };
 
   networking = {
-    hostName = "pentos";
+    hostName = "oldtown";
     wireless.enable = true;
     interfaces = {
       enp0s31f6.useDHCP = true;
-      wlp0s20f3.useDHCP = true;
+      wlp2s0.useDHCP = true;
     };
   };
 
@@ -39,6 +39,6 @@
 
   # Machine-specific application settings
   custom = {
-    git.email = "charlotte@vanpetegem.me";
+    git.email = "charlotte.vanpetegem@ugent.be";
   };
 }
