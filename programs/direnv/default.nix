@@ -12,5 +12,6 @@
       };
     };
     services.lorri.enable = true;
+    xdg.dataFile.nix-shells.source = ./shells;
   };
 }

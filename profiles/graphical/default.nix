@@ -40,18 +40,16 @@
     ];
   };
 
-  users.users.charlotte.extraGroups = [ "networkmanager" "video" "input" ];
+  virtualisation.docker.enable = true;
+
+  users.users.charlotte.extraGroups = [ "docker" "video" "input" ];
 
   environment.systemPackages = with pkgs; [ eid-mw ];
 
   system.autoUpgrade.enable = true;
 
   home-manager.users.charlotte = { pkgs, ... }: {
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
-    };
+    nixpkgs.config.allowUnfree = true;
     home = {
       packages = with pkgs; [
         chromium
