@@ -207,9 +207,6 @@ in
     };
 
     home-manager.users.charlotte = { pkgs, ... }: {
-      nixpkgs.overlays = [
-        (self: super: { waybar = super.waybar.override { pulseSupport = true; mpdSupport = false; }; })
-      ];
       home.packages = [ color-picker ];
       xdg.configFile."sway/config".text = ''
         # Config for sway
