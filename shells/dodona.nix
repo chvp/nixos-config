@@ -1,6 +1,5 @@
 let
   pkgs = import <nixpkgs> {};
-  nixpkgs-master = import <nixpkgs-master> {};
   baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
   nodePackages = import ../packages/node/default.nix { inherit pkgs; };
 in
@@ -20,7 +19,7 @@ in
         child=$!
         wait $child
       '')
-      (nixpkgs-master.neovim.override {
+      (neovim.override {
         configure = {
           customRC = baseVimConfig.customRC + ''
             " Required for operations modifying multiple buffers like rename

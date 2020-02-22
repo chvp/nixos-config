@@ -1,6 +1,5 @@
 let
   pkgs = import <nixpkgs> {};
-  nixpkgs-master = import <nixpkgs-master> {};
   baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
 in
   pkgs.mkShell {
@@ -10,7 +9,7 @@ in
       ruby_2_7
       taglib
       zlib
-      (nixpkgs-master.neovim.override {
+      (neovim.override {
         configure = {
           customRC = baseVimConfig.customRC + ''
             " Required for operations modifying multiple buffers like rename

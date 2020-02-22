@@ -1,12 +1,9 @@
 { pkgs, ... }:
 
-let
-  nixpkgs-master = import <nixpkgs-master> {};
-in
 {
   home-manager.users.charlotte = { pkgs, ... }: {
       nixpkgs.overlays = [
-        (self: super: { waybar = nixpkgs-master.waybar.override { pulseSupport = true; mpdSupport = false; }; })
+        (self: super: { waybar = super.waybar.override { pulseSupport = true; mpdSupport = false; }; })
       ];
     xdg.configFile = {
       "waybar/config".text = ''

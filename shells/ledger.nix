@@ -1,10 +1,9 @@
 let
   pkgs = import <nixpkgs> {};
-  nixpkgs-master = import <nixpkgs-master> {};
   baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
 in
   pkgs.mkShell {
-    buildInputs = with nixpkgs-master; [
+    buildInputs = with pkgs; [
       (neovim.override {
         configure = {
           customRC = baseVimConfig.customRC;
