@@ -7,8 +7,9 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     nodejs-12_x
     yarn
-    (neovim.override {
-      configure = {
+    (
+      neovim.override {
+        configure = {
           customRC = baseVimConfig.customRC + ''
             " Required for operations modifying multiple buffers like rename
             set hidden
@@ -26,7 +27,8 @@ pkgs.mkShell {
               ];
             }
           ];
-      };
-    })
+        };
+      }
+    )
   ];
 }

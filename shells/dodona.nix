@@ -3,14 +3,15 @@ let
   baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
   nodePackages = import ../packages/node/default.nix { inherit pkgs; };
 in
-  pkgs.mkShell {
-    buildInputs = with pkgs; [
-      ruby
-      yarn
-      nodejs-12_x
-      libmysqlclient
-      zlib
-      (pkgs.writeScriptBin "start-db" ''
+pkgs.mkShell {
+  buildInputs = with pkgs; [
+    ruby
+    yarn
+    nodejs-12_x
+    libmysqlclient
+    zlib
+    (
+      pkgs.writeScriptBin "start-db" ''
         #!${pkgs.zsh}/bin/zsh
 
         trap "docker stop dodona-db" 0
@@ -18,8 +19,10 @@ in
 
         child=$!
         wait $child
-      '')
-      (neovim.override {
+      ''
+    )
+    (
+      neovim.override {
         configure = {
           customRC = baseVimConfig.customRC + ''
             " Required for operations modifying multiple buffers like rename
@@ -42,9 +45,10 @@ in
             }
           ];
         };
-      })
-    ];
-    shellHook = ''
-      export DATABASE_URL="mysql2://root:dodona@127.0.0.1:3306/dodona"
-    '';
-  }
+      }
+    )
+  ];
+  shellHook = ''
+    export DATABASE_URL="mysql2://root:dodona@127.0.0.1:3306/dodona"
+  '';
+}

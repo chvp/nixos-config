@@ -2,9 +2,9 @@
 
 {
   home-manager.users.charlotte = { pkgs, ... }: {
-      nixpkgs.overlays = [
-        (self: super: { waybar = super.waybar.override { pulseSupport = true; mpdSupport = false; }; })
-      ];
+    nixpkgs.overlays = [
+      (self: super: { waybar = super.waybar.override { pulseSupport = true; mpdSupport = false; }; })
+    ];
     xdg.configFile = {
       "waybar/config".text = ''
         {

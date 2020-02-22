@@ -7,7 +7,7 @@
   # Early KMS start
   boot.initrd.kernelModules = [ "i915" ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/0eb8b94a-5fc2-4b24-962a-94b3675b6f5b";
