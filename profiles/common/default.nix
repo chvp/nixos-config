@@ -27,6 +27,12 @@
 
   nix.trustedUsers = [ "@wheel" ];
 
+  services.locate = {
+    enable = true;
+    interval = "hourly";
+    localuser = "charlotte";
+  };
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
