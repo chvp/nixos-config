@@ -8,7 +8,7 @@ in
       nixpkgs.overlays = [
         (self: super: {
           neovim = nixpkgs-master.neovim.override {
-            configure = (import ../direnv/shells/vim-base.nix { pkgs = self; }) ;
+            configure = (import ./base.nix { pkgs = self; }) ;
           };
         })
       ];
