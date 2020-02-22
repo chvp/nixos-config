@@ -55,6 +55,7 @@
         chromium
         firefox
         hledger
+        joplin-desktop
         libreoffice
         moreutils
         mpv
