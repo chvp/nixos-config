@@ -126,6 +126,8 @@ in
       "" Plugin configuration
       let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
       let g:ale_fix_on_save = 1
+
+      let g:deoplete#enable_at_startup = 1
     '';
     vam.knownPlugins = pkgs.vimPlugins // customPlugins;
     vam.pluginDictionaries = [
@@ -133,6 +135,7 @@ in
         names = [
           "ale"
           "auto-pairs"
+          "deoplete-nvim"
           "editorconfig-vim"
           "snow-color-theme"
           "vim-nix"

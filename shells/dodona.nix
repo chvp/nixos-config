@@ -26,8 +26,6 @@ in
             " Required for operations modifying multiple buffers like rename
             set hidden
 
-            let g:deoplete#enable_at_startup = 1
-
             let g:LanguageClient_serverCommands = {
             \ 'ruby': ['${solargraph}/bin/solargraph', 'stdio'],
             \ 'javascript': ['${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
@@ -38,7 +36,6 @@ in
           vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or []) ++ [
             {
               names = [
-                "deoplete-nvim"
                 "LanguageClient-neovim"
                 "vim-ruby"
                 "yats-vim"
