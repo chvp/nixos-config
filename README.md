@@ -1,6 +1,6 @@
-## NixOS config
+# NixOS config
 
-# Setting up a new dev environment
+## Setting up a new dev environment
 
 * Create a new `*.nix` file in the shells directory that describes the environment (this is the hard part).
 
