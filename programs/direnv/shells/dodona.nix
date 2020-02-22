@@ -11,20 +11,11 @@ in
       (pkgs.writeScriptBin "start-db" ''
         #!${pkgs.zsh}/bin/zsh
 
-        _sighandler() {
-          docker stop dodona-db
-        }
-
-        trap _sighandler SIGINT
-        trap _sighandler SIGTERM
-        trap _sighandler SIGHUP
-
+        trap "docker stop dodona-db" 0
         docker run --name dodona-db -p 3306:3306 --rm -v $(git rev-parse --show-toplevel)/tmp/db:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest &
 
         child=$!
         wait $child
-        # We wait two times, because the first wait exits when the process receives a signal. The process might have finished though, so we ignore errors.
-        wait $child 2>/dev/null
       '')
     ];
     shellHook = ''
