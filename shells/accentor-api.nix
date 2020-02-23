@@ -49,5 +49,7 @@ pkgs.mkShell {
       listen_addresses = '''
       unix_socket_directories = '$PGHOST'
     HERE
+    export GEM_HOME="$PWD/vendor/rubygems"
+    export PATH="$GEM_HOME/bin:$PATH"
   '';
 }
