@@ -88,7 +88,7 @@ in
       assign [app_id="firefox"] 1
       assign [app_id="thunderbird"] 3
       assign [class="Joplin"] 3
-      assign [class="rambox"] 4
+      assign [class="Rambox"] 4
 
       # Launcher popup
       for_window [app_id="launcher"] floating enable
