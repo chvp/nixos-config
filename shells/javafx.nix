@@ -1,5 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
+  baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
   jdtls = import ../packages/jdtls/default.nix { inherit pkgs; stdenv = pkgs.stdenv; };
 in
 pkgs.mkShell {

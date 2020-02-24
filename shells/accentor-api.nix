@@ -32,24 +32,21 @@ pkgs.mkShell {
         };
       }
     )
+    (
+      pkgs.writeScriptBin "start-db" ''
+        #!/${pkgs.zsh}/bin/zsh
+
+        trap "docker stop accentor-db" 0
+        docker run --name accentor-db -p 5432:5432 --rm -v accentor-db-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=accentor postgres:latest &
+
+        child=$!
+        wait $child
+      ''
+    )
   ];
   shellHook = ''
-    export PGDATA=$PWD/tmp/postgres_data
-    export PGHOST=$PWD/tmp/postgres
-    export PGDATABASE=postgres
-    export DATABASE_URL="postgresql:///postgres?host=$PGHOST"
-    if [ ! -d $PGHOST ]; then
-      mkdir -p $PGHOST
-    fi
-    if [ ! -d $PGDATA ]; then
-      echo 'Initializing postgresql database...'
-      initdb $PGDATA --auth=trust >/dev/null
-    fi
-    cat >"$PGDATA/postgresql.conf" <<HERE
-      listen_addresses = '''
-      unix_socket_directories = '$PGHOST'
-    HERE
-    export GEM_HOME="$PWD/vendor/rubygems"
+    export DATABASE_URL="postgres://postgres:accentor@127.0.0.1:5432/accentor"
+    export GEM_HOME="$PWD/vendor/rubygems/$(ruby -e 'puts RUBY_VERSION')"
     export PATH="$GEM_HOME/bin:$PATH"
   '';
 }

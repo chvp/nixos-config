@@ -50,7 +50,7 @@ pkgs.mkShell {
   ];
   shellHook = ''
     export DATABASE_URL="mysql2://root:dodona@127.0.0.1:3306/dodona"
-    export GEM_HOME="$PWD/vendor/rubygems"
+    export GEM_HOME="$PWD/vendor/rubygems/$(ruby -e 'puts RUBY_VERSION')"
     export PATH="$GEM_HOME/bin:$PATH"
   '';
 }

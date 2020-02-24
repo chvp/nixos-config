@@ -13,12 +13,15 @@ windows:
     panes:
     - nvim
     - git status
+- desktop:
+    root: "/home/charlotte/repos/accentor/desktop"
+    layout: main-vertical
+    panes:
+    - nvim
+    - git status
 - run:
     layout: even-horizontal
     panes:
-      - postgres:
-        - cd api
-        - postgres
       - rails:
         - cd api
         - bundle exec rails s
@@ -28,4 +31,6 @@ windows:
       - vue:
         - cd web
         - yarn run serve
-
+      - postgres:
+        - cd api
+        - start-db
