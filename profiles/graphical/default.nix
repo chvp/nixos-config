@@ -53,6 +53,7 @@
     home = {
       packages = with pkgs; [
         chromium
+        citrix_workspace
         firefox
         hledger
         joplin-desktop
