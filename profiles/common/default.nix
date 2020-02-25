@@ -27,6 +27,15 @@
 
   nix.trustedUsers = [ "@wheel" ];
 
+  programs.gnupg.agent.enable = true;
+  programs.gnupg.package = pkgs.gnupg.override { guiSupport = true; };
+
+  home-manager.users.charlotte = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      unzip
+    ];
+  };
+
   services.locate = {
     enable = true;
     interval = "hourly";
