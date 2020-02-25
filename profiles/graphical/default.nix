@@ -62,7 +62,14 @@
         mpv
         okular
         pavucontrol
-        rambox
+        (
+          rambox.overrideAttrs (
+            oldAttrs: rec {
+              buildInputs = oldAttrs.buildInputs ++ [ libappindicator-gtk3 ];
+              runtimeDependencies = oldAttrs.runtimeDependencies ++ [ libappindicator-gtk3 ];
+            }
+          )
+        )
         ranger
         slurp
         sshfs
