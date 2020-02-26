@@ -44,6 +44,9 @@
         DEFAULT_USER = "charlotte";
         EDITOR = "nvim";
       };
+      shellAliases = {
+        upgrade = "sudo nix-channel --update && sudo nixos-rebuild switch";
+      };
     };
   };
 }
