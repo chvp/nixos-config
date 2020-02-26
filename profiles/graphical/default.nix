@@ -46,7 +46,7 @@
 
   environment.systemPackages = with pkgs; [ eid-mw ];
 
-  system.autoUpgrade.enable = true;
+  programs.gnupg.package = pkgs.gnupg.override { guiSupport = true; };
 
   home-manager.users.charlotte = { pkgs, ... }: {
     nixpkgs.config.allowUnfree = true;

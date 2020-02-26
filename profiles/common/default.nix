@@ -39,7 +39,6 @@
   };
 
   programs.gnupg.agent.enable = true;
-  programs.gnupg.package = pkgs.gnupg.override { guiSupport = true; };
 
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
