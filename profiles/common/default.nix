@@ -25,7 +25,18 @@
     keyMap = "us";
   };
 
-  nix.trustedUsers = [ "@wheel" ];
+  nix = {
+    trustedUsers = [ "@wheel" ];
+    gc = {
+      automatic = true;
+      dates = "hourly";
+      options = "--delete-older-than 7d";
+    };
+    optimise = {
+      automatic = true;
+      dates = [ "hourly" ];
+    };
+  };
 
   programs.gnupg.agent.enable = true;
   programs.gnupg.package = pkgs.gnupg.override { guiSupport = true; };
@@ -40,6 +51,12 @@
     enable = true;
     interval = "hourly";
     localuser = "charlotte";
+  };
+
+  system.autoUpgrade = {
+    allowReboot = false;
+    enable = true;
+    dates = "hourly";
   };
 
   users = {
