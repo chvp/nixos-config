@@ -11,7 +11,10 @@
   };
 
   config.home-manager.users.charlotte = { pkgs, ... }: {
-    home.packages = [ pkgs.git-crypt ];
+    home.packages = with pkgs; [
+      gitAndTools.gitflow
+      git-crypt
+    ];
     programs.git = {
       enable = true;
       extraConfig = {
