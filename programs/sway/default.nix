@@ -5,11 +5,11 @@ let
   launcher = import ./launcher.nix { inherit pkgs stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
+  status-configuration = import ./status-configuration.nix { inherit pkgs; };
 in
 {
   imports = [
     ./kanshi.nix
-    ./waybar.nix
   ];
   programs = {
     sway = {
@@ -290,7 +290,23 @@ in
       #
       # Read `man 5 sway-bar` for more information about this section.
       bar {
-        swaybar_command ${pkgs.waybar}/bin/waybar
+        position top
+
+        status_command ${pkgs.i3status-rust}/bin/i3status-rs ${status-configuration}
+        status_padding 0
+
+        font Fira Code Normal 9
+
+        colors {
+          statusline #535c65
+          background #fbffff
+          focused_workspace #2b7ab2 #2b7ab2 #fbffff
+          active_workspace #6d7782 #6d7782 #fbffff
+          inactive_workspace #fbffff #fbffff #535c65
+          urgent_workspace #ae5865 #ae5865 #fbffff
+        }
+
+        icon_theme Arc
       }
 
       default_border pixel

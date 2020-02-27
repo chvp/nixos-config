@@ -26,6 +26,7 @@ in
     set autoread
     "" Theming
 
+    set termguicolors
     set background=light
     colorscheme snow
 
