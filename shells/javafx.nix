@@ -6,8 +6,15 @@ in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     jdk11
-    openjfx11
     jdtls
+    openjfx11
+    (
+      pkgs.writeScriptBin "pmd" ''
+        #!${pkgs.zsh}/bin/zsh
+
+        ${pkgs.pmd}/bin/run.sh pmd $@
+      ''
+    )
     (
       neovim.override {
         configure = {
@@ -18,6 +25,10 @@ pkgs.mkShell {
             let g:LanguageClient_serverCommands = {
             \ 'java': ['${jdtls}/bin/jdtls'],
             \ }
+
+            let g:ale_linters = {
+            \ 'java': ['pmd'],
+            \}
           '';
           vam.knownPlugins = baseVimConfig.vam.knownPlugins;
           vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or []) ++ [
