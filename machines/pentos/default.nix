@@ -14,14 +14,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  networking = {
-    hostName = "pentos";
-    wireless.enable = true;
-    interfaces = {
-      enp0s31f6.useDHCP = true;
-      wlp0s20f3.useDHCP = true;
-    };
-  };
+  networking.hostName = "pentos";
 
   time.timeZone = "Europe/Brussels";
 

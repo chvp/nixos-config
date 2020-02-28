@@ -40,9 +40,15 @@
     ];
   };
 
+  networking.networkmanager = {
+    enable = true;
+    packages = [ pkgs.networkmanager-vpnc ];
+    wifi.macAddress = "random";
+  };
+
   virtualisation.docker.enable = true;
 
-  users.users.charlotte.extraGroups = [ "docker" "video" "input" ];
+  users.users.charlotte.extraGroups = [ "docker" "video" "input" "networkmanager" ];
 
   environment.systemPackages = with pkgs; [ eid-mw ];
 
@@ -60,6 +66,7 @@
         libreoffice
         moreutils
         mpv
+        networkmanagerapplet
         okular
         pavucontrol
         (

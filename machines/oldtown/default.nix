@@ -14,14 +14,7 @@
     efi.canTouchEfiVariables = true;
   };
 
-  networking = {
-    hostName = "oldtown";
-    wireless.enable = true;
-    interfaces = {
-      enp0s31f6.useDHCP = true;
-      wlp2s0.useDHCP = true;
-    };
-  };
+  networking.hostName = "oldtown";
 
   time.timeZone = "Europe/Brussels";
 
