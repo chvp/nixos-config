@@ -87,8 +87,8 @@ in
       # Common programs
       assign [app_id="firefox"] 1
       assign [app_id="thunderbird"] 3
-      assign [class="Joplin"] 3
       assign [class="Rambox"] 4
+      assign [class="Joplin"] 4
 
       # Launcher popup
       for_window [app_id="launcher"] floating enable
@@ -177,6 +177,11 @@ in
 
       # lock screen
       bindsym $mod+c exec ${pkgs.swaylock}/bin/swaylock -f -c 000000
+
+      # toggle the current view inhibiting idle
+      bindsym $mod+i inhibit_idle open; border normal; mark --add inhibiting_idle
+      bindsym $mod+Shift+i inhibit_idle none; border pixel; unmark inhibiting_idle
+
 
       # screenshot
       bindsym Print exec ${screenshot}/bin/screenshot
@@ -272,18 +277,6 @@ in
 
       # move focus to the parent container
       bindsym $mod+a focus parent
-      #
-      # Scratchpad:
-      #
-      # Sway has a "scratchpad", which is a bag of holding for windows.
-      # You can send windows there and get them back later.
-
-      # Move the currently focused window to the scratchpad
-      bindsym $mod+Shift+minus move scratchpad
-
-      # Show the next scratchpad window or hide the focused scratchpad window.
-      # If there are multiple scratchpad windows, this command cycles through them.
-      bindsym $mod+minus scratchpad show
 
       #
       # Status Bar:
