@@ -5,6 +5,7 @@
     ./secret.nix
     ../../programs/direnv/default.nix
     ../../programs/git/default.nix
+    ../../programs/neovim/default.nix
     ../../programs/ssh/default.nix
     ../../programs/tmux/default.nix
     ../../programs/zsh/default.nix

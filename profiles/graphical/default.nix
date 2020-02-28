@@ -5,7 +5,6 @@
     ./secret.nix
     ../../programs/dropbox/default.nix
     ../../programs/kitty/default.nix
-    ../../programs/neovim/default.nix
     ../../programs/syncthing/default.nix
     ../../programs/sway/default.nix
   ];
