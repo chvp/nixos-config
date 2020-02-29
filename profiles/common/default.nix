@@ -45,6 +45,22 @@
     home.packages = with pkgs; [
       htop
       inotify-tools
+      (
+        symlinkJoin {
+          name = "openssh";
+          paths = [
+            (
+              pkgs.writeScriptBin "ssh" ''
+                #!${zsh}/bin/zsh
+
+                export TERM=xterm-256color
+                ${openssh}/bin/ssh $@
+              ''
+            )
+            openssh
+          ];
+        }
+      )
       unzip
     ];
   };

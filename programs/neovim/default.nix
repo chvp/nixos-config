@@ -2,15 +2,12 @@ with import <nixpkgs> {};
 
 {
   home-manager.users.charlotte = { pkgs, ... }: {
-    nixpkgs.overlays = [
+    home.packages = [
       (
-        self: super: {
-          neovim = super.neovim.override {
-            configure = (import ./base.nix { pkgs = self; });
-          };
+        pkgs.neovim.override {
+          configure = (import ./base.nix { inherit pkgs; });
         }
       )
     ];
-    home.packages = [ pkgs.neovim ];
   };
 }
