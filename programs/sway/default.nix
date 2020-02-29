@@ -87,7 +87,6 @@ in
       # Common programs
       assign [app_id="firefox"] 1
       assign [app_id="thunderbird"] 3
-      assign [class="Rambox"] 4
       assign [class="Joplin"] 4
 
       # Launcher popup
@@ -100,7 +99,6 @@ in
       #
       exec ${pkgs.firefox}/bin/firefox
       exec ${pkgs.thunderbird}/bin/thunderbird
-      exec ${pkgs.rambox}/bin/rambox
       exec ${pkgs.joplin-desktop}/bin/joplin-desktop
 
       ### Input configuration
