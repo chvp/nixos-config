@@ -5,6 +5,7 @@
     <home-manager/nixos>
     ./hardware.nix
     ./secret.nix
+    ../../profiles/bluetooth/default.nix
     ../../profiles/common/default.nix
     ../../profiles/graphical/default.nix
   ];
