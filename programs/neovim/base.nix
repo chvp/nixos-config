@@ -10,16 +10,6 @@ let
       sha256 = "099fky1bpppac5785bhx1jc26gfpm8n837p8487j1rf1lwq83q33";
     };
   };
-
-  customPlugins.deoplete-old = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    name = "deoplete-old";
-    src = pkgs.fetchFromGitHub {
-      owner = "Shougo";
-      repo = "deoplete.nvim";
-      rev = "e897e0142759eb7ffbded565389243cab6a09a91";
-      sha256 = "00qvpp7r7wnccfzfxq9xa4cyxzr25zy32mpxscnbixc7cv5y981x";
-    };
-  };
 in
 {
   customRC = ''
@@ -146,7 +136,7 @@ in
       names = [
         "ale"
         "auto-pairs"
-        "deoplete-old"
+        "deoplete-nvim"
         "editorconfig-vim"
         "snow-color-theme"
         "vim-nix"
