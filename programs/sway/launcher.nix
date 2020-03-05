@@ -1,5 +1,4 @@
 { pkgs, stdenv }:
-
 let
   gemoji = pkgs.buildRubyGem {
     pname = "gemoji";

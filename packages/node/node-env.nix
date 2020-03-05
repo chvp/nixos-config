@@ -1,7 +1,6 @@
 # This file originates from node2nix
 
 { stdenv, nodejs, python2, utillinux, libtool, runCommand, writeTextFile }:
-
 let
   python = if nodejs ? python then nodejs.python else python2;
 
@@ -393,7 +392,6 @@ let
     , buildPhase ? "true"
     , ...
     }@args:
-
       let
         extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" "dontStrip" "dontNpmInstall" "preRebuild" "unpackPhase" "buildPhase" ];
       in
@@ -467,7 +465,6 @@ let
     , buildPhase ? "true"
     , ...
     }@args:
-
       let
         extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" ];
 

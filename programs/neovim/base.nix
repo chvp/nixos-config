@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 let
   customPlugins.snow-color-theme = pkgs.vimUtils.buildVimPlugin {
     name = "snow";

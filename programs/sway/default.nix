@@ -1,6 +1,5 @@
 with import <nixpkgs> {};
 { pkgs, ... }:
-
 let
   launcher = import ./launcher.nix { inherit pkgs stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
