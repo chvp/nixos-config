@@ -114,32 +114,13 @@ in
       # You can get the names of your inputs by running: swaymsg -t get_inputs
       # Read `man 5 sway-input` for more information about this section.
 
-      input "1:1:AT_Translated_Set_2_keyboard" {
+      input type:keyboard {
         xkb_layout "us"
         xkb_variant "altgr-intl"
         xkb_numlock enabled
       }
 
-      input "3141:30354:SONiX_USB_Keyboard" {
-        xkb_layout "us"
-        xkb_variant "altgr-intl"
-        xkb_numlock enabled
-      }
-
-      input "1241:513:USB-HID_Keyboard" {
-        xkb_layout "us"
-        xkb_variant "altgr-intl"
-        xkb_numlock enabled
-      }
-
-      input "1102:4639:DELL081C:00_044E:121F_Touchpad" {
-        drag enabled
-        dwt enabled
-        scroll_method two_finger
-        tap enabled
-      }
-
-      input "2:7:SynPS/2_Synaptics_TouchPad" {
+      input type:touchpad {
         drag enabled
         dwt enabled
         scroll_method two_finger
