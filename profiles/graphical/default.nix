@@ -4,6 +4,7 @@
   imports = [
     ./secret.nix
     ../../programs/dropbox/default.nix
+    ../../programs/i3/default.nix
     ../../programs/kitty/default.nix
     ../../programs/syncthing/default.nix
     ../../programs/sway/default.nix
@@ -89,6 +90,10 @@
     programs.zsh.loginExtra = ''
       if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
         exec sway
+      fi
+
+      if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty2" ]]; then
+        exec startx
       fi
     '';
     dconf.settings = {
