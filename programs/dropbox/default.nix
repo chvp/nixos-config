@@ -2,7 +2,6 @@
 
 {
   home-manager.users.charlotte = { pkgs, ... }: {
-    home.packages = [ pkgs.dropbox-cli ];
     systemd.user.services = {
       dropbox = {
         Unit = {
