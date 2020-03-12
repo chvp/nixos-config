@@ -73,6 +73,7 @@
         ranger
         slurp
         sshfs
+        teams
         thunderbird
         vanilla-dmz
         wf-recorder
