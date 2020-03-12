@@ -4,7 +4,7 @@
   imports = [
     ./secret.nix
     ../../programs/dropbox/default.nix
-    ../../programs/i3/default.nix
+    ../../programs/openbox/default.nix
     ../../programs/kitty/default.nix
     ../../programs/syncthing/default.nix
     ../../programs/sway/default.nix

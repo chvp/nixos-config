@@ -5,24 +5,9 @@ let
   status-configuration = import ../sway/status-configuration.nix { inherit pkgs; };
 in
 {
-  services.xserver = {
-    enable = true;
-    displayManager.startx.enable = true;
-    libinput = {
-      enable = true;
-      disableWhileTyping = true;
-      scrollMethod = "twofinger";
-      tapping = true;
-      tappingDragLock = true;
-    };
-    xkbVariant = "altgr-intl";
-  };
+  imports = [ ../base-x/default.nix ];
   home-manager.users.charlotte = { pkgs, ... }: {
-    home.packages = [ pkgs.xorg.xauth ];
-    home.file.".xinitrc".text = "source ~/.xsession";
     xsession = {
-      enable = true;
-      numlock.enable = true;
       windowManager.i3 = {
         enable = true;
         config = {
