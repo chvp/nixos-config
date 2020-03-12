@@ -61,6 +61,7 @@
         chromium
         citrix_workspace
         firefox
+        google-chrome
         hledger
         joplin-desktop
         libreoffice
