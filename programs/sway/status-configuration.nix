@@ -1,5 +1,18 @@
 { pkgs, ... }:
 
+let
+  mic-status = pkgs.writeScript "mic-status" ''
+    #!${pkgs.zsh}/bin/zsh
+
+    if [ "$(${pkgs.pulseaudio}/bin/pactl list sources | grep -o 'Mute: yes')" = "Mute: yes" ]
+    then
+      echo -e '\uf131'
+    else
+      echo -e '\uf130'
+    fi
+  '';
+in
+
 pkgs.writeText "configuration.toml" ''
   [theme]
   name = "gruvbox-light"
@@ -60,6 +73,12 @@ pkgs.writeText "configuration.toml" ''
 
   [[block]]
   block = "sound"
+
+  [[block]]
+  block = "custom"
+  command = "${mic-status}"
+  interval = 1
+  on_click = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle"
 
   [[block]]
   block = "time"

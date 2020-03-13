@@ -170,9 +170,10 @@ in
       bindsym Alt+Shift+Print exec ${screenshot}/bin/screenshot -r -d
 
       # audio
-      bindsym XF86AudioRaiseVolume exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pacmd list-sinks |${pkgs.gawk}/bin/awk '/* index:/{print $3}') +5%
-      bindsym XF86AudioLowerVolume exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume $(${pkgs.pulseaudio}/bin/pacmd list-sinks |${pkgs.gawk}/bin/awk '/* index:/{print $3}') -5%
-      bindsym XF86AudioMute exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute $(${pkgs.pulseaudio}/bin/pacmd list-sinks |${pkgs.gawk}/bin/awk '/* index:/{print $3}') toggle
+      bindsym XF86AudioRaiseVolume exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%
+      bindsym XF86AudioLowerVolume exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%
+      bindsym XF86AudioMute exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
+      bindsym XF86AudioMicMute exec ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
       # brightness
       bindsym XF86MonBrightnessDown exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
