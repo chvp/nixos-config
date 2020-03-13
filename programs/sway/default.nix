@@ -87,6 +87,7 @@ in
       assign [app_id="firefox"] 1
       assign [app_id="thunderbird"] 3
       assign [class="Joplin"] 4
+      assign [class="Microsoft Teams - Preview"] 6
 
       # Launcher popup
       for_window [app_id="launcher"] floating enable
@@ -99,6 +100,7 @@ in
       exec ${pkgs.firefox}/bin/firefox
       exec ${pkgs.thunderbird}/bin/thunderbird
       exec ${pkgs.joplin-desktop}/bin/joplin-desktop
+      exec ${pkgs.teams}/bin/teams
 
       ### Input configuration
       #
