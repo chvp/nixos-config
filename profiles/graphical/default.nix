@@ -51,11 +51,20 @@
 
   virtualisation.docker.enable = true;
 
-  users.users.charlotte.extraGroups = [ "docker" "video" "input" "networkmanager" ];
+  users.users.charlotte.extraGroups = [
+    "adbusers"
+    "docker"
+    "input"
+    "networkmanager"
+    "video"
+  ];
 
   environment.systemPackages = with pkgs; [ eid-mw ];
 
-  programs.gnupg.package = pkgs.gnupg.override { guiSupport = true; };
+  programs = {
+    gnupg.package = pkgs.gnupg.override { guiSupport = true; };
+    adb.enable = true;
+  };
 
   home-manager.users.charlotte = { pkgs, ... }: {
     nixpkgs.config.allowUnfree = true;

@@ -13,6 +13,12 @@ windows:
     panes:
     - nvim
     - git status
+- android:
+    root: "/home/charlotte/repos/accentor/android"
+    layout: main-vertical
+    panes:
+    - nvim
+    - git status
 - desktop:
     root: "/home/charlotte/repos/accentor/desktop"
     layout: main-vertical
