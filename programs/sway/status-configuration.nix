@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 let
   mic-status = pkgs.writeScript "mic-status" ''
     #!${pkgs.zsh}/bin/zsh
@@ -12,7 +11,6 @@ let
     fi
   '';
 in
-
 pkgs.writeText "configuration.toml" ''
   [theme]
   name = "gruvbox-light"
