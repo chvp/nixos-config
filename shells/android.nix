@@ -33,9 +33,34 @@ let
       sha256 = "1yqzxabhpc4jbdlzhsysp0vi1ayqg0vnpysvx4ynd9961q2fk3sz";
     };
   };
+
+  gradle-fhs-nix = pkgs.writeText "gradle-fhs.nix" ''
+    { run ? "bash" }:
+    let
+      pkgs = import <nixpkgs> {};
+    in
+      (pkgs.buildFHSUserEnv {
+        name = "android-sdk-env";
+        targetPkgs = pkgs: (with pkgs;
+          [
+            glibc
+          ]);
+        profile = '''
+          export ANDROID_SDK_ROOT="${composed.androidsdk}/libexec/android-sdk/"
+        ''';
+        runScript = "''${run}";
+      }).env
+    '';
+
+    gradle-run-script = pkgs.writeScriptBin "gradle" ''
+      #!${pkgs.bash}/bin/bash
+
+      nix-shell --argstr run "./gradlew $@" "${gradle-fhs-nix}"
+    '';
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
+    gradle-run-script
     jdk11
     jdtls
     (
