@@ -55,7 +55,8 @@ let
     gradle-run-script = pkgs.writeScriptBin "gradle" ''
       #!${pkgs.bash}/bin/bash
 
-      nix-shell --argstr run "./gradlew $@" "${gradle-fhs-nix}"
+      REPO_ROOT="$(git rev-parse --show-toplevel)"
+      nix-shell --argstr run "$REPO_ROOT/gradlew $@" "${gradle-fhs-nix}"
     '';
 
     sign-release = pkgs.writeScriptBin "sign-release" ''
@@ -65,8 +66,8 @@ let
       REPO_ROOT="$(git rev-parse --show-toplevel)"
       APK_DIR="$REPO_ROOT/app/build/outputs/apk/release"
 
-      rm "$APK_DIR/app-release-unsigned-aligned.apk"
-      rm "$APK_DIR/app-release.apk"
+      rm "$APK_DIR/"*
+      ${gradle-run-script}/bin/gradle assembleRelease
       "$BUILD_TOOLS_PATH/zipalign" -v -p 4 "$APK_DIR/app-release-unsigned.apk" "$APK_DIR/app-release-unsigned-aligned.apk"
 
       "$BUILD_TOOLS_PATH/apksigner" sign --ks "$REPO_ROOT/keystore.jks" --out "$APK_DIR/app-release.apk" "$APK_DIR/app-release-unsigned-aligned.apk"
