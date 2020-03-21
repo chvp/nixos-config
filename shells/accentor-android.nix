@@ -35,16 +35,13 @@ let
   };
 
   gradle-fhs-nix = pkgs.writeText "gradle-fhs.nix" ''
-    { run ? "bash" }:
+    { run }:
     let
       pkgs = import <nixpkgs> {};
     in
       (pkgs.buildFHSUserEnv {
         name = "android-sdk-env";
-        targetPkgs = pkgs: (with pkgs;
-          [
-            glibc
-          ]);
+        targetPkgs = pkgs: (with pkgs; [ glibc ]);
         profile = '''
           export ANDROID_SDK_ROOT="${composed.androidsdk}/libexec/android-sdk/"
         ''';
@@ -105,7 +102,4 @@ pkgs.mkShell {
       }
     )
   ];
-  shellHook = ''
-    export ANDROID_SDK_ROOT="${composed.androidsdk}/libexec/android-sdk/"
-  '';
 }
