@@ -5,10 +5,11 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
+    chromedriver
+    libmysqlclient
+    nodejs-12_x
     ruby
     yarn
-    nodejs-12_x
-    libmysqlclient
     zlib
     (
       pkgs.writeScriptBin "start-db" ''
