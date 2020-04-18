@@ -45,7 +45,7 @@ let
         profile = '''
           export ANDROID_SDK_ROOT="${composed.androidsdk}/libexec/android-sdk/"
         ''';
-        runScript = "''${run}";
+        runScript = "bash -c '''''${run}'''";
       }).env
   '';
 
@@ -53,7 +53,7 @@ let
     #!${pkgs.bash}/bin/bash
 
     REPO_ROOT="$(git rev-parse --show-toplevel)"
-    nix-shell --argstr run "$REPO_ROOT/gradlew $@" "${gradle-fhs-nix}"
+    nix-shell --argstr run "\"$REPO_ROOT/gradlew $@\"" "${gradle-fhs-nix}"
   '';
 
   sign-release = pkgs.writeScriptBin "sign-release" ''
@@ -102,4 +102,7 @@ pkgs.mkShell {
       }
     )
   ];
+  shellHook = ''
+    export ANDROID_SDK_ROOT="${composed.androidsdk}/libexec/android-sdk/"
+  '';
 }
