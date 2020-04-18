@@ -4,7 +4,7 @@
   imports = [
     ./secret.nix
     ../../programs/dropbox/default.nix
-    ../../programs/openbox/default.nix
+    ../../programs/i3/default.nix
     ../../programs/kitty/default.nix
     ../../programs/syncthing/default.nix
     ../../programs/sway/default.nix
@@ -72,6 +72,7 @@
       packages = with pkgs; [
         chromium
         citrix_workspace
+        deluge
         firefox
         google-chrome
         hledger
@@ -79,6 +80,7 @@
         libreoffice
         moreutils
         mpv
+        mumble
         networkmanagerapplet
         okular
         pavucontrol
@@ -91,6 +93,7 @@
         wf-recorder
         wl-clipboard
         xdg-user-dirs
+        zeroad
       ];
       file = {
         ".icons/default/index.theme".text = ''
