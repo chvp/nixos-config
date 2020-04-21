@@ -280,7 +280,7 @@ in
           urgent_workspace #ae5865 #ae5865 #fbffff
         }
 
-        icon_theme Arc
+        icon_theme Breeze
       }
 
       default_border pixel
