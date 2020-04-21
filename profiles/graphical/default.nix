@@ -61,10 +61,7 @@
 
   environment.systemPackages = with pkgs; [ eid-mw ];
 
-  programs = {
-    gnupg.package = pkgs.gnupg.override { guiSupport = true; };
-    adb.enable = true;
-  };
+  programs.adb.enable = true;
 
   home-manager.users.charlotte = { pkgs, ... }: {
     nixpkgs.config.allowUnfree = true;
@@ -75,6 +72,7 @@
         deluge
         firefox
         google-chrome
+        (gnupg.override { guiSupport = true; })
         hledger
         joplin-desktop
         libreoffice

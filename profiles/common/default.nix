@@ -39,8 +39,6 @@
     };
   };
 
-  programs.gnupg.agent.enable = true;
-
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
       htop
