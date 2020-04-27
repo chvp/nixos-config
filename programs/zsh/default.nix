@@ -43,6 +43,7 @@
       sessionVariables = {
         DEFAULT_USER = "charlotte";
         EDITOR = "nvim";
+        PASSWORD_STORE_DIR = "$HOME/repos/passwords";
       };
       shellAliases = {
         upgrade = "sudo nix-channel --update && sudo nixos-rebuild switch";

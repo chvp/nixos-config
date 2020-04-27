@@ -59,7 +59,7 @@
           ];
         }
       )
-      (pass.withExtensions (ext: [ext.pass-otp ext.pass-genphrase]))
+      (pass.withExtensions (ext: [ ext.pass-otp ext.pass-genphrase ]))
       ripgrep
       unzip
     ];

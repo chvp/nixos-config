@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 { ... }:
 let
   launcher = import ../sway/launcher.nix { inherit pkgs stdenv; };
@@ -26,7 +26,7 @@ in
               statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status-configuration}";
             }
           ];
-          floating.criteria = [ { class = "launcher"; } { class = "accentor.Main"; } ];
+          floating.criteria = [{ class = "launcher"; } { class = "accentor.Main"; }];
           fonts = [ "Fira Code Normal 9" ];
           menu = "${pkgs.kitty}/bin/kitty --class launcher -e ${launcher}/bin/launcher";
           modifier = "Mod4";

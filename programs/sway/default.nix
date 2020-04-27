@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 { pkgs, ... }:
 let
   launcher = import ./launcher.nix { inherit pkgs stdenv; };

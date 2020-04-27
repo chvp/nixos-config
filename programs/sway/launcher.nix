@@ -7,7 +7,6 @@ let
     type = "gem";
     version = "4.0.0.rc2";
   };
-
   emoji_list = stdenv.mkDerivation {
     name = "emoji_list";
     buildInputs = [ pkgs.ruby gemoji ];

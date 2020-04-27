@@ -5,7 +5,7 @@ let
   python = if nodejs ? python then nodejs.python else python2;
 
   # Create a tar wrapper that filters all the 'Ignoring unknown extended header keyword' noise
-  tarWrapper = runCommand "tarWrapper" {} ''
+  tarWrapper = runCommand "tarWrapper" { } ''
     mkdir -p $out/bin
 
     cat > $out/bin/tar <<EOF
@@ -20,27 +20,27 @@ let
   buildNodeSourceDist =
     { name, version, src, ... }:
 
-      stdenv.mkDerivation {
-        name = "node-tarball-${name}-${version}";
-        inherit src;
-        buildInputs = [ nodejs ];
-        buildPhase = ''
-          export HOME=$TMPDIR
-          tgzFile=$(npm pack | tail -n 1) # Hooks to the pack command will add output (https://docs.npmjs.com/misc/scripts)
-        '';
-        installPhase = ''
-          mkdir -p $out/tarballs
-          mv $tgzFile $out/tarballs
-          mkdir -p $out/nix-support
-          echo "file source-dist $out/tarballs/$tgzFile" >> $out/nix-support/hydra-build-products
-        '';
-      };
-
+    stdenv.mkDerivation {
+      name = "node-tarball-${name}-${version}";
+      inherit src;
+      buildInputs = [ nodejs ];
+      buildPhase = ''
+        export HOME=$TMPDIR
+        tgzFile=$(npm pack | tail -n 1) # Hooks to the pack command will add output (https://docs.npmjs.com/misc/scripts)
+      '';
+      installPhase = ''
+        mkdir -p $out/tarballs
+        mv $tgzFile $out/tarballs
+        mkdir -p $out/nix-support
+        echo "file source-dist $out/tarballs/$tgzFile" >> $out/nix-support/hydra-build-products
+      '';
+    };
   includeDependencies = { dependencies }:
-    stdenv.lib.optionalString (dependencies != [])
+    stdenv.lib.optionalString (dependencies != [ ])
       (
-        stdenv.lib.concatMapStrings (
-          dependency:
+        stdenv.lib.concatMapStrings
+          (
+            dependency:
             ''
               # Bundle the dependencies of the package
               mkdir -p node_modules
@@ -54,11 +54,11 @@ let
 
               cd ..
             ''
-        ) dependencies
+          ) dependencies
       );
 
   # Recursively composes the dependencies of a package
-  composePackage = { name, packageName, src, dependencies ? [], ... }@args:
+  composePackage = { name, packageName, src, dependencies ? [ ], ... }@args:
     ''
       DIR=$(pwd)
       cd $TMPDIR
@@ -104,7 +104,6 @@ let
       cd ..
       ${stdenv.lib.optionalString (builtins.substring 0 1 packageName == "@") "cd .."}
     '';
-
   pinpointDependencies = { dependencies, production }:
     let
       pinpointDependenciesFromPackageJSON = writeTextFile {
@@ -160,10 +159,10 @@ let
         '';
       };
     in
-      ''
-        node ${pinpointDependenciesFromPackageJSON} ${if production then "production" else "development"}
+    ''
+      node ${pinpointDependenciesFromPackageJSON} ${ if production then "production" else "development"}
 
-        ${stdenv.lib.optionalString (dependencies != [])
+      ${stdenv.lib.optionalString (dependencies != [ ])
         ''
           if [ -d node_modules ]
           then
@@ -172,13 +171,12 @@ let
               cd ..
           fi
         ''}
-      '';
+    '';
 
   # Recursively traverses all dependencies of a package and pinpoints all
   # dependencies in the package.json file to the versions that are actually
   # being used.
-
-  pinpointDependenciesOfPackage = { packageName, dependencies ? [], production ? true, ... }@args:
+  pinpointDependenciesOfPackage = { packageName, dependencies ? [ ], production ? true, ... }@args:
     ''
       if [ -d "${packageName}" ]
       then
@@ -191,7 +189,7 @@ let
 
   # Extract the Node.js source code which is used to compile packages with
   # native bindings
-  nodeSources = runCommand "node-sources" {} ''
+  nodeSources = runCommand "node-sources" { } ''
     tar --no-same-owner --no-same-permissions -xf ${nodejs.src}
     mv node-* $out
   '';
@@ -318,69 +316,68 @@ let
       fs.writeFileSync("package-lock.json", JSON.stringify(lockObj, null, 2));
     '';
   };
-
   prepareAndInvokeNPM = { packageName, bypassCache, reconstructLock, npmFlags, production }:
     let
       forceOfflineFlag = if bypassCache then "--offline" else "--registry http://www.example.com";
     in
-      ''
-        # Pinpoint the versions of all dependencies to the ones that are actually being used
-        echo "pinpointing versions of dependencies..."
-        source $pinpointDependenciesScriptPath
+    ''
+      # Pinpoint the versions of all dependencies to the ones that are actually being used
+      echo "pinpointing versions of dependencies..."
+      source $pinpointDependenciesScriptPath
 
-        # Patch the shebangs of the bundled modules to prevent them from
-        # calling executables outside the Nix store as much as possible
-        patchShebangs .
+      # Patch the shebangs of the bundled modules to prevent them from
+      # calling executables outside the Nix store as much as possible
+      patchShebangs .
 
-        # Deploy the Node.js package by running npm install. Since the
-        # dependencies have been provided already by ourselves, it should not
-        # attempt to install them again, which is good, because we want to make
-        # it Nix's responsibility. If it needs to install any dependencies
-        # anyway (e.g. because the dependency parameters are
-        # incomplete/incorrect), it fails.
-        #
-        # The other responsibilities of NPM are kept -- version checks, build
-        # steps, postprocessing etc.
+      # Deploy the Node.js package by running npm install. Since the
+      # dependencies have been provided already by ourselves, it should not
+      # attempt to install them again, which is good, because we want to make
+      # it Nix's responsibility. If it needs to install any dependencies
+      # anyway (e.g. because the dependency parameters are
+      # incomplete/incorrect), it fails.
+      #
+      # The other responsibilities of NPM are kept -- version checks, build
+      # steps, postprocessing etc.
 
-        export HOME=$TMPDIR
-        cd "${packageName}"
-        runHook preRebuild
+      export HOME=$TMPDIR
+      cd "${packageName}"
+      runHook preRebuild
 
-        ${stdenv.lib.optionalString bypassCache ''
+      ${stdenv.lib.optionalString bypassCache ''
         ${stdenv.lib.optionalString reconstructLock ''
-        if [ -f package-lock.json ]
-        then
-            echo "WARNING: Reconstruct lock option enabled, but a lock file already exists!"
-            echo "This will most likely result in version mismatches! We will remove the lock file and regenerate it!"
-            rm package-lock.json
-        else
-            echo "No package-lock.json file found, reconstructing..."
-        fi
+          if [ -f package-lock.json ]
+          then
+              echo "WARNING: Reconstruct lock option enabled, but a lock file already exists!"
+              echo "This will most likely result in version mismatches! We will remove the lock file and regenerate it!"
+              rm package-lock.json
+          else
+              echo "No package-lock.json file found, reconstructing..."
+          fi
 
-        node ${reconstructPackageLock}
-      ''}
+          node ${reconstructPackageLock}
+        ''}
 
         node ${addIntegrityFieldsScript}
       ''}
 
-        npm ${forceOfflineFlag} --nodedir=${nodeSources} ${npmFlags} ${stdenv.lib.optionalString production "--production"} rebuild
+      npm ${forceOfflineFlag} --nodedir=${nodeSources} ${npmFlags} ${stdenv.lib.optionalString production "--production"} rebuild
 
-        if [ "$dontNpmInstall" != "1" ]
-        then
-            # NPM tries to download packages even when they already exist if npm-shrinkwrap is used.
-            rm -f npm-shrinkwrap.json
+      if [ "$dontNpmInstall" != "1" ]
+      then
+          # NPM tries to download packages even when they already exist if npm-shrinkwrap is used.
+          rm -f npm-shrinkwrap.json
 
-            npm ${forceOfflineFlag} --nodedir=${nodeSources} ${npmFlags} ${stdenv.lib.optionalString production "--production"} install
-        fi
-      '';
+          npm ${forceOfflineFlag} --nodedir=${nodeSources} ${npmFlags} ${stdenv.lib.optionalString production "--production"} install
+      fi
+    '';
 
   # Builds and composes an NPM package including all its dependencies
   buildNodePackage =
     { name
     , packageName
     , version
-    , dependencies ? []
-    , buildInputs ? []
+    , dependencies ? [ ]
+    , buildInputs ? [ ]
     , production ? true
     , npmFlags ? ""
     , dontNpmInstall ? false
@@ -392,60 +389,61 @@ let
     , buildPhase ? "true"
     , ...
     }@args:
-      let
-        extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" "dontStrip" "dontNpmInstall" "preRebuild" "unpackPhase" "buildPhase" ];
-      in
-        stdenv.mkDerivation (
-          {
-            name = "node_${name}-${version}";
-            buildInputs = [ tarWrapper python nodejs ]
-            ++ stdenv.lib.optional (stdenv.isLinux) utillinux
-            ++ stdenv.lib.optional (stdenv.isDarwin) libtool
-            ++ buildInputs;
+    let
+      extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" "dontStrip" "dontNpmInstall" "preRebuild" "unpackPhase" "buildPhase" ];
+    in
+    stdenv.mkDerivation
+      (
+        {
+          name = "node_${name}-${version}";
+          buildInputs = [ tarWrapper python nodejs ]
+          ++ stdenv.lib.optional (stdenv.isLinux) utillinux
+          ++ stdenv.lib.optional (stdenv.isDarwin) libtool
+          ++ buildInputs;
 
-            inherit dontStrip; # Stripping may fail a build for some package deployments
-            inherit dontNpmInstall preRebuild unpackPhase buildPhase;
+          inherit dontStrip; # Stripping may fail a build for some package deployments
+          inherit dontNpmInstall preRebuild unpackPhase buildPhase;
 
-            compositionScript = composePackage args;
-            pinpointDependenciesScript = pinpointDependenciesOfPackage args;
+          compositionScript = composePackage args;
+          pinpointDependenciesScript = pinpointDependenciesOfPackage args;
 
-            passAsFile = [ "compositionScript" "pinpointDependenciesScript" ];
+          passAsFile = [ "compositionScript" "pinpointDependenciesScript" ];
 
-            installPhase = ''
-              # Create and enter a root node_modules/ folder
-              mkdir -p $out/lib/node_modules
-              cd $out/lib/node_modules
+          installPhase = ''
+            # Create and enter a root node_modules/ folder
+            mkdir -p $out/lib/node_modules
+            cd $out/lib/node_modules
 
-              # Compose the package and all its dependencies
-              source $compositionScriptPath
+            # Compose the package and all its dependencies
+            source $compositionScriptPath
 
-              ${prepareAndInvokeNPM { inherit packageName bypassCache reconstructLock npmFlags production; }}
+            ${prepareAndInvokeNPM { inherit packageName bypassCache reconstructLock npmFlags production; }}
 
-              # Create symlink to the deployed executable folder, if applicable
-              if [ -d "$out/lib/node_modules/.bin" ]
-              then
-                  ln -s $out/lib/node_modules/.bin $out/bin
-              fi
+            # Create symlink to the deployed executable folder, if applicable
+            if [ -d "$out/lib/node_modules/.bin" ]
+            then
+                ln -s $out/lib/node_modules/.bin $out/bin
+            fi
 
-              # Create symlinks to the deployed manual page folders, if applicable
-              if [ -d "$out/lib/node_modules/${packageName}/man" ]
-              then
-                  mkdir -p $out/share
-                  for dir in "$out/lib/node_modules/${packageName}/man/"*
-                  do
-                      mkdir -p $out/share/man/$(basename "$dir")
-                      for page in "$dir"/*
-                      do
-                          ln -s $page $out/share/man/$(basename "$dir")
-                      done
-                  done
-              fi
+            # Create symlinks to the deployed manual page folders, if applicable
+            if [ -d "$out/lib/node_modules/${packageName}/man" ]
+            then
+                mkdir -p $out/share
+                for dir in "$out/lib/node_modules/${packageName}/man/"*
+                do
+                    mkdir -p $out/share/man/$(basename "$dir")
+                    for page in "$dir"/*
+                    do
+                        ln -s $page $out/share/man/$(basename "$dir")
+                    done
+                done
+            fi
 
-              # Run post install hook, if provided
-              runHook postInstall
-            '';
-          } // extraArgs
-        );
+            # Run post install hook, if provided
+            runHook postInstall
+          '';
+        } // extraArgs
+      );
 
   # Builds a development shell
   buildNodeShell =
@@ -453,8 +451,8 @@ let
     , packageName
     , version
     , src
-    , dependencies ? []
-    , buildInputs ? []
+    , dependencies ? [ ]
+    , buildInputs ? [ ]
     , production ? true
     , npmFlags ? ""
     , dontNpmInstall ? false
@@ -465,10 +463,10 @@ let
     , buildPhase ? "true"
     , ...
     }@args:
-      let
-        extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" ];
-
-        nodeDependencies = stdenv.mkDerivation (
+    let
+      extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" ];
+      nodeDependencies = stdenv.mkDerivation
+        (
           {
             name = "node-dependencies-${name}-${version}";
 
@@ -495,11 +493,11 @@ let
               cp ${src}/package.json .
               chmod 644 package.json
               ${stdenv.lib.optionalString bypassCache ''
-              if [ -f ${src}/package-lock.json ]
-              then
-                  cp ${src}/package-lock.json .
-              fi
-            ''}
+                if [ -f ${src}/package-lock.json ]
+                then
+                    cp ${src}/package-lock.json .
+                fi
+              ''}
 
               # Go to the parent folder to make sure that all packages are pinpointed
               cd ..
@@ -516,28 +514,28 @@ let
             '';
           } // extraArgs
         );
-      in
-        stdenv.mkDerivation {
-          name = "node-shell-${name}-${version}";
+    in
+    stdenv.mkDerivation {
+      name = "node-shell-${name}-${version}";
 
-          buildInputs = [ python nodejs ] ++ stdenv.lib.optional (stdenv.isLinux) utillinux ++ buildInputs;
-          buildCommand = ''
-            mkdir -p $out/bin
-            cat > $out/bin/shell <<EOF
-            #! ${stdenv.shell} -e
-            $shellHook
-            exec ${stdenv.shell}
-            EOF
-            chmod +x $out/bin/shell
-          '';
+      buildInputs = [ python nodejs ] ++ stdenv.lib.optional (stdenv.isLinux) utillinux ++ buildInputs;
+      buildCommand = ''
+        mkdir -p $out/bin
+        cat > $out/bin/shell <<EOF
+        #! ${stdenv.shell} -e
+        $shellHook
+        exec ${stdenv.shell}
+        EOF
+        chmod +x $out/bin/shell
+      '';
 
-          # Provide the dependencies in a development shell through the NODE_PATH environment variable
-          inherit nodeDependencies;
-          shellHook = stdenv.lib.optionalString (dependencies != []) ''
-            export NODE_PATH=$nodeDependencies/lib/node_modules
-            export PATH="$nodeDependencies/bin:$PATH"
-          '';
-        };
+      # Provide the dependencies in a development shell through the NODE_PATH environment variable
+      inherit nodeDependencies;
+      shellHook = stdenv.lib.optionalString (dependencies != [ ]) ''
+        export NODE_PATH=$nodeDependencies/lib/node_modules
+        export PATH="$nodeDependencies/bin:$PATH"
+      '';
+    };
 in
 {
   buildNodeSourceDist = stdenv.lib.makeOverridable buildNodeSourceDist;

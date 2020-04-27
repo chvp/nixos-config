@@ -48,7 +48,7 @@ pkgs.writeText "configuration.toml" ''
   block = "net"
   device = "wlp0s20f3"
   ssid = true
-  signal_strength = true
+  signal_strength = false
   speed_up = false
   speed_down = false
   hide_missing = true

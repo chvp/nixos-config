@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+with import <nixpkgs> { };
 
 {
   home-manager.users.charlotte = { pkgs, ... }: {

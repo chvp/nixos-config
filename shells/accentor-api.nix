@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
 in
 pkgs.mkShell {
@@ -21,7 +21,7 @@ pkgs.mkShell {
             \ }
           '';
           vam.knownPlugins = baseVimConfig.vam.knownPlugins;
-          vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or []) ++ [
+          vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or [ ]) ++ [
             {
               names = [
                 "LanguageClient-neovim"

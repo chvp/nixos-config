@@ -23,7 +23,6 @@ let
     # useGoogleTVAddOns = false;
     # includeExtras = [ "extras;google;gcm" ];
   };
-
   customPlugins.kotlin-vim = pkgs.vimUtils.buildVimPlugin {
     name = "kotlin-vim";
     src = pkgs.fetchFromGitHub {
@@ -33,7 +32,6 @@ let
       sha256 = "1yqzxabhpc4jbdlzhsysp0vi1ayqg0vnpysvx4ynd9961q2fk3sz";
     };
   };
-
   gradle-fhs-nix = pkgs.writeText "gradle-fhs.nix" ''
     { run }:
     let
@@ -48,14 +46,12 @@ let
         runScript = "bash -c '''''${run}'''";
       }).env
   '';
-
   gradle-run-script = pkgs.writeScriptBin "gradle" ''
     #!${pkgs.bash}/bin/bash
 
     REPO_ROOT="$(git rev-parse --show-toplevel)"
     nix-shell --argstr run "\"$REPO_ROOT/gradlew $@\"" "${gradle-fhs-nix}"
   '';
-
   sign-release = pkgs.writeScriptBin "sign-release" ''
     #!${pkgs.bash}/bin/bash
 
@@ -90,7 +86,7 @@ pkgs.mkShell {
             \ }
           '';
           vam.knownPlugins = baseVimConfig.vam.knownPlugins // customPlugins;
-          vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or []) ++ [
+          vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or [ ]) ++ [
             {
               names = [
                 "kotlin-vim"
