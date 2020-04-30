@@ -3,15 +3,16 @@ let
   baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
   jdtls = import ../packages/jdtls/default.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   kotlinls = import ../packages/kotlin-language-server/default.nix { inherit pkgs; };
+  buildToolsVersion = "28.0.3";
   composed = pkgs.androidenv.composeAndroidPackages {
     toolsVersion = "26.1.1";
-    platformToolsVersion = "28.0.1";
-    buildToolsVersions = [ "28.0.3" ];
+    platformToolsVersion = "29.0.6";
+    buildToolsVersions = [ buildToolsVersion ];
     # includeEmulator = false;
     # emulatorVersion = "27.2.0";
     platformVersions = [ "29" ];
-    includeSources = false;
-    includeDocs = false;
+    includeSources = true;
+    includeDocs = true;
     # includeSystemImages = false;
     # systemImageTypes = [ "default" ];
     # abiVersions = [ "armeabi-v7a" ];
@@ -55,7 +56,7 @@ let
   sign-release = pkgs.writeScriptBin "sign-release" ''
     #!${pkgs.bash}/bin/bash
 
-    BUILD_TOOLS_PATH="${composed.androidsdk}/libexec/android-sdk/build-tools/28.0.3"
+    BUILD_TOOLS_PATH="${composed.androidsdk}/libexec/android-sdk/build-tools/${buildToolsVersion}"
     REPO_ROOT="$(git rev-parse --show-toplevel)"
     APK_DIR="$REPO_ROOT/app/build/outputs/apk/release"
 
