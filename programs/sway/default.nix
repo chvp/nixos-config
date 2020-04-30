@@ -1,6 +1,7 @@
 with import <nixpkgs> { };
 { pkgs, ... }:
 let
+  firefox = import ../firefox/default.nix { inherit pkgs; };
   launcher = import ./launcher.nix { inherit pkgs stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
@@ -97,7 +98,7 @@ in
 
       ### Startup programs
       #
-      exec ${pkgs.firefox}/bin/firefox
+      exec ${firefox}/bin/firefox
       exec ${pkgs.thunderbird}/bin/thunderbird
       exec ${pkgs.joplin-desktop}/bin/joplin-desktop
       exec ${pkgs.teams}/bin/teams

@@ -1,5 +1,6 @@
 { pkgs, stdenv }:
 let
+  pass = import ../pass/default.nix { inherit pkgs; };
   gemoji = pkgs.buildRubyGem {
     pname = "gemoji";
     gemName = "gemoji";
@@ -55,6 +56,36 @@ pkgs.writeScriptBin "launcher" ''
   emoji() {
     char=$(echo -n "$1" | sed "s/^\([^ ]*\) .*/\1/")
     ${pkgs.sway}/bin/swaymsg exec -- "echo -n $char | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+  }
+
+  pass_options(){
+    prefix=''${PASSWORD_STORE_DIR-~/.password-store}
+    password_files=( "$prefix"/**/*.gpg )
+    printf 'pass password %s\n' ''${''${password_files%.gpg}#$prefix/}
+    printf 'pass username %s\n' ''${''${password_files%.gpg}#$prefix/}
+    printf 'pass otp %s\n' ''${''${password_files%.gpg}#$prefix/}
+    printf 'pass edit %s\n' ''${''${password_files%.gpg}#$prefix/}
+  }
+
+  pass() {
+    option=$(echo $1 | sed "s/^\([^ ]*\) .*$/\1/")
+    passfile=$(echo $1 | sed "s/^[^ ]* \(.*$\)/\1/")
+    echo $option
+    echo $passfile
+    case $option in
+      username)
+        swaymsg exec -- "${pass}/bin/pass show '$passfile' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+        ;;
+      password)
+        swaymsg exec -- "${pass}/bin/pass show -c0 '$passfile'"
+        ;;
+      otp)
+        swaymsg exec -- "${pass}/bin/pass otp -c '$passfile'"
+        ;;
+      edit)
+        ${pass}/bin/pass edit "$passfile"
+        ;;
+    esac
   }
 
   record_options() {
@@ -125,7 +156,7 @@ pkgs.writeScriptBin "launcher" ''
     ${pkgs.sway}/bin/swaymsg \[con_id="$window"\] focus
   }
 
-  CHOSEN=$(cat <(windows_options) <(tmuxinator_options) <(ssh_options) <(systemctl_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | ${pkgs.fzy}/bin/fzy --lines 36 | tail -n1)
+  CHOSEN=$(cat <(windows_options) <(tmuxinator_options) <(ssh_options) <(systemctl_options) <(pass_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | ${pkgs.fzy}/bin/fzy --lines 36 | tail -n1)
 
   if [ -n "$CHOSEN" ]
   then

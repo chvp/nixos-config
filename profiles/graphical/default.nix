@@ -70,13 +70,7 @@
         chromium
         citrix_workspace
         deluge
-        (
-          firefox.override {
-            extraNativeMessagingHosts = [
-              (passff-host.override { pass = (pass.withExtensions (ext: [ ext.pass-otp ext.pass-genphrase ])); })
-            ];
-          }
-        )
+        (import ../../programs/firefox/default.nix { inherit pkgs; })
         google-chrome
         (gnupg.override { guiSupport = true; })
         hledger

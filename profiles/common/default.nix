@@ -59,7 +59,7 @@
           ];
         }
       )
-      (pass.withExtensions (ext: [ ext.pass-otp ext.pass-genphrase ]))
+      (import ../../programs/pass/default.nix { inherit pkgs; })
       ripgrep
       unzip
     ];
