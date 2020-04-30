@@ -14,6 +14,9 @@
         expireDuplicatesFirst = true;
         path = "\$HOME/.config/zsh/zsh_history";
       };
+      initExtra = ''
+        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
+      '';
       oh-my-zsh = {
         enable = true;
         plugins = [
