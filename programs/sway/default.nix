@@ -83,13 +83,6 @@ in
       exec "${pkgs.systemd}/bin/systemctl --user import-environment; ${pkgs.systemd}/bin/systemctl --user start graphical-session.target"
 
       ### Window rules
-      #
-      # Common programs
-      assign [app_id="firefox"] 1
-      assign [app_id="thunderbird"] 3
-      assign [class="Joplin"] 4
-      assign [class="Microsoft Teams - Preview"] 6
-
       # Launcher popup
       for_window [app_id="launcher"] floating enable
 
@@ -98,10 +91,15 @@ in
 
       ### Startup programs
       #
+      workspace 1
       exec ${firefox}/bin/firefox
+      workspace 3
       exec ${pkgs.thunderbird}/bin/thunderbird
+      workspace 4
       exec ${pkgs.joplin-desktop}/bin/joplin-desktop
+      workspace 6
       exec ${pkgs.teams}/bin/teams
+      workspace 2
 
       ### Input configuration
       #
