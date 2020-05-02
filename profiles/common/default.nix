@@ -43,6 +43,7 @@
     home.packages = with pkgs; [
       htop
       inotify-tools
+      ncdu
       (
         symlinkJoin {
           name = "openssh";
