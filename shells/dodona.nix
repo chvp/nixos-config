@@ -16,7 +16,10 @@ pkgs.mkShell {
         #!${pkgs.zsh}/bin/zsh
 
         trap "docker stop dodona-db" 0
+        trap "docker stop dodona-cache" 0
+
         docker run --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest &
+        docker run --name dodona-cache -p 11211:11211 --rm memcached:latest &
 
         child=$!
         wait $child
