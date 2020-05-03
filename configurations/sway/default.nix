@@ -1,7 +1,7 @@
 with import <nixpkgs> { };
 { pkgs, ... }:
 let
-  firefox = import ../firefox/default.nix { inherit pkgs; };
+  firefox = import ../../programs/firefox/default.nix { inherit pkgs; };
   launcher = import ./launcher.nix { inherit pkgs stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };

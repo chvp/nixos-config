@@ -3,12 +3,12 @@
 {
   imports = [
     ./secret.nix
-    ../../programs/direnv/default.nix
-    ../../programs/git/default.nix
-    ../../programs/neovim/default.nix
-    ../../programs/ssh/default.nix
-    ../../programs/tmux/default.nix
-    ../../programs/zsh/default.nix
+    ../../configurations/direnv/default.nix
+    ../../configurations/git/default.nix
+    ../../configurations/neovim/default.nix
+    ../../configurations/ssh/default.nix
+    ../../configurations/tmux/default.nix
+    ../../configurations/zsh/default.nix
   ];
 
   # Use latest kernel
@@ -44,23 +44,8 @@
       htop
       inotify-tools
       ncdu
-      (
-        symlinkJoin {
-          name = "openssh";
-          paths = [
-            (
-              pkgs.writeScriptBin "ssh" ''
-                #!${zsh}/bin/zsh
-
-                export TERM=xterm-256color
-                ${openssh}/bin/ssh $@
-              ''
-            )
-            openssh
-          ];
-        }
-      )
       (import ../../programs/pass/default.nix { inherit pkgs; })
+      (import ../../programs/ssh/default.nix { inherit pkgs; })
       ripgrep
       unzip
     ];

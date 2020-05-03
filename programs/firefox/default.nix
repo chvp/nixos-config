@@ -2,6 +2,6 @@
 
 (pkgs.firefox.override {
   extraNativeMessagingHosts = [
-    (pkgs.passff-host.override { pass = (import ../pass/default.nix { inherit pkgs; }); })
+    (pkgs.passff-host.override { pass = (import ../../programs/pass/default.nix { inherit pkgs; }); })
   ];
 })

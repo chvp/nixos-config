@@ -1,6 +1,6 @@
 { pkgs, stdenv }:
 let
-  pass = import ../pass/default.nix { inherit pkgs; };
+  pass = import ../../programs/pass/default.nix { inherit pkgs; };
   gemoji = pkgs.buildRubyGem {
     pname = "gemoji";
     gemName = "gemoji";

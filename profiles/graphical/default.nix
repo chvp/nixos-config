@@ -3,11 +3,11 @@
 {
   imports = [
     ./secret.nix
-    ../../programs/dropbox/default.nix
-    ../../programs/i3/default.nix
-    ../../programs/kitty/default.nix
-    ../../programs/syncthing/default.nix
-    ../../programs/sway/default.nix
+    ../../configurations/dropbox/default.nix
+    ../../configurations/i3/default.nix
+    ../../configurations/kitty/default.nix
+    ../../configurations/syncthing/default.nix
+    ../../configurations/sway/default.nix
   ];
 
   services.pcscd = {
@@ -71,8 +71,8 @@
         citrix_workspace
         deluge
         (import ../../programs/firefox/default.nix { inherit pkgs; })
+        (import ../../programs/gnupg/default.nix { inherit pkgs; })
         google-chrome
-        (gnupg.override { guiSupport = true; })
         hledger
         joplin-desktop
         libreoffice
