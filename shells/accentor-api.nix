@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { };
-  baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
+  baseVimConfig = import ../configurations/neovim/base.nix { inherit pkgs; };
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -9,29 +9,6 @@ pkgs.mkShell {
     ruby_2_7
     taglib
     zlib
-    (
-      neovim.override {
-        configure = {
-          customRC = baseVimConfig.customRC + ''
-            " Required for operations modifying multiple buffers like rename
-            set hidden
-
-            let g:LanguageClient_serverCommands = {
-            \ 'ruby': ['${solargraph}/bin/solargraph', 'stdio'],
-            \ }
-          '';
-          vam.knownPlugins = baseVimConfig.vam.knownPlugins;
-          vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or [ ]) ++ [
-            {
-              names = [
-                "LanguageClient-neovim"
-                "vim-ruby"
-              ];
-            }
-          ];
-        };
-      }
-    )
     (
       pkgs.writeScriptBin "start-db" ''
         #!/${pkgs.zsh}/bin/zsh

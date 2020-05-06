@@ -1,7 +1,5 @@
 let
   pkgs = import <nixpkgs> { };
-  baseVimConfig = import ../programs/neovim/base.nix { inherit pkgs; };
-  nodePackages = import ../packages/node/default.nix { inherit pkgs; };
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -13,7 +11,7 @@ pkgs.mkShell {
     zlib
     (
       pkgs.writeScriptBin "start-db" ''
-        #!${pkgs.zsh}/bin/zsh
+        #!${zsh}/bin/zsh
 
         trap "docker stop dodona-db" 0
         trap "docker stop dodona-cache" 0
@@ -24,32 +22,6 @@ pkgs.mkShell {
         child=$!
         wait $child
       ''
-    )
-    (
-      neovim.override {
-        configure = {
-          customRC = baseVimConfig.customRC + ''
-            " Required for operations modifying multiple buffers like rename
-            set hidden
-
-            let g:LanguageClient_serverCommands = {
-            \ 'ruby': ['${solargraph}/bin/solargraph', 'stdio'],
-            \ 'javascript': ['${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
-            \ 'typescript': ['${nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio'],
-            \ }
-          '';
-          vam.knownPlugins = baseVimConfig.vam.knownPlugins;
-          vam.pluginDictionaries = (baseVimConfig.vam.pluginDictionaries or [ ]) ++ [
-            {
-              names = [
-                "LanguageClient-neovim"
-                "vim-ruby"
-                "yats-vim"
-              ];
-            }
-          ];
-        };
-      }
     )
   ];
   shellHook = ''
