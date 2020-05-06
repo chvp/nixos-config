@@ -156,7 +156,7 @@ in
               \ 'javascript': ['${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
               \ 'typescript': ['${nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio'],
               \ 'java': ['${jdtls}/bin/jdtls'],
-              \ 'kotlin': ['${kotlinls}/bin/kotlin-language-server']
+              \ 'kotlin': ['${kotlinls}/bin/kotlin-language-server'],
               \ 'ruby': ['${pkgs.solargraph}/bin/solargraph', 'stdio'],
               \ }
             '';
