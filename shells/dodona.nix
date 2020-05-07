@@ -11,16 +11,22 @@ pkgs.mkShell {
     zlib
     (
       pkgs.writeScriptBin "start-db" ''
-        #!${zsh}/bin/zsh
+        #!${bash}/bin/bash
 
-        trap "docker stop dodona-db" 0
-        trap "docker stop dodona-cache" 0
+        function stopdockers {
+          docker stop dodona-db
+          docker stop dodona-cache
+        }
 
-        docker run --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest &
-        docker run --name dodona-cache -p 11211:11211 --rm memcached:latest &
+        trap stopdockers 0
 
-        child=$!
-        wait $child
+        docker run -d --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
+        docker run -d --name dodona-cache -p 11211:11211 --rm memcached:latest
+
+        while [ 1 -eq 1 ]
+        do
+          sleep 1000
+        done
       ''
     )
   ];
