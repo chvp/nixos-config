@@ -44,12 +44,36 @@
       htop
       inotify-tools
       ncdu
+      nix-index
       (import ../../programs/pass/default.nix { inherit pkgs; })
       (import ../../programs/ssh/default.nix { inherit pkgs; })
       ripgrep
       unzip
       youtube-dl
     ];
+    systemd.user = {
+      services.nix-index = {
+        Unit = {
+          Description = "Service to run nix-index";
+        };
+        Service = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.nix-index}/bin/nix-index";
+        };
+      };
+      timers.nix-index = {
+        Unit = {
+          Description = "Timer that starts nix-index every two hours";
+          PartOf = [ "nix-index.service" ];
+        };
+        Timer = {
+          OnCalendar = "00/2:30";
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+      };
+    };
   };
 
   services = {

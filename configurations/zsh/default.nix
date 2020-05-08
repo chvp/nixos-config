@@ -1,8 +1,6 @@
 { ... }:
 
 {
-  programs.command-not-found.enable = true;
-
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = [ pkgs.autojump ];
     programs.zsh = {
@@ -15,13 +13,13 @@
         path = "\$HOME/.config/zsh/zsh_history";
       };
       initExtra = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
         ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
       '';
       oh-my-zsh = {
         enable = true;
         plugins = [
           "autojump"
-          "command-not-found"
           "common-aliases"
           "extract"
           "history-substring-search"
