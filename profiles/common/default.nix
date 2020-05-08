@@ -51,10 +51,13 @@
     ];
   };
 
-  services.locate = {
-    enable = true;
-    interval = "hourly";
-    localuser = "charlotte";
+  services = {
+    atd.enable = true;
+    locate = {
+      enable = true;
+      interval = "hourly";
+      localuser = "charlotte";
+    };
   };
 
   system.autoUpgrade = {

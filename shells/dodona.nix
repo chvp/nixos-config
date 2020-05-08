@@ -10,12 +10,12 @@ pkgs.mkShell {
     yarn
     zlib
     (
-      pkgs.writeScriptBin "start-db" ''
+      pkgs.writeScriptBin "start-dockers" ''
         #!${bash}/bin/bash
 
         function stopdockers {
-          docker stop dodona-db
-          docker stop dodona-cache
+          echo ${docker}/bin/docker stop dodona-db | ${at}/bin/at NOW
+          echo ${docker}/bin/docker stop dodona-cache | ${at}/bin/at NOW
         }
 
         trap stopdockers 0

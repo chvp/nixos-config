@@ -52,4 +52,4 @@ windows:
         - bundle exec rails jobs:work
         - ./bin/webpack-dev-server
   - logs: tail -f log/development.log
-  - db: start-db
+  - db: start-dockers
