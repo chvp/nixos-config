@@ -14,8 +14,8 @@ pkgs.mkShell {
         #!${bash}/bin/bash
 
         function stopdockers {
-          echo ${docker}/bin/docker stop dodona-db | ${at}/bin/at NOW
-          echo ${docker}/bin/docker stop dodona-cache | ${at}/bin/at NOW
+          echo ${docker}/bin/docker stop dodona-db | at NOW
+          echo ${docker}/bin/docker stop dodona-cache | at NOW
         }
 
         trap stopdockers 0
