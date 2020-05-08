@@ -48,6 +48,7 @@
       (import ../../programs/ssh/default.nix { inherit pkgs; })
       ripgrep
       unzip
+      youtube-dl
     ];
   };
 
