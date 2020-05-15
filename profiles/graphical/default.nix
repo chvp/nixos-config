@@ -113,8 +113,8 @@
     '';
     dconf.settings = {
       "org/gnome/desktop/interface" = {
-        gtk-theme = "Breeze";
-        icon-theme = "breeze";
+        gtk-theme = "Arc";
+        icon-theme = "Arc";
         cursor-theme = "Vanilla-DMZ";
       };
     };
@@ -133,12 +133,12 @@
         gtk-cursor-theme-size = 0;
       };
       iconTheme = {
-        package = pkgs.breeze-icons;
-        name = "breeze";
+        package = pkgs.arc-icon-theme;
+        name = "Arc";
       };
       theme = {
-        package = pkgs.breeze-gtk;
-        name = "Breeze";
+        package = pkgs.arc-theme;
+        name = "Arc";
       };
     };
     qt = {
