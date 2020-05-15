@@ -25,7 +25,7 @@ pkgs.mkShell {
   ];
   shellHook = ''
     export DATABASE_URL="postgres://postgres:accentor@127.0.0.1:5432/accentor"
-    export GEM_HOME="$PWD/vendor/rubygems/$(ruby -e 'puts RUBY_VERSION')"
+    export GEM_HOME="$PWD/vendor/bundle/$(ruby -e 'puts RUBY_VERSION')"
     export PATH="$GEM_HOME/bin:$PATH"
   '';
 }

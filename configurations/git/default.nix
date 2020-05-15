@@ -26,7 +26,7 @@
         ".envrc"
         "shell.nix"
         # Ruby dependencies in source tree
-        "/vendor/rubygems"
+        "/vendor/bundle"
         "**/*.patch"
       ];
       userEmail = config.custom.git.email;
