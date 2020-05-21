@@ -1,6 +1,5 @@
 let
   pkgs = import <nixpkgs> { };
-  baseVimConfig = import ../configurations/neovim/base.nix { inherit pkgs; };
 in
 pkgs.mkShell {
   buildInputs = with pkgs; [

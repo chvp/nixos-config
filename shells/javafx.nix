@@ -1,6 +1,5 @@
 let
   pkgs = import <nixpkgs> { };
-  baseVimConfig = import ../configurations/neovim/base.nix { inherit pkgs; };
   extraRpath = pkgs.stdenv.lib.strings.makeLibraryPath (with pkgs; [ ffmpeg ]);
 in
 pkgs.mkShell {
