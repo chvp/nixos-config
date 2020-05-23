@@ -8,7 +8,6 @@
     ../configurations/dropbox.nix
     ../configurations/firefox.nix
     ../configurations/fonts.nix
-    ../configurations/gnupg.nix
     ../configurations/i3.nix
     ../configurations/joplin.nix
     ../configurations/kernel.nix
@@ -52,4 +51,6 @@
       fi
     '';
   };
+
+  custom.gnupg.pinentryFlavor = "qt";
 }

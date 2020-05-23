@@ -7,6 +7,7 @@
     ../overlays/default.nix
     ../configurations/direnv.nix
     ../configurations/git.nix
+    ../configurations/gnupg.nix
     ../configurations/locale.nix
     ../configurations/neovim.nix
     ../configurations/nix-index.nix
@@ -28,5 +29,4 @@
       youtube-dl
     ];
   };
-
 }

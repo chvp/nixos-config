@@ -6,7 +6,7 @@
     default = "charlotte@vanpetegem.me";
     example = "charlotte@vanpetegem.me";
     description = ''
-      Default email set in git config
+      Default email set in global git config.
     '';
   };
 
