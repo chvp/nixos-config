@@ -36,6 +36,7 @@ let
         echo "file source-dist $out/tarballs/$tgzFile" >> $out/nix-support/hydra-build-products
       '';
     };
+
   includeDependencies = { dependencies }:
     stdenv.lib.optionalString
       (dependencies != [ ])
@@ -105,6 +106,7 @@ let
       cd ..
       ${stdenv.lib.optionalString (builtins.substring 0 1 packageName == "@") "cd .."}
     '';
+
   pinpointDependencies = { dependencies, production }:
     let
       pinpointDependenciesFromPackageJSON = writeTextFile {
@@ -177,6 +179,7 @@ let
   # Recursively traverses all dependencies of a package and pinpoints all
   # dependencies in the package.json file to the versions that are actually
   # being used.
+
   pinpointDependenciesOfPackage = { packageName, dependencies ? [ ], production ? true, ... }@args:
     ''
       if [ -d "${packageName}" ]
@@ -318,6 +321,7 @@ let
       fs.writeFileSync("package-lock.json", JSON.stringify(lockObj, null, 2));
     '';
   };
+
   prepareAndInvokeNPM = { packageName, bypassCache, reconstructLock, npmFlags, production }:
     let
       forceOfflineFlag = if bypassCache then "--offline" else "--registry http://www.example.com";
@@ -466,6 +470,7 @@ let
     }@args:
     let
       extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" ];
+
       nodeDependencies = stdenv.mkDerivation ({
         name = "node-dependencies-${name}-${version}";
 
