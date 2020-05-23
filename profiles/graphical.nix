@@ -3,6 +3,7 @@
 {
   imports = [
     ../configurations/adb.nix
+    ../configurations/citrix.nix
     ../configurations/docker.nix
     ../configurations/dropbox.nix
     ../configurations/firefox.nix
@@ -13,6 +14,7 @@
     ../configurations/kernel.nix
     ../configurations/kitty.nix
     ../configurations/mounts.nix
+    ../configurations/mumble.nix
     ../configurations/networkmanager.nix
     ../configurations/sound.nix
     ../configurations/sway.nix
@@ -26,13 +28,11 @@
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
       chromium
-      citrix_workspace
       deluge
       google-chrome
       hledger
       libreoffice
       mpv
-      mumble
       okular
       pavucontrol
       ranger
