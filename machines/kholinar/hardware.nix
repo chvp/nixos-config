@@ -11,7 +11,7 @@
     };
     initrd = {
       availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
-      kernelModules = ["i915"];
+      kernelModules = [ "i915" ];
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
