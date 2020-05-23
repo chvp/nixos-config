@@ -84,30 +84,30 @@ let
         (id: "${replaceStrings [ "." ] [ "/" ] id.group}/${id.name}/maven-metadata.xml")
         ids;
     in
-    attrValues
-      (
-        mapAttrs
-          (
-            path: meta:
-              let
-                versions' = sort versionOlder (unique meta.versions);
-              in
-              with meta; writeTextDir path ''
-                <?xml version="1.0" encoding="UTF-8"?>
-                <metadata modelVersion="1.1">
-                  <groupId>${groupId}</groupId>
-                  <artifactId>${artifactId}</artifactId>
-                  <versioning>
-                    ${optionalString (latest != "") "<latest>${latest}</latest>"}
-                    ${optionalString (release != "") "<release>${release}</release>"}
-                    <versions>
-                      ${concatMapStringsSep "\n    " (v: "<version>${v}</version>") versions'}
-                    </versions>
-                  </versioning>
-                </metadata>
-              ''
-          ) modules
-      );
+    attrValues (
+      mapAttrs
+        (
+          path: meta:
+            let
+              versions' = sort versionOlder (unique meta.versions);
+            in
+            with meta; writeTextDir path ''
+              <?xml version="1.0" encoding="UTF-8"?>
+              <metadata modelVersion="1.1">
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}</artifactId>
+                <versioning>
+                  ${optionalString (latest != "") "<latest>${latest}</latest>"}
+                  ${optionalString (release != "") "<release>${release}</release>"}
+                  <versions>
+                    ${concatMapStringsSep "\n    " (v: "<version>${v}</version>") versions'}
+                  </versions>
+                </versioning>
+              </metadata>
+            ''
+        )
+        modules
+    );
   mkSnapshotMetadata = deps:
     let
       snapshotDeps = filter (dep: dep ? build && dep ? timestamp) deps;
@@ -156,31 +156,31 @@ let
         </snapshotVersion>
       '';
     in
-    attrValues
-      (
-        mapAttrs
-          (
-            path: meta:
-              with meta; writeTextDir path ''
-                <?xml version="1.0" encoding="UTF-8"?>
-                <metadata modelVersion="1.1">
-                  <groupId>${groupId}</groupId>
-                  <artifactId>${artifactId}</artifactId>
-                  <version>${version}</version>
-                  <versioning>
-                    <snapshot>
-                      ${optionalString (timestamp != "") "<timestamp>${timestamp}</timestamp>"}
-                      ${optionalString (buildNumber != -1) "<buildNumber>${toString buildNumber}</buildNumber>"}
-                    </snapshot>
-                    ${optionalString (lastUpdated != "") "<lastUpdated>${lastUpdated}</lastUpdated>"}
-                    <snapshotVersions>
-                      ${concatMapStringsSep "\n    " mkSnapshotVersion versions}
-                    </snapshotVersions>
-                  </versioning>
-                </metadata>
-              ''
-          ) modules
-      );
+    attrValues (
+      mapAttrs
+        (
+          path: meta:
+            with meta; writeTextDir path ''
+              <?xml version="1.0" encoding="UTF-8"?>
+              <metadata modelVersion="1.1">
+                <groupId>${groupId}</groupId>
+                <artifactId>${artifactId}</artifactId>
+                <version>${version}</version>
+                <versioning>
+                  <snapshot>
+                    ${optionalString (timestamp != "") "<timestamp>${timestamp}</timestamp>"}
+                    ${optionalString (buildNumber != -1) "<buildNumber>${toString buildNumber}</buildNumber>"}
+                  </snapshot>
+                  ${optionalString (lastUpdated != "") "<lastUpdated>${lastUpdated}</lastUpdated>"}
+                  <snapshotVersions>
+                    ${concatMapStringsSep "\n    " mkSnapshotVersion versions}
+                  </snapshotVersions>
+                </versioning>
+              </metadata>
+            ''
+        )
+        modules
+    );
   mkRepo = project: type: deps: buildEnv {
     name = "${project}-gradle-${type}-env";
     paths = map mkDep deps ++ mkModuleMetadata deps ++ mkSnapshotMetadata deps;
@@ -248,32 +248,31 @@ let
   pname = args.pname or projectEnv.name;
   version = args.version or projectEnv.version;
 in
-stdenv.mkDerivation
-  (
-    args // {
+stdenv.mkDerivation (
+  args // {
 
-      inherit pname version;
+    inherit pname version;
 
-      nativeBuildInputs = (args.nativeBuildInputs or [ ]) ++ [ projectEnv.gradle ];
+    nativeBuildInputs = (args.nativeBuildInputs or [ ]) ++ [ projectEnv.gradle ];
 
-      buildPhase = args.buildPhase or ''
-        runHook preBuild
+    buildPhase = args.buildPhase or ''
+      runHook preBuild
 
-        (
-        set -x
-        env \
-          "GRADLE_USER_HOME=$(mktemp -d)" \
-          gradle --offline --no-daemon --no-build-cache \
-            --info --full-stacktrace --warning-mode=all \
-            ${optionalString enableParallelBuilding "--parallel"} \
-            ${optionalString enableDebug "-Dorg.gradle.debug=true"} \
-            --init-script ${projectEnv.initScript} \
-            ${concatStringsSep " " gradleFlags}
-        )
+      (
+      set -x
+      env \
+        "GRADLE_USER_HOME=$(mktemp -d)" \
+        gradle --offline --no-daemon --no-build-cache \
+          --info --full-stacktrace --warning-mode=all \
+          ${optionalString enableParallelBuilding "--parallel"} \
+          ${optionalString enableDebug "-Dorg.gradle.debug=true"} \
+          --init-script ${projectEnv.initScript} \
+          ${concatStringsSep " " gradleFlags}
+      )
 
-        runHook postBuild
-      '';
+      runHook postBuild
+    '';
 
-      dontStrip = true;
-    }
-  )
+    dontStrip = true;
+  }
+)

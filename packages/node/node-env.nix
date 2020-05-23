@@ -5,7 +5,8 @@ let
   python = if nodejs ? python then nodejs.python else python2;
 
   # Create a tar wrapper that filters all the 'Ignoring unknown extended header keyword' noise
-  tarWrapper = runCommand "tarWrapper" { } ''
+  tarWrapper = runCommand "tarWrapper"
+    { } ''
     mkdir -p $out/bin
 
     cat > $out/bin/tar <<EOF
@@ -36,7 +37,8 @@ let
       '';
     };
   includeDependencies = { dependencies }:
-    stdenv.lib.optionalString (dependencies != [ ])
+    stdenv.lib.optionalString
+      (dependencies != [ ])
       (stdenv.lib.concatMapStrings
         (dependency:
           ''
@@ -52,7 +54,9 @@ let
 
             cd ..
           ''
-        ) dependencies);
+        )
+        dependencies
+      );
 
   # Recursively composes the dependencies of a package
   composePackage = { name, packageName, src, dependencies ? [ ], ... }@args:
@@ -157,7 +161,7 @@ let
       };
     in
     ''
-      node ${pinpointDependenciesFromPackageJSON} ${ if production then "production" else "development"}
+      node ${pinpointDependenciesFromPackageJSON} ${if production then "production" else "development"}
 
       ${stdenv.lib.optionalString (dependencies != [ ])
         ''
@@ -186,7 +190,8 @@ let
 
   # Extract the Node.js source code which is used to compile packages with
   # native bindings
-  nodeSources = runCommand "node-sources" { } ''
+  nodeSources = runCommand "node-sources"
+    { } ''
     tar --no-same-owner --no-same-permissions -xf ${nodejs.src}
     mv node-* $out
   '';
@@ -389,58 +394,57 @@ let
     let
       extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" "dontStrip" "dontNpmInstall" "preRebuild" "unpackPhase" "buildPhase" ];
     in
-    stdenv.mkDerivation
-      ({
-        name = "node_${name}-${version}";
-        buildInputs = [ tarWrapper python nodejs ]
-          ++ stdenv.lib.optional (stdenv.isLinux) utillinux
-          ++ stdenv.lib.optional (stdenv.isDarwin) libtool
-          ++ buildInputs;
+    stdenv.mkDerivation ({
+      name = "node_${name}-${version}";
+      buildInputs = [ tarWrapper python nodejs ]
+        ++ stdenv.lib.optional (stdenv.isLinux) utillinux
+        ++ stdenv.lib.optional (stdenv.isDarwin) libtool
+        ++ buildInputs;
 
-        inherit nodejs;
+      inherit nodejs;
 
-        inherit dontStrip; # Stripping may fail a build for some package deployments
-        inherit dontNpmInstall preRebuild unpackPhase buildPhase;
+      inherit dontStrip;# Stripping may fail a build for some package deployments
+      inherit dontNpmInstall preRebuild unpackPhase buildPhase;
 
-        compositionScript = composePackage args;
-        pinpointDependenciesScript = pinpointDependenciesOfPackage args;
+      compositionScript = composePackage args;
+      pinpointDependenciesScript = pinpointDependenciesOfPackage args;
 
-        passAsFile = [ "compositionScript" "pinpointDependenciesScript" ];
+      passAsFile = [ "compositionScript" "pinpointDependenciesScript" ];
 
-        installPhase = ''
-          # Create and enter a root node_modules/ folder
-          mkdir -p $out/lib/node_modules
-          cd $out/lib/node_modules
+      installPhase = ''
+        # Create and enter a root node_modules/ folder
+        mkdir -p $out/lib/node_modules
+        cd $out/lib/node_modules
 
-          # Compose the package and all its dependencies
-          source $compositionScriptPath
+        # Compose the package and all its dependencies
+        source $compositionScriptPath
 
-          ${prepareAndInvokeNPM { inherit packageName bypassCache reconstructLock npmFlags production; }}
+        ${prepareAndInvokeNPM { inherit packageName bypassCache reconstructLock npmFlags production; }}
 
-          # Create symlink to the deployed executable folder, if applicable
-          if [ -d "$out/lib/node_modules/.bin" ]
-          then
-              ln -s $out/lib/node_modules/.bin $out/bin
-          fi
+        # Create symlink to the deployed executable folder, if applicable
+        if [ -d "$out/lib/node_modules/.bin" ]
+        then
+            ln -s $out/lib/node_modules/.bin $out/bin
+        fi
 
-          # Create symlinks to the deployed manual page folders, if applicable
-          if [ -d "$out/lib/node_modules/${packageName}/man" ]
-          then
-              mkdir -p $out/share
-              for dir in "$out/lib/node_modules/${packageName}/man/"*
-              do
-                  mkdir -p $out/share/man/$(basename "$dir")
-                  for page in "$dir"/*
-                  do
-                      ln -s $page $out/share/man/$(basename "$dir")
-                  done
-              done
-          fi
+        # Create symlinks to the deployed manual page folders, if applicable
+        if [ -d "$out/lib/node_modules/${packageName}/man" ]
+        then
+            mkdir -p $out/share
+            for dir in "$out/lib/node_modules/${packageName}/man/"*
+            do
+                mkdir -p $out/share/man/$(basename "$dir")
+                for page in "$dir"/*
+                do
+                    ln -s $page $out/share/man/$(basename "$dir")
+                done
+            done
+        fi
 
-          # Run post install hook, if provided
-          runHook postInstall
-        '';
-      } // extraArgs);
+        # Run post install hook, if provided
+        runHook postInstall
+      '';
+    } // extraArgs);
 
   # Builds a development shell
   buildNodeShell =
@@ -462,53 +466,52 @@ let
     }@args:
     let
       extraArgs = removeAttrs args [ "name" "dependencies" "buildInputs" ];
-      nodeDependencies = stdenv.mkDerivation
-        ({
-          name = "node-dependencies-${name}-${version}";
+      nodeDependencies = stdenv.mkDerivation ({
+        name = "node-dependencies-${name}-${version}";
 
-          buildInputs = [ tarWrapper python nodejs ]
-            ++ stdenv.lib.optional (stdenv.isLinux) utillinux
-            ++ stdenv.lib.optional (stdenv.isDarwin) libtool
-            ++ buildInputs;
+        buildInputs = [ tarWrapper python nodejs ]
+          ++ stdenv.lib.optional (stdenv.isLinux) utillinux
+          ++ stdenv.lib.optional (stdenv.isDarwin) libtool
+          ++ buildInputs;
 
-          inherit dontStrip; # Stripping may fail a build for some package deployments
-          inherit dontNpmInstall unpackPhase buildPhase;
+        inherit dontStrip;# Stripping may fail a build for some package deployments
+        inherit dontNpmInstall unpackPhase buildPhase;
 
-          includeScript = includeDependencies { inherit dependencies; };
-          pinpointDependenciesScript = pinpointDependenciesOfPackage args;
+        includeScript = includeDependencies { inherit dependencies; };
+        pinpointDependenciesScript = pinpointDependenciesOfPackage args;
 
-          passAsFile = [ "includeScript" "pinpointDependenciesScript" ];
+        passAsFile = [ "includeScript" "pinpointDependenciesScript" ];
 
-          installPhase = ''
-            mkdir -p $out/${packageName}
-            cd $out/${packageName}
+        installPhase = ''
+          mkdir -p $out/${packageName}
+          cd $out/${packageName}
 
-            source $includeScriptPath
+          source $includeScriptPath
 
-            # Create fake package.json to make the npm commands work properly
-            cp ${src}/package.json .
-            chmod 644 package.json
-            ${stdenv.lib.optionalString bypassCache ''
-              if [ -f ${src}/package-lock.json ]
-              then
-                  cp ${src}/package-lock.json .
-              fi
-            ''}
+          # Create fake package.json to make the npm commands work properly
+          cp ${src}/package.json .
+          chmod 644 package.json
+          ${stdenv.lib.optionalString bypassCache ''
+            if [ -f ${src}/package-lock.json ]
+            then
+                cp ${src}/package-lock.json .
+            fi
+          ''}
 
-            # Go to the parent folder to make sure that all packages are pinpointed
-            cd ..
-            ${stdenv.lib.optionalString (builtins.substring 0 1 packageName == "@") "cd .."}
+          # Go to the parent folder to make sure that all packages are pinpointed
+          cd ..
+          ${stdenv.lib.optionalString (builtins.substring 0 1 packageName == "@") "cd .."}
 
-            ${prepareAndInvokeNPM { inherit packageName bypassCache reconstructLock npmFlags production; }}
+          ${prepareAndInvokeNPM { inherit packageName bypassCache reconstructLock npmFlags production; }}
 
-            # Expose the executables that were installed
-            cd ..
-            ${stdenv.lib.optionalString (builtins.substring 0 1 packageName == "@") "cd .."}
+          # Expose the executables that were installed
+          cd ..
+          ${stdenv.lib.optionalString (builtins.substring 0 1 packageName == "@") "cd .."}
 
-            mv ${packageName} lib
-            ln -s $out/lib/node_modules/.bin $out/bin
-          '';
-        } // extraArgs);
+          mv ${packageName} lib
+          ln -s $out/lib/node_modules/.bin $out/bin
+        '';
+      } // extraArgs);
     in
     stdenv.mkDerivation {
       name = "node-shell-${name}-${version}";

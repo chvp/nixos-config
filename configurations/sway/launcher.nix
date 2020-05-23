@@ -1,6 +1,5 @@
 { pkgs, stdenv }:
 let
-  pass = import ../../programs/pass/default.nix { inherit pkgs; };
   gemoji = pkgs.buildRubyGem {
     pname = "gemoji";
     gemName = "gemoji";
@@ -74,16 +73,16 @@ pkgs.writeScriptBin "launcher" ''
     echo $passfile
     case $option in
       username)
-        swaymsg exec -- "${pass}/bin/pass show '$passfile' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+        swaymsg exec -- "${pkgs.pass}/bin/pass show '$passfile' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
         ;;
       password)
-        swaymsg exec -- "${pass}/bin/pass show -c0 '$passfile'"
+        swaymsg exec -- "${pkgs.pass}/bin/pass show -c0 '$passfile'"
         ;;
       otp)
-        swaymsg exec -- "${pass}/bin/pass otp -c '$passfile'"
+        swaymsg exec -- "${pkgs.pass}/bin/pass otp -c '$passfile'"
         ;;
       edit)
-        ${pass}/bin/pass edit "$passfile"
+        ${pkgs.pass}/bin/pass edit "$passfile"
         ;;
     esac
   }

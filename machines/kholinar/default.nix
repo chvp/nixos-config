@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
@@ -11,12 +11,18 @@
     ../../profiles/graphical/default.nix
   ];
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  # Use the systemd-boot EFI boot loader.
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 
-  networking.hostName = "oldtown";
+  networking = {
+    hostId = "3cc1a4b2";
+    hostName = "kholinar";
+  };
 
   time.timeZone = "Europe/Brussels";
 
@@ -26,14 +32,18 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
 
   home-manager.users.charlotte = { ... }: {
-    home.stateVersion = "20.03";
+    home.stateVersion = "20.09";
   };
 
-  # Machine-specific application settings
+  # Machine-specific settings
   custom = {
-    git.email = "charlotte.vanpetegem@ugent.be";
+    git.email = "charlotte@vanpetegem.me";
+    zfs = {
+      enable = true;
+      encrypted = true;
+    };
   };
 }
