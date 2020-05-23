@@ -11,14 +11,6 @@
     ../../profiles/graphical/default.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
   networking = {
     hostId = "3cc1a4b2";
     hostName = "kholinar";
