@@ -1,14 +1,14 @@
-{ ... }:
+{ config, lib, ... }:
 
 {
-  custom.zfs.systemLinks = [
-    { path = "/var/lib/pulse"; type = "data"; }
-  ];
-
   sound.enable = true;
   hardware.pulseaudio = {
     enable = true;
-    systemWide = true;
+  };
+
+  # PulseAudio doesn't play nice with symlinks
+  systemd.user.services.pulseaudio.environment = lib.mkIf config.custom.zfs.enable {
+    XDG_CONFIG_HOME = "/data/home/charlotte/.config";
   };
 
   users.users.charlotte.extraGroups = [ "audio" ];
