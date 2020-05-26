@@ -13,6 +13,7 @@
     ../configurations/joplin.nix
     ../configurations/kernel.nix
     ../configurations/kitty.nix
+    ../configurations/mime.nix
     ../configurations/mounts.nix
     ../configurations/mumble.nix
     ../configurations/networkmanager.nix
