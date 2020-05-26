@@ -4,6 +4,7 @@
   imports = [
     ../configurations/adb.nix
     ../configurations/citrix.nix
+    ../configurations/deluge.nix
     ../configurations/docker.nix
     ../configurations/dropbox.nix
     ../configurations/firefox.nix
@@ -27,7 +28,6 @@
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
       chromium
-      deluge
       google-chrome
       hledger
       libreoffice
