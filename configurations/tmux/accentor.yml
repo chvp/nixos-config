@@ -19,12 +19,6 @@ windows:
     panes:
     - nvim
     - git status
-- desktop:
-    root: "/home/charlotte/repos/accentor/desktop"
-    layout: main-vertical
-    panes:
-    - nvim
-    - git status
 - run:
     layout: even-horizontal
     panes:
