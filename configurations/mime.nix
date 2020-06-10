@@ -10,7 +10,7 @@
         "image/jpeg" = [ "org.kde.okular.desktop" ];
         "application/pdf" = [ "org.kde.okular.desktop" ];
 
-        "text/html"= [ "firefox.desktop" ];
+        "text/html" = [ "firefox.desktop" ];
         "x-scheme-handler/about" = [ "firefox.desktop" ];
         "x-scheme-handler/http" = [ "firefox.desktop" ];
         "x-scheme-handler/https" = [ "firefox.desktop" ];
