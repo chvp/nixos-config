@@ -21,6 +21,9 @@
         branch = {
           autosetuprebase = "always";
         };
+        pull = {
+          rebase = true;
+        };
       };
       ignores = [
         ".envrc"
