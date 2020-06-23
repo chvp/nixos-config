@@ -2,10 +2,10 @@
 
 stdenv.mkDerivation rec {
   pname = "jdtls";
-  version = "0.55.0";
+  version = "0.57.0";
   src = pkgs.fetchurl {
-    url = "http://download.eclipse.org/${pname}/milestones/${version}/jdt-language-server-${version}-202004300028.tar.gz";
-    sha256 = "0kxx4l7yqvzxbcb0j8yvrpvq6rba50j173dl71p4kqz14878m17w";
+    url = "http://download.eclipse.org/${pname}/milestones/${version}/jdt-language-server-${version}-202006172108.tar.gz";
+    sha256 = "1yvk6pby5ylvnhcax6da86dzrx76iym3jc25mnvfv4krpfcl8zl9";
   };
   sourceRoot = ".";
   buildPhase = "true";
