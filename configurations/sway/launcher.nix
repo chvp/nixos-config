@@ -60,31 +60,19 @@ pkgs.writeScriptBin "launcher" ''
   pass_options(){
     prefix=''${PASSWORD_STORE_DIR-~/.password-store}
     password_files=( "$prefix"/**/*.gpg )
-    printf 'pass password %s\n' ''${''${password_files%.gpg}#$prefix/}
-    printf 'pass username %s\n' ''${''${password_files%.gpg}#$prefix/}
-    printf 'pass otp %s\n' ''${''${password_files%.gpg}#$prefix/}
-    printf 'pass edit %s\n' ''${''${password_files%.gpg}#$prefix/}
+    printf 'password %s\n' ''${''${password_files%.gpg}#$prefix/}
+    printf 'username %s\n' ''${''${password_files%.gpg}#$prefix/}
+    printf 'otp %s\n' ''${''${password_files%.gpg}#$prefix/}
   }
 
-  pass() {
-    option=$(echo $1 | sed "s/^\([^ ]*\) .*$/\1/")
-    passfile=$(echo $1 | sed "s/^[^ ]* \(.*$\)/\1/")
-    echo $option
-    echo $passfile
-    case $option in
-      username)
-        swaymsg exec -- "${pkgs.pass}/bin/pass show '$passfile' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
-        ;;
-      password)
-        swaymsg exec -- "${pkgs.pass}/bin/pass show -c0 '$passfile'"
-        ;;
-      otp)
-        swaymsg exec -- "${pkgs.pass}/bin/pass otp -c '$passfile'"
-        ;;
-      edit)
-        ${pkgs.pass}/bin/pass edit "$passfile"
-        ;;
-    esac
+  username() {
+    swaymsg exec -- "${pkgs.pass}/bin/pass show '$1' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+  }
+  password() {
+    swaymsg exec -- "${pkgs.pass}/bin/pass show -c0 '$1'"
+  }
+  otp() {
+    swaymsg exec -- "${pkgs.pass}/bin/pass otp -c '$1'"
   }
 
   record_options() {
