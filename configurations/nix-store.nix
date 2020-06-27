@@ -20,6 +20,7 @@
   };
 
   home-manager.users.charlotte = { ... }: {
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = import ./nix-store/config.nix;
+    xdg.configFile."nixpkgs/config.nix".source = ./nix-store/config.nix;
   };
 }
