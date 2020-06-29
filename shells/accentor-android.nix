@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { config.android_sdk.accept_license = true; };
-  buildToolsVersion = "28.0.3";
+  buildToolsVersion = "29.0.2";
   composed = pkgs.androidenv.composeAndroidPackages {
     toolsVersion = "26.1.1";
     platformToolsVersion = "29.0.6";
