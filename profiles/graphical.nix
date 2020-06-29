@@ -34,10 +34,12 @@
       libreoffice
       mpv
       okular
+      pandoc
       pavucontrol
       ranger
       slurp
       sshfs
+      texlive.combined.scheme-medium
       wf-recorder
       wl-clipboard
       zeroad
