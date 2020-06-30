@@ -2,6 +2,8 @@
 
 {
   home-manager.users.charlotte = { pkgs, ... }: {
+    # Some applications overwrite mimeapps.list with an identical file
+    xdg.configFile."mimeapps.list".force = true;
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
