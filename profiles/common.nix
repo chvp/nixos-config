@@ -20,11 +20,14 @@
 
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
+      hledger
       htop
       moreutils
       ncdu
+      pandoc
       pass
       ripgrep
+      texlive.combined.scheme-medium
       unzip
       youtube-dl
     ];
