@@ -3,6 +3,7 @@ let
   files = [
     "pass.nix"
     "ssh.nix"
+    "zeroad.nix"
   ];
   overlays = map (f: import (./. + "/${f}")) files;
   set = builtins.listToAttrs (map (f: { name = f; value = (./. + "/${f}"); }) files);
