@@ -24,6 +24,7 @@
     ../configurations/themes.nix
     ../configurations/thunderbird.nix
     ../configurations/xdg-dirs.nix
+    ../configurations/zeroad.nix
   ];
 
   home-manager.users.charlotte = { pkgs, ... }: {
@@ -39,7 +40,6 @@
       sshfs
       wf-recorder
       wl-clipboard
-      zeroad
     ];
     programs.zsh.loginExtra = ''
       if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
