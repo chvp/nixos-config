@@ -1,6 +1,7 @@
 { ... }:
 let
   files = [
+    "firefox.nix"
     "pass.nix"
     "ssh.nix"
     "zeroad.nix"
