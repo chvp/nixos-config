@@ -22,7 +22,6 @@ let
   };
   jdtls = import ../packages/jdtls/default.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   kotlinls = import ../packages/kotlin-language-server/default.nix { inherit pkgs; };
-  nodePackages = import ../packages/node/default.nix { inherit pkgs; };
 in
 {
   custom.zfs.homeLinks = [
@@ -157,9 +156,9 @@ in
               set hidden
 
               let g:LanguageClient_serverCommands = {
-              \ 'vue': ['${nodePackages.vue-language-server}/bin/vls'],
-              \ 'javascript': ['${nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
-              \ 'typescript': ['${nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio'],
+              \ 'vue': ['${pkgs.nodePackages.vue-language-server}/bin/vls'],
+              \ 'javascript': ['${pkgs.nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
+              \ 'typescript': ['${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio'],
               \ 'java': ['${jdtls}/bin/jdtls'],
               \ 'kotlin': ['${kotlinls}/bin/kotlin-language-server'],
               \ 'ruby': ['${pkgs.solargraph}/bin/solargraph', 'stdio'],
