@@ -14,6 +14,5 @@ in
 
   home-manager.users.charlotte = { pkgs, lib, ... }: {
     xdg.configFile = lib.attrsets.mapAttrs' (name: value: { name = "nixpkgs/overlays/${name}"; value = { source = value; }; }) set;
-    nixpkgs.overlays = overlays;
   };
 }

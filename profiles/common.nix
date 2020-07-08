@@ -1,8 +1,11 @@
 { pkgs, ... }:
-
+let
+  findImport = (import ../lib.nix).findImport;
+  home-manager = findImport "home-manager";
+in
 {
   imports = [
-    <home-manager/nixos>
+    "${home-manager}/nixos"
     ../modules/zfs.nix
     ../overlays/default.nix
     ../configurations/direnv.nix
@@ -18,6 +21,7 @@
     ../configurations/zsh.nix
   ];
 
+  home-manager.useGlobalPkgs = true;
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
       hledger

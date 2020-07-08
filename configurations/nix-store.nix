@@ -13,14 +13,9 @@
     };
   };
 
-  system.autoUpgrade = {
-    allowReboot = false;
-    enable = true;
-    dates = "hourly";
-  };
+  nixpkgs.config = import ./nix-store/config.nix;
 
   home-manager.users.charlotte = { ... }: {
-    nixpkgs.config = import ./nix-store/config.nix;
     xdg.configFile."nixpkgs/config.nix".source = ./nix-store/config.nix;
   };
 }
