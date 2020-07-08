@@ -37,10 +37,6 @@
   config.services.zfs.autoScrub.enable = config.custom.zfs.enable;
   config.services.zfs.trim.enable = config.custom.zfs.enable;
 
-  config.environment.etc = lib.mkIf config.custom.zfs.enable {
-    nixos = { source = "/data/etc/nixos/"; };
-  };
-
   config.systemd.tmpfiles.rules = lib.mkIf config.custom.zfs.enable (
     [ "d /home/charlotte 0700 charlotte users - -" ] ++
     (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.custom.zfs.systemLinks)
