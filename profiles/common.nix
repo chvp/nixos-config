@@ -7,7 +7,6 @@ in
   imports = [
     "${home-manager}/nixos"
     ../modules/zfs.nix
-    ../overlays/default.nix
     ../configurations/direnv.nix
     ../configurations/git.nix
     ../configurations/gnupg.nix
@@ -15,6 +14,7 @@ in
     ../configurations/neovim.nix
     ../configurations/nix-index.nix
     ../configurations/nix-store.nix
+    ../configurations/pass.nix
     ../configurations/ssh.nix
     ../configurations/tmux.nix
     ../configurations/users.nix
@@ -29,7 +29,6 @@ in
       moreutils
       ncdu
       pandoc
-      pass
       ripgrep
       texlive.combined.scheme-medium
       unzip

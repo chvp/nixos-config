@@ -7,6 +7,25 @@
     { path = ".ssh/known_hosts"; type = "cache"; }
   ];
 
+  nixpkgs.overlays = [
+    (self: super: {
+      ssh = self.symlinkJoin {
+        name = "openssh";
+        paths = [
+          (
+            self.writeScriptBin "ssh" ''
+              #!${self.zsh}/bin/zsh
+
+              export TERM=xterm-256color
+              ${super.openssh}/bin/ssh $@
+            ''
+          )
+          super.openssh
+        ];
+      };
+    })
+  ];
+
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
       ssh
