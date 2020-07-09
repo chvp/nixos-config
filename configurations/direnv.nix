@@ -16,12 +16,11 @@
       enable = true;
       enableNixDirenvIntegration = true;
       enableZshIntegration = true;
-      # https://github.com/nix-community/nix-direnv/issues/26
-      #config = {
-      #  global = {
-      #    strict_env = true;
-      #  };
-      #};
+      config = {
+        global = {
+          strict_env = true;
+        };
+      };
       stdlib = ''
         : ''${XDG_CACHE_HOME:=$HOME/.cache}
         hash=$(echo -n $PWD | shasum | cut -d' ' -f 1)
