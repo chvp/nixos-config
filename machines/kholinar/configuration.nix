@@ -1,7 +1,12 @@
 { pkgs, lib, ... }:
 
+let
+  findImport = (import ../../lib.nix).findImport;
+  nixos-hardware = findImport "nixos-hardware";
+in
 {
   imports = [
+    "${nixos-hardware}/lenovo/thinkpad/t490"
     ./hardware.nix
     ./secret.nix
     ../../configurations/eid.nix

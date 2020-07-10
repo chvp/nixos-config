@@ -1,7 +1,14 @@
 { config, pkgs, ... }:
 
+let
+  findImport = (import ../../lib.nix).findImport;
+  nixos-hardware = findImport "nixos-hardware";
+in
 {
   imports = [
+    "${nixos-hardware}/common/cpu/intel"
+    "${nixos-hardware}/common/pc/laptop"
+    "${nixos-hardware}/common/pc/laptop/ssd"
     ./hardware.nix
     ./secret.nix
     ../../configurations/eid.nix
