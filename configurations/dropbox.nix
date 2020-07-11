@@ -2,7 +2,7 @@
 
 {
   custom.zfs.homeLinks = [
-    { path = ".dropbox"; type = "data"; }
+    { path = ".dropbox"; type = "cache"; }
     { path = "Dropbox"; type = "data"; }
   ];
   home-manager.users.charlotte = { pkgs, ... }: {

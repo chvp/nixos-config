@@ -1,14 +1,7 @@
 { config, pkgs, ... }:
 
-let
-  findImport = (import ../../lib.nix).findImport;
-  nixos-hardware = findImport "nixos-hardware";
-in
 {
   imports = [
-    "${nixos-hardware}/common/cpu/intel"
-    "${nixos-hardware}/common/pc/laptop"
-    "${nixos-hardware}/common/pc/laptop/ssd"
     ./hardware.nix
     ./secret.nix
     ../../configurations/eid.nix
@@ -17,7 +10,10 @@ in
     ../../profiles/graphical.nix
   ];
 
-  networking.hostName = "oldtown";
+  networking = {
+    hostId = "e718389d";
+    hostName = "kharbranth";
+  };
 
   time.timeZone = "Europe/Brussels";
 
@@ -27,14 +23,18 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
 
   home-manager.users.charlotte = { ... }: {
-    home.stateVersion = "20.03";
+    home.stateVersion = "20.09";
   };
 
   # Machine-specific application settings
   custom = {
     git.email = "charlotte.vanpetegem@ugent.be";
+    zfs = {
+      enable = true;
+      encrypted = true;
+    };
   };
 }

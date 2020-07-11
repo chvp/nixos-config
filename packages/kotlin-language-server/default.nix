@@ -8,7 +8,7 @@ buildGradle {
   envSpec = ./gradle-env.json;
   src = fetchTarball {
     url = "https://github.com/fwcd/kotlin-language-server/archive/master.tar.gz";
-    sha256 = "16qddjwcj1n79c4p9dqlj1vg6yg5rkvzb8r15jbyxsy82mp6ib3k";
+    sha256 = "0by07h2ly84dzmwzjf3fsgghm3fwhyhhbnnv3kl7dy1iajhl4shj";
   };
   gradleFlags = [ "server:installDist" ];
   installPhase = ''
