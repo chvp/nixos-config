@@ -30,7 +30,7 @@ in
       ncdu
       pandoc
       ripgrep
-      texlive.combined.scheme-medium
+      texlive.combined.scheme-small
       unzip
       youtube-dl
     ];
