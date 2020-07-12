@@ -1,0 +1,32 @@
+name: CI
+
+on: push
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install Nix
+              uses: cachix/install-nix-action@v10
+              with:
+                  skip_adding_nixpkgs_channel: True
+            - name: Unlock git-crypt
+              uses: sliteteam/github-action-git-crypt-unlock@1.1.0
+              env:
+                  GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+            - name: Import ssh key
+              uses: webfactory/ssh-agent@v0.4.0
+              with:
+                  ssh-private-key: ${{ secrets.SSH_KEY }}
+            - name: Build machines
+              run: |
+                  sudo ssh -o StrictHostKeyChecking=accept-new -o IdentityAgent=$SSH_AUTH_SOCK charlotte@sunspear.vanpetegem.me true
+                  sudo bash -c "echo '${{ secrets.SSH_KEY }}' > /root/.ssh/id_ed25519"
+                  sudo chmod u=r,go= /root/.ssh/id_ed25519
+                  export NIX_SSHOPTS="-o IdentityAgent=$SSH_AUTH_SOCK"
+                  for machine in machines/*
+                  do
+                    STORE_PATH=$(./build.sh $machine)
+                    nix-copy-closure charlotte@sunspear.vanpetegem.me $STORE_PATH
+                    ssh charlotte@sunspear.vanpetegem.me "nix-env --set --profile /nix/var/nix/profiles/per-user/charlotte/$(echo $machine | sed "s,machine/,,") $STORE_PATH"
+                  done
