@@ -11,6 +11,7 @@
       automatic = true;
       dates = [ "hourly" ];
     };
+    trustedUsers = [ "@wheel" ];
   };
 
   nixpkgs.config = import ./nix-store/config.nix;
