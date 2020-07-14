@@ -26,6 +26,7 @@
         };
       };
       ignores = [
+        ".direnv"
         ".envrc"
         "shell.nix"
         # Ruby dependencies in source tree
