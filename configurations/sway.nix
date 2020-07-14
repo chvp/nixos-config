@@ -92,8 +92,6 @@ in
       workspace 3
       exec ${pkgs.thunderbird}/bin/thunderbird
       workspace 4
-      exec ${pkgs.joplin-desktop}/bin/joplin-desktop
-      workspace 6
       exec ${pkgs.teams}/bin/teams
       workspace 2
 

@@ -11,7 +11,6 @@
     ../configurations/firefox.nix
     ../configurations/fonts.nix
     ../configurations/i3.nix
-    ../configurations/joplin.nix
     ../configurations/kernel.nix
     ../configurations/kitty.nix
     ../configurations/mime.nix
