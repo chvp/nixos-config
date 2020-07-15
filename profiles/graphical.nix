@@ -23,6 +23,7 @@
     ../configurations/teams.nix
     ../configurations/themes.nix
     ../configurations/thunderbird.nix
+    ../configurations/virtualbox.nix
     ../configurations/xdg-dirs.nix
     ../configurations/zeroad.nix
   ];
