@@ -15,6 +15,9 @@
     };
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+    kernel.sysctl = {
+      "vm.swappiness" = 1;
+    };
   };
 
   fileSystems."/" = {
@@ -52,5 +55,15 @@
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = true;
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+    opengl.extraPackages = with pkgs; [
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+      intel-media-driver
+    ];
+  };
+  services.fstrim.enable = true;
 }
