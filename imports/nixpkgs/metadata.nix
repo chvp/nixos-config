@@ -2,8 +2,8 @@
   url = "https://github.com/charvp/nixpkgs/archive/master.tar.gz";
   repo_git = "https://github.com/charvp/nixpkgs";
   branch = "master";
-  rev = "7b0966f80d6e848225ad30477008caf37fa22e85";
-  sha256 = "154mrp832qvri4lrhv5w6xhbfn2asa6cjkkvipz583f6sj9ln1z1";
-  revdate = "2020-07-19 13:28:18 +0200";
+  rev = "1cab31c02385445cd86b2930201f02708fe504d9";
+  sha256 = "1c2wm4wyrswi61bfrb7yyv2025xg31shs7h1l0662vkjmd58vjaf";
+  revdate = "2020-07-21 09:11:54 +0200";
   skip = false;
 }
