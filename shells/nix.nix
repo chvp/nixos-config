@@ -1,9 +1,3 @@
-let
-  pkgs = import <nixpkgs> { };
-in
-pkgs.mkShell {
-  buildInputs = with pkgs; [
-    jq
-    nixpkgs-fmt
-  ];
-}
+(import (fetchTarball https://github.com/edolstra/flake-compat/archive/master.tar.gz) {
+  src = ./.;
+}).shellNix

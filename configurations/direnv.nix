@@ -5,21 +5,22 @@
     { path = ".local/share/direnv"; type = "cache"; }
   ];
 
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
-
   home-manager.users.charlotte = { ... }: {
     programs.direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
       enableZshIntegration = true;
       config = {
         global = {
           strict_env = true;
         };
       };
+      stdlib = ''
+        use_flake() {
+          watch_file flake.nix
+          watch_file flake.lock
+          eval "$(nix --experimental-features 'nix-commnand flakes' print-dev-env --profile "$(direnv_layout_dir)/flake-profile")"
+        }
+      '';
     };
   };
 }

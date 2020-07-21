@@ -1,11 +1,7 @@
 { pkgs, ... }:
-let
-  findImport = (import ../lib.nix).findImport;
-  home-manager = findImport "home-manager";
-in
+
 {
   imports = [
-    "${home-manager}/nixos"
     ../modules/zfs.nix
     ../configurations/direnv.nix
     ../configurations/git.nix
