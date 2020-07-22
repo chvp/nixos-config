@@ -39,11 +39,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1595363904,
-        "narHash": "sha256-p53BaxRE1FPqdOqVtj3e8dtygME6JzNtJPXYFGb9EPQ=",
+        "lastModified": 1595402314,
+        "narHash": "sha256-LEHScTpv+Swf+LoqeaY128N2AC7vhWv7SlDnIJoB6sk=",
         "ref": "master",
-        "rev": "4da6ffdfb1ee6aaf93c379507dab543091a5536c",
-        "revCount": 235509,
+        "rev": "5a687c0410ab6214d1467d535274b26c3f38b4b4",
+        "revCount": 235540,
         "type": "git",
         "url": "file:///data/home/charlotte/repos/nixpkgs"
       },
