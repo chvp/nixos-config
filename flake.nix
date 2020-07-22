@@ -30,11 +30,7 @@
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = with nixpkgs.legacyPackages.${system}; [
-            jq
-            nixUnstable
-            nixpkgs-fmt
-          ];
+          buildInputs = with nixpkgs.legacyPackages.${system}; [ nixpkgs-fmt ];
         };
       }) // {
       nixosConfigurations = {
