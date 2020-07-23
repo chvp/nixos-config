@@ -2,11 +2,11 @@
   "nodes": {
     "flake-utils": {
       "locked": {
-        "lastModified": 1595332686,
-        "narHash": "sha256-GpzwLOx6fvtsAnjPqG0ob5GXR0e4eWThwgWedo3qeNc=",
+        "lastModified": 1595410516,
+        "narHash": "sha256-8lKGIGTyo1uVfdT0TXEJk9YAR/Tw08sRA/VLOm9ewco=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "f99f5970824e210e84f9a766e2ea52d4af770182",
+        "rev": "8e1f14e82dcd87f484a5024a86e52399b1061416",
         "type": "github"
       },
       "original": {
@@ -39,13 +39,12 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1595402314,
-        "narHash": "sha256-LEHScTpv+Swf+LoqeaY128N2AC7vhWv7SlDnIJoB6sk=",
-        "ref": "master",
-        "rev": "5a687c0410ab6214d1467d535274b26c3f38b4b4",
-        "revCount": 235540,
-        "type": "git",
-        "url": "file:///data/home/charlotte/repos/nixpkgs"
+        "lastModified": 1595486616,
+        "narHash": "sha256-36b6SSE1Ef+i7LE2JE6qaq087Bhbrr8VPmcxr+lS2e8=",
+        "owner": "charvp",
+        "repo": "nixpkgs",
+        "rev": "871bc12bf4edd1a099d1fdef771f99a34af0cfad",
+        "type": "github"
       },
       "original": {
         "owner": "charvp",
