@@ -18,7 +18,12 @@
         use_flake() {
           watch_file flake.nix
           watch_file flake.lock
-          eval "$(nix print-dev-env --profile "$(direnv_layout_dir)/flake-profile")"
+          local profile_dir="$(direnv_layout_dir)/flake-profile"
+          eval "$(nix print-dev-env --profile "''${profile_dir}")"
+          local stripped_pwd=''${PWD/\//}
+          local escaped_pwd=''${stripped_pwd//-/--}
+          local escaped_pwd=''${escaped_pwd//\//-}
+          ln -fs "''${profile_dir}" "/nix/var/nix/gcroots/per-user/$USER/''${escaped_pwd}"
         }
       '';
     };
