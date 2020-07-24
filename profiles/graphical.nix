@@ -8,6 +8,7 @@
     ../configurations/deluge.nix
     ../configurations/docker.nix
     ../configurations/dropbox.nix
+    ../configurations/element-desktop.nix
     ../configurations/firefox.nix
     ../configurations/fonts.nix
     ../configurations/i3.nix

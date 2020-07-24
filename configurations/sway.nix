@@ -91,6 +91,8 @@ in
       exec ${pkgs.firefox}/bin/firefox
       workspace 3
       exec ${pkgs.thunderbird}/bin/thunderbird
+      workspace 4
+      exec ${pkgs.element-desktop}/bin/element-desktop
       workspace 2
 
       ### Input configuration
