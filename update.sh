@@ -2,7 +2,7 @@
 set -euo pipefail
 set -x
 
-nix flake update
+nix flake update --update-input nixpkgs --update-input home-manager --update-input flake-utils
 
 BUILD_ARGS=(
     "--extra-substituters"
