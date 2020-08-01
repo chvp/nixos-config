@@ -31,7 +31,6 @@
 
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
-      chromium
       google-chrome
       libreoffice
       mpv
@@ -40,6 +39,7 @@
       ranger
       slurp
       sshfs
+      ungoogled-chromium
       wf-recorder
       wl-clipboard
     ];
