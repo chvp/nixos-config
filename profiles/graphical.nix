@@ -21,6 +21,7 @@
     ../configurations/sound.nix
     ../configurations/sway.nix
     ../configurations/syncthing.nix
+    ../configurations/steam.nix
     ../configurations/teams.nix
     ../configurations/themes.nix
     ../configurations/thunderbird.nix
