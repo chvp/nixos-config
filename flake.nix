@@ -24,15 +24,16 @@
         ];
       };
     in
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = pkgsFor system;
-      in
-      {
-        devShell = pkgs.mkShell {
-          buildInputs = with nixpkgs.legacyPackages.${system}; [ nixpkgs-fmt ];
-        };
-      }) // {
+    flake-utils.lib.eachDefaultSystem
+      (system:
+        let
+          pkgs = pkgsFor system;
+        in
+        {
+          devShell = pkgs.mkShell {
+            buildInputs = with nixpkgs.legacyPackages.${system}; [ nixpkgs-fmt ];
+          };
+        }) // {
       nixosConfigurations = {
         kharbranth = mkSystem "x86_64-linux" "kharbranth";
         kholinar = mkSystem "x86_64-linux" "kholinar";
