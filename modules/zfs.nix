@@ -1,5 +1,9 @@
 { config, lib, ... }:
-
+let
+  linkCommands = map
+    (location: "$DRY_RUN_CMD ln -sf -T $VERBOSE_ARG \"/${location.type}/home/charlotte/${location.path}\" \"/home/charlotte/${location.path}\"")
+    config.custom.zfs.homeLinks;
+in
 {
   options.custom.zfs = {
     enable = lib.mkOption {
@@ -42,11 +46,9 @@
     (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.custom.zfs.systemLinks)
   );
 
-  config.home-manager.users.charlotte = { ... }: {
-    systemd.user.tmpfiles.rules = lib.mkIf config.custom.zfs.enable (
-      map
-        (location: "L /home/charlotte/${location.path} - - - - /${location.type}/home/charlotte/${location.path}")
-        config.custom.zfs.homeLinks
-    );
+  config.home-manager.users.charlotte = { lib, ... }: {
+    home.activation = lib.mkIf config.custom.zfs.enable {
+      linkCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] (lib.concatStringsSep "\n" linkCommands);
+    };
   };
 }
