@@ -1,7 +1,10 @@
 { config, lib, ... }:
 let
   linkCommands = map
-    (location: "$DRY_RUN_CMD ln -sf -T $VERBOSE_ARG \"/${location.type}/home/charlotte/${location.path}\" \"/home/charlotte/${location.path}\"")
+    (location: ''
+      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG "/home/charlotte/$(dirname ${location.path})"
+      $DRY_RUN_CMD ln -sf -T $VERBOSE_ARG "/${location.type}/home/charlotte/${location.path}" "/home/charlotte/${location.path}"
+    '')
     config.custom.zfs.homeLinks;
 in
 {
