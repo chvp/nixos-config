@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs = { url = "github:charvp/nixpkgs/master"; };
     home-manager = {
-      url = "github:ehmry/home-manager/flake";
+      url = "github:rycee/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils = { url = "github:numtide/flake-utils/master"; };

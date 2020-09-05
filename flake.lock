@@ -23,27 +23,26 @@
         ]
       },
       "locked": {
-        "lastModified": 1596118171,
-        "narHash": "sha256-+Zbkjrk9vEfeJ95sFVvJDQGcEa2cL8koq+8CRQG2keA=",
-        "owner": "ehmry",
+        "lastModified": 1599242479,
+        "narHash": "sha256-hqI+F1S8gW5OJ+DitXl6F/5f/A7RvnmZJAcR7BDndtQ=",
+        "owner": "rycee",
         "repo": "home-manager",
-        "rev": "134222c9cd6132cd3bd848b91aa52b1416e99f71",
+        "rev": "41b1af808f1de69c31f3fd164d5274154ee782e4",
         "type": "github"
       },
       "original": {
-        "owner": "ehmry",
-        "ref": "flake",
+        "owner": "rycee",
         "repo": "home-manager",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1599041662,
-        "narHash": "sha256-GQhubHkcTOnVTG8yrRep4EwNEA04xMIOnGEs5/pcXy8=",
+        "lastModified": 1599239543,
+        "narHash": "sha256-PpZHP6VO4pdaR63gsIP/c1hvEFmZm2ZBshktm2BAc6c=",
         "owner": "charvp",
         "repo": "nixpkgs",
-        "rev": "ee0d559dae1bd2bdf3591b3efc5ce832ebbf2b1d",
+        "rev": "8c7ed979b98e527d822696673398cf4996a1f3bf",
         "type": "github"
       },
       "original": {
