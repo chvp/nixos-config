@@ -3,7 +3,7 @@
 {
   imports = [
     ../configurations/adb.nix
-    # ../configurations/calibre.nix
+    ../configurations/calibre.nix
     ../configurations/citrix.nix
     ../configurations/deluge.nix
     ../configurations/docker.nix
