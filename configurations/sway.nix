@@ -85,6 +85,9 @@ in
       # Start accentor as floating window
       for_window [class="accentor.Main"] floating enable
 
+      # Don't allow teams notifications to steal focus
+      no_focus [title="Microsoft Teams Notification"]
+
       ### Startup programs
       #
       workspace 1
@@ -93,6 +96,8 @@ in
       exec ${pkgs.thunderbird}/bin/thunderbird
       workspace 4
       exec ${pkgs.element-desktop}/bin/element-desktop
+      workspace 5
+      exec ${pkgs.teams}/bin/teams
       workspace 2
 
       ### Input configuration
