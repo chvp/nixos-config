@@ -42,6 +42,7 @@
       ungoogled-chromium
       wf-recorder
       wl-clipboard
+      zoom-us
     ];
     programs.zsh.loginExtra = ''
       if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
