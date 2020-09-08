@@ -6,7 +6,10 @@ in
       (pkgs.rWrapper.override {
         packages = with pkgs.rPackages; [
           base64enc
+          dplyr
+          dslabs
           jsonlite
+          knitr
           R6
           rlang
         ];
