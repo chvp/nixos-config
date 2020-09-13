@@ -82,9 +82,6 @@ in
       # Launcher popup
       for_window [app_id="launcher"] floating enable
 
-      # Start accentor as floating window
-      for_window [class="accentor.Main"] floating enable
-
       # Don't allow teams notifications to steal focus
       no_focus [title="Microsoft Teams Notification"]
 
