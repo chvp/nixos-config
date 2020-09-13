@@ -5,8 +5,8 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     chromedriver
     libmysqlclient
-    nodejs-12_x
-    ruby
+    nodejs-14_x
+    ruby_2_7
     yarn
     zlib
     (
