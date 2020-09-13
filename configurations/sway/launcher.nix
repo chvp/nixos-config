@@ -66,13 +66,13 @@ pkgs.writeScriptBin "launcher" ''
   }
 
   username() {
-    swaymsg exec -- "${pkgs.pass}/bin/pass show '$1' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
+    swaymsg exec -- "${pkgs.pass}/bin/pass show '$@' | sed -n 's/^Username: *//p' | tr -d '\n' | ${pkgs.wl-clipboard}/bin/wl-copy --foreground"
   }
   password() {
-    swaymsg exec -- "${pkgs.pass}/bin/pass show -c0 '$1'"
+    swaymsg exec -- "${pkgs.pass}/bin/pass show -c0 '$@'"
   }
   otp() {
-    swaymsg exec -- "${pkgs.pass}/bin/pass otp -c '$1'"
+    swaymsg exec -- "${pkgs.pass}/bin/pass otp -c '$@'"
   }
 
   record_options() {
