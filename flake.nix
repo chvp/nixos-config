@@ -21,6 +21,14 @@
         modules = [
           home-manager.nixosModules.home-manager
           (./. + "/machines/${hostname}")
+          ({ pkgs, ... }: {
+            environment.etc."nixpkgs".source = (pkgs.runCommandNoCC "nixpkgs" { } ''
+              cp -r ${nixpkgs} $out
+              chmod 700 $out
+              echo "${nixpkgs.rev}" > $out/.version-suffix
+            '');
+            nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
+          })
         ];
       };
     in
