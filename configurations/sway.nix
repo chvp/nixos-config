@@ -8,7 +8,12 @@ in
 {
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   home-manager.users.charlotte = { pkgs, lib, ... }: {
-    home.packages = [ color-picker launcher screenshot ];
+    home.packages = [ color-picker screenshot ];
+    programs.mako = {
+      enable = true;
+      font = "Fira Code Normal 9";
+      layer = "overlay";
+    };
     services.kanshi = {
       enable = true;
       profiles = {
@@ -67,7 +72,6 @@ in
         ];
         startup = [
           { command = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${pkgs.swaylock}/bin/swaylock -f -c 000000' timeout 150 '${pkgs.sway}/bin/swaymsg \"output * dpms off\"' resume '${pkgs.sway}/bin/swaymsg \"output * dpms on\"' before-sleep '${pkgs.swaylock}/bin/swaylock -f -c 000000'"; }
-          { command = "${pkgs.mako}/bin/mako"; }
         ];
         window.commands = [
           { command = "floating enable"; criteria = { app_id = "launcher"; }; }
@@ -77,10 +81,12 @@ in
           "type:keyboard" = { xkb_layout = "us"; xkb_variant = "altgr-intl"; xkb_numlock = "enabled"; };
           "type:touchpad" = { drag = "enabled"; dwt = "enabled"; scroll_method = "two_finger"; tap = "enabled"; };
         };
+        modes = {}; # Unset default "resize" mode
         keybindings = lib.mkOptionDefault {
+          "${modifier}+Shift+q" = "nop Unset default kill";
+          "${modifier}+r" = "nop Unset default resize mode";
           "${modifier}+Shift+c" = "kill";
           "${modifier}+Shift+r" = "reload";
-          "${modifier}+Shift+q" = "noop";
           "${modifier}+c" = "exec ${pkgs.swaylock}/bin/swaylock -f -c 000000";
           "${modifier}+i" = "inhibit_idle open; border normal; mark --add inhibiting_idle";
           "${modifier}+Shift+i" = "inhibit_idle none; border pixel; unmark inhibiting_idle";

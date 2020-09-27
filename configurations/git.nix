@@ -33,6 +33,10 @@
         "/vendor/bundle"
         "**/*.patch"
       ];
+      signing = {
+        key = "charlotte@vanpetegem.me";
+        signByDefault = true;
+      };
       userEmail = config.custom.git.email;
       userName = "Charlotte Van Petegem";
     };

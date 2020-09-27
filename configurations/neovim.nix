@@ -30,6 +30,7 @@ in
   ];
 
   home-manager.users.charlotte = { pkgs, ... }: {
+    home.sessionVariables = { EDITOR = "nvim"; };
     programs.neovim = {
       enable = true;
       extraConfig = ''

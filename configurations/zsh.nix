@@ -45,11 +45,7 @@
           };
         }
       ];
-      sessionVariables = {
-        DEFAULT_USER = "charlotte";
-        EDITOR = "nvim";
-        PASSWORD_STORE_DIR = "$HOME/repos/passwords";
-      };
+      sessionVariables = { DEFAULT_USER = "charlotte"; };
     };
   };
 }
