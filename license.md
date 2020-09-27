@@ -1,4 +1,4 @@
-[SOFTWARE NAME] Copyright (YEAR) (COPYRIGHT HOLDER(S)/AUTHOR(S))(“Licensor”)
+NixOS config Copyright 2020 Charlotte Van Petegem (“Licensor”)
 
 Hippocratic License Version Number: 2.1.
 
