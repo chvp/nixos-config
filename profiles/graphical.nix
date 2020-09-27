@@ -34,6 +34,7 @@
     home.packages = with pkgs; [
       bluej
       google-chrome
+      greenfoot
       libreoffice
       mpv
       okular
