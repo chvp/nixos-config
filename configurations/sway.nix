@@ -75,7 +75,6 @@ in
         ];
         window.commands = [
           { command = "floating enable"; criteria = { app_id = "launcher"; }; }
-          { command = "no_focus"; criteria = { title = "Microsoft Teams Notification"; }; }
         ];
         input = {
           "type:keyboard" = { xkb_layout = "us"; xkb_variant = "altgr-intl"; xkb_numlock = "enabled"; };
@@ -124,6 +123,8 @@ in
         workspace 5
         exec ${pkgs.teams}/bin/teams
         workspace 2
+
+        no_focus [title="Microsoft Teams Notification"]
 
         default_border pixel
       '';
