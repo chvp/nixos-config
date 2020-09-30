@@ -140,14 +140,28 @@ in
         {
           plugin = ale;
           config = ''
-            let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
+            let g:ale_fixers = {
+            \  '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \  'javascript': ['eslint', 'remove_trailing_lines', 'trim_whitespace'],
+            \  'ledger': ['trim_whitespace'],
+            \  'nix': ['nixpkgs-fmt', 'remove_trailing_lines', 'trim_whitespace'],
+            \  'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace'],
+            \  'typescript': ['eslint', 'remove_trailing_lines', 'trim_whitespace'],
+            \  'vue': ['prettier', 'remove_trailing_lines', 'trim_whitespace'],
+            \}
             let g:ale_fix_on_save = 1
           '';
         }
         auto-pairs
         {
           plugin = deoplete-nvim;
-          config = "let g:deoplete#enable_at_startup = 1";
+          config = ''
+            let g:deoplete#enable_at_startup = 1
+            set completeopt+=noselect
+            au VimEnter * call deoplete#custom#option('omni_patterns', {
+            \ 'ledger': ['[a-zA-Z][a-zA-Z: ]*'],
+            \})
+          '';
         }
         editorconfig-vim
         kotlin-vim
@@ -158,13 +172,23 @@ in
             set hidden
 
             let g:LanguageClient_serverCommands = {
-            \ 'vue': ['${pkgs.nodePackages.vue-language-server}/bin/vls'],
-            \ 'javascript': ['${pkgs.nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
-            \ 'typescript': ['${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio'],
             \ 'java': ['${jdtls}/bin/jdtls'],
+            \ 'javascript': ['${pkgs.nodePackages.javascript-typescript-langserver}/bin/javascript-typescript-stdio'],
             \ 'kotlin': ['${kotlinls}/bin/kotlin-language-server'],
             \ 'ruby': ['${pkgs.solargraph}/bin/solargraph', 'stdio'],
+            \ 'typescript': ['${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server', '--stdio'],
+            \ 'vue': ['${pkgs.nodePackages.vue-language-server}/bin/vls'],
             \ }
+
+            function LC_maps()
+              if has_key(g:LanguageClient_serverCommands, &filetype)
+                nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+                nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
+                nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+              endif
+            endfunction
+
+            autocmd FileType * call LC_maps()
           '';
         }
         snow-color-theme
