@@ -8,7 +8,7 @@
   home-manager.users.charlotte = { pkgs, ... }: {
     programs.password-store = {
       enable = true;
-      settings = { PASSWORD_STORE_DIR = "$HOME/repos/passwords"; };
+      settings = { PASSWORD_STORE_DIR = "/home/charlotte/repos/passwords"; };
     };
     services.password-store-sync.enable = true;
   };
