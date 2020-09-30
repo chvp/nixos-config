@@ -10,15 +10,6 @@ let
         sha256 = "099fky1bpppac5785bhx1jc26gfpm8n837p8487j1rf1lwq83q33";
       };
     };
-    kotlin-vim = pkgs.vimUtils.buildVimPlugin {
-      name = "kotlin-vim";
-      src = pkgs.fetchFromGitHub {
-        owner = "udalov";
-        repo = "kotlin-vim";
-        rev = "b9fa728701a0aa0b9a2ffe92f10880348fc27a8f";
-        sha256 = "1yqzxabhpc4jbdlzhsysp0vi1ayqg0vnpysvx4ynd9961q2fk3sz";
-      };
-    };
   };
   jdtls = import ../packages/jdtls/default.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   kotlinls = import ../packages/kotlin-language-server/default.nix { inherit pkgs; };
