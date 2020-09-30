@@ -10,8 +10,10 @@ pkgs.mkShell {
         dslabs
         jsonlite
         knitr
+        lintr
         R6
         rlang
+        styler
       ];
     })
   ];
