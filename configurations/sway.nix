@@ -7,6 +7,7 @@ let
 in
 {
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  security.pam.services.swaylock = { };
   home-manager.users.charlotte = { pkgs, lib, ... }: {
     home.packages = [ color-picker screenshot ];
     programs.mako = {
@@ -77,7 +78,13 @@ in
           "Dell Inc. DELL U2718Q FN84K83Q1KHL" = { position = "1920,0"; mode = "3840x2160"; scale = "1.25"; };
         };
         startup = [
-          { command = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${pkgs.swaylock}/bin/swaylock -f -c 000000' timeout 150 '${pkgs.sway}/bin/swaymsg \"output * dpms off\"' resume '${pkgs.sway}/bin/swaymsg \"output * dpms on\"' before-sleep '${pkgs.swaylock}/bin/swaylock -f -c 000000'"; }
+          {
+            command = ''${pkgs.swayidle}/bin/swayidle -w \
+              timeout 300 '${pkgs.swaylock}/bin/swaylock -f -c 000000' \
+              timeout 150 '${pkgs.sway}/bin/swaymsg "output * dpms off"' \
+                   resume '${pkgs.sway}/bin/swaymsg "output * dpms on"' \
+             before-sleep '${pkgs.swaylock}/bin/swaylock -f -c 000000'';
+          }
         ];
         window.commands = [
           { command = "floating enable"; criteria = { app_id = "launcher"; }; }
