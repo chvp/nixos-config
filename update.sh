@@ -13,4 +13,4 @@ fi
 
 nix flake update --update-input nixpkgs --update-input home-manager --update-input flake-utils
 
-./build.sh
+./build.sh && ./switch.sh
