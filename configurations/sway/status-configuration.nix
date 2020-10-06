@@ -10,6 +10,17 @@ let
       echo -e '\uf130'
     fi
   '';
+  mail-status = pkgs.writeScript "mail-status" ''
+    #!${pkgs.zsh}/bin/zsh
+
+    mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
+    if [ "$mails" -gt 0 ]
+    then
+      echo "{ \"state\": \"Info\", \"text\": \" 📬 $mails\" }"
+    else
+      echo "{ \"state\": \"Idle\", \"text\": \" 📭 $mails\" }"
+    fi
+  '';
 in
 pkgs.writeText "configuration.toml" ''
   [theme]
@@ -19,11 +30,11 @@ pkgs.writeText "configuration.toml" ''
   idle_fg="#535c65"
   info_bg="#2b7ab2"
   info_fg="#fbffff"
-  good_bg="#2b7ab2"
+  good_bg="#4d7f43"
   good_fg="#fbffff"
-  warning_bg="#2b7ab2"
+  warning_bg="#906c33"
   warning_fg="#fbffff"
-  critical_bg="#2b7ab2"
+  critical_bg="#ae5865"
   critical_fg="#fbffff"
   separator=""
 
@@ -77,6 +88,12 @@ pkgs.writeText "configuration.toml" ''
   command = "${mic-status}"
   interval = 1
   on_click = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+
+  [[block]]
+  block = "custom"
+  json = true
+  command = "${mail-status}"
+  interval = 10
 
   [[block]]
   block = "time"
