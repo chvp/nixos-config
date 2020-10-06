@@ -52,6 +52,9 @@ let
         After = "network-online.target";
         Wants = "network-online.target";
       };
+      Service = {
+        Restart = "always";
+      };
     };
   };
 in
