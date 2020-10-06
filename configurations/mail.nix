@@ -3,7 +3,7 @@ let
   passwordScript = pkgs.writeScript "get_mail_password" ''
     #!${pkgs.bash}/bin/bash
 
-    pass show "$@" | head -n1 | tr -d "\n"
+    ${pkgs.pass}/bin/pass show "$@" | head -n1 | tr -d "\n"
   '';
   baseAccount = {
     gpg = {
@@ -24,6 +24,10 @@ in
     { path = ".local/share/offlineimap"; type = "data"; }
   ];
   home-manager.users.charlotte = { ... }: {
+    home.file.".mailcap".text = ''
+      text/html; ${pkgs.firefox}/bin/firefox %s ; nametemplate=%s.html; needsterminal
+      text/html; ${pkgs.w3m}/bin/w3m -I %{charset} -T text/html ; copiousoutput; nametemplate=%s.html
+    '';
     accounts.email = {
       maildirBasePath = "mail";
       accounts = {
@@ -45,6 +49,10 @@ in
             boxes = [ "INBOX" ];
             onNotify = "${pkgs.offlineimap}/bin/offlineimap -a personal -f INBOX";
             onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send 'New mail arrived'"; };
+          };
+          neomutt = {
+            enable = true;
+            sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account personal";
           };
           passwordCommand = "${passwordScript} mail/Personal";
           primary = true;
@@ -73,6 +81,10 @@ in
             boxes = [ "INBOX" ];
             onNotify = "${pkgs.offlineimap}/bin/offlineimap -a work -f INBOX";
             onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send 'New mail arrived'"; };
+          };
+          neomutt = {
+            enable = true;
+            sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account work";
           };
           passwordCommand = "${passwordScript} work/UGentNet";
           smtp = {
@@ -104,6 +116,10 @@ in
             onNotify = "${pkgs.offlineimap}/bin/offlineimap -a work -f INBOX";
             onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send 'New mail arrived'"; };
           };
+          neomutt = {
+            enable = true;
+            sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account posteo";
+          };
           passwordCommand = "${passwordScript} mail/Posteo";
           smtp = {
             host = "posteo.de";
@@ -112,10 +128,55 @@ in
           };
           userName = "chvp@posteo.net";
         };
+        jonggroen = baseAccount // {
+          address = "charlotte@jonggroen.be";
+          flavor = "gmail.com";
+          folders = {
+            drafts = "[Gmail].Drafts";
+            inbox = "INBOX";
+            sent = "[Gmail].Sent Mail";
+            trash = "[Gmail].Bin";
+          };
+          imap = {
+            host = "imap.gmail.com";
+            port = 993;
+            tls.enable = true;
+          };
+          imapnotify = {
+            enable = true;
+            boxes = [ "INBOX" ];
+            onNotify = "${pkgs.offlineimap}/bin/offlineimap -a jonggroen -f INBOX";
+            onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send 'New mail arrived'"; };
+          };
+          neomutt = {
+            enable = true;
+            sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account jonggroen";
+          };
+          passwordCommand = "${passwordScript} jonggroen/GoogleAppMail";
+          smtp = {
+            host = "smtp.gmail.com";
+            port = 587;
+            tls = {
+              enable = true;
+              useStartTls = true;
+            };
+          };
+          userName = "charlotte@jonggroen.be";
+        };
       };
     };
     programs = {
       msmtp.enable = true;
+      neomutt = {
+        enable = true;
+        sidebar = {
+          enable = true;
+        };
+        extraConfig = ''
+          auto_view text/html
+        '';
+        vimKeys = true;
+      };
       offlineimap.enable = true;
     };
     services = {
