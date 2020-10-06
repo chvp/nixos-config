@@ -126,7 +126,7 @@ in
         workspace 1
         exec ${pkgs.firefox}/bin/firefox
         workspace 3
-        exec ${pkgs.thunderbird}/bin/thunderbird
+        exec ${pkgs.kitty}/bin/kitty -e ${pkgs.tmuxinator}/bin/tmuxinator start mail
         workspace 4
         exec ${pkgs.element-desktop}/bin/element-desktop
         workspace 5

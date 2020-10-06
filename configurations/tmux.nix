@@ -19,6 +19,7 @@
     xdg.configFile = {
       "tmuxinator/accentor.yml".source = ./tmux/accentor.yml;
       "tmuxinator/dodona.yml".source = ./tmux/dodona.yml;
+      "tmuxinator/mail.yml".source = ./tmux/mail.yml;
     };
   };
 }

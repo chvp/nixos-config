@@ -59,6 +59,9 @@ in
   custom.zfs.homeLinks = [
     { path = "mail"; type = "data"; }
     { path = ".local/share/offlineimap"; type = "data"; }
+    { path = ".local/share/contacts"; type = "data"; }
+    { path = ".local/share/calendars"; type = "data"; }
+    { path = ".local/share/vdirsyncer"; type = "data"; }
   ];
   home-manager.users.charlotte = { ... }: {
     accounts.email = {
@@ -131,10 +134,114 @@ in
         };
       };
     };
-    home.file.".mailcap".text = ''
-      text/html; ${pkgs.firefox}/bin/firefox %s ; nametemplate=%s.html; needsterminal
-      text/html; ${pkgs.w3m}/bin/w3m -I %{charset} -T text/html ; copiousoutput; nametemplate=%s.html
-    '';
+    home = {
+      packages = [ pkgs.khal pkgs.khard ];
+      file.".mailcap".text = ''
+        text/html; ${pkgs.firefox}/bin/firefox %s ; nametemplate=%s.html; needsterminal
+        text/html; ${pkgs.w3m}/bin/w3m -I %{charset} -T text/html ; copiousoutput; nametemplate=%s.html
+      '';
+    };
+    xdg.configFile = {
+      "khal/config".text = ''
+        [calendars]
+
+        [[calendar]]
+        path = ~/.local/share/calendars/*
+        type = discover
+
+        [locale]
+        timeformat = %H:%M
+        dateformat = %Y-%m-%d
+        longdateformat = %Y-%m-%d
+        datetimeformat = %Y-%m-%d %H:%M
+        longdatetimeformat = %Y-%m-%d %H:%M
+      '';
+      "khard/khard.conf".text = ''
+        [addressbooks]
+        [[contacts]]
+        path = ~/.local/share/contacts/contacts
+
+        [general]
+        debug = no
+        default_action = list
+        # These are either strings or comma seperated lists
+        editor = nvim
+        merge_editor = nvim, -d
+
+        [contact table]
+        # display names by first or last name: first_name / last_name / formatted_name
+        display = formatted_name
+        # group by address book: yes / no
+        group_by_addressbook = no
+        # reverse table ordering: yes / no
+        reverse = no
+        # append nicknames to name column: yes / no
+        show_nicknames = no
+        # show uid table column: yes / no
+        show_uids = yes
+        # sort by first or last name: first_name / last_name / formatted_name
+        sort = last_name
+        # localize dates: yes / no
+        localize_dates = yes
+        # set a comma separated list of preferred phone number types in descending priority
+        # or nothing for non-filtered alphabetical order
+        preferred_phone_number_type = pref, cell, home
+        # set a comma separated list of preferred email address types in descending priority
+        # or nothing for non-filtered alphabetical order
+        preferred_email_address_type = pref, work, home
+
+        [vcard]
+        # extend contacts with your own private objects
+        # these objects are stored with a leading "X-" before the object name in the vcard files
+        # every object label may only contain letters, digits and the - character
+        # example:
+        #   private_objects = Jabber, Skype, Twitter
+        # default: ,  (the empty list)
+        private_objects = ,
+        # preferred vcard version: 3.0 / 4.0
+        preferred_version = 4.0
+        # Look into source vcf files to speed up search queries: yes / no
+        search_in_source_files = no
+        # skip unparsable vcard files: yes / no
+        skip_unparsable = no
+      '';
+      "vdirsyncer/config".text = ''
+        [general]
+        status_path = "~/.local/share/vdirsyncer"
+
+        [pair nextcloud_contacts]
+        a = "nextcloud_contacts_local"
+        b = "nextcloud_contacts_remote"
+        collections = ["from a", "from b"]
+
+        [storage nextcloud_contacts_local]
+        type = "filesystem"
+        path = "~/.local/share/contacts"
+        fileext = ".vcf"
+
+        [storage nextcloud_contacts_remote]
+        type = "carddav"
+        url = "https://nextcloud.vanpetegem.me/"
+        username = "chvp"
+        password.fetch = ["command", "${passwordScript}", "social/Nextcloud"]
+
+        [pair nextcloud_calendars]
+        a = "nextcloud_calendars_local"
+        b = "nextcloud_calendars_remote"
+        collections = ["from a", "from b"]
+
+        [storage nextcloud_calendars_local]
+        type = "filesystem"
+        path = "~/.local/share/calendars"
+        fileext = ".ics"
+
+        [storage nextcloud_calendars_remote]
+        type = "caldav"
+        url = "https://nextcloud.vanpetegem.me/"
+        username = "chvp"
+        password.fetch = ["command", "${passwordScript}", "social/Nextcloud"]
+      '';
+    };
     programs = {
       msmtp.enable = true;
       neomutt = {
@@ -162,6 +269,14 @@ in
           };
           Service = { ExecStart = "${pkgs.offlineimap}/bin/offlineimap"; };
         };
+        vdirsyncer = {
+          Unit = {
+            Description = "VDirSyncer WebDAV syncer";
+            After = "network-online.target";
+            Wants = "network-online.target";
+          };
+          Service = { ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync"; };
+        };
       } // lib.listToAttrs (map genNotifyImapPatch [ "jonggroen" "personal" "postbot" "posteo" "webmaster" "work" ]);
       timers = {
         offlineimap = {
@@ -169,6 +284,14 @@ in
           Timer = {
             OnCalendar = "*:0/5";
             Unit = "offlineimap.service";
+          };
+          Install = { WantedBy = [ "timers.target" ]; };
+        };
+        vdirsyncer = {
+          Unit = { Description = "VDirSyncer WebDAV syncer"; };
+          Timer = {
+            OnCalendar = "*:0/5";
+            Unit = "vdirsyncer.service";
           };
           Install = { WantedBy = [ "timers.target" ]; };
         };
