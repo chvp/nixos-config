@@ -93,7 +93,7 @@ pkgs.writeText "configuration.toml" ''
   block = "custom"
   json = true
   command = "${mail-status}"
-  interval = 10
+  interval = 1
 
   [[block]]
   block = "time"

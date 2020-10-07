@@ -21,7 +21,7 @@ let
         enable = true;
         boxes = [ "INBOX" ];
         onNotify = "${pkgs.offlineimap}/bin/offlineimap -a ${name} -f INBOX";
-        onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send 'New ${name} mail arrived'"; };
+        onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' \"$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l) unseen mails\""; };
       };
       msmtp.enable = true;
       neomutt = {
