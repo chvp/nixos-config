@@ -42,10 +42,6 @@ pkgs.writeText "configuration.toml" ''
   name = "awesome"
 
   [[block]]
-  block = "focused_window"
-  max_width = 100
-
-  [[block]]
   block = "net"
   device = "wlp2s0"
   ssid = true
@@ -68,6 +64,15 @@ pkgs.writeText "configuration.toml" ''
   [[block]]
   block = "net"
   device = "enp0s31f6"
+  ip = true
+  speed_up = false
+  speed_down = false
+  hide_missing = true
+  hide_inactive = true
+
+  [[block]]
+  block = "net"
+  device = "enp0s20f0u1u2"
   ip = true
   speed_up = false
   speed_down = false
