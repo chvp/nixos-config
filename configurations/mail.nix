@@ -115,6 +115,8 @@ in
               sent = "[Gmail].Sent Mail";
               trash = "[Gmail].Bin";
             };
+            # IMAPNotify doesn't seem to work for imap.gmail.com.
+            imapnotify.enable = false;
           };
         };
         postbot = makeAccount {
@@ -280,7 +282,7 @@ in
           };
           Service = { ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync"; };
         };
-      } // lib.listToAttrs (map genNotifyImapPatch [ "jonggroen" "personal" "postbot" "posteo" "webmaster" "work" ]);
+      } // lib.listToAttrs (map genNotifyImapPatch [ "personal" "postbot" "posteo" "webmaster" "work" ]);
       timers = {
         offlineimap = {
           Unit = { Description = "OfflineIMAP email fetcher"; };
