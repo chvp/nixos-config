@@ -1,9 +1,17 @@
 { pkgs, lib, ... }:
 let
   passwordScript = pkgs.writeScript "get_mail_password" ''
-    #!${pkgs.bash}/bin/bash
-
     ${pkgs.pass}/bin/pass show "$@" | head -n1 | tr -d "\n"
+  '';
+  notifyScript = name: pkgs.writeScript "notify_${name}_mail" ''
+    unseen_count=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
+
+    if [ "$unseen_count" = "1" ]
+    then
+      ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' \"1 unseen mail\"
+    else
+      ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' \"$unseen_count unseen mails\"
+    fi
   '';
   makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, passFile, extraConfig ? { } }: (lib.recursiveUpdate
     {
@@ -21,7 +29,7 @@ let
         enable = true;
         boxes = [ "INBOX" ];
         onNotify = "${pkgs.offlineimap}/bin/offlineimap -a ${name} -f INBOX";
-        onNotifyPost = { mail = "${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' \"$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l) unseen mails\""; };
+        onNotifyPost = { mail = "${notifyScript name}"; };
       };
       msmtp.enable = true;
       neomutt = {
@@ -77,7 +85,7 @@ in
           passFile = "mail/Personal";
           extraConfig = {
             neomutt.extraConfig = ''
-              alternates '^*@cvpetegem.be$' '^charlotte\+.*@vanpetegem.me'
+              alternates '^.*@cvpetegem.be$' '^charlotte\+.*@vanpetegem.me'
             '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
             primary = true;
