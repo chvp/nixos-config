@@ -76,6 +76,9 @@ in
           host = "mail.vanpetegem.me";
           passFile = "mail/Personal";
           extraConfig = {
+            neomutt.extraConfig = ''
+              alternates '^*@cvpetegem.be$' '^charlotte\+.*@vanpetegem.me'
+            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
             primary = true;
           };
@@ -88,6 +91,9 @@ in
           passFile = "work/UGentNet";
           useStartTls = true;
           extraConfig = {
+            neomutt.extraConfig = ''
+              alternates dodona@ugent.be
+            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent Items"; trash = "Deleted Items"; };
           };
         };
@@ -97,6 +103,9 @@ in
           host = "posteo.de";
           passFile = "mail/Posteo";
           extraConfig = {
+            neomutt.extraConfig = ''
+              alternates '^chvp\+.*posteo.net'
+            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
           };
         };
@@ -108,6 +117,9 @@ in
           passFile = "jonggroen/GoogleAppMail";
           useStartTls = true;
           extraConfig = {
+            neomutt.extraConfig = ''
+              alternates it@jonggroen.be rvb@jonggroen.be
+            '';
             flavor = "gmail.com";
             folders = {
               drafts = "[Gmail].Drafts";
@@ -125,6 +137,9 @@ in
           host = "mail.vanpetegem.me";
           passFile = "mail/Postbot";
           extraConfig = {
+            neomutt.extraConfig = ''
+              alternates '.*@vanpetegem.me$'
+            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
           };
         };
@@ -134,6 +149,9 @@ in
           host = "mail.vanpetegem.me";
           passFile = "mail/Webmaster";
           extraConfig = {
+            neomutt.extraConfig = ''
+              alternates root@vanpetegem.me
+            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
           };
         };
