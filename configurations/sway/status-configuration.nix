@@ -99,6 +99,7 @@ pkgs.writeText "configuration.toml" ''
   json = true
   command = "${mail-status}"
   interval = 1
+  on_click = "${pkgs.offlineimap}/bin/offlineimap"
 
   [[block]]
   block = "time"
