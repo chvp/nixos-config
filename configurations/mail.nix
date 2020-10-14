@@ -172,8 +172,8 @@ in
     home = {
       packages = [ pkgs.khal pkgs.khard ];
       file.".mailcap".text = ''
-        text/html; ${pkgs.firefox}/bin/firefox %s ; nametemplate=%s.html; needsterminal
-        text/html; ${pkgs.w3m}/bin/w3m -I %{charset} -T text/html ; copiousoutput; nametemplate=%s.html
+        text/html; ${pkgs.qutebrowser}/bin/qutebrowser %s ; nametemplate=%s.html; needsterminal
+        text/html; ${pkgs.w3m}/bin/w3m -dump -o display_link_number=1 -o document_charset=%{charset} %s ; copiousoutput; nametemplate=%s.html
       '';
     };
     xdg.configFile = {

@@ -124,7 +124,7 @@ in
         workspace 9 output DP-3 DP-4 DP-5 HDMI-A-1 eDP-1
 
         workspace 1
-        exec ${pkgs.firefox}/bin/firefox
+        exec ${pkgs.qutebrowser}/bin/qutebrowser
         workspace 3
         exec ${pkgs.kitty}/bin/kitty -e ${pkgs.tmuxinator}/bin/tmuxinator start mail
         workspace 4

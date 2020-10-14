@@ -18,6 +18,7 @@
     ../configurations/mounts.nix
     ../configurations/mumble.nix
     ../configurations/networkmanager.nix
+    ../configurations/qutebrowser.nix
     ../configurations/sound.nix
     ../configurations/sway.nix
     ../configurations/syncthing.nix
