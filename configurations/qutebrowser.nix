@@ -4,6 +4,12 @@
   home-manager.users.charlotte = { ... }: {
     programs.qutebrowser = {
       enable = true;
+      keyBindings = {
+        normal = {
+          "x" = "spawn --detach mpv {url}";
+          ";x" = "hint links spawn --detach mpv {hint-url}";
+        };
+      };
       extraConfig = ''
         config.load_autoconfig()
       '';
