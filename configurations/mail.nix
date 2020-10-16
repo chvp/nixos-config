@@ -1,13 +1,7 @@
 { pkgs, lib, ... }:
 let
-  passwordScript = pkgs.writeScript "get_mail_password" ''
-    #!${pkgs.bash}/bin/bash
-
-    ${pkgs.pass}/bin/pass show "$@" | head -n1 | tr -d "\n"
-  '';
-  notifyScript = name: pkgs.writeScript "notify_${name}_mail" ''
-    #!${pkgs.bash}/bin/bash
-
+  passwordScript = pkgs.writeShellScript "get_mail_password" ''${pkgs.pass}/bin/pass show "$@" | head -n1 | tr -d "\n"'';
+  notifyScript = name: pkgs.writeShellScript "notify_${name}_mail" ''
     unseen_count=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
 
     if [ "$unseen_count" = "1" ]

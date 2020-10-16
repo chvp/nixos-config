@@ -1,8 +1,6 @@
 { pkgs, ... }:
 let
-  mic-status = pkgs.writeScript "mic-status" ''
-    #!${pkgs.zsh}/bin/zsh
-
+  mic-status = pkgs.writeShellScript "mic-status" ''
     if [ "$(${pkgs.pulseaudio}/bin/pactl list sources | grep -o 'Mute: yes')" = "Mute: yes" ]
     then
       echo -e '\uf131'
@@ -10,9 +8,7 @@ let
       echo -e '\uf130'
     fi
   '';
-  mail-status = pkgs.writeScript "mail-status" ''
-    #!${pkgs.zsh}/bin/zsh
-
+  mail-status = pkgs.writeShellScript "mail-status" ''
     mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
     if [ "$mails" -gt 0 ]
     then

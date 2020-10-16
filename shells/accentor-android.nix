@@ -35,15 +35,11 @@ let
         runScript = "bash -c '''''${run}'''";
       }).env
   '';
-  gradle-run-script = pkgs.writeScriptBin "gradle" ''
-    #!${pkgs.bash}/bin/bash
-
+  gradle-run-script = pkgs.writeShellScriptBin "gradle" ''
     REPO_ROOT="$(git rev-parse --show-toplevel)"
     nix-shell --argstr run "\"$REPO_ROOT/gradlew $@\"" "${gradle-fhs-nix}"
   '';
-  sign-release = pkgs.writeScriptBin "sign-release" ''
-    #!${pkgs.bash}/bin/bash
-
+  sign-release = pkgs.writeShellScriptBin "sign-release" ''
     BUILD_TOOLS_PATH="${composed.androidsdk}/libexec/android-sdk/build-tools/${buildToolsVersion}"
     REPO_ROOT="$(git rev-parse --show-toplevel)"
     APK_DIR="$REPO_ROOT/app/build/outputs/apk/release"

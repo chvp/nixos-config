@@ -10,9 +10,7 @@ pkgs.mkShell {
     yarn
     zlib
     (
-      pkgs.writeScriptBin "start-dockers" ''
-        #!${bash}/bin/bash
-
+      pkgs.writeShellScriptBin "start-dockers" ''
         trap "systemd-run --user --no-block docker stop dodona-db dodona-cache" 0
 
         docker run -d --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest

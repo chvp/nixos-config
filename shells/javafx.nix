@@ -5,9 +5,7 @@ in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     (
-      pkgs.writeScriptBin "java" ''
-        #!${pkgs.zsh}/bin/zsh
-
+      pkgs.writeShellScriptBin "java" ''
         old_path="$(patchelf --print-rpath ${jdk11}/bin/java)"
         LD_LIBRARY_PATH="$old_path:${extraRpath}" ${jdk11}/bin/java $@
       ''

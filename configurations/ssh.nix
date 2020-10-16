@@ -13,9 +13,7 @@
         name = "openssh";
         paths = [
           (
-            self.writeScriptBin "ssh" ''
-              #!${self.zsh}/bin/zsh
-
+            self.writeShellScriptBin "ssh" ''
               export TERM=xterm-256color
               ${super.openssh}/bin/ssh $@
             ''

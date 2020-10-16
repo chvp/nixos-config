@@ -1,8 +1,6 @@
 { pkgs }:
 
-pkgs.writeScriptBin "screenshot" ''
-  #!${pkgs.zsh}/bin/zsh
-
+pkgs.writeShellScriptBin "screenshot" ''
   while getopts ":rd" opt
   do
     case "''${opt}" in

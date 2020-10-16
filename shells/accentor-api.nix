@@ -9,9 +9,7 @@ pkgs.mkShell {
     taglib
     zlib
     (
-      pkgs.writeScriptBin "start-db" ''
-        #!/${pkgs.bash}/bin/bash
-
+      pkgs.writeShellScriptBin "start-db" ''
         trap "systemd-run --user --no-block docker stop accentor-db" 0
         docker run -d --name accentor-db -p 5432:5432 --rm -v accentor-db-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=accentor postgres:latest
 
