@@ -63,6 +63,20 @@ let
       };
     };
   };
+  repeat = count: char: lib.strings.concatStrings (builtins.genList (_: char) count);
+  mkHeader = depth: name: lib.strings.concatStrings [ (repeat depth "[") name (repeat depth "]") ];
+  simpleAttrs = lib.attrsets.filterAttrs (n: v: !(builtins.isAttrs v));
+  complexAttrs = lib.attrsets.filterAttrs (n: v: builtins.isAttrs v);
+  toRecursiveINIBase = depth: data: (builtins.concatStringsSep "\n" (
+    lib.attrsets.mapAttrsToList
+      (name: values: builtins.concatStringsSep "\n" (builtins.filter (v: v != "") [
+        (mkHeader depth name)
+        (lib.generators.toKeyValue { } (simpleAttrs values))
+        (toRecursiveINIBase (depth + 1) (complexAttrs values))
+      ]))
+      data
+  ));
+  toRecursiveINI = toRecursiveINIBase 1;
 in
 {
   custom.zfs.homeLinks = [
@@ -171,105 +185,85 @@ in
       '';
     };
     xdg.configFile = {
-      "khal/config".text = ''
-        [calendars]
-
-        [[calendar]]
-        path = ~/.local/share/calendars/*
-        type = discover
-
-        [locale]
-        timeformat = %H:%M
-        dateformat = %Y-%m-%d
-        longdateformat = %Y-%m-%d
-        datetimeformat = %Y-%m-%d %H:%M
-        longdatetimeformat = %Y-%m-%d %H:%M
-      '';
-      "khard/khard.conf".text = ''
-        [addressbooks]
-        [[contacts]]
-        path = ~/.local/share/contacts/contacts
-
-        [general]
-        debug = no
-        default_action = list
-        # These are either strings or comma seperated lists
-        editor = nvim
-        merge_editor = nvim, -d
-
-        [contact table]
-        # display names by first or last name: first_name / last_name / formatted_name
-        display = formatted_name
-        # group by address book: yes / no
-        group_by_addressbook = no
-        # reverse table ordering: yes / no
-        reverse = no
-        # append nicknames to name column: yes / no
-        show_nicknames = no
-        # show uid table column: yes / no
-        show_uids = yes
-        # sort by first or last name: first_name / last_name / formatted_name
-        sort = last_name
-        # localize dates: yes / no
-        localize_dates = yes
-        # set a comma separated list of preferred phone number types in descending priority
-        # or nothing for non-filtered alphabetical order
-        preferred_phone_number_type = pref, cell, home
-        # set a comma separated list of preferred email address types in descending priority
-        # or nothing for non-filtered alphabetical order
-        preferred_email_address_type = pref, work, home
-
-        [vcard]
-        # extend contacts with your own private objects
-        # these objects are stored with a leading "X-" before the object name in the vcard files
-        # every object label may only contain letters, digits and the - character
-        # example:
-        #   private_objects = Jabber, Skype, Twitter
-        # default: ,  (the empty list)
-        private_objects = ,
-        # preferred vcard version: 3.0 / 4.0
-        preferred_version = 4.0
-        # Look into source vcf files to speed up search queries: yes / no
-        search_in_source_files = no
-        # skip unparsable vcard files: yes / no
-        skip_unparsable = no
-      '';
-      "vdirsyncer/config".text = ''
-        [general]
-        status_path = "~/.local/share/vdirsyncer"
-
-        [pair nextcloud_contacts]
-        a = "nextcloud_contacts_local"
-        b = "nextcloud_contacts_remote"
-        collections = ["from a", "from b"]
-
-        [storage nextcloud_contacts_local]
-        type = "filesystem"
-        path = "~/.local/share/contacts"
-        fileext = ".vcf"
-
-        [storage nextcloud_contacts_remote]
-        type = "carddav"
-        url = "https://nextcloud.vanpetegem.me/"
-        username = "chvp"
-        password.fetch = ["command", "${passwordScript}", "social/Nextcloud"]
-
-        [pair nextcloud_calendars]
-        a = "nextcloud_calendars_local"
-        b = "nextcloud_calendars_remote"
-        collections = ["from a", "from b"]
-
-        [storage nextcloud_calendars_local]
-        type = "filesystem"
-        path = "~/.local/share/calendars"
-        fileext = ".ics"
-
-        [storage nextcloud_calendars_remote]
-        type = "caldav"
-        url = "https://nextcloud.vanpetegem.me/"
-        username = "chvp"
-        password.fetch = ["command", "${passwordScript}", "social/Nextcloud"]
-      '';
+      "khal/config".text = toRecursiveINI {
+        calendars = {
+          calendar = {
+            path = "~/.local/share/calendars/*";
+            type = "discover";
+          };
+        };
+        locale = {
+          timeformat = "%H:%M";
+          dateformat = "%Y-%m-%d";
+          longdateformat = "%Y-%m-%d";
+          datetimeformat = "%Y-%m-%d %H:%M";
+          longdatetimeformat = "%Y-%m-%d %H:%M";
+        };
+      };
+      "khard/khard.conf".text = toRecursiveINI {
+        addressbooks = {
+          contacts = {
+            path = "~/.local/share/contacts/contacts";
+          };
+        };
+        general = {
+          debug = "no";
+          default_action = "list";
+          editor = "nvim";
+          merge_editor = "nvim, -d";
+        };
+        "contact table" = {
+          display = "formatted_name";
+          group_by_addressbook = "no";
+          reverse = "no";
+          show_nicknames = "no";
+          show_uids = "yes";
+          sort = "last_name";
+          localize_dates = "yes";
+          preferred_phone_number_type = "pref, cell, home";
+          preferred_email_address_type = "pref, work, home";
+        };
+        vcard = {
+          private_objects = ",";
+          preferred_version = "4.0";
+          search_in_source_files = "no";
+          skip_unparsable = "no";
+        };
+      };
+      "vdirsyncer/config".text =
+        let nextcloudConfig = type: {
+          inherit type;
+          url = "https://nextcloud.vanpetegem.me";
+          username = "chvp";
+          "password.fetch" = [ "command" "${passwordScript}" "social/Nextcloud" ];
+        }; in
+        lib.generators.toINI
+          { mkKeyValue = lib.generators.mkKeyValueDefault { mkValueString = builtins.toJSON; } "="; }
+          {
+            general.status_path = "~/.local/share/vdirsyncer";
+            "pair nextcloud_contacts" = {
+              a = "nextcloud_contacts_local";
+              b = "nextcloud_contacts_remote";
+              collections = [ "from a" "from b" ];
+            };
+            "storage nextcloud_contacts_local" = {
+              type = "filesystem";
+              path = "~/.local/share/contacts";
+              fileext = ".vcf";
+            };
+            "storage nextcloud_contacts_remote" = nextcloudConfig "carddav";
+            "pair nextcloud_calendars" = {
+              a = "nextcloud_calendars_local";
+              b = "nextcloud_calendars_remote";
+              collections = [ "from a" "from b" ];
+            };
+            "storage nextcloud_calendars_local" = {
+              type = "filesystem";
+              path = "~/.local/share/calendars";
+              fileext = ".ics";
+            };
+            "storage nextcloud_calendars_remote" = nextcloudConfig "caldav";
+          };
     };
     programs = {
       msmtp.enable = true;
