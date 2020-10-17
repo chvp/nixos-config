@@ -63,20 +63,23 @@ let
       };
     };
   };
-  repeat = count: char: lib.strings.concatStrings (builtins.genList (_: char) count);
-  mkHeader = depth: name: lib.strings.concatStrings [ (repeat depth "[") name (repeat depth "]") ];
-  simpleAttrs = lib.attrsets.filterAttrs (n: v: !(builtins.isAttrs v));
-  complexAttrs = lib.attrsets.filterAttrs (n: v: builtins.isAttrs v);
-  toRecursiveINIBase = depth: data: (builtins.concatStringsSep "\n" (
-    lib.attrsets.mapAttrsToList
-      (name: values: builtins.concatStringsSep "\n" (builtins.filter (v: v != "") [
-        (mkHeader depth name)
-        (lib.generators.toKeyValue { } (simpleAttrs values))
-        (toRecursiveINIBase (depth + 1) (complexAttrs values))
-      ]))
-      data
-  ));
-  toRecursiveINI = toRecursiveINIBase 1;
+  toRecursiveINI = with lib.strings; with lib.attrsets; with lib.generators; with lib.lists; let
+    repeat = count: char: concatStrings (genList (_: char) count);
+    mkHeader = depth: name: concatStrings [ (repeat depth "[") (escape [ "[" ] name) (repeat depth "]") ];
+    simpleAttrs = filterAttrs (n: v: !(isAttrs v));
+    complexAttrs = filterAttrs (n: v: isAttrs v);
+    removeEmpty = filter (v: v != "");
+    toRecursiveINIBase = depth: data: (concatStringsSep "\n" (
+      mapAttrsToList
+        (name: values: concatStringsSep "\n" (removeEmpty [
+          (mkHeader depth name)
+          (toKeyValue { } (simpleAttrs values))
+          (toRecursiveINIBase (depth + 1) (complexAttrs values))
+        ]))
+        data
+    ));
+  in
+  toRecursiveINIBase 1;
 in
 {
   custom.zfs.homeLinks = [
