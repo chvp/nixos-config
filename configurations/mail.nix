@@ -60,6 +60,7 @@ let
       };
       Service = {
         Restart = "always";
+        RestartSec = 20;
       };
     };
   };
