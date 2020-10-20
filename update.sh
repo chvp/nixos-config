@@ -11,7 +11,7 @@ then
     popd
 fi
 
-nix flake update --update-input nixpkgs --update-input home-manager --update-input flake-utils
+nix flake update --recreate-lock-file
 
 if [ -z "${OVERRIDE:-}" ]
 then
