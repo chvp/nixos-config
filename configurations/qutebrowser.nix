@@ -6,8 +6,8 @@
       enable = true;
       keyBindings = {
         normal = {
-          "x" = "spawn --detach mpv {url}";
-          ";x" = "hint links spawn --detach mpv {hint-url}";
+          "x" = "spawn --detach ${pkgs.mpv}/bin/umpv {url}";
+          ";x" = "hint links spawn --detach ${pkgs.mpv}/bin/umpv {hint-url}";
           "tch" = "config-cycle -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
           "tCh" = "config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
           "tcH" = "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
