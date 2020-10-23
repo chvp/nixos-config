@@ -12,6 +12,7 @@
 
   outputs = { self, nixpkgs, home-manager, flake-utils }:
     let
+      version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
       pkgsFor = system: import nixpkgs {
         inherit system;
         config = { allowUnfree = true; };
@@ -25,7 +26,7 @@
             environment.etc."nixpkgs".source = (pkgs.runCommandNoCC "nixpkgs" { } ''
               cp -r ${nixpkgs} $out
               chmod 700 $out
-              echo "${nixpkgs.rev}" > $out/.version-suffix
+              echo "${version-suffix}" > $out/.version-suffix
             '');
             nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
           })
