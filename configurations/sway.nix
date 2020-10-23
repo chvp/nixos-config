@@ -86,7 +86,7 @@ in
           { command = "floating enable"; criteria = { app_id = "launcher"; }; }
         ];
         input = {
-          "type:keyboard" = { xkb_layout = "us"; xkb_variant = "altgr-intl"; xkb_numlock = "enabled"; };
+          "type:keyboard" = { xkb_layout = "us"; xkb_variant = "altgr-intl"; xkb_numlock = "enabled"; xkb_options = "compose:caps"; };
           "type:touchpad" = { drag = "enabled"; dwt = "enabled"; scroll_method = "two_finger"; tap = "enabled"; };
         };
         modes = { }; # Unset default "resize" mode
