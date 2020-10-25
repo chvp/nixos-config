@@ -198,6 +198,9 @@ in
         vim-vue
         yats-vim
       ];
+      extraPackages = with pkgs; [
+        nixpkgs-fmt
+      ];
     };
   };
 }
