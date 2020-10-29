@@ -121,6 +121,18 @@ in
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent Items"; trash = "Deleted Items"; };
           };
         };
+        work-aap-we-fr = makeAccount {
+          name = "work-aap-we-fr";
+          address = "aap-we-fr@ugent.be";
+          imapHost = "owa.ugent.be";
+          smtpHost = "smtp.ugent.be";
+          passFile = "work/UGentNet";
+          useStartTls = true;
+          extraConfig = {
+            userName = "UGENT\\ecvpeteg/aap-we-fr";
+            folders = { drafts = "Concepten"; inbox = "INBOX"; sent = "Verzonden items"; trash = "Verwijderde items"; };
+          };
+        };
         posteo = makeAccount {
           name = "posteo";
           address = "chvp@posteo.net";
