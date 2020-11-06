@@ -6,7 +6,7 @@ if [ -z "${NO_LOCAL:-}" ]
 then
     pushd ../nixpkgs
     git fetch --all --prune
-    git rebase upstream/nixos-unstable-small || exit 1
+    git rebase upstream/nixos-unstable || exit 1
     git push || exit 1
     popd
 fi
