@@ -6,6 +6,7 @@
     ../configurations/direnv.nix
     ../configurations/git.nix
     ../configurations/gnupg.nix
+    ../configurations/hledger.nix
     ../configurations/locale.nix
     ../configurations/mail.nix
     ../configurations/neovim.nix
@@ -25,7 +26,6 @@
   home-manager.useGlobalPkgs = true;
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
-      hledger
       htop
       moreutils
       ncdu
