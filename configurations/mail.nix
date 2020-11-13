@@ -83,7 +83,7 @@ let
   toRecursiveINIBase 1;
 in
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = "mail"; type = "data"; }
     { path = ".local/share/offlineimap"; type = "data"; }
     { path = ".local/share/contacts"; type = "data"; }

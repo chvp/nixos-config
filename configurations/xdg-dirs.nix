@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = "desktop"; type = "data"; }
     { path = "documents"; type = "data"; }
     { path = "downloads"; type = "data"; }

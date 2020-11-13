@@ -1,5 +1,5 @@
 { ... }: {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".config/Mumble"; type = "data"; }
     { path = ".local/share/Mumble"; type = "data"; }
   ];

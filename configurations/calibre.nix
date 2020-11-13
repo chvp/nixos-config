@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".config/calibre"; type = "cache"; }
   ];
 

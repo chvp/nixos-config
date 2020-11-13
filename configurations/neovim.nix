@@ -15,7 +15,7 @@ let
   kotlinls = import ../packages/kotlin-language-server/default.nix { inherit pkgs; };
 in
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".local/share/nvim"; type = "cache"; }
     { path = ".cache/nvim"; type = "cache"; }
   ];

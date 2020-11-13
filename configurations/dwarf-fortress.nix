@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { type = "data"; path = ".local/share/df_linux"; }
   ];
 

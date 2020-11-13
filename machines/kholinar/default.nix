@@ -30,7 +30,7 @@
   };
 
   # Machine-specific settings
-  custom = {
+  chvp = {
     git.email = "charlotte@vanpetegem.me";
     zfs = {
       enable = true;

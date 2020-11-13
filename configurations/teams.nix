@@ -5,7 +5,7 @@
     home.packages = with pkgs; [ teams ];
   };
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".config/Microsoft"; type = "data"; }
   ];
 }

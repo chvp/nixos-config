@@ -41,7 +41,7 @@
     };
   };
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".pki"; type = "cache"; } # Required for eid-mw browser configuration
     { path = ".cache/qutebrowser"; type = "cache"; }
     { path = ".local/share/qutebrowser"; type = "data"; }

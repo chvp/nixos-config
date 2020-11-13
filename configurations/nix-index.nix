@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".cache/nix-index"; type = "cache"; }
   ];
 

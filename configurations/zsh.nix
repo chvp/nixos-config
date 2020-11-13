@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".local/share/autojump"; type = "cache"; }
     { path = ".local/share/zsh"; type = "cache"; }
   ];

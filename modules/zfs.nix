@@ -5,10 +5,10 @@ let
       $DRY_RUN_CMD mkdir -p $VERBOSE_ARG "/home/charlotte/$(dirname ${location.path})"
       $DRY_RUN_CMD ln -sf -T $VERBOSE_ARG "/${location.type}/home/charlotte/${location.path}" "/home/charlotte/${location.path}"
     '')
-    config.custom.zfs.homeLinks;
+    config.chvp.zfs.homeLinks;
 in
 {
-  options.custom.zfs = {
+  options.chvp.zfs = {
     enable = lib.mkOption {
       default = false;
       example = true;
@@ -33,26 +33,26 @@ in
     };
   };
 
-  config.boot = lib.mkIf config.custom.zfs.enable {
+  config.boot = lib.mkIf config.chvp.zfs.enable {
     supportedFilesystems = [ "zfs" ];
-    zfs.requestEncryptionCredentials = config.custom.zfs.encrypted;
+    zfs.requestEncryptionCredentials = config.chvp.zfs.encrypted;
     initrd.postDeviceCommands = lib.mkAfter ''
       zfs rollback -r rpool/local/root@blank
     '';
   };
 
-  config.virtualisation.docker.storageDriver = lib.mkIf config.custom.zfs.enable "zfs";
+  config.virtualisation.docker.storageDriver = lib.mkIf config.chvp.zfs.enable "zfs";
 
-  config.services.zfs.autoScrub.enable = config.custom.zfs.enable;
-  config.services.zfs.trim.enable = config.custom.zfs.enable;
+  config.services.zfs.autoScrub.enable = config.chvp.zfs.enable;
+  config.services.zfs.trim.enable = config.chvp.zfs.enable;
 
-  config.systemd.tmpfiles.rules = lib.mkIf config.custom.zfs.enable (
+  config.systemd.tmpfiles.rules = lib.mkIf config.chvp.zfs.enable (
     [ "d /home/charlotte 0700 charlotte users - -" ] ++
-    (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.custom.zfs.systemLinks)
+    (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.chvp.zfs.systemLinks)
   );
 
   config.home-manager.users.charlotte = { lib, ... }: {
-    home.activation = lib.mkIf config.custom.zfs.enable {
+    home.activation = lib.mkIf config.chvp.zfs.enable {
       linkCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] (lib.concatStringsSep "\n" linkCommands);
     };
   };

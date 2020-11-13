@@ -7,7 +7,7 @@
     pulseaudio.support32Bit = true;
   };
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".paradoxlauncher"; type = "data"; }
     { path = ".steam"; type = "data"; }
     { path = ".local/share/Steam"; type = "data"; }

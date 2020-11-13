@@ -3,7 +3,7 @@
 {
   imports = [ ./ssh/secret.nix ];
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".ssh/known_hosts"; type = "cache"; }
   ];
 

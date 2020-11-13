@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".config/syncthing"; type = "data"; }
     { path = "sync"; type = "data"; }
   ];

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  custom.zfs.systemLinks = [
+  chvp.zfs.systemLinks = [
     { path = "/var/lib/bluetooth"; type = "cache"; }
   ];
 

@@ -19,7 +19,7 @@
     ../configurations/zsh.nix
   ];
 
-  custom.zfs.systemLinks = [
+  chvp.zfs.systemLinks = [
     { path = "/root/.ssh"; type = "data"; }
   ];
 

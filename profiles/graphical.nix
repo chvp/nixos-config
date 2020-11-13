@@ -57,5 +57,5 @@
     '';
   };
 
-  custom.gnupg.pinentryFlavor = "qt";
+  chvp.gnupg.pinentryFlavor = "qt";
 }

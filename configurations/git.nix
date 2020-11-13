@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  options.custom.git.email = lib.mkOption {
+  options.chvp.git.email = lib.mkOption {
     type = lib.types.str;
     default = "charlotte@vanpetegem.me";
     example = "charlotte@vanpetegem.me";
@@ -37,7 +37,7 @@
         key = "charlotte@vanpetegem.me";
         signByDefault = true;
       };
-      userEmail = config.custom.git.email;
+      userEmail = config.chvp.git.email;
       userName = "Charlotte Van Petegem";
     };
   };

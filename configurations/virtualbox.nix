@@ -1,5 +1,5 @@
 { ... }: {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = "VirtualBox VMs"; type = "data"; }
   ];
 

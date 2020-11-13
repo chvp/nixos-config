@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  custom.zfs.systemLinks = [
+  chvp.zfs.systemLinks = [
     { path = "/etc/NetworkManager/system-connections"; type = "data"; }
   ];
 

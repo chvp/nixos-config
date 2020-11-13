@@ -11,7 +11,7 @@
     })
   ];
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".cache/mozilla"; type = "cache"; }
     { path = ".mozilla"; type = "data"; }
   ];

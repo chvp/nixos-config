@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.systemLinks = [
+  chvp.zfs.systemLinks = [
     { path = "/var/lib/docker"; type = "cache"; }
     { path = "/var/lib/docker/volumes"; type = "data"; }
   ];

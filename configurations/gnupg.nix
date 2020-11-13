@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  options.custom.gnupg.pinentryFlavor = lib.mkOption {
+  options.chvp.gnupg.pinentryFlavor = lib.mkOption {
     type = lib.types.str;
     default = "curses";
     example = "qt";
@@ -10,7 +10,7 @@
     '';
   };
 
-  config.custom.zfs.homeLinks = [
+  config.chvp.zfs.homeLinks = [
     { path = ".gnupg/crls.d"; type = "data"; }
     { path = ".gnupg/private-keys-v1.d"; type = "data"; }
     { path = ".gnupg/pubring.kbx"; type = "data"; }
@@ -25,7 +25,7 @@
       enable = true;
       defaultCacheTtl = 7200;
       maxCacheTtl = 99999;
-      pinentryFlavor = config.custom.gnupg.pinentryFlavor;
+      pinentryFlavor = config.chvp.gnupg.pinentryFlavor;
     };
   };
 }

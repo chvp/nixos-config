@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".dropbox"; type = "cache"; }
     { path = "Dropbox"; type = "data"; }
   ];

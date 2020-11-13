@@ -5,7 +5,7 @@
     home.packages = with pkgs; [ element-desktop ];
   };
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".config/Element"; type = "data"; }
   ];
 }

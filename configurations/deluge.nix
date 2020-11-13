@@ -5,7 +5,7 @@
     home.packages = with pkgs; [ deluge ];
   };
 
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".config/deluge"; type = "data"; }
   ];
 }

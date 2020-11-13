@@ -1,5 +1,5 @@
 { ... }: {
-  custom.zfs.homeLinks = [
+  chvp.zfs.homeLinks = [
     { path = ".ICAClient"; type = "data"; }
   ];
   home-manager.users.charlotte = { pkgs, ... }: {
