@@ -1,11 +1,12 @@
 { ... }:
 
 {
-  chvp.zfs.systemLinks = [
-    { path = "/var/lib/docker"; type = "cache"; }
-    { path = "/var/lib/docker/volumes"; type = "data"; }
-  ];
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = "--data-root /data/var/lib/docker";
+    storageDriver = "zfs";
+  };
+
   users.users.charlotte.extraGroups = [
     "docker"
   ];

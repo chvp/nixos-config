@@ -19,10 +19,6 @@
     ../configurations/zsh.nix
   ];
 
-  chvp.zfs.systemLinks = [
-    { path = "/root/.ssh"; type = "data"; }
-  ];
-
   home-manager.useGlobalPkgs = true;
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [

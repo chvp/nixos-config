@@ -41,8 +41,6 @@ in
     '';
   };
 
-  config.virtualisation.docker.storageDriver = lib.mkIf config.chvp.zfs.enable "zfs";
-
   config.services.zfs.autoScrub.enable = config.chvp.zfs.enable;
   config.services.zfs.trim.enable = config.chvp.zfs.enable;
 
