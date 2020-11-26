@@ -46,6 +46,8 @@
       nixosConfigurations = {
         kharbranth = mkSystem "x86_64-linux" "kharbranth";
         kholinar = mkSystem "x86_64-linux" "kholinar";
+        lasting-integrity = mkSystem "x86_64-linux" "lasting-integrity";
+        urithiru = mkSystem "x86_64-linux" "urithiru";
       };
     };
 }
