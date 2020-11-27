@@ -56,5 +56,7 @@
     '';
   };
 
+  services.fwupd.enable = true;
+
   chvp.gnupg.pinentryFlavor = "qt";
 }
