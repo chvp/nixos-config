@@ -30,7 +30,7 @@
           path = "rpool/safe/data";
           remotePath = "zdata/recv/kholinar/safe/data";
           fast = true;
-          location = "lasting-integrity.vanpetegem.me";
+          location = "lasting-integrity";
         }
       ];
     };
