@@ -4,16 +4,21 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
+    loader = {
+      grub = {
+        enable = true;
+        efiSupport = true;
+        mirroredBoots = [
+          { devices = [ "nodev" ]; path = "/boot/ESP0"; }
+          { devices = [ "nodev" ]; path = "/boot/ESP1"; }
+        ];
+      };
+      efi.canTouchEfiVariables = true;
+    };
     initrd = {
       availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-      kernelModules = [ ];
-      postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r zroot/local/root@blank
-      '';
     };
     kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
-    supportedFilesystems = [ "zfs" ];
   };
 
   fileSystems = {
@@ -59,4 +64,9 @@
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+  };
+  services.fstrim.enable = true;
 }

@@ -23,8 +23,8 @@ pkgs.writeShellScriptBin "screenshot" ''
   if [[ -n "$remote" ]]
   then
     name=$(${pkgs.utillinux}/bin/uuidgen).png
-    ${pkgs.grim}/bin/grim -t png -g "$dims" - | ${pkgs.openssh}/bin/ssh sunspear "cat > /usr/share/nginx/html/screenshots/$name"
-    path="https://cvpetegem.be/screenshots/$name"
+    ${pkgs.grim}/bin/grim -t png -g "$dims" - | ${pkgs.openssh}/bin/ssh data "cat > data/public/$name"
+    path="https://data.vanpetegem.me/public/$name"
   else
     name=$(date +'screenshot_%Y-%m-%d-%H%M%S.png')
     path="$(${pkgs.xdg-user-dirs}/bin/xdg-user-dir PICTURES)/$name"

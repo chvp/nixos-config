@@ -4,7 +4,6 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    # Use the systemd-boot EFI boot loader.
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -45,7 +44,6 @@
     device = "/dev/disk/by-uuid/BEEE-D83A";
     fsType = "vfat";
   };
-
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/6c09b90f-8971-4702-a18a-f06dfb3d8dcd"; }

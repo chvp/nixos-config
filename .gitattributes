@@ -1,4 +1,4 @@
 # To add a new file:
 # /secret/file filter=git-crypt diff=git-crypt
-**/*-secret.nix filter=git-crypt diff=git-crypt
+**/*.secret.nix filter=git-crypt diff=git-crypt
 **/secret.nix filter=git-crypt diff=git-crypt

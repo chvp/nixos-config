@@ -6,7 +6,6 @@
     ../configurations/calibre.nix
     ../configurations/citrix.nix
     ../configurations/deluge.nix
-    ../configurations/docker.nix
     ../configurations/dropbox.nix
     ../configurations/dwarf-fortress.nix
     ../configurations/firefox.nix

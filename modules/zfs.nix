@@ -31,27 +31,73 @@ in
         { path = ".cache/nix-index"; type = "cache"; }
       ];
     };
+    backups = lib.mkOption {
+      default = [ ];
+      example = [{
+        path = "rpool/safe/data";
+        remotePath = "zdata/recv/<hostname>/safe/data";
+        fast = false;
+        location = "lasting-integrity.vanpetegem.me";
+      }];
+    };
   };
 
-  config.boot = lib.mkIf config.chvp.zfs.enable {
-    supportedFilesystems = [ "zfs" ];
-    zfs.requestEncryptionCredentials = config.chvp.zfs.encrypted;
-    initrd.postDeviceCommands = lib.mkAfter ''
-      zfs rollback -r rpool/local/root@blank
-    '';
-  };
+  config = lib.mkIf config.chvp.zfs.enable {
+    chvp.dataPrefix = lib.mkDefault "/data";
+    chvp.cachePrefix = lib.mkDefault "/cache";
 
-  config.services.zfs.autoScrub.enable = config.chvp.zfs.enable;
-  config.services.zfs.trim.enable = config.chvp.zfs.enable;
+    boot = {
+      supportedFilesystems = [ "zfs" ];
+      zfs.requestEncryptionCredentials = config.chvp.zfs.encrypted;
+      initrd.postDeviceCommands = lib.mkAfter ''
+        zfs rollback -r rpool/local/root@blank
+      '';
+    };
 
-  config.systemd.tmpfiles.rules = lib.mkIf config.chvp.zfs.enable (
-    [ "d /home/charlotte 0700 charlotte users - -" ] ++
-    (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.chvp.zfs.systemLinks)
-  );
+    services = {
+      znapzend = {
+        enable = config.chvp.zfs.backups != [ ];
+        pure = true;
+        autoCreation = true;
+        zetup = builtins.listToAttrs
+          (map
+            (elem: {
+              name = elem.path;
+              value = {
+                enable = true;
+                plan =
+                  if elem.fast then
+                    "1hour=>15min,1day=>1hour,1week=>1day,4week=>1week" else
+                    "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
+                timestampFormat = "%Y-%m-%d--%H%M%SZ";
+                destinations."${elem.location}" = {
+                  plan =
+                    if elem.fast then
+                      "1day=>1hour,1week=>1day,4week=>1week,1year=>4week,10year=>1year" else
+                      "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
+                  host = "${elem.location}";
+                  dataset = elem.remotePath;
+                };
+              };
+            })
+            config.chvp.zfs.backups);
 
-  config.home-manager.users.charlotte = { lib, ... }: {
-    home.activation = lib.mkIf config.chvp.zfs.enable {
-      linkCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] (lib.concatStringsSep "\n" linkCommands);
+      };
+      zfs = {
+        autoScrub.enable = true;
+        trim.enable = true;
+      };
+    };
+
+    systemd.tmpfiles.rules = (
+      [ "d /home/charlotte 0700 charlotte users - -" ] ++
+      (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.chvp.zfs.systemLinks)
+    );
+
+    home-manager.users.charlotte = { lib, ... }: {
+      home.activation = {
+        linkCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] (lib.concatStringsSep "\n" linkCommands);
+      };
     };
   };
 }

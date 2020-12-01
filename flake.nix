@@ -21,7 +21,7 @@
         inherit system;
         modules = [
           home-manager.nixosModules.home-manager
-          (./. + "/machines/${hostname}")
+          (./modules)
           ({ pkgs, ... }: {
             environment.etc."nixpkgs".source = (pkgs.runCommandNoCC "nixpkgs" { } ''
               cp -r ${nixpkgs} $out
@@ -30,6 +30,7 @@
             '');
             nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
           })
+          (./. + "/machines/${hostname}")
         ];
       };
     in
