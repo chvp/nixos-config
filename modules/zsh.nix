@@ -51,10 +51,8 @@
       });
     in
     lib.mkIf config.chvp.zsh.enable {
-      chvp.zfs.systemLinks = [
-        { path = "/home/charlotte/.local/share/autojump"; type = "cache"; }
-        { path = "/root/.local/share/autojump"; type = "cache"; }
-      ];
+      chvp.zfs.systemLinks = [ { path = "/root/.local/share/autojump"; type = "cache"; } ];
+      chvp.zfs.homeLinks = [ { path = ".local/share/autojump"; type = "cache"; } ];
       home-manager.users.charlotte = { ... }: (base "/home/charlotte");
       home-manager.users.root = { ... }: (base "/root");
     };
