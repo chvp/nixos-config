@@ -15,7 +15,6 @@
       version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
       pkgsFor = system: import nixpkgs {
         inherit system;
-        config = { allowUnfree = true; };
       };
       mkSystem = system: hostname: nixpkgs.lib.nixosSystem {
         inherit system;
