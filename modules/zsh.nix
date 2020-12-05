@@ -20,7 +20,6 @@
             path = "${config.chvp.cachePrefix}${home}/.local/share/zsh/history";
           };
           initExtra = ''
-            source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
             ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
           '';
           oh-my-zsh = {

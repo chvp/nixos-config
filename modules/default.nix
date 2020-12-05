@@ -3,13 +3,20 @@
 {
   imports = [
     ./default/secret.nix
+    ./bluetooth.nix
     ./docker.nix
+    ./eid.nix
     ./git.nix
+    ./global-mailer.nix
+    ./neovim.nix
+    ./nix.nix
     ./nginx.nix
     ./ovh.nix
+    ./smartd.nix
     ./ssh.nix
     ./sshd.nix
     ./syncthing-server.nix
+    ./tmux.nix
     ./zfs.nix
     ./zsh.nix
   ];
@@ -54,6 +61,18 @@
       ripgrep
     ];
 
+    i18n = {
+      defaultLocale = "en_IE.UTF-8";
+      extraLocaleSettings = {
+        LC_TIME = "en_GB.UTF-8";
+      };
+    };
+
+    console = {
+      font = "Lat2-Terminus16";
+      keyMap = "us";
+    };
+
     users = {
       mutableUsers = false;
       defaultUserShell = pkgs.zsh;
@@ -62,7 +81,7 @@
           isNormalUser = true;
           home = "/home/charlotte";
           description = "Charlotte Van Petegem";
-          extraGroups = [ "wheel" "systemd-journal" ];
+          extraGroups = [ "wheel" "systemd-journal" ] ++ lib.optionals config.chvp.graphical [ "input" "video" ];
         };
       };
     };

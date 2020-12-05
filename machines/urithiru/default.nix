@@ -18,6 +18,7 @@
     docker.enable = true;
     nginx.enable = true;
     ovh.enable = true;
+    smartd.enable = true;
     sshd.enable = true;
     zfs = {
       enable = true;

@@ -3,9 +3,6 @@
 {
   imports = [
     ./hardware.nix
-    ../../configurations/eid.nix
-    ../../profiles/bluetooth.nix
-    ../../profiles/common.nix
     ../../profiles/graphical.nix
   ];
 
@@ -20,8 +17,11 @@
   chvp = {
     stateVersion = "20.09";
     graphical = true;
+    bluetooth.enable = true;
     docker.enable = true;
+    eid.enable = true;
     git.email = "charlotte@vanpetegem.me";
+    nix.enableUnfree = true;
     zfs = {
       enable = true;
       encrypted = true;

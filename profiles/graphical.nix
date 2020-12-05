@@ -10,17 +10,20 @@
     ../configurations/dwarf-fortress.nix
     ../configurations/firefox.nix
     ../configurations/fonts.nix
+    ../configurations/gnupg.nix
+    ../configurations/hledger.nix
     ../configurations/i3.nix
-    ../configurations/kernel.nix
     ../configurations/kitty.nix
+    ../configurations/mail.nix
     ../configurations/mime.nix
     ../configurations/mounts.nix
     ../configurations/mumble.nix
     ../configurations/networkmanager.nix
+    ../configurations/pass.nix
     ../configurations/sound.nix
+    ../configurations/steam.nix
     ../configurations/sway.nix
     ../configurations/syncthing.nix
-    ../configurations/steam.nix
     ../configurations/teams.nix
     ../configurations/themes.nix
     ../configurations/virtualbox.nix
@@ -34,15 +37,20 @@
       google-chrome
       greenfoot
       libreoffice
+      moreutils
       mpv
       okular
+      pandoc
       pavucontrol
       ranger
       slurp
       sshfs
+      texlive.combined.scheme-small
       ungoogled-chromium
+      unzip
       wf-recorder
       wl-clipboard
+      youtube-dl
     ];
     programs.zsh.loginExtra = ''
       if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
