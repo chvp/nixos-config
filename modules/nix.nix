@@ -95,11 +95,14 @@ in
     ];
 
     home-manager.users.charlotte = { ... }:
-      (lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv) //
-      (lib.optionalAttrs config.chvp.nix.enableUnfree baseUnfree) //
-      (lib.optionalAttrs config.chvp.nix.enableNixIndex baseNixIndex);
+      lib.recursiveUpdate
+        (lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv)
+        (lib.recursiveUpdate
+          (lib.optionalAttrs config.chvp.nix.enableUnfree baseUnfree)
+          (lib.optionalAttrs config.chvp.nix.enableNixIndex baseNixIndex));
     home-manager.users.root = { ... }:
-      (lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv) //
-      (lib.optionalAttrs config.chvp.nix.enableUnfree baseUnfree);
+      lib.recursiveUpdate
+        (lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv)
+        (lib.optionalAttrs config.chvp.nix.enableUnfree baseUnfree);
   };
 }
