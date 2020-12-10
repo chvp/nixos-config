@@ -249,7 +249,7 @@ in
       "vdirsyncer/config".text =
         let nextcloudConfig = type: {
           inherit type;
-          url = "https://nextcloud.vanpetegem.me";
+          url = "https://nextcloud.vanpetegem.me/remote.php/dav/";
           username = "chvp";
           "password.fetch" = [ "command" "${passwordScript}" "social/Nextcloud" ];
         }; in
