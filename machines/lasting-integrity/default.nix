@@ -29,6 +29,7 @@
         fast = true;
         location = "192.168.0.1";
       }];
+      rootDataset = "zroot/local/root";
     };
   };
 }

@@ -40,6 +40,9 @@ in
         location = "lasting-integrity.vanpetegem.me";
       }];
     };
+    rootDataset = lib.mkOption {
+      example = "rpool/local/root";
+    };
   };
 
   config = lib.mkIf config.chvp.zfs.enable {
@@ -50,7 +53,7 @@ in
       supportedFilesystems = [ "zfs" ];
       zfs.requestEncryptionCredentials = config.chvp.zfs.encrypted;
       initrd.postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r rpool/local/root@blank
+        zfs rollback -r ${config.chvp.zfs.rootDataset}@blank
       '';
     };
 

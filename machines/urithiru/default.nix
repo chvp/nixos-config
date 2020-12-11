@@ -36,6 +36,7 @@
           location = "192.168.0.2";
         }
       ];
+      rootDataset = "zroot/local/root";
     };
   };
 }

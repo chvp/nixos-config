@@ -33,6 +33,7 @@
           location = "lasting-integrity";
         }
       ];
+      rootDataset = "rpool/local/root";
     };
   };
 }
