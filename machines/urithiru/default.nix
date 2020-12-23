@@ -4,6 +4,7 @@
   imports = [
     ./hardware.nix
     ./secret.nix
+    ../../containers/data-access
   ];
 
   time.timeZone = "Europe/Berlin";

@@ -40,6 +40,11 @@
       default = false;
       example = true;
     };
+
+    hasContainers = lib.mkOption {
+      default = false;
+      example = true;
+    };
   };
 
   config = {
@@ -61,6 +66,11 @@
       ripgrep
     ];
 
+    console = {
+      font = "Lat2-Terminus16";
+      keyMap = "us";
+    };
+
     i18n = {
       defaultLocale = "en_IE.UTF-8";
       extraLocaleSettings = {
@@ -68,9 +78,11 @@
       };
     };
 
-    console = {
-      font = "Lat2-Terminus16";
-      keyMap = "us";
+    networking.nat = lib.mkIf config.chvp.hasContainers {
+      enable = true;
+      enableIPv6 = true;
+      internalInterfaces = [ "ve-+" ];
+      externalInterface = "eno3";
     };
 
     users = {
