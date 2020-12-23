@@ -22,6 +22,7 @@
     eid.enable = true;
     git.email = "charlotte@vanpetegem.me";
     nix.enableUnfree = true;
+    zeroad.enable = true;
     zfs = {
       enable = true;
       encrypted = true;

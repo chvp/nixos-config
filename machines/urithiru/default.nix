@@ -21,6 +21,11 @@
     ovh.enable = true;
     smartd.enable = true;
     sshd.enable = true;
+    teeworlds.enable = false;
+    zeroad = {
+      enable = true;
+      asServer = false;
+    };
     zfs = {
       enable = true;
       backups = [

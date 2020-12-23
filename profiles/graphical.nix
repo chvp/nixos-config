@@ -28,7 +28,6 @@
     ../configurations/themes.nix
     ../configurations/virtualbox.nix
     ../configurations/xdg-dirs.nix
-    ../configurations/zeroad.nix
   ];
 
   home-manager.users.charlotte = { pkgs, ... }: {
