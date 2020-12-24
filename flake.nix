@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:charvp/nixpkgs/master";
   };
 
   outputs = { self, nixpkgs, home-manager, flake-utils }:
