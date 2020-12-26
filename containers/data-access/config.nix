@@ -13,7 +13,6 @@
   };
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
     permitRootLogin = "no";
     hostKeys = [
       { bits = 4096; path = "/var/secrets/ssh_host_rsa_key"; type = "rsa"; }
