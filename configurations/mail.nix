@@ -27,7 +27,7 @@ let
         enable = true;
         boxes = [ "INBOX" ];
         onNotify = "${pkgs.offlineimap}/bin/offlineimap -a ${name} -f INBOX";
-        onNotifyPost = { mail = "${notifyScript name}"; };
+        onNotifyPost = "${notifyScript name}";
       };
       msmtp.enable = true;
       neomutt = {
@@ -51,19 +51,6 @@ let
       userName = address;
     }
     extraConfig);
-  genNotifyImapPatch = account: {
-    name = "imapnotify-${account}";
-    value = {
-      Unit = {
-        After = "network-online.target";
-        Wants = "network-online.target";
-      };
-      Service = {
-        Restart = "always";
-        RestartSec = 20;
-      };
-    };
-  };
   toRecursiveINI = with lib.strings; with lib.attrsets; with lib.generators; with lib.lists; let
     repeat = count: char: concatStrings (genList (_: char) count);
     mkHeader = depth: name: concatStrings [ (repeat depth "[") (escape [ "[" ] name) (repeat depth "]") ];
@@ -163,8 +150,6 @@ in
               sent = "[Gmail].Sent Mail";
               trash = "[Gmail].Bin";
             };
-            # IMAPNotify doesn't seem to work for imap.gmail.com.
-            imapnotify.enable = false;
           };
         };
         postbot = makeAccount {
@@ -316,7 +301,7 @@ in
           };
           Service = { ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync"; };
         };
-      } // lib.listToAttrs (map genNotifyImapPatch [ "personal" "postbot" "posteo" "webmaster" "work" ]);
+      };
       timers = {
         offlineimap = {
           Unit = { Description = "OfflineIMAP email fetcher"; };
