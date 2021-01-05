@@ -26,15 +26,24 @@ let
       imapnotify = {
         enable = true;
         boxes = [ "INBOX" ];
-        onNotify = "${pkgs.offlineimap}/bin/offlineimap -a ${name} -f INBOX";
+        onNotify = "${pkgs.isync}/bin/mbsync ${name}:INBOX";
         onNotifyPost = "${notifyScript name}";
+      };
+      mbsync = {
+        enable = true;
+        create = "both";
+        expunge = "both";
+        flatten = ".";
+        remove = "both";
+        extraConfig.account = {
+          AuthMechs = "PLAIN";
+        };
       };
       msmtp.enable = true;
       neomutt = {
         enable = true;
         sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account ${name}";
       };
-      offlineimap.enable = true;
       passwordCommand = "${passwordScript} ${passFile}";
       realName = "Charlotte Van Petegem";
       signature = {
@@ -108,18 +117,18 @@ in
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent Items"; trash = "Deleted Items"; };
           };
         };
-        work-aap-we-fr = makeAccount {
-          name = "work-aap-we-fr";
-          address = "aap-we-fr@ugent.be";
-          imapHost = "owa.ugent.be";
-          smtpHost = "smtp.ugent.be";
-          passFile = "work/UGentNet";
-          useStartTls = true;
-          extraConfig = {
-            userName = "UGENT\\ecvpeteg/aap-we-fr";
-            folders = { drafts = "Concepten"; inbox = "INBOX"; sent = "Verzonden items"; trash = "Verwijderde items"; };
-          };
-        };
+        #work-aap-we-fr = makeAccount {
+        #  name = "work-aap-we-fr";
+        #  address = "aap-we-fr@ugent.be";
+        #  imapHost = "owa.ugent.be";
+        #  smtpHost = "smtp.ugent.be";
+        #  passFile = "work/UGentNet";
+        #  useStartTls = true;
+        #  extraConfig = {
+        #    userName = "UGENT\\ecvpeteg/aap-we-fr";
+        #    folders = { drafts = "Concepten"; inbox = "INBOX"; sent = "Verzonden items"; trash = "Verwijderde items"; };
+        #  };
+        #};
         posteo = makeAccount {
           name = "posteo";
           address = "chvp@posteo.net";
@@ -267,6 +276,7 @@ in
           };
     };
     programs = {
+      mbsync.enable = true;
       msmtp.enable = true;
       neomutt = {
         enable = true;
@@ -278,20 +288,19 @@ in
         '';
         vimKeys = true;
       };
-      offlineimap.enable = true;
     };
     services = {
       imapnotify.enable = true;
     };
     systemd.user = {
       services = {
-        offlineimap = {
+        mbsync = {
           Unit = {
-            Description = "OfflineIMAP email fetcher";
+            Description = "MBSync email fetcher";
             After = "network-online.target";
             Wants = "network-online.target";
           };
-          Service = { ExecStart = "${pkgs.offlineimap}/bin/offlineimap"; };
+          Service = { ExecStart = "${pkgs.isync}/bin/mbsync -a"; };
         };
         vdirsyncer = {
           Unit = {
@@ -303,11 +312,11 @@ in
         };
       };
       timers = {
-        offlineimap = {
-          Unit = { Description = "OfflineIMAP email fetcher"; };
+        mbsync = {
+          Unit = { Description = "MBSync email fetcher"; };
           Timer = {
             OnCalendar = "*:0/5";
-            Unit = "offlineimap.service";
+            Unit = "mbsync.service";
           };
           Install = { WantedBy = [ "timers.target" ]; };
         };
