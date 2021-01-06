@@ -4,10 +4,10 @@
   chvp.zfs.homeLinks = [
     { path = "desktop"; type = "data"; }
     { path = "documents"; type = "data"; }
-    { path = "downloads"; type = "data"; }
+    { path = "downloads"; type = "cache"; }
     { path = "music"; type = "data"; }
-    { path = "pictures"; type = "data"; }
-    { path = "repos"; type = "data"; }
+    { path = "pictures"; type = "cache"; }
+    { path = "repos"; type = "cache"; }
     { path = "templates"; type = "data"; }
     { path = "videos"; type = "data"; }
   ];

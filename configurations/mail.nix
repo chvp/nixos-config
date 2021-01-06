@@ -35,9 +35,7 @@ let
         expunge = "both";
         flatten = ".";
         remove = "both";
-        extraConfig.account = {
-          AuthMechs = "PLAIN";
-        };
+        extraConfig.account.AuthMechs = "PLAIN";
       };
       msmtp.enable = true;
       neomutt = {
@@ -81,10 +79,9 @@ in
 {
   chvp.zfs.homeLinks = [
     { path = "mail"; type = "data"; }
-    { path = ".local/share/offlineimap"; type = "data"; }
-    { path = ".local/share/contacts"; type = "data"; }
-    { path = ".local/share/calendars"; type = "data"; }
-    { path = ".local/share/vdirsyncer"; type = "data"; }
+    { path = ".local/share/contacts"; type = "cache"; }
+    { path = ".local/share/calendars"; type = "cache"; }
+    { path = ".local/share/vdirsyncer"; type = "cache"; }
   ];
   home-manager.users.charlotte = { ... }: {
     accounts.email = {
@@ -111,10 +108,11 @@ in
           passFile = "work/UGentNet";
           useStartTls = true;
           extraConfig = {
+            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent Items"; trash = "Deleted Items"; };
+            mbsync.extraConfig.account.PipelineDepth = "1";
             neomutt.extraConfig = ''
               alternates dodona@ugent.be
             '';
-            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent Items"; trash = "Deleted Items"; };
           };
         };
         #work-aap-we-fr = makeAccount {
@@ -125,8 +123,9 @@ in
         #  passFile = "work/UGentNet";
         #  useStartTls = true;
         #  extraConfig = {
-        #    userName = "UGENT\\ecvpeteg/aap-we-fr";
         #    folders = { drafts = "Concepten"; inbox = "INBOX"; sent = "Verzonden items"; trash = "Verwijderde items"; };
+        #    mbsync.extraConfig.account.PipelineDepth = "1";
+        #    userName = "UGENT\\ecvpeteg/aap-we-fr";
         #  };
         #};
         posteo = makeAccount {
