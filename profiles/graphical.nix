@@ -7,7 +7,6 @@
     ../configurations/citrix.nix
     ../configurations/deluge.nix
     ../configurations/dropbox.nix
-    ../configurations/dwarf-fortress.nix
     ../configurations/firefox.nix
     ../configurations/fonts.nix
     ../configurations/gnupg.nix
@@ -21,7 +20,6 @@
     ../configurations/networkmanager.nix
     ../configurations/pass.nix
     ../configurations/sound.nix
-    ../configurations/steam.nix
     ../configurations/sway.nix
     ../configurations/syncthing.nix
     ../configurations/teams.nix
