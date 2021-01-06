@@ -7,7 +7,8 @@ let
     if [ "$unseen_count" = "1" ]
     then
       ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' "1 unseen mail"
-    else
+    elif [ "$unseen_count" != "0" ]
+    then
       ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' "$unseen_count unseen mails"
     fi
   '';
