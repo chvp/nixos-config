@@ -32,9 +32,7 @@
 
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
-      bluej
       google-chrome
-      greenfoot
       libreoffice
       moreutils
       mpv
