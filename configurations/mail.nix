@@ -88,7 +88,7 @@ in
   ];
   home-manager.users.charlotte = { ... }: {
     accounts.email = {
-      maildirBasePath = "mail";
+      maildirBasePath = "/data/home/charlotte/mail";
       accounts = {
         personal = makeAccount {
           name = "personal";
