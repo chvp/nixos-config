@@ -7,9 +7,6 @@ let
       enableNixDirenvIntegration = true;
     };
   };
-  baseUnfree = {
-    xdg.configFile."nixpkgs/config.nix".source = ./nix/unfree.nix;
-  };
   baseNixIndex = {
     home.packages = with pkgs; [ nix-index ];
     programs.zsh.initExtra = ''
@@ -87,7 +84,14 @@ in
       '');
     };
 
-    nixpkgs.config = lib.mkIf config.chvp.nix.enableUnfree (import ./nix/unfree.nix);
+    nixpkgs.config = lib.mkIf config.chvp.nix.enableUnfree {
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "citrix-workspace"
+        "dropbox"
+        "teams"
+        "google-chrome"
+      ];
+    };
     nixpkgs.overlays = lib.mkIf config.chvp.nix.enableFlakes [
       (self: super: {
         nix = super.nixUnstable;
@@ -97,12 +101,7 @@ in
     home-manager.users.charlotte = { ... }:
       lib.recursiveUpdate
         (lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv)
-        (lib.recursiveUpdate
-          (lib.optionalAttrs config.chvp.nix.enableUnfree baseUnfree)
-          (lib.optionalAttrs config.chvp.nix.enableNixIndex baseNixIndex));
-    home-manager.users.root = { ... }:
-      lib.recursiveUpdate
-        (lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv)
-        (lib.optionalAttrs config.chvp.nix.enableUnfree baseUnfree);
+        (lib.optionalAttrs config.chvp.nix.enableNixIndex baseNixIndex);
+    home-manager.users.root = { ... }: lib.optionalAttrs config.chvp.nix.enableDirenv baseDirenv;
   };
 }
