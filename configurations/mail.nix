@@ -36,7 +36,7 @@ let
         expunge = "both";
         flatten = ".";
         remove = "both";
-        extraConfig.account.AuthMechs = "PLAIN";
+        extraConfig.account.AuthMechs = "LOGIN";
       };
       msmtp.enable = true;
       neomutt = {
@@ -116,19 +116,19 @@ in
             '';
           };
         };
-        #work-aap-we-fr = makeAccount {
-        #  name = "work-aap-we-fr";
-        #  address = "aap-we-fr@ugent.be";
-        #  imapHost = "owa.ugent.be";
-        #  smtpHost = "smtp.ugent.be";
-        #  passFile = "work/UGentNet";
-        #  useStartTls = true;
-        #  extraConfig = {
-        #    folders = { drafts = "Concepten"; inbox = "INBOX"; sent = "Verzonden items"; trash = "Verwijderde items"; };
-        #    mbsync.extraConfig.account.PipelineDepth = "1";
-        #    userName = "UGENT\\ecvpeteg/aap-we-fr";
-        #  };
-        #};
+        work-aap-we-fr = makeAccount {
+          name = "work-aap-we-fr";
+          address = "aap-we-fr@ugent.be";
+          imapHost = "owa.ugent.be";
+          smtpHost = "smtp.ugent.be";
+          passFile = "work/UGentNet";
+          useStartTls = true;
+          extraConfig = {
+            folders = { drafts = "Concepten"; inbox = "INBOX"; sent = "Verzonden items"; trash = "Verwijderde items"; };
+            mbsync.extraConfig.account.PipelineDepth = "1";
+            userName = "UGENT\\\\ecvpeteg/aap-we-fr";
+          };
+        };
         posteo = makeAccount {
           name = "posteo";
           address = "chvp@posteo.net";
