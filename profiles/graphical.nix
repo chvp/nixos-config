@@ -24,7 +24,6 @@
     ../configurations/syncthing.nix
     ../configurations/teams.nix
     ../configurations/themes.nix
-    ../configurations/virtualbox.nix
     ../configurations/xdg-dirs.nix
   ];
 
