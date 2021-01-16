@@ -21,6 +21,7 @@
     docker.enable = true;
     eid.enable = true;
     git.email = "charlotte.vanpetegem@ugent.be";
+    gomuks.enable = true;
     nix.enableUnfree = true;
     zfs = {
       enable = true;

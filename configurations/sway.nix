@@ -128,6 +128,8 @@ in
         workspace 3
         exec ${pkgs.kitty}/bin/kitty -e ${pkgs.tmuxinator}/bin/tmuxinator start mail
         workspace 4
+        exec ${pkgs.gomuks}/bin/gomuks
+        workspace 4
         exec ${pkgs.teams}/bin/teams
         workspace 2
 

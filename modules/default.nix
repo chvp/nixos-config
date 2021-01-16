@@ -8,6 +8,7 @@
     ./eid.nix
     ./git.nix
     ./global-mailer.nix
+    ./gomuks.nix
     ./neovim.nix
     ./nix.nix
     ./nginx.nix
