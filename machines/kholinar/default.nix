@@ -6,6 +6,8 @@
     ../../profiles/graphical.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   networking = {
     hostId = "3cc1a4b2";
     hostName = "kholinar";
