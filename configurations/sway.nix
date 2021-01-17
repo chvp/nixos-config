@@ -8,6 +8,11 @@ in
 {
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
   security.pam.services.swaylock = { };
+  xdg.portal = {
+    enable = true;
+    gtkUsePortal = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+  };
   home-manager.users.charlotte = { pkgs, lib, ... }: {
     home.packages = [ color-picker screenshot ];
     programs.mako = {
@@ -139,6 +144,7 @@ in
       '';
       extraSessionCommands = ''
         export XDG_SESSION_TYPE=wayland
+        export XDG_CURRENT_DESKTOP=sway
         export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
         export QT_AUTO_SCREEN_SCALE_FACTOR=0
         export QT_SCALE_FACTOR=1

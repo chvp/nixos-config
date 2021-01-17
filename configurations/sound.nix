@@ -2,14 +2,10 @@
 
 {
   sound.enable = true;
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
   };
-
-  # PulseAudio doesn't play nice with symlinks
-  systemd.user.services.pulseaudio.environment = lib.mkIf config.chvp.zfs.enable {
-    XDG_CONFIG_HOME = "/data/home/charlotte/.config";
-  };
-
-  users.users.charlotte.extraGroups = [ "audio" ];
 }
