@@ -14,7 +14,6 @@ in
           export GOMUKS_CACHE_HOME="${cfg.cachePrefix}${config.users.users.charlotte.home}/.cache/gomuks"
           export GOMUKS_DATA_HOME="${cfg.cachePrefix}${config.users.users.charlotte.home}/.local/share/gomuks"
           export GOMUKS_CONFIG_HOME="${cfg.cachePrefix}${config.users.users.charlotte.home}/.config/gomuks"
-          export PATH="$PATH:${self.libnotify}/bin"
           ${self.alacritty}/bin/alacritty -e ${super.gomuks}/bin/gomuks
         '';
       })
