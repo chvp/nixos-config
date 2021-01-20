@@ -192,6 +192,10 @@ in
       file.".mailcap".text = ''
         text/html; ${pkgs.firefox}/bin/firefox %s ; nametemplate=%s.html; needsterminal
         text/html; ${pkgs.w3m}/bin/w3m -dump -o display_link_number=1 -o document_charset=%{charset} %s ; copiousoutput; nametemplate=%s.html
+        text/calendar; ${pkgs.khal}/bin/khal import %s;
+        application/pdf; ${pkgs.okular}/bin/okular %s
+        image/png; ${pkgs.okular}/bin/okular %s
+        image/jpeg; ${pkgs.okular}/bin/okular %s
       '';
     };
     xdg.configFile = {
@@ -285,7 +289,34 @@ in
         };
         extraConfig = ''
           auto_view text/html
+
+          set mail_check_stats
+          set query_command = "${pkgs.khard}/bin/khard email -p %s"
+          set send_charset="utf-8"
+          set print_command = "${pkgs.wl-clipboard}/bin/wl-copy"
+
+          color normal     white        default
+          color error      red          default
+          color status     black        blue
+          color indicator  black        blue
+          color quoted     yellow       default
+          color header     blue         default "^(Subject)"
+          color header     brightblue   default "^(From)"
+          color index      black        red     "~D"          # deleted messages
+          color attachment green        default
         '';
+        macros = [
+          {
+            map = "index";
+            key = "\\Ck";
+            action = "<sidebar-prev><sidebar-open>";
+          }
+          {
+            map = "index";
+            key = "\\Cj";
+            action = "<sidebar-next><sidebar-open>";
+          }
+        ];
         vimKeys = true;
       };
     };
