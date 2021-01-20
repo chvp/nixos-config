@@ -23,12 +23,6 @@
       "spidermonkey-38.8.0"
     ];
 
-    nixpkgs.overlays = [
-      (self: super: {
-        zeroadPackages = (super.zeroadPackages.override { newScope = (extra: self.newScope ({ stdenv = self.gcc9Stdenv; } // extra)); });
-      })
-    ];
-
     hardware.opengl.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
       home.packages = [ pkgs.zeroad ];
