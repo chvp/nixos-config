@@ -100,5 +100,5 @@ pkgs.writeText "configuration.toml" ''
   [[block]]
   block = "time"
   interval = 1
-  format = "%a %d/%m %H:%M:%S"
+  format = "%a %d/%m %H:%M"
 ''
