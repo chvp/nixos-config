@@ -5,10 +5,12 @@
     displayManager.startx.enable = true;
     libinput = {
       enable = true;
-      disableWhileTyping = true;
-      scrollMethod = "twofinger";
-      tapping = true;
-      tappingDragLock = true;
+      touchpad = {
+        disableWhileTyping = true;
+        scrollMethod = "twofinger";
+        tapping = true;
+        tappingDragLock = true;
+      };
     };
     xkbVariant = "altgr-intl";
   };
