@@ -3,6 +3,7 @@
 {
   imports = [
     ./default/secret.nix
+    ./accentor.nix
     ./bluetooth.nix
     ./docker.nix
     ./eid.nix
