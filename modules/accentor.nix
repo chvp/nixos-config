@@ -23,7 +23,7 @@ let
   api = pkgs.fetchFromGitHub {
     owner = "accentor";
     repo = "api";
-    rev = "fix/nixos-deploy";
+    rev = "develop";
     sha256 = "0fqxz33cxw3k4swm2rh5q8yxmnq6wny6pv4gy467rsdqvj8h5l1f";
   };
   gems = pkgs.bundlerEnv {
