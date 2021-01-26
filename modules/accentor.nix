@@ -53,6 +53,23 @@ in
   };
 
   config = lib.mkIf config.chvp.accentor.enable {
+    environment.systemPackages = [
+      (pkgs.writeShellScriptBin "accentor-console" ''
+        set -ex
+        export DATABASE_URL="postgresql://%2Frun%2Fpostgresql/accentor"
+        export FFMPEG_LOG_LOCATION="/var/log/accentor/ffmpeg.log"
+        export RAILS_STORAGE_PATH="${config.chvp.dataPrefix}/var/lib/accentor/storage"
+        export RAILS_TRANSCODE_CACHE="/var/tmp/accentor/transcode_cache"
+        export BOOTSNAP_CACHE_DIR="/var/tmp/accentor/bootsnap"
+        export PIDFILE="/run/accentor/server.pid"
+        export RACK_ENV="production"
+        export RAILS_ENV="production"
+        export RAILS_LOG_TO_STDOUT="yes"
+        cd ${api}
+        ${gems}/bin/bundle exec rails c
+      '')
+    ];
+
     services.postgresql = {
       enable = true;
       dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
@@ -89,25 +106,26 @@ in
           ExecStart = "${gems}/bin/bundle exec puma -C ${api}/config/puma.rb";
         };
       };
-    } // (builtins.foldl' (x: y: x // y) {} (builtins.genList (n: {
-      "accentor-worker${toString n}" = {
-        after = [ "network.target" "accentor-api.service" "postgresql.service" ];
-        requires = [ "accentor-api.service" "postgresql.service" ];
-        wantedBy = [ "multi-user.target" ];
-        environment = env;
-        path = [ pkgs.ffmpeg gems gems.wrappedRuby ];
-        serviceConfig = {
-          EnvironmentFile = "${config.chvp.dataPrefix}/var/secrets/accentor-api";
-          Type = "simple";
-          User = "accentor";
-          Group = "accentor";
-          Restart = "on-failure";
-          WorkingDirectory = api;
-          ExecStart = "${gems}/bin/bundle exec rails jobs:work";
+    } // (builtins.foldl' (x: y: x // y) { } (builtins.genList
+      (n: {
+        "accentor-worker${toString n}" = {
+          after = [ "network.target" "accentor-api.service" "postgresql.service" ];
+          requires = [ "accentor-api.service" "postgresql.service" ];
+          wantedBy = [ "multi-user.target" ];
+          environment = env;
+          path = [ pkgs.ffmpeg gems gems.wrappedRuby ];
+          serviceConfig = {
+            EnvironmentFile = "${config.chvp.dataPrefix}/var/secrets/accentor-api";
+            Type = "simple";
+            User = "accentor";
+            Group = "accentor";
+            Restart = "on-failure";
+            WorkingDirectory = api;
+            ExecStart = "${gems}/bin/bundle exec rails jobs:work";
+          };
         };
-      };
 
-    }) 4));
+      }) 4));
 
     users.users.accentor = {
       group = "accentor";
