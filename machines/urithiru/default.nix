@@ -17,7 +17,6 @@
   chvp = {
     stateVersion = "20.09";
     accentor.enable = true;
-    docker.enable = true;
     nginx.enable = true;
     ovh.enable = true;
     smartd.enable = true;
