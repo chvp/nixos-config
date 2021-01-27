@@ -70,6 +70,14 @@ in
       '')
     ];
 
+    security.doas.extraRules = [{
+      users = [ "charlotte" ];
+      noPass = true;
+      cmd = "accentor-console";
+      runAs = "accentor";
+      setEnv = [ "RAILS_MASTER_KEY" ];
+    }];
+
     services.postgresql = {
       enable = true;
       dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";

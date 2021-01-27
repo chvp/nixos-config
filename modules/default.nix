@@ -89,6 +89,19 @@
       externalInterface = "eno3";
     };
 
+    security.sudo.enable = false;
+    security.doas = {
+      enable = true;
+      extraRules = [
+        {
+          users = [ "charlotte" ];
+          noPass = true;
+          cmd = "nix-collect-garbage";
+          runAs = "root";
+        }
+      ];
+    };
+
     users = {
       mutableUsers = false;
       defaultUserShell = pkgs.zsh;
@@ -97,7 +110,7 @@
           isNormalUser = true;
           home = "/home/charlotte";
           description = "Charlotte Van Petegem";
-          extraGroups = [ "wheel" "systemd-journal" ] ++ lib.optionals config.chvp.graphical [ "input" "video" ];
+          extraGroups = [ "systemd-journal" ] ++ lib.optionals config.chvp.graphical [ "input" "video" ];
         };
       };
     };

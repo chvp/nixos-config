@@ -11,6 +11,7 @@
     uid = 1000;
     group = "users";
   };
+  security.sudo.enable = false;
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
