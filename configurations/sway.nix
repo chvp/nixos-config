@@ -11,7 +11,7 @@ in
   xdg.portal = {
     enable = true;
     gtkUsePortal = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
   };
   home-manager.users.charlotte = { pkgs, lib, ... }: {
     home.packages = [ color-picker screenshot ];
