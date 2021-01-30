@@ -168,10 +168,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1qx1f729bgh391agsqb4ngzn22wdn4cc6mkp0cipf0d5hsg9cpaq";
+      sha256 = "0jkh8qrsz3nhz759jwlfa20xkizn63yxym2db0c8ayjxzldyc77z";
       type = "gem";
     };
-    version = "1.5.1";
+    version = "1.6.0";
   };
   builder = {
     groups = ["default" "development" "test"];
@@ -218,10 +218,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1a2yraa3fyvpjx56ymgzc7vzr8g3m1aqgm60svam16yqplg1b3wr";
+      sha256 = "0g8mqxz46rhbfvlw639bnak547p25npbsykxa2d7m53ky32gbwbc";
       type = "gem";
     };
-    version = "0.3.0";
+    version = "0.4.2";
   };
   concurrent-ruby = {
     groups = ["default" "development" "test"];
@@ -512,10 +512,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1lva6bkvb4mfa0m3bqn4lm4s4gi81c40jvdcsrxr6vng49q9daih";
+      sha256 = "0f99zvxg9q3hv69ypi08jlpc1h0jx110dgvrk22wcn3jvm6s4jyz";
       type = "gem";
     };
-    version = "1.3.3";
+    version = "1.4.1";
   };
   nio4r = {
     groups = ["default"];
@@ -575,10 +575,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "13640p5fk19705ygp8j6p07lccag3d80bx8bmjgpd5zsxxsdc50b";
+      sha256 = "0fmcz4dp7ggkv1h4n51vn1gq0r4zbkw7sr2ssl4ws1khb86grkv5";
       type = "gem";
     };
-    version = "5.1.1";
+    version = "5.2.0";
   };
   pundit = {
     dependencies = ["activesupport"];
@@ -809,10 +809,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1mm20dvd64w46l5k11il9z5sjgdpp0bknml76glcngvl2w03k3cb";
+      sha256 = "1hrv046jll6ad1s964gsmcq4hvkr3zzr6jc7z1mns22mvfpbc3cr";
       type = "gem";
     };
-    version = "0.20.0";
+    version = "0.21.2";
   };
   simplecov-html = {
     groups = ["default" "test"];

@@ -2250,6 +2250,14 @@
       };
     }
     {
+      name = "callsite___callsite_1.0.0.tgz";
+      path = fetchurl {
+        name = "callsite___callsite_1.0.0.tgz";
+        url  = "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz";
+        sha1 = "280398e5d664bd74038b6f0905153e6e8af1bc20";
+      };
+    }
+    {
       name = "callsites___callsites_2.0.0.tgz";
       path = fetchurl {
         name = "callsites___callsites_2.0.0.tgz";
@@ -3079,6 +3087,14 @@
         name = "debug___debug_3.1.0.tgz";
         url  = "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz";
         sha1 = "5bb5a0672628b64149566ba16819e61518c67261";
+      };
+    }
+    {
+      name = "decache___decache_4.6.0.tgz";
+      path = fetchurl {
+        name = "decache___decache_4.6.0.tgz";
+        url  = "https://registry.yarnpkg.com/decache/-/decache-4.6.0.tgz";
+        sha1 = "87026bc6e696759e82d57a3841c4e251a30356e8";
       };
     }
     {
@@ -4031,6 +4047,14 @@
         name = "file_loader___file_loader_4.3.0.tgz";
         url  = "https://registry.yarnpkg.com/file-loader/-/file-loader-4.3.0.tgz";
         sha1 = "780f040f729b3d18019f20605f723e844b8a58af";
+      };
+    }
+    {
+      name = "file_loader___file_loader_6.2.0.tgz";
+      path = fetchurl {
+        name = "file_loader___file_loader_6.2.0.tgz";
+        url  = "https://registry.yarnpkg.com/file-loader/-/file-loader-6.2.0.tgz";
+        sha1 = "baef7cf8e1840df325e4390b4484879480eebe4d";
       };
     }
     {
@@ -9314,11 +9338,11 @@
       };
     }
     {
-      name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.0.9.tgz";
+      name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.1.0.tgz";
       path = fetchurl {
-        name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.0.9.tgz";
-        url  = "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.0.9.tgz";
-        sha1 = "982991aec28e79d1f0c2eb8f6e3d62e042087ee8";
+        name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.1.0.tgz";
+        url  = "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.1.0.tgz";
+        sha1 = "1261d5866bca8f5c256f1b13abad2568fbcd6bb2";
       };
     }
     {
@@ -9378,11 +9402,11 @@
       };
     }
     {
-      name = "vue_router___vue_router_3.4.9.tgz";
+      name = "vue_router___vue_router_3.5.1.tgz";
       path = fetchurl {
-        name = "vue_router___vue_router_3.4.9.tgz";
-        url  = "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.9.tgz";
-        sha1 = "c016f42030ae2932f14e4748b39a1d9a0e250e66";
+        name = "vue_router___vue_router_3.5.1.tgz";
+        url  = "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.1.tgz";
+        sha1 = "edf3cf4907952d1e0583e079237220c5ff6eb6c9";
       };
     }
     {
@@ -9426,11 +9450,11 @@
       };
     }
     {
-      name = "vuetify_loader___vuetify_loader_1.6.0.tgz";
+      name = "vuetify_loader___vuetify_loader_1.7.1.tgz";
       path = fetchurl {
-        name = "vuetify_loader___vuetify_loader_1.6.0.tgz";
-        url  = "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.6.0.tgz";
-        sha1 = "05df0805b3ab2ff0de198109d34f9da3f69da667";
+        name = "vuetify_loader___vuetify_loader_1.7.1.tgz";
+        url  = "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.7.1.tgz";
+        sha1 = "d2fb905ee7dbd1183ea210dbd31e52756fd622fc";
       };
     }
     {
@@ -9450,11 +9474,11 @@
       };
     }
     {
-      name = "vuex___vuex_3.6.0.tgz";
+      name = "vuex___vuex_3.6.2.tgz";
       path = fetchurl {
-        name = "vuex___vuex_3.6.0.tgz";
-        url  = "https://registry.yarnpkg.com/vuex/-/vuex-3.6.0.tgz";
-        sha1 = "95efa56a58f7607c135b053350833a09e01aa813";
+        name = "vuex___vuex_3.6.2.tgz";
+        url  = "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz";
+        sha1 = "236bc086a870c3ae79946f107f16de59d5895e71";
       };
     }
     {

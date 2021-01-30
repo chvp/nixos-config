@@ -10,7 +10,7 @@ gem 'rack', '~> 2.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 1.2.3', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 5.1'
+gem 'puma', '~> 5.2'
 # Use ActiveModelSerializer for serializing to JSON
 gem 'active_model_serializers', '~> 0.10'
 # Use Redis adapter to run Action Cable in production
@@ -38,9 +38,9 @@ gem 'bootsnap', '>= 1.4.6', require: false
 gem 'rack-cors', '~> 1.1'
 
 group :test do
-  gem 'codecov', '~> 0.3.0', require: false
+  gem 'codecov', '~> 0.4.2', require: false
   gem 'mocha', '~> 1.12.0', require: false
-  gem 'simplecov', '~> 0.20', require: false
+  gem 'simplecov', '~> 0.21', require: false
 end
 
 group :development, :test do
