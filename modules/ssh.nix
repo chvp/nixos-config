@@ -16,6 +16,8 @@ let
     programs.ssh = {
       enable = true;
       compression = true;
+      controlMaster = "yes";
+      controlPersist = "10m";
       hashKnownHosts = true;
       userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
       serverAliveInterval = 300;
