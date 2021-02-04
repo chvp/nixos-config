@@ -20,7 +20,7 @@ let
       controlPersist = "10m";
       hashKnownHosts = true;
       userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
-      serverAliveInterval = 300;
+      serverAliveInterval = 10;
       extraOptionOverrides = {
         IdentityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
         HostKeyAlgorithms = "ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa";
