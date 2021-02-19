@@ -97,7 +97,7 @@ in
             neomutt.extraConfig = ''
               alternates '^.*@cvpetegem.be$' '^charlotte\+.*@vanpetegem.me'
             '';
-            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
+            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             primary = true;
           };
         };
@@ -109,7 +109,7 @@ in
           passFile = "work/UGentNet";
           useStartTls = true;
           extraConfig = {
-            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent Items"; trash = "Deleted Items"; };
+            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Deleted Items"; };
             mbsync.extraConfig.account.PipelineDepth = "1";
             neomutt.extraConfig = ''
               alternates dodona@ugent.be
@@ -138,7 +138,7 @@ in
             neomutt.extraConfig = ''
               alternates '^chvp\+.*posteo.net'
             '';
-            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
+            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
         };
         jonggroen = makeAccount {
@@ -156,7 +156,7 @@ in
             folders = {
               drafts = "[Gmail].Drafts";
               inbox = "INBOX";
-              sent = "[Gmail].Sent Mail";
+              sent = "INBOX";
               trash = "[Gmail].Bin";
             };
           };
@@ -170,7 +170,7 @@ in
             neomutt.extraConfig = ''
               alternates '.*@vanpetegem.me$'
             '';
-            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
+            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
         };
         webmaster = makeAccount {
@@ -182,7 +182,7 @@ in
             neomutt.extraConfig = ''
               alternates root@vanpetegem.me
             '';
-            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "Sent"; trash = "Trash"; };
+            folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
         };
       };
