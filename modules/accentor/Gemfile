@@ -24,7 +24,7 @@ gem 'delayed_cron_job', '~> 0.7'
 
 gem 'wahwah', '~> 1.1.1'
 
-gem 'has_scope', '~> 0.7'
+gem 'has_scope', '~> 0.8'
 gem 'pundit', '~> 2.1'
 gem 'will_paginate', '~> 3.3'
 
