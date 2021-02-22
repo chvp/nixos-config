@@ -1,6 +1,10 @@
 { config, lib, ... }:
 
 {
+  chvp.zfs.homeLinks = [
+    { path = ".config/pipewire-media-session"; type = "cache"; }
+  ];
+
   sound.enable = true;
   services.pipewire = {
     enable = true;
