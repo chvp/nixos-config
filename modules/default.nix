@@ -22,6 +22,7 @@
     ./tmux.nix
     ./zeroad.nix
     ./zfs.nix
+    ./zotero.nix
     ./zsh.nix
   ];
 

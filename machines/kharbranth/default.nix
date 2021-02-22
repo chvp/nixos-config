@@ -38,5 +38,6 @@
       ];
       rootDataset = "rpool/local/root";
     };
+    zotero.enable = true;
   };
 }
