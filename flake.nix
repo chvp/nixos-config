@@ -7,8 +7,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:charvp/nixpkgs/master";
-    nixpkgsFor0AD.url = "github:charvp/nixpkgs/0ad0.24";
+    nixpkgs.url = "github:chvp/nixpkgs/master";
+    nixpkgsFor0AD.url = "github:chvp/nixpkgs/0ad0.24";
   };
 
   outputs = { self, nixpkgs, nixpkgsFor0AD, home-manager, flake-utils }:
