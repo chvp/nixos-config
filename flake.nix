@@ -8,9 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:charvp/nixpkgs/master";
+    nixpkgsFor0AD.url = "github:charvp/nixpkgs/0ad0.24";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils }:
+  outputs = { self, nixpkgs, nixpkgsFor0AD, home-manager, flake-utils }:
     let
       version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
       pkgsFor = system: import nixpkgs {
@@ -18,6 +19,7 @@
       };
       mkSystem = system: hostname: nixpkgs.lib.nixosSystem {
         inherit system;
+        extraArgs = { pkgsFor0AD = import nixpkgsFor0AD { inherit system; }; };
         modules = [
           home-manager.nixosModules.home-manager
           (./modules)

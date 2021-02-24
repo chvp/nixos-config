@@ -52,11 +52,28 @@
         "type": "github"
       }
     },
+    "nixpkgsFor0AD": {
+      "locked": {
+        "lastModified": 1614186703,
+        "narHash": "sha256-eVWRScBdmsdgMv6UHrntBxAxKylXBYzzeFahf9RFEuE=",
+        "owner": "charvp",
+        "repo": "nixpkgs",
+        "rev": "e9f0809cc1c48707f4a95a845bcb0e98d98ede36",
+        "type": "github"
+      },
+      "original": {
+        "owner": "charvp",
+        "ref": "0ad0.24",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgsFor0AD": "nixpkgsFor0AD"
       }
     }
   },

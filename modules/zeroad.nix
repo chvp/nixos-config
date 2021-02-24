@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, pkgsFor0AD, ... }:
 
 {
   options = {
@@ -19,13 +19,9 @@
       { path = ".config/0ad"; type = "cache"; }
     ];
 
-    nixpkgs.config.permittedInsecurePackages = [
-      "spidermonkey-38.8.0"
-    ];
-
     hardware.opengl.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = [ pkgs.zeroad ];
+      home.packages = [ pkgsFor0AD.zeroad ];
     };
     networking.firewall = lib.mkIf config.chvp.zeroad.asServer {
       allowedTCPPorts = [ 20595 ];
