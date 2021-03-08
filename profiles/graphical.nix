@@ -59,5 +59,8 @@
 
   services.fwupd.enable = true;
 
-  chvp.gnupg.pinentryFlavor = "qt";
+  chvp = {
+    gnupg.pinentryFlavor = "qt";
+    nix.unfreePackages = [ "google-chrome" ];
+  };
 }

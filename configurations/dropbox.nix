@@ -27,4 +27,5 @@
       };
     };
   };
+  chvp.nix.unfreePackages = [ "dropbox" ];
 }

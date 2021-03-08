@@ -24,7 +24,7 @@
     eid.enable = true;
     git.email = "charlotte@vanpetegem.me";
     gomuks.enable = true;
-    nix.enableUnfree = true;
+    minecraft.client = true;
     zeroad.enable = true;
     zfs = {
       enable = true;

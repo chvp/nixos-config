@@ -47,9 +47,9 @@ in
       default = true;
       example = false;
     };
-    enableUnfree = lib.mkOption {
-      default = false;
-      example = true;
+    unfreePackages = lib.mkOption {
+      default = [ ];
+      example = [ "teams" ];
     };
     # Note that this is only enabled for charlotte, until https://github.com/bennofs/nix-index/issues/143 is resolved.
     enableNixIndex = lib.mkOption {
@@ -84,14 +84,7 @@ in
       '');
     };
 
-    nixpkgs.config = lib.mkIf config.chvp.nix.enableUnfree {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "citrix-workspace"
-        "dropbox"
-        "teams"
-        "google-chrome"
-      ];
-    };
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.nix.unfreePackages;
     nixpkgs.overlays = lib.mkIf config.chvp.nix.enableFlakes [
       (self: super: {
         nix = super.nixUnstable;

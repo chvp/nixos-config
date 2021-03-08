@@ -5,7 +5,10 @@
     home.packages = with pkgs; [ teams ];
   };
 
-  chvp.zfs.homeLinks = [
-    { path = ".config/Microsoft"; type = "data"; }
-  ];
+  chvp = {
+    nix.unfreePackages = [ "teams" ];
+    zfs.homeLinks = [
+      { path = ".config/Microsoft"; type = "data"; }
+    ];
+  };
 }
