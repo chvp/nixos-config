@@ -8,28 +8,34 @@
         font_family = "Fira Code";
         font_size = 9;
         disable_ligatures = "cursor";
-        background = "#fbffff";
-        foreground = "#535c65";
-        selection_background = "#6d7782";
-        selection_foreground = "#fbffff";
-        url_color = "#906c33";
-        cursor = "#434951";
-        color0 = "#fbffff";
-        color1 = "#ae5865";
-        color2 = "#4d7f43";
-        color3 = "#906c33";
-        color4 = "#2b7ab2";
-        color5 = "#8f63a2";
-        color6 = "#008483";
-        color7 = "#535c65";
-        color8 = "#6d7782";
-        color9 = "#ae5865";
-        color10 = "#4d7f43";
-        color11 = "#906c33";
-        color12 = "#2b7ab2";
-        color13 = "#8f63a2";
-        color14 = "#008483";
-        color15 = "#434951";
+        background = "#ffffff";
+        foreground = "#000000";
+        cursor = "#777777";
+        url_color = "#0031a9";
+        # black
+        color0 = "#282828";
+        color8 = "#000000";
+        # red
+        color1 = "#a60000";
+        color9 = "#972500";
+        # green
+        color2 = "#005e00";
+        color10 = "#315b00";
+        # yellow
+        color3 = "#813e00";
+        color11 = "#70480f";
+        # blue
+        color4 = "#0031a9";
+        color12 = "#2544bb";
+        # magenta
+        color5 = "#721045";
+        color13 = "#8f0075";
+        # cyan
+        color6 = "#00538b";
+        color14 = "#30517f";
+        # white
+        color7 = "#f8f8f8";
+        color15 = "#ffffff";
         enable_audio_bell = false;
         visual_bell_duration = "0.25";
         remember_window_size = false;

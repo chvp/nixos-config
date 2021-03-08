@@ -22,16 +22,16 @@ pkgs.writeText "configuration.toml" ''
   [theme]
   name = "gruvbox-light"
   [theme.overrides]
-  idle_bg="#fbffff"
-  idle_fg="#535c65"
-  info_bg="#2b7ab2"
-  info_fg="#fbffff"
-  good_bg="#4d7f43"
-  good_fg="#fbffff"
-  warning_bg="#906c33"
-  warning_fg="#fbffff"
-  critical_bg="#ae5865"
-  critical_fg="#fbffff"
+  idle_bg="#ffffff"
+  idle_fg="#000000"
+  info_bg="#6aaeff"
+  info_fg="#000000"
+  good_bg="#5ada88"
+  good_fg="#000000"
+  warning_bg="#f5df23"
+  warning_fg="#000000"
+  critical_bg="#ff8892"
+  critical_fg="#000000"
   separator=""
 
   [icons]

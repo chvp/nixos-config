@@ -60,12 +60,12 @@ in
         bars = [
           {
             colors = {
-              background = "#fbffff";
-              statusline = "#535c65";
-              activeWorkspace = { border = "#6d7782"; background = "#6d7782"; text = "#fbffff"; };
-              focusedWorkspace = { border = "#2b7ab2"; background = "#2b7ab2"; text = "#fbffff"; };
-              inactiveWorkspace = { border = "#fbffff"; background = "#fbffff"; text = "#535c65"; };
-              urgentWorkspace = { border = "#ae5865"; background = "#ae5865"; text = "#fbffff"; };
+              background = "#ffffff";
+              statusline = "#000000";
+              activeWorkspace = { border = "#f2eff3"; background = "#f2eff3"; text = "#000000"; };
+              focusedWorkspace = { border = "#6aaeff"; background = "#6aaeff"; text = "#000000"; };
+              inactiveWorkspace = { border = "#ffffff"; background = "#ffffff"; text = "#000000"; };
+              urgentWorkspace = { border = "#ff8892"; background = "#ff8892"; text = "#000000"; };
             };
             fonts = [ "Fira Code Normal 9" ];
             position = "top";

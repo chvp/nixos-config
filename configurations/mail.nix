@@ -295,15 +295,15 @@ in
           set send_charset="utf-8"
           set print_command = "${pkgs.wl-clipboard}/bin/wl-copy"
 
-          color normal     white        default
-          color error      red          default
-          color status     black        blue
-          color indicator  black        blue
+          color normal     black      white
+          color error      red          white
+          color status     white      blue
+          color indicator  white      blue
           color quoted     yellow       default
-          color header     blue         default "^(Subject)"
-          color header     brightblue   default "^(From)"
-          color index      black        red     "~D"          # deleted messages
-          color attachment green        default
+          color header     blue         white "^(Subject)"
+          color header     brightblue   white "^(From)"
+          color index      white        red     "~D"          # deleted messages
+          color attachment green        white
         '';
         macros = [
           {

@@ -7,6 +7,7 @@
     ./bluetooth.nix
     ./docker.nix
     ./eid.nix
+    ./emacs.nix
     ./git.nix
     ./global-mailer.nix
     ./gomuks.nix
@@ -74,22 +75,22 @@
 
     console = {
       colors = [
-        "fbffff"
-        "ae5865"
-        "4d7f43"
-        "906c33"
-        "2b7ab2"
-        "8f63a2"
-        "008483"
-        "535c65"
-        "6d7782"
-        "ae5865"
-        "4d7f43"
-        "906c33"
-        "2b7ab2"
-        "8f63a2"
-        "008483"
-        "434951"
+        "f8f8f8"
+        "a60000"
+        "005e00"
+        "813e00"
+        "0031a9"
+        "721045"
+        "00538b"
+        "282828"
+        "ffffff"
+        "972500"
+        "315b00"
+        "70480f"
+        "2544bb"
+        "8f0075"
+        "30517f"
+        "000000"
       ];
       font = "Lat2-Terminus16";
       keyMap = "us";

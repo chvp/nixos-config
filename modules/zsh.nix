@@ -33,7 +33,7 @@
               "systemd"
               "tmux"
             ];
-            theme = "agnoster";
+            theme = "robbyrussell";
           };
           plugins = [{
             name = "zsh-syntax-highlighting";
