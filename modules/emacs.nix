@@ -64,8 +64,6 @@
             lsp-mode = {
               enable = true;
               command = [ "lsp" ];
-              config = ''
-              '';
             };
             markdown-mode = {
               enable = true;
