@@ -42,7 +42,7 @@
             };
             fira-code-mode = {
               enable = true;
-              config = "(global-fira-code-mode)";
+              config = "(when window-system (global-fira-code-mode))";
             };
             flycheck = {
               enable = true;
