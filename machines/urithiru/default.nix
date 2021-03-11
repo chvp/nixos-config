@@ -24,7 +24,7 @@
     teeworlds.enable = false;
     zeroad = {
       enable = true;
-      asServer = false;
+      asServer = true;
     };
     zfs = {
       enable = true;

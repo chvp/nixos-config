@@ -23,10 +23,14 @@
     home-manager.users.charlotte = { pkgs, ... }: {
       home.packages = [ pkgsFor0AD.zeroad ];
     };
+
     networking.firewall = lib.mkIf config.chvp.zeroad.asServer {
       allowedTCPPorts = [ 20595 ];
       allowedUDPPorts = [ 20595 ];
     };
-    services.openssh.forwardX11 = lib.mkDefault config.chvp.zeroad.asServer;
+    services.xrdp = lib.mkIf config.chvp.zeroad.asServer {
+      enable = true;
+      defaultWindowManager = "${pkgsFor0AD.zeroad}/bin/0ad";
+    };
   };
 }
