@@ -53,12 +53,12 @@
               enable = true;
               mode = [ ''"\\.journal\\'"'' ];
               config = ''
-                (setq ledger-binary-path "hledger")
-                (setq ledger-highlight-xact-under-point nil)
-                (setq ledger-post-account-alignment-column 4)
-                (setq ledger-post-amount-alignment-at :decimal)
-                (setq ledger-post-amount-alignment-column 59)
-                (setq ledger-post-auto-align t)
+                (setq ledger-binary-path "hledger"
+                      ledger-highlight-xact-under-point nil
+                      ledger-post-account-alignment-column 4
+                      ledger-post-amount-alignment-at :decimal
+                      ledger-post-amount-alignment-column 59
+                      ledger-post-auto-align t)
               '';
             };
             lsp-mode = {
@@ -105,6 +105,11 @@
             web-mode = {
               enable = true;
               mode = [ ''"\\.html\\.erb\\'"'' ];
+            };
+            which-key = {
+              enable = true;
+              diminish = [ "which-key-mode" ];
+              config = "(which-key-mode)";
             };
           };
         };
