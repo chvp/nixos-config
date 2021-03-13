@@ -11,7 +11,7 @@ then
     popd
 fi
 
-nix flake update --recreate-lock-file
+nix flake update
 
 if [ -z "${OVERRIDE:-}" ]
 then
