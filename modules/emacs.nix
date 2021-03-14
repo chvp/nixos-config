@@ -26,6 +26,10 @@
             (if (daemonp)
                 (add-hook 'server-after-make-frame-hook #'emoji-fonts)
                     (emoji-fonts))
+
+            ;; Disable default evil keybindings, since evil-collection is a superset
+            ;; See https://github.com/emacs-evil/evil-collection/issues/60
+            (setq evil-want-keybinding nil)
           '';
           recommendedGcSettings = true;
           usePackageVerbose = true;
@@ -38,7 +42,13 @@
             };
             evil = {
               enable = true;
-              config = "(evil-mode 1)";
+              config = ''
+                (evil-mode 1)
+              '';
+            };
+            evil-collection = {
+              enable = true;
+              after = [ "evil" ];
             };
             fira-code-mode = {
               enable = true;
@@ -48,6 +58,13 @@
               enable = true;
               diminish = [ "flycheck-mode" ];
               config = "(global-flycheck-mode)";
+            };
+            general = {
+              enable = true;
+              after = [ "evil" "which-key" ];
+              config = ''
+                (general-evil-setup)
+              '';
             };
             ledger-mode = {
               enable = true;
@@ -64,6 +81,9 @@
             lsp-mode = {
               enable = true;
               command = [ "lsp" ];
+            };
+            magit = {
+              enable = true;
             };
             markdown-mode = {
               enable = true;
