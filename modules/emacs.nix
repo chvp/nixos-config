@@ -12,6 +12,7 @@
     home-manager.users.charlotte = { ... }: {
       programs.emacs = {
         enable = true;
+        package = pkgs.emacsPgtkGcc;
         init = {
           enable = true;
           prelude = ''

@@ -2,17 +2,18 @@
   description = "Nixos configuration flake";
 
   inputs = {
+    emacs-overlay.url = "github:nix-community/emacs-overlay/master";
     flake-utils.url = "github:numtide/flake-utils/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
     nixpkgs.url = "github:chvp/nixpkgs/master";
     nixpkgsFor0AD.url = "github:chvp/nixpkgs/0ad0.24";
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, nixpkgsFor0AD, nur, home-manager, flake-utils }:
+  outputs = { self, emacs-overlay, nixpkgs, nixpkgsFor0AD, nur, home-manager, flake-utils }:
     let
       version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
       pkgsFor = system: import nixpkgs {
@@ -33,7 +34,7 @@
             nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
           })
           ({ pkgs, ... }: {
-            nixpkgs.overlays = [ nur.overlay ];
+            nixpkgs.overlays = [ nur.overlay emacs-overlay.overlay ];
             home-manager.sharedModules = [ pkgs.nur.repos.rycee.hmModules.emacs-init ];
           })
           (./. + "/machines/${hostname}")
