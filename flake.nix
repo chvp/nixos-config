@@ -10,10 +10,9 @@
     };
     nixpkgs.url = "github:chvp/nixpkgs/master";
     nixpkgsFor0AD.url = "github:chvp/nixpkgs/0ad0.24";
-    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, emacs-overlay, nixpkgs, nixpkgsFor0AD, nur, home-manager, flake-utils }:
+  outputs = { self, emacs-overlay, nixpkgs, nixpkgsFor0AD, home-manager, flake-utils }:
     let
       version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
       pkgsFor = system: import nixpkgs {
@@ -34,8 +33,7 @@
             nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
           })
           ({ pkgs, ... }: {
-            nixpkgs.overlays = [ nur.overlay emacs-overlay.overlay ];
-            home-manager.sharedModules = [ pkgs.nur.repos.rycee.hmModules.emacs-init ];
+            nixpkgs.overlays = [ emacs-overlay.overlay ];
           })
           (./. + "/machines/${hostname}")
         ];
