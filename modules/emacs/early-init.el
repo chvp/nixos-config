@@ -33,6 +33,7 @@
 
 (add-hook 'emacs-startup-hook #'hm/restore-file-name-handler-alist)
 
+;; Nix manages our packages
 (setq package-enable-at-startup nil)
 
 ;; Avoid expensive frame resizing. Inspired by Doom Emacs.
