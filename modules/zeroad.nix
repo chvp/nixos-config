@@ -30,7 +30,7 @@
     };
     services.xrdp = lib.mkIf config.chvp.zeroad.asServer {
       enable = true;
-      defaultWindowManager = "${pkgsFor0AD.zeroad}/bin/0ad";
+      defaultWindowManager = "${pkgs.icewm}/bin/icewm";
     };
   };
 }
