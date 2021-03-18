@@ -98,8 +98,10 @@
 ;; Autocomplete framework
 (use-package ivy
   :custom
-  (ivy-use-virtual-buffers t)
   (ivy-count-format "(%d/%d) ")
+  (ivy-height 20)
+  (ivy-use-virtual-buffers t)
+  (ivy-wrap t)
   :config (ivy-mode 1)
   :diminish (ivy-mode)
   )
