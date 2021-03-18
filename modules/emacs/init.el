@@ -169,7 +169,8 @@
     "pp" '(projectile-switch-project :which-key "switch")
     "pr" '(projectile-replace :which-key "replace")
     "ps" '(projectile-ripgrep :which-key "search")
-    "p!" '(projectile-run-shell-command-in-root :which-key "shell")
+    "p!" '(projectile-run-shell-command-in-root :which-key "command")
+    "pt" '(projectile-run-term :which-key "term")
     )
   )
 
