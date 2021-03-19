@@ -9,9 +9,9 @@
 
 ;; Dependencies that inject `:keywords' into `use-package' should be
 ;; included before all other packages.
-;; For :diminish in (use-package).
+;; For :diminish in (use-package). Hides minor modes from the status line.
 (use-package diminish)
-;; For :general in (use-package) and keybindings management.
+;; For :general in (use-package). Keybinding management framework.
 (use-package general
   :config
   (general-evil-setup t)
@@ -89,7 +89,7 @@
 ;; Should probably switch to ligature.el, but it isn't on MELPA (yet).
 (use-package fira-code-mode :config (when window-system (global-fira-code-mode)))
 
-;; Linting integration
+;; Linting
 (use-package flycheck
   :diminish (flycheck-mode)
   :config (global-flycheck-mode)
@@ -182,7 +182,7 @@
 ;; Ripgrep support (needed for `projectile-ripgrep')
 (use-package ripgrep)
 
-;; `ivy'-integrated `/'
+;; `ivy'-integrated buffer search
 (use-package swiper
   :general
   (nmap
@@ -194,7 +194,9 @@
 
 ;; HTML (and HTML template) support
 (use-package web-mode
-  :mode "\\.html\\.erb\\'")
+  :mode "\\.html'"
+  :mode "\\.html\\.erb\\'"
+  )
 
 ;; Show keybindings
 (use-package which-key
@@ -210,7 +212,7 @@
 
 ;; Enable basic auto pairs. Maybe replace this with something more
 ;; advanced later? Look into configuring pairs for frequently used
-;; modes.
+;; major modes.
 (electric-pair-mode)
 
 ;; Always display line numbers
