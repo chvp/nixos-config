@@ -50,6 +50,7 @@
 
 ;; Replacements for emacs built-ins that better integrate with `ivy'.
 (use-package counsel
+  :demand t
   :diminish (counsel-mode)
   :config (counsel-mode 1)
   :general
@@ -124,6 +125,7 @@
 
 ;; Git integration
 (use-package magit
+  :demand t
   :general
   (nmap
     :prefix "SPC"
@@ -159,6 +161,7 @@
 ;; Project management
 (use-package projectile
   :after (ripgrep)
+  :demand t
   :diminish (projectile-mode)
   :custom
   (projectile-completion-system 'ivy "Make sure projectile uses ivy as
