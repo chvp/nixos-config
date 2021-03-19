@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgsFor0AD, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options = {
@@ -21,7 +21,7 @@
 
     hardware.opengl.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = [ pkgsFor0AD.zeroad ];
+      home.packages = [ pkgs.zeroad ];
     };
 
     networking.firewall = lib.mkIf config.chvp.zeroad.asServer {

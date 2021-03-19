@@ -9,10 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:chvp/nixpkgs/master";
-    nixpkgsFor0AD.url = "github:chvp/nixpkgs/0ad0.24";
   };
 
-  outputs = { self, emacs-overlay, nixpkgs, nixpkgsFor0AD, home-manager, flake-utils }:
+  outputs = { self, emacs-overlay, nixpkgs, home-manager, flake-utils }:
     let
       version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
       pkgsFor = system: import nixpkgs {
@@ -20,10 +19,11 @@
       };
       mkSystem = system: hostname: nixpkgs.lib.nixosSystem {
         inherit system;
-        extraArgs = { pkgsFor0AD = import nixpkgsFor0AD { inherit system; }; };
         modules = [
+          ({ pkgs, ... }: { nixpkgs.overlays = [ emacs-overlay.overlay ]; })
           home-manager.nixosModules.home-manager
           (./modules)
+          (./. + "/machines/${hostname}")
           ({ pkgs, ... }: {
             environment.etc."nixpkgs".source = (pkgs.runCommandNoCC "nixpkgs" { } ''
               cp -r ${nixpkgs} $out
@@ -32,10 +32,6 @@
             '');
             nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
           })
-          ({ pkgs, ... }: {
-            nixpkgs.overlays = [ emacs-overlay.overlay ];
-          })
-          (./. + "/machines/${hostname}")
         ];
       };
     in
