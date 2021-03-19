@@ -72,10 +72,10 @@
 ;; Vim keybindings
 (use-package evil
   :custom
-  ;; Disable default evil keybindings, since evil-collection is a superset
-  ;; See https://github.com/emacs-evil/evil-collection/issues/60
-  (evil-want-keybinding nil)
-  (evil-want-integration t)
+  (evil-want-keybinding nil "Disable default evil keybindings, since
+    evil-collection is a superset. See
+    https://github.com/emacs-evil/evil-collection/issues/60.")
+  (evil-want-integration t "Also needed for evil-collection")
   :config (evil-mode 1)
   )
 
@@ -98,10 +98,10 @@
 ;; Autocomplete framework
 (use-package ivy
   :custom
-  (ivy-count-format "(%d/%d) ")
-  (ivy-height 20)
-  (ivy-use-virtual-buffers t)
-  (ivy-wrap t)
+  (ivy-count-format "(%d/%d) " "Format used to display match count")
+  (ivy-height 20 "Maximum height of the ivy buffer")
+  (ivy-use-virtual-buffers t "Include recent files and bookmarks in buffer switch")
+  (ivy-wrap t "Wrap next and previous at the end and beginning of the completion list")
   :config (ivy-mode 1)
   :diminish (ivy-mode)
   )
@@ -110,12 +110,13 @@
 (use-package ledger-mode
   :mode "\\.journal\\'"
   :custom
-  (ledger-binary-path "hledger")
-  (ledger-highlight-xact-under-point nil)
-  (ledger-post-account-alignment-column 4)
-  (ledger-post-amount-alignment-at :decimal)
-  (ledger-post-amount-alignment-column 59)
-  (ledger-post-auto-align t)
+  (ledger-binary-path "hledger" "Use hledger instead of ledger")
+  (ledger-highlight-xact-under-point nil "Remove distracting highlight")
+  (ledger-mode-should-check-version nil "Remove version check, since it doesn't work with hledger anyway")
+  (ledger-post-account-alignment-column 4 "Indent postings with 4 spaces")
+  (ledger-post-amount-alignment-at :decimal "Align on the decimal")
+  (ledger-post-amount-alignment-column 59 "Align on column 60")
+  (ledger-post-auto-align t "Align when moving to the next line")
   )
 
 ;; Language server support
@@ -142,11 +143,11 @@
 ;; Theming
 (use-package modus-themes
   :custom
-  (modus-themes-bold-constructs t)
-  (modus-themes-syntax 'alt-syntax-yellow-comments)
-  (modus-themes-promts 'intense-accented)
-  (modus-themes-mode-line 'borderless)
-  (modus-themes-region 'bg-only)
+  (modus-themes-bold-constructs t "Use bold accents")
+  (modus-themes-syntax 'alt-syntax-yellow-comments "Show comments in yellow instead of gray")
+  (modus-themes-promts 'intense-accented "Colours are nice")
+  (modus-themes-mode-line 'borderless "Thin borders are ugly")
+  (modus-themes-region 'bg-only "Don't lose syntax highlighting in the active region")
   :config
   (modus-themes-load-themes)
   (modus-themes-load-operandi)
@@ -160,8 +161,9 @@
   :after (ripgrep)
   :diminish (projectile-mode)
   :custom
-  (projectile-completion-system 'ivy)
-  (projectile-switch-project-action #'projectile-dired)
+  (projectile-completion-system 'ivy "Make sure projectile uses ivy as
+    the completion system. This should be autodetected, but that doesn't
+    seem to work")
   :config (projectile-mode 1)
   :general
   (nmap
