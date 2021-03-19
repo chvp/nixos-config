@@ -16,7 +16,6 @@
           config = ./emacs/init.el;
           package = pkgs.emacsPgtk;
           alwaysEnsure = true;
-          extraEmacsPackages = epkgs: [ epkgs.diminish ];
         };
       };
       home.file = {

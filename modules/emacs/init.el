@@ -7,11 +7,11 @@
   (setq use-package-verbose nil)
   (setq use-package-always-ensure t))
 
+;; Dependencies that inject `:keywords' into `use-package' should be
+;; included before all other packages.
 ;; For :diminish in (use-package).
-(require 'diminish)
-;; For :general in (use-package). Needs to be included before
-;; everything else so `use-package' definitely already knows about
-;; `:general'.
+(use-package diminish)
+;; For :general in (use-package) and keybindings management.
 (use-package general
   :config
   (general-evil-setup t)
