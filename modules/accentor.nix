@@ -7,7 +7,7 @@ let
       owner = "accentor";
       repo = "web";
       rev = "develop";
-      sha256 = "00k2wmc68nh89ja33ckv51raj5a654d2fgrk5mnp1lv4mk8da65b";
+      sha256 = "0w4r1fscgvpik9kpamlkdsclalqz44j1g40srd6vzpr4h1vh7930";
     };
     yarnNix = ./accentor/yarn.nix;
     buildPhase = ''
@@ -24,7 +24,7 @@ let
     owner = "accentor";
     repo = "api";
     rev = "develop";
-    sha256 = "1k84v2ch9lgrwz36pmwx8yxp3l8z34cpmsz95dbivqrdm3dsmvn8";
+    sha256 = "1vkz3834ihigigvdslkcxmgm2rnmddnxf77h5j2rxzzxjlcslbaa";
   };
   gems = pkgs.bundlerEnv {
     name = "accentor-api-env";
