@@ -28,7 +28,7 @@ let
         enable = true;
         boxes = [ "INBOX" ];
         onNotify = "${pkgs.isync}/bin/mbsync ${name}:INBOX";
-        onNotifyPost = "${notifyScript name}";
+        onNotifyPost = "${pkgs.mu}/bin/mu index && ${notifyScript name}";
       };
       mbsync = {
         enable = true;
@@ -39,6 +39,7 @@ let
         extraConfig.account.AuthMechs = "LOGIN";
       };
       msmtp.enable = true;
+      mu.enable = true;
       neomutt = {
         enable = true;
         sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account ${name}";
@@ -80,6 +81,7 @@ in
 {
   chvp.zfs.homeLinks = [
     { path = "mail"; type = "data"; }
+    { path = ".cache/mu"; type = "cache"; }
     { path = ".local/share/contacts"; type = "cache"; }
     { path = ".local/share/calendars"; type = "cache"; }
     { path = ".local/share/vdirsyncer"; type = "cache"; }
@@ -282,6 +284,7 @@ in
     programs = {
       mbsync.enable = true;
       msmtp.enable = true;
+      mu.enable = true;
       neomutt = {
         enable = true;
         sidebar = {
@@ -331,7 +334,10 @@ in
             After = "network-online.target";
             Wants = "network-online.target";
           };
-          Service = { ExecStart = "${pkgs.isync}/bin/mbsync -a"; };
+          Service = {
+            Type = "oneshot";
+            ExecStart = [ "${pkgs.isync}/bin/mbsync -a" "${pkgs.mu}/bin/mu index" ];
+          };
         };
         vdirsyncer = {
           Unit = {
@@ -339,7 +345,10 @@ in
             After = "network-online.target";
             Wants = "network-online.target";
           };
-          Service = { ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync"; };
+          Service = {
+            Type = "oneshot";
+            ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
+          };
         };
       };
       timers = {
