@@ -16,6 +16,10 @@
           config = ./emacs/init.el;
           package = pkgs.emacsPgtk;
           alwaysEnsure = true;
+          extraEmacsPackages = epkgs: [
+            # mu4e is included in the mu package and should be used from there
+            pkgs.mu
+          ];
         };
       };
       home.file = {

@@ -18,25 +18,26 @@
 
   (nmap
     :prefix "SPC"
-    "b"  '(:ignore t :which-key "buffer")
-    "bd" '(kill-this-buffer :which-key "kill")
+    "SPC"  '(:ignore t :which-key "mode")
 
-    "f"  '(:ignore t :which-key "file")
-    "fs" '(save-buffer :which-key "save")
+    "b"    '(:ignore t :which-key "buffer")
+    "bd"   '(kill-this-buffer :which-key "kill")
 
-    "h"  '(:ignore t :which-key "help")
+    "f"    '(:ignore t :which-key "file")
+    "fs"   '(save-buffer :which-key "save")
 
-    "m"  '(:ignore t :which-key "mode")
+    "h"    '(:ignore t :which-key "help")
 
-    "q"  '(:ignore t :which-key "quit")
-    "qq" '(save-buffers-kill-emacs :which-key "quit"))
+    "q"    '(:ignore t :which-key "quit")
+    "qq"   '(save-buffers-kill-emacs :which-key "quit")
 
-    "s"  '(:ignore t :which-key "search")
+    "s"    '(:ignore t :which-key "search")
 
-    "w"  '(:ignore t :which-key "window")
-    "wv" '(split-window-vertically :which-key "split vertical")
-    "ws" '(split-window-horizontally :which-key "split horizontal")
-    "wd" '(delete-window :which-key "delete")
+    "w"    '(:ignore t :which-key "window")
+    "wv"   '(split-window-vertically :which-key "split vertical")
+    "ws"   '(split-window-horizontally :which-key "split horizontal")
+    "wd"   '(delete-window :which-key "delete")
+    )
   )
 
 ;; Better defaults that aren't defaults for some reason.
@@ -56,12 +57,12 @@
   :general
   (nmap
     :prefix "SPC"
-    "SPC" '(counsel-M-x :which-key "execute")
+    "x"   '(counsel-M-x :which-key "execute")
     "bb"  '(counsel-switch-buffer :which-key "switch")
     "ff"  '(counsel-find-file :which-key "find")
     "fr"  '(counsel-recentf :which-key "recent")
     "ha"  '(counsel-apropos :which-key "apropos")
-    "hd"  '(counsel-descbinds :which-key "bindings")
+    "hb"  '(counsel-descbinds :which-key "bindings")
     "hf"  '(counsel-describe-function :which-key "function")
     "hv"  '(counsel-describe-variable :which-key "variable")
     )
@@ -153,6 +154,130 @@
   :config
   (modus-themes-load-themes)
   (modus-themes-load-operandi)
+  )
+
+(use-package mu4e
+  ;; Use mu4e included in the mu package, see emacs.nix
+  :ensure nil
+  :demand t
+  :custom
+  (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
+  (mu4e-maildir "/home/charlotte/mail" "Root of the maildir hierarchy")
+  (mu4e-context-policy 'pick-first "Use the first mail context in the list")
+  (mu4e-compose-format-flowed t "Flow emails correctly for recipients")
+  (mu4e-attachment-dir "/home/charlotte/downloads" "Save attachments to downloads folder")
+  (mu4e-compose-dont-reply-to-self t "Don't reply to mysel on reply to all")
+  (mu4e-confirm-quit nil "Don't confirm when quitting")
+  (message-kill-buffer-on-exit t "Close buffer when finished with email")
+  (sendmail-program "msmtp" "Use msmtp to send email")
+  (message-sendmail-f-is-evil t "Remove username from the emacs message")
+  (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
+  (message-cite-reply-position 'below)
+  :config
+  (setq mu4e-contexts
+   (list
+    (make-mu4e-context
+     :name "Personal"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/personal" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "charlotte@vanpetegem.me")
+             (user-full-name . "Charlotte Van Petegem")
+             (mu4e-drafts-folder . "/personal/Drafts")
+             (mu4e-sent-folder . "/personal/INBOX")
+             (mu4e-refile-folder . "/personal/Archive")
+             (mu4e-trash-folder . "/personal/Trash")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "personal"))
+             )
+     )
+    (make-mu4e-context
+     :name "Work"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/work/" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "charlotte.vanpetegem@ugent.be")
+             (user-full-name . "Charlotte Van Petegem")
+             (mu4e-drafts-folder . "/work/Drafts")
+             (mu4e-sent-folder . "/work/INBOX")
+             (mu4e-refile-folder . "/work/Archive")
+             (mu4e-trash-folder . "/work/Deleted Items")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "work"))
+             )
+     )
+    (make-mu4e-context
+     :name "Work AAP-WE-FR"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/work-aap-we-fr" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "aap-we-fr@ugent.be")
+             (user-full-name . "Charlotte Van Petegem")
+             (mu4e-drafts-folder . "/work-aap-we-fr/Concepten")
+             (mu4e-sent-folder . "/work-aap-we-fr/Verzonden items")
+             (mu4e-refile-folder . "/work-aap-we-fr/Archief")
+             (mu4e-trash-folder . "/work-aap-we-fr/Verwijderde items")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "work-aap-we-fr"))
+             )
+     )
+    (make-mu4e-context
+     :name "Posteo"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/posteo" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "charlotte@vanpetegem.me")
+             (user-full-name . "Charlotte Van Petegem")
+             (mu4e-drafts-folder . "/posteo/Drafts")
+             (mu4e-sent-folder . "/posteo/INBOX")
+             (mu4e-refile-folder . "/posteo/Archive")
+             (mu4e-trash-folder . "/posteo/Trash")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "posteo"))
+             )
+     )
+    (make-mu4e-context
+     :name "Jong Groen"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/jonggroen" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "charlotte@vanpetegem.me")
+             (user-full-name . "Charlotte Van Petegem")
+             (mu4e-drafts-folder . "/jonggroen/[Gmail]/Drafts")
+             (mu4e-sent-folder . "/jonggroen/INBOX")
+             (mu4e-refile-folder . "/jonggroen/Archive")
+             (mu4e-trash-folder . "/jonggroen/[Gmail]/Bin")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "jonggroen"))
+             )
+     )
+    (make-mu4e-context
+     :name "Postbot"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/postbot" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "postbot@vanpetegem.me")
+             (user-full-name . "Charlotte Van Petegem")
+             (mu4e-drafts-folder . "/postbot/Drafts")
+             (mu4e-sent-folder . "/postbot/INBOX")
+             (mu4e-refile-folder . "/postbot/Archive")
+             (mu4e-trash-folder . "/postbot/Trash")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "postbot"))
+             )
+     )
+    (make-mu4e-context
+     :name "Webmaster"
+     :match-func (lambda (msg) (when msg (string-prefix-p "/webmaster" (mu4e-message-field msg :maildir))))
+     :vars '(
+             (user-mail-address . "webmaster@vanpetegem.me")
+             (user-full-name . "Webmaster")
+             (mu4e-drafts-folder . "/webmaster/Drafts")
+             (mu4e-sent-folder . "/webmaster/INBOX")
+             (mu4e-refile-folder . "/webmaster/Archive")
+             (mu4e-trash-folder . "/webmaster/Trash")
+             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "webmaster"))
+             )
+     )
+    )
+   )
+  (add-to-list
+   'mu4e-bookmarks
+   '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/jonggroen/INBOX" :key ?i)
+   )
+  :general
+  (nmap
+    :prefix "SPC"
+    "m" '(mu4e :which-key "mail")
+    )
   )
 
 ;; Nix syntax support
