@@ -181,7 +181,7 @@
    (list
     (make-mu4e-context
      :name "pPersonal"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/personal" (mu4e-message-field msg :maildir))))
+     :match-func (lambda (msg) (when msg (string-prefix-p "/personal/" (mu4e-message-field msg :maildir))))
      :vars '(
              (user-mail-address . "charlotte@vanpetegem.me")
              (user-full-name . "Charlotte Van Petegem")
@@ -207,7 +207,7 @@
      )
     (make-mu4e-context
      :name "aWork AAP-WE-FR"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/work-aap-we-fr" (mu4e-message-field msg :maildir))))
+     :match-func (lambda (msg) (when msg (string-prefix-p "/work-aap-we-fr/" (mu4e-message-field msg :maildir))))
      :vars '(
              (user-mail-address . "aap-we-fr@ugent.be")
              (user-full-name . "Charlotte Van Petegem")
@@ -220,7 +220,7 @@
      )
     (make-mu4e-context
      :name "oPosteo"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/posteo" (mu4e-message-field msg :maildir))))
+     :match-func (lambda (msg) (when msg (string-prefix-p "/posteo/" (mu4e-message-field msg :maildir))))
      :vars '(
              (user-mail-address . "chvp@posteo.net")
              (user-full-name . "Charlotte Van Petegem")
@@ -233,7 +233,7 @@
      )
     (make-mu4e-context
      :name "Jong Groen"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/jonggroen" (mu4e-message-field msg :maildir))))
+     :match-func (lambda (msg) (when msg (string-prefix-p "/jonggroen/" (mu4e-message-field msg :maildir))))
      :vars '(
              (user-mail-address . "charlotte@jonggroen.be")
              (user-full-name . "Charlotte Van Petegem")
@@ -246,7 +246,7 @@
      )
     (make-mu4e-context
      :name "bPostbot"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/postbot" (mu4e-message-field msg :maildir))))
+     :match-func (lambda (msg) (when msg (string-prefix-p "/postbot/" (mu4e-message-field msg :maildir))))
      :vars '(
              (user-mail-address . "postbot@vanpetegem.me")
              (user-full-name . "Charlotte Van Petegem")
@@ -259,7 +259,7 @@
      )
     (make-mu4e-context
      :name "mWebmaster"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/webmaster" (mu4e-message-field msg :maildir))))
+     :match-func (lambda (msg) (when msg (string-prefix-p "/webmaster/" (mu4e-message-field msg :maildir))))
      :vars '(
              (user-mail-address . "webmaster@vanpetegem.me")
              (user-full-name . "Webmaster")
