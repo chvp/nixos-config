@@ -13,7 +13,6 @@ let
         set -sg escape-time 10
       '';
       keyMode = "vi";
-      tmuxinator.enable = lib.mkIf config.chvp.graphical true;
     };
   };
 in
@@ -24,13 +23,7 @@ in
   };
 
   config = lib.mkIf config.chvp.tmux.enable {
-    home-manager.users.charlotte = { ... }: base // lib.optionalAttrs config.chvp.graphical {
-      xdg.configFile = {
-        "tmuxinator/accentor.yml".source = ./tmux/accentor.yml;
-        "tmuxinator/dodona.yml".source = ./tmux/dodona.yml;
-        "tmuxinator/mail.yml".source = ./tmux/mail.yml;
-      };
-    };
+    home-manager.users.charlotte = { ... }: base;
     home-manager.users.root = { ... }: base;
   };
 }

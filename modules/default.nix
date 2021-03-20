@@ -12,7 +12,6 @@
     ./global-mailer.nix
     ./gomuks.nix
     ./minecraft.nix
-    ./neovim.nix
     ./nix.nix
     ./nginx.nix
     ./ovh.nix

@@ -40,10 +40,6 @@ let
       };
       msmtp.enable = true;
       mu.enable = true;
-      neomutt = {
-        enable = true;
-        sendMailCommand = "msmtpq --read-envelope-from --read-recipients --account ${name}";
-      };
       passwordCommand = "${passwordScript} ${passFile}";
       realName = "Charlotte Van Petegem";
       signature = {
@@ -96,9 +92,6 @@ in
           host = "mail.vanpetegem.me";
           passFile = "mail/Personal";
           extraConfig = {
-            neomutt.extraConfig = ''
-              alternates '^.*@cvpetegem.be$' '^charlotte\+.*@vanpetegem.me'
-            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             primary = true;
           };
@@ -113,9 +106,6 @@ in
           extraConfig = {
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Deleted Items"; };
             mbsync.extraConfig.account.PipelineDepth = "1";
-            neomutt.extraConfig = ''
-              alternates dodona@ugent.be
-            '';
           };
         };
         work-aap-we-fr = makeAccount {
@@ -137,9 +127,6 @@ in
           host = "posteo.de";
           passFile = "mail/Posteo";
           extraConfig = {
-            neomutt.extraConfig = ''
-              alternates '^chvp\+.*posteo.net'
-            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
         };
@@ -151,9 +138,6 @@ in
           passFile = "jonggroen/GoogleAppMail";
           useStartTls = true;
           extraConfig = {
-            neomutt.extraConfig = ''
-              alternates it@jonggroen.be rvb@jonggroen.be
-            '';
             flavor = "gmail.com";
             folders = {
               drafts = "[Gmail].Drafts";
@@ -169,9 +153,6 @@ in
           host = "mail.vanpetegem.me";
           passFile = "mail/Postbot";
           extraConfig = {
-            neomutt.extraConfig = ''
-              alternates '.*@vanpetegem.me$'
-            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
         };
@@ -181,9 +162,6 @@ in
           host = "mail.vanpetegem.me";
           passFile = "mail/Webmaster";
           extraConfig = {
-            neomutt.extraConfig = ''
-              alternates root@vanpetegem.me
-            '';
             folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
         };
@@ -225,8 +203,8 @@ in
         general = {
           debug = "no";
           default_action = "list";
-          editor = "nvim";
-          merge_editor = "nvim, -d";
+          editor = "emacs";
+          merge_editor = "${pkgs.writeShellScript "ediff" ''emacs --eval "(ediff-merge-files \"$1\" \"$2\")"''}";
         };
         "contact table" = {
           display = "formatted_name";
@@ -285,43 +263,6 @@ in
       mbsync.enable = true;
       msmtp.enable = true;
       mu.enable = true;
-      neomutt = {
-        enable = true;
-        sidebar = {
-          enable = true;
-        };
-        extraConfig = ''
-          auto_view text/html
-
-          set mail_check_stats
-          set query_command = "${pkgs.khard}/bin/khard email -p %s"
-          set send_charset="utf-8"
-          set print_command = "${pkgs.wl-clipboard}/bin/wl-copy"
-
-          color normal     black      white
-          color error      red          white
-          color status     white      blue
-          color indicator  white      blue
-          color quoted     yellow       default
-          color header     blue         white "^(Subject)"
-          color header     brightblue   white "^(From)"
-          color index      white        red     "~D"          # deleted messages
-          color attachment green        white
-        '';
-        macros = [
-          {
-            map = "index";
-            key = "\\Ck";
-            action = "<sidebar-prev><sidebar-open>";
-          }
-          {
-            map = "index";
-            key = "\\Cj";
-            action = "<sidebar-next><sidebar-open>";
-          }
-        ];
-        vimKeys = true;
-      };
     };
     services = {
       imapnotify.enable = true;
