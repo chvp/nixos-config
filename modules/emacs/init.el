@@ -20,6 +20,8 @@
     :prefix "SPC"
     "SPC"  '(:ignore t :which-key "mode")
 
+    ":"    '(eval-expression :which-key "eval")
+
     "b"    '(:ignore t :which-key "buffer")
     "bd"   '(kill-this-buffer :which-key "kill")
 
@@ -57,7 +59,7 @@
   :general
   (nmap
     :prefix "SPC"
-    "x"   '(counsel-M-x :which-key "execute")
+    "x"   '(counsel-M-x :which-key "exec")
     "bb"  '(counsel-switch-buffer :which-key "switch")
     "ff"  '(counsel-find-file :which-key "find")
     "fr"  '(counsel-recentf :which-key "recent")
@@ -178,100 +180,100 @@
   (message-cite-reply-position 'below)
   :config
   (setq mu4e-contexts
-   (list
-    (make-mu4e-context
-     :name "pPersonal"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/personal/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "charlotte@vanpetegem.me")
-             (user-full-name . "Charlotte Van Petegem")
-             (mu4e-drafts-folder . "/personal/Drafts")
-             (mu4e-sent-folder . "/personal/INBOX")
-             (mu4e-refile-folder . "/personal/Archive")
-             (mu4e-trash-folder . "/personal/Trash")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "personal"))
-             )
-     )
-    (make-mu4e-context
-     :name "wWork"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/work/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "charlotte.vanpetegem@ugent.be")
-             (user-full-name . "Charlotte Van Petegem")
-             (mu4e-drafts-folder . "/work/Drafts")
-             (mu4e-sent-folder . "/work/INBOX")
-             (mu4e-refile-folder . "/work/Archive")
-             (mu4e-trash-folder . "/work/Deleted Items")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "work"))
-             )
-     )
-    (make-mu4e-context
-     :name "aWork AAP-WE-FR"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/work-aap-we-fr/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "aap-we-fr@ugent.be")
-             (user-full-name . "Charlotte Van Petegem")
-             (mu4e-drafts-folder . "/work-aap-we-fr/Concepten")
-             (mu4e-sent-folder . "/work-aap-we-fr/Verzonden items")
-             (mu4e-refile-folder . "/work-aap-we-fr/Archief")
-             (mu4e-trash-folder . "/work-aap-we-fr/Verwijderde items")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "work-aap-we-fr"))
-             )
-     )
-    (make-mu4e-context
-     :name "oPosteo"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/posteo/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "chvp@posteo.net")
-             (user-full-name . "Charlotte Van Petegem")
-             (mu4e-drafts-folder . "/posteo/Drafts")
-             (mu4e-sent-folder . "/posteo/INBOX")
-             (mu4e-refile-folder . "/posteo/Archive")
-             (mu4e-trash-folder . "/posteo/Trash")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "posteo"))
-             )
-     )
-    (make-mu4e-context
-     :name "Jong Groen"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/jonggroen/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "charlotte@jonggroen.be")
-             (user-full-name . "Charlotte Van Petegem")
-             (mu4e-drafts-folder . "/jonggroen/[Gmail]/Drafts")
-             (mu4e-sent-folder . "/jonggroen/INBOX")
-             (mu4e-refile-folder . "/jonggroen/Archive")
-             (mu4e-trash-folder . "/jonggroen/[Gmail]/Bin")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "jonggroen"))
-             )
-     )
-    (make-mu4e-context
-     :name "bPostbot"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/postbot/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "postbot@vanpetegem.me")
-             (user-full-name . "Charlotte Van Petegem")
-             (mu4e-drafts-folder . "/postbot/Drafts")
-             (mu4e-sent-folder . "/postbot/INBOX")
-             (mu4e-refile-folder . "/postbot/Archive")
-             (mu4e-trash-folder . "/postbot/Trash")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "postbot"))
-             )
-     )
-    (make-mu4e-context
-     :name "mWebmaster"
-     :match-func (lambda (msg) (when msg (string-prefix-p "/webmaster/" (mu4e-message-field msg :maildir))))
-     :vars '(
-             (user-mail-address . "webmaster@vanpetegem.me")
-             (user-full-name . "Webmaster")
-             (mu4e-drafts-folder . "/webmaster/Drafts")
-             (mu4e-sent-folder . "/webmaster/INBOX")
-             (mu4e-refile-folder . "/webmaster/Archive")
-             (mu4e-trash-folder . "/webmaster/Trash")
-             (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "webmaster"))
-             )
-     )
-    )
-   )
+        (list
+         (make-mu4e-context
+          :name "pPersonal"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/personal/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "charlotte@vanpetegem.me")
+                  (user-full-name . "Charlotte Van Petegem")
+                  (mu4e-drafts-folder . "/personal/Drafts")
+                  (mu4e-sent-folder . "/personal/INBOX")
+                  (mu4e-refile-folder . "/personal/Archive")
+                  (mu4e-trash-folder . "/personal/Trash")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "personal"))
+                  )
+          )
+         (make-mu4e-context
+          :name "wWork"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/work/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "charlotte.vanpetegem@ugent.be")
+                  (user-full-name . "Charlotte Van Petegem")
+                  (mu4e-drafts-folder . "/work/Drafts")
+                  (mu4e-sent-folder . "/work/INBOX")
+                  (mu4e-refile-folder . "/work/Archive")
+                  (mu4e-trash-folder . "/work/Deleted Items")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "work"))
+                  )
+          )
+         (make-mu4e-context
+          :name "aWork AAP-WE-FR"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/work-aap-we-fr/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "aap-we-fr@ugent.be")
+                  (user-full-name . "Charlotte Van Petegem")
+                  (mu4e-drafts-folder . "/work-aap-we-fr/Concepten")
+                  (mu4e-sent-folder . "/work-aap-we-fr/Verzonden items")
+                  (mu4e-refile-folder . "/work-aap-we-fr/Archief")
+                  (mu4e-trash-folder . "/work-aap-we-fr/Verwijderde items")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "work-aap-we-fr"))
+                  )
+          )
+         (make-mu4e-context
+          :name "oPosteo"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/posteo/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "chvp@posteo.net")
+                  (user-full-name . "Charlotte Van Petegem")
+                  (mu4e-drafts-folder . "/posteo/Drafts")
+                  (mu4e-sent-folder . "/posteo/INBOX")
+                  (mu4e-refile-folder . "/posteo/Archive")
+                  (mu4e-trash-folder . "/posteo/Trash")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "posteo"))
+                  )
+          )
+         (make-mu4e-context
+          :name "jJong Groen"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/jonggroen/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "charlotte@jonggroen.be")
+                  (user-full-name . "Charlotte Van Petegem")
+                  (mu4e-drafts-folder . "/jonggroen/[Gmail]/Drafts")
+                  (mu4e-sent-folder . "/jonggroen/INBOX")
+                  (mu4e-refile-folder . "/jonggroen/Archive")
+                  (mu4e-trash-folder . "/jonggroen/[Gmail]/Bin")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "jonggroen"))
+                  )
+          )
+         (make-mu4e-context
+          :name "bPostbot"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/postbot/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "postbot@vanpetegem.me")
+                  (user-full-name . "Charlotte Van Petegem")
+                  (mu4e-drafts-folder . "/postbot/Drafts")
+                  (mu4e-sent-folder . "/postbot/INBOX")
+                  (mu4e-refile-folder . "/postbot/Archive")
+                  (mu4e-trash-folder . "/postbot/Trash")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "postbot"))
+                  )
+          )
+         (make-mu4e-context
+          :name "mWebmaster"
+          :match-func (lambda (msg) (when msg (string-prefix-p "/webmaster/" (mu4e-message-field msg :maildir))))
+          :vars '(
+                  (user-mail-address . "webmaster@vanpetegem.me")
+                  (user-full-name . "Webmaster")
+                  (mu4e-drafts-folder . "/webmaster/Drafts")
+                  (mu4e-sent-folder . "/webmaster/INBOX")
+                  (mu4e-refile-folder . "/webmaster/Archive")
+                  (mu4e-trash-folder . "/webmaster/Trash")
+                  (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "webmaster"))
+                  )
+          )
+         )
+        )
   (add-to-list
    'mu4e-bookmarks
    '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/jonggroen/INBOX" :key ?i)
