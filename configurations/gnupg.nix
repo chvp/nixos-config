@@ -17,10 +17,11 @@
     { path = ".gnupg/trustdb.gpg"; type = "data"; }
   ];
   config.programs.gnupg.agent.enable = true;
-  config.home-manager.users.charlotte = { pkgs, ... }: {
-    programs = {
-      gpg.enable = true;
-    };
+  config.home-manager.users.charlotte = { lib, ... }: {
+    home.activation.fixPermissionsCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      chmod u=rwX,go= /home/charlotte/.gnupg
+    '';
+    programs.gpg.enable = true;
     services.gpg-agent = {
       enable = true;
       defaultCacheTtl = 7200;
