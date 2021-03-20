@@ -182,7 +182,7 @@
   (setq mu4e-contexts
         (list
          (make-mu4e-context
-          :name "pPersonal"
+          :name "Personal"
           :match-func (lambda (msg) (when msg (string-prefix-p "/personal/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "charlotte@vanpetegem.me")
@@ -195,7 +195,7 @@
                   )
           )
          (make-mu4e-context
-          :name "wWork"
+          :name "Work"
           :match-func (lambda (msg) (when msg (string-prefix-p "/work/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "charlotte.vanpetegem@ugent.be")
@@ -208,7 +208,7 @@
                   )
           )
          (make-mu4e-context
-          :name "aWork AAP-WE-FR"
+          :name "Work AAP-WE-FR"
           :match-func (lambda (msg) (when msg (string-prefix-p "/work-aap-we-fr/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "aap-we-fr@ugent.be")
@@ -221,7 +221,7 @@
                   )
           )
          (make-mu4e-context
-          :name "oPosteo"
+          :name "Posteo"
           :match-func (lambda (msg) (when msg (string-prefix-p "/posteo/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "chvp@posteo.net")
@@ -234,7 +234,7 @@
                   )
           )
          (make-mu4e-context
-          :name "jJong Groen"
+          :name "Jong Groen"
           :match-func (lambda (msg) (when msg (string-prefix-p "/jonggroen/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "charlotte@jonggroen.be")
@@ -247,7 +247,7 @@
                   )
           )
          (make-mu4e-context
-          :name "bPostbot"
+          :name "Postbot"
           :match-func (lambda (msg) (when msg (string-prefix-p "/postbot/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "postbot@vanpetegem.me")
@@ -260,7 +260,7 @@
                   )
           )
          (make-mu4e-context
-          :name "mWebmaster"
+          :name "Webmaster"
           :match-func (lambda (msg) (when msg (string-prefix-p "/webmaster/" (mu4e-message-field msg :maildir))))
           :vars '(
                   (user-mail-address . "webmaster@vanpetegem.me")
@@ -278,6 +278,18 @@
    'mu4e-bookmarks
    '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/jonggroen/INBOX" :key ?i)
    )
+  (define-advice mu4e~context-ask-user
+      (:around (orig-fun &rest args) mu4e~context-ask-user-completing-read)
+    "Replace `mu4e-read-option` by general-purpose completing-read"
+    (cl-letf (((symbol-function 'mu4e-read-option)
+               (lambda (prompt options)
+                 (let* ((prompt (mu4e-format "%s" prompt))
+                        (choice (completing-read prompt (cl-mapcar #'car options) nil t))
+                        (chosen-el (cl-find-if (lambda (option) (equal choice (car option))) options)))
+                   (if chosen-el
+                       (cdr chosen-el)
+                     (mu4e-warn "Unknown option: '%s'" choice))))))
+      (apply orig-fun args)))
   :general
   (nmap
     :prefix "SPC"
