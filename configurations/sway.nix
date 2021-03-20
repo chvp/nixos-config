@@ -18,7 +18,6 @@ in
     programs.mako = {
       enable = true;
       font = "Fira Code Normal 9";
-      layer = "overlay";
     };
     services.kanshi = {
       enable = true;
