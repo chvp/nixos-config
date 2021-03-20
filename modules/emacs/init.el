@@ -159,6 +159,7 @@
 (use-package mu4e
   ;; Use mu4e included in the mu package, see emacs.nix
   :ensure nil
+  :after (ivy)
   :demand t
   :custom
   (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
@@ -168,6 +169,7 @@
   (mu4e-attachment-dir "/home/charlotte/downloads" "Save attachments to downloads folder")
   (mu4e-compose-dont-reply-to-self t "Don't reply to mysel on reply to all")
   (mu4e-confirm-quit nil "Don't confirm when quitting")
+  (mu4e-completing-read-function 'ivy-completing-read)
   (message-kill-buffer-on-exit t "Close buffer when finished with email")
   (sendmail-program "msmtp" "Use msmtp to send email")
   (message-sendmail-f-is-evil t "Remove username from the emacs message")
