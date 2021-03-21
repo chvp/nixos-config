@@ -145,7 +145,7 @@
   (marginalia-mode)
   (advice-add #'marginalia-cycle :after (lambda () (selectrum-exhibit 'keep-selected)))
   :general
-  (:keymaps 'minibuffer-local-map "M-a" 'marginalia-cycle)
+  (minibuffer-local-map "M-a" 'marginalia-cycle)
   )
 
 ;; Markdown syntax support
