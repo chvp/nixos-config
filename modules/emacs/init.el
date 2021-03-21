@@ -44,7 +44,7 @@
     "ws"   '(split-window-horizontally :which-key "split horizontal")
     "wd"   '(delete-window :which-key "delete")
 
-    "x"    '(M-x :which-key "exec")
+    "x"    '(execute-extended-command :which-key "exec")
     )
   )
 
@@ -134,6 +134,18 @@
     "g" '(:ignore t :which-key "git")
     "gs" '(magit-status :which-key "status")
     )
+  )
+
+;; Annotations in selection interface
+(use-package marginalia
+  :demand t
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  :config
+  (marginalia-mode)
+  (advice-add #'marginalia-cycle :after (lambda () (selectrum-exhibit 'keep-selected)))
+  :general
+  (:keymaps 'minibuffer-local-map "M-a" 'marginalia-cycle)
   )
 
 ;; Markdown syntax support
