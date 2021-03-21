@@ -26,9 +26,13 @@
     "bd"   '(kill-this-buffer :which-key "kill")
 
     "f"    '(:ignore t :which-key "file")
+    "ff"   '(find-file :which-key "find")
     "fs"   '(save-buffer :which-key "save")
 
     "h"    '(:ignore t :which-key "help")
+    "hb"   '(describe-bindings :which-key "bindings")
+    "hf"   '(describe-function :which-key "function")
+    "hv"   '(describe-variable :which-key "variable")
 
     "q"    '(:ignore t :which-key "quit")
     "qq"   '(save-buffers-kill-emacs :which-key "quit")
@@ -39,11 +43,16 @@
     "wv"   '(split-window-vertically :which-key "split vertical")
     "ws"   '(split-window-horizontally :which-key "split horizontal")
     "wd"   '(delete-window :which-key "delete")
+
+    "x"    '(M-x :which-key "exec")
     )
   )
 
 ;; Better defaults that aren't defaults for some reason.
-(use-package better-defaults)
+(use-package better-defaults
+  ;; But don't enable ido-mode...
+  :config (ido-mode nil)
+  )
 
 ;; Autocomplete
 (use-package company
@@ -51,23 +60,24 @@
   :config (global-company-mode)
   )
 
-;; Replacements for emacs built-ins that better integrate with `ivy'.
-(use-package counsel
+;; Prescient in company
+(use-package company-prescient
+  :config (company-prescient-mode 1)
+  )
+
+;; Replacements for emacs built-ins that better integrate with `selectrum'.
+(use-package consult
   :demand t
-  :diminish (counsel-mode)
-  :config (counsel-mode 1)
+  :custom (consult-project-root-function #'projectile-project-root "Use projectile to determine project roots.")
   :general
   (nmap
     :prefix "SPC"
-    "x"   '(counsel-M-x :which-key "exec")
-    "bb"  '(counsel-switch-buffer :which-key "switch")
-    "ff"  '(counsel-find-file :which-key "find")
-    "fr"  '(counsel-recentf :which-key "recent")
-    "ha"  '(counsel-apropos :which-key "apropos")
-    "hb"  '(counsel-descbinds :which-key "bindings")
-    "hf"  '(counsel-describe-function :which-key "function")
-    "hv"  '(counsel-describe-variable :which-key "variable")
+    "bb"  '(consult-buffer :which-key "switch")
+    "fr"  '(consult-recent-file :which-key "recent")
+    "ha"  '(consult-apropos :which-key "apropos")
+    "ss"  '(consult-line :which-key "search")
     )
+  (nmap "/" 'consult-line)
   )
 
 ;; Direnv integration in emacs.
@@ -97,17 +107,6 @@
 (use-package flycheck
   :diminish (flycheck-mode)
   :config (global-flycheck-mode)
-  )
-
-;; Autocomplete framework
-(use-package ivy
-  :custom
-  (ivy-count-format "(%d/%d) " "Format used to display match count")
-  (ivy-height 20 "Maximum height of the ivy buffer")
-  (ivy-use-virtual-buffers t "Include recent files and bookmarks in buffer switch")
-  (ivy-wrap t "Wrap next and previous at the end and beginning of the completion list")
-  :config (ivy-mode 1)
-  :diminish (ivy-mode)
   )
 
 ;; Ledger syntax support
@@ -158,26 +157,27 @@
   (modus-themes-load-operandi)
   )
 
+;; Mail user agent
 (use-package mu4e
   ;; Use mu4e included in the mu package, see emacs.nix
   :ensure nil
-  :after (ivy)
   :demand t
+  :after (selectrum)
   :custom
   (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
   (mu4e-maildir "/home/charlotte/mail" "Root of the maildir hierarchy")
   (mu4e-context-policy 'pick-first "Use the first mail context in the list")
   (mu4e-compose-format-flowed t "Flow emails correctly for recipients")
   (mu4e-attachment-dir "/home/charlotte/downloads" "Save attachments to downloads folder")
-  (mu4e-compose-dont-reply-to-self t "Don't reply to mysel on reply to all")
+  (mu4e-compose-dont-reply-to-self t "Don't reply to myself on reply to all")
   (mu4e-confirm-quit nil "Don't confirm when quitting")
-  (mu4e-completing-read-function 'ivy-completing-read "Use ivy for completion")
+  (mu4e-completing-read-function 'completing-read "Use default completing read function")
   (mu4e-headers-include-related nil "Don't show related messages by default")
   (message-kill-buffer-on-exit t "Close buffer when finished with email")
   (sendmail-program "msmtp" "Use msmtp to send email")
   (message-sendmail-f-is-evil t "Remove username from the emacs message")
   (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
-  (message-cite-reply-position 'below)
+  (message-cite-reply-position 'below "Bottom posting is the correct way to reply to email")
   :config
   (setq mu4e-contexts
         (list
@@ -300,15 +300,25 @@
 ;; Nix syntax support
 (use-package nix-mode :mode "\\.nix\\'")
 
+;; Orderless filtering
+(use-package orderless
+  :after (selectrum)
+  :custom
+  (completion-styles '(orderless) "Use orderless for filtering")
+  (orderless-skip-highlighting (lambda () selectrum-is-active) "This and the setting below are performance optimisations.")
+  (selectrum-highlight-candidates-function #'orderless-highlight-matches "They make sure only the shown candidates are highlighted.")
+  )
+
+;; Sorting when filtering
+(use-package prescient
+  :config (prescient-persist-mode 1)
+  )
+
 ;; Project management
 (use-package projectile
-  :after (ripgrep)
+  :after (ripgrep selectrum)
   :demand t
   :diminish (projectile-mode)
-  :custom
-  (projectile-completion-system 'ivy "Make sure projectile uses ivy as
-    the completion system. This should be autodetected, but that doesn't
-    seem to work")
   :config (projectile-mode 1)
   :general
   (nmap
@@ -317,7 +327,8 @@
     "pf" '(projectile-find-file :which-key "find")
     "pp" '(projectile-switch-project :which-key "switch")
     "pr" '(projectile-replace :which-key "replace")
-    "ps" '(projectile-ripgrep :which-key "search")
+    "ps" '(consult-ripgrep :search "incsearch")
+    "pS" '(projectile-ripgrep :which-key "search")
     "p!" '(projectile-run-shell-command-in-root :which-key "command")
     "pt" '(projectile-run-term :which-key "term")
     )
@@ -329,15 +340,17 @@
 ;; Ripgrep support (needed for `projectile-ripgrep')
 (use-package ripgrep)
 
-;; `ivy'-integrated buffer search
-(use-package swiper
-  :general
-  (nmap
-    :prefix "SPC"
-    "ss" '(swiper :which-key "search")
-    )
-  (nmap "/" 'swiper)
+;; List item selection interface
+(use-package selectrum
+  :custom (selectrum-max-window-height 20 "Allow selector to be a bit higher")
+  :config (selectrum-mode 1)
+  :diminish (selectrum-mode)
   )
+
+;; Prescient integration in selectrum
+(use-package selectrum-prescient
+  :custom (selectrum-prescient-enable-filtering nil "`orderless' manages the filtering part.")
+  :config (selectrum-prescient-mode 1))
 
 ;; HTML (and HTML template) support
 (use-package web-mode
