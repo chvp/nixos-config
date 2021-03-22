@@ -35,7 +35,7 @@
     "hv"   '(describe-variable :which-key "variable")
 
     "q"    '(:ignore t :which-key "quit")
-    "qq"   '(save-buffers-kill-emacs :which-key "quit")
+    "qq"   '(delete-frame :which-key "quit")
 
     "s"    '(:ignore t :which-key "search")
 
@@ -394,14 +394,14 @@
 (setq inhibit-startup-screen t)
 
 ;; Font configuration
-(when window-system (set-frame-font "Fira Code 9"))
-(defun emoji-fonts ()
-  "Setup emoji font priorities."
+(defun font-settings ()
+  "Setup font settings."
+  (when window-system (set-frame-font "Fira Code 9"))
   (set-fontset-font t 'symbol "Noto Color Emoji")
   (set-fontset-font t 'symbol "Symbola" nil 'append))
 (if (daemonp)
-    (add-hook 'server-after-make-frame-hook #'emoji-fonts)
-  (emoji-fonts))
+    (add-hook 'server-after-make-frame-hook #'font-settings)
+  (font-settings))
 
 (provide 'init)
 ;;; init.el ends here

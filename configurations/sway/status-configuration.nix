@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   mic-status = pkgs.writeShellScript "mic-status" ''
     if [ "$(${pkgs.pulseaudio}/bin/pactl list sources | grep -o 'Mute: yes')" = "Mute: yes" ]
@@ -95,7 +95,7 @@ pkgs.writeText "configuration.toml" ''
   json = true
   command = "${mail-status}"
   interval = 1
-  on_click = "${pkgs.isync}/bin/mbsync -a"
+  on_click = "${pkgs.isync}/bin/mbsync -a && ${config.chvp.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\""
 
   [[block]]
   block = "time"
