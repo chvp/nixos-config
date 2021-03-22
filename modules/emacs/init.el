@@ -16,8 +16,12 @@
   :config
   (general-evil-setup t)
 
-  (nmap
-    :prefix "SPC"
+  ;; Create bindings under the leader
+  (general-create-definer lmap :states '(normal visual emacs motion) :prefix "SPC")
+
+  (lmap
+    ""     nil ;; Unbind SPC, I don't use it for navigation anyway.
+
     "SPC"  '(:ignore t :which-key "mode")
 
     ":"    '(eval-expression :which-key "eval")
@@ -70,14 +74,12 @@
   :demand t
   :custom (consult-project-root-function #'projectile-project-root "Use projectile to determine project roots.")
   :general
-  (nmap
-    :prefix "SPC"
+  (lmap
     "bb"  '(consult-buffer :which-key "switch")
     "fr"  '(consult-recent-file :which-key "recent")
     "ha"  '(consult-apropos :which-key "apropos")
     "ss"  '(consult-line :which-key "search")
     )
-  (nmap "/" 'consult-line)
   )
 
 ;; Direnv integration in emacs.
@@ -129,8 +131,7 @@
 (use-package magit
   :demand t
   :general
-  (nmap
-    :prefix "SPC"
+  (lmap
     "g" '(:ignore t :which-key "git")
     "gs" '(magit-status :which-key "status")
     )
@@ -185,6 +186,7 @@
   (mu4e-confirm-quit nil "Don't confirm when quitting")
   (mu4e-completing-read-function 'completing-read "Use default completing read function")
   (mu4e-headers-include-related nil "Don't show related messages by default")
+  (mu4e-headers-skip-duplicates nil "Show duplicate emails")
   (message-kill-buffer-on-exit t "Close buffer when finished with email")
   (sendmail-program "msmtp" "Use msmtp to send email")
   (message-sendmail-f-is-evil t "Remove username from the emacs message")
@@ -302,10 +304,47 @@
                        (cdr chosen-el)
                      (mu4e-warn "Unknown option: '%s'" choice))))))
       (apply orig-fun args)))
+  (define-skeleton mail/dodona-teacher-reply-skeleton
+    "Inserts a typical reply after someone was made a teacher on Dodona."
+    "Naam leerkracht: "
+    "Dag " str ",\n"
+    "\n"
+    _
+    "\n"
+    "Ik heb je account lesgeversrechten gegeven. Je kan nu cursussen aanmaken\n"
+    "en oefeningen toevoegen aan het platform. Een handleiding over hoe van\n"
+    "start te gaan met Dodona kan je hier vinden:\n"
+    "https://dodona-edu.github.io/nl/guides/teachers/getting-started/.\n"
+    "\n"
+    "Als je nog verdere vragen hebt mag je ons altijd via dodona@ugent.be\n"
+    "contacteren.\n"
+    "\n"
+    "Met vriendelijke groeten,\n"
+    "Charlotte Van Petegem"
+    )
+  (defun mail/dodona-cc-reply-to ()
+    "Add dodona@ugent.be in cc and reply-to headers."
+    (interactive)
+    (save-excursion (message-add-header "Cc: dodona@ugent.be\nReply-To: dodona@ugent.be\n"))
+    )
+  (add-hook
+   'mu4e-compose-mode-hook
+   (defun mail/auto-dodona-cc-reply-to ()
+     "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
+     (let ((msg mu4e-compose-parent-message))
+       (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (dodona-cc-reply-to))
+       )
+     )
+   )
   :general
-  (nmap
-    :prefix "SPC"
-    "m" '(mu4e :which-key "mail")
+  (lmap "m" '(mu4e :which-key "mail"))
+  ;; Unmap SPC in the mail view so we can still use the leader.
+  (lmap mu4e-view-mode-map "" nil)
+  (lmap mu4e-compose-mode-map
+    "SPC s" '(mml-secure-message-sign-pgpmime :which-key "Sign")
+    "SPC c" '(mml-secure-message-encrypt-pgpmime :which-key "Encrypt")
+    "SPC t" '(mail/dodona-teacher-reply-skeleton :which-key "Teacher rights reply")
+    "SPC d" '(mail/dodona-cc-reply-to :which-key "Dodona support headers")
     )
   )
 
@@ -333,8 +372,7 @@
   :diminish (projectile-mode)
   :config (projectile-mode 1)
   :general
-  (nmap
-    :prefix "SPC"
+  (lmap
     "p"  '(:ignore t :which-key "project")
     "pf" '(projectile-find-file :which-key "find")
     "pp" '(projectile-switch-project :which-key "switch")
