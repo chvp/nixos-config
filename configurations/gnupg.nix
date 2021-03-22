@@ -19,6 +19,7 @@
   config.programs.gnupg.agent.enable = true;
   config.home-manager.users.charlotte = { lib, ... }: {
     home.activation.fixPermissionsCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p /home/charlotte/.gnupg
       chmod u=rwX,go= /home/charlotte/.gnupg
     '';
     programs.gpg.enable = true;
