@@ -431,6 +431,9 @@
 ;; Don't show default startup screen
 (setq inhibit-startup-screen t)
 
+;; Only ask for y/n, never for yes/no.
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Font configuration
 (defun font-settings ()
   "Setup font settings."
