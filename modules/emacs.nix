@@ -32,6 +32,7 @@ in
       services.emacs = {
         enable = true;
         client.enable = true;
+        socketActivation.enable = true;
         package = emacsPkg;
       };
       home = {

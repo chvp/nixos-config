@@ -332,7 +332,7 @@
    (defun mail/auto-dodona-cc-reply-to ()
      "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
      (let ((msg mu4e-compose-parent-message))
-       (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (dodona-cc-reply-to))
+       (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (mail/dodona-cc-reply-to))
        )
      )
    )
