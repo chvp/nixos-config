@@ -41,9 +41,8 @@ in
           ".emacs.d/init.el".source = ./emacs/init.el;
         };
         packages = [
-          (pkgs.writeShellScriptBin "emacs" ''
-            ${emacsPkg}/bin/emacsclient -c $@
-          '')
+          (pkgs.writeShellScriptBin "emacs" ''${emacsPkg}/bin/emacsclient -c "$@"'')
+          (pkgs.writeShellScriptBin "emacsclient" ''${emacsPkg}/bin/emacsclient "$@"'')
         ];
         sessionVariables = { EDITOR = "emacs"; };
       };
