@@ -43,10 +43,6 @@ in
       default = true;
       example = false;
     };
-    enableFlakes = lib.mkOption {
-      default = true;
-      example = false;
-    };
     unfreePackages = lib.mkOption {
       default = [ ];
       example = [ "teams" ];
@@ -82,17 +78,11 @@ in
       '' + (lib.optionalString config.chvp.nix.enableDirenv ''
         keep-outputs = true
         keep-derivations = true
-      '') + (lib.optionalString config.chvp.nix.enableFlakes ''
-        experimental-features = nix-command flakes
       '');
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.nix.unfreePackages;
-    nixpkgs.overlays = lib.mkIf config.chvp.nix.enableFlakes [
-      (self: super: {
-        nix = super.nixUnstable;
-      })
-    ];
+    nixpkgs.overlays = [ (self: super: { nix = super.nixUnstable; }) ];
 
     home-manager.users.charlotte = { ... }:
       lib.recursiveUpdate

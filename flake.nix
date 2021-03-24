@@ -3,53 +3,36 @@
 
   inputs = {
     emacs-overlay.url = "github:nix-community/emacs-overlay/master";
-    flake-utils.url = "github:numtide/flake-utils/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:chvp/nixpkgs/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/master";
   };
 
-  outputs = { self, emacs-overlay, nixpkgs, home-manager, flake-utils }:
-    let
-      version-suffix = nixpkgs.rev or (builtins.toString nixpkgs.lastModified);
-      pkgsFor = system: import nixpkgs {
-        inherit system;
-      };
-      mkSystem = system: hostname: nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ({ pkgs, ... }: { nixpkgs.overlays = [ emacs-overlay.overlay ]; })
-          home-manager.nixosModules.home-manager
-          (./modules)
-          (./. + "/machines/${hostname}")
-          ({ pkgs, ... }: {
-            environment.etc."nixpkgs".source = (pkgs.runCommandNoCC "nixpkgs" { } ''
-              cp -r ${nixpkgs} $out
-              chmod 700 $out
-              echo "${version-suffix}" > $out/.version-suffix
-            '');
-            nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
-          })
-        ];
-      };
-    in
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = pkgsFor system;
-        in
-        {
-          devShell = pkgs.mkShell {
-            buildInputs = with pkgs; [ nixpkgs-fmt ];
-          };
-        }) // {
-      nixosConfigurations = {
-        kharbranth = mkSystem "x86_64-linux" "kharbranth";
-        kholinar = mkSystem "x86_64-linux" "kholinar";
-        lasting-integrity = mkSystem "x86_64-linux" "lasting-integrity";
-        urithiru = mkSystem "x86_64-linux" "urithiru";
-      };
+  outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
+    inherit self inputs;
+    channels.nixpkgs = {
+      input = nixpkgs;
+      patches = [ ];
+      # TODO: Try to find a way to get rid of this and return to the
+      # list built up in the config.
+      config = { allowUnfree = true; };
     };
+    sharedOverlays = [ emacs-overlay.overlay ];
+    sharedModules = [
+      utils.nixosModules.saneFlakeDefaults
+      home-manager.nixosModules.home-manager
+      ./modules
+    ];
+    nixosProfiles = {
+      kharbranth = { system = "x86_64-linux"; modules = [ ./machines/kharbranth ]; };
+      kholinar = { system = "x86_64-linux"; modules = [ ./machines/kholinar ]; };
+      lasting-integrity = { system = "x86_64-linux"; modules = [ ./machines/lasting-integrity ]; };
+      urithiru = { system = "x86_64-linux"; modules = [ ./machines/urithiru ]; };
+    };
+    devShellBuilder = channels:
+      let pkgs = channels.nixpkgs; in pkgs.mkShell { buildInputs = [ pkgs.nixpkgs-fmt ]; };
+  };
 }

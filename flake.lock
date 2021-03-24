@@ -27,7 +27,6 @@
       },
       "original": {
         "owner": "numtide",
-        "ref": "master",
         "repo": "flake-utils",
         "type": "github"
       }
@@ -54,16 +53,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1616250371,
-        "narHash": "sha256-bG3/Dt3f/x8qUZ6djnfUVG8erVzwA9I4pxrtzmCizoI=",
-        "owner": "chvp",
+        "lastModified": 1616527350,
+        "narHash": "sha256-VkMevY2WLU+K7T/P4wVj18Ms8zyeRfp05ILf556m5Y8=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e132ddfecfeba08f3b09b72064ded55b9fceb45a",
+        "rev": "d3f7e969b9860fb80750147aeb56dab1c730e756",
         "type": "github"
       },
       "original": {
-        "owner": "chvp",
-        "ref": "master",
+        "owner": "nixos",
+        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -71,9 +70,28 @@
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
-        "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "utils": "utils"
+      }
+    },
+    "utils": {
+      "inputs": {
+        "flake-utils": "flake-utils"
+      },
+      "locked": {
+        "lastModified": 1616328024,
+        "narHash": "sha256-t5FrJlYiN1HojtN3eRWlPhmzH2+5pdB22AfosbphI6c=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "rev": "51cb739c9c9c2258bc70747eb7bc22975ae244bd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gytis-ivaskevicius",
+        "ref": "master",
+        "repo": "flake-utils-plus",
+        "type": "github"
       }
     }
   },
