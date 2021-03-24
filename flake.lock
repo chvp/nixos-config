@@ -53,11 +53,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1616527350,
-        "narHash": "sha256-VkMevY2WLU+K7T/P4wVj18Ms8zyeRfp05ILf556m5Y8=",
+        "lastModified": 1616574639,
+        "narHash": "sha256-GwzddH/IPOiLZpeb/PjKV2bv3AYgXBJUMZXuELFei08=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d3f7e969b9860fb80750147aeb56dab1c730e756",
+        "rev": "070bfc96b7446e7d2653a1913b9bc4082d529638",
         "type": "github"
       },
       "original": {
@@ -80,16 +80,16 @@
         "flake-utils": "flake-utils"
       },
       "locked": {
-        "lastModified": 1616582947,
-        "narHash": "sha256-nXJTA78Wk940aF6p6UQCpTLuHVV0tnfJtyDGay+0xMY=",
-        "owner": "chvp",
+        "lastModified": 1616589133,
+        "narHash": "sha256-nTSfGoH//b2McEi3c3qSV2+/D54VhOO7h0ybPrMnCd4=",
+        "owner": "gytis-ivaskevicius",
         "repo": "flake-utils-plus",
-        "rev": "97f6aa2fb92c699057d7199bcf629ad4bc8f4717",
+        "rev": "b6a057c1d8876f14246013d4b23a73ad6ab4b64f",
         "type": "github"
       },
       "original": {
-        "owner": "chvp",
-        "ref": "master",
+        "owner": "gytis-ivaskevicius",
+        "ref": "staging",
         "repo": "flake-utils-plus",
         "type": "github"
       }
