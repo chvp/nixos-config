@@ -34,8 +34,8 @@ in
             terminal = "${pkgs.kitty}/bin/kitty";
           };
           extraConfig = ''
-          default_border pixel
-        '';
+            default_border pixel
+          '';
         };
       };
     };
