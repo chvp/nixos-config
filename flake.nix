@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/master";
+    utils.url = "github:chvp/flake-utils-plus/master";
   };
 
   outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
@@ -16,12 +16,9 @@
     channels.nixpkgs = {
       input = nixpkgs;
       patches = [ ];
-      # TODO: Try to find a way to get rid of this and return to the
-      # list built up in the config.
-      config = { allowUnfree = true; };
     };
-    sharedOverlays = [ emacs-overlay.overlay ];
     sharedModules = [
+      ({ nixpkgs.overlays = [ emacs-overlay.overlay ]; })
       utils.nixosModules.saneFlakeDefaults
       home-manager.nixosModules.home-manager
       ./modules
