@@ -7,6 +7,18 @@
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModulePackages = [ pkgs.linuxPackages_latest.v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback video_nr=9 card_label="obs"
+  '';
+
+  home-manager.users.charlotte = { pkgs, ... }: {
+    programs.obs-studio = {
+      enable = true;
+      plugins = [ pkgs.obs-wlrobs pkgs.obs-v4l2sink ];
+    };
+  };
 
   networking = {
     hostId = "3cc1a4b2";
