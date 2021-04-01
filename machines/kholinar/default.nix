@@ -35,7 +35,6 @@
     docker.enable = true;
     eid.enable = true;
     git.email = "charlotte@vanpetegem.me";
-    gomuks.enable = true;
     minecraft.client = true;
     zeroad.enable = true;
     zfs = {

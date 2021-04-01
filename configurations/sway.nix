@@ -132,8 +132,6 @@ in
           workspace 1
           exec ${pkgs.firefox}/bin/firefox
           workspace 3
-          exec ${pkgs.gomuks}/bin/gomuks
-          workspace 3
           exec ${pkgs.teams}/bin/teams
           workspace 2
 

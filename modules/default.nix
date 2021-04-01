@@ -10,7 +10,6 @@
     ./emacs.nix
     ./git.nix
     ./global-mailer.nix
-    ./gomuks.nix
     ./minecraft.nix
     ./nix.nix
     ./nginx.nix

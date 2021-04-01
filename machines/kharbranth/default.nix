@@ -23,7 +23,6 @@
     docker.enable = true;
     eid.enable = true;
     git.email = "charlotte.vanpetegem@ugent.be";
-    gomuks.enable = true;
     zfs = {
       enable = true;
       encrypted = true;
