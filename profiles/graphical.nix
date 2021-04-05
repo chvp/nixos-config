@@ -30,7 +30,7 @@
   home-manager.users.charlotte = { pkgs, ... }: {
     home.packages = with pkgs; [
       google-chrome
-      libreoffice
+      libreoffice-fresh
       moreutils
       mpv
       okular
