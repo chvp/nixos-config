@@ -22,6 +22,7 @@
     smartd.enable = true;
     sshd.enable = true;
     syncthing-server.enable = true;
+    tetris.enable = true;
     zfs = {
       enable = true;
       backups = [{

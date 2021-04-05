@@ -20,6 +20,7 @@
     ./sshd.nix
     ./syncthing-server.nix
     ./teeworlds.nix
+    ./tetris.nix
     ./tmux.nix
     ./zeroad.nix
     ./zfs.nix
