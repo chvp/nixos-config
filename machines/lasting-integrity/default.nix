@@ -17,6 +17,7 @@
     stateVersion = "20.09";
     docker.enable = true;
     nginx.enable = true;
+    nextcloud.enable = true;
     ovh.enable = true;
     smartd.enable = true;
     sshd.enable = true;

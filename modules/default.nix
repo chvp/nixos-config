@@ -11,6 +11,7 @@
     ./git.nix
     ./global-mailer.nix
     ./minecraft.nix
+    ./nextcloud.nix
     ./nix.nix
     ./nginx.nix
     ./ovh.nix
