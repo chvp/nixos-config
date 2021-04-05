@@ -131,9 +131,6 @@ in
 
           workspace 1
           exec ${pkgs.firefox}/bin/firefox
-          workspace 3
-          exec ${pkgs.teams}/bin/teams
-          workspace 2
 
           no_focus [title="Microsoft Teams Notification"]
 
