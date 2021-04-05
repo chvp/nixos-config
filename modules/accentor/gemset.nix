@@ -399,10 +399,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "1r1mr4x1l7x6gkx9avmrwfwagzqf8h71mklrg9dzr01yh132yx65";
+      sha256 = "0h2v34xhi30w0d9gfzds2w6v89grq2gkpgvmdj9m8x1ld1845xnj";
       type = "gem";
     };
-    version = "3.5.0";
+    version = "3.5.1";
   };
   loofah = {
     dependencies = ["crass" "nokogiri"];
@@ -755,10 +755,10 @@
     platforms = [];
     source = {
       remotes = ["https://rubygems.org"];
-      sha256 = "123kkqpcrk11hp5rylz3ayygd7aw39pwi3nhv850s3ymm34cckq6";
+      sha256 = "0s4pqq4v8gb3nw4jcb82xplrrncn9plw81vqqfm700sf9j8k9gj0";
       type = "gem";
     };
-    version = "0.11.0";
+    version = "0.11.1";
   };
   rubocop-rails = {
     dependencies = ["activesupport" "rack" "rubocop"];
