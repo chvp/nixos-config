@@ -392,7 +392,6 @@
     "ps" '(consult-ripgrep :search "incsearch")
     "pS" '(projectile-ripgrep :which-key "search")
     "p!" '(projectile-run-shell-command-in-root :which-key "command")
-    "pt" '(projectile-run-term :which-key "term")
     )
   )
 
