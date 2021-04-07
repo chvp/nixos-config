@@ -362,6 +362,14 @@
   (completion-styles '(orderless) "Use orderless for filtering")
   (orderless-skip-highlighting (lambda () selectrum-is-active) "This and the setting below are performance optimisations.")
   (selectrum-highlight-candidates-function #'orderless-highlight-matches "They make sure only the shown candidates are highlighted.")
+  (orderless-matching-styles '(orderless-regexp orderless-initialism orderless-prefixes orderless-flex) "More matching styles for more flexible matching.")
+  :config
+  ;; Highlight multiple parts in company matches
+  (defun just-one-face (fn &rest args)
+    (let ((orderless-match-faces [completions-common-part]))
+      (apply fn args)))
+
+  (advice-add 'company-capf--candidates :around #'just-one-face)
   )
 
 ;; Sorting when filtering
