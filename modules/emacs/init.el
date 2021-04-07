@@ -17,7 +17,11 @@
   (general-evil-setup t)
 
   ;; Create bindings under the leader
-  (general-create-definer lmap :states '(normal visual emacs motion) :prefix "SPC")
+  (general-create-definer lmap
+    :states '(normal visual insert emacs motion)
+    :prefix "SPC"
+    :non-normal-prefix "C-SPC"
+    )
 
   (lmap
     ""     nil ;; Unbind SPC, I don't use it for navigation anyway.
