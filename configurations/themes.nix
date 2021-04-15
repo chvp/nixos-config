@@ -20,7 +20,8 @@
       enable = true;
       font = {
         package = pkgs.noto-fonts;
-        name = "Noto Sans 10";
+        name = "Noto Sans";
+        size = 10;
       };
       gtk2.extraConfig = ''
         gtk-cursor-theme-name = "Vanilla-DMZ"
