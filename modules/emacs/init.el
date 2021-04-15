@@ -90,7 +90,10 @@
 (use-package direnv :config (direnv-mode))
 
 ;; Editorconfig
-(use-package editorconfig :config (editorconfig-mode 1))
+(use-package editorconfig
+  :custom (editorconfig-get-properties-function 'editorconfig-get-properties)
+  :config (editorconfig-mode 1)
+  )
 
 ;; Vim keybindings
 (use-package evil
