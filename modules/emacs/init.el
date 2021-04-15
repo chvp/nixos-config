@@ -89,6 +89,9 @@
 ;; Direnv integration in emacs.
 (use-package direnv :config (direnv-mode))
 
+;; Editorconfig
+(use-package editorconfig :config (editorconfig-mode 1))
+
 ;; Vim keybindings
 (use-package evil
   :custom
@@ -392,11 +395,19 @@
     "ps" '(consult-ripgrep :search "incsearch")
     "pS" '(projectile-ripgrep :which-key "search")
     "p!" '(projectile-run-shell-command-in-root :which-key "command")
+    "p&" '(projectile-run-async-shell-command-in-root :which-key "task")
     )
   )
 
 ;; Python syntax support
 (use-package python-mode :mode "\\.py\\'")
+
+;; Ruby language support
+(use-package ruby-mode
+  :ensure nil ;; Included with emacs
+  :custom
+  (ruby-insert-encoding-magic-comment nil "Don't insert encoding magic comment")
+  )
 
 ;; Ripgrep support (needed for `projectile-ripgrep')
 (use-package ripgrep)
@@ -412,6 +423,10 @@
 (use-package selectrum-prescient
   :custom (selectrum-prescient-enable-filtering nil "`orderless' manages the filtering part.")
   :config (selectrum-prescient-mode 1))
+
+;; TypeScript language support
+(use-package tide
+  :mode "\\.ts'")
 
 ;; HTML (and HTML template) support
 (use-package web-mode
