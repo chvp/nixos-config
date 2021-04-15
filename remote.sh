@@ -2,5 +2,7 @@
 set -euo pipefail
 set -x
 
-nix build --no-link --profile /nix/var/nix/profiles/per-user/charlotte/$1 .#nixosConfigurations.$1.config.system.build.toplevel
-nixos-rebuild --flake .#$1 --target-host root@$1 --build-host localhost $2
+drv=$(nix eval .#nixosConfigurations.$1.config.system.build.toplevel.drvPath | tr -d '"')
+nix copy --derivation -s --to "ssh://root@$1" "$drv"
+ssh root@$1 nix build -L --no-link "$drv"
+nixos-rebuild --flake .#$1 --target-host root@$1 $2
