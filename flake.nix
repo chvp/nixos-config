@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:chvp/nixpkgs/nixos-rebuild-remote-flakes";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
   };
 
