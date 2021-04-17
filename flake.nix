@@ -7,17 +7,17 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:chvp/nixpkgs/nixos-rebuild-remote-flakes";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    utils.url = "github:chvp/flake-utils-plus/staging";
   };
 
   outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
     inherit self inputs;
     channels.nixpkgs = {
       input = nixpkgs;
-      patches = [ ];
+      patches = map (patch: ./patches + "/${patch}") (builtins.attrNames (builtins.readDir ./patches));
+      overlaysBuilder = _: [ emacs-overlay.overlay ];
     };
-    sharedOverlays = [ emacs-overlay.overlay ];
     hostDefaults = {
       modules = [
         ({ lib, ... }: {
@@ -36,6 +36,12 @@
       urithiru.modules = [ ./machines/urithiru ];
     };
     devShellBuilder = channels:
-      let pkgs = channels.nixpkgs; in pkgs.mkShell { buildInputs = [ pkgs.nixpkgs-fmt ]; };
+      let pkgs = channels.nixpkgs; in
+      pkgs.mkShell {
+        buildInputs = [
+          pkgs.nixpkgs-fmt
+          (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
+        ];
+      };
   };
 }

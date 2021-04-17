@@ -1,0 +1,159 @@
+From 456aa2db499409ab500d98c464b3321d4b7cecc3 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Thu, 15 Apr 2021 15:40:20 +0200
+Subject: [PATCH 1/2] nixos-rebuild: Allow remote building when using flakes
+
+---
+ .../linux/nixos-rebuild/nixos-rebuild.sh      | 65 +++++++++++++++----
+ 1 file changed, 53 insertions(+), 12 deletions(-)
+
+diff --git a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
+index 5874f334fedb9..6e31e174c849a 100644
+--- a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
++++ b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
+@@ -214,6 +214,49 @@ nixBuild() {
+   fi
+ }
+ 
++nixFlakeBuild() {
++    if [ -z "$buildHost" ]; then
++        nix build "$@" --out-link "${tmpDir}/result"
++        readlink -f "${tmpDir}/result"
++    else
++        local attr="$1"
++        shift 1
++        local evalArgs=()
++        local buildArgs=()
++        while [ "$#" -gt 0 ]; do
++            local i="$1"; shift 1
++            case "$i" in
++              --recreate-lock-file|--no-update-lock-file|--no-write-lock-file|--no-registries|--commit-lock-file)
++                evalArgs+=("$i")
++                ;;
++              --update-input)
++                local j="$1"; shift 1
++                evalArgs+=("$i" "$j")
++                ;;
++              --override-input)
++                local j="$1"; shift 1
++                local k="$1"; shift 1
++                evalArgs+=("$i" "$j" "$k")
++                ;;
++              *)
++                buildArgs+=("$i")
++                ;;
++            esac
++        done
++
++        local drv="$(nix "${flakeFlags[@]}" eval --raw "${attr}.drvPath" "${evalArgs[@]}" "${extraBuildArgs[@]}")"
++        if [ -a "$drv" ]; then
++            NIX_SSHOPTS=$SSHOPTS nix "${flakeFlags[@]}" copy --derivation --to "ssh://$buildHost" "$drv"
++            # The 'nix-command flakes' part in "${flakeFlags[@]}" is seen as two separate args over SSH
++            buildHostCmd nix --experimental-features "'nix-command flakes'" build "${buildArgs[@]}" --out-link "${tmpDir}/result" "$drv"
++            buildHostCmd readlink -f "${tmpDir}/result"
++        else
++            echo "nix eval failed"
++            exit 1
++        fi
++    fi
++}
++
+ 
+ if [ -z "$action" ]; then showSyntax; fi
+ 
+@@ -315,8 +358,14 @@ fi
+ 
+ tmpDir=$(mktemp -t -d nixos-rebuild.XXXXXX)
+ SSHOPTS="$NIX_SSHOPTS -o ControlMaster=auto -o ControlPath=$tmpDir/ssh-%n -o ControlPersist=60"
++if [ -n "$buildHost" -a -n "$flake" ]; then
++    buildHostCmd mkdir -p "$tmpDir"
++fi
+ 
+ cleanup() {
++    if [ -n "$buildHost" -a -n "$flake" ]; then
++        buildHostCmd rm -rf "$tmpDir"
++    fi
+     for ctrl in "$tmpDir"/ssh-*; do
+         ssh -o ControlPath="$ctrl" -O exit dummyhost 2>/dev/null || true
+     done
+@@ -418,10 +467,7 @@ if [ -z "$rollback" ]; then
+         if [[ -z $flake ]]; then
+             pathToConfig="$(nixBuild '<nixpkgs/nixos>' --no-out-link -A system "${extraBuildFlags[@]}")"
+         else
+-            outLink=$tmpDir/result
+-            nix "${flakeFlags[@]}" build "$flake#$flakeAttr.config.system.build.toplevel" \
+-              "${extraBuildFlags[@]}" "${lockFlags[@]}" --out-link $outLink
+-            pathToConfig="$(readlink -f $outLink)"
++            pathToConfig="$(nixFlakeBuild "$flake#$flakeAttr.config.system.build.toplevel" "${extraBuildFlags[@]}" "${lockFlags[@]}")"
+         fi
+         copyToTarget "$pathToConfig"
+         targetHostCmd nix-env -p "$profile" --set "$pathToConfig"
+@@ -429,24 +475,19 @@ if [ -z "$rollback" ]; then
+         if [[ -z $flake ]]; then
+             pathToConfig="$(nixBuild '<nixpkgs/nixos>' -A system -k "${extraBuildFlags[@]}")"
+         else
+-            nix "${flakeFlags[@]}" build "$flake#$flakeAttr.config.system.build.toplevel" "${extraBuildFlags[@]}" "${lockFlags[@]}"
+-            pathToConfig="$(readlink -f ./result)"
++            pathToConfig="$(nixFlakeBuild "$flake#$flakeAttr.config.system.build.toplevel" "${extraBuildFlags[@]}" "${lockFlags[@]}")"
+         fi
+     elif [ "$action" = build-vm ]; then
+         if [[ -z $flake ]]; then
+             pathToConfig="$(nixBuild '<nixpkgs/nixos>' -A vm -k "${extraBuildFlags[@]}")"
+         else
+-            nix "${flakeFlags[@]}" build "$flake#$flakeAttr.config.system.build.vm" \
+-              "${extraBuildFlags[@]}" "${lockFlags[@]}"
+-            pathToConfig="$(readlink -f ./result)"
++            pathToConfig="$(nixFlakeBuild "$flake#$flakeAttr.config.system.build.vm" "${extraBuildFlags[@]}" "${lockFlags[@]}")"
+         fi
+     elif [ "$action" = build-vm-with-bootloader ]; then
+         if [[ -z $flake ]]; then
+             pathToConfig="$(nixBuild '<nixpkgs/nixos>' -A vmWithBootLoader -k "${extraBuildFlags[@]}")"
+         else
+-            nix "${flakeFlags[@]}" build "$flake#$flakeAttr.config.system.build.vmWithBootLoader" \
+-              "${extraBuildFlags[@]}" "${lockFlags[@]}"
+-            pathToConfig="$(readlink -f ./result)"
++            pathToConfig="$(nixFlakeBuild "$flake#$flakeAttr.config.system.build.vmWithBootLoader" "${extraBuildFlags[@]}" "${lockFlags[@]}")"
+         fi
+     else
+         showSyntax
+
+From fa827f3f624659d822666bc79d36534d6d3ea9d1 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Fri, 16 Apr 2021 12:42:26 +0200
+Subject: [PATCH 2/2] nixos-rebuild: Use old-style nix command when building
+ flake on a remote host
+
+---
+ pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh | 10 +---------
+ 1 file changed, 1 insertion(+), 9 deletions(-)
+
+diff --git a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
+index 6e31e174c849a..01d0fa823b9b5 100644
+--- a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
++++ b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
+@@ -247,9 +247,7 @@ nixFlakeBuild() {
+         local drv="$(nix "${flakeFlags[@]}" eval --raw "${attr}.drvPath" "${evalArgs[@]}" "${extraBuildArgs[@]}")"
+         if [ -a "$drv" ]; then
+             NIX_SSHOPTS=$SSHOPTS nix "${flakeFlags[@]}" copy --derivation --to "ssh://$buildHost" "$drv"
+-            # The 'nix-command flakes' part in "${flakeFlags[@]}" is seen as two separate args over SSH
+-            buildHostCmd nix --experimental-features "'nix-command flakes'" build "${buildArgs[@]}" --out-link "${tmpDir}/result" "$drv"
+-            buildHostCmd readlink -f "${tmpDir}/result"
++            buildHostCmd nix-store -r "$drv" "${buildArgs[@]}"
+         else
+             echo "nix eval failed"
+             exit 1
+@@ -358,14 +356,8 @@ fi
+ 
+ tmpDir=$(mktemp -t -d nixos-rebuild.XXXXXX)
+ SSHOPTS="$NIX_SSHOPTS -o ControlMaster=auto -o ControlPath=$tmpDir/ssh-%n -o ControlPersist=60"
+-if [ -n "$buildHost" -a -n "$flake" ]; then
+-    buildHostCmd mkdir -p "$tmpDir"
+-fi
+ 
+ cleanup() {
+-    if [ -n "$buildHost" -a -n "$flake" ]; then
+-        buildHostCmd rm -rf "$tmpDir"
+-    fi
+     for ctrl in "$tmpDir"/ssh-*; do
+         ssh -o ControlPath="$ctrl" -O exit dummyhost 2>/dev/null || true
+     done

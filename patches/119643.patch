@@ -1,0 +1,136 @@
+From 66f9ad192710d18d44322f49c87bba64d2beec11 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Fri, 16 Apr 2021 18:40:48 +0200
+Subject: [PATCH 1/2] zeroad: Split data from binaries again
+
+The rootdir patch was lost in the update to 0.0.24b. Adding it allows
+hydra to build the game. It can't when the binaries depend on the data
+since the data is too big for hydra.
+---
+ pkgs/games/0ad/game.nix          | 10 +++-----
+ pkgs/games/0ad/rootdir_env.patch | 39 ++++++++++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+), 7 deletions(-)
+ create mode 100644 pkgs/games/0ad/rootdir_env.patch
+
+diff --git a/pkgs/games/0ad/game.nix b/pkgs/games/0ad/game.nix
+index bb3b7c0138aff..81965b116be67 100644
+--- a/pkgs/games/0ad/game.nix
++++ b/pkgs/games/0ad/game.nix
+@@ -2,7 +2,7 @@
+ , pkg-config, spidermonkey_78, boost, icu, libxml2, libpng, libsodium
+ , libjpeg, zlib, curl, libogg, libvorbis, enet, miniupnpc
+ , openal, libGLU, libGL, xorgproto, libX11, libXcursor, nspr, SDL2
+-, gloox, nvidia-texture-tools, zeroad-data
++, gloox, nvidia-texture-tools
+ , withEditor ? true, wxGTK
+ }:
+ 
+@@ -50,6 +50,8 @@ stdenv.mkDerivation rec {
+     "-I${fmt.dev}/include"
+   ];
+ 
++  patches = [ ./rootdir_env.patch ];
++
+   configurePhase = ''
+     # Delete shipped libraries which we don't need.
+     rm -rf libraries/source/{enet,miniupnpc,nvtt,spidermonkey}
+@@ -62,7 +64,6 @@ stdenv.mkDerivation rec {
+       ${lib.optionalString withEditor "--enable-atlas"} \
+       --bindir="$out"/bin \
+       --libdir="$out"/lib/0ad \
+-      --datadir="$out"/share/0ad/data \
+       --without-tests \
+       -j $NIX_BUILD_CORES
+     popd
+@@ -85,11 +86,6 @@ stdenv.mkDerivation rec {
+     # Copy l10n data.
+     install -Dm755 -t $out/share/0ad/data/l10n binaries/data/l10n/*
+ 
+-    # Link in game data from package
+-    ln -s ${zeroad-data}/share/0ad/data/config $out/share/0ad/data/config
+-    ln -s ${zeroad-data}/share/0ad/data/mods $out/share/0ad/data/mods
+-    ln -s ${zeroad-data}/share/0ad/data/tools $out/share/0ad/data/tools
+-
+     # Copy libraries.
+     install -Dm644 -t $out/lib/0ad        binaries/system/*.so
+ 
+diff --git a/pkgs/games/0ad/rootdir_env.patch b/pkgs/games/0ad/rootdir_env.patch
+new file mode 100644
+index 0000000000000..95463c7e2df46
+--- /dev/null
++++ b/pkgs/games/0ad/rootdir_env.patch
+@@ -0,0 +1,39 @@
++diff --git a/source/ps/GameSetup/Paths.cpp b/source/ps/GameSetup/Paths.cpp
++index 474364e..bf084b4 100644
++--- a/source/ps/GameSetup/Paths.cpp
+++++ b/source/ps/GameSetup/Paths.cpp
++@@ -155,32 +155,8 @@ Paths::Paths(const CmdLineArgs& args)
++ 
++ /*static*/ OsPath Paths::Root(const OsPath& argv0)
++ {
++-#if OS_ANDROID
++-	return OsPath("/sdcard/0ad"); // TODO: this is kind of bogus
++-#else
++-
++-	// get full path to executable
++-	OsPath pathname = sys_ExecutablePathname();	// safe, but requires OS-specific implementation
++-	if(pathname.empty())	// failed, use argv[0] instead
++-	{
++-		errno = 0;
++-		pathname = wrealpath(argv0);
++-		if(pathname.empty())
++-			WARN_IF_ERR(StatusFromErrno());
++-	}
++-
++-	// make sure it's valid
++-	if(!FileExists(pathname))
++-	{
++-		LOGERROR("Cannot find executable (expected at '%s')", pathname.string8());
++-		WARN_IF_ERR(StatusFromErrno());
++-	}
++-
++-	for(size_t i = 0; i < 2; i++)	// remove "system/name.exe"
++-		pathname = pathname.Parent();
++-	return pathname;
++-
++-#endif
+++        UNUSED2(argv0);
+++        return OsPath(getenv("ZEROAD_ROOTDIR"));
++ }
++ 
++ /*static*/ OsPath Paths::RootData(const OsPath& argv0)
+
+From 8d6375ba029851c053388ff95ed445d2ae0a56cc Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Fri, 16 Apr 2021 18:42:32 +0200
+Subject: [PATCH 2/2] zeroad: Add myself as a maintainer
+
+---
+ pkgs/games/0ad/data.nix | 1 +
+ pkgs/games/0ad/game.nix | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/pkgs/games/0ad/data.nix b/pkgs/games/0ad/data.nix
+index 5cb28b3f3bd63..9533af21b15d1 100644
+--- a/pkgs/games/0ad/data.nix
++++ b/pkgs/games/0ad/data.nix
+@@ -19,6 +19,7 @@ stdenv.mkDerivation rec {
+     description = "A free, open-source game of ancient warfare -- data files";
+     homepage = "https://play0ad.com/";
+     license = licenses.cc-by-sa-30;
++    maintainers = with maintainers; [ chvp ];
+     platforms = platforms.linux;
+     hydraPlatforms = [];
+   };
+diff --git a/pkgs/games/0ad/game.nix b/pkgs/games/0ad/game.nix
+index 81965b116be67..feaf4347329c4 100644
+--- a/pkgs/games/0ad/game.nix
++++ b/pkgs/games/0ad/game.nix
+@@ -101,6 +101,7 @@ stdenv.mkDerivation rec {
+       gpl2 lgpl21 mit cc-by-sa-30
+       licenses.zlib # otherwise masked by pkgs.zlib
+     ];
++    maintainers = with maintainers; [ chvp ];
+     platforms = subtractLists platforms.i686 platforms.linux;
+   };
+ }

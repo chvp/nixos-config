@@ -8,10 +8,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking = {
-    hostId = "e718389d";
-    hostName = "kharbranth";
-  };
+  networking.hostId = "e718389d";
 
   time.timeZone = "Europe/Brussels";
 

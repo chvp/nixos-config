@@ -20,10 +20,7 @@
     };
   };
 
-  networking = {
-    hostId = "3cc1a4b2";
-    hostName = "kholinar";
-  };
+  networking.hostId = "3cc1a4b2";
 
   time.timeZone = "Europe/Brussels";
 

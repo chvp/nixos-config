@@ -8,10 +8,7 @@
 
   time.timeZone = "Europe/Berlin";
 
-  networking = {
-    hostName = "lasting-integrity";
-    hostId = "b352adfe";
-  };
+  networking.hostId = "b352adfe";
 
   chvp = {
     stateVersion = "20.09";

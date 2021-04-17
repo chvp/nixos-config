@@ -9,10 +9,7 @@
 
   time.timeZone = "Europe/Berlin";
 
-  networking = {
-    hostName = "urithiru";
-    hostId = "079e60ba";
-  };
+  networking.hostId = "079e60ba";
 
   chvp = {
     stateVersion = "20.09";
