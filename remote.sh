@@ -2,4 +2,7 @@
 set -euo pipefail
 set -x
 
-nixos-rebuild --flake .#$1 --target-host root@$1 $2
+hostname=$1
+shift 1
+
+nixos-rebuild --flake .#$hostname --target-host root@$hostname "$@"
