@@ -13,6 +13,8 @@
 
   outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
     inherit self inputs;
+    # This config can only be evaluated on x86_64-linux because of IFD
+    supportedSystems = [ "x86_64-linux" ];
     channels.nixpkgs = {
       input = nixpkgs;
       patches = map (patch: ./patches + "/${patch}") (builtins.attrNames (builtins.readDir ./patches));
