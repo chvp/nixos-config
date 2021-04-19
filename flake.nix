@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    utils.url = "github:chvp/flake-utils-plus/staging";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
   };
 
   outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
