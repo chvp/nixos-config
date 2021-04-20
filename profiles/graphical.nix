@@ -45,6 +45,7 @@
       wf-recorder
       wl-clipboard
       youtube-dl
+      zoom-us
     ];
     programs.zsh.loginExtra = ''
       if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
@@ -61,6 +62,6 @@
 
   chvp = {
     gnupg.pinentryFlavor = "qt";
-    nix.unfreePackages = [ "google-chrome" ];
+    nix.unfreePackages = [ "google-chrome" "zoom" ];
   };
 }
