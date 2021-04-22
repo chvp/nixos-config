@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, nixosConfigurations, ... }:
 
 {
   imports = [
@@ -10,6 +10,9 @@
   time.timeZone = "Europe/Berlin";
 
   networking.hostId = "079e60ba";
+
+  environment.etc = lib.mapAttrs' (n: v: { name = "pinned-hosts/${n}"; value = { source = v.config.system.build.toplevel.outPath; }; })
+    (lib.filterAttrs (n: _: n != "urithiru") nixosConfigurations);
 
   chvp = {
     stateVersion = "20.09";

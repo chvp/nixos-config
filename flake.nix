@@ -30,6 +30,7 @@
         home-manager.nixosModules.home-manager
         ./modules
       ];
+      extraArgs = { nixosConfigurations = self.nixosConfigurations; };
     };
     hosts = {
       kharbranth.modules = [ ./machines/kharbranth ];
