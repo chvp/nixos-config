@@ -7738,11 +7738,11 @@
       };
     }
     {
-      name = "sass___sass_1.32.8.tgz";
+      name = "sass___sass_1.32.11.tgz";
       path = fetchurl {
-        name = "sass___sass_1.32.8.tgz";
-        url = "https://registry.yarnpkg.com/sass/-/sass-1.32.8.tgz";
-        sha1 = "f16a9abd8dc530add8834e506878a2808c037bdc";
+        name = "sass___sass_1.32.11.tgz";
+        url = "https://registry.yarnpkg.com/sass/-/sass-1.32.11.tgz";
+        sha1 = "b236b3ea55c76602c2ef2bd0445f0db581baa218";
       };
     }
     {
@@ -9146,11 +9146,11 @@
       };
     }
     {
-      name = "vuetify___vuetify_2.4.9.tgz";
+      name = "vuetify___vuetify_2.4.11.tgz";
       path = fetchurl {
-        name = "vuetify___vuetify_2.4.9.tgz";
-        url = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.4.9.tgz";
-        sha1 = "c4ccf4cf3dc81d426da78913c32d47ab33ede38f";
+        name = "vuetify___vuetify_2.4.11.tgz";
+        url = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.4.11.tgz";
+        sha1 = "3aba19a32cd89c5dce523260f589cf95d90e2dce";
       };
     }
     {

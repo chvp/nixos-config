@@ -38,7 +38,7 @@ gem 'bootsnap', '>= 1.4.6', require: false
 gem 'rack-cors', '~> 1.1'
 
 group :test do
-  gem 'codecov', '~> 0.5.1', require: false
+  gem 'codecov', '~> 0.5.2', require: false
   gem 'mocha', '~> 1.12.0', require: false
   gem 'simplecov', '~> 0.21', require: false
 end
