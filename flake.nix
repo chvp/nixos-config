@@ -4,11 +4,11 @@
   inputs = {
     emacs-overlay.url = "github:nix-community/emacs-overlay/d9530a7048f4b1c0f65825202a0ce1d111a1d39a";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/staging";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/master";
   };
 
   outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
