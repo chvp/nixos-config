@@ -24,7 +24,7 @@ let
     owner = "accentor";
     repo = "api";
     rev = "develop";
-    sha256 = "044yj8md2qikjvcp3pmfl42pbrl8y598fr45sd5whysahvqqsfhc";
+    sha256 = "08qb2liflv8i3mw2p4j8f9mhafw9h3rqklzd8lpmvdfk3cnvcskv";
   };
   gems = pkgs.bundlerEnv {
     name = "accentor-api-env";
