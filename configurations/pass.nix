@@ -11,5 +11,6 @@
       settings = { PASSWORD_STORE_DIR = "/home/charlotte/repos/passwords"; };
     };
     services.password-store-sync.enable = true;
+    services.pass-secret-service.enable = true;
   };
 }
