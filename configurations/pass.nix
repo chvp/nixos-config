@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   nixpkgs.overlays = [
     (self: super: {
       pass = (super.pass.override { pass = super.pass-wayland; }).withExtensions (ext: [ ext.pass-otp ]);
@@ -11,6 +11,5 @@
       settings = { PASSWORD_STORE_DIR = "/home/charlotte/repos/passwords"; };
     };
     services.password-store-sync.enable = true;
-    services.pass-secret-service.enable = true;
   };
 }
