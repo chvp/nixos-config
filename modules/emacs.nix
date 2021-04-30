@@ -21,6 +21,19 @@ in
   };
 
   config = lib.mkIf config.chvp.emacs.enable {
+    nixpkgs.overlays = [
+      (self: super: {
+        mu = super.mu.overrideAttrs (old: {
+          version = "1.5.12";
+          src = self.fetchFromGitHub {
+            owner = "djcb";
+            repo = "mu";
+            rev = "c5219778af65dc868eea91c910c801e5105d5cd7";
+            sha256 = "1z6l02bdsh4z2yv3dbixrs0fvyp2axx62dnmqwyampjn5xs5l2yf";
+          };
+        });
+      })
+    ];
     chvp = {
       emacs.package = emacsPkg;
       zfs.homeLinks = [

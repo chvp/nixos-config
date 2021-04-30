@@ -186,6 +186,13 @@
   :ensure nil
   :demand t
   :after (selectrum)
+  :hook
+  ((message-mode . (lambda ()
+                     (auto-fill-mode)
+                     (setq-local fill-column 72)
+                     (setq-local fill-flowed-encode-column 72)))
+   (mu4e-view-mode . display-line-numbers-mode)
+   )
   :custom
   (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
   (mu4e-maildir "/home/charlotte/mail" "Root of the maildir hierarchy")
@@ -198,6 +205,9 @@
   (mu4e-headers-include-related nil "Don't show related messages by default")
   (mu4e-headers-skip-duplicates nil "Show duplicate emails")
   (message-kill-buffer-on-exit t "Close buffer when finished with email")
+  (mm-verify-option 'known "Always verify PGP signatures (known protocols)")
+  (mm-discouraged-alternatives '("text/html" "text/richtext") "Discourage showing HTML views")
+  (gnus-buttonized-mime-types '("multipart/signed") "Make sure signature verification is always shown")
   (sendmail-program "msmtp" "Use msmtp to send email")
   (message-sendmail-f-is-evil t "Remove username from the emacs message")
   (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
@@ -321,13 +331,12 @@
     "\n"
     _
     "\n"
-    "Ik heb je account lesgeversrechten gegeven. Je kan nu cursussen aanmaken\n"
-    "en oefeningen toevoegen aan het platform. Een handleiding over hoe van\n"
-    "start te gaan met Dodona kan je hier vinden:\n"
-    "https://dodona-edu.github.io/nl/guides/teachers/getting-started/.\n"
-    "\n"
-    "Als je nog verdere vragen hebt mag je ons altijd via dodona@ugent.be\n"
-    "contacteren.\n"
+    "Recent introduceerden we een formulier op Dodona waarin je"
+    "rechtstreeks lesgeversrechten kan aanvragen. Dat kan je vinden op"
+    "https://dodona.ugent.be/rights_requests/new/. Als je dat formulier"
+    "gebruikt is het voor ons een stuk minder werk om je die rechten te"
+    "geven. Hierbij zou ik je dus toch willen vragen van deze rechten via"
+    "dat formulier aan te vragen.\n"
     "\n"
     "Met vriendelijke groeten,\n"
     "Charlotte Van Petegem"
@@ -337,15 +346,12 @@
     (interactive)
     (save-excursion (message-add-header "Cc: dodona@ugent.be\nReply-To: dodona@ugent.be\n"))
     )
-  (add-hook
-   'mu4e-compose-mode-hook
-   (defun mail/auto-dodona-cc-reply-to ()
-     "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
-     (let ((msg mu4e-compose-parent-message))
-       (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (mail/dodona-cc-reply-to))
-       )
-     )
-   )
+  (defun mail/auto-dodona-cc-reply-to ()
+    "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
+    (let ((msg mu4e-compose-parent-message))
+      (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (mail/dodona-cc-reply-to))
+      )
+    )
   :general
   (lmap "m" '(mu4e :which-key "mail"))
   ;; Unmap SPC in the mail view so we can still use the leader.
@@ -428,7 +434,7 @@
   :config (selectrum-prescient-mode 1))
 
 ;; TypeScript language support
-(use-package tide
+(use-package typescript-mode
   :mode "\\.ts'")
 
 ;; HTML (and HTML template) support
@@ -454,8 +460,8 @@
 ;; major modes.
 (electric-pair-mode)
 
-;; Always display line numbers
-(global-display-line-numbers-mode)
+;; Always display line numbers for text-based modes
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
 
 ;; Don't show default startup screen
 (setq inhibit-startup-screen t)
