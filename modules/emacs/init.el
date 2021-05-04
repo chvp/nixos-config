@@ -121,6 +121,10 @@
   :config (global-flycheck-mode)
   )
 
+;; Haskell language support
+(use-package haskell-mode
+  :mode "\\.hs\\'")
+
 ;; Ledger syntax support
 (use-package ledger-mode
   :mode "\\.journal\\'"
