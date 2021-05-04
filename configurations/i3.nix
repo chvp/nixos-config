@@ -22,13 +22,13 @@ in
                   inactiveWorkspace = { background = "#fbffff"; border = "#fbffff"; text = "535c65"; };
                   urgentWorkspace = { background = "#ae5865"; border = "#ae5865"; text = "#fbffff"; };
                 };
-                fonts = [ "Fira Code Normal 9" ];
+                fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
                 position = "top";
                 statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status-configuration}";
               }
             ];
             floating.criteria = [{ class = "launcher"; } { class = "accentor.Main"; }];
-            fonts = [ "Fira Code Normal 9" ];
+            fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
             menu = "${pkgs.kitty}/bin/kitty --class launcher -e ${launcher}/bin/launcher";
             modifier = "Mod4";
             terminal = "${pkgs.kitty}/bin/kitty";

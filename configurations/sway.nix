@@ -57,6 +57,7 @@ in
           right = "l";
           terminal = "${pkgs.kitty}/bin/kitty";
           menu = "${terminal} --class launcher -e ${launcher}/bin/launcher";
+          fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
           bars = [
             {
               colors = {
@@ -67,7 +68,7 @@ in
                 inactiveWorkspace = { border = "#ffffff"; background = "#ffffff"; text = "#000000"; };
                 urgentWorkspace = { border = "#ff8892"; background = "#ff8892"; text = "#000000"; };
               };
-              fonts = [ "Fira Code Normal 9" ];
+              fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
               position = "top";
               statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status-configuration}";
               extraConfig = ''
