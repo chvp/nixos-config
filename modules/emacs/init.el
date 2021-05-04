@@ -190,18 +190,11 @@
   :ensure nil
   :demand t
   :after (selectrum)
-  :hook
-  ((message-mode . (lambda ()
-                     (auto-fill-mode)
-                     (setq-local fill-column 72)
-                     (setq-local fill-flowed-encode-column 72)))
-   (mu4e-view-mode . display-line-numbers-mode)
-   )
+  :hook (mu4e-view-mode . display-line-numbers-mode)
   :custom
   (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
   (mu4e-maildir "/home/charlotte/mail" "Root of the maildir hierarchy")
   (mu4e-context-policy 'pick-first "Use the first mail context in the list")
-  (mu4e-compose-format-flowed t "Flow emails correctly for recipients")
   (mu4e-attachment-dir "/home/charlotte/downloads" "Save attachments to downloads folder")
   (mu4e-compose-dont-reply-to-self t "Don't reply to myself on reply to all")
   (mu4e-confirm-quit nil "Don't confirm when quitting")
