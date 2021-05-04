@@ -2,7 +2,7 @@
   description = "Nixos configuration flake";
 
   inputs = {
-    emacs-overlay.url = "github:nix-community/emacs-overlay/d9530a7048f4b1c0f65825202a0ce1d111a1d39a";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/master";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
