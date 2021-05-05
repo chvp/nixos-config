@@ -322,18 +322,18 @@
                      (mu4e-warn "Unknown option: '%s'" choice))))))
       (apply orig-fun args)))
   (define-skeleton mail/dodona-teacher-reply-skeleton
-    "Inserts a typical reply after someone was made a teacher on Dodona."
+    "Inserts a typical reply when someone uses the general for for a Dodona teacher request."
     "Naam leerkracht: "
     "Dag " str ",\n"
     "\n"
     _
     "\n"
-    "Recent introduceerden we een formulier op Dodona waarin je"
-    "rechtstreeks lesgeversrechten kan aanvragen. Dat kan je vinden op"
-    "https://dodona.ugent.be/rights_requests/new/. Als je dat formulier"
-    "gebruikt is het voor ons een stuk minder werk om je die rechten te"
-    "geven. Hierbij zou ik je dus toch willen vragen van deze rechten via"
-    "dat formulier aan te vragen.\n"
+    "Welkom op Dodona! Zou je het volgende formulier kunnen invullen?\n"
+    "\n"
+    "https://dodona.ugent.be/rights_requests/new/\n"
+    "\n"
+    "Zo hebben we meteen alle info die we nodig hebben om je"
+    "lesgeversrechten te geven op Dodona.\n"
     "\n"
     "Met vriendelijke groeten,\n"
     "Charlotte Van Petegem"
