@@ -322,7 +322,7 @@
                      (mu4e-warn "Unknown option: '%s'" choice))))))
       (apply orig-fun args)))
   (define-skeleton mail/dodona-teacher-reply-skeleton
-    "Inserts a typical reply when someone uses the general for for a Dodona teacher request."
+    "Inserts a typical reply when someone uses the general form for a Dodona teacher request."
     "Naam leerkracht: "
     "Dag " str ",\n"
     "\n"
