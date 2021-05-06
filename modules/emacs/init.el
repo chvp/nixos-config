@@ -101,15 +101,14 @@
   :ensure nil ;; Not a real package, but a place to collect global settings
   :hook
   ;; Always display line numbers for text-based modes
-  (text-mode . display-line-numbers-mode)
-  :custom
-  (inhibit-startup-screen t "Don't show default startup screen")
-  :config
+  ((text-mode prog-mode) . display-line-numbers-mode)
   ;; Enable basic auto pairs. Maybe replace this with something more
   ;; advanced later? Look into configuring pairs for frequently used
   ;; major modes.
-  (electric-pair-mode)
-
+  ((text-mode prog-mode) . electric-pair-mode)
+  :custom
+  (inhibit-startup-screen t "Don't show default startup screen")
+  :config
   ;; Only ask for y/n, never for yes/no.
   (defalias 'yes-or-no-p 'y-or-n-p)
 
