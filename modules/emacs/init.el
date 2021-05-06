@@ -332,7 +332,7 @@
     "\n"
     "https://dodona.ugent.be/rights_requests/new/\n"
     "\n"
-    "Zo hebben we meteen alle info die we nodig hebben om je"
+    "Zo hebben we meteen alle info die we nodig hebben om je "
     "lesgeversrechten te geven op Dodona.\n"
     "\n"
     "Met vriendelijke groeten,\n"
