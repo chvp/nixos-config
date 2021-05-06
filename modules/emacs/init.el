@@ -91,6 +91,7 @@
 
 ;; Editorconfig
 (use-package editorconfig
+  :diminish (editorconfig-mode)
   :custom (editorconfig-get-properties-function 'editorconfig-get-properties)
   :config (editorconfig-mode 1)
   )
