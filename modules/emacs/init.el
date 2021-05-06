@@ -95,6 +95,34 @@
   :config (editorconfig-mode 1)
   )
 
+;; General emacs settings
+(use-package emacs
+  :ensure nil ;; Not a real package, but a place to collect global settings
+  :hook
+  ;; Always display line numbers for text-based modes
+  (text-mode . display-line-numbers-mode)
+  :custom
+  (inhibit-startup-screen t "Don't show default startup screen")
+  :config
+  ;; Enable basic auto pairs. Maybe replace this with something more
+  ;; advanced later? Look into configuring pairs for frequently used
+  ;; major modes.
+  (electric-pair-mode)
+
+  ;; Only ask for y/n, never for yes/no.
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  ;; Font configuration
+  (defun font-settings ()
+    "Setup font settings."
+    (when window-system (set-frame-font "Fira Code 9"))
+    (set-fontset-font t 'symbol "Noto Color Emoji")
+    (set-fontset-font t 'symbol "Symbola" nil 'append))
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'font-settings)
+    (font-settings))
+  )
+
 ;; Vim keybindings
 (use-package evil
   :custom
@@ -454,29 +482,6 @@
   :mode "\\.yaml\\'"
   )
 
-;; Enable basic auto pairs. Maybe replace this with something more
-;; advanced later? Look into configuring pairs for frequently used
-;; major modes.
-(electric-pair-mode)
-
-;; Always display line numbers for text-based modes
-(add-hook 'text-mode-hook 'display-line-numbers-mode)
-
-;; Don't show default startup screen
-(setq inhibit-startup-screen t)
-
-;; Only ask for y/n, never for yes/no.
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-;; Font configuration
-(defun font-settings ()
-  "Setup font settings."
-  (when window-system (set-frame-font "Fira Code 9"))
-  (set-fontset-font t 'symbol "Noto Color Emoji")
-  (set-fontset-font t 'symbol "Symbola" nil 'append))
-(if (daemonp)
-    (add-hook 'server-after-make-frame-hook #'font-settings)
-  (font-settings))
 
 (provide 'init)
 ;;; init.el ends here
