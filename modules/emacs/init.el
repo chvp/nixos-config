@@ -301,10 +301,10 @@
           :vars '(
                   (user-mail-address . "charlotte@jonggroen.be")
                   (user-full-name . "Charlotte Van Petegem")
-                  (mu4e-drafts-folder . "/jonggroen/[Gmail]/Drafts")
+                  (mu4e-drafts-folder . "/jonggroen/[Gmail].Drafts")
                   (mu4e-sent-folder . "/jonggroen/INBOX")
                   (mu4e-refile-folder . "/jonggroen/Archive")
-                  (mu4e-trash-folder . "/jonggroen/[Gmail]/Bin")
+                  (mu4e-trash-folder . "/jonggroen/[Gmail].Bin")
                   (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "jonggroen"))
                   )
           )
