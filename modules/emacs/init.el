@@ -190,7 +190,9 @@
   :ensure nil
   :demand t
   :after (selectrum)
-  :hook (mu4e-view-mode . display-line-numbers-mode)
+  :hook
+  (mu4e-view-mode . display-line-numbers-mode)
+  (mu4e-compose-mode . mail/auto-dodona-cc-reply-to)
   :custom
   (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
   (mu4e-maildir "/home/charlotte/mail" "Root of the maildir hierarchy")
