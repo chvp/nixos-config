@@ -8794,11 +8794,11 @@
       };
     }
     {
-      name = "url_parse___url_parse_1.4.7.tgz";
+      name = "url_parse___url_parse_1.5.1.tgz";
       path = fetchurl {
-        name = "url_parse___url_parse_1.4.7.tgz";
-        url = "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.7.tgz";
-        sha1 = "a8a83535e8c00a316e403a5db4ac1b9b853ae278";
+        name = "url_parse___url_parse_1.5.1.tgz";
+        url = "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz";
+        sha1 = "d5fa9890af8a5e1f274a2c98376510f6425f6e3b";
       };
     }
     {

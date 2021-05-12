@@ -40,38 +40,28 @@ pkgs.writeText "configuration.toml" ''
   [[block]]
   block = "net"
   device = "wlp2s0"
-  ssid = true
-  signal_strength = false
-  speed_up = false
-  speed_down = false
+  format = "{ssid}"
   hide_missing = true
   hide_inactive = true
 
   [[block]]
   block = "net"
   device = "wlp0s20f3"
-  ssid = true
-  signal_strength = false
-  speed_up = false
-  speed_down = false
+  format = "{ssid}"
   hide_missing = true
   hide_inactive = true
 
   [[block]]
   block = "net"
   device = "enp0s31f6"
-  ip = true
-  speed_up = false
-  speed_down = false
+  format = "{ip}"
   hide_missing = true
   hide_inactive = true
 
   [[block]]
   block = "net"
   device = "enp0s20f0u1u2"
-  ip = true
-  speed_up = false
-  speed_down = false
+  format = "{ip}"
   hide_missing = true
   hide_inactive = true
 
