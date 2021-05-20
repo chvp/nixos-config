@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { };
-  extraRpath = pkgs.stdenv.lib.strings.makeLibraryPath (with pkgs; [ ffmpeg ]);
+  extraRpath = pkgs.stdenv.lib.strings.makeLibraryPath (with pkgs; [ ffmpeg_3 ]);
   java = pkgs.writeShellScriptBin "java" ''
     old_path="$(patchelf --print-rpath ${pkgs.jdk11}/bin/java)"
     LD_LIBRARY_PATH="$old_path:${extraRpath}" ${pkgs.jdk11}/bin/java $@
