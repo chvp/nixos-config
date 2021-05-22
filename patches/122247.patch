@@ -1,7 +1,7 @@
-From 9865b13d73a1c01b43a039edd58e0eeba90d61e6 Mon Sep 17 00:00:00 2001
+From cdc5953d38868ddd51ecc2a912716e59b33e25ba Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte@vanpetegem.me>
 Date: Sat, 8 May 2021 23:55:56 +0200
-Subject: [PATCH 1/2] eid-mw: 4.4.27 -> 5.0.14
+Subject: [PATCH 1/5] eid-mw: 4.4.27 -> 5.0.14
 
 ---
  pkgs/tools/security/eid-mw/default.nix | 65 +++++++++++++++-----------
@@ -106,10 +106,10 @@ index cbe56694da1421..d943274a98e9b3 100644
    enableParallelBuilding = true;
  
 
-From c6b73cfad86428d2fca84c2064a03e4dd48b8c46 Mon Sep 17 00:00:00 2001
+From 5bdad0ac18f150ac710b2829e3c53781c5a94a89 Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte@vanpetegem.me>
 Date: Sat, 8 May 2021 23:56:10 +0200
-Subject: [PATCH 2/2] eid-mw: add chvp as maintainer
+Subject: [PATCH 2/5] eid-mw: add chvp as maintainer
 
 ---
  pkgs/tools/security/eid-mw/default.nix | 2 +-
@@ -127,3 +127,75 @@ index d943274a98e9b3..a104112265730f 100644
 +    maintainers = with maintainers; [ bfortz chvp ];
    };
  }
+
+From b9d63bfdec294a3de66ec87e7b9e8e860b9275c5 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sat, 22 May 2021 10:03:10 +0200
+Subject: [PATCH 3/5] eid-mw: 5.0.14 -> 5.0.21
+
+---
+ pkgs/tools/security/eid-mw/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/security/eid-mw/default.nix b/pkgs/tools/security/eid-mw/default.nix
+index a104112265730f..45774ea8a5077c 100644
+--- a/pkgs/tools/security/eid-mw/default.nix
++++ b/pkgs/tools/security/eid-mw/default.nix
+@@ -20,11 +20,11 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "eid-mw";
+-  version = "5.0.14";
++  version = "5.0.21";
+ 
+   src = fetchFromGitHub {
+     rev = "v${version}";
+-    sha256 = "1hyxsbxjjn9hh5p7jlcfb5yplf3n8dg49dfgi8fjp95phis3gbd4";
++    sha256 = "1sz7996q6gd6vbdxqgyx1jwjznpki1k9zbgaj1j1a51y6w0g0kdh";
+     repo = "eid-mw";
+     owner = "Fedict";
+   };
+
+From 49acdd355f918efe7b3358cc71a7beb0f2a2a4d5 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sat, 22 May 2021 10:08:13 +0200
+Subject: [PATCH 4/5] eid-mw: add note about upstream version management
+
+---
+ pkgs/tools/security/eid-mw/default.nix | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pkgs/tools/security/eid-mw/default.nix b/pkgs/tools/security/eid-mw/default.nix
+index 45774ea8a5077c..b84a7a2f22ef39 100644
+--- a/pkgs/tools/security/eid-mw/default.nix
++++ b/pkgs/tools/security/eid-mw/default.nix
+@@ -20,6 +20,7 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "eid-mw";
++  # NOTE: Don't just blindly update to the latest version/tag. Releases are always for a specific OS.
+   version = "5.0.21";
+ 
+   src = fetchFromGitHub {
+
+From cabfc153d5a8e22da2de1d9ac7da0b2227a8535d Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sat, 22 May 2021 10:09:34 +0200
+Subject: [PATCH 5/5] eid-mw: add note about why --disable-pinentry is used
+
+---
+ pkgs/tools/security/eid-mw/default.nix | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pkgs/tools/security/eid-mw/default.nix b/pkgs/tools/security/eid-mw/default.nix
+index b84a7a2f22ef39..e07ea1a3337998 100644
+--- a/pkgs/tools/security/eid-mw/default.nix
++++ b/pkgs/tools/security/eid-mw/default.nix
+@@ -41,6 +41,7 @@ stdenv.mkDerivation rec {
+     substituteInPlace plugins_tools/eid-viewer/Makefile.in \
+       --replace "c_rehash" "openssl rehash"
+   '';
++  # pinentry uses hardcoded `/usr/bin/pinentry`, so use the built-in (uglier) dialogs for pinentry.
+   configureFlags = [ "--disable-pinentry" ];
+ 
+   postPatch = ''

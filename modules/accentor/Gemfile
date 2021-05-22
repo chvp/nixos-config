@@ -45,7 +45,7 @@ end
 
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2'
-  gem 'faker', '~> 2.17'
+  gem 'faker', '~> 2.18'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
