@@ -17,7 +17,7 @@
     supportedSystems = [ "x86_64-linux" ];
     channels.nixpkgs = {
       input = nixpkgs;
-      patches = map (patch: ./patches + "/${patch}") (builtins.attrNames (builtins.readDir ./patches));
+      patches = map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       overlaysBuilder = _: [ emacs-overlay.overlay ];
     };
     hostDefaults = {
