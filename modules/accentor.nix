@@ -7,7 +7,7 @@ let
       owner = "accentor";
       repo = "web";
       rev = "develop";
-      sha256 = "06z4qm6sgqpvg3cgb20vgac83zkfm1q120i5xbra6p2srhd0h922";
+      sha256 = "0gqbzhbpv1h3c76nmbd4c0i2hd28hxvhs0xxllqbav4nnpdvrmq6";
     };
     yarnNix = ./accentor/yarn.nix;
     buildPhase = ''
@@ -24,7 +24,7 @@ let
     owner = "accentor";
     repo = "api";
     rev = "develop";
-    sha256 = "13lkvrn3nw00jwyf4jzp9j9f09sgva2fbnh9i028hr3lcd7yw6my";
+    sha256 = "1pm8zmf1q6gxjl6swqi103gpac27nc3v2q6xwyq2jkf8ql71jarj";
   };
   gems = pkgs.bundlerEnv {
     name = "accentor-api-env";
@@ -37,6 +37,7 @@ let
   env = {
     DATABASE_URL = "postgresql://%2Frun%2Fpostgresql/accentor";
     FFMPEG_LOG_LOCATION = "/var/log/accentor/ffmpeg.log";
+    FFMPEG_VERSION_LOCATION = "${config.chvp.dataPrefix}/var/lib/accentor/ffmpeg.version";
     RAILS_STORAGE_PATH = "${config.chvp.dataPrefix}/var/lib/accentor/storage";
     RAILS_TRANSCODE_CACHE = "/var/tmp/accentor/transcode_cache";
     BOOTSNAP_CACHE_DIR = "/var/tmp/accentor/bootsnap";
@@ -59,6 +60,7 @@ in
         export DATABASE_URL="postgresql://%2Frun%2Fpostgresql/accentor"
         export FFMPEG_LOG_LOCATION="/var/log/accentor/ffmpeg.log"
         export RAILS_STORAGE_PATH="${config.chvp.dataPrefix}/var/lib/accentor/storage"
+        export FFMPEG_VERSION_LOCATION="${config.chvp.dataPrefix}/var/lib/accentor/ffmpeg.version"
         export RAILS_TRANSCODE_CACHE="/var/tmp/accentor/transcode_cache"
         export BOOTSNAP_CACHE_DIR="/var/tmp/accentor/bootsnap"
         export PIDFILE="/run/accentor/server.pid"
@@ -110,7 +112,10 @@ in
           Group = "accentor";
           Restart = "on-failure";
           WorkingDirectory = api;
-          ExecStartPre = "${gems}/bin/bundle exec rails db:migrate";
+          ExecStartPre = [
+            "${gems}/bin/bundle exec rails db:migrate"
+            "${gems}/bin/bundle exec rails ffmpeg:check_version"
+          ];
           ExecStart = "${gems}/bin/bundle exec puma -C ${api}/config/puma.rb";
         };
       };

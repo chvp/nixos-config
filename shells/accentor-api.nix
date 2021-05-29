@@ -4,6 +4,7 @@ in
 pkgs.mkShell {
   buildInputs = with pkgs; [
     ffmpeg
+    imagemagick
     postgresql
     ruby_2_7
     taglib
