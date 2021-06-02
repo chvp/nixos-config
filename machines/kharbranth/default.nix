@@ -6,8 +6,6 @@
     ../../profiles/graphical.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   networking.hostId = "e718389d";
 
   time.timeZone = "Europe/Brussels";
