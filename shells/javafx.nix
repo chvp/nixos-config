@@ -1,5 +1,5 @@
 let
-  pkgs = import <nixpkgs> { };
+  pkgs = import <nixpkgs> { config.permittedInsecurePackages = [ "ffmpeg-3.4.8" ]; };
   extraRpath = pkgs.lib.strings.makeLibraryPath (with pkgs; [ ffmpeg_3 ]);
   java = pkgs.writeShellScriptBin "java" ''
     old_path="$(patchelf --print-rpath ${pkgs.jdk11}/bin/java)"
