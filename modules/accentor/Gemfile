@@ -5,8 +5,6 @@ ruby '2.7.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1'
-# Keep this low enough until https://github.com/rack/rack/issues/1619 is fixed
-gem 'rack', '~> 2.1.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 1.2.3', '< 2.0'
 # Use Puma as the app server

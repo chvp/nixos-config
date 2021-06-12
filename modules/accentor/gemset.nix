@@ -598,10 +598,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "1x72abm2snhk664s9g642pxjyk911y39qck8n9hbnqmb7ba1zbmz";
+      sha256 = "0i5vs0dph9i5jn8dfc6aqd6njcafmb20rwqngrf759c9cvmyff16";
       type = "gem";
     };
-    version = "2.1.4";
+    version = "2.2.3";
   };
   rack-cors = {
     dependencies = [ "rack" ];
