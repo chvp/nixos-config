@@ -4,7 +4,10 @@ let
     programs.direnv = {
       enable = true;
       enableZshIntegration = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv = {
+        enable = true;
+        enableFlakes = true;
+      };
     };
   };
   baseNixIndex = {
@@ -85,7 +88,6 @@ in
     nixpkgs.overlays = [
       (self: super: {
         nix = super.nixUnstable;
-        nix-direnv = super.nix-direnv.override { enableFlakes = true; };
       })
     ];
 
