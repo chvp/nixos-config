@@ -18,7 +18,10 @@
       authorizedKeysFiles = [ "/run/secrets/authorized_keys/%u" ];
     };
 
-    age.secrets."authorized_keys/charlotte".file = ../secrets/authorized_keys/charlotte.age;
+    age.secrets."authorized_keys/charlotte" = {
+      file = ../secrets/authorized_keys/charlotte.age;
+      owner = "charlotte";
+    };
     age.secrets."authorized_keys/root".file = ../secrets/authorized_keys/root.age;
   };
 }
