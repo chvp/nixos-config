@@ -1,12 +1,32 @@
 {
   "nodes": {
+    "agenix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1620877075,
+        "narHash": "sha256-XvgTqtmQZHegu9UMDSR50gK5cHEM2gbnRH0qecmdN54=",
+        "owner": "ryantm",
+        "repo": "agenix",
+        "rev": "e543aa7d68f222e1e771165da9e9a64b5bf7b3e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryantm",
+        "repo": "agenix",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1624097579,
-        "narHash": "sha256-vy447LhWdLaikwXx3BtNdlY4rmgNM35fwZzZ5SyY/4M=",
+        "lastModified": 1624127230,
+        "narHash": "sha256-0Wg07rR5u4F/02/mJU+CjwyYryBHB/zMOz7ArEnMlt8=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "eb561e58db5ab3b52b1157da189c48a27fb7dca9",
+        "rev": "e9ced9b4f2e49488a97b20dc43fafea7284715a7",
         "type": "github"
       },
       "original": {
@@ -70,6 +90,7 @@
     },
     "root": {
       "inputs": {
+        "agenix": "agenix",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",

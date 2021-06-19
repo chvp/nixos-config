@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./default/secret.nix
     ./accentor.nix
     ./bluetooth.nix
     ./docker.nix
@@ -132,8 +131,15 @@
           home = "/home/charlotte";
           description = "Charlotte Van Petegem";
           extraGroups = [ "systemd-journal" ] ++ lib.optionals config.chvp.graphical [ "input" "video" ];
+          passwordFile = config.age.secrets."passwords/users/charlotte".path;
         };
+        root.passwordFile = config.age.secrets."passwords/users/root".path;
       };
+    };
+
+    age.secrets = {
+      "passwords/users/charlotte".file = ../secrets/passwords/users/charlotte.age;
+      "passwords/users/root".file = ../secrets/passwords/users/root.age;
     };
   };
 }

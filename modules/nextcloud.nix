@@ -20,7 +20,7 @@
           dbtype = "pgsql";
           dbhost = "/run/postgresql";
           adminuser = "admin";
-          adminpassFile = "${config.chvp.dataPrefix}/var/secrets/nextcloud-admin-password";
+          adminpassFile = config.age.secrets."passwords/services/nextcloud-admin".path;
         };
       };
       nginx.virtualHosts."nextcloud.vanpetegem.me" = {
@@ -36,6 +36,10 @@
           ensurePermissions = { "DATABASE nextcloud" = "ALL PRIVILEGES"; };
         }];
       };
+    };
+    age.secrets."passwords/services/nextcloud-admin" = {
+      file = ../secrets/passwords/services/nextcloud-admin.age;
+      owner = "nextcloud";
     };
     systemd.services."nextcloud-setup" = {
       requires = [ "postgresql.service" ];

@@ -13,7 +13,6 @@
           fqdn = "data.vanpetegem.me";
           options = {
             default = true;
-            basicAuthFile = "/data/var/secrets/data.vanpetegem.me.htpasswd";
             root = "/srv/data";
             locations = {
               "/".extraConfig = ''
@@ -47,7 +46,7 @@
     security.acme = {
       certs."vanpetegem.me" = {
         dnsProvider = "cloudflare";
-        credentialsFile = "/data/var/secrets/vanpetegem.me-cloudflare";
+        credentialsFile =  config.age.secrets."passwords/services/acme".path;
         extraDomainNames = [
           "*.vanpetegem.me"
           "cvpetegem.be"
@@ -60,6 +59,10 @@
       email = "webmaster@vanpetegem.me";
       acceptTerms = true;
       preliminarySelfsigned = false;
+    };
+    age.secrets."passwords/services/acme" = {
+      file = ../secrets/passwords/services/acme.age;
+      owner = "acme";
     };
     chvp.zfs.systemLinks = [
       { type = "data"; path = "/var/lib/acme"; }

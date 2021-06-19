@@ -16,8 +16,8 @@
     enable = true;
     permitRootLogin = "no";
     hostKeys = [
-      { bits = 4096; path = "/var/secrets/ssh_host_rsa_key"; type = "rsa"; }
-      { path = "/var/secrets/ssh_host_ed25519_key"; type = "ed25519"; }
+      { bits = 4096; path = "/run/secrets/ssh_host_rsa_key"; type = "rsa"; }
+      { path = "/run/secrets/ssh_host_ed25519_key"; type = "ed25519"; }
     ];
   };
 }

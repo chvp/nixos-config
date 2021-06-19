@@ -9,8 +9,8 @@
   config = lib.mkIf config.chvp.syncthing-server.enable {
     services.syncthing = {
       enable = true;
-      dataDir = "${config.chvp.dataPrefix}/var/lib/synthing";
-      configDir = "${config.chvp.dataPrefix}/var/lib/synthing/.config";
+      dataDir = "${config.chvp.dataPrefix}/var/lib/syncthing";
+      configDir = "${config.chvp.dataPrefix}/var/lib/syncthing/.config";
       openDefaultPorts = true;
       guiAddress = "127.0.0.1:8384";
     };
@@ -20,9 +20,13 @@
         fqdn = "syncthing.vanpetegem.me";
         basicProxy = "http://localhost:8384";
         options = {
-          basicAuthFile = "${config.chvp.dataPrefix}/var/secrets/syncthing.vanpetegem.me.htpasswd";
+          basicAuthFile = config.age.secrets."passwords/services/syncthing-basic-auth".path;
         };
       }
     ];
+    age.secrets."passwords/services/syncthing-basic-auth" = {
+      file = ../secrets/passwords/services/syncthing-basic-auth.age;
+      owner = "nginx";
+    };
   };
 }

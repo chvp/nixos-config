@@ -22,31 +22,36 @@
   fileSystems."/" = {
     device = "rpool/local/root";
     fsType = "zfs";
+    neededForBoot = true;
   };
 
   fileSystems."/nix" = {
     device = "rpool/local/nix";
     fsType = "zfs";
+    neededForBoot = true;
   };
 
   fileSystems."/nix/store" = {
     device = "rpool/local/nix-store";
     fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A5BA-352A";
-    fsType = "vfat";
+    neededForBoot = true;
   };
 
   fileSystems."/cache" = {
     device = "rpool/local/cache";
     fsType = "zfs";
+    neededForBoot = true;
   };
 
   fileSystems."/data" = {
     device = "rpool/safe/data";
     fsType = "zfs";
+    neededForBoot = true;
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/A5BA-352A";
+    fsType = "vfat";
   };
 
   swapDevices = [

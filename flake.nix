@@ -2,6 +2,10 @@
   description = "Nixos configuration flake";
 
   inputs = {
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     emacs-overlay.url = "github:nix-community/emacs-overlay/master";
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -11,7 +15,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/master";
   };
 
-  outputs = inputs@{ self, nixpkgs, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
+  outputs = inputs@{ self, nixpkgs, agenix, emacs-overlay, home-manager, utils }: utils.lib.systemFlake {
     inherit self inputs;
     # This config can only be evaluated on x86_64-linux because of IFD
     supportedSystems = [ "x86_64-linux" ];
@@ -27,6 +31,7 @@
           nix.nixPath = [ "/etc/channels" ];
         })
         utils.nixosModules.saneFlakeDefaults
+        agenix.nixosModules.age
         home-manager.nixosModules.home-manager
         ./modules
       ];
@@ -44,6 +49,7 @@
         buildInputs = [
           pkgs.nixpkgs-fmt
           (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
+          agenix.defaultPackage.x86_64-linux
         ];
       };
   };

@@ -1,7 +1,25 @@
 { pkgs, ... }:
 
+let
+  automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+in
 {
-  imports = [ ./mounts/secret.nix ];
+  fileSystems = {
+    "/mnt/ugent/files" = {
+      device = "//files.ugent.be/ecvpeteg";
+      fsType = "cifs";
+      options = [ "credentials=/run/secrets/passwords/ugent-mount-credentials,${automount_opts},users,vers=3.0,noperm,domain=UGENT,sec=ntlmv2i" ];
+      noCheck = true;
+    };
+    "/mnt/ugent/webhost" = {
+      device = "//webhost.ugent.be/ecvpeteg";
+      fsType = "cifs";
+      options = [ "credentials=/run/secrets/passwords/ugent-mount-credentials,${automount_opts},users,vers=3.0" ];
+      noCheck = true;
+    };
+  };
+
+  age.secrets."passwords/ugent-mount-credentials".file = ../secrets/passwords/ugent-mount-credentials.age;
 
   environment.systemPackages = [ pkgs.keyutils ];
   # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved

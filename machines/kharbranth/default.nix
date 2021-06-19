@@ -18,6 +18,7 @@
     docker.enable = true;
     eid.enable = true;
     git.email = "charlotte.vanpetegem@ugent.be";
+    sshd.enable = true;
     zfs = {
       enable = true;
       encrypted = true;

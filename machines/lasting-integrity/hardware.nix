@@ -25,22 +25,27 @@
     "/" = {
       device = "zroot/local/root";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/nix" = {
       device = "zroot/local/nix";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/nix/store" = {
       device = "zroot/local/nix-store";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/data" = {
       device = "zroot/safe/data";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/srv/data" = {
       device = "zdata/data";

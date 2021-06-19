@@ -14,8 +14,8 @@
           hostPath = "/srv/data";
           isReadOnly = false;
         };
-        "/var/secrets" = {
-          hostPath = "${config.chvp.dataPrefix}/var/secrets/data-access";
+        "/run/secrets" = {
+          hostPath = "/run/secrets/data-access";
           isReadOnly = true;
         };
       };
@@ -26,5 +26,10 @@
       localAddress6 = "fc00::2";
       config = import ./config.nix;
     };
+
+    age.secrets."data-access/ssh_host_rsa_key".file = ../../secrets/data-access/ssh_host_rsa_key.age;
+    age.secrets."data-access/ssh_host_rsa_key.pub".file = ../../secrets/data-access/ssh_host_rsa_key.pub.age;
+    age.secrets."data-access/ssh_host_ed25519_key".file = ../../secrets/data-access/ssh_host_ed25519_key.age;
+    age.secrets."data-access/ssh_host_ed25519_key.pub".file = ../../secrets/data-access/ssh_host_ed25519_key.pub.age;
   };
 }

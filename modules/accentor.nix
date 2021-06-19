@@ -106,7 +106,7 @@ in
         environment = env;
         path = [ pkgs.ffmpeg gems gems.wrappedRuby ];
         serviceConfig = {
-          EnvironmentFile = "${config.chvp.dataPrefix}/var/secrets/accentor-api";
+          EnvironmentFile = config.age.secrets."passwords/services/accentor".path;
           Type = "simple";
           User = "accentor";
           Group = "accentor";
@@ -128,7 +128,7 @@ in
           environment = env;
           path = [ pkgs.ffmpeg gems gems.wrappedRuby ];
           serviceConfig = {
-            EnvironmentFile = "${config.chvp.dataPrefix}/var/secrets/accentor-api";
+            EnvironmentFile = config.age.secrets."passwords/services/accentor".path;
             Type = "simple";
             User = "accentor";
             Group = "accentor";
@@ -139,6 +139,11 @@ in
         };
 
       }) 4));
+
+    age.secrets."passwords/services/accentor" = {
+      file = ../secrets/passwords/services/accentor.age;
+      owner = "accentor";
+    };
 
     users.users.accentor = {
       group = "accentor";

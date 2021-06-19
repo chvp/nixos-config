@@ -34,6 +34,7 @@
     eid.enable = true;
     git.email = "charlotte@vanpetegem.me";
     minecraft.client = true;
+    sshd.enable = true;
     zeroad.enable = true;
     zfs = {
       enable = true;
