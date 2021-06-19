@@ -36,6 +36,7 @@
       okular
       pandoc
       pavucontrol
+      qjackctl
       ranger
       slurp
       sshfs

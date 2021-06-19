@@ -15,7 +15,9 @@
   home-manager.users.charlotte = { pkgs, ... }: {
     programs.obs-studio = {
       enable = true;
-      plugins = [ pkgs.obs-wlrobs pkgs.obs-v4l2sink ];
+      package = pkgs.wrapOBS {
+        plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+      };
     };
   };
 
