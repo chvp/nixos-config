@@ -149,9 +149,17 @@
   :config (global-flycheck-mode)
   )
 
+;; Groovy (gradle) language support
+(use-package groovy-mode
+  :mode "\\.gradle\\'")
+
 ;; Haskell language support
 (use-package haskell-mode
   :mode "\\.hs\\'")
+
+;; Kotlin language support
+(use-package kotlin-mode
+  :mode "\\.kt\\'")
 
 ;; Ledger syntax support
 (use-package ledger-mode
