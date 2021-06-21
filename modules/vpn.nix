@@ -14,8 +14,14 @@
 
   config = lib.mkIf config.chvp.vpn.ugent.enable {
     systemd.services = {
-      ugent-global-vpn.after = [ "network.target" ];
-      ugent-local-vpn.after = [ "network.target" ];
+      ugent-global-vpn = {
+        after = [ "network.target" ];
+        conflicts = [ "ugent-local-vpn.service" ];
+      };
+      ugent-local-vpn = {
+        after = [ "network.target" ];
+        conflicts = [ "ugent-global-vpn.service" ];
+      };
     };
     security.polkit.extraConfig = ''
         polkit.addRule(function(action, subject) {
