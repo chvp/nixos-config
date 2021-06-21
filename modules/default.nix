@@ -21,6 +21,7 @@
     ./teeworlds.nix
     ./tetris.nix
     ./tmux.nix
+    ./vpn.nix
     ./zeroad.nix
     ./zfs.nix
     ./zotero.nix

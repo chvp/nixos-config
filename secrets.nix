@@ -26,6 +26,7 @@ in
   "secrets/authorized_keys/root.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/ugent-mount-credentials.age".publicKeys = [ kholinar ] ++ users;
+  "secrets/passwords/ugent-vpn.age".publicKeys = [ kholinar ] ++ users;
 
   "secrets/passwords/services/accentor.age".publicKeys = [ urithiru ] ++ users;
 

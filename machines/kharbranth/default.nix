@@ -19,6 +19,7 @@
     eid.enable = true;
     git.email = "charlotte.vanpetegem@ugent.be";
     sshd.enable = true;
+    vpn.ugent.enable = true;
     zfs = {
       enable = true;
       encrypted = true;
