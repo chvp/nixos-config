@@ -17,6 +17,7 @@
     ./smartd.nix
     ./ssh.nix
     ./sshd.nix
+    ./steam.nix
     ./syncthing-server.nix
     ./teeworlds.nix
     ./tetris.nix

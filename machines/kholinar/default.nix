@@ -35,6 +35,7 @@
     git.email = "charlotte@vanpetegem.me";
     minecraft.client = true;
     sshd.enable = true;
+    steam.enable = true;
     vpn.ugent.enable = true;
     zeroad.enable = true;
     zfs = {
