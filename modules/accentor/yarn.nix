@@ -3530,11 +3530,11 @@
       };
     }
     {
-      name = "eslint_plugin_vue___eslint_plugin_vue_7.11.1.tgz";
+      name = "eslint_plugin_vue___eslint_plugin_vue_7.12.1.tgz";
       path = fetchurl {
-        name = "eslint_plugin_vue___eslint_plugin_vue_7.11.1.tgz";
-        url = "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.11.1.tgz";
-        sha1 = "77eb4b44032d5cca79f9af21d06991d8694a314a";
+        name = "eslint_plugin_vue___eslint_plugin_vue_7.12.1.tgz";
+        url = "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.12.1.tgz";
+        sha1 = "ef6499ce4fe0566659c8e12c71713f5308630a76";
       };
     }
     {
@@ -7122,11 +7122,11 @@
       };
     }
     {
-      name = "prettier___prettier_2.3.1.tgz";
+      name = "prettier___prettier_2.3.2.tgz";
       path = fetchurl {
-        name = "prettier___prettier_2.3.1.tgz";
-        url = "https://registry.yarnpkg.com/prettier/-/prettier-2.3.1.tgz";
-        sha1 = "76903c3f8c4449bc9ac597acefa24dc5ad4cbea6";
+        name = "prettier___prettier_2.3.2.tgz";
+        url = "https://registry.yarnpkg.com/prettier/-/prettier-2.3.2.tgz";
+        sha1 = "ef280a05ec253712e486233db5c6f23441e7342d";
       };
     }
     {
@@ -9066,11 +9066,11 @@
       };
     }
     {
-      name = "vue_i18n___vue_i18n_8.24.4.tgz";
+      name = "vue_i18n___vue_i18n_8.24.5.tgz";
       path = fetchurl {
-        name = "vue_i18n___vue_i18n_8.24.4.tgz";
-        url = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.24.4.tgz";
-        sha1 = "b158614c1df7db183d9cadddbb73e1d540269492";
+        name = "vue_i18n___vue_i18n_8.24.5.tgz";
+        url = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.24.5.tgz";
+        sha1 = "7127a666d5be2199be69be39e439a419a90ff931";
       };
     }
     {
@@ -9098,11 +9098,11 @@
       };
     }
     {
-      name = "vue_router___vue_router_3.5.1.tgz";
+      name = "vue_router___vue_router_3.5.2.tgz";
       path = fetchurl {
-        name = "vue_router___vue_router_3.5.1.tgz";
-        url = "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.1.tgz";
-        sha1 = "edf3cf4907952d1e0583e079237220c5ff6eb6c9";
+        name = "vue_router___vue_router_3.5.2.tgz";
+        url = "https://registry.yarnpkg.com/vue-router/-/vue-router-3.5.2.tgz";
+        sha1 = "5f55e3f251970e36c3e8d88a7cd2d67a350ade5c";
       };
     }
     {
@@ -9154,11 +9154,11 @@
       };
     }
     {
-      name = "vuetify___vuetify_2.5.4.tgz";
+      name = "vuetify___vuetify_2.5.5.tgz";
       path = fetchurl {
-        name = "vuetify___vuetify_2.5.4.tgz";
-        url = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.4.tgz";
-        sha1 = "037cc8d430b61188ab15b9a8cc1ee67e620fa6e7";
+        name = "vuetify___vuetify_2.5.5.tgz";
+        url = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.5.tgz";
+        sha1 = "66d4058209e1d70e9c742d37384f3ae63add7b04";
       };
     }
     {
