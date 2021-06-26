@@ -1,7 +1,8 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, ... }:
+
 let
   passwordScript = pkgs.writeShellScript "get_mail_password" ''${pkgs.pass}/bin/pass show "$@" | head -n1 | tr -d "\n"'';
-  notifyScript = name: pkgs.writeShellScript "notify_${name}_mail" ''
+  notifyScript = name: pkgs.writeShellScript "notify_${name}_mail" (if config.chvp.graphical then ''
     unseen_count=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
 
     if [ "$unseen_count" = "1" ]
@@ -11,7 +12,7 @@ let
     then
       ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' "$unseen_count unseen mails"
     fi
-  '';
+  '' else ''true'');
   makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, passFile, extraConfig ? { } }: (lib.recursiveUpdate
     {
       inherit address;
@@ -75,7 +76,12 @@ let
   toRecursiveINIBase 1;
 in
 {
-  config = {
+  options.chvp.mail-client.enable = lib.mkOption {
+    default = false;
+    example = true;
+  };
+
+  config = lib.mkIf config.chvp.mail-client.enable {
     chvp.zfs.homeLinks = [
       { path = "mail"; type = "data"; }
       { path = ".cache/mu"; type = "cache"; }

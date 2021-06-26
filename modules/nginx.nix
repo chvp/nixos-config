@@ -46,7 +46,7 @@
     security.acme = {
       certs."vanpetegem.me" = {
         dnsProvider = "cloudflare";
-        credentialsFile =  config.age.secrets."passwords/services/acme".path;
+        credentialsFile = config.age.secrets."passwords/services/acme".path;
         extraDomainNames = [
           "*.vanpetegem.me"
           "cvpetegem.be"

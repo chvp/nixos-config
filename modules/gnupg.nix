@@ -1,16 +1,22 @@
 { config, lib, ... }:
 
 {
-  options.chvp.gnupg.pinentryFlavor = lib.mkOption {
-    type = lib.types.str;
-    default = "curses";
-    example = "qt";
-    description = ''
-      Pinentry flavor for gnupg.
-    '';
+  options.chvp.gnupg = {
+    enable = lib.mkOption {
+      default = false;
+      example = true;
+    };
+    pinentryFlavor = lib.mkOption {
+      type = lib.types.str;
+      default = "curses";
+      example = "qt";
+      description = ''
+        Pinentry flavor for gnupg.
+      '';
+    };
   };
 
-  config = {
+  config = lib.mkIf config.chvp.gnupg.enable {
     chvp.zfs.homeLinks = [
       { path = ".gnupg/crls.d"; type = "data"; }
       { path = ".gnupg/private-keys-v1.d"; type = "data"; }
@@ -19,6 +25,7 @@
     ];
     programs.gnupg.agent = {
       enable = true;
+      pinentryFlavor = config.chvp.gnupg.pinentryFlavor;
     };
     home-manager.users.charlotte = { lib, ... }: {
       home.activation.fixPermissionsCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

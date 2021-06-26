@@ -10,6 +10,7 @@
 
   networking.hostId = "b352adfe";
 
+  # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
     docker.enable = true;

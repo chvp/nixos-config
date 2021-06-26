@@ -1,25 +1,18 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware.nix
-    ../../profiles/graphical.nix
-  ];
+  imports = [ ./hardware.nix ];
 
   networking.hostId = "e718389d";
 
   time.timeZone = "Europe/Brussels";
 
-  # Machine-specific application settings
+  # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
     graphical = true;
     bluetooth.enable = true;
-    docker.enable = true;
-    eid.enable = true;
     git.email = "charlotte.vanpetegem@ugent.be";
-    sshd.enable = true;
-    vpn.ugent.enable = true;
     zfs = {
       enable = true;
       encrypted = true;
@@ -33,6 +26,5 @@
       ];
       rootDataset = "rpool/local/root";
     };
-    zotero.enable = true;
   };
 }

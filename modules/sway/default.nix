@@ -1,12 +1,18 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
+
 let
-  launcher = import ./sway/launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
-  color-picker = import ./sway/color-picker.nix { inherit pkgs; };
-  screenshot = import ./sway/screenshot.nix { inherit pkgs; };
-  status-configuration = import ./sway/status-configuration.nix { inherit pkgs config; };
+  launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
+  color-picker = import ./color-picker.nix { inherit pkgs; };
+  screenshot = import ./screenshot.nix { inherit pkgs; };
+  status-configuration = import ./status-configuration.nix { inherit pkgs config; };
 in
 {
-  config = {
+  options.chvp.sway.enable = lib.mkOption {
+    default = false;
+    example = true;
+  };
+
+  config = lib.mkIf config.chvp.sway.enable {
     services.dbus.packages = with pkgs; [ gnome3.dconf ];
     security.pam.services.swaylock = { };
     xdg.portal = {
@@ -14,11 +20,23 @@ in
       gtkUsePortal = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
     };
-    home-manager.users.charlotte = { pkgs, lib, ... }: {
-      home.packages = [ color-picker screenshot ];
-      programs.mako = {
-        enable = true;
-        font = "Fira Code Normal 9";
+    home-manager.users.charlotte = { pkgs, ... }: {
+      home.packages = with pkgs; [
+        color-picker
+        screenshot
+        wf-recorder
+        wl-clipboard
+      ];
+      programs = {
+        mako = {
+          enable = true;
+          font = "Fira Code Normal 9";
+        };
+        zsh.loginExtra = ''
+          if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
+              exec sway
+          fi
+        '';
       };
       services.kanshi = {
         enable = true;

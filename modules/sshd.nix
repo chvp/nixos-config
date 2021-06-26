@@ -2,8 +2,8 @@
 
 {
   options.chvp.sshd.enable = lib.mkOption {
-    default = false;
-    example = true;
+    default = true;
+    example = false;
   };
 
   config = lib.mkIf config.chvp.sshd.enable {

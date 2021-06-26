@@ -1,42 +1,24 @@
 { pkgs, lib, ... }:
 
 {
-  imports = [
-    ./hardware.nix
-    ../../profiles/graphical.nix
-  ];
-
-  boot.kernelModules = [ "v4l2loopback" ];
-  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback video_nr=9 card_label="obs"
-  '';
-
-  home-manager.users.charlotte = { pkgs, ... }: {
-    programs.obs-studio = {
-      enable = true;
-      package = pkgs.wrapOBS {
-        plugins = [ pkgs.obs-studio-plugins.wlrobs ];
-      };
-    };
-  };
+  imports = [ ./hardware.nix ];
 
   networking.hostId = "3cc1a4b2";
 
   time.timeZone = "Europe/Brussels";
 
-  # Machine-specific settings
+  # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
     graphical = true;
+    android.enable = true;
     bluetooth.enable = true;
-    docker.enable = true;
-    eid.enable = true;
+    dropbox.enable = true;
     git.email = "charlotte@vanpetegem.me";
     minecraft.client = true;
-    sshd.enable = true;
+    mumble.enable = true;
+    obs.enable = true;
     steam.enable = true;
-    vpn.ugent.enable = true;
     zeroad.enable = true;
     zfs = {
       enable = true;
@@ -51,6 +33,5 @@
       ];
       rootDataset = "rpool/local/root";
     };
-    zotero.enable = true;
   };
 }

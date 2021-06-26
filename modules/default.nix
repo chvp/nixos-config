@@ -3,26 +3,46 @@
 {
   imports = [
     ./accentor.nix
+    ./android.nix
     ./bluetooth.nix
+    ./calibre.nix
     ./docker.nix
+    ./deluge-client.nix
+    ./deluge-server.nix
+    ./dropbox.nix
     ./eid.nix
     ./emacs.nix
+    ./firefox.nix
     ./git.nix
     ./global-mailer.nix
+    ./gnupg.nix
+    ./graphical.nix
+    ./hledger.nix
+    ./mail-client.nix
     ./minecraft.nix
+    ./mumble.nix
+    ./networkmanager.nix
     ./nextcloud.nix
     ./nix.nix
     ./nginx.nix
+    ./obs.nix
     ./ovh.nix
+    ./pass.nix
     ./smartd.nix
+    ./sound.nix
     ./ssh.nix
     ./sshd.nix
     ./steam.nix
+    ./sway
+    ./syncthing-client.nix
     ./syncthing-server.nix
     ./teeworlds.nix
+    ./terminal.nix
     ./tetris.nix
+    ./theming.nix
     ./tmux.nix
-    ./vpn.nix
+    ./ugent
+    ./xdg.nix
     ./zeroad.nix
     ./zfs.nix
     ./zotero.nix
@@ -44,11 +64,6 @@
       example = "/cache";
     };
 
-    graphical = lib.mkOption {
-      default = false;
-      example = true;
-    };
-
     hasContainers = lib.mkOption {
       default = false;
       example = true;
@@ -68,11 +83,7 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      htop
-      ncdu
-      ripgrep
-    ];
+    environment.systemPackages = with pkgs; [ htop moreutils ncdu ripgrep sshfs unzip ];
 
     console = {
       colors = [
@@ -124,6 +135,8 @@
       ];
     };
 
+    services.fwupd.enable = true;
+
     users = {
       mutableUsers = false;
       defaultUserShell = pkgs.zsh;
@@ -132,7 +145,7 @@
           isNormalUser = true;
           home = "/home/charlotte";
           description = "Charlotte Van Petegem";
-          extraGroups = [ "systemd-journal" ] ++ lib.optionals config.chvp.graphical [ "input" "video" ];
+          extraGroups = [ "systemd-journal" ];
           passwordFile = config.age.secrets."passwords/users/charlotte".path;
         };
         root.passwordFile = config.age.secrets."passwords/users/root".path;
