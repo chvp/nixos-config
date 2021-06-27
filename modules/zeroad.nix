@@ -19,6 +19,7 @@
       { path = ".config/0ad"; type = "cache"; }
     ];
 
+    # Needs to be here, since the headless server probably doesn't have this enabled yet.
     hardware.opengl.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
       home.packages = [ pkgs.zeroad ];

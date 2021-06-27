@@ -56,6 +56,7 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
     enableRedistributableFirmware = true;
+    opengl.enable = true;
     opengl.extraPackages = with pkgs; [
       vaapiIntel
       vaapiVdpau
