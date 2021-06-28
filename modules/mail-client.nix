@@ -82,6 +82,11 @@ in
   };
 
   config = lib.mkIf config.chvp.mail-client.enable {
+    nixpkgs.overlays = [
+      (self: super: {
+        khal = super.khal.overrideAttrs (old: { doInstallCheck = false; });
+      })
+    ];
     chvp.zfs.homeLinks = [
       { path = "mail"; type = "data"; }
       { path = ".cache/mu"; type = "cache"; }
