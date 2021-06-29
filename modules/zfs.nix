@@ -22,7 +22,6 @@
       example = [
         { path = ".config/syncthing"; type = "data"; }
         { path = ".cache/nix-index"; type = "cache"; }
-        { path = ".gnupg/pubring.kbx"; type = "data"; file = true; }
       ];
     };
     backups = lib.mkOption {
@@ -88,17 +87,7 @@
 
     systemd.services =
       let
-        makeLinkScript = config: lib.strings.concatStringsSep "\n" (map
-          (location:
-            if location.file or false then
-              ''
-                mkdir -p $(dirname "${location.path}")
-                [ -f "${location.path}" ] || touch "${location.path}"
-              ''
-            else
-              ''mkdir -p "${location.path}"''
-          )
-          config);
+        makeLinkScript = config: lib.strings.concatStringsSep "\n" (map (location: ''mkdir -p "${location.path}"'') config);
         systemLinksScript = makeLinkScript config.chvp.zfs.systemLinks;
         homeLinksScript = makeLinkScript config.chvp.zfs.homeLinks;
       in
