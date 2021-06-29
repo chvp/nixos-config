@@ -1,12 +1,5 @@
 { config, lib, ... }:
-let
-  linkCommands = map
-    (location: ''
-      $DRY_RUN_CMD mkdir -p $VERBOSE_ARG "/home/charlotte/$(dirname ${location.path})"
-      $DRY_RUN_CMD ln -sf -T $VERBOSE_ARG "/${location.type}/home/charlotte/${location.path}" "/home/charlotte/${location.path}"
-    '')
-    config.chvp.zfs.homeLinks;
-in
+
 {
   options.chvp.zfs = {
     enable = lib.mkOption {
@@ -29,6 +22,7 @@ in
       example = [
         { path = ".config/syncthing"; type = "data"; }
         { path = ".cache/nix-index"; type = "cache"; }
+        { path = ".gnupg/pubring.kbx"; type = "data"; file = true; }
       ];
     };
     backups = lib.mkOption {
@@ -92,15 +86,97 @@ in
       };
     };
 
-    systemd.tmpfiles.rules = (
-      [ "d /home/charlotte 0700 charlotte users - -" ] ++
-      (map (location: "L ${location.path} - - - - /${location.type}${location.path}") config.chvp.zfs.systemLinks)
-    );
+    systemd.services =
+      let
+        makeLinkScript = config: lib.strings.concatStringsSep "\n" (map
+          (location:
+            if location.file or false then
+              ''
+                mkdir -p $(dirname "${location.path}")
+                [ -f "${location.path}" ] || touch "${location.path}"
+              ''
+            else
+              ''mkdir -p "${location.path}"''
+          )
+          config);
+        systemLinksScript = makeLinkScript config.chvp.zfs.systemLinks;
+        homeLinksScript = makeLinkScript config.chvp.zfs.homeLinks;
+      in
+      {
+        make-system-links-destinations = {
+          script = ''
+            ${systemLinksScript}
+            mkdir -p /home/charlotte
+            chown charlotte:users /home/charlotte
+          '';
+          after = [ "local-fs.target" ];
+          wants = [ "local-fs.target" ];
+          before = [ "shutdown.target" "sysinit.target" ];
+          conflicts = [ "shutdown.target" ];
+          wantedBy = [ "sysinit.target" ];
+          serviceConfig = {
+            RemainAfterExit = "yes";
+            Type = "oneshot";
+            UMask = "0077";
+          };
+          unitConfig = {
+            DefaultDependencies = "no";
+          };
+        };
 
-    home-manager.users.charlotte = { lib, ... }: {
-      home.activation = {
-        linkCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] (lib.concatStringsSep "\n" linkCommands);
+        make-home-links-destinations = {
+          script = homeLinksScript;
+          after = [ "local-fs.target" "make-system-links-destinations.service" ];
+          wants = [ "local-fs.target" "make-system-links-destinations.service" ];
+          before = [ "shutdown.target" "sysinit.target" ];
+          conflicts = [ "shutdown.target" ];
+          wantedBy = [ "sysinit.target" ];
+          serviceConfig = {
+            RemainAfterExit = "yes";
+            Type = "oneshot";
+            User = "charlotte";
+            Group = "users";
+            UMask = "0077";
+            WorkingDirectory = "/home/charlotte";
+          };
+          unitConfig = {
+            DefaultDependencies = "no";
+          };
+        };
       };
-    };
+
+    systemd.mounts =
+      (map
+        (location: {
+          what = "/${location.type}${location.path}";
+          where = "${location.path}";
+          type = "none";
+          options = "bind";
+          after = [ "local-fs.target" "make-system-links-destinations.service" ];
+          wants = [ "local-fs.target" "make-system-links-destinations.service" ];
+          before = [ "umount.target" "sysinit.target" ];
+          conflicts = [ "umount.target" ];
+          wantedBy = [ "sysinit.target" ];
+          unitConfig = {
+            DefaultDependencies = "no";
+          };
+        })
+        config.chvp.zfs.systemLinks) ++
+      (map
+        (location: {
+          what = "/${location.type}/home/charlotte/${location.path}";
+          where = "/home/charlotte/${location.path}";
+          type = "none";
+          options = "bind";
+          after = [ "local-fs.target" "make-home-links-destinations.service" ];
+          wants = [ "local-fs.target" "make-home-links-destinations.service" ];
+          before = [ "umount.target" "sysinit.target" ];
+          conflicts = [ "umount.target" ];
+          wantedBy = [ "sysinit.target" ];
+          unitConfig = {
+            DefaultDependencies = "no";
+          };
+        })
+        config.chvp.zfs.homeLinks);
   };
 }

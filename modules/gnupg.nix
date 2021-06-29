@@ -20,8 +20,8 @@
     chvp.zfs.homeLinks = [
       { path = ".gnupg/crls.d"; type = "data"; }
       { path = ".gnupg/private-keys-v1.d"; type = "data"; }
-      { path = ".gnupg/pubring.kbx"; type = "data"; }
-      { path = ".gnupg/trustdb.gpg"; type = "data"; }
+      { path = ".gnupg/pubring.kbx"; type = "data"; file = true; }
+      { path = ".gnupg/trustdb.gpg"; type = "data"; file = true; }
     ];
     programs.gnupg.agent = {
       enable = true;
