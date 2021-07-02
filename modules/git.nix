@@ -32,6 +32,9 @@
             pull = {
               rebase = true;
             };
+            github = {
+              user = "chvp";
+            };
           };
           ignores = [
             ".direnv"

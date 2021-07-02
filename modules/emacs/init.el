@@ -108,6 +108,8 @@
   ((text-mode prog-mode) . electric-pair-mode)
   :custom
   (inhibit-startup-screen t "Don't show default startup screen")
+  (auth-sources '(password-store))
+  (auth-source-pass-filename "~/repos/passwords")
   :config
   ;; Only ask for y/n, never for yes/no.
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -148,6 +150,10 @@
   :diminish (flycheck-mode)
   :config (global-flycheck-mode)
   )
+
+;; Magit GitHub/GitLab integration
+(use-package forge
+  :after magit)
 
 ;; Groovy (gradle) language support
 (use-package groovy-mode
