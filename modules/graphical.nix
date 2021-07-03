@@ -36,6 +36,8 @@
     home-manager.users.charlotte = { ... }: {
       home.packages = with pkgs; [
         google-chrome
+        jdtls
+        kotlin-language-server
         libreoffice-fresh
         mpv
         okular
