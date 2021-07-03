@@ -56,6 +56,11 @@
     )
   )
 
+(use-package auth-source-pass
+  :ensure nil
+  :custom
+  (auth-source-pass-filename "~/repos/passwords"))
+
 ;; Better defaults that aren't defaults for some reason.
 (use-package better-defaults
   ;; But don't enable ido-mode...
@@ -109,7 +114,6 @@
   :custom
   (inhibit-startup-screen t "Don't show default startup screen")
   (auth-sources '(password-store))
-  (auth-source-pass-filename "~/repos/passwords")
   :config
   ;; Only ask for y/n, never for yes/no.
   (defalias 'yes-or-no-p 'y-or-n-p)
