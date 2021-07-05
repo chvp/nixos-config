@@ -480,11 +480,11 @@
 
 ;; TypeScript language support
 (use-package typescript-mode
-  :mode "\\.ts'")
+  :mode "\\.ts\\'")
 
 ;; HTML (and HTML template) support
 (use-package web-mode
-  :mode "\\.html'"
+  :mode "\\.html\\'"
   :mode "\\.html\\.erb\\'"
   )
 
