@@ -9154,11 +9154,11 @@
       };
     }
     {
-      name = "vuetify___vuetify_2.5.5.tgz";
+      name = "vuetify___vuetify_2.5.6.tgz";
       path = fetchurl {
-        name = "vuetify___vuetify_2.5.5.tgz";
-        url = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.5.tgz";
-        sha1 = "66d4058209e1d70e9c742d37384f3ae63add7b04";
+        name = "vuetify___vuetify_2.5.6.tgz";
+        url = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.6.tgz";
+        sha1 = "9cbb1eacece6c42028216312b9be23e35a7f5cf4";
       };
     }
     {
