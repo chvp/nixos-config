@@ -145,6 +145,9 @@
   :config (evil-collection-init)
   )
 
+;; R language support
+(use-package ess)
+
 ;; Ligatures in GUI mode
 ;; Should probably switch to ligature.el, but it isn't on MELPA (yet).
 (use-package fira-code-mode :config (when window-system (global-fira-code-mode)))
@@ -499,7 +502,6 @@
   :mode "\\.yml\\'"
   :mode "\\.yaml\\'"
   )
-
 
 (provide 'init)
 ;;; init.el ends here
