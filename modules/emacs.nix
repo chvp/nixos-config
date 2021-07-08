@@ -1,14 +1,16 @@
 { config, lib, pkgs, ... }:
 
 let
+  emacsConfigText = builtins.readFile ./emacs/init.el + (if config.chvp.mail-client.enable then config.chvp.mail-client.mu4eConfig else "") + ''
+    (provide 'init)
+    ;;; init.el ends here
+  '';
   emacsPkg = pkgs.emacsWithPackagesFromUsePackage {
-    config = ./emacs/init.el;
+    config = emacsConfigText;
     package = pkgs.emacsPgtk;
     alwaysEnsure = true;
-    extraEmacsPackages = epkgs: [
-      # mu4e is included in the mu package and should be used from there
-      pkgs.mu
-    ];
+    # mu4e is included in the mu package and should be used from there
+    extraEmacsPackages = epkgs: lib.optional config.chvp.mail-client.enable pkgs.mu;
   };
 in
 {
@@ -51,7 +53,7 @@ in
       home = {
         file = {
           ".emacs.d/early-init.el".source = ./emacs/early-init.el;
-          ".emacs.d/init.el".source = ./emacs/init.el;
+          ".emacs.d/init.el".text = emacsConfigText;
         };
         packages = [
           (pkgs.writeShellScriptBin "emacs" ''${emacsPkg}/bin/emacsclient -c "$@"'')

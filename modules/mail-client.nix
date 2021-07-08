@@ -76,9 +76,124 @@ let
   toRecursiveINIBase 1;
 in
 {
-  options.chvp.mail-client.enable = lib.mkOption {
-    default = false;
-    example = true;
+  options.chvp.mail-client = {
+    enable = lib.mkOption {
+      default = false;
+      example = true;
+    };
+    mu4eConfig =
+      let
+        mkAccountConfig = account: ''
+          (make-mu4e-context
+            :name "${account.name}"
+            :match-func (lambda (msg) (when msg (string-prefix-p "/${account.maildir.path}/" (mu4e-message-field msg :maildir))))
+            :vars '(
+                    (user-mail-address . "${account.address}")
+                    (user-full-name . "${account.realName}")
+                    (mu4e-drafts-folder . "/${account.maildir.path}/${account.folders.drafts}")
+                    (mu4e-sent-folder . "/${account.maildir.path}/${account.folders.sent}")
+                    (mu4e-refile-folder . "/${account.maildir.path}/${account.folders.trash}")
+                    (mu4e-trash-folder . "/${account.maildir.path}/${account.folders.trash}")
+                    (message-sendmail-extra-arguments . ("--read-envelope-from" "--account" "${account.name}"))
+                    )
+           )
+        '';
+        hmConfig = config.home-manager.users.charlotte;
+      in
+      lib.mkOption {
+        type = lib.types.str;
+        readOnly = true;
+        default = ''
+          (use-package mu4e
+            ;; Use mu4e included in the mu package, see emacs.nix
+            :ensure nil
+            :demand t
+            :after (selectrum)
+            :hook
+            (mu4e-view-mode . display-line-numbers-mode)
+            (mu4e-compose-mode . mail/auto-dodona-cc-reply-to)
+            :custom
+            (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
+            (mu4e-maildir "${hmConfig.accounts.email.maildirBasePath}" "Root of the maildir hierarchy")
+            (mu4e-context-policy 'pick-first "Use the first mail context in the list")
+            (mu4e-attachment-dir "/home/charlotte/downloads/" "Save attachments to downloads folder")
+            (mu4e-compose-dont-reply-to-self t "Don't reply to myself on reply to all")
+            (mu4e-confirm-quit nil "Don't confirm when quitting")
+            (mu4e-completing-read-function 'completing-read "Use default completing read function")
+            (mu4e-headers-include-related nil "Don't show related messages by default")
+            (mu4e-headers-skip-duplicates nil "Show duplicate emails")
+            (message-kill-buffer-on-exit t "Close buffer when finished with email")
+            (mm-verify-option 'known "Always verify PGP signatures (known protocols)")
+            (mm-discouraged-alternatives '("text/html" "text/richtext") "Discourage showing HTML views")
+            (gnus-buttonized-mime-types '("multipart/signed") "Make sure signature verification is always shown")
+            (sendmail-program "msmtp" "Use msmtp to send email")
+            (message-sendmail-f-is-evil t "Remove username from the emacs message")
+            (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
+            (message-cite-reply-position 'below "Bottom posting is the correct way to reply to email")
+            :config
+            (setq mu4e-contexts
+                  (list
+                  ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}
+                  )
+                 )
+            (add-to-list
+             'mu4e-bookmarks
+              '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/jonggroen/INBOX" :key ?i)
+             )
+            (define-advice mu4e~context-ask-user
+                (:around (orig-fun &rest args) mu4e~context-ask-user-completing-read)
+              "Replace `mu4e-read-option` by general-purpose completing-read"
+              (cl-letf (((symbol-function 'mu4e-read-option)
+                         (lambda (prompt options)
+                           (let* ((prompt (mu4e-format "%s" prompt))
+                                  (choice (completing-read prompt (cl-mapcar #'car options) nil t))
+                                  (chosen-el (cl-find-if (lambda (option) (equal choice (car option))) options)))
+                             (if chosen-el
+                                 (cdr chosen-el)
+                               (mu4e-warn "Unknown option: '%s'" choice))))))
+                (apply orig-fun args)))
+            (define-skeleton mail/dodona-teacher-reply-skeleton
+              "Inserts a typical reply when someone uses the general form for a Dodona teacher request."
+              "Naam leerkracht: "
+              "Dag " str ",\n"
+              "\n"
+              _
+              "\n"
+              "Welkom op Dodona! Zou je het volgende formulier kunnen invullen?\n"
+              "\n"
+              "https://dodona.ugent.be/rights_requests/new/\n"
+              "\n"
+              "Zo hebben we meteen alle info die we nodig hebben om je "
+              "lesgeversrechten te geven op Dodona.\n"
+              "\n"
+              "Met vriendelijke groeten,\n"
+              "Charlotte Van Petegem"
+              )
+            (defun mail/dodona-cc-reply-to ()
+              "Add dodona@ugent.be in cc and reply-to headers."
+              (interactive)
+              (save-excursion (message-add-header "Cc: dodona@ugent.be\nReply-To: dodona@ugent.be\n"))
+              )
+            (defun mail/auto-dodona-cc-reply-to ()
+              "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
+              (let ((msg mu4e-compose-parent-message))
+                (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (mail/dodona-cc-reply-to))
+                )
+              )
+            :general
+            (lmap "m" '(mu4e :which-key "mail"))
+            ;; Unmap SPC in the mail view so we can still use the leader.
+            (lmap mu4e-view-mode-map "" nil)
+            (lmap mu4e-compose-mode-map
+              "SPC s" '(mml-secure-message-sign-pgpmime :which-key "Sign")
+              "SPC c" '(mml-secure-message-encrypt-pgpmime :which-key "Encrypt")
+              "SPC t" '(mail/dodona-teacher-reply-skeleton :which-key "Teacher rights reply")
+              "SPC d" '(mail/dodona-cc-reply-to :which-key "Dodona support headers")
+              )
+            )
+        '';
+        description = "mu4e config for inclusion in init.el";
+      };
   };
 
   config = lib.mkIf config.chvp.mail-client.enable {
