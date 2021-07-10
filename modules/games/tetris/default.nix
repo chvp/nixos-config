@@ -7,8 +7,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "chvp";
       repo = "tetris";
-      rev = "a3ff63bb8aecd42241a40ac8f7bdb6acacef7038";
-      sha256 = "0nlj268kwbv45gsmsp2rc2bfdmbiks21pr8zsa22nfkpbm6m4c03";
+      rev = "master";
+      sha256 = "0jq5pih8bb1w2pglpklqix01pdd3a3wzzf0jnai0wy5gn93abpik";
     };
     packageJSON = ./package.json;
     yarnLock = ./yarn.lock;
