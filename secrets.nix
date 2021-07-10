@@ -36,7 +36,7 @@ in
 
   "secrets/passwords/services/accentor.age".publicKeys = [ urithiru ] ++ users;
 
-  "secrets/passwords/services/ssmtp-pass.age".publicKeys = servers ++ users;
+  "secrets/passwords/services/ssmtp-pass.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 

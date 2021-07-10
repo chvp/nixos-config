@@ -1,0 +1,45 @@
+{
+  "name": "accentor",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
+  },
+  "dependencies": {
+    "@mdi/font": "^5.9.55",
+    "@mdi/svg": "^5.9.55",
+    "fetch-retry": "^4.1.1",
+    "roboto-fontface": "^0.10.0",
+    "vue": "^2.6.14",
+    "vue-i18n": "^8.24.5",
+    "vue-meta": "^2.4.0",
+    "vue-router": "^3.5.2",
+    "vuedraggable": "^2.24.3",
+    "vuetify": "^2.5.6",
+    "vuex": "^3.6.2",
+    "vuex-persistedstate": "^3.2.0"
+  },
+  "devDependencies": {
+    "@intlify/vue-i18n-loader": "^1.1.0",
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.12.1",
+    "eslint-plugin-vuetify": "^1.0.1",
+    "prettier": "^2.3.2",
+    "sass": "^1.35.1",
+    "sass-loader": "^10.1.1",
+    "vue-cli-plugin-i18n": "^2.1.0",
+    "vue-cli-plugin-vuetify": "^2.4.1",
+    "vue-template-compiler": "^2.6.14",
+    "vuetify-loader": "^1.7.2",
+    "webpack": "^4.46.0"
+  }
+}

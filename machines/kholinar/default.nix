@@ -10,28 +10,37 @@
   # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
-    graphical = true;
-    android.enable = true;
-    bluetooth.enable = true;
-    dropbox.enable = true;
-    git.email = "charlotte@vanpetegem.me";
-    minecraft.client = true;
-    mumble.enable = true;
-    obs.enable = true;
-    steam.enable = true;
-    zeroad.enable = true;
-    zfs = {
-      enable = true;
-      encrypted = true;
-      backups = [
-        {
-          path = "rpool/safe/data";
-          remotePath = "zdata/recv/kholinar/safe/data";
-          fast = true;
-          location = "lasting-integrity";
-        }
-      ];
-      rootDataset = "rpool/local/root";
+    base = {
+      bluetooth.enable = true;
+      network.networkmanager.enable = true;
+      zfs = {
+        encrypted = true;
+        backups = [
+          {
+            path = "rpool/safe/data";
+            remotePath = "zdata/recv/kholinar/safe/data";
+            fast = true;
+            location = "lasting-integrity";
+          }
+        ];
+        rootDataset = "rpool/local/root";
+      };
     };
+    development = {
+      enable = true;
+      android.enable = true;
+    };
+    games.enable = true;
+    graphical.enable = true;
+    programs = {
+      calibre.enable = true;
+      deluge.enable = true;
+      dropbox.enable = true;
+      eid.enable = true;
+      hledger.enable = true;
+      obs.enable = true;
+    };
+    # It's a pandemic.
+    work.enable = true;
   };
 }

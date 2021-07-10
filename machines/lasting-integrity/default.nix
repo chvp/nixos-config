@@ -13,23 +13,23 @@
   # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
-    docker.enable = true;
-    nginx.enable = true;
-    nextcloud.enable = true;
-    ovh.enable = true;
-    smartd.enable = true;
-    sshd.enable = true;
-    syncthing-server.enable = true;
-    tetris.enable = true;
-    zfs = {
-      enable = true;
-      backups = [{
-        path = "zroot/safe/data";
-        remotePath = "zdata/recv/lasting-integrity/safe/data";
-        fast = true;
-        location = "192.168.0.1";
-      }];
-      rootDataset = "zroot/local/root";
+    base = {
+      network.ovh.enable = true;
+      zfs = {
+        backups = [{
+          path = "zroot/safe/data";
+          remotePath = "zdata/recv/lasting-integrity/safe/data";
+          fast = true;
+          location = "192.168.0.1";
+        }];
+        rootDataset = "zroot/local/root";
+      };
+    };
+    development.enable = true;
+    games.tetris.server = true;
+    services = {
+      nextcloud.enable = true;
+      syncthing.enable = true;
     };
   };
 }
