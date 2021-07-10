@@ -25,7 +25,10 @@
         rootDataset = "zroot/local/root";
       };
     };
-    development.enable = true;
+    development = {
+      docker.enable = true;
+      git.enable = true;
+    };
     games.tetris.server = true;
     services = {
       nextcloud.enable = true;
