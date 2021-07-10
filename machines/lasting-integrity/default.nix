@@ -31,6 +31,7 @@
     };
     games.tetris.server = true;
     services = {
+      matrix.enable = true;
       nextcloud.enable = true;
       syncthing.enable = true;
     };

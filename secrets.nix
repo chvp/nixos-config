@@ -46,6 +46,12 @@ in
 
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ urithiru ] ++ users;
 
+  "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
+
   "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/ssh_host_rsa_key.pub.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/ssh_host_ed25519_key.age".publicKeys = [ urithiru ] ++ users;
