@@ -44,7 +44,7 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [ htop moreutils ncdu ripgrep unzip zip ];
+    environment.systemPackages = with pkgs; [ git htop moreutils ncdu ripgrep unzip zip ];
 
     console = {
       colors = [
