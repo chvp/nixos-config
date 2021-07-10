@@ -39,8 +39,8 @@
           tls = false;
           x_forwarded = true;
           resources = [
-            { names = ["client" "webclient"]; compress = true; }
-            { names = ["federation"]; compress = false; }
+            { names = [ "client" ]; compress = true; }
+            { names = [ "federation" ]; compress = false; }
           ];
         }];
         url_preview_enabled = true;
@@ -131,8 +131,8 @@
         };
       };
       groups = {
-        matrix_appservice_slack = {};
-        mautrix_whatsapp = {};
+        matrix_appservice_slack = { };
+        mautrix_whatsapp = { };
       };
     };
 
