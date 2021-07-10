@@ -92,7 +92,7 @@
       matrix-appservice-slack = {
         description = "Matrix <-> Slack bridge";
         wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
+        after = [ "network.target" "postgresql.service" "matrix-synapse.service" ];
         requires = [ "postgresql.service" "matrix-synapse.service" ];
         script = "${pkgs.matrix-appservice-slack}/bin/matrix-appservice-slack --config ${config.age.secrets."files/services/matrix-appservice-slack/config.yml".path} --file ${config.age.secrets."files/services/matrix-appservice-slack/registration.yml".path}";
         serviceConfig = {
@@ -106,7 +106,7 @@
       mautrix-whatsapp = {
         description = "Matrix <-> WhatsApp bridge";
         wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
+        after = [ "network.target" "postgresql.service" "matrix-synapse.service" ];
         requires = [ "postgresql.service" "matrix-synapse.service" ];
         script = "${pkgs.mautrix-whatsapp}/bin/mautrix-whatsapp --config ${config.age.secrets."files/services/mautrix-whatsapp/config.yml".path}";
         serviceConfig = {
