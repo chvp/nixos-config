@@ -27,7 +27,7 @@ let
       };
       matchBlocks = import ./hosts.secret.nix;
     };
-    home.packages = lib.mkIf config.chvp.graphical.enable [ ssh ];
+    home.packages = lib.mkIf config.chvp.graphical.enable [ ssh pkgs.sshfs ];
   };
 in
 {
