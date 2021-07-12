@@ -45,5 +45,7 @@
       requires = [ "postgresql.service" ];
       after = [ "postgresql.service" ];
     };
+    users.users.nextcloud.uid = 996;
+    users.groups.nextcloud.gid = 996;
   };
 }

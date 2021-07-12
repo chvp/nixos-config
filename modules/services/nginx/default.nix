@@ -90,6 +90,10 @@
           })
           config.chvp.services.nginx.hosts);
     };
-    users.users.nginx.extraGroups = [ "acme" ];
+    users.users = {
+      nginx.extraGroups = [ "acme" ];
+      acme.uid = 999;
+    };
+    users.groups.acme.gid = 999;
   };
 }

@@ -122,17 +122,23 @@
     users = {
       users = {
         matrix_appservice_slack = {
+          uid = 998;
           group = "matrix_appservice_slack";
           isSystemUser = true;
         };
         mautrix_whatsapp = {
+          uid = 997;
           group = "mautrix_whatsapp";
           isSystemUser = true;
         };
       };
       groups = {
-        matrix_appservice_slack = { };
-        mautrix_whatsapp = { };
+        matrix_appservice_slack = {
+          gid = 998;
+        };
+        mautrix_whatsapp = {
+          gid = 997;
+        };
       };
     };
 
