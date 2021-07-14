@@ -4010,6 +4010,14 @@
       };
     }
     {
+      name = "flatted___flatted_3.1.0.tgz";
+      path = fetchurl {
+        name = "flatted___flatted_3.1.0.tgz";
+        url = "https://registry.yarnpkg.com/flatted/-/flatted-3.1.0.tgz";
+        sha1 = "a5d06b4a8b01e3a63771daa5cb7a1903e2e57067";
+      };
+    }
+    {
       name = "flush_write_stream___flush_write_stream_1.1.1.tgz";
       path = fetchurl {
         name = "flush_write_stream___flush_write_stream_1.1.1.tgz";
@@ -4679,6 +4687,14 @@
         name = "ignore___ignore_4.0.6.tgz";
         url = "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz";
         sha1 = "750e3db5862087b4737ebac8207ffd1ef27b25fc";
+      };
+    }
+    {
+      name = "immediate___immediate_3.0.6.tgz";
+      path = fetchurl {
+        name = "immediate___immediate_3.0.6.tgz";
+        url = "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz";
+        sha1 = "9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b";
       };
     }
     {
@@ -5514,6 +5530,14 @@
       };
     }
     {
+      name = "lie___lie_3.1.1.tgz";
+      path = fetchurl {
+        name = "lie___lie_3.1.1.tgz";
+        url = "https://registry.yarnpkg.com/lie/-/lie-3.1.1.tgz";
+        sha1 = "9a436b2cc7746ca59de7a41fa469b3efb76bd87e";
+      };
+    }
+    {
       name = "lines_and_columns___lines_and_columns_1.1.6.tgz";
       path = fetchurl {
         name = "lines_and_columns___lines_and_columns_1.1.6.tgz";
@@ -5559,6 +5583,14 @@
         name = "loader_utils___loader_utils_2.0.0.tgz";
         url = "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.0.tgz";
         sha1 = "e4cace5b816d425a166b5f097e10cd12b36064b0";
+      };
+    }
+    {
+      name = "localforage___localforage_1.9.0.tgz";
+      path = fetchurl {
+        name = "localforage___localforage_1.9.0.tgz";
+        url = "https://registry.yarnpkg.com/localforage/-/localforage-1.9.0.tgz";
+        sha1 = "f3e4d32a8300b362b4634cc4e066d9d00d2f09d1";
       };
     }
     {
@@ -7962,14 +7994,6 @@
       };
     }
     {
-      name = "shvl___shvl_2.0.3.tgz";
-      path = fetchurl {
-        name = "shvl___shvl_2.0.3.tgz";
-        url = "https://registry.yarnpkg.com/shvl/-/shvl-2.0.3.tgz";
-        sha1 = "eb4bd37644f5684bba1fc52c3010c96fb5e6afd1";
-      };
-    }
-    {
       name = "signal_exit___signal_exit_3.0.3.tgz";
       path = fetchurl {
         name = "signal_exit___signal_exit_3.0.3.tgz";
@@ -9162,11 +9186,11 @@
       };
     }
     {
-      name = "vuex_persistedstate___vuex_persistedstate_3.2.0.tgz";
+      name = "vuex_persist___vuex_persist_3.1.3.tgz";
       path = fetchurl {
-        name = "vuex_persistedstate___vuex_persistedstate_3.2.0.tgz";
-        url = "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-3.2.0.tgz";
-        sha1 = "41d3ea304404769ac653ec020de80c95ce16243d";
+        name = "vuex_persist___vuex_persist_3.1.3.tgz";
+        url = "https://registry.yarnpkg.com/vuex-persist/-/vuex-persist-3.1.3.tgz";
+        sha1 = "518c722a2ca3026bcee5732f99d24f75cee0f3b6";
       };
     }
     {
