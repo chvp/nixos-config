@@ -20,6 +20,16 @@
         alwaysEnsure = true;
         # mu4e is included in the mu package and should be used from there
         extraEmacsPackages = epkgs: lib.optional config.chvp.graphical.mail.enable pkgs.mu;
+        override = epkgs: epkgs // {
+          modus-themes = epkgs.melpaPackages.modus-themes.overrideAttrs (old: {
+            src = pkgs.fetchFromGitLab {
+              owner = "protesilaos";
+              repo = "modus-themes";
+              rev = "6593dc2569722c3e85d9e00eff62e4afa35e0610";
+              hash = "sha256-druZQ2oBl0waMQbWcY3z9BkhURCtZGwp66cHbHnFRww=";
+            };
+          });
+        };
       };
     };
   };
