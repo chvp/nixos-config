@@ -60,6 +60,10 @@
           ;; TypeScript language support
           (use-package typescript-mode
            :mode "\\.ts\\'")
+
+          ;; Vue language support
+          (use-package vue-mode
+           :mode "\\.vue\\'")
           
           ;; HTML (and HTML template) support
           (use-package web-mode
