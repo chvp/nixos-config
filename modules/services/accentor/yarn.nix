@@ -9090,11 +9090,11 @@
       };
     }
     {
-      name = "vue_i18n___vue_i18n_8.24.5.tgz";
+      name = "vue_i18n___vue_i18n_8.25.0.tgz";
       path = fetchurl {
-        name = "vue_i18n___vue_i18n_8.24.5.tgz";
-        url = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.24.5.tgz";
-        sha1 = "7127a666d5be2199be69be39e439a419a90ff931";
+        name = "vue_i18n___vue_i18n_8.25.0.tgz";
+        url = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.25.0.tgz";
+        sha1 = "1037d9295fa2845a230b771de473481edb2cfc4c";
       };
     }
     {
