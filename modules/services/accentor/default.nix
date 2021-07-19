@@ -6,7 +6,7 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "accentor";
       repo = "web";
-      rev = "develop";
+      rev = "main";
       sha256 = "0bw6f81fb15f17zm2g7xf2zd3mz8q4xl3s3fq96a3sq2yn8l4zqf";
     };
     packageJSON = ./package.json;
@@ -25,7 +25,7 @@ let
   api = pkgs.fetchFromGitHub {
     owner = "accentor";
     repo = "api";
-    rev = "develop";
+    rev = "main";
     sha256 = "03vmn2x5j07cq7iqvslap05h20cq1wf5mn24pgahb8vk41k7l5sh";
   };
   gems = pkgs.bundlerEnv {
