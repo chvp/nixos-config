@@ -7,7 +7,7 @@ let
       owner = "accentor";
       repo = "web";
       rev = "main";
-      sha256 = "0zk156x3bhgip47hixs47i3r5sh8nad3khdgy50rqmbc6wm9yj1g";
+      sha256 = "09dh7y504h8785fw3flmy56f4dgwscwq4arn29gbrg5kkjk4n7nc";
     };
     packageJSON = ./package.json;
     yarnLock = ./yarn.lock;
