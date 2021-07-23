@@ -79,7 +79,7 @@ in
       noPass = true;
       cmd = "accentor-console";
       runAs = "accentor";
-      setEnv = [ "RAILS_MASTER_KEY" ];
+      setEnv = [ "SECRET_KEY_BASE" ];
     }];
 
     services.postgresql = {
