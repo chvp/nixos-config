@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "accentor": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1627069617,
+        "narHash": "sha256-s/GiZzXildy05Gn21xwaY9nr008v5VMtfvIBtZinYVk=",
+        "owner": "accentor",
+        "repo": "flake",
+        "rev": "a6c06b32fffdc3f15d6ff14cbfd4afa735ae70d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "accentor",
+        "ref": "feature/overridable-packages",
+        "repo": "flake",
+        "type": "github"
+      }
+    },
     "agenix": {
       "inputs": {
         "nixpkgs": [
@@ -90,6 +111,7 @@
     },
     "root": {
       "inputs": {
+        "accentor": "accentor",
         "agenix": "agenix",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",

@@ -2,6 +2,10 @@
   description = "Nixos configuration flake";
 
   inputs = {
+    accentor = {
+      url = "github:accentor/flake/feature/overridable-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +19,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/master";
   };
 
-  outputs = inputs@{ self, nixpkgs, agenix, emacs-overlay, home-manager, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -38,6 +42,7 @@
             nix.nixPath = [ "/etc/channels" ];
           })
           utils.nixosModules.saneFlakeDefaults
+          accentor.nixosModule
           agenix.nixosModules.age
           home-manager.nixosModules.home-manager
           ./modules
