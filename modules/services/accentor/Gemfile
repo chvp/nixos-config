@@ -54,7 +54,7 @@ group :development do
   gem 'rubocop-minitest', '~> 0.14.0'
   gem 'rubocop-rails', '~> 2.11'
 
-  gem 'listen', '>= 3.1.5', '< 3.6'
+  gem 'listen', '>= 3.1.5', '< 3.7'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.1'
   gem 'spring-watcher-listen', '~> 2.0'
