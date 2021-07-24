@@ -35,17 +35,17 @@
         };
       });
       webPackage = (pkgs.accentor-web.override {
-          packageJSON = ./package.json;
-          yarnLock = ./yarn.lock;
-          yarnNix = ./yarn.nix;
-        }).overrideAttrs (old: {
-          src = pkgs.fetchFromGitHub {
-            owner = "accentor";
-            repo = "web";
-            rev = "main";
-            sha256 = "0pkm0v8gdqz1qd1yd129ckankd6i8q1hnmcbgnm5mayd9jla1373";
-          };
-        });
+        packageJSON = ./package.json;
+        yarnLock = ./yarn.lock;
+        yarnNix = ./yarn.nix;
+      }).overrideAttrs (old: {
+        src = pkgs.fetchFromGitHub {
+          owner = "accentor";
+          repo = "web";
+          rev = "main";
+          sha256 = "0pkm0v8gdqz1qd1yd129ckankd6i8q1hnmcbgnm5mayd9jla1373";
+        };
+      });
     };
 
     security.doas.extraRules = [{
