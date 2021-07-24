@@ -7,16 +7,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1627069617,
+        "lastModified": 1627100708,
         "narHash": "sha256-s/GiZzXildy05Gn21xwaY9nr008v5VMtfvIBtZinYVk=",
         "owner": "accentor",
         "repo": "flake",
-        "rev": "a6c06b32fffdc3f15d6ff14cbfd4afa735ae70d4",
+        "rev": "c206b8a5c8c41f049cc640cbbd82ff13aca6c2c8",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
-        "ref": "feature/overridable-packages",
         "repo": "flake",
         "type": "github"
       }
@@ -43,16 +42,15 @@
     },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1627058059,
-        "narHash": "sha256-rnJ8lv9ZackPji5ngyEJbMA3rIVoVkv2YSgcuSVwFz4=",
+        "lastModified": 1627088262,
+        "narHash": "sha256-08/bLnIvlActZM2GASLU4jeldhFb4bZH76T7fgYYH4A=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "dd54cb4be116d3ca13f6e90a5bfb0e792b5133b5",
+        "rev": "f37b084e6f483df1f0a9c0cd01c87b1671f3cd81",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
         "repo": "emacs-overlay",
         "type": "github"
       }
@@ -79,16 +77,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1626841047,
-        "narHash": "sha256-DSS2Wuu9P0oUzVRTwkd9J/AALhS9kA2ZwSlX0u8gGsM=",
+        "lastModified": 1627079826,
+        "narHash": "sha256-+Bz7GgiWMm9aTuZ0fvYp4Tc4wVaN4Z7IwFS2IMJw7XA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "41101d0e62fe3cdb76e8e64349a2650da1433dd4",
+        "rev": "996b43973969b3453e23dd06d2fc19765fb31e9d",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
         "repo": "home-manager",
         "type": "github"
       }
@@ -133,7 +130,6 @@
       },
       "original": {
         "owner": "gytis-ivaskevicius",
-        "ref": "master",
         "repo": "flake-utils-plus",
         "type": "github"
       }

@@ -3,20 +3,20 @@
 
   inputs = {
     accentor = {
-      url = "github:accentor/flake/feature/overridable-packages";
+      url = "github:accentor/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    emacs-overlay.url = "github:nix-community/emacs-overlay/master";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/master";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
   };
 
   outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, utils }:
