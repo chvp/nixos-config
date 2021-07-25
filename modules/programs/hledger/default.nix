@@ -2,10 +2,10 @@
 
 let
   hledger-repo = pkgs.fetchFromGitHub {
-    owner = "chvp";
+    owner = "Xitian9";
     repo = "hledger";
-    rev = "feature/gain-reports";
-    sha256 = "07qsrq71pnkys11q6k2zc20xc9l3yp8dhzp1ar5bnkgcwbm69rcx";
+    rev = "gain";
+    sha256 = "1ppyil0byn0qrfgkjvb4wi8wb5lichddrh519v70k81gyczlbnyw";
   };
 in
 {
@@ -21,6 +21,7 @@ in
           overrides = hself: hsuper: rec {
             hledger = hsuper.callCabal2nixWithOptions "hledger" hledger-repo "--subpath hledger" { };
             hledger-lib = hsuper.callCabal2nixWithOptions "hledger-lib" hledger-repo "--subpath hledger-lib" { };
+            doctest = hsuper.doctest_0_18_1;
           };
         };
       })

@@ -33,7 +33,7 @@
     games.enable = true;
     graphical.enable = true;
     programs = {
-      calibre.enable = true;
+      calibre.enable = false;
       deluge.enable = true;
       dropbox.enable = true;
       eid.enable = true;

@@ -2,6 +2,14 @@
   offline_cache = linkFarm "offline" packages;
   packages = [
     {
+      name = "_accentor_api_client_js___api_client_js_0.11.2.tgz";
+      path = fetchurl {
+        name = "_accentor_api_client_js___api_client_js_0.11.2.tgz";
+        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.11.2.tgz";
+        sha1 = "1d606360cc03c50888025cede40339ece36ef5f0";
+      };
+    }
+    {
       name = "_babel_code_frame___code_frame_7.12.13.tgz";
       path = fetchurl {
         name = "_babel_code_frame___code_frame_7.12.13.tgz";

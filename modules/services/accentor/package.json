@@ -9,6 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "@accentor/api-client-js": "^0.11.2",
     "@mdi/font": "^5.9.55",
     "@mdi/svg": "^5.9.55",
     "fetch-retry": "^4.1.1",
