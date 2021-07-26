@@ -15,18 +15,6 @@ in
   };
 
   config = lib.mkIf config.chvp.programs.hledger.enable {
-    nixpkgs.overlays = [
-      (self: super: {
-        haskellPackages = super.haskellPackages.override {
-          overrides = hself: hsuper: rec {
-            hledger = hsuper.callCabal2nixWithOptions "hledger" hledger-repo "--subpath hledger" { };
-            hledger-lib = hsuper.callCabal2nixWithOptions "hledger-lib" hledger-repo "--subpath hledger-lib" { };
-            doctest = hsuper.doctest_0_18_1;
-          };
-        };
-      })
-    ];
-
     chvp.base.emacs.extraConfig = [
       ''
         ;; Ledger syntax support
@@ -45,7 +33,13 @@ in
     ];
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ pkgs.hledger ];
+      home.packages = [ (pkgs.haskell.lib.justStaticExecutables (pkgs.haskellPackages.override {
+          overrides = hself: hsuper: rec {
+            hledger = hsuper.callCabal2nixWithOptions "hledger" hledger-repo "--subpath hledger" { };
+            hledger-lib = hsuper.callCabal2nixWithOptions "hledger-lib" hledger-repo "--subpath hledger-lib" { };
+            doctest = hsuper.doctest_0_18_1;
+          };
+      }).hledger) ];
     };
   };
 }
