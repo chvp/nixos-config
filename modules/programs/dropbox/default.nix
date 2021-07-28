@@ -15,7 +15,7 @@
       ];
     };
 
-    # Avoids a double firefox install, see https://github.com/NixOS/nixpkgs/pull/31772
+    # `firefox-bin` is unfree, and unnecessary
     nixpkgs.overlays = [ (self: super: { firefox-bin = self.firefox; }) ];
 
     home-manager.users.charlotte = { pkgs, ... }: {

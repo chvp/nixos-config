@@ -35,7 +35,7 @@
     programs = {
       calibre.enable = false;
       deluge.enable = true;
-      dropbox.enable = true;
+      dropbox.enable = false;
       eid.enable = true;
       hledger.enable = true;
       obs.enable = true;

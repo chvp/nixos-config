@@ -9,7 +9,6 @@
   config = lib.mkIf config.chvp.graphical.pass.enable {
     nixpkgs.overlays = [
       (self: super: {
-        firefox = super.firefox.override { extraNativeMessagingHosts = [ self.passff-host ]; };
         pass = (super.pass.override { pass = super.pass-wayland; }).withExtensions (ext: [ ext.pass-otp ]);
       })
     ];
