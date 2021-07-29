@@ -13,7 +13,7 @@
           patches = (old.patches or [ ]) ++ [
             (self.fetchpatch {
               url = "https://github.com/qutebrowser/qutebrowser/pull/6626.patch";
-              sha256 = "pBMyXGizVJfhPK8i1q38g2HFupeP/4GrR9THwYRxAmk=";
+              sha256 = "aWhkUQ2eaLNiQwxRTbzfFrM0TrDSKtPKinjGu/RknLk=";
             })
           ];
         });
