@@ -135,6 +135,8 @@ in
             "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
             "${modifier}+Alt+Left" = "move workspace to output left";
             "${modifier}+Alt+Right" = "move workspace to output right";
+            # Invoke default action on top notification.
+            "${modifier}+n" = "exec ${pkgs.mako}/bin/makoctl invoke";
           };
         };
         extraConfig = ''

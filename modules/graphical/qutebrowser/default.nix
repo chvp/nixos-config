@@ -7,6 +7,10 @@
   };
 
   config = lib.mkIf config.chvp.graphical.qutebrowser.enable {
+    chvp.base.zfs.homeLinks = [
+      { path = ".config/qutebrowser"; type = "data"; }
+      { path = ".local/share/qutebrowser"; type = "cache"; }
+    ];
     home-manager.users.charlotte = { ... }: {
       programs.qutebrowser = {
         enable = true;
@@ -26,9 +30,11 @@
           confirm_quit = [ "downloads" ];
           content = {
             autoplay = false;
-            cookies.accept = "no-3rdparty";
+            cookies.accept = "never";
             default_encoding = "utf-8";
             dns_prefetch = false;
+            fullscreen.window = true;
+            javascript.enabled = false;
             geolocation = false;
             pdfjs = true;
           };
