@@ -5,7 +5,7 @@ let
     owner = "Xitian9";
     repo = "hledger";
     rev = "gain";
-    sha256 = "1ppyil0byn0qrfgkjvb4wi8wb5lichddrh519v70k81gyczlbnyw";
+    sha256 = "giHh+IVZws4FErWbaJeIeuDLCXMJvN4U6DdpqKaJ1e8=";
   };
 in
 {
