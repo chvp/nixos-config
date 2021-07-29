@@ -17,6 +17,7 @@
   chvp = {
     stateVersion = "20.09";
     base = {
+      nix.enableDirenv = false;
       network.ovh.enable = true;
       zfs = {
         backups = [

@@ -15,6 +15,7 @@
     stateVersion = "20.09";
     base = {
       network.ovh.enable = true;
+      nix.enableDirenv = false;
       zfs = {
         backups = [{
           path = "zroot/safe/data";
