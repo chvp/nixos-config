@@ -29,13 +29,20 @@
         loadAutoconfig = true;
         aliases = {
           save-to-zotero = "jseval --quiet var d=document,s=d.createElement('script');s.src='https://www.zotero.org/bookmarklet/loader.js';(d.body?d.body:d.documentElement).appendChild(s);void(0);";
+          open-in-temp = "spawn qutebrowser --temp-basedir {url}";
+          hint-open-in-temp = "hint links spawn qutebrowser --temp-basedir {hint-url}";
         };
         keyBindings = {
           normal = {
             ",m" = "hint links spawn umpv {hint-url}";
             ",M" = "hint --rapid links spawn umpv {hint-url}";
             ",p" = "spawn --userscript qute-pass";
+            "tt" = "open-in-temp";
+            "tT" = "hint-open-in-temp";
           };
+        };
+        searchEngines = {
+          DEFAULT = "https://html.duckduckgo.com/html?q={}";
         };
         settings = {
           auto_save.session = true;
