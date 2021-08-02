@@ -7,7 +7,7 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "chvp";
       repo = "tetris";
-      rev = "master";
+      rev = "main";
       sha256 = "0jq5pih8bb1w2pglpklqix01pdd3a3wzzf0jnai0wy5gn93abpik";
     };
     packageJSON = ./package.json;
