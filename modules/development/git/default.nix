@@ -29,6 +29,7 @@
             branch.autosetuprebase = "always";
             pull.rebase = true;
             github.user = "chvp";
+            tag.gpgSign = true;
           };
           ignores = [
             ".direnv"
