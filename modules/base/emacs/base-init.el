@@ -108,8 +108,15 @@
     (when window-system (set-frame-font "Fira Code 9"))
     (set-fontset-font t 'symbol "Noto Color Emoji")
     (set-fontset-font t 'symbol "Symbola" nil 'append))
+  ;; Make sure DISPLAY is set correctly in env.
+  (defun display-env-hack ()
+    "Hack DISPLAY env variable back into env."
+    (setenv "DISPLAY" ":0")
+    )
   (if (daemonp)
-      (add-hook 'server-after-make-frame-hook #'font-settings)
+      (progn
+        (add-hook 'server-after-make-frame-hook #'font-settings)
+        (add-hook 'server-after-make-frame-hook #'display-env-hack))
     (font-settings))
   )
 
