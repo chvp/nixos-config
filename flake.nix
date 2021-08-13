@@ -37,8 +37,19 @@
       };
       hostDefaults = {
         modules = [
-          ({ lib, ... }: {
-            environment.etc = lib.mapAttrs' (key: val: { name = "channels/${key}"; value = { source = val.outPath; }; }) inputs;
+          ({ lib, pkgs, ... }: {
+            environment.etc = lib.mapAttrs'
+              (key: val: {
+                name = "channels/${key}";
+                value = {
+                  source = pkgs.runCommandNoCC "${key}-channel" { } ''
+                    mkdir $out
+                    echo "${val.rev or (toString val.lastModified)}" > $out/.version-suffix
+                    echo "import ${val.outPath}/default.nix" > $out/default.nix
+                  '';
+                };
+              })
+              inputs;
             nix.nixPath = [ "/etc/channels" ];
           })
           utils.nixosModules.saneFlakeDefaults
