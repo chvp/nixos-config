@@ -37,8 +37,18 @@
             ",m" = "hint links spawn umpv {hint-url}";
             ",M" = "hint --rapid links spawn umpv {hint-url}";
             ",p" = "spawn --userscript qute-pass";
+
+            # Toggle all by opening in temporary browser
             "tt" = "open-in-temp";
             "tT" = "hint-open-in-temp";
+
+            # Cookie toggle (all removed from defaults)
+            "tCH" = "config-cycle -p -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
+            "tCh" = "config-cycle -p -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
+            "tCu" = "config-cycle -p -u {url} content.cookies.accept no-3rdparty never ;; reload";
+            "tcH" = "config-cycle -p -t -u *://*.{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
+            "tch" = "config-cycle -p -t -u *://{url:host}/* content.cookies.accept no-3rdparty never ;; reload";
+            "tcu" = "config-cycle -p -t -u {url} content.cookies.accept no-3rdparty never ;; reload";
           };
         };
         searchEngines = {
