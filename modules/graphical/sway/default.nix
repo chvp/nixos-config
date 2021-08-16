@@ -59,8 +59,8 @@ in
           };
           "work-docked" = {
             outputs = [
-              { criteria = "Chimei Innolux Corporation 0x14D3 0x00000000"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
-              { criteria = "Dell Inc. DELL U2718Q FN84K83Q1KHL"; position = "1920,0"; mode = "3840x2160"; scale = 1.0; }
+              { criteria = "Chimei Innolux Corporation 0x14D3 0x00000000"; position = "960,2160"; mode = "1920x1080"; scale = 1.0; }
+              { criteria = "Dell Inc. DELL U2718Q FN84K83Q1KHL"; position = "0,0"; mode = "3840x2160"; scale = 1.0; }
             ];
           };
         };
