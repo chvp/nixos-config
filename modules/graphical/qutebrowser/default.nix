@@ -29,8 +29,8 @@
         loadAutoconfig = true;
         aliases = {
           save-to-zotero = "jseval --quiet var d=document,s=d.createElement('script');s.src='https://www.zotero.org/bookmarklet/loader.js';(d.body?d.body:d.documentElement).appendChild(s);void(0);";
-          open-in-temp = "spawn qutebrowser --temp-basedir -s download.location.directory /home/charlotte/downloads {url}";
-          hint-open-in-temp = "hint links spawn qutebrowser --temp-basedir -s download.location.directory /home/charlotte/downloads {hint-url}";
+          open-in-temp = "spawn qutebrowser --temp-basedir -s downloads.location.directory /home/charlotte/downloads {url}";
+          hint-open-in-temp = "hint links spawn qutebrowser --temp-basedir -s downloads.location.directory /home/charlotte/downloads {hint-url}";
         };
         keyBindings = {
           normal = {
