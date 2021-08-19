@@ -2,10 +2,10 @@
 
 let
   hledger-repo = pkgs.fetchFromGitHub {
-    owner = "Xitian9";
+    owner = "simonmichael";
     repo = "hledger";
-    rev = "gain";
-    sha256 = "hNlS4vOl5nzVo1zZOgM0BzY/YFWBsNnEkyq2eXJfee0=";
+    rev = "master";
+    sha256 = "yh5raLqwRIoONAbrUT3VKDRgjGidM5y6ZiD/y53ocg4=";
   };
 in
 {
