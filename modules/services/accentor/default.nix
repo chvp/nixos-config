@@ -31,7 +31,7 @@
           owner = "accentor";
           repo = "api";
           rev = "main";
-          sha256 = "44G1y+bXBSqSaTdOObV/jcrOZBiynx7JYjrV3/Ae90Y=";
+          sha256 = "2KhHyGRaxTF14okQjagZV618MDlqB1LjeNIXRp4p//s=";
         };
       });
       webPackage = (pkgs.accentor-web.override {
@@ -43,7 +43,7 @@
           owner = "accentor";
           repo = "web";
           rev = "main";
-          sha256 = "V6JAVA52frhHLupHlog1gXliuWrWLo+BVWZtpwlVjiM=";
+          sha256 = "K58VX0vCsjFn16uvGosbyI/XKXQp5VVA2haVMY2bkFw=";
         };
       });
     };

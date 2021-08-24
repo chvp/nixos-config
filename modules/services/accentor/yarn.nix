@@ -1,12 +1,12 @@
-{ fetchurl, fetchgit, linkFarm, runCommandNoCC, gnutar }: rec {
+{ fetchurl, fetchgit, linkFarm, runCommand, gnutar }: rec {
   offline_cache = linkFarm "offline" packages;
   packages = [
     {
-      name = "_accentor_api_client_js___api_client_js_0.11.2.tgz";
+      name = "_accentor_api_client_js___api_client_js_0.12.1.tgz";
       path = fetchurl {
-        name = "_accentor_api_client_js___api_client_js_0.11.2.tgz";
-        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.11.2.tgz";
-        sha1 = "1d606360cc03c50888025cede40339ece36ef5f0";
+        name = "_accentor_api_client_js___api_client_js_0.12.1.tgz";
+        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.12.1.tgz";
+        sha1 = "7b784cb7afe077b39e0a9e8d619cb8bf34ae8281";
       };
     }
     {
@@ -3530,11 +3530,11 @@
       };
     }
     {
-      name = "eslint_plugin_prettier___eslint_plugin_prettier_3.4.0.tgz";
+      name = "eslint_plugin_prettier___eslint_plugin_prettier_3.4.1.tgz";
       path = fetchurl {
-        name = "eslint_plugin_prettier___eslint_plugin_prettier_3.4.0.tgz";
-        url = "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.4.0.tgz";
-        sha1 = "cdbad3bf1dbd2b177e9825737fe63b476a08f0c7";
+        name = "eslint_plugin_prettier___eslint_plugin_prettier_3.4.1.tgz";
+        url = "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.4.1.tgz";
+        sha1 = "e9ddb200efb6f3d05ffe83b1665a716af4a387e5";
       };
     }
     {
@@ -5594,11 +5594,11 @@
       };
     }
     {
-      name = "localforage___localforage_1.9.0.tgz";
+      name = "localforage___localforage_1.10.0.tgz";
       path = fetchurl {
-        name = "localforage___localforage_1.9.0.tgz";
-        url = "https://registry.yarnpkg.com/localforage/-/localforage-1.9.0.tgz";
-        sha1 = "f3e4d32a8300b362b4634cc4e066d9d00d2f09d1";
+        name = "localforage___localforage_1.10.0.tgz";
+        url = "https://registry.yarnpkg.com/localforage/-/localforage-1.10.0.tgz";
+        sha1 = "5c465dc5f62b2807c3a84c0c6a1b1b3212781dd4";
       };
     }
     {
@@ -7786,11 +7786,11 @@
       };
     }
     {
-      name = "sass___sass_1.37.5.tgz";
+      name = "sass___sass_1.38.0.tgz";
       path = fetchurl {
-        name = "sass___sass_1.37.5.tgz";
-        url = "https://registry.yarnpkg.com/sass/-/sass-1.37.5.tgz";
-        sha1 = "f6838351f7cc814c4fcfe1d9a20e0cabbd1e7b3c";
+        name = "sass___sass_1.38.0.tgz";
+        url = "https://registry.yarnpkg.com/sass/-/sass-1.38.0.tgz";
+        sha1 = "2f3e60a1efdcdc910586fa79dc89d3399a145b4f";
       };
     }
     {

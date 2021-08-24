@@ -36,7 +36,7 @@ gem 'bootsnap', '>= 1.4.6', require: false
 gem 'rack-cors', '~> 1.1'
 
 group :test do
-  gem 'codecov', '~> 0.5.2', require: false
+  gem 'codecov', '~> 0.6.0', require: false
   gem 'mocha', '~> 1.13.0', require: false
   gem 'simplecov', '~> 0.21', require: false
 end
@@ -54,7 +54,7 @@ group :development do
   gem 'rubocop-minitest', '~> 0.15.0'
   gem 'rubocop-rails', '~> 2.11'
 
-  gem 'listen', '>= 3.1.5', '< 3.7'
+  gem 'listen', '>= 3.1.5', '< 3.8'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring', '~> 2.1'
   gem 'spring-watcher-listen', '~> 2.0'
