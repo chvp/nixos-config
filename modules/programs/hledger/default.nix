@@ -5,7 +5,7 @@ let
     owner = "simonmichael";
     repo = "hledger";
     rev = "master";
-    sha256 = "iRShf1vlIKIa1DzmSw8RX+BqBIoI6i81OtE7iEYIZgE=";
+    sha256 = "eiVxp37Gw+iYA4fvEHiW/ClHZd5WRPiODeEEZF+Gias=";
   };
 in
 {
