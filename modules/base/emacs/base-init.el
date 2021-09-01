@@ -186,7 +186,9 @@
 
 ;; Sorting when filtering
 (use-package prescient
-  :config (prescient-persist-mode 1)
+  :config
+  (prescient-persist-mode 1)
+  (run-at-time t 300 'prescient--save)
   )
 
 ;; List item selection interface
