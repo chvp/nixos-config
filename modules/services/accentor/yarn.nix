@@ -2,11 +2,11 @@
   offline_cache = linkFarm "offline" packages;
   packages = [
     {
-      name = "_accentor_api_client_js___api_client_js_0.12.1.tgz";
+      name = "_accentor_api_client_js___api_client_js_0.13.0.tgz";
       path = fetchurl {
-        name = "_accentor_api_client_js___api_client_js_0.12.1.tgz";
-        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.12.1.tgz";
-        sha1 = "7b784cb7afe077b39e0a9e8d619cb8bf34ae8281";
+        name = "_accentor_api_client_js___api_client_js_0.13.0.tgz";
+        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.13.0.tgz";
+        sha1 = "03223b7cc2d2c64bf6561b13c7ceccad8fc678e5";
       };
     }
     {
@@ -3538,11 +3538,11 @@
       };
     }
     {
-      name = "eslint_plugin_vue___eslint_plugin_vue_7.16.0.tgz";
+      name = "eslint_plugin_vue___eslint_plugin_vue_7.17.0.tgz";
       path = fetchurl {
-        name = "eslint_plugin_vue___eslint_plugin_vue_7.16.0.tgz";
-        url = "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.16.0.tgz";
-        sha1 = "7fe9fea039a190b108319c1380adf543ef57707d";
+        name = "eslint_plugin_vue___eslint_plugin_vue_7.17.0.tgz";
+        url = "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-7.17.0.tgz";
+        sha1 = "41e0bdb5effca5ee26f087f924be987eb41ef573";
       };
     }
     {
@@ -7786,11 +7786,11 @@
       };
     }
     {
-      name = "sass___sass_1.38.0.tgz";
+      name = "sass___sass_1.39.0.tgz";
       path = fetchurl {
-        name = "sass___sass_1.38.0.tgz";
-        url = "https://registry.yarnpkg.com/sass/-/sass-1.38.0.tgz";
-        sha1 = "2f3e60a1efdcdc910586fa79dc89d3399a145b4f";
+        name = "sass___sass_1.39.0.tgz";
+        url = "https://registry.yarnpkg.com/sass/-/sass-1.39.0.tgz";
+        sha1 = "6c64695d1c437767c8f1a4e471288e831f81d035";
       };
     }
     {
@@ -9178,11 +9178,11 @@
       };
     }
     {
-      name = "vuetify_loader___vuetify_loader_1.7.2.tgz";
+      name = "vuetify_loader___vuetify_loader_1.7.3.tgz";
       path = fetchurl {
-        name = "vuetify_loader___vuetify_loader_1.7.2.tgz";
-        url = "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.7.2.tgz";
-        sha1 = "5cdc45309496cf3a5fe431fd7611706ffa4aa8c8";
+        name = "vuetify_loader___vuetify_loader_1.7.3.tgz";
+        url = "https://registry.yarnpkg.com/vuetify-loader/-/vuetify-loader-1.7.3.tgz";
+        sha1 = "404657f4925c828f400fe3269003421d586835c6";
       };
     }
     {
