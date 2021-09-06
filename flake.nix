@@ -52,7 +52,6 @@
               inputs;
             nix.nixPath = [ "/etc/channels" ];
           })
-          utils.nixosModules.saneFlakeDefaults
           accentor.nixosModule
           agenix.nixosModules.age
           home-manager.nixosModules.home-manager
