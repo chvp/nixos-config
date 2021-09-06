@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/1.2.0";
   };
 
   outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, utils }:
@@ -66,16 +66,15 @@
         lasting-integrity.modules = [ ./machines/lasting-integrity ];
         urithiru.modules = [ ./machines/urithiru ];
       };
-      devShellBuilder = channels:
-        let pkgs = channels.nixpkgs; in
-        pkgs.mkShell {
+      outputsBuilder = channels: let pkgs = channels.nixpkgs; in {
+        packages = customPackages pkgs.callPackage;
+        devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.nixpkgs-fmt
             (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
             agenix.defaultPackage.x86_64-linux
           ];
         };
-      packagesBuilder = channels:
-        let pkgs = channels.nixpkgs; in customPackages pkgs.callPackage;
+      };
     };
 }
