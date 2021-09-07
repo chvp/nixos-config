@@ -132,6 +132,7 @@ in
                 (mm-verify-option 'known "Always verify PGP signatures (known protocols)")
                 (mm-discouraged-alternatives '("text/html" "text/richtext") "Discourage showing HTML views")
                 (gnus-buttonized-mime-types '("multipart/signed") "Make sure signature verification is always shown")
+                (mml-secure-openpgp-sign-with-sender t "Sign mails with the sender")
                 (sendmail-program "msmtp" "Use msmtp to send email")
                 (message-sendmail-f-is-evil t "Remove username from the emacs message")
                 (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
