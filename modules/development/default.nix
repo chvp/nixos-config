@@ -57,6 +57,9 @@
            (ruby-insert-encoding-magic-comment nil "Don't insert encoding magic comment")
            )
 
+          ;; Rust language support
+          (use-package rust-mode :mode "\\.rs\\'")
+
           ;; TypeScript language support
           (use-package typescript-mode
            :mode "\\.ts\\'")
