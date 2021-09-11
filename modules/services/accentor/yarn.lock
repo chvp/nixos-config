@@ -965,15 +965,15 @@
     js-yaml "^3.13.1"
     json5 "^2.1.1"
 
-"@mdi/font@^5.9.55":
-  version "5.9.55"
-  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz#41acd50b88073ded7095fc3029d8712b6e12f38e"
-  integrity sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==
+"@mdi/font@^6.1.95":
+  version "6.1.95"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-6.1.95.tgz#665b7dc13b2d1d1ebefcfac5a68c1013581aaa96"
+  integrity sha512-L3cg9qoUEp5MZHvu6rtuobTtPBmq0ATau5ZrHmsaE6gCRs90T4JBWyzV8WCMEjZoy5+zA+/cvtCUtD/+WVaQ9Q==
 
-"@mdi/svg@^5.9.55":
-  version "5.9.55"
-  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-5.9.55.tgz#7cba058135afd5d8a3da977f51b71ffc6a3a3699"
-  integrity sha512-gO0ZpKIeCn9vFg46QduK9MM+n1fuCNwSdcdlBTtbafnnuvwLveK2uj+byhdLtg/8VJGXDhp+DJ35QUMbeWeULA==
+"@mdi/svg@^6.1.95":
+  version "6.1.95"
+  resolved "https://registry.yarnpkg.com/@mdi/svg/-/svg-6.1.95.tgz#86837e6335579236673ce2bd82727d2398c7b21f"
+  integrity sha512-X3qD1LWJotRUMnkjuAdAJxb1fqRsa+uWh3UugEM2b66mj7NSC6jhn97W8b/UW/ukhDvdP/jRPrqz+2mJf2jN9w==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -6672,10 +6672,10 @@ prettier@^1.18.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
-prettier@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.2.tgz#ef280a05ec253712e486233db5c6f23441e7342d"
-  integrity sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==
+prettier@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.0.tgz#85bdfe0f70c3e777cf13a4ffff39713ca6f64cba"
+  integrity sha512-DsEPLY1dE5HF3BxCRBmD4uYZ+5DCbvatnolqTqcxEgKVZnL2kUfyu7b8pPQ5+hTBkdhU9SLUmK0/pHb07RE4WQ==
 
 pretty-error@^2.0.2:
   version "2.1.2"
@@ -7201,10 +7201,10 @@ sass-loader@^10.1.1:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@^1.39.0:
-  version "1.39.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.39.0.tgz#6c64695d1c437767c8f1a4e471288e831f81d035"
-  integrity sha512-F4o+RhJkNOIG0b6QudYU8c78ZADKZjKDk5cyrf8XTKWfrgbtyVVXImFstJrc+1pkQDCggyidIOytq6gS4gCCZg==
+sass@^1.39.2:
+  version "1.39.2"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.39.2.tgz#1681964378f58d76fc64a6a502619bd5ac99f660"
+  integrity sha512-4/6Vn2RPc+qNwSclUSKvssh7dqK1Ih3FfHBW16I/GfH47b3scbYeOw65UIrYG7PkweFiKbpJjgkf5CV8EMmvzw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 

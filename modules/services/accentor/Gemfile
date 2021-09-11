@@ -52,7 +52,7 @@ end
 group :development do
   gem 'annotate', '~> 3.1' # Remove workaround in lib/tasks/annotate.rb when https://github.com/ctran/annotate_models/issues/696 is fixed
   gem 'rubocop-minitest', '~> 0.15.0'
-  gem 'rubocop-rails', '~> 2.11'
+  gem 'rubocop-rails', '~> 2.12'
 
   gem 'listen', '>= 3.1.5', '< 3.8'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

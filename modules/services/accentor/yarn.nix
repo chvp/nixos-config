@@ -890,19 +890,19 @@
       };
     }
     {
-      name = "_mdi_font___font_5.9.55.tgz";
+      name = "_mdi_font___font_6.1.95.tgz";
       path = fetchurl {
-        name = "_mdi_font___font_5.9.55.tgz";
-        url = "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz";
-        sha1 = "41acd50b88073ded7095fc3029d8712b6e12f38e";
+        name = "_mdi_font___font_6.1.95.tgz";
+        url = "https://registry.yarnpkg.com/@mdi/font/-/font-6.1.95.tgz";
+        sha1 = "665b7dc13b2d1d1ebefcfac5a68c1013581aaa96";
       };
     }
     {
-      name = "_mdi_svg___svg_5.9.55.tgz";
+      name = "_mdi_svg___svg_6.1.95.tgz";
       path = fetchurl {
-        name = "_mdi_svg___svg_5.9.55.tgz";
-        url = "https://registry.yarnpkg.com/@mdi/svg/-/svg-5.9.55.tgz";
-        sha1 = "7cba058135afd5d8a3da977f51b71ffc6a3a3699";
+        name = "_mdi_svg___svg_6.1.95.tgz";
+        url = "https://registry.yarnpkg.com/@mdi/svg/-/svg-6.1.95.tgz";
+        sha1 = "86837e6335579236673ce2bd82727d2398c7b21f";
       };
     }
     {
@@ -7162,11 +7162,11 @@
       };
     }
     {
-      name = "prettier___prettier_2.3.2.tgz";
+      name = "prettier___prettier_2.4.0.tgz";
       path = fetchurl {
-        name = "prettier___prettier_2.3.2.tgz";
-        url = "https://registry.yarnpkg.com/prettier/-/prettier-2.3.2.tgz";
-        sha1 = "ef280a05ec253712e486233db5c6f23441e7342d";
+        name = "prettier___prettier_2.4.0.tgz";
+        url = "https://registry.yarnpkg.com/prettier/-/prettier-2.4.0.tgz";
+        sha1 = "85bdfe0f70c3e777cf13a4ffff39713ca6f64cba";
       };
     }
     {
@@ -7786,11 +7786,11 @@
       };
     }
     {
-      name = "sass___sass_1.39.0.tgz";
+      name = "sass___sass_1.39.2.tgz";
       path = fetchurl {
-        name = "sass___sass_1.39.0.tgz";
-        url = "https://registry.yarnpkg.com/sass/-/sass-1.39.0.tgz";
-        sha1 = "6c64695d1c437767c8f1a4e471288e831f81d035";
+        name = "sass___sass_1.39.2.tgz";
+        url = "https://registry.yarnpkg.com/sass/-/sass-1.39.2.tgz";
+        sha1 = "1681964378f58d76fc64a6a502619bd5ac99f660";
       };
     }
     {
