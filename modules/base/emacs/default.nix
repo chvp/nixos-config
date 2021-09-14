@@ -26,7 +26,7 @@
 
   config = {
     chvp.base.zfs.homeLinks = [
-      { path = ".emacs.d"; type = "cache"; }
+      { path = ".cache/emacs"; type = "cache"; }
     ];
 
     home-manager.users.charlotte = { ... }: {

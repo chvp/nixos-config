@@ -97,6 +97,7 @@
   ;; major modes.
   ((text-mode prog-mode) . electric-pair-mode)
   :custom
+  (create-lockfiles nil "I'm the only user on my devices, so don't clutter with lockfiles")
   (inhibit-startup-screen t "Don't show default startup screen")
   :config
   ;; Only ask for y/n, never for yes/no.
@@ -118,6 +119,9 @@
         (add-hook 'server-after-make-frame-hook #'font-settings)
         (add-hook 'server-after-make-frame-hook #'display-env-hack))
     (font-settings))
+
+  ;; Always display column number in mode line
+  (column-number-mode)
   )
 
 ;; Vim keybindings
@@ -165,6 +169,12 @@
   :config
   (modus-themes-load-themes)
   (modus-themes-load-operandi)
+  )
+
+(use-package no-littering
+  :custom
+  (user-emacs-directory (expand-file-name "~/.cache/emacs/") "Don't put files into .emacs.d")
+  (url-history-file (expand-file-name "url/history" user-emacs-directory) "Same for url-history file")
   )
 
 ;; Orderless filtering
