@@ -12,7 +12,7 @@ let
       pkgs.openssh
     ];
   };
-  base = home: {
+  base = home: user: {
     programs.ssh = {
       enable = true;
       compression = true;
@@ -22,7 +22,7 @@ let
       userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
       serverAliveInterval = 10;
       extraOptionOverrides = {
-        Include = config.age.secrets."files/programs/ssh/host_configuration".path;
+        Include = config.age.secrets."files/programs/ssh/host_configuration_${user}".path;
         IdentityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
         HostKeyAlgorithms = "ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa";
       };
@@ -31,10 +31,13 @@ let
   };
 in
 {
-  home-manager.users.root = { ... }: (base "/root");
-  home-manager.users.charlotte = { ... }: (base "/home/charlotte");
-  age.secrets."files/programs/ssh/host_configuration" = {
+  home-manager.users.root = { ... }: (base "/root" "root");
+  home-manager.users.charlotte = { ... }: (base "/home/charlotte" "charlotte");
+  age.secrets."files/programs/ssh/host_configuration_charlotte" = {
     file = ../../../secrets/files/programs/ssh/host_configuration.age;
     owner = "charlotte";
+  };
+  age.secrets."files/programs/ssh/host_configuration_root" = {
+    file = ../../../secrets/files/programs/ssh/host_configuration.age;
   };
 }
