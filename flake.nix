@@ -65,15 +65,17 @@
         lasting-integrity.modules = [ ./machines/lasting-integrity ];
         urithiru.modules = [ ./machines/urithiru ];
       };
-      outputsBuilder = channels: let pkgs = channels.nixpkgs; in {
-        packages = customPackages pkgs.callPackage;
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            pkgs.nixpkgs-fmt
-            (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
-            agenix.defaultPackage.x86_64-linux
-          ];
+      outputsBuilder = channels:
+        let pkgs = channels.nixpkgs; in
+        {
+          packages = customPackages pkgs.callPackage;
+          devShell = pkgs.mkShell {
+            buildInputs = [
+              pkgs.nixpkgs-fmt
+              (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
+              agenix.defaultPackage.x86_64-linux
+            ];
+          };
         };
-      };
     };
 }

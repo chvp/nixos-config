@@ -1,10 +1,7 @@
 { lib, pkgs, nixosConfigurations, ... }:
 
 {
-  imports = [
-    ./hardware.nix
-    ./secret.nix
-  ];
+  imports = [ ./hardware.nix ];
 
   time.timeZone = "Europe/Berlin";
 

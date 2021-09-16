@@ -33,6 +33,8 @@ in
 
   "secrets/passwords/ugent-mount-credentials.age".publicKeys = laptops ++ users;
   "secrets/passwords/ugent-vpn.age".publicKeys = laptops ++ users;
+  "secrets/files/programs/vpn/local.age".publicKeys = laptops ++ users;
+  "secrets/files/programs/vpn/global.age".publicKeys = laptops ++ users;
 
   "secrets/passwords/services/accentor.age".publicKeys = [ urithiru ] ++ users;
 
@@ -47,7 +49,7 @@ in
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ urithiru ] ++ users;
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = hosts ++ users;
-  
+
   "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
@@ -58,4 +60,7 @@ in
   "secrets/data-access/ssh_host_rsa_key.pub.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/ssh_host_ed25519_key.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/ssh_host_ed25519_key.pub.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/data-access/authorized_keys.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/data-access/password_file.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/data-access/create_torrent.age".publicKeys = [ urithiru ] ++ users;
 }

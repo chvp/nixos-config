@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [
-    ./hardware.nix
-    ./secret.nix
-  ];
+  imports = [ ./hardware.nix ];
 
   time.timeZone = "Europe/Berlin";
 
@@ -68,11 +65,12 @@
                   client_max_body_size 10M;
                   proxy_set_header X-Forwarded-Ssl on;
                 '';
-              }; in {
-                "/_matrix" = matrixRedirect;
-                "/.well-known/matrix" = matrixRedirect;
-                "/".return = "307 https://www.vanpetegem.me$request_uri";
-              };
+              }; in
+                {
+                  "/_matrix" = matrixRedirect;
+                  "/.well-known/matrix" = matrixRedirect;
+                  "/".return = "307 https://www.vanpetegem.me$request_uri";
+                };
             };
           }
           { fqdn = "www.vanpetegem.me"; }
