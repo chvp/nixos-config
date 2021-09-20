@@ -13,6 +13,7 @@
 (use-package diminish)
 ;; For :general in (use-package). Keybinding management framework.
 (use-package general
+  :after evil
   :config
   (general-evil-setup t)
 
@@ -20,7 +21,7 @@
   (general-create-definer lmap
     :states '(normal visual insert emacs motion)
     :prefix "SPC"
-    :non-normal-prefix "C-SPC"
+    :global-prefix "C-SPC"
     )
 
   (lmap
@@ -56,6 +57,22 @@
     )
   )
 
+;; Vim keybindings
+(use-package evil
+  :custom
+  (evil-want-keybinding nil "Disable default evil keybindings, since
+    evil-collection is a superset. See
+    https://github.com/emacs-evil/evil-collection/issues/60.")
+  (evil-want-integration t "Also needed for evil-collection")
+  :config (evil-mode 1)
+  )
+
+;; Vim keybindings in other packages
+(use-package evil-collection
+  :after (evil)
+  :config (evil-collection-init)
+  )
+
 ;; Better defaults that aren't defaults for some reason.
 (use-package better-defaults
   ;; But don't enable ido-mode...
@@ -65,18 +82,18 @@
 ;; Autocomplete
 (use-package company
   :diminish (company-mode)
+  :defer t
   :config (global-company-mode)
   )
 
 ;; Prescient in company
 (use-package company-prescient
+  :after (company prescient)
   :config (company-prescient-mode 1)
   )
 
 ;; Replacements for emacs built-ins that better integrate with `selectrum'.
 (use-package consult
-  :demand t
-  :custom (consult-project-root-function #'projectile-project-root "Use projectile to determine project roots.")
   :general
   (lmap
     "bb"  '(consult-buffer :which-key "switch")
@@ -89,6 +106,7 @@
 ;; General emacs settings
 (use-package emacs
   :ensure nil ;; Not a real package, but a place to collect global settings
+  :demand t
   :hook
   ;; Always display line numbers for text-based modes
   ((text-mode prog-mode) . display-line-numbers-mode)
@@ -97,7 +115,7 @@
   ;; major modes.
   ((text-mode prog-mode) . electric-pair-mode)
   :custom
-  (create-lockfiles nil "I'm the only user on my devices, so don't clutter with lockfiles")
+  (create-lockfiles nil "I'm the only user on my devices and use emacs as a daemon, so don't clutter with lockfiles")
   (inhibit-startup-screen t "Don't show default startup screen")
   :config
   ;; Only ask for y/n, never for yes/no.
@@ -124,31 +142,16 @@
   (column-number-mode)
   )
 
-;; Vim keybindings
-(use-package evil
-  :custom
-  (evil-want-keybinding nil "Disable default evil keybindings, since
-    evil-collection is a superset. See
-    https://github.com/emacs-evil/evil-collection/issues/60.")
-  (evil-want-integration t "Also needed for evil-collection")
-  :config (evil-mode 1)
-  )
-
-;; Vim keybindings in other packages
-(use-package evil-collection
-  :after (evil)
-  :config (evil-collection-init)
-  )
-
 ;; Linting
 (use-package flycheck
+  :defer t
   :diminish (flycheck-mode)
   :config (global-flycheck-mode)
   )
 
 ;; Annotations in selection interface
 (use-package marginalia
-  :demand t
+  :after (selectrum)
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   :config
@@ -174,7 +177,9 @@
 (use-package no-littering
   :custom
   (user-emacs-directory (expand-file-name "~/.cache/emacs/") "Don't put files into .emacs.d")
-  (url-history-file (expand-file-name "url/history" user-emacs-directory) "Same for url-history file")
+  :config
+  ;; Also make sure auto-save files are saved out-of-tree
+  (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
   )
 
 ;; Orderless filtering
@@ -210,6 +215,7 @@
 
 ;; Prescient integration in selectrum
 (use-package selectrum-prescient
+  :after (selectrum prescient)
   :custom (selectrum-prescient-enable-filtering nil "`orderless' manages the filtering part.")
   :config (selectrum-prescient-mode 1))
 

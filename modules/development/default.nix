@@ -18,13 +18,17 @@
         ''
           ;; Editorconfig
           (use-package editorconfig
+            :defer t
             :diminish (editorconfig-mode)
             :custom (editorconfig-get-properties-function 'editorconfig-get-properties)
             :config (editorconfig-mode 1)
             )
           
           ;; Language server support
-          (use-package lsp-mode :commands (lsp))
+          (use-package lsp-mode
+            :commands (lsp lsp-deferred)
+            :config (lsp-enable-which-key-integration t)
+            )
           
           ;; Markdown syntax support
           (use-package markdown-mode
@@ -41,38 +45,50 @@
             )
 
           ;; R language support
-          (use-package ess)
+          (use-package ess
+            :mode "\\.r\\'"
+            :mode "\\.R\\'"
+            )
 
           ;; Haskell language support
           (use-package haskell-mode
-           :mode "\\.hs\\'")
+            :mode "\\.hs\\'"
+            )
 
           ;; Python syntax support
-          (use-package python-mode :mode "\\.py\\'")
+          (use-package python-mode
+            :mode "\\.py\\'"
+            )
           
           ;; Ruby language support
           (use-package ruby-mode
            :ensure nil ;; Included with emacs
+           :mode "\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
+           :mode "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'"
            :custom
            (ruby-insert-encoding-magic-comment nil "Don't insert encoding magic comment")
            )
 
           ;; Rust language support
-          (use-package rust-mode :mode "\\.rs\\'")
+          (use-package rust-mode
+            :mode "\\.rs\\'"
+            )
 
           ;; TypeScript language support
           (use-package typescript-mode
-           :mode "\\.ts\\'")
+            :mode "\\.ts\\'"
+            )
 
           ;; Vue language support
           (use-package vue-mode
-           :mode "\\.vue\\'")
+            :mode "\\.vue\\'"
+            )
           
           ;; HTML (and HTML template) support
           (use-package web-mode
-           :mode "\\.html\\'"
-           :mode "\\.html\\.erb\\'"
-           )
+            :mode "\\.html\\'"
+            :mode "\\.html\\.erb\\'"
+            )
         ''
       ];
       development = {

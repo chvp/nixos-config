@@ -113,7 +113,7 @@ in
               (use-package mu4e
                 ;; Use mu4e included in the mu package, see emacs.nix
                 :ensure nil
-                :demand t
+                :commands (mu4e mu4e-update-index)
                 :after (selectrum)
                 :hook
                 (mu4e-view-mode . display-line-numbers-mode)

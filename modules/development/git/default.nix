@@ -56,7 +56,6 @@
 
           ;; Git integration
           (use-package magit
-            :demand t
             :general
             (lmap
               "g" '(:ignore t :which-key "git")
@@ -66,8 +65,8 @@
 
           ;; Project management
           (use-package projectile
-            :after (ripgrep selectrum)
-            :demand t
+            :commands (projectile-project-root)
+            :custom (consult-project-root-function #'projectile-project-root "Use projectile to determine project roots.")
             :diminish (projectile-mode)
             :config (projectile-mode 1)
             :general
@@ -84,7 +83,9 @@
             )
 
           ;; Ripgrep support (needed for `projectile-ripgrep')
-          (use-package ripgrep)
+          (use-package ripgrep
+            :after (projectile)
+            )
         ''
       ];
       home-manager.users.charlotte = { ... }: base;

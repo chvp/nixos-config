@@ -62,11 +62,16 @@ in
       emacs.extraConfig = [
         ''
           ;; Nix syntax support
-          (use-package nix-mode :mode "\\.nix\\'")
+          (use-package nix-mode
+            :mode "\\.nix\\'"
+            )
         ''
       ] ++ lib.optional config.chvp.base.nix.enableDirenv ''
         ;; Direnv integration in emacs.
-        (use-package direnv :config (direnv-mode))
+        (use-package direnv
+          :defer t
+          :config (direnv-mode)
+          )
       '';
       zfs = {
         homeLinks =
