@@ -17,7 +17,6 @@
       ''
         (use-package auth-source-pass
          :ensure nil
-         :defer t
          :custom
          (auth-sources '(password-store))
          (auth-source-pass-filename "${config.home-manager.users.charlotte.programs.password-store.settings.PASSWORD_STORE_DIR}")

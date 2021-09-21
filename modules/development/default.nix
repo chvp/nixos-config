@@ -18,7 +18,6 @@
         ''
           ;; Editorconfig
           (use-package editorconfig
-            :defer t
             :diminish (editorconfig-mode)
             :custom (editorconfig-get-properties-function 'editorconfig-get-properties)
             :config (editorconfig-mode 1)
@@ -28,6 +27,10 @@
           (use-package lsp-mode
             :commands (lsp lsp-deferred)
             :config (lsp-enable-which-key-integration t)
+            :general
+            (lmap lsp-mode-map
+              "SPC" '(:keymap lsp-command-map)
+              )
             )
           
           ;; Markdown syntax support

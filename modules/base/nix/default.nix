@@ -69,7 +69,6 @@ in
       ] ++ lib.optional config.chvp.base.nix.enableDirenv ''
         ;; Direnv integration in emacs.
         (use-package direnv
-          :defer t
           :config (direnv-mode)
           )
       '';

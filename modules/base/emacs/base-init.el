@@ -82,8 +82,10 @@
 ;; Autocomplete
 (use-package company
   :diminish (company-mode)
-  :defer t
-  :config (global-company-mode)
+  :hook ((text-mode prog-mode) . company-mode)
+  :custom
+  (company-dabbrev-downcase nil "Don't downcase completions")
+  (company-dabbrev-ignore-case t "Change full casing of completion if completion has different case")
   )
 
 ;; Prescient in company
@@ -144,9 +146,8 @@
 
 ;; Linting
 (use-package flycheck
-  :defer t
+  :hook ((text-mode prog-mode) . flycheck-mode)
   :diminish (flycheck-mode)
-  :config (global-flycheck-mode)
   )
 
 ;; Annotations in selection interface
