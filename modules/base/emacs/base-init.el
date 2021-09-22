@@ -96,6 +96,7 @@
 
 ;; Replacements for emacs built-ins that better integrate with `selectrum'.
 (use-package consult
+  :commands (consult-ripgrep)
   :general
   (lmap
     "bb"  '(consult-buffer :which-key "switch")
