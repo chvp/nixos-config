@@ -207,7 +207,7 @@ in
     };
     home-manager.users.charlotte = { ... }: {
       accounts.email = {
-        maildirBasePath = "/data/home/charlotte/mail";
+        maildirBasePath = "/home/charlotte/mail";
         accounts = {
           personal = makeAccount {
             name = "personal";
@@ -222,13 +222,12 @@ in
           work = makeAccount {
             name = "work";
             address = "charlotte.vanpetegem@ugent.be";
-            imapHost = "outlook.office365.com";
-            smtpHost = "smtp.office365.com";
+            host = "mail.vanpetegem.me";
             passFile = "work/UGentNet";
             useStartTls = true;
             extraConfig = {
-              folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Deleted Items"; };
-              mbsync.extraConfig.account.PipelineDepth = "1";
+              folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
+              userName = "ugent@cvpetegem.be";
             };
           };
           work-aap-we-fr = makeAccount {
