@@ -4,8 +4,8 @@ let
   hledger-repo = pkgs.fetchFromGitHub {
     owner = "simonmichael";
     repo = "hledger";
-    rev = "master";
-    sha256 = "DJpP+GZHn/OpT1rfhviNmVNQu0492jjQB3y2Gi3SgBE=";
+    rev = "1.23";
+    sha256 = "yiQa30Qq5u+i3jOkUlI6I+aRfwa74tqdtfnvVV54aoM=";
   };
 in
 {
