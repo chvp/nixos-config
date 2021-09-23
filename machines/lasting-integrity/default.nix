@@ -96,6 +96,7 @@
       };
       nextcloud.enable = true;
       syncthing.enable = true;
+      tunnel.enable = true;
     };
   };
 }

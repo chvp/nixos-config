@@ -10,5 +10,6 @@
     ./nextcloud
     ./nginx
     ./syncthing
+    ./tunnel
   ];
 }

@@ -46,6 +46,9 @@ in
 
   "secrets/passwords/services/syncthing-basic-auth.age".publicKeys = [ lasting-integrity ] ++ users;
 
+  "secrets/files/services/tunnel/key.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/services/tunnel/env.age".publicKeys = [ lasting-integrity ] ++ users;
+
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ urithiru ] ++ users;
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = hosts ++ users;
