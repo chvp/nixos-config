@@ -29,6 +29,7 @@
       ];
     };
 
+    programs.dconf.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
       home.packages = [ pkgs.vanilla-dmz ];
       home.file = {
