@@ -47,12 +47,6 @@
             :mode "\\.yaml\\'"
             )
 
-          ;; R language support
-          (use-package ess
-            :mode "\\.r\\'"
-            :mode "\\.R\\'"
-            )
-
           ;; Haskell language support
           (use-package haskell-mode
             :mode "\\.hs\\'"
@@ -61,6 +55,14 @@
           ;; Python syntax support
           (use-package python-mode
             :mode "\\.py\\'"
+            )
+
+          ;; R syntax support
+          (use-package ess
+            :init
+            (load "ess-autoloads")
+            :mode ("\\.r\\'" . ess-r-mode)
+            :mode ("\\.R\\'" . ess-r-mode)
             )
           
           ;; Ruby language support
