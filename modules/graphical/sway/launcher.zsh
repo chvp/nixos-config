@@ -96,14 +96,6 @@ systemctl_options() {
   echo systemctl suspend
 }
 
-tmuxinator_options() {
-  ls ~/.config/tmuxinator | sed "s/\.yml$//" | sed "s/^/tmuxinator /"
-}
-
-tmuxinator() {
-  @sway@/bin/swaymsg exec "@kitty@/bin/kitty -e @tmuxinator@/bin/tmuxinator start $1"
-}
-
 windows_options() {
   @sway@/bin/swaymsg -t get_tree | @jq@/bin/jq -r 'recurse(.nodes[]?)|recurse(.floating_nodes[]?)|select(.layout=="none")|select(.app_id!="launcher")|select(.type=="con"),select(.type=="floating_con")|(if .app_id then .app_id else .window_properties.class end)+": "+.name+" ("+(.id|tostring)+")"' | sed "s/^/windows /"
 }
@@ -113,7 +105,7 @@ windows() {
   @sway@/bin/swaymsg \[con_id="$window"\] focus
 }
 
-CHOSEN=$(cat <(windows_options) <(tmuxinator_options) <(ssh_options) <(systemctl_options) <(pass_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 36 | tail -n1)
+CHOSEN=$(cat <(windows_options) <(ssh_options) <(systemctl_options) <(pass_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 40 | tail -n1)
 
 if [ -n "$CHOSEN" ]
 then

@@ -36,7 +36,6 @@ let
       pass
       slurp
       sway
-      tmuxinator
       zsh
       ;
     inherit emojiList;
