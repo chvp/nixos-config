@@ -52,6 +52,8 @@
     "wv"   '(split-window-vertically :which-key "split vertical")
     "ws"   '(split-window-horizontally :which-key "split horizontal")
     "wd"   '(delete-window :which-key "delete")
+    "w-"   '(text-scale-decrease :which-key "decrease font size")
+    "w+"   '(text-scale-increase :which-key "increase font size")
 
     "x"    '(execute-extended-command :which-key "exec")
     )
@@ -86,6 +88,7 @@
   :custom
   (company-dabbrev-downcase nil "Don't downcase completions")
   (company-dabbrev-ignore-case t "Change full casing of completion if completion has different case")
+  (company-minimum-prefix-length 2 "Start autocompletion after 2 characters")
   )
 
 ;; Prescient in company
