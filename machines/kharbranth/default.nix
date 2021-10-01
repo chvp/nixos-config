@@ -7,6 +7,9 @@
 
   time.timeZone = "Europe/Brussels";
 
+  environment.etc."jetbrains/python".source = pkgs.python3;
+  environment.systemPackages = [ pkgs.jetbrains.pycharm-community ];
+
   # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
