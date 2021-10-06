@@ -1,13 +1,5 @@
 { config, lib, pkgs, ... }:
 
-let
-  hledger-repo = pkgs.fetchFromGitHub {
-    owner = "simonmichael";
-    repo = "hledger";
-    rev = "1.23";
-    sha256 = "yiQa30Qq5u+i3jOkUlI6I+aRfwa74tqdtfnvVV54aoM=";
-  };
-in
 {
   options.chvp.programs.hledger.enable = lib.mkOption {
     default = false;
@@ -36,9 +28,8 @@ in
       home.packages = [
         (pkgs.haskell.lib.justStaticExecutables (pkgs.haskellPackages.override {
           overrides = hself: hsuper: rec {
-            hledger = hsuper.callCabal2nixWithOptions "hledger" hledger-repo "--subpath hledger" { };
-            hledger-lib = hsuper.callCabal2nixWithOptions "hledger-lib" hledger-repo "--subpath hledger-lib" { };
-            doctest = hsuper.doctest_0_18_1;
+            hledger = hsuper.hledger_1_23;
+            hledger-lib = hsuper.hledger-lib_1_23;
           };
         }).hledger)
       ];
