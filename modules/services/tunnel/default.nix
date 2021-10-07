@@ -13,6 +13,8 @@
       wantedBy = [ "multi-user.target" ];
       script = "${pkgs.openssh}/bin/ssh -i ${config.age.secrets."files/services/tunnel/key".path} -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -o ControlPath=none -NT -p $SSH_PORT -L 0.0.0.0:9797:$CONN_HOST:$CONN_PORT $USER@$SSH_HOST";
       serviceConfig = {
+        RestartSec = "5s";
+        Restart = "on-failure";
         EnvironmentFile = config.age.secrets."files/services/tunnel/env".path;
       };
     };
