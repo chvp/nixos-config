@@ -211,6 +211,10 @@
   (run-at-time t 300 'prescient--save)
   )
 
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; List item selection interface
 (use-package selectrum
   :custom (selectrum-max-window-height 20 "Allow selector to be a bit higher")

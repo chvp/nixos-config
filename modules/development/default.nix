@@ -22,6 +22,14 @@
             :custom (editorconfig-get-properties-function 'editorconfig-get-properties)
             :config (editorconfig-mode 1)
             )
+
+          ;; R syntax support
+          (use-package ess
+            :init
+            (load "ess-autoloads")
+            :mode ("\\.r\\'" . ess-r-mode)
+            :mode ("\\.R\\'" . ess-r-mode)
+            )
           
           ;; Language server support
           (use-package lsp-mode
@@ -40,29 +48,20 @@
             :mode ("\\.md\\'" . markdown-mode)
             :mode ("\\.markdown\\'" . markdown-mode)
             )
-          
-          ;; YAML syntax support
-          (use-package yaml-mode
-            :mode "\\.yml\\'"
-            :mode "\\.yaml\\'"
-            )
 
           ;; Haskell language support
           (use-package haskell-mode
             :mode "\\.hs\\'"
             )
 
+          ;; Folding
+          (use-package origami
+            :hook (prog-mode . origami-mode)
+            )
+
           ;; Python syntax support
           (use-package python-mode
             :mode "\\.py\\'"
-            )
-
-          ;; R syntax support
-          (use-package ess
-            :init
-            (load "ess-autoloads")
-            :mode ("\\.r\\'" . ess-r-mode)
-            :mode ("\\.R\\'" . ess-r-mode)
             )
           
           ;; Ruby language support
@@ -93,6 +92,12 @@
           (use-package web-mode
             :mode "\\.html\\'"
             :mode "\\.html\\.erb\\'"
+            )
+
+          ;; YAML syntax support
+          (use-package yaml-mode
+            :mode "\\.yml\\'"
+            :mode "\\.yaml\\'"
             )
         ''
       ];
