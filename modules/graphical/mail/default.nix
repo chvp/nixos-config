@@ -252,23 +252,6 @@ in
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             };
           };
-          jonggroen = makeAccount {
-            name = "jonggroen";
-            address = "charlotte@jonggroen.be";
-            imapHost = "imap.gmail.com";
-            smtpHost = "smtp.gmail.com";
-            passFile = "jonggroen/GoogleAppMail";
-            useStartTls = true;
-            extraConfig = {
-              flavor = "gmail.com";
-              folders = {
-                drafts = "[Gmail].Drafts";
-                inbox = "INBOX";
-                sent = "INBOX";
-                trash = "[Gmail].Bin";
-              };
-            };
-          };
           postbot = makeAccount {
             name = "postbot";
             address = "postbot@vanpetegem.me";
