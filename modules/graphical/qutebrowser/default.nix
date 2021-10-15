@@ -7,18 +7,6 @@
   };
 
   config = lib.mkIf config.chvp.graphical.qutebrowser.enable {
-    nixpkgs.overlays = [
-      (self: super: {
-        qutebrowser = super.qutebrowser.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [
-            (self.fetchpatch {
-              url = "https://github.com/qutebrowser/qutebrowser/pull/6626.patch";
-              sha256 = "aWhkUQ2eaLNiQwxRTbzfFrM0TrDSKtPKinjGu/RknLk=";
-            })
-          ];
-        });
-      })
-    ];
     chvp.base.zfs.homeLinks = [
       { path = ".config/qutebrowser"; type = "data"; }
       { path = ".local/share/qutebrowser"; type = "cache"; }

@@ -30,7 +30,10 @@
       enable = true;
       android.enable = true;
     };
-    games.enable = true;
+    games = {
+      enable = true;
+      steam.enable = false;
+    };
     graphical.enable = true;
     programs = {
       calibre.enable = false;
