@@ -56,6 +56,10 @@
             pdfjs = true;
           };
           editor.command = [ "${config.chvp.base.emacs.package}/bin/emacsclient" "-c" "+{line}:{column}" "{file}" ];
+          fonts = {
+            default_family = "Fira Code";
+            default_size = "9pt";
+          };
           url.default_page = "about:blank";
           window.hide_decoration = true;
         };
