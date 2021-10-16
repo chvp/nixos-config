@@ -41,8 +41,8 @@
         '';
       };
       dconf.settings."org/gnome/desktop/interface" = {
-        gtk-theme = "Arc";
-        icon-theme = "Arc";
+        gtk-theme = "Breeze";
+        icon-theme = "breeze";
         cursor-theme = "Vanilla-DMZ";
       };
       gtk = {
@@ -61,17 +61,21 @@
           gtk-cursor-theme-size = 0;
         };
         iconTheme = {
-          package = pkgs.arc-icon-theme;
-          name = "Arc";
+          package = pkgs.libsForQt5.breeze-icons;
+          name = "breeze";
         };
         theme = {
-          package = pkgs.arc-theme;
-          name = "Arc";
+          package = pkgs.libsForQt5.breeze-gtk;
+          name = "Breeze";
         };
       };
       qt = {
         enable = true;
-        platformTheme = "gtk";
+        platformTheme = "gnome";
+        style = {
+          name = "breeze";
+          package = pkgs.libsForQt5.breeze-qt5;
+        };
       };
     };
   };
