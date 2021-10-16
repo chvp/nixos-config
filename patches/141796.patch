@@ -1,0 +1,35 @@
+From f9c9ec120eb7bdd664bb9f29323a442637e81c7b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fabi=C3=A1n=20Heredia=20Montiel?= <fabianhjr@protonmail.com>
+Date: Fri, 15 Oct 2021 14:34:17 -0500
+Subject: [PATCH] tracker: patch failing test due to float comparison
+
+---
+ pkgs/development/libraries/tracker/default.nix | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/pkgs/development/libraries/tracker/default.nix b/pkgs/development/libraries/tracker/default.nix
+index 39ac21b7ad6c..fc0ba54cbe7e 100644
+--- a/pkgs/development/libraries/tracker/default.nix
++++ b/pkgs/development/libraries/tracker/default.nix
+@@ -1,6 +1,7 @@
+ { stdenv
+ , lib
+ , fetchurl
++, fetchpatch
+ , gettext
+ , meson
+ , ninja
+@@ -44,6 +45,13 @@ stdenv.mkDerivation rec {
+       src = ./fix-paths.patch;
+       inherit asciidoc;
+     })
++  ] ++ lib.optionals (stdenv.hostPlatform.isi686) [
++    # Upstream: https://gitlab.gnome.org/GNOME/tracker/-/issues/332
++    (fetchpatch {
++      name = "i686-test.patch";
++      url = "https://gitlab.gnome.org/GNOME/tracker/-/commit/af707181a2c492a794daec7ce3f3062d67ffd9dc.patch";
++      sha256 = "sha256-KOdkTy79w3oiQILrPG00UVrv+VBjAk4Y868I8jtifqk=";
++    })
+   ];
+ 
+   nativeBuildInputs = [
