@@ -150,13 +150,16 @@ in
           workspace 8 output DP-3 DP-4 DP-5 HDMI-A-1 eDP-1
           workspace 9 output DP-3 DP-4 DP-5 HDMI-A-1 eDP-1
 
-          workspace 1
-          exec ${pkgs.qutebrowser}/bin/qutebrowser
-
           no_focus [title="Microsoft Teams Notification"]
 
           default_border pixel
-        '';
+
+          workspace 1
+          exec ${pkgs.qutebrowser}/bin/qutebrowser
+        '' + (lib.optionalString config.chvp.programs.element.enable ''
+          workspace 3
+          exec ${pkgs.element-desktop-wayland}/bin/element-desktop
+        '');
         extraSessionCommands = ''
           export XDG_SESSION_TYPE=wayland
           export XDG_CURRENT_DESKTOP=sway

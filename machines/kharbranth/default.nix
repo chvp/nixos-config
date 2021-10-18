@@ -37,6 +37,7 @@
     graphical.enable = true;
     programs = {
       eid.enable = true;
+      element.enable = true;
       hledger.enable = true;
       obs.enable = true;
     };
