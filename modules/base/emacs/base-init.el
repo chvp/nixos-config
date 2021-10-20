@@ -33,6 +33,7 @@
 
     "b"    '(:ignore t :which-key "buffer")
     "bd"   '(kill-this-buffer :which-key "kill")
+    "br"   '(rename-buffer :which-key "rename")
 
     "f"    '(:ignore t :which-key "file")
     "ff"   '(find-file :which-key "find")
