@@ -31,6 +31,8 @@ in
   "secrets/authorized_keys/charlotte.age".publicKeys = hosts ++ users;
   "secrets/authorized_keys/root.age".publicKeys = hosts ++ users;
 
+  "secrets/passwords/networks.age".publicKeys = laptops ++ users;
+
   "secrets/passwords/ugent-mount-credentials.age".publicKeys = laptops ++ users;
   "secrets/passwords/ugent-vpn.age".publicKeys = laptops ++ users;
   "secrets/files/programs/vpn/local.age".publicKeys = laptops ++ users;

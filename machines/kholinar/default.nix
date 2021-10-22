@@ -12,7 +12,13 @@
     stateVersion = "20.09";
     base = {
       bluetooth.enable = true;
-      network.networkmanager.enable = true;
+      network.mobile = {
+        enable = true;
+        wireless-interface = "wlp2s0";
+        wired-interfaces = {
+          "enp0s31f6" = { macAddress = "10:65:30:df:80:f5"; };
+        };
+      };
       zfs = {
         encrypted = true;
         backups = [

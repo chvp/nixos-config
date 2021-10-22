@@ -3,6 +3,6 @@
 {
   imports = [
     ./ovh.nix
-    ./networkmanager.nix
+    ./mobile.nix
   ];
 }
