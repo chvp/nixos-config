@@ -14,9 +14,9 @@
       bluetooth.enable = true;
       network.mobile = {
         enable = true;
-        wireless-interface = "wlp2s0";
+        wireless-interface = "wlp0s20f3";
         wired-interfaces = {
-          "enp0s31f6" = { macAddress = "10:65:30:df:80:f5"; };
+          "enp0s31f6" = { };
         };
       };
       zfs = {
