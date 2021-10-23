@@ -1,0 +1,29 @@
+From 45fc09dfdd812e8cff48c53b70c87878e7776577 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sat, 23 Oct 2021 11:21:54 +0200
+Subject: [PATCH] mu: 1.6.7 -> 1.6.8
+
+---
+ pkgs/tools/networking/mu/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index 0d94861da295..4b4582d39d0e 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -7,13 +7,13 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.6.7";
++  version = "1.6.8";
+ 
+   src = fetchFromGitHub {
+     owner  = "djcb";
+     repo   = "mu";
+     rev    = version;
+-    sha256 = "bhZrottFT5NX43Iz1wFGYzaUSAgvgkhOwNHX6fjUs7M=";
++    sha256 = "S2ByfRBBcIIvFbHAn+OB6I4hCuC7Tx8I0bCvxw05UsE=";
+   };
+ 
+   postPatch = lib.optionalString (batchSize != null) ''
