@@ -1,0 +1,36 @@
+From 3f24252df0f0412e3b345898fa1c9126b54bed67 Mon Sep 17 00:00:00 2001
+From: Maximilian Bosch <maximilian@mbosch.me>
+Date: Tue, 2 Nov 2021 23:00:46 +0100
+Subject: [PATCH] mautrix-whatsapp: 0.1.9 -> 0.1.10
+
+ChangeLog: https://github.com/mautrix/whatsapp/releases/tag/v0.1.10
+---
+ pkgs/servers/mautrix-whatsapp/default.nix | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pkgs/servers/mautrix-whatsapp/default.nix b/pkgs/servers/mautrix-whatsapp/default.nix
+index 70684b767c581..134ff52199258 100644
+--- a/pkgs/servers/mautrix-whatsapp/default.nix
++++ b/pkgs/servers/mautrix-whatsapp/default.nix
+@@ -2,18 +2,18 @@
+ 
+ buildGoModule rec {
+   pname = "mautrix-whatsapp";
+-  version = "0.1.9";
++  version = "0.1.10";
+ 
+   src = fetchFromGitHub {
+     owner = "mautrix";
+     repo = "whatsapp";
+     rev = "v${version}";
+-    sha256 = "DKW54bxhohvtz71zqFi4ZacK1pVys6aR5B9naD7PYPk=";
++    sha256 = "sha256-4eqgmJ5CC1Glc8jG+4cQs6FbrY8Az29rCrZvFU3PAoM=";
+   };
+ 
+   buildInputs = [ olm ];
+ 
+-  vendorSha256 = "Y9mUl7fWZiXBEEDX3w2HXMlQKJntv16WeQC1bQQ7hHs=";
++  vendorSha256 = "sha256-Y9mUl7fWZiXBEEDX3w2HXMlQKJntv16WeQC1bQQ7hHs=";
+ 
+   doCheck = false;
+ 
