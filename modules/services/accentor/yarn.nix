@@ -9274,11 +9274,11 @@
       };
     }
     {
-      name = "vue_i18n___vue_i18n_8.26.5.tgz";
+      name = "vue_i18n___vue_i18n_8.26.7.tgz";
       path = fetchurl {
-        name = "vue_i18n___vue_i18n_8.26.5.tgz";
-        url  = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.26.5.tgz";
-        sha1 = "b61e994e7ae83564c6aebd004543156bbdc7c7e9";
+        name = "vue_i18n___vue_i18n_8.26.7.tgz";
+        url  = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.26.7.tgz";
+        sha1 = "adfd48373449fe31438c48e3b3bd43044dc3a681";
       };
     }
     {
@@ -9362,11 +9362,11 @@
       };
     }
     {
-      name = "vuetify___vuetify_2.5.10.tgz";
+      name = "vuetify___vuetify_2.5.12.tgz";
       path = fetchurl {
-        name = "vuetify___vuetify_2.5.10.tgz";
-        url  = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.10.tgz";
-        sha1 = "165cb3de9dbffbc94bc775aa2f698eb9fa89eabe";
+        name = "vuetify___vuetify_2.5.12.tgz";
+        url  = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.12.tgz";
+        sha1 = "d21f6d8ff4a654a3e90f40012ea61b53376adcf4";
       };
     }
     {
