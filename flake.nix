@@ -25,7 +25,7 @@
         jdtls = callPackage ./packages/jdtls { };
         kotlin-language-server = callPackage ./packages/kotlin-language-server { };
       }; in
-    utils.lib.systemFlake {
+    utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
         input = nixpkgs;
