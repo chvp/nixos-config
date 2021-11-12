@@ -99,11 +99,6 @@ in
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
-    nixpkgs.overlays = [
-      (self: super: {
-        nix = super.nix_2_4;
-      })
-    ];
 
     home-manager.users.charlotte = { ... }:
       lib.recursiveUpdate
