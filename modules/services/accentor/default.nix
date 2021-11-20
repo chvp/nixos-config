@@ -18,6 +18,10 @@
       hostname = "accentor.vanpetegem.me";
       workers = 4;
       environmentFile = config.age.secrets."passwords/services/accentor".path;
+      rescanTimer = {
+        enable = true;
+        dates = "00:00";
+      };
       nginx = {
         forceSSL = true;
         useACMEHost = "vanpetegem.me";
@@ -31,7 +35,7 @@
           owner = "accentor";
           repo = "api";
           rev = "main";
-          sha256 = "z6Ioo7H0f6G9OsVFTjK8o7KXVdnXt0Ax39DPa62HZ7U=";
+          sha256 = "bgn5ByLN+yVln711O62hcLYH+RK1ky+NdvyJdIfFLUc=";
         };
       });
       webPackage = (pkgs.accentor-web.override {
@@ -43,7 +47,7 @@
           owner = "accentor";
           repo = "web";
           rev = "main";
-          sha256 = "9ZEiRGj40quBGUx6bxnB+FGXI8wlvzRfWPTvYPSx03A=";
+          sha256 = "8cS0O74WFkp5WV96MuS1d5SAfnHtWgajpJUUHtT2yJ8=";
         };
       });
     };

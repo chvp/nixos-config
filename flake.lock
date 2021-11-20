@@ -7,15 +7,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1630749056,
-        "narHash": "sha256-WnruBfNt+zNEEHrJDgEgldD4x525ZTBkmNQ9iTsT4Ao=",
+        "lastModified": 1637425210,
+        "narHash": "sha256-PV0BPG0NBfgPs16VvqklEmU0okr/frWIoGrTTq6qxqw=",
         "owner": "accentor",
         "repo": "flake",
-        "rev": "e465c5bb11ed09fdf15ee5cca8302129abe5fb52",
+        "rev": "562c4627476ea04c228e69ad95d9edd624af10d7",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
+        "ref": "feature/rescan-timer",
         "repo": "flake",
         "type": "github"
       }
