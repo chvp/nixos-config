@@ -41,7 +41,7 @@
           isReadOnly = false;
         };
         "/run/secrets" = {
-          hostPath = "/run/secrets/data-access";
+          hostPath = "/run/agenix/data-access";
           isReadOnly = true;
         };
       };

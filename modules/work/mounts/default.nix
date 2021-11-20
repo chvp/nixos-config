@@ -15,13 +15,13 @@
         "/mnt/ugent/files" = {
           device = "//files.ugent.be/ecvpeteg";
           fsType = "cifs";
-          options = [ "credentials=/run/secrets/passwords/ugent-mount-credentials,${automount_opts},users,vers=3.0,noperm,domain=UGENT,sec=ntlmv2i" ];
+          options = [ "credentials=${config.age.secrets."passwords/ugent-mount-credentials".path},${automount_opts},users,vers=3.0,noperm,domain=UGENT,sec=ntlmv2i" ];
           noCheck = true;
         };
         "/mnt/ugent/webhost" = {
           device = "//webhost.ugent.be/ecvpeteg";
           fsType = "cifs";
-          options = [ "credentials=/run/secrets/passwords/ugent-mount-credentials,${automount_opts},users,vers=3.0" ];
+          options = [ "credentials=${config.age.secrets."passwords/ugent-mount-credentials".path},${automount_opts},users,vers=3.0" ];
           noCheck = true;
         };
       };
