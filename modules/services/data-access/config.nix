@@ -18,6 +18,9 @@
       { bits = 4096; path = "/run/secrets/ssh_host_rsa_key"; type = "rsa"; }
       { path = "/run/secrets/ssh_host_ed25519_key"; type = "ed25519"; }
     ];
+    extraConfig = ''
+      HostKeyAlgorithms +ssh-rsa
+    '';
     authorizedKeysFiles = [ "/run/secrets/authorized_keys" ];
   };
 }
