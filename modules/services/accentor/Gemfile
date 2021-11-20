@@ -18,7 +18,7 @@ gem 'bcrypt', '~> 3.1'
 
 gem 'delayed_job_active_record', '~> 4.1'
 
-gem 'delayed_cron_job', '~> 0.8'
+gem 'delayed_cron_job', '~> 0.9'
 
 gem 'wahwah', '~> 1.1.1'
 
@@ -51,7 +51,7 @@ end
 
 group :development do
   gem 'annotate', '~> 3.1' # Remove workaround in lib/tasks/annotate.rb when https://github.com/ctran/annotate_models/issues/696 is fixed
-  gem 'rubocop-minitest', '~> 0.15.2'
+  gem 'rubocop-minitest', '~> 0.16.0'
   gem 'rubocop-rails', '~> 2.12'
 
   gem 'listen', '>= 3.1.5', '< 3.8'
