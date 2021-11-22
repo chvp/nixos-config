@@ -3,7 +3,7 @@
 
   inputs = {
     accentor = {
-      url = "github:accentor/flake/feature/rescan-timer";
+      url = "github:accentor/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
