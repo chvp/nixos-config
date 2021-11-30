@@ -17,9 +17,13 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
+    zeroad = {
+      url = "github:chvp/0ad-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, zeroad, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -33,6 +37,7 @@
         overlaysBuilder = _: [
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
+          (self: super: { zeroad = zeroad.packages.x86_64-linux.zeroad; })
         ];
       };
       hostDefaults = {
