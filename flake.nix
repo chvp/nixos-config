@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/1.3.0";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
   };
 
   outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, utils }:
