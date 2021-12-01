@@ -111,7 +111,7 @@ in
           [
             ''
               (use-package mu4e
-                ;; Use mu4e included in the mu package, see emacs.nix
+                ;; Use mu4e included in the mu package, see emacs/default.nix
                 :ensure nil
                 :commands (mu4e mu4e-update-index)
                 :after (selectrum)

@@ -40,6 +40,14 @@
               "SPC" '(:keymap lsp-command-map)
               )
             )
+
+          ;; Forth syntax support
+          (use-package gforth
+            ;; Included in the gforth package, see emacs/default.nix
+            :ensure nil
+            :mode ("\\.fs\\'" . forth-mode)
+            :mode ("\\.fb\\'" . forth-block-mode)
+          )
           
           ;; Markdown syntax support
           (use-package markdown-mode
