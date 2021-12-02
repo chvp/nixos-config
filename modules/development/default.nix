@@ -42,9 +42,7 @@
             )
 
           ;; Forth syntax support
-          (use-package gforth
-            ;; Included in the gforth package, see emacs/default.nix
-            :ensure nil
+          (use-package forth-mode
             :mode ("\\.fs\\'" . forth-mode)
             :mode ("\\.fb\\'" . forth-block-mode)
           )
