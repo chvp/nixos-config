@@ -2,11 +2,11 @@
   offline_cache = linkFarm "offline" packages;
   packages = [
     {
-      name = "_accentor_api_client_js___api_client_js_0.13.0.tgz";
+      name = "_accentor_api_client_js___api_client_js_0.15.0.tgz";
       path = fetchurl {
-        name = "_accentor_api_client_js___api_client_js_0.13.0.tgz";
-        url  = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.13.0.tgz";
-        sha1 = "03223b7cc2d2c64bf6561b13c7ceccad8fc678e5";
+        name = "_accentor_api_client_js___api_client_js_0.15.0.tgz";
+        url  = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.15.0.tgz";
+        sha1 = "c06b3187346b2a34d29ec07f04b512b3ae812c9b";
       };
     }
     {
@@ -4407,6 +4407,14 @@
         name = "graceful_fs___graceful_fs_4.2.6.tgz";
         url  = "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.6.tgz";
         sha1 = "ff040b2b0853b23c3d31027523706f1885d76bee";
+      };
+    }
+    {
+      name = "gsap___gsap_3.8.0.tgz";
+      path = fetchurl {
+        name = "gsap___gsap_3.8.0.tgz";
+        url  = "https://registry.yarnpkg.com/gsap/-/gsap-3.8.0.tgz";
+        sha1 = "a404dd6ebbaabc92605539aea9d98e3098688064";
       };
     }
     {
