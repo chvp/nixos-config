@@ -874,83 +874,35 @@
       };
     }
     {
-      name = "_intlify_bundle_utils___bundle_utils_1.0.0.tgz";
+      name = "_intlify_bundle_utils___bundle_utils_2.1.0.tgz";
       path = fetchurl {
-        name = "_intlify_bundle_utils___bundle_utils_1.0.0.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/bundle-utils/-/bundle-utils-1.0.0.tgz";
-        sha1 = "a2bf5a8292d32d6ca4a6df0d4e2d7c4441a580af";
+        name = "_intlify_bundle_utils___bundle_utils_2.1.0.tgz";
+        url  = "https://registry.yarnpkg.com/@intlify/bundle-utils/-/bundle-utils-2.1.0.tgz";
+        sha1 = "2d5ca80335dcccb8f1d72423e7261b2d23a0cda2";
       };
     }
     {
-      name = "_intlify_core_base___core_base_9.1.9.tgz";
+      name = "_intlify_message_compiler___message_compiler_9.2.0_beta.22.tgz";
       path = fetchurl {
-        name = "_intlify_core_base___core_base_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/core-base/-/core-base-9.1.9.tgz";
-        sha1 = "e4e8c951010728e4af3a0d13d74cf3f9e7add7f6";
+        name = "_intlify_message_compiler___message_compiler_9.2.0_beta.22.tgz";
+        url  = "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-9.2.0-beta.22.tgz";
+        sha1 = "02548ec10cff6466052116345a98d072bca4f943";
       };
     }
     {
-      name = "_intlify_core___core_9.1.9.tgz";
+      name = "_intlify_shared___shared_9.2.0_beta.22.tgz";
       path = fetchurl {
-        name = "_intlify_core___core_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/core/-/core-9.1.9.tgz";
-        sha1 = "774e739a2ab4ac460a348a35eb0260e787d50556";
+        name = "_intlify_shared___shared_9.2.0_beta.22.tgz";
+        url  = "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.2.0-beta.22.tgz";
+        sha1 = "26144144cd93b3100f20b370e9f1bc7b5e955b6a";
       };
     }
     {
-      name = "_intlify_devtools_if___devtools_if_9.1.9.tgz";
+      name = "_intlify_vue_i18n_loader___vue_i18n_loader_4.0.0.tgz";
       path = fetchurl {
-        name = "_intlify_devtools_if___devtools_if_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/devtools-if/-/devtools-if-9.1.9.tgz";
-        sha1 = "a30e1dd1256ff2c5c98d8d75d075384fba898e5d";
-      };
-    }
-    {
-      name = "_intlify_message_compiler___message_compiler_9.1.9.tgz";
-      path = fetchurl {
-        name = "_intlify_message_compiler___message_compiler_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-9.1.9.tgz";
-        sha1 = "1193cbd224a71c2fb981455b8534a3c766d2948d";
-      };
-    }
-    {
-      name = "_intlify_message_resolver___message_resolver_9.1.9.tgz";
-      path = fetchurl {
-        name = "_intlify_message_resolver___message_resolver_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/message-resolver/-/message-resolver-9.1.9.tgz";
-        sha1 = "3155ccd2f5e6d0dc16cad8b7f1d8e97fcda05bfc";
-      };
-    }
-    {
-      name = "_intlify_runtime___runtime_9.1.9.tgz";
-      path = fetchurl {
-        name = "_intlify_runtime___runtime_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/runtime/-/runtime-9.1.9.tgz";
-        sha1 = "2c12ce29518a075629efed0a8ed293ee740cb285";
-      };
-    }
-    {
-      name = "_intlify_shared___shared_9.1.9.tgz";
-      path = fetchurl {
-        name = "_intlify_shared___shared_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.1.9.tgz";
-        sha1 = "0baaf96128b85560666bec784ffb01f6623cc17a";
-      };
-    }
-    {
-      name = "_intlify_vue_devtools___vue_devtools_9.1.9.tgz";
-      path = fetchurl {
-        name = "_intlify_vue_devtools___vue_devtools_9.1.9.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/vue-devtools/-/vue-devtools-9.1.9.tgz";
-        sha1 = "2be8f4dbe7f7ed4115676eb32348141d411e426b";
-      };
-    }
-    {
-      name = "_intlify_vue_i18n_loader___vue_i18n_loader_3.3.0.tgz";
-      path = fetchurl {
-        name = "_intlify_vue_i18n_loader___vue_i18n_loader_3.3.0.tgz";
-        url  = "https://registry.yarnpkg.com/@intlify/vue-i18n-loader/-/vue-i18n-loader-3.3.0.tgz";
-        sha1 = "5dfe3bb79c4a8aafe2d1e3e28147e380fa7b3342";
+        name = "_intlify_vue_i18n_loader___vue_i18n_loader_4.0.0.tgz";
+        url  = "https://registry.yarnpkg.com/@intlify/vue-i18n-loader/-/vue-i18n-loader-4.0.0.tgz";
+        sha1 = "4fe133fea88173dc17d44c5cdb33809a91bf7793";
       };
     }
     {
@@ -4858,6 +4810,14 @@
       };
     }
     {
+      name = "immutable___immutable_4.0.0.tgz";
+      path = fetchurl {
+        name = "immutable___immutable_4.0.0.tgz";
+        url  = "https://registry.yarnpkg.com/immutable/-/immutable-4.0.0.tgz";
+        sha1 = "b86f78de6adef3608395efb269a91462797e2c23";
+      };
+    }
+    {
       name = "import_cwd___import_cwd_2.1.0.tgz";
       path = fetchurl {
         name = "import_cwd___import_cwd_2.1.0.tgz";
@@ -7330,11 +7290,11 @@
       };
     }
     {
-      name = "prettier___prettier_2.4.1.tgz";
+      name = "prettier___prettier_2.5.0.tgz";
       path = fetchurl {
-        name = "prettier___prettier_2.4.1.tgz";
-        url  = "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz";
-        sha1 = "671e11c89c14a4cfc876ce564106c4a6726c9f5c";
+        name = "prettier___prettier_2.5.0.tgz";
+        url  = "https://registry.yarnpkg.com/prettier/-/prettier-2.5.0.tgz";
+        sha1 = "a6370e2d4594e093270419d9cc47f7670488f893";
       };
     }
     {
@@ -7954,11 +7914,11 @@
       };
     }
     {
-      name = "sass___sass_1.43.4.tgz";
+      name = "sass___sass_1.44.0.tgz";
       path = fetchurl {
-        name = "sass___sass_1.43.4.tgz";
-        url  = "https://registry.yarnpkg.com/sass/-/sass-1.43.4.tgz";
-        sha1 = "68c7d6a1b004bef49af0d9caf750e9b252105d1f";
+        name = "sass___sass_1.44.0.tgz";
+        url  = "https://registry.yarnpkg.com/sass/-/sass-1.44.0.tgz";
+        sha1 = "619aa0a2275c097f9af5e6b8fe8a95e3056430fb";
       };
     }
     {
@@ -9234,11 +9194,11 @@
       };
     }
     {
-      name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.3.tgz";
+      name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.4.tgz";
       path = fetchurl {
-        name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.3.tgz";
-        url  = "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.4.3.tgz";
-        sha1 = "68a893642b354ed8d534e4a9bc63d0728a8987ac";
+        name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.4.tgz";
+        url  = "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.4.4.tgz";
+        sha1 = "462256a54180b70f3aaa1b1dc279b324f8114474";
       };
     }
     {
@@ -9362,11 +9322,11 @@
       };
     }
     {
-      name = "vuetify___vuetify_2.6.0.tgz";
+      name = "vuetify___vuetify_2.6.1.tgz";
       path = fetchurl {
-        name = "vuetify___vuetify_2.6.0.tgz";
-        url  = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.0.tgz";
-        sha1 = "7fcb8ec7b122760750b5c028a15188e3ab45158c";
+        name = "vuetify___vuetify_2.6.1.tgz";
+        url  = "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.1.tgz";
+        sha1 = "5cdd26c51980618b0b92625a2829cd4956813eaa";
       };
     }
     {
