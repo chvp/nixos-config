@@ -1,6 +1,6 @@
 {
   "name": "accentor",
-  "version": "0.28.1",
+  "version": "0.29.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +9,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
-    "@accentor/api-client-js": "^0.15.0",
+    "@accentor/api-client-js": "^0.16.0",
     "@mdi/font": "^6.5.95",
     "@mdi/svg": "^6.5.95",
     "fetch-retry": "^5.0.1",
