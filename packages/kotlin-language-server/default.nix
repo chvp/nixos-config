@@ -2,10 +2,10 @@
 
 stdenv.mkDerivation rec {
   pname = "kotlin-language-server";
-  version = "1.1.2";
+  version = "1.2.0";
   src = fetchzip {
     url = "https://github.com/fwcd/${pname}/releases/download/${version}/server.zip";
-    sha256 = "021h9239lr19r9r726hfjlfgwa8fl4m8vfryzsg8fbm0hsziklkz";
+    sha256 = "ooVEYL4ENf15NQWEU/5uQYD+s/RM2vTKDSpWUcccsPM=";
   };
 
   nativeBuildInputs = [ makeWrapper ];
