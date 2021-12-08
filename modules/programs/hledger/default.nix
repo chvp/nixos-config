@@ -28,8 +28,8 @@
       home.packages = [
         (pkgs.haskell.lib.justStaticExecutables (pkgs.haskellPackages.override {
           overrides = hself: hsuper: rec {
-            hledger = hsuper.hledger_1_23;
-            hledger-lib = hsuper.hledger-lib_1_23;
+            hledger = hsuper.hledger_1_24;
+            hledger-lib = hsuper.hledger-lib_1_24;
           };
         }).hledger)
       ];
