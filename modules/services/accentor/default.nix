@@ -47,7 +47,7 @@
           owner = "accentor";
           repo = "web";
           rev = "main";
-          sha256 = "wd53oF0Owh7j+5SBR6YoRg2Q6jgDbHEEZhk9aNsb25s=";
+          sha256 = "wnTKvc8lxUBwZUZmLkFP1z1vKzPM5xsH75VYXX21a1o=";
         };
       });
     };
