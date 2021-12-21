@@ -16,7 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus/v1.3.1";
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     zeroad = {
       url = "github:chvp/0ad-flake";
       inputs.nixpkgs.follows = "nixpkgs";
