@@ -57,12 +57,12 @@
               inputs;
             nix.nixPath = [ "/etc/channels" ];
           })
+          ({ config._module.args = { nixosConfigurations = self.nixosConfigurations; }; })
           accentor.nixosModule
           agenix.nixosModules.age
           home-manager.nixosModules.home-manager
           ./modules
         ];
-        extraArgs = { nixosConfigurations = self.nixosConfigurations; };
       };
       hosts = {
         kharbranth.modules = [ ./machines/kharbranth ];
