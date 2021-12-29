@@ -41,7 +41,7 @@
           isReadOnly = false;
         };
         "/run/secrets" = {
-          hostPath = "/run/agenix/data-access";
+          hostPath = "/run/data-access";
           isReadOnly = true;
         };
       };
@@ -60,18 +60,42 @@
       };
     };
 
-    age.secrets."data-access/ssh_host_rsa_key".file = ../../../secrets/data-access/ssh_host_rsa_key.age;
-    age.secrets."data-access/ssh_host_rsa_key.pub".file = ../../../secrets/data-access/ssh_host_rsa_key.pub.age;
-    age.secrets."data-access/ssh_host_ed25519_key".file = ../../../secrets/data-access/ssh_host_ed25519_key.age;
-    age.secrets."data-access/ssh_host_ed25519_key.pub".file = ../../../secrets/data-access/ssh_host_ed25519_key.pub.age;
-    age.secrets."data-access/password_file".file = ../../../secrets/data-access/password_file.age;
+    age.secrets."data-access/ssh_host_rsa_key" = {
+      file = ../../../secrets/data-access/ssh_host_rsa_key.age;
+      path = "/run/data-access/ssh_host_rsa_key";
+      symlink = false;
+    };
+    age.secrets."data-access/ssh_host_rsa_key.pub" = {
+      file = ../../../secrets/data-access/ssh_host_rsa_key.pub.age;
+      path = "/run/data-access/ssh_host_rsa_key.pub";
+      symlink = false;
+    };
+    age.secrets."data-access/ssh_host_ed25519_key" = {
+      file = ../../../secrets/data-access/ssh_host_ed25519_key.age;
+      path = "/run/data-access/ssh_host_ed25519_key";
+      symlink = false;
+    };
+    age.secrets."data-access/ssh_host_ed25519_key.pub" = {
+      file = ../../../secrets/data-access/ssh_host_ed25519_key.pub.age;
+      path = "/run/data-access/ssh_host_ed25519_key.pub";
+      symlink = false;
+    };
+    age.secrets."data-access/password_file" = {
+      file = ../../../secrets/data-access/password_file.age;
+      path = "/run/data-access/password_file";
+      symlink = false;
+    };
     age.secrets."data-access/authorized_keys" = {
       file = ../../../secrets/data-access/authorized_keys.age;
       owner = "charlotte";
+      path = "/run/data-access/authorized_keys";
+      symlink = false;
     };
     age.secrets."data-access/create_torrent" = {
       file = ../../../secrets/data-access/create_torrent.age;
       owner = "charlotte";
+      path = "/run/data-access/create_torrent";
+      symlink = false;
     };
     age.secrets."passwords/services/data-basic-auth" = {
       file = ../../../secrets/passwords/services/data-basic-auth.age;
