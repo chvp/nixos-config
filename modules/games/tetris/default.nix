@@ -8,7 +8,7 @@ let
       owner = "chvp";
       repo = "tetris";
       rev = "main";
-      sha256 = "0jq5pih8bb1w2pglpklqix01pdd3a3wzzf0jnai0wy5gn93abpik";
+      sha256 = "lH7LV03pRCJnY4ZjklWpmNuWjrQUiy1LwuByQlA1nTg=";
     };
     packageJSON = ./package.json;
     yarnLock = ./yarn.lock;
