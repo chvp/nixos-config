@@ -1,0 +1,107 @@
+From c66c1afaadf7714e18abef4ffeb12f3905bf3809 Mon Sep 17 00:00:00 2001
+From: Christian Kampka <christian@kampka.net>
+Date: Wed, 29 Dec 2021 19:07:31 +0100
+Subject: [PATCH 1/2] matrix-appservice-slack: Slim down dependencies
+
+Due to the setup of the node env and npm packages in general,
+the resulting nix derivations contain a lot of unwanted dependencies.
+In the the case of matrix-appservice-slack, this includes a fully
+functional gcc which is required to build native bindings but is
+unnecessary at runtime, as well as a full nodejs toolchain,
+including tooling like npm and the like.
+
+Switching to nodejs-slim and patching over node paths, in addition with
+stripping debug symbols from native bindings, mitigates this a lot,
+resulting in a massively reduced closure.
+---
+ .../matrix-appservice-slack/default.nix        | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+index eb3d82e14d0b4..1ea8088967c80 100644
+--- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
++++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+@@ -1,4 +1,4 @@
+-{ pkgs, nodejs, stdenv, fetchFromGitHub, lib, ... }:
++{ pkgs, nodejs, nodejs-slim, stdenv, fetchFromGitHub, lib, ... }:
+ let
+   src = fetchFromGitHub {
+     owner = "matrix-org";
+@@ -8,8 +8,9 @@ let
+   };
+ 
+   nodePackages = import ./node-composition.nix {
+-    inherit pkgs nodejs;
++    inherit pkgs;
+     inherit (stdenv.hostPlatform) system;
++    nodejs = nodejs-slim;
+   };
+ in
+ nodePackages.package.override {
+@@ -17,10 +18,19 @@ nodePackages.package.override {
+ 
+   inherit src;
+ 
+-  nativeBuildInputs = [ pkgs.makeWrapper ];
++  nativeBuildInputs = [ pkgs.makeWrapper nodejs ];
++
++  dontStrip = false;
+ 
+   postInstall = ''
+-    makeWrapper '${nodejs}/bin/node' "$out/bin/matrix-appservice-slack" \
++    # replace nodejs with nodejs-slim in node_modules
++    NODE=$(basename ${nodejs})
++    NODE_SLIM=$(basename ${nodejs-slim})
++    while read file; do
++      substituteInPlace $file --replace "$NODE" "$NODE_SLIM"
++    done < <(grep -l -R "$NODE" $out/lib )
++
++    makeWrapper '${nodejs-slim}/bin/node' "$out/bin/matrix-appservice-slack" \
+     --add-flags "$out/lib/node_modules/matrix-appservice-slack/lib/app.js"
+   '';
+ 
+
+From 2b91dfd19b838005c8b6af71cfc7509d40d5d319 Mon Sep 17 00:00:00 2001
+From: Christian Kampka <christian@kampka.net>
+Date: Wed, 29 Dec 2021 19:26:42 +0100
+Subject: [PATCH 2/2] matrix-appservice-slack: Add simple test
+
+---
+ .../matrix-appservice-slack/default.nix               | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+index 1ea8088967c80..bd4de337b1226 100644
+--- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
++++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+@@ -1,4 +1,4 @@
+-{ pkgs, nodejs, nodejs-slim, stdenv, fetchFromGitHub, lib, ... }:
++{ pkgs, nodejs, nodejs-slim, stdenv, fetchFromGitHub, lib, runCommand, matrix-appservice-slack }:
+ let
+   src = fetchFromGitHub {
+     owner = "matrix-org";
+@@ -12,9 +12,9 @@ let
+     inherit (stdenv.hostPlatform) system;
+     nodejs = nodejs-slim;
+   };
++  pname = "matrix-appservice-slack";
+ in
+ nodePackages.package.override {
+-  pname = "matrix-appservice-slack";
+ 
+   inherit src;
+ 
+@@ -34,6 +34,13 @@ nodePackages.package.override {
+     --add-flags "$out/lib/node_modules/matrix-appservice-slack/lib/app.js"
+   '';
+ 
++  passthru.tests = {
++    simple = runCommand "${pname}-test" {} ''
++      ${matrix-appservice-slack}/bin/matrix-appservice-slack --help > $out
++      [ -s $out ]
++    '';
++  };
++
+   meta = with lib; {
+     description = "A Matrix <--> Slack bridge";
+     maintainers = with maintainers; [ beardhatcode ];
