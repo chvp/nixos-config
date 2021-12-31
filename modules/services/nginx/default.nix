@@ -56,7 +56,7 @@
         ];
         postRun = lib.concatStrings config.chvp.services.nginx.extraPostACMEScripts;
       };
-      email = "webmaster@vanpetegem.me";
+      defaults.email = "webmaster@vanpetegem.me";
       acceptTerms = true;
       preliminarySelfsigned = false;
     };
