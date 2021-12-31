@@ -2330,11 +2330,11 @@
       };
     }
     {
-      name = "caniuse_lite___caniuse_lite_1.0.30001230.tgz";
+      name = "https___registry.npmjs.org_caniuse_lite___caniuse_lite_1.0.30001294.tgz";
       path = fetchurl {
-        name = "caniuse_lite___caniuse_lite_1.0.30001230.tgz";
-        url = "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001230.tgz";
-        sha512 = "5yBd5nWCBS+jWKTcHOzXwo5xzcj4ePE/yjtkZyUV1BTUmrBaA9MRGC+e7mxnqXSA90CmCA8L3eKLaSUkt099IQ==";
+        name = "https___registry.npmjs.org_caniuse_lite___caniuse_lite_1.0.30001294.tgz";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001294.tgz";
+        sha512 = "LiMlrs1nSKZ8qkNhpUf5KD0Al1KCBE3zaT7OLOwEkagXMEDij98SiOovn9wxVGQpklk9vVC/pUSqgYmkmKOS8g==";
       };
     }
     {
@@ -9231,6 +9231,14 @@
         name = "vue_eslint_parser___vue_eslint_parser_8.0.1.tgz";
         url = "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-8.0.1.tgz";
         sha512 = "lhWjDXJhe3UZw2uu3ztX51SJAPGPey1Tff2RK3TyZURwbuI4vximQLzz4nQfCv8CZq4xx7uIiogHMMoSJPr33A==";
+      };
+    }
+    {
+      name = "vue_global_events___vue_global_events_1.2.1.tgz";
+      path = fetchurl {
+        name = "vue_global_events___vue_global_events_1.2.1.tgz";
+        url = "https://registry.yarnpkg.com/vue-global-events/-/vue-global-events-1.2.1.tgz";
+        sha512 = "035Su/+5GUFnj9potJThJXu9DnayRKSENbuBw5k5sMa6hetiY+6Yu+5zUtPXT4X0S9y8tX7uSxGZJMMYiqhFfg==";
       };
     }
     {
