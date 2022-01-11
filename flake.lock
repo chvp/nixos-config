@@ -42,11 +42,11 @@
     },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1641901534,
-        "narHash": "sha256-Nvm6Zj80fVtzmGsUFYlz9XGFyLnyAe9VoduPmDBu+js=",
+        "lastModified": 1641926379,
+        "narHash": "sha256-zvp7ATyqNv9952TwxPcRg3t8BI2HEIrnPdZHRaUOoU0=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "57378ea2f62e9f450f420dc9d01cc06e0d3dd15e",
+        "rev": "c41bd1462ade47da23e5df9a82badb19c9185bb0",
         "type": "github"
       },
       "original": {
@@ -113,8 +113,29 @@
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "tetris": "tetris",
         "utils": "utils",
         "zeroad": "zeroad"
+      }
+    },
+    "tetris": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1641928399,
+        "narHash": "sha256-55FwNVfgHReLbaktBx31rtPJFkp+HenD8uLTzV2+GEA=",
+        "owner": "chvp",
+        "repo": "tetris",
+        "rev": "dd70718cac370d2bc44c1b45848969386282970b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chvp",
+        "repo": "tetris",
+        "type": "github"
       }
     },
     "utils": {
@@ -142,11 +163,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1641824052,
-        "narHash": "sha256-xbPD2kYtLAIekf701s6hMo9ArA/8X91CiP9zXqK3me8=",
+        "lastModified": 1641927600,
+        "narHash": "sha256-1zZyiAODX6fwGNylT4/hP/2OphIOctAevl9VPTtbssg=",
         "owner": "chvp",
         "repo": "0ad-flake",
-        "rev": "73d0ba0dc3d22e8d67139cc3697afaebca1c6cd9",
+        "rev": "1b93201ef3c24479c3ecd598bb05ad8a3f0faf67",
         "type": "github"
       },
       "original": {
