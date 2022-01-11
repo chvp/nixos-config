@@ -34,7 +34,15 @@
   config = {
     home-manager.useGlobalPkgs = true;
 
-    system.stateVersion = config.chvp.stateVersion;
+    system = {
+      stateVersion = config.chvp.stateVersion;
+      autoUpgrade = {
+        enable = true;
+        flake = "github:chvp/nixos-config";
+        dates = "01/4:00";
+        randomizedDelaySec = "10min";
+      };
+    };
     home-manager.users = {
       charlotte = { ... }: {
         home.stateVersion = config.chvp.stateVersion;
