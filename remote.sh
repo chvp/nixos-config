@@ -5,4 +5,4 @@ set -x
 hostname=$1
 shift 1
 
-nixos-rebuild --flake .#$hostname --target-host root@$hostname --build-host root@urithiru "$@"
+nixos-rebuild --flake .#$hostname --target-host root@$hostname -s "$@"

@@ -7,10 +7,6 @@
 
   networking.hostId = "079e60ba";
 
-  environment.etc = lib.mapAttrs' (n: v: { name = "pinned-hosts/${n}"; value = { source = v.config.system.build.toplevel.outPath; }; })
-    (lib.filterAttrs (n: _: n != "urithiru") nixosConfigurations);
-
-  # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";
     base = {

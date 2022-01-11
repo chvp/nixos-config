@@ -6,7 +6,7 @@ nix flake update
 
 if [ -z "${OVERRIDE:-}" ]
 then
-    su -c "nixos-rebuild --flake . --build-host root@urithiru switch"
+    su -c "nixos-rebuild --flake . switch"
 else
-    su -c "nixos-rebuild --flake . --build-host root@urithiru --override-input nixpkgs ../nixpkgs --no-write-lock-file switch"
+    su -c "nixos-rebuild --flake . --override-input nixpkgs ../nixpkgs --no-write-lock-file switch"
 fi

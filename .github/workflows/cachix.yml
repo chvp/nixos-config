@@ -1,0 +1,27 @@
+name: Cachix
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - uses: cachix/install-nix-action@v15
+      - name: Cachix
+        uses: cachix/cachix-action@v10
+        with:
+          name: chvp
+          extraPullNames: "nix-community,accentor"
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+      - run: nix build -L --no-link .#nixosConfigurations.urithiru.config.system.build.toplevel
+      - run: nix build -L --no-link .#nixosConfigurations.lasting-integrity.config.system.build.toplevel
+      - run: nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
+      - run: nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
+      - run: nix eval --json ".#nixosConfigurations.urithiru.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix eval --json ".#nixosConfigurations.lasting-integrity.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
