@@ -21,13 +21,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    zeroad = {
-      url = "github:chvp/0ad-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, zeroad, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, tetris, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -41,7 +37,6 @@
         overlaysBuilder = _: [
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
-          (self: super: { zeroad = zeroad.packages.x86_64-linux.zeroad; })
           (self: super: { tetris = tetris.packages.x86_64-linux.tetris; })
         ];
       };
