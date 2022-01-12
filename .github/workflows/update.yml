@@ -14,7 +14,7 @@ jobs:
       - name: Cachix
         uses: cachix/cachix-action@v10
         with:
-          name: accentor
+          name: chvp
           extraPullNames: "nix-community,accentor"
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
