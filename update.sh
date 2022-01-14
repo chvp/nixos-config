@@ -2,7 +2,7 @@
 set -euo pipefail
 set -x
 
-nix flake update
+git pull
 
 if [ -z "${OVERRIDE:-}" ]
 then
