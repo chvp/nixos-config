@@ -18,7 +18,7 @@
          (ledger-mode-should-check-version nil "Remove version check, since it doesn't work with hledger anyway")
          (ledger-post-account-alignment-column 4 "Indent postings with 4 spaces")
          (ledger-post-amount-alignment-at :decimal "Align on the decimal")
-         (ledger-post-amount-alignment-column 59 "Align on column 60")
+         (ledger-post-amount-alignment-column 69 "Align on column 70")
          (ledger-post-auto-align t "Align when moving to the next line")
          )
       ''
