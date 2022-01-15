@@ -3594,11 +3594,11 @@
       };
     }
     {
-      name = "eslint_plugin_vue___eslint_plugin_vue_8.2.0.tgz";
+      name = "eslint_plugin_vue___eslint_plugin_vue_8.3.0.tgz";
       path = fetchurl {
-        name = "eslint_plugin_vue___eslint_plugin_vue_8.2.0.tgz";
-        url = "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-8.2.0.tgz";
-        sha512 = "cLIdTuOAMXyHeQ4drYKcZfoyzdwdBpH279X8/N0DgmotEI9yFKb5O/cAgoie/CkQZCH/MOmh0xw/KEfS90zY2A==";
+        name = "eslint_plugin_vue___eslint_plugin_vue_8.3.0.tgz";
+        url = "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-8.3.0.tgz";
+        sha512 = "IIuLHw4vQxGlHcoP2dG6t/2OVdQf2qoyAzEGAxreU1afZOHGA7y3TWq8I+r3ZA6Wjs6xpeUWGHlT31QGr9Rb5g==";
       };
     }
     {
@@ -7938,11 +7938,11 @@
       };
     }
     {
-      name = "sass___sass_1.47.0.tgz";
+      name = "sass___sass_1.48.0.tgz";
       path = fetchurl {
-        name = "sass___sass_1.47.0.tgz";
-        url = "https://registry.yarnpkg.com/sass/-/sass-1.47.0.tgz";
-        sha512 = "GtXwvwgD7/6MLUZPnlA5/8cdRgC9SzT5kAnnJMRmEZQFRE3J56Foswig4NyyyQGsnmNvg6EUM/FP0Pe9Y2zywQ==";
+        name = "sass___sass_1.48.0.tgz";
+        url = "https://registry.yarnpkg.com/sass/-/sass-1.48.0.tgz";
+        sha512 = "hQi5g4DcfjcipotoHZ80l7GNJHGqQS5LwMBjVYB/TaT0vcSSpbgM8Ad7cgfsB2M0MinbkEQQPO9+sjjSiwxqmw==";
       };
     }
     {
