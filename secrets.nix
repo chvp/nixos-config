@@ -55,8 +55,6 @@ in
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = hosts ++ users;
 
-  "secrets/files/services/openvpn/tryhackme.age".publicKeys = [ kholinar ] ++ users;
-
   "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;

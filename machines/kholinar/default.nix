@@ -8,13 +8,6 @@
 
     time.timeZone = "Europe/Brussels";
 
-    services.openvpn.servers.tryhackme = {
-      autoStart = false;
-      config = "config ${config.age.secrets."files/services/openvpn/tryhackme".path}";
-    };
-
-    age.secrets."files/services/openvpn/tryhackme".file = ../../secrets/files/services/openvpn/tryhackme.age;
-
     # Machine-specific module settings
     chvp = {
       stateVersion = "20.09";
