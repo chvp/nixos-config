@@ -13,7 +13,7 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.sway.enable {
-    services.dbus.packages = with pkgs; [ gnome3.dconf ];
+    services.dbus.packages = with pkgs; [ dconf ];
     security.pam.services.swaylock = { };
     xdg.portal = {
       enable = true;
