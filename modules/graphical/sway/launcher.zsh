@@ -74,7 +74,7 @@ record() {
 }
 
 run_options() {
-  print -rl -- ''${(ko)commands} | sed "s/^/run /"
+  print -rl -- ''${(ko)commands} | grep -v "^\\." | sed "s/^/run /"
 }
 
 run() {
