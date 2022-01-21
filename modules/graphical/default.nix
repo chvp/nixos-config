@@ -2,10 +2,10 @@
 
 {
   imports = [
+    ./firefox
     ./gnupg
     ./mail
     ./pass
-    ./qutebrowser
     ./sound
     ./sway
     ./syncthing
@@ -34,13 +34,13 @@
         nix.unfreePackages = [ "google-chrome" ];
       };
       graphical = {
+        firefox.enable = lib.mkDefault true;
         gnupg = {
           enable = lib.mkDefault true;
           pinentryFlavor = "qt";
         };
         mail.enable = lib.mkDefault true;
         pass.enable = lib.mkDefault true;
-        qutebrowser.enable = lib.mkDefault true;
         sound.enable = lib.mkDefault true;
         sway.enable = lib.mkDefault true;
         syncthing.enable = lib.mkDefault true;

@@ -32,11 +32,11 @@
             "image/jpeg" = [ "org.kde.okular.desktop" ];
             "application/pdf" = [ "org.kde.okular.desktop" ];
 
-            "text/html" = [ "org.qutebrowser.qutebrowser.desktop" ];
-            "x-scheme-handler/about" = [ "org.qutebrowser.qutebrowser.desktop" ];
-            "x-scheme-handler/http" = [ "org.qutebrowser.qutebrowser.desktop" ];
-            "x-scheme-handler/https" = [ "org.qutebrowser.qutebrowser.desktop" ];
-            "x-scheme-handler/unknown" = [ "org.qutebrowser.qutebrowser.desktop" ];
+            "text/html" = [ "firefox.desktop" ];
+            "x-scheme-handler/about" = [ "firefox.desktop" ];
+            "x-scheme-handler/http" = [ "firefox.desktop" ];
+            "x-scheme-handler/https" = [ "firefox.desktop" ];
+            "x-scheme-handler/unknown" = [ "firefox.desktop" ];
 
             "x-scheme-handler/msteams" = [ "teams.desktop" ];
           };

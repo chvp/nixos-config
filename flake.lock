@@ -106,6 +106,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1642744051,
+        "narHash": "sha256-9NPqm2Cya//c67FLvgb0pPNQJ/sswO2uZmkcUAEY1mg=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "ec7f740c3e7446a42d9e152bda60c4fe056cc4e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "accentor": "accentor",
@@ -113,6 +128,7 @@
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
+        "nur": "nur",
         "tetris": "tetris",
         "utils": "utils"
       }

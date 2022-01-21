@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +24,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, nur, tetris, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -38,6 +39,7 @@
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
           (self: super: { tetris = tetris.packages.x86_64-linux.tetris; })
+          nur.overlay
         ];
       };
       hostDefaults = {
