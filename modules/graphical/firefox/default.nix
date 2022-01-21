@@ -50,21 +50,6 @@ in
               FirefoxHome = { Pocket = false; Snippets = false; };
               OfferToSaveLogins = false;
               UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
-              SearchEngines = {
-                Default = "DuckDuckGo";
-                Add = [
-                  {
-                    Name = "DuckDuckGo";
-                    Description = "DuckDuckGo";
-                    Alias = "ddg";
-                    URLTemplate = "https://html.duckduckgo.com/html?q={searchTerms}";
-                    SuggestURLTemplate = "https://duckduckgo.com/ac/?q={searchTerms}&type=list";
-                    Method = "GET";
-                    IconURL = "https://duckduckgo.com/favicon.ico";
-                  }
-                ];
-                Remove = [ "Google" "Amazon.nl" "Bing" "eBay" "Wikipedia (en)" ];
-              };
             };
           };
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
