@@ -155,7 +155,7 @@ in
           default_border pixel
 
           workspace 1
-          exec ${pkgs.qutebrowser}/bin/qutebrowser
+          exec ${config.chvp.graphical.firefox.package}/bin/firefox
         '' + (lib.optionalString config.chvp.programs.element.enable ''
           workspace 3
           exec ${pkgs.element-desktop-wayland}/bin/element-desktop
