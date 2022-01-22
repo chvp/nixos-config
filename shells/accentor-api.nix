@@ -6,7 +6,7 @@ pkgs.mkShell {
     ffmpeg
     imagemagick
     postgresql
-    ruby_3_0
+    ruby_3_1
     taglib
     zlib
     (

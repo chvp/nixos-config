@@ -2,11 +2,11 @@
   offline_cache = linkFarm "offline" packages;
   packages = [
     {
-      name = "_accentor_api_client_js___api_client_js_0.16.0.tgz";
+      name = "_accentor_api_client_js___api_client_js_0.17.0.tgz";
       path = fetchurl {
-        name = "_accentor_api_client_js___api_client_js_0.16.0.tgz";
-        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.16.0.tgz";
-        sha512 = "DUTDstzKGqMv4VKe4Hx81svGTkQ/0NC89euGjm1OOJy0dlzjTtDgUuI0mxHz6gvg1V1jx4n6fx0LKwoneE3sTA==";
+        name = "_accentor_api_client_js___api_client_js_0.17.0.tgz";
+        url = "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.17.0.tgz";
+        sha512 = "AcbgwmleguHmk6uQ7fXrpFUgPy9TDZy7ksX7UryplAm9TJfreNuzAAz9ho1ChmEPBggHBALoU8a33OL+v/dC/g==";
       };
     }
     {
@@ -7938,11 +7938,11 @@
       };
     }
     {
-      name = "sass___sass_1.48.0.tgz";
+      name = "sass___sass_1.49.0.tgz";
       path = fetchurl {
-        name = "sass___sass_1.48.0.tgz";
-        url = "https://registry.yarnpkg.com/sass/-/sass-1.48.0.tgz";
-        sha512 = "hQi5g4DcfjcipotoHZ80l7GNJHGqQS5LwMBjVYB/TaT0vcSSpbgM8Ad7cgfsB2M0MinbkEQQPO9+sjjSiwxqmw==";
+        name = "sass___sass_1.49.0.tgz";
+        url = "https://registry.yarnpkg.com/sass/-/sass-1.49.0.tgz";
+        sha512 = "TVwVdNDj6p6b4QymJtNtRS2YtLJ/CqZriGg0eIAbAKMlN8Xy6kbv33FsEZSF7FufFFM705SQviHjjThfaQ4VNw==";
       };
     }
     {
@@ -9282,11 +9282,11 @@
       };
     }
     {
-      name = "vue_i18n___vue_i18n_8.26.8.tgz";
+      name = "vue_i18n___vue_i18n_8.27.0.tgz";
       path = fetchurl {
-        name = "vue_i18n___vue_i18n_8.26.8.tgz";
-        url = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.26.8.tgz";
-        sha512 = "BN2OXolO15AKS95yNF8oOtARibaO6RxyKkAYNV4XpOmL7S4eVZYMIDtyvDv+XGZaiUmBJSH9mdNqzexvGMnK2A==";
+        name = "vue_i18n___vue_i18n_8.27.0.tgz";
+        url = "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.27.0.tgz";
+        sha512 = "SX35iJHL5PJ4Gfh0Mo/q0shyHiI2V6Zkh51c+k8E9O1RKv5BQyYrCxRzpvPrsIOJEnLaeiovet3dsUB0e/kDzw==";
       };
     }
     {

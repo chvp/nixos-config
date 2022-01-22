@@ -168,10 +168,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "19i4x2nascd74ahcvmrsnf03cygh1y4c9yf8rcv91fv0mcxpvb9n";
+      sha256 = "18j6zbw26y9kf4b2ihprg380jzw97mm9h17nhd8jvsmdxhvz4yvv";
       type = "gem";
     };
-    version = "1.9.4";
+    version = "1.10.2";
   };
   builder = {
     groups = [ "default" "development" "test" ];
@@ -263,10 +263,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "19ym3jw2jj1pxm6p22x2mpf69sdxiw07ddr69v92ccgg6d7q87rh";
+      sha256 = "1f1vzxi1xcm1mq7nw3xr9j4q6a5pr5xply15s0n1hl1gahsgnlfa";
       type = "gem";
     };
-    version = "4.1.9";
+    version = "4.1.10";
   };
   delayed_job_active_record = {
     dependencies = [ "activerecord" "delayed_job" ];
@@ -274,10 +274,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "0n6wjvk0yfkp1z19kvma7piasw1xgjh5ls51sf24c8g1jlmkmvdh";
+      sha256 = "0wh1146hg0b85zv336dn00jx9mzw5ma0maj67is7bvz5l35hd6yk";
       type = "gem";
     };
-    version = "4.1.6";
+    version = "4.1.7";
   };
   docile = {
     groups = [ "default" "test" ];
@@ -526,10 +526,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "06iajjyhx0rvpn4yr3h1hc4w4w3k59bdmfhxnjzzh76wsrdxxrc6";
+      sha256 = "0b98w2j7g89ihnc753hh3if68r5qrmdp9n2j6mvqy2yl73sbv739";
       type = "gem";
     };
-    version = "1.4.2";
+    version = "1.4.4";
   };
   nio4r = {
     groups = [ "default" ];

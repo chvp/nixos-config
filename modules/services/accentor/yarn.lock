@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@accentor/api-client-js@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.16.0.tgz#1d6b8efe8b5d28cab0cfd6cb9b50cbf622801ee6"
-  integrity sha512-DUTDstzKGqMv4VKe4Hx81svGTkQ/0NC89euGjm1OOJy0dlzjTtDgUuI0mxHz6gvg1V1jx4n6fx0LKwoneE3sTA==
+"@accentor/api-client-js@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@accentor/api-client-js/-/api-client-js-0.17.0.tgz#00da18459362e025d3897dde21ff5eeb222c137a"
+  integrity sha512-AcbgwmleguHmk6uQ7fXrpFUgPy9TDZy7ksX7UryplAm9TJfreNuzAAz9ho1ChmEPBggHBALoU8a33OL+v/dC/g==
   dependencies:
     fetch-retry "^4.1.1"
 
@@ -7337,10 +7337,10 @@ sass-loader@^10.1.1:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@^1.48.0:
-  version "1.48.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.48.0.tgz#b53cfccc1b8ab4be375cc54f306fda9d4711162c"
-  integrity sha512-hQi5g4DcfjcipotoHZ80l7GNJHGqQS5LwMBjVYB/TaT0vcSSpbgM8Ad7cgfsB2M0MinbkEQQPO9+sjjSiwxqmw==
+sass@^1.49.0:
+  version "1.49.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.49.0.tgz#65ec1b1d9a6bc1bae8d2c9d4b392c13f5d32c078"
+  integrity sha512-TVwVdNDj6p6b4QymJtNtRS2YtLJ/CqZriGg0eIAbAKMlN8Xy6kbv33FsEZSF7FufFFM705SQviHjjThfaQ4VNw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -8534,10 +8534,10 @@ vue-i18n-extract@1.0.2:
     is-valid-glob "^1.0.0"
     yargs "^13.2.2"
 
-vue-i18n@^8.17.0, vue-i18n@^8.26.8:
-  version "8.26.8"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.26.8.tgz#afe936adbf96ff0e9808e04845b8f41cc21c666f"
-  integrity sha512-BN2OXolO15AKS95yNF8oOtARibaO6RxyKkAYNV4XpOmL7S4eVZYMIDtyvDv+XGZaiUmBJSH9mdNqzexvGMnK2A==
+vue-i18n@^8.17.0, vue-i18n@^8.27.0:
+  version "8.27.0"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.27.0.tgz#3e3b3ed2c107ccbd7f20dbdd7a96763a9990253e"
+  integrity sha512-SX35iJHL5PJ4Gfh0Mo/q0shyHiI2V6Zkh51c+k8E9O1RKv5BQyYrCxRzpvPrsIOJEnLaeiovet3dsUB0e/kDzw==
 
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.2.0"
