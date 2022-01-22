@@ -158,7 +158,7 @@ in
           exec ${config.chvp.graphical.firefox.package}/bin/firefox
         '' + (lib.optionalString config.chvp.programs.element.enable ''
           workspace 3
-          exec ${pkgs.element-desktop-wayland}/bin/element-desktop
+          exec ${pkgs.element-desktop}/bin/element-desktop
         '');
         extraSessionCommands = ''
           export XDG_SESSION_TYPE=wayland
