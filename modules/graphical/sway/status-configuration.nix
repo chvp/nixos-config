@@ -12,9 +12,9 @@ let
     mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
     if [ "$mails" -gt 0 ]
     then
-      echo "{ \"state\": \"Info\", \"text\": \" 📬 $mails\" }"
+      echo "{ \"state\": \"Info\", \"text\": \"📬 $mails\" }"
     else
-      echo "{ \"state\": \"Idle\", \"text\": \" 📭 $mails\" }"
+      echo "{ \"state\": \"Idle\", \"text\": \"📭\" }"
     fi
   '';
 in
@@ -35,7 +35,7 @@ pkgs.writeText "configuration.toml" ''
   separator=""
 
   [icons]
-  name = "awesome"
+  name = "awesome5"
 
   [[block]]
   block = "net"

@@ -21,7 +21,7 @@
       fonts = with pkgs; [
         fira-code
         fira-code-symbols
-        font-awesome_4
+        font-awesome
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
