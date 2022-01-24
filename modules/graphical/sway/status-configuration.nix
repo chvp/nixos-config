@@ -93,7 +93,7 @@ pkgs.writeText "configuration.toml" ''
   json = true
   command = "${mail-status}"
   interval = 1
-  on_click = "${pkgs.isync}/bin/mbsync -a && ${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\""
+  on_click = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\""
 
   [[block]]
   block = "time"
