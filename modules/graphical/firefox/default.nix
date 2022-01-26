@@ -128,6 +128,7 @@ in
             "browser.safebrowsing.phishing.enabled" = false;
             "browser.shell.checkDefaultBrowser" = false;
             "browser.startup.homepage" = "about:blank";
+            "browser.startup.page" = 3;
             "dom.security.https_only_mode_pbm" = true;
             "network.cookie.cookieBehavior" = 1;
             "privacy.annotate_channels.strict_list.enabled" = true;
