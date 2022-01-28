@@ -117,13 +117,19 @@ in
                 :after (selectrum)
                 :hook
                 (mu4e-view-mode . display-line-numbers-mode)
+                (mu4e-view-mode . visual-line-mode)
                 (mu4e-compose-mode . mail/auto-dodona-cc-reply-to)
+                (mu4e-compose-mode . visual-line-mode)
+                (mu4e-compose-mode . (lambda () (setq use-hard-newlines nil)))
                 :custom
                 (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
                 (mu4e-maildir "${hmConfig.accounts.email.maildirBasePath}" "Root of the maildir hierarchy")
                 (mu4e-context-policy 'pick-first "Use the first mail context in the list")
                 (mu4e-attachment-dir "/home/charlotte/downloads/" "Save attachments to downloads folder")
                 (mu4e-compose-dont-reply-to-self t "Don't reply to myself on reply to all")
+                (mu4e-compose-format-flowed t "Send format=flowed mails when use-hard-newlines gets enabled")
+                (fill-flowed-display-column nil "Dont fill when decoding flowed messages, let visual-line-mode handle it")
+                (gnus-treat-fill-long-lines nil "Let visual-line-mode handle filling")
                 (mu4e-confirm-quit nil "Don't confirm when quitting")
                 (mu4e-completing-read-function 'completing-read "Use default completing read function")
                 (mu4e-headers-include-related nil "Don't show related messages by default")
@@ -192,8 +198,18 @@ in
                   "SPC c" '(mml-secure-message-encrypt-pgpmime :which-key "Encrypt")
                   "SPC t" '(mail/dodona-teacher-reply-skeleton :which-key "Teacher rights reply")
                   "SPC d" '(mail/dodona-cc-reply-to :which-key "Dodona support headers")
+                  "SPC f" '(mu4e-toggle-use-hard-newlines :which-key "Toggle format=flowed/hard newlines")
                   )
                 )
+
+              (use-package visual-fill-column
+                :custom (visual-fill-column-enable-sensible-window-split t "Sensibly split windows in visual-fill-column-mode")
+                :hook (visual-line-mode . visual-fill-column-mode)
+              )
+
+              (use-package adaptive-wrap
+                :hook (visual-fill-column-mode . adaptive-wrap-prefix-mode)
+              )
             ''
           ];
         zfs.homeLinks = [

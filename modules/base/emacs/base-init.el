@@ -122,6 +122,7 @@
   ;; major modes.
   ((text-mode prog-mode) . electric-pair-mode)
   :custom
+  (fill-column 80 "Fill at column 80 instead of 70")
   (create-lockfiles nil "I'm the only user on my devices and use emacs as a daemon, so don't clutter with lockfiles")
   (inhibit-startup-screen t "Don't show default startup screen")
   :config
