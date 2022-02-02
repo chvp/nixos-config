@@ -37,15 +37,15 @@
         package = config.chvp.base.emacs.package;
       };
       home = {
-        file = {
-          ".emacs.d/early-init.el".source = ./early-init.el;
-          ".emacs.d/init.el".text = config.chvp.base.emacs.fullConfig;
-        };
         packages = [
           (pkgs.writeShellScriptBin "emacs" ''${config.chvp.base.emacs.package}/bin/emacsclient -c "$@"'')
           (pkgs.writeShellScriptBin "emacsclient" ''${config.chvp.base.emacs.package}/bin/emacsclient "$@"'')
         ];
         sessionVariables = { EDITOR = "emacs"; };
+      };
+      xdg.configFile = {
+        "emacs/init.el".text = config.chvp.base.emacs.fullConfig;
+        "emacs/early-init.el".source = ./early-init.el;
       };
     };
   };

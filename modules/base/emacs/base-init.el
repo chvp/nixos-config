@@ -121,6 +121,8 @@
   ;; advanced later? Look into configuring pairs for frequently used
   ;; major modes.
   ((text-mode prog-mode) . electric-pair-mode)
+  ;; Always highlight the current line in text modes
+  ((text-mode prog-mode) . hl-line-mode)
   :custom
   (fill-column 80 "Fill at column 80 instead of 70")
   (create-lockfiles nil "I'm the only user on my devices and use emacs as a daemon, so don't clutter with lockfiles")
@@ -209,9 +211,11 @@
 
 ;; Sorting when filtering
 (use-package prescient
-  :config
-  (prescient-persist-mode 1)
-  (run-at-time t 300 'prescient--save)
+  :custom
+  (prescient-aggressive-file-save t "Be aggressive with saving prescient data since we're in daemon mode")
+  (prescient-history-length 100000 "Save a lot of history")
+  (prescient-frequency-threshold 0.00005 "Save a lot of history")
+  :config (prescient-persist-mode 1)
   )
 
 ;; Rainbow delimiters
