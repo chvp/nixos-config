@@ -13,6 +13,7 @@ let
     buildInputs = [ pkgs.python3 ];
     buildPhase = ''
       sed -i "s#/home/william/scripts/ff2mpv#$out/bin/ff2mpv.py#" ff2mpv.json
+      sed -i 's#"mpv"#"${pkgs.mpv}/bin/umpv"#' ff2mpv.py
     '';
     installPhase = ''
       mkdir -p $out/bin
