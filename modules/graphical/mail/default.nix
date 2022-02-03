@@ -128,7 +128,7 @@ in
                 (mu4e-attachment-dir "/home/charlotte/downloads/" "Save attachments to downloads folder")
                 (mu4e-compose-dont-reply-to-self t "Don't reply to myself on reply to all")
                 (mu4e-compose-format-flowed t "Send format=flowed mails when use-hard-newlines gets enabled")
-                (fill-flowed-display-column nil "Dont fill when decoding flowed messages, let visual-line-mode handle it")
+                (fill-flowed-display-column 1000000000000 "Dont fill when decoding flowed messages, let visual-line-mode handle it")
                 (gnus-treat-fill-long-lines nil "Let visual-line-mode handle filling")
                 (mu4e-confirm-quit nil "Don't confirm when quitting")
                 (mu4e-completing-read-function 'completing-read "Use default completing read function")
