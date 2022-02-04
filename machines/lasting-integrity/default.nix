@@ -28,12 +28,20 @@
       };
       nix.enableDirenv = false;
       zfs = {
-        backups = [{
-          path = "zroot/safe/data";
-          remotePath = "zdata/recv/lasting-integrity/safe/data";
-          fast = true;
-          location = "192.168.0.1";
-        }];
+        backups = [
+          {
+            path = "zroot/safe/data";
+            remotePath = "zdata/recv/lasting-integrity/safe/data";
+            fast = true;
+            location = "192.168.0.1";
+          }
+          {
+            path = "zdata/big-apps/nextcloud";
+            remotePath = "zdata/recv/lasting-integrity/big-apps/nextcloud";
+            fast = true;
+            location = "192.168.0.1";
+          }
+        ];
         rootDataset = "zroot/local/root";
       };
     };

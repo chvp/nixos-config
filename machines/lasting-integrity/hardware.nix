@@ -42,6 +42,10 @@
       fsType = "zfs";
       neededForBoot = true;
     };
+    "/data/var/lib/nextcloud" = {
+      device = "zdata/big-apps/nextcloud";
+      fsType = "zfs";
+    };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";
