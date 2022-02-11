@@ -6,7 +6,7 @@ pkgs.mkShell {
     chromedriver
     libmysqlclient
     nodejs-14_x
-    ruby_2_7
+    ruby_3_0
     yarn
     zlib
     (
