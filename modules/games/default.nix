@@ -4,6 +4,7 @@
   imports = [
     ./minecraft
     ./mumble
+    ./particles
     ./steam
     ./teeworlds
     ./tetris

@@ -49,7 +49,10 @@
       docker.enable = true;
       git.enable = true;
     };
-    games.tetris.server = true;
+    games = {
+      particles.server = true;
+      tetris.server = true;
+    };
     services = {
       matrix.enable = true;
       nginx = {
