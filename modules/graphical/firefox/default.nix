@@ -3,12 +3,12 @@
 let
   ff2mpv-host = pkgs.stdenv.mkDerivation rec {
     pname = "ff2mpv";
-    version = "3.9.1";
+    version = "4.0.0";
     src = pkgs.fetchFromGitHub {
       owner = "woodruffw";
       repo = "ff2mpv";
       rev = "v${version}";
-      sha256 = "j2VjHRhadLaftWRv0zrzOyg/pizD/kvr9RBb2ozjKDw=";
+      sha256 = "sxUp/JlmnYW2sPDpIO2/q40cVJBVDveJvbQMT70yjP4=";
     };
     buildInputs = [ pkgs.python3 ];
     buildPhase = ''
@@ -55,17 +55,6 @@ let
     addonId = "BetterTweetDeck@erambert.me";
     url = "https://addons.mozilla.org/firefox/downloads/file/3901721/better_tweetdeck-${version}-fx.xpi";
     sha256 = "W07qVsK1mznE0sOiFtkyrRCqx+7D3732RA8LiaST6k8=";
-    meta = with lib; {
-      license = licenses.mit;
-      platforms = platforms.all;
-    };
-  };
-  ff2mpv = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
-    pname = "ff2mpv";
-    version = "3.9.1";
-    addonId = "ff2mpv@yossarian.net";
-    url = "https://addons.mozilla.org/firefox/downloads/file/3874208/ff2mpv-${version}-fx.xpi";
-    sha256 = "AJO9h2jv/VmqlfShu8q7VqJ7N+bGBtippaODZeCCM6I=";
     meta = with lib; {
       license = licenses.mit;
       platforms = platforms.all;
