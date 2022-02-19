@@ -67,7 +67,10 @@
     evil-collection is a superset. See
     https://github.com/emacs-evil/evil-collection/issues/60.")
   (evil-want-integration t "Also needed for evil-collection")
-  :config (evil-mode 1)
+  :config
+  (defalias 'mu4e--main-action-str 'mu4e~main-action-str)
+  (defalias 'mu4e--main-view-queue 'mu4e~main-view-queue)
+  (evil-mode 1)
   )
 
 ;; Vim keybindings in other packages
