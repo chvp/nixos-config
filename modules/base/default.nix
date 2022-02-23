@@ -52,10 +52,7 @@
       };
     };
 
-    environment = {
-      systemPackages = with pkgs; [ git htop moreutils ncdu ripgrep unzip zip ];
-      variables.EDITOR = "emacs";
-    };
+    environment.systemPackages = with pkgs; [ git htop moreutils ncdu ripgrep unzip zip ];
 
     console = {
       colors = [

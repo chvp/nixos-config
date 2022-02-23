@@ -42,6 +42,7 @@ let
   });
 in
 {
+  programs.zsh.enable = true;
   chvp.base.zfs.systemLinks = [{ path = "/root/.local/share/autojump"; type = "cache"; }];
   chvp.base.zfs.homeLinks = [{ path = ".local/share/autojump"; type = "cache"; }];
   home-manager.users.charlotte = { ... }: (base "/home/charlotte");
