@@ -1,0 +1,21 @@
+diff --git a/vue.config.js b/vue.config.js
+index 5ec914b..4d09b24 100644
+--- a/vue.config.js
++++ b/vue.config.js
+@@ -14,7 +14,16 @@ module.exports = {
+       },
+     },
+   },
++  configureWebpack: config => {
++      config.cache = process.env.IN_NIX !== "true";
++  },
+   chainWebpack: (config) => {
++    config.module.rule("js").use("babel-loader").tap((opt) =>
++      Object.assign(opt, { cacheDirectory: process.env.IN_NIX !== "true" })
++    );
++    config.plugin("eslint").tap((args) =>
++      [Object.assign(args[0], { cache: process.env.IN_NIX !== "true" })]
++    );
+     ["vue-modules", "vue", "normal-modules", "normal"].forEach((match) => {
+       config.module
+         .rule("scss")
