@@ -18,7 +18,7 @@ gem 'delayed_job_active_record', '~> 4.1'
 
 gem 'delayed_cron_job', '~> 0.9'
 
-gem 'wahwah', '~> 1.2.0'
+gem 'wahwah', '~> 1.3.0'
 
 gem 'has_scope', '~> 0.8'
 gem 'pundit', '~> 2.2'
