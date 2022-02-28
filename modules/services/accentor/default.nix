@@ -35,7 +35,7 @@
           owner = "accentor";
           repo = "api";
           rev = "main";
-          sha256 = "JfvnTbDE8pfaSf8QFuvqmKnq4EW0Vq8hxKnLIf34ovA=";
+          sha256 = "sOZeIo/bg8rnWGiIJtcPL/4otXjROJMdKyHa0jTdEDU=";
         };
       });
       webPackage = (pkgs.accentor-web.override {
@@ -43,13 +43,12 @@
         yarnLock = ./yarn.lock;
         yarnNix = ./yarn.nix;
       }).overrideAttrs (old: {
-        IN_NIX = "true";
-        patches = (old.patches or [ ]) ++ [ ./no_caching_in_nix.patch ];
+        SKIP_CACHE = "true";
         src = pkgs.fetchFromGitHub {
           owner = "accentor";
           repo = "web";
           rev = "main";
-          sha256 = "alEGPio1uS5pFQ+riR2TWV2BIDYMRGgz1YHonhSECy4=";
+          sha256 = "34HD86HUw+oq2KL521JUD0Dd4y290KfxW7TA1biuOwk=";
         };
       });
     };

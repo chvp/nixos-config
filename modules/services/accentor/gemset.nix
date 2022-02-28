@@ -854,10 +854,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "0lk124dixshf8mmrjpsy9avnaygni3cwki25g8nm5py4d2f5fwwa";
+      sha256 = "19pzpx406rr9s3qk527rn9y3b76sjq5pi7y0xzqiy50q3k0hhg7g";
       type = "gem";
     };
-    version = "2.0.17";
+    version = "2.1.4";
   };
   simplecov = {
     dependencies = [ "docile" "simplecov-html" "simplecov_json_formatter" ];
