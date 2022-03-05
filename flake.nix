@@ -15,6 +15,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     tetris = {
@@ -24,7 +28,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, nur, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, nixos-mailserver, nur, tetris, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -61,7 +65,8 @@
           })
           accentor.nixosModule
           agenix.nixosModules.age
-          home-manager.nixosModules.home-manager
+          home-manager.nixosModule
+          nixos-mailserver.nixosModule
           ./modules
         ];
       };

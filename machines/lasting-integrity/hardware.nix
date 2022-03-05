@@ -42,6 +42,10 @@
       fsType = "zfs";
       neededForBoot = true;
     };
+    "/data/var/vmail" = {
+      device = "zdata/big-apps/mail";
+      fsType = "zfs";
+    };
     "/data/var/lib/nextcloud" = {
       device = "zdata/big-apps/nextcloud";
       fsType = "zfs";

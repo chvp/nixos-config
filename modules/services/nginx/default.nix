@@ -27,18 +27,6 @@
         }
       ];
     };
-    extraPostACMEScripts = lib.mkOption {
-      default = [ ];
-      example = [
-        ''
-          cp fullchain.pem /data/home/charlotte/synapse/slack/cert.crt
-          cp privkey.pem /data/home/charlotte/synapse/slack/key.pem
-          pushd /data/home/charlotte/synapse
-          ''${pkgs.docker-compose}/bin/docker-compose restart slack
-          popd
-        ''
-      ];
-    };
   };
 
   config = lib.mkIf config.chvp.services.nginx.enable {
@@ -54,7 +42,6 @@
           "chvp.be"
           "*.chvp.be"
         ];
-        postRun = lib.concatStrings config.chvp.services.nginx.extraPostACMEScripts;
       };
       defaults.email = "webmaster@vanpetegem.me";
       acceptTerms = true;

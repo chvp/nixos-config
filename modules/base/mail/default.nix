@@ -2,7 +2,7 @@
 
 {
   services.ssmtp = {
-    enable = true;
+    enable = lib.mkDefault true;
     authUser = "webmaster@vanpetegem.me";
     authPassFile = config.age.secrets."passwords/services/ssmtp-pass".path;
     domain = "${config.networking.hostName}.vanpetegem.me";

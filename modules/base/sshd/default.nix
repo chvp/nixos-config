@@ -12,7 +12,7 @@
     ];
   };
 
-  age.secrets."authorized_keys/root"= {
+  age.secrets."authorized_keys/root" = {
     file = ../../../secrets/authorized_keys/root.age;
     path = "/root/.ssh/authorized_keys";
     symlink = false;

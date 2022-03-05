@@ -40,6 +40,14 @@ in
 
   "secrets/passwords/services/accentor.age".publicKeys = [ urithiru ] ++ users;
 
+  "secrets/passwords/services/mail/charlotte_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/expenses-noreply_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/huis_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/postbot_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/robbe_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/ugent_at_cvpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/webmaster_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/ssmtp-pass.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
