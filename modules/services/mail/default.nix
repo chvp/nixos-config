@@ -8,6 +8,15 @@ in
   options.chvp.services.mail.enable = lib.mkEnableOption "mail";
 
   config = lib.mkIf config.chvp.services.mail.enable {
+    chvp.base.zfs.systemLinks = [
+      { path = "/var/lib/dhparams"; type = "cache"; }
+      { path = "/var/lib/dovecot"; type = "cache"; }
+      { path = "/var/lib/knot-resolver"; type = "cache"; }
+      { path = "/var/lib/opendkim"; type = "cache"; }
+      { path = "/var/lib/postfix"; type = "cache"; }
+      { path = "/var/lib/redis-rspamd"; type = "cache"; }
+      { path = "/var/lib/rspamd"; type = "cache"; }
+    ];
     mailserver = {
       enable = true;
       fqdn = "mail.vanpetegem.me";
