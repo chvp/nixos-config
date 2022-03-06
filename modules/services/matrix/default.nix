@@ -31,7 +31,7 @@
       matrix-synapse = {
         enable = true;
         server_name = "vanpetegem.me";
-        public_baseurl = "https://vanpetegem.me";
+        public_baseurl = "https://matrix.vanpetegem.me";
         listeners = [{
           port = 8448;
           bind_address = "localhost";

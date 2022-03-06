@@ -69,7 +69,20 @@
             }; in
               {
                 "/_matrix" = matrixRedirect;
-                "/.well-known/matrix" = matrixRedirect;
+                "/.well-known/matrix" = {
+                  root = pkgs.runCommandNoCC "well-known-matrix" { } ''
+                    mkdir -p $out/.well-known/matrix
+                    echo '{"m.server":"matrix.vanpetegem.me:443"}' > $out/.well-known/matrix/server
+                    echo '{"m.homeserver":{"base_url":"https://matrix.vanpetegem.me"}}' > $out/.well-known/matrix/client
+                  '';
+                  extraConfig = ''
+                    default_type application/json;
+                    add_header 'access-control-allow-origin' '*' always;
+                    add_header 'access-control-allow-methods' 'GET, HEAD, POST, PUT, DELETE, OPTIONS' always;
+                    add_header 'access-control-allow-headers' 'X-Requested-With, Content-Type, Authorization, Date' always;
+                 '';
+                  priority = 1;
+                };
                 "/".return = "307 https://www.vanpetegem.me$request_uri";
               };
           };
