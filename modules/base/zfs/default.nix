@@ -20,9 +20,13 @@
         { path = ".cache/nix-index"; type = "cache"; }
       ];
     };
-    ensureExists = lib.mkOption {
+    ensureSystemExists = lib.mkOption {
       default = [ ];
       example = [ "/data/etc/ssh" ];
+    };
+    ensureHomeExists = lib.mkOption {
+      default = [ ];
+      example = [ ".ssh" ];
     };
     backups = lib.mkOption {
       default = [ ];
@@ -87,14 +91,16 @@
 
     systemd.services =
       let
-        ensureExistsScript = lib.concatStringsSep "\n" (map (path: "mkdir -p ${path}") config.chvp.base.zfs.ensureExists);
         makeLinkScript = config: lib.concatStringsSep "\n" (map (location: ''mkdir -p "${location.path}"'') config);
+        ensureSystemExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureSystemExists);
         systemLinksScript = makeLinkScript config.chvp.base.zfs.systemLinks;
+        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureHomeExists);
         homeLinksScript = makeLinkScript config.chvp.base.zfs.homeLinks;
       in
       {
         make-system-links-destinations = {
           script = ''
+            ${ensureSystemExistsScript}
             ${systemLinksScript}
             mkdir -p /home/charlotte
             chown charlotte:users /home/charlotte
@@ -115,7 +121,10 @@
         };
 
         make-home-links-destinations = {
-          script = homeLinksScript;
+          script = ''
+            ${ensureHomeExistsScript}
+            ${homeLinksScript}
+          '';
           after = [ "local-fs.target" "make-system-links-destinations.service" ];
           wants = [ "local-fs.target" "make-system-links-destinations.service" ];
           before = [ "shutdown.target" "sysinit.target" ];

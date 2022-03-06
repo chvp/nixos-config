@@ -1,7 +1,10 @@
 { config, lib, ... }:
 
 {
-  chvp.base.zfs.ensureExists = [ "${config.chvp.dataPrefix}/etc/ssh" ];
+  chvp.base.zfs = {
+    ensureSystemExists = [ "${config.chvp.dataPrefix}/etc/ssh" ];
+    ensureHomeExists = [ ".ssh" ];
+  };
   services.openssh = {
     enable = true;
     passwordAuthentication = false;
