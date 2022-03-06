@@ -80,7 +80,7 @@
                     add_header 'access-control-allow-origin' '*' always;
                     add_header 'access-control-allow-methods' 'GET, HEAD, POST, PUT, DELETE, OPTIONS' always;
                     add_header 'access-control-allow-headers' 'X-Requested-With, Content-Type, Authorization, Date' always;
-                 '';
+                  '';
                   priority = 1;
                 };
                 "/".return = "307 https://www.vanpetegem.me$request_uri";

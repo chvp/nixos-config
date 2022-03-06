@@ -89,22 +89,36 @@
       };
     };
 
+    system.activationScripts =
+      let
+        ensureSystemExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureSystemExists);
+        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "/home/charlotte/${path}"; chown charlotte:users /home/charlotte/${path};'') config.chvp.base.zfs.ensureHomeExists);
+      in
+      {
+        ensureSystemPathsExist = {
+          text = ensureSystemExistsScript;
+          deps = [ "agenixMountSecrets" ];
+        };
+        agenixRoot.deps = [ "ensureSystemPathsExist" ];
+        ensureHomePathsExist = {
+          text = ''
+            mkdir -p /home/charlotte/
+            ${ensureHomeExistsScript}
+          '';
+          deps = [ "users" "groups" ];
+        };
+        agenix.deps = [ "ensureHomePathsExist" ];
+      };
+
     systemd.services =
       let
         makeLinkScript = config: lib.concatStringsSep "\n" (map (location: ''mkdir -p "${location.path}"'') config);
-        ensureSystemExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureSystemExists);
         systemLinksScript = makeLinkScript config.chvp.base.zfs.systemLinks;
-        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureHomeExists);
         homeLinksScript = makeLinkScript config.chvp.base.zfs.homeLinks;
       in
       {
         make-system-links-destinations = {
-          script = ''
-            ${ensureSystemExistsScript}
-            ${systemLinksScript}
-            mkdir -p /home/charlotte
-            chown charlotte:users /home/charlotte
-          '';
+          script = systemLinksScript;
           after = [ "local-fs.target" ];
           wants = [ "local-fs.target" ];
           before = [ "shutdown.target" "sysinit.target" ];
@@ -121,10 +135,7 @@
         };
 
         make-home-links-destinations = {
-          script = ''
-            ${ensureHomeExistsScript}
-            ${homeLinksScript}
-          '';
+          script = homeLinksScript;
           after = [ "local-fs.target" "make-system-links-destinations.service" ];
           wants = [ "local-fs.target" "make-system-links-destinations.service" ];
           before = [ "shutdown.target" "sysinit.target" ];
