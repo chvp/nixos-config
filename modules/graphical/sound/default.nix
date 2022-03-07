@@ -8,7 +8,7 @@
 
   config = lib.mkIf config.chvp.graphical.sound.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/pipewire"; type = "cache"; }
+      { path = ".local/state/wireplumber"; type = "cache"; }
     ];
 
     home-manager.users.charlotte = { ... }: {
