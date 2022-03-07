@@ -30,28 +30,30 @@
     services = {
       matrix-synapse = {
         enable = true;
-        server_name = "vanpetegem.me";
-        public_baseurl = "https://matrix.vanpetegem.me";
-        listeners = [{
-          port = 8448;
-          bind_address = "localhost";
-          type = "http";
-          tls = false;
-          x_forwarded = true;
-          resources = [
-            { names = [ "client" ]; compress = true; }
-            { names = [ "federation" ]; compress = false; }
+        settings = {
+          server_name = "vanpetegem.me";
+          public_baseurl = "https://matrix.vanpetegem.me";
+          listeners = [{
+            port = 8448;
+            bind_addresses = [ "::1" "127.0.0.1" ];
+            type = "http";
+            tls = false;
+            x_forwarded = true;
+            resources = [
+              { names = [ "client" ]; compress = true; }
+              { names = [ "federation" ]; compress = false; }
+            ];
+          }];
+          url_preview_enabled = true;
+          enable_metrics = false;
+          enable_registration = false;
+          report_stats = false;
+          allow_guest_access = false;
+          app_service_config_files = [
+            config.age.secrets."files/services/matrix-synapse/whatsapp-registration.yml".path
+            config.age.secrets."files/services/matrix-synapse/slack-registration.yml".path
           ];
-        }];
-        url_preview_enabled = true;
-        enable_metrics = false;
-        enable_registration = false;
-        report_stats = false;
-        allow_guest_access = false;
-        app_service_config_files = [
-          config.age.secrets."files/services/matrix-synapse/whatsapp-registration.yml".path
-          config.age.secrets."files/services/matrix-synapse/slack-registration.yml".path
-        ];
+        };
         extraConfigFiles = [
           config.age.secrets."files/services/matrix-synapse/config.yml".path
         ];
