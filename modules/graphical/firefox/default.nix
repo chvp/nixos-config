@@ -51,10 +51,10 @@ let
   };
   better-tweetdeck = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
     pname = "better-tweetdeck";
-    version = "4.8.2";
+    version = "4.8.4";
     addonId = "BetterTweetDeck@erambert.me";
-    url = "https://addons.mozilla.org/firefox/downloads/file/3912655/better_tweetdeck-${version}-fx.xpi";
-    sha256 = "fQ1HPPaAciQfGgOJHssActkT4ywjbyIqz8qI+02Ye8Y=";
+    url = "https://addons.mozilla.org/firefox/downloads/file/3918392/better_tweetdeck-${version}-fx.xpi";
+    sha256 = "pY71Aar3/AXf80TKwfC05etNQgvvzK0pvV50uBtuVD8=";
     meta = with lib; {
       license = licenses.mit;
       platforms = platforms.all;
