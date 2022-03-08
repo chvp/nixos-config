@@ -2954,19 +2954,11 @@
       };
     }
     {
-      name = "eslint_config_prettier___eslint_config_prettier_8.4.0.tgz";
+      name = "eslint_config_prettier___eslint_config_prettier_8.5.0.tgz";
       path = fetchurl {
-        name = "eslint_config_prettier___eslint_config_prettier_8.4.0.tgz";
-        url = "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.4.0.tgz";
-        sha512 = "CFotdUcMY18nGRo5KGsnNxpznzhkopOcOo0InID+sgQssPrzjvsyKZPvOgymTFeHrFuC3Tzdf2YndhXtULK9Iw==";
-      };
-    }
-    {
-      name = "eslint_plugin_prettier___eslint_plugin_prettier_3.4.1.tgz";
-      path = fetchurl {
-        name = "eslint_plugin_prettier___eslint_plugin_prettier_3.4.1.tgz";
-        url = "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.4.1.tgz";
-        sha512 = "htg25EUYUeIhKHXjOinK4BgCcDwtLHjqaxCDsMy5nbnUMkKFvIhMVCp+5GFUXQ4Nr8lBsPqtGAqBenbpFqAA2g==";
+        name = "eslint_config_prettier___eslint_config_prettier_8.5.0.tgz";
+        url = "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz";
+        sha512 = "obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==";
       };
     }
     {
@@ -3266,11 +3258,11 @@
       };
     }
     {
-      name = "fetch_retry___fetch_retry_5.0.1.tgz";
+      name = "fetch_retry___fetch_retry_5.0.2.tgz";
       path = fetchurl {
-        name = "fetch_retry___fetch_retry_5.0.1.tgz";
-        url = "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-5.0.1.tgz";
-        sha512 = "ENMet8exSRjJO8I5PoKChm0psngw0VrBOD9fUH4YO7sE7Dpqnb0/iFEGHZn633z6MPNVJv4zZNrGgQ4lmQt1nw==";
+        name = "fetch_retry___fetch_retry_5.0.2.tgz";
+        url = "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-5.0.2.tgz";
+        sha512 = "57Hmu+1kc6pKFUGVIobT7qw3NeAzY/uNN26bSevERLVvf6VGFR/ooDCOFBHMNDgAxBiU2YJq1D0vFzc6U1DcPw==";
       };
     }
     {
@@ -6682,11 +6674,11 @@
       };
     }
     {
-      name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.6.tgz";
+      name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.7.tgz";
       path = fetchurl {
-        name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.6.tgz";
-        url = "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.4.6.tgz";
-        sha512 = "rM4ORStIIHlivDVJ5o0e/YQzkShHyKnituq6OLhnGGZdRRWF5USxlUPtAHZOrhw3o6dUnoj74LlL4kOuR5D+fg==";
+        name = "vue_cli_plugin_vuetify___vue_cli_plugin_vuetify_2.4.7.tgz";
+        url = "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-2.4.7.tgz";
+        sha512 = "SvxZysXyEnm7B0e3tHLvDVPFaNMewYolIMqQWm+E9y7Fki0Dapn7LfY/Js+UdFzRq0hpHjDBk+bv1WR9Z7ECgQ==";
       };
     }
     {

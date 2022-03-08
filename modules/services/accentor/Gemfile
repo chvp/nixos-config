@@ -25,7 +25,7 @@ gem 'pundit', '~> 2.2'
 gem 'will_paginate', '~> 3.3'
 
 # Use ActiveStorage variant
-gem 'image_processing', '~> 1.12.1'
+gem 'image_processing', '~> 1.12.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '~> 1.10.3', require: false

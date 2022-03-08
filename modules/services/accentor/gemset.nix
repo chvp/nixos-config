@@ -413,10 +413,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "1778lv4lpwk9ffm0zy7w59gzchq19f22a5gfrdk6qa7l9vx89h11";
+      sha256 = "1f32dzj77p9mfp4q95930vfkp80psf88phjc46jhf9ncl72ykffk";
       type = "gem";
     };
-    version = "1.12.1";
+    version = "1.12.2";
   };
   io-wait = {
     groups = [ "default" ];
