@@ -73,6 +73,14 @@ in
       '';
     };
 
+    services.rspamd.extraConfig = ''
+      actions {
+        reject = null;
+        add_header = 10;
+        greylist = 4;
+      }
+    '';
+
     systemd.services.tunnel = {
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
