@@ -36,30 +36,6 @@ let
       UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
     };
   };
-  belgium-eid = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
-    pname = "belgium-eid";
-    version = "1.0.32";
-    addonId = "belgiumeid@eid.belgium.be";
-    url = "https://addons.mozilla.org/firefox/downloads/file/3736679/eid_belgie-${version}-fx.xpi";
-    sha256 = "t2zbE58IuHeAlM91lNX4rbiWLzt5sQq350b1PRdSY7w=";
-    meta = with lib; {
-      homepage = "https://eid.belgium.be/";
-      description = "Use the Belgian electronic identity card (eID) in Firefox";
-      license = licenses.lgpl3;
-      platforms = platforms.all;
-    };
-  };
-  better-tweetdeck = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
-    pname = "better-tweetdeck";
-    version = "4.8.4";
-    addonId = "BetterTweetDeck@erambert.me";
-    url = "https://addons.mozilla.org/firefox/downloads/file/3918392/better_tweetdeck-${version}-fx.xpi";
-    sha256 = "pY71Aar3/AXf80TKwfC05etNQgvvzK0pvV50uBtuVD8=";
-    meta = with lib; {
-      license = licenses.mit;
-      platforms = platforms.all;
-    };
-  };
   zotero-connector = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
     pname = "zotero-connector";
     version = "5.0.92";
