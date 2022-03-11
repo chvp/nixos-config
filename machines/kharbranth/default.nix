@@ -16,7 +16,7 @@
         enable = true;
         wireless-interface = "wlp0s20f3";
         wired-interfaces = {
-          "enp0s13f0u2u2" = { macAddress = "10:65:30:df:80:f5"; };
+          "enp0s13f0u2u2" = { };
         };
       };
       zfs = {
