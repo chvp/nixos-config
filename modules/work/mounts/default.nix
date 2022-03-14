@@ -30,15 +30,6 @@
 
     environment.systemPackages = [ pkgs.keyutils ];
     # Remove this once https://github.com/NixOS/nixpkgs/issues/34638 is resolved
-    # The TL;DR is: the kernel calls out to the hard-coded path of
-    # /sbin/request-key as part of its CIFS auth process, which of course does
-    # not exist on NixOS due to the usage of Nix store paths.
-    system.activationScripts.symlink-requestkey = ''
-      if [ ! -d /sbin ]; then
-        mkdir /sbin
-      fi
-      ln -sfn /run/current-system/sw/bin/request-key /sbin/request-key
-    '';
     # request-key expects a configuration file under /etc
     environment.etc."request-key.conf" = {
       text =
