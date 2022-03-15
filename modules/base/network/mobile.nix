@@ -30,6 +30,7 @@
             psk = "@PSK_Zeus@";
             hidden = true;
           };
+          "Zeus Event 5G".psk = "@PSK_Zeus@";
           eduroam = {
             authProtocols = [ "WPA-EAP" ];
             auth = ''
