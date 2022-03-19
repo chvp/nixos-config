@@ -157,10 +157,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "02r1c3isfchs5fxivbq99gc3aq4vfyn8snhcy707dal1p8qz12qb";
+      sha256 = "1rakdhrnlclrpy7sihi9ipwdh7fjkkvzga171464lq6rzp07cf65";
       type = "gem";
     };
-    version = "3.1.16";
+    version = "3.1.17";
   };
   bootsnap = {
     dependencies = [ "msgpack" ];
@@ -621,10 +621,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "08q20ckhn58m49lccf93p0yv7pkc7hymmcz3di762kb658d5fd38";
+      sha256 = "0zaghgvva2q4jqbachg8jvpwgbg3w1jqr0d00m8rqciqznjgsw3c";
       type = "gem";
     };
-    version = "3.1.0.0";
+    version = "3.1.1.0";
   };
   pg = {
     groups = [ "default" ];
@@ -800,10 +800,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "1l3q96il8zx5zl041lxvmfrndxxpk08fksza1gqshhjjzms7c2rk";
+      sha256 = "03c6v6bfqdw8vnda0if0sx7aff0iq6xnv1adyfs0bi9msgggafcr";
       type = "gem";
     };
-    version = "1.25.1";
+    version = "1.26.0";
   };
   rubocop-ast = {
     dependencies = [ "parser" ];
@@ -811,10 +811,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "1xrij42166a71ixfpfr1pildqdrcmc0cb4906h2s8sk4kqdyngih";
+      sha256 = "1bd2z82ly7fix8415gvfiwzb6bjialz5rs3sr72kv1lk68rd23wv";
       type = "gem";
     };
-    version = "1.15.1";
+    version = "1.16.0";
   };
   rubocop-minitest = {
     dependencies = [ "rubocop" ];
@@ -822,10 +822,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "1irb3qb4sx9mjpksmqz9nh5x9s6r2synzxjnzkimvmlhk827jn1m";
+      sha256 = "0pm8w4z206blrp5ayhzscvaf244dmipmwk2vkaqip3l7xdq9sgf6";
       type = "gem";
     };
-    version = "0.17.2";
+    version = "0.18.0";
   };
   rubocop-rails = {
     dependencies = [ "activesupport" "rack" "rubocop" ];
@@ -833,10 +833,10 @@
     platforms = [ ];
     source = {
       remotes = [ "https://rubygems.org" ];
-      sha256 = "0vibx4jhpxaxa8w3wyhasskcgrxfjiyqdwrrc7l2lb0mbxqcs1ly";
+      sha256 = "14xagb3jbms5mlcf932kx1djn2q4k952d4xia75ll36vh7xf2fpp";
       type = "gem";
     };
-    version = "2.13.2";
+    version = "2.14.2";
   };
   ruby-progressbar = {
     groups = [ "default" "development" ];
