@@ -19,7 +19,7 @@
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
