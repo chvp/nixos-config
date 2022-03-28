@@ -26,7 +26,7 @@
           AndroidAP.psk = "@PSK_AndroidAP@";
           draadloosnw.psk = "@PSK_draadloosnw@";
           Secorima.psk = "@PSK_Secorima@";
-          "Zeus WPI 5G" = {
+          "Zeus WPI" = {
             psk = "@PSK_Zeus@";
             hidden = true;
           };
