@@ -1,5 +1,13 @@
 { config, lib, pkgs, ... }:
 
+let
+  ligature = pkgs.fetchFromGitHub {
+    owner = "mickeynp";
+    repo = "ligature.el";
+    rev = "9357156a917a021a87b33ee391567a5d8e44794a";
+    hash = "sha256-Bgb5wFyx0hMilpihxA8cTrRVw71EBOw2DczlM4lSNMs=";
+  };
+in
 {
   imports = [
     ./firefox
@@ -26,9 +34,22 @@
         emacs.extraConfig = [
           ''
             ;; Ligatures in GUI mode
-            ;; Should probably switch to ligature.el, but it isn't on MELPA (yet).
-            (use-package fira-code-mode :config (when window-system (global-fira-code-mode)))
-
+            (use-package ligature
+              :load-path "${ligature}"
+              :config
+              (ligature-set-ligatures 't '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+                                           ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+                                           "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+                                           "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+                                           "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+                                           "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+                                           "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+                                           "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+                                           "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+                                           "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%")
+              )
+              (global-ligature-mode 't)
+            )
           ''
         ];
         nix.unfreePackages = [ "google-chrome" ];
