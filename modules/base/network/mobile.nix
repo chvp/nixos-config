@@ -25,6 +25,7 @@
           "Public Universal Friend".psk = "@PSK_PUF@";
           AndroidAP.psk = "@PSK_AndroidAP@";
           draadloosnw.psk = "@PSK_draadloosnw@";
+          jonsnowisdead.psk = "@PSK_jonsnowisdead@";
           Secorima.psk = "@PSK_Secorima@";
           "Zeus WPI" = {
             psk = "@PSK_Zeus@";
