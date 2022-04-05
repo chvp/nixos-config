@@ -25,14 +25,7 @@
     ];
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = [
-        (pkgs.haskell.lib.justStaticExecutables (pkgs.haskellPackages.override {
-          overrides = hself: hsuper: rec {
-            hledger = hsuper.hledger_1_24_1;
-            hledger-lib = hsuper.hledger-lib_1_24_1;
-          };
-        }).hledger)
-      ];
+      home.packages = [ pkgs.hledger ];
     };
   };
 }
