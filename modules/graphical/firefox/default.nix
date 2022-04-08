@@ -66,6 +66,10 @@ in
       { path = ".cache/mozilla"; type = "cache"; }
     ];
     home-manager.users.charlotte = { ... }: {
+      home.sessionVariables = {
+        # This is like, really insecure. Disable ASAP.
+        MOZ_DISABLE_CONTENT_SANDBOX = "1";
+      };
       programs = {
         browserpass = {
           enable = true;
