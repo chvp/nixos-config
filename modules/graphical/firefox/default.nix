@@ -66,10 +66,6 @@ in
       { path = ".cache/mozilla"; type = "cache"; }
     ];
     home-manager.users.charlotte = { ... }: {
-      home.sessionVariables = {
-        # This is like, really insecure. Disable ASAP.
-        MOZ_DISABLE_CONTENT_SANDBOX = "1";
-      };
       programs = {
         browserpass = {
           enable = true;
@@ -105,6 +101,7 @@ in
             "privacy.trackingprotection.enabled" = true;
             "privacy.trackingprotection.socialtracking.enabled" = true;
             "security.identityblock.show_extended_validation" = true;
+            "security.sandbox.content.level" = 3;
           };
         };
       };
