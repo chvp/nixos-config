@@ -60,7 +60,7 @@ pkgs.writeText "configuration.toml" ''
 
   [[block]]
   block = "net"
-  device = "enp0s20f0u1u2"
+  device = "enp0s13f0u2u2"
   format = "{ip}"
   hide_missing = true
   hide_inactive = true
