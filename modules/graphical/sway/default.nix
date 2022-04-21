@@ -109,6 +109,7 @@ in
           window.commands = [
             { command = "floating enable"; criteria = { app_id = "launcher"; }; }
             { command = "floating enable"; criteria = { title = "Quick Format Citation"; class = "Zotero"; }; }
+            { command = "floating enable"; criteria = { class = "be.ugent.flash.Main"; }; }
           ];
           input = {
             "type:keyboard" = { xkb_layout = "us"; xkb_variant = "altgr-intl"; xkb_numlock = "enabled"; xkb_options = "compose:caps"; };
