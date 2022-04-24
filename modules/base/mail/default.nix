@@ -7,11 +7,11 @@
       auth = true;
       from = "webmaster@vanpetegem.me";
       host = "mail.vanpetegem.me";
-      passwordeval = ''cat ${config.age.secrets."passwords/services/ssmtp-pass".path}'';
+      passwordeval = ''${pkgs.coreutils}/bin/cat ${config.age.secrets."passwords/services/ssmtp-pass".path}'';
       port = 465;
       tls = true;
       tls_starttls = false;
-      tls_trust_file = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
+      tls_trust_file = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
       user = "webmaster@vanpetegem.me";
     };
     setSendmail = true;
