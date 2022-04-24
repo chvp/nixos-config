@@ -1834,11 +1834,11 @@
       };
     }
     {
-      name = "async___async_2.6.3.tgz";
+      name = "async___async_2.6.4.tgz";
       path = fetchurl {
-        name = "async___async_2.6.3.tgz";
-        url = "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz";
-        sha512 = "zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==";
+        name = "async___async_2.6.4.tgz";
+        url = "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz";
+        sha512 = "mzo5dfJYwAn29PeiJ0zvwTo04zj8HDJj0Mn8TD7sno7q12prdbnasKJHhkm2c1LgrhlJ0teaea8860oxi51mGA==";
       };
     }
     {
@@ -3586,11 +3586,11 @@
       };
     }
     {
-      name = "gsap___gsap_3.10.2.tgz";
+      name = "gsap___gsap_3.10.3.tgz";
       path = fetchurl {
-        name = "gsap___gsap_3.10.2.tgz";
-        url = "https://registry.yarnpkg.com/gsap/-/gsap-3.10.2.tgz";
-        sha512 = "exJVOda3O1NpgGjM4dzZONmSODWFP+JF/DwfiBfCPQPr15nm3M0TQczYKLZlMdBNdWxHMvRPKVqc1e1/6YD+zA==";
+        name = "gsap___gsap_3.10.3.tgz";
+        url = "https://registry.yarnpkg.com/gsap/-/gsap-3.10.3.tgz";
+        sha512 = "O4P5mC6awoo0uSemZ1kS1Nm52I4/3gC8gy6ws6VFXvR1KmA4oRlBY/ZI4+LWsH0MoSDZrpwNyF9FAkB37UTGVg==";
       };
     }
     {

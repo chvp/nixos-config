@@ -103,5 +103,5 @@
       syncthing.enable = true;
     };
   };
-  services.ssmtp.enable = false;
+  programs.msmtp.enable = false;
 }

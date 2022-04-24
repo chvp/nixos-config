@@ -1,15 +1,20 @@
 { config, lib, pkgs, ... }:
 
 {
-  services.ssmtp = {
+  programs.msmtp = {
     enable = lib.mkDefault true;
-    authUser = "webmaster@vanpetegem.me";
-    authPassFile = config.age.secrets."passwords/services/ssmtp-pass".path;
-    domain = "${config.networking.hostName}.vanpetegem.me";
-    hostName = "mail.vanpetegem.me:465";
-    root = "webmaster@vanpetegem.me";
+    accounts.default = {
+      auth = true;
+      from = "webmaster@vanpetegem.me";
+      host = "mail.vanpetegem.me";
+      passwordeval = ''cat ${config.age.secrets."passwords/services/ssmtp-pass".path}'';
+      port = 465;
+      tls = true;
+      tls_starttls = false;
+      tls_trust_file = "${pkgs.cacert}/etc/ssl/certs/ca-certificates.crt";
+      user = "webmaster@vanpetegem.me";
+    };
     setSendmail = true;
-    useTLS = true;
   };
 
   age.secrets."passwords/services/ssmtp-pass".file = ../../../secrets/passwords/services/ssmtp-pass.age;
