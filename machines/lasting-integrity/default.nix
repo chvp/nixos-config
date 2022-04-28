@@ -33,6 +33,12 @@
             location = "192.168.0.1";
           }
           {
+            path = "zdata/big-apps/influxdb2";
+            remotePath = "zdata/recv/lasting-integrity/big-apps/influxdb2";
+            fast = true;
+            location = "192.168.0.1";
+          }
+          {
             path = "zdata/big-apps/mail";
             remotePath = "zdata/recv/lasting-integrity/big-apps/mail";
             fast = true;
@@ -53,6 +59,7 @@
       tetris.server = true;
     };
     services = {
+      grafana.enable = true;
       mail.enable = true;
       matrix.enable = true;
       nginx.hosts = [

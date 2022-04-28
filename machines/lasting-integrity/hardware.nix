@@ -50,6 +50,10 @@
       device = "zdata/big-apps/nextcloud";
       fsType = "zfs";
     };
+    "/var/lib/influxdb2" = {
+      device = "zdata/big-apps/influxdb2";
+      fsType = "zfs";
+    };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";
