@@ -26,8 +26,21 @@ def hr2point(time, val):
       )
 
 
+def stress2point(time, val):
+    return Point("health") \
+      .field("stress", max(val, 0)) \
+      .time(
+          datetime.fromtimestamp(time / 1000, timezone.utc),
+          WritePrecision.S
+      )
+
+
 def hr_for_date(api, date_to_fetch):
     return api.get_heart_rates(date_to_fetch.isoformat())['heartRateValues']
+
+
+def stress_for_date(api, date_to_fetch):
+    return api.get_stress_data(date_to_fetch.isoformat())['stressValuesArray']
 
 
 date_to_fetch = date.today().isoformat()
@@ -39,21 +52,30 @@ date_to_fetch = date.fromisoformat(date_to_fetch)
 try:
     api = Garmin(email, password)
     api.login()
-    points = list(map(
+    hr_points = list(map(
         lambda p: hr2point(*p),
         hr_for_date(api, date_to_fetch - timedelta(days=1))
-        ))
-    points += list(map(
+    ))
+    stress_points = list(map(
+        lambda p: stress2point(*p),
+        stress_for_date(api, date_to_fetch - timedelta(days=1))
+    ))
+    hr_points += list(map(
         lambda p: hr2point(*p),
         hr_for_date(api, date_to_fetch)
-        ))
+    ))
+    stress_points += list(map(
+        lambda p: stress2point(*p),
+        stress_for_date(api, date_to_fetch)
+    ))
     with InfluxDBClient(
         url="https://stats.chvp.be:8086",
         token=token,
         org=org
     ) as client:
         write_api = client.write_api(write_options=SYNCHRONOUS)
-        write_api.write(bucket, org, points)
+        write_api.write(bucket, org, hr_points)
+        write_api.write(bucket, org, stress_points)
 except (
     GarminConnectConnectionError,
     GarminConnectAuthenticationError,
