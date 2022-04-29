@@ -53,6 +53,7 @@ in
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
+  "secrets/passwords/services/garmin2influx-env.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/smtp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/secret-key.age".publicKeys = [ lasting-integrity ] ++ users;
