@@ -34,7 +34,10 @@
         rootUrl = "https://stats.chvp.be/";
         dataDir = "${config.chvp.dataPrefix}/var/lib/grafana";
         protocol = "socket";
-        auth.anonymous.enable = true;
+        auth.anonymous = {
+          enable = true;
+          org_name = "Van Petegem";
+        };
         smtp = {
           enable = true;
           user = "noreply@vanpetegem.me";
