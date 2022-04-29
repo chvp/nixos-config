@@ -40,6 +40,7 @@
         };
         smtp = {
           enable = true;
+          host = "mail.vanpetegem.me:25";
           user = "noreply@vanpetegem.me";
           fromAddress = "noreply@vanpetegem.me";
           passwordFile = config.age.secrets."passwords/services/grafana/smtp".path;
@@ -61,6 +62,11 @@
         extraOptions = {
           USERS_DEFAULT_THEME = "light";
         };
+      };
+      grafana-image-renderer = {
+        enable = true;
+        provisionGrafana = true;
+        chromium = pkgs.ungoogled-chromium;
       };
       postgresql = {
         enable = true;
