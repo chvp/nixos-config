@@ -4,28 +4,51 @@
   inputs = {
     accentor = {
       url = "github:accentor/flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     accentor-api = {
       url = "github:accentor/api";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     accentor-web = {
       url = "github:accentor/web";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
@@ -33,10 +56,16 @@
       url = "github:chvp/tetris";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    utils = {
+      url = "github:gytis-ivaskevicius/flake-utils-plus";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        devshell.follows = "devshell";
+      };
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, emacs-overlay, home-manager, nixos-mailserver, nur, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -48,6 +77,7 @@
         input = nixpkgs;
         patches = map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
         overlaysBuilder = _: [
+          devshell.overlay
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
           (self: super: {
@@ -92,12 +122,16 @@
         let pkgs = channels.nixpkgs; in
         {
           packages = customPackages pkgs.callPackage;
-          devShell = pkgs.mkShell {
-            buildInputs = [
-              pkgs.nixpkgs-fmt
-              (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
-              agenix.defaultPackage.x86_64-linux
-            ];
+          devShells = rec {
+            default = nixos-config;
+            nixos-config = pkgs.devshell.mkShell {
+              name = "NixOS config";
+              packages = [
+                pkgs.nixpkgs-fmt
+                (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
+                agenix.defaultPackage.x86_64-linux
+              ];
+            };
           };
         };
     };

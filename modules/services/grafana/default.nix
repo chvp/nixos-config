@@ -17,7 +17,7 @@
     };
     networking.firewall.allowedTCPPorts = [ 8086 ];
     services = {
-      nginx.upstreams.grafana.servers = { "unix:/run/grafana/grafana.sock" = {}; };
+      nginx.upstreams.grafana.servers = { "unix:/run/grafana/grafana.sock" = { }; };
       influxdb2 = {
         enable = true;
         settings = {

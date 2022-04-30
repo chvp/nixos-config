@@ -1,9 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
-  garmin2influx = pkgs.writers.writePython3Bin "garmin2influx" {
-    libraries = with pkgs.python3Packages; [ garminconnect influxdb-client ];
-  } (builtins.readFile ./garmin2influx.py);
+  garmin2influx = pkgs.writers.writePython3Bin "garmin2influx"
+    {
+      libraries = with pkgs.python3Packages; [ garminconnect influxdb-client ];
+    }
+    (builtins.readFile ./garmin2influx.py);
 in
 {
   options.chvp.services.garmin-scraper.enable = lib.mkEnableOption "garmin scraper";
