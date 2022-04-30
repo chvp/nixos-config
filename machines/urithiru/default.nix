@@ -55,4 +55,6 @@
       };
     };
   };
+
+  services.telegraf.extraConfig.inputs.disk.mount_points = [ "/" "/boot/ESP0" "/boot/ESP1" "/srv/data" ];
 }

@@ -57,6 +57,7 @@ in
   "secrets/passwords/services/grafana/smtp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/secret-key.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/telegraf-env.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ lasting-integrity ] ++ users;
 
