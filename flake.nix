@@ -52,8 +52,8 @@
           (self: super: customPackages self.callPackage)
           (self: super: {
             tetris = tetris.defaultPackage.${self.system};
-            accentor-api-unstable = accentor-api.defaultPackage.${self.system};
-            accentor-web-unstable = accentor-web.defaultPackage.${self.system};
+            accentor-api = accentor-api.defaultPackage.${self.system};
+            accentor-web = accentor-web.defaultPackage.${self.system};
           })
           nur.overlay
         ];

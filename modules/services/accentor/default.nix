@@ -26,8 +26,6 @@
         forceSSL = true;
         useACMEHost = "vanpetegem.me";
       };
-      apiPackage = pkgs.accentor-api-unstable;
-      webPackage = pkgs.accentor-web-unstable;
     };
 
     security.doas.extraRules = [{
