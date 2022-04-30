@@ -81,9 +81,9 @@
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
           (self: super: {
-            tetris = tetris.defaultPackage.${self.system};
-            accentor-api = accentor-api.defaultPackage.${self.system};
-            accentor-web = accentor-web.defaultPackage.${self.system};
+            tetris = tetris.packages.${self.system}.default;
+            accentor-api = accentor-api.packages.${self.system}.default;
+            accentor-web = accentor-web.packages.${self.system}.default;
           })
           nur.overlay
         ];
