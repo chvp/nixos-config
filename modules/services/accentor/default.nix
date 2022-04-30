@@ -26,31 +26,8 @@
         forceSSL = true;
         useACMEHost = "vanpetegem.me";
       };
-      apiPackage = (pkgs.accentor-api.override {
-        gemfile = ./Gemfile;
-        lockfile = ./Gemfile.lock;
-        gemset = ./gemset.nix;
-      }).overrideAttrs (old: {
-        src = pkgs.fetchFromGitHub {
-          owner = "accentor";
-          repo = "api";
-          rev = "main";
-          sha256 = "sBmcgvGYeqcXKaYaIrpBU3jitTk8YXlnEk4GEGjfup0=";
-        };
-      });
-      webPackage = (pkgs.accentor-web.override {
-        packageJSON = ./package.json;
-        yarnLock = ./yarn.lock;
-        yarnNix = ./yarn.nix;
-      }).overrideAttrs (old: {
-        SKIP_CACHE = "true";
-        src = pkgs.fetchFromGitHub {
-          owner = "accentor";
-          repo = "web";
-          rev = "main";
-          sha256 = "SDSpikTeMWYjkC2NmBxakbG+Evtv22vFYw8dKGSHsOg=";
-        };
-      });
+      apiPackage = pkgs.accentor-api-unstable;
+      webPackage = pkgs.accentor-web-unstable;
     };
 
     security.doas.extraRules = [{

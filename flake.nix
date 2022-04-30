@@ -6,6 +6,14 @@
       url = "github:accentor/flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    accentor-api = {
+      url = "github:accentor/api";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    accentor-web = {
+      url = "github:accentor/web";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +36,7 @@
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, agenix, emacs-overlay, home-manager, nixos-mailserver, nur, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, emacs-overlay, home-manager, nixos-mailserver, nur, tetris, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -42,7 +50,11 @@
         overlaysBuilder = _: [
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
-          (self: super: { tetris = tetris.packages.x86_64-linux.tetris; })
+          (self: super: {
+            tetris = tetris.defaultPackage.${self.system};
+            accentor-api-unstable = accentor-api.defaultPackage.${self.system};
+            accentor-web-unstable = accentor-web.defaultPackage.${self.system};
+          })
           nur.overlay
         ];
       };
