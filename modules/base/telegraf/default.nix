@@ -29,6 +29,11 @@
           report_active = false;
         };
         diskio = { };
+        exec = {
+          commands = [ "${pkgs.zfs}/libexec/zfs/zpool_influxdb" ];
+          timeout = "5s";
+          data_format = "influx";
+        };
         kernel = { };
         mem = { };
         processes = { };
