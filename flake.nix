@@ -90,21 +90,7 @@
       };
       hostDefaults = {
         modules = [
-          ({ lib, pkgs, ... }: {
-            environment.etc = lib.mapAttrs'
-              (key: val: {
-                name = "channels/${key}";
-                value = {
-                  source = pkgs.runCommandNoCC "${key}-channel" { } ''
-                    mkdir $out
-                    echo "${val.rev or (toString val.lastModified)}" > $out/.version-suffix
-                    echo "import ${val.outPath}/default.nix" > $out/default.nix
-                  '';
-                };
-              })
-              inputs;
-            nix.nixPath = [ "/etc/channels" ];
-          })
+          { nix.generateRegistryFromInputs = true; }
           accentor.nixosModule
           agenix.nixosModules.age
           home-manager.nixosModule
@@ -130,6 +116,63 @@
                 pkgs.nixpkgs-fmt
                 (pkgs.writeShellScriptBin "fetchpatch" "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o patches/$1.patch")
                 agenix.defaultPackage.x86_64-linux
+              ];
+            };
+            accentor-api-client-js = pkgs.devshell.mkShell {
+              name = "Accentor API client in JavaScript";
+              packages = with pkgs; [ nodejs yarn ];
+            };
+            dodona = pkgs.devshell.mkShell {
+              name = "Dodona";
+              imports = [ "${devshell}/extra/language/c.nix" ];
+              packages = with pkgs; [
+                (pkgs.lowPrio binutils)
+                chromedriver
+                findutils
+                gnumake
+                nodejs
+                ruby_3_0
+                yarn
+              ];
+              env = [
+                { name = "DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona"; }
+                { name = "TEST_DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona_test"; }
+                { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
+                { name = "PATH"; prefix = "$GEM_HOME/bin"; }
+              ];
+              commands = [
+                {
+                  name = "start-dockers";
+                  category = "general commands";
+                  help = "Start mysql and memcached in docker containers";
+                  command = ''
+                    trap "systemd-run --user --no-block docker stop dodona-db dodona-cache" 0
+                    docker run -d --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
+                    docker run -d --name dodona-cache -p 11211:11211 --rm memcached:latest
+                    while [ 1 -eq 1 ]
+                    do
+                      sleep 1000
+                    done
+                  '';
+                }
+              ];
+              language.c = {
+                compiler = pkgs.gcc;
+                includes = [ pkgs.libmysqlclient pkgs.zlib ];
+                libraries = [ pkgs.libmysqlclient pkgs.zlib ];
+              };
+            };
+            dodona-docs = pkgs.devshell.mkShell {
+              name = "Dodona Docs";
+              env = [{ name = "PUPPETEER_EXECUTABLE_PATH"; eval = "${pkgs.ungoogled-chromium}/bin/chromium"; }];
+              packages = with pkgs; [ nodejs yarn ];
+            };
+            dodona-judge-r = pkgs.devshell.mkShell {
+              name = "R judge";
+              packages = [
+                (pkgs.rWrapper.override {
+                  packages = with pkgs.rPackages; [ base64enc dplyr dslabs jsonlite knitr lintr R6 rlang styler ];
+                })
               ];
             };
           };

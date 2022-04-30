@@ -32,11 +32,9 @@
             tag.gpgSign = true;
           };
           ignores = [
+            ".data"
             ".direnv"
             ".envrc"
-            "shell.nix"
-            # Ruby dependencies in source tree
-            "/vendor/bundle"
           ];
           signing = {
             key = "charlotte@vanpetegem.me";
