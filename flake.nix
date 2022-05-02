@@ -175,6 +175,10 @@
                 })
               ];
             };
+            scriptingtalen-project = pkgs.devshell.mkShell {
+              name = "Scriptingtalen project";
+              packages = [ (pkgs.python3.withPackages (ps: with ps; [ beautifulsoup4 requests ])) ];
+            };
           };
         };
     };
