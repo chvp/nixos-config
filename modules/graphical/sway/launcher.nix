@@ -33,6 +33,7 @@ let
       jq
       kitty
       libqalculate
+      nix
       pass
       slurp
       sway

@@ -27,6 +27,14 @@ emoji() {
   @sway@/bin/swaymsg exec -- "echo -n $char | @wlClipboard@/bin/wl-copy --foreground"
 }
 
+nrun_options() {
+    echo "nrun "
+}
+
+nrun() {
+   @sway@/bin/swaymsg exec -- @nix@/bin/nix run nixpkgs\#$1
+}
+
 pass_options(){
   prefix=${PASSWORD_STORE_DIR-~/.password-store}
   password_files=( "$prefix"/**/*.gpg )
@@ -81,14 +89,6 @@ run() {
   @sway@/bin/swaymsg exec $1
 }
 
-ssh_options() {
-  cat $HOME/.ssh/config | grep "^Host [a-zA-Z]\+" | sed "s/Host /ssh /"
-}
-
-ssh() {
-  @sway@/bin/swaymsg exec "@kitty@/bin/kitty -e ssh $1"
-}
-
 systemctl_options() {
   echo systemctl hibernate
   echo systemctl poweroff
@@ -105,7 +105,7 @@ windows() {
   @sway@/bin/swaymsg \[con_id="$window"\] focus
 }
 
-CHOSEN=$(cat <(windows_options) <(ssh_options) <(systemctl_options) <(pass_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 40 | tail -n1)
+CHOSEN=$(cat <(windows_options) <(systemctl_options) <(pass_options) <(nrun_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 40 | tail -n1)
 
 if [ -n "$CHOSEN" ]
 then
