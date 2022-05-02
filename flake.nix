@@ -142,17 +142,37 @@
               ];
               commands = [
                 {
-                  name = "start-dockers";
+                  name = "memcached";
                   category = "general commands";
-                  help = "Start mysql and memcached in docker containers";
+                  help = "Start caching server";
+                  package = pkgs.memcached;
+                }
+                {
+                  name = "mysql";
+                  category = "general commands";
+                  help = "Start mysql (in docker container)";
                   command = ''
-                    trap "systemd-run --user --no-block docker stop dodona-db dodona-cache" 0
+                    trap "systemd-run --user --no-block docker stop dodona-db" 0
                     docker run -d --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
-                    docker run -d --name dodona-cache -p 11211:11211 --rm memcached:latest
                     while [ 1 -eq 1 ]
                     do
                       sleep 1000
                     done
+                  '';
+                }
+                {
+                  name = "server";
+                  category = "general commands";
+                  help = "Run everything";
+                  command = ''
+                    memcached &
+                    mysql &
+                    bundle install
+                    yarn install
+                    rails s &
+                    rails jobs:work &
+                    yarn build:css --watch &
+                    yarn build:js --watch
                   '';
                 }
               ];
