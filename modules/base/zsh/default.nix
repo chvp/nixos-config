@@ -12,9 +12,6 @@ let
         expireDuplicatesFirst = true;
         path = "${config.chvp.cachePrefix}${home}/.local/share/zsh/history";
       };
-      initExtra = ''
-        ${pkgs.any-nix-shell}/bin/any-nix-shell zsh --info-right | source /dev/stdin
-      '';
       oh-my-zsh = {
         enable = true;
         plugins = [
