@@ -19,7 +19,7 @@ calc() {
 }
 
 emoji_options() {
-  cat @emojiList@ | sed "s/^/emoji /"
+  @uni@/bin/uni emoji all | sed "s/^/emoji /"
 }
 
 emoji() {

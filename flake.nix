@@ -70,6 +70,7 @@
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
         kotlin-language-server = callPackage ./packages/kotlin-language-server { };
+        uni = callPackage ./packages/uni { };
       }; in
     utils.lib.mkFlake {
       inherit self inputs;
