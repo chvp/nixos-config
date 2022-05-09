@@ -171,11 +171,11 @@
     },
     "emacs-overlay": {
       "locked": {
-        "lastModified": 1652038791,
-        "narHash": "sha256-dTQdPbsq+WCEo9B72+MLT+rqtVjD+ryfc6DJbR/iMHQ=",
+        "lastModified": 1652072170,
+        "narHash": "sha256-7aWTXT+tM6yNYwq6HYzNmnFvkosygMMFy0QPiLgBt6M=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "7cb7c8c550ae9e746cbc65bfea7bd005409bf0a4",
+        "rev": "ff6f93f4d156d7e9b48bb9cc986d119775e7df1f",
         "type": "github"
       },
       "original": {
@@ -230,11 +230,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1650133068,
-        "narHash": "sha256-biHmW4DyRjydDUJ9bTqvUgVSSE/MzzAseQERT5yPjWI=",
+        "lastModified": 1652050932,
+        "narHash": "sha256-1lOa33Z2sC6CmNdqkCtplVHlMUWVZl4FLT6MYOM+WJQ=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "4ce864f52ae7e1733582a32d66c1f94ee11a52c8",
+        "rev": "4396125ebbbaecbaba0f8e0afb25e492b3be5795",
         "type": "gitlab"
       },
       "original": {
@@ -261,11 +261,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1652069314,
-        "narHash": "sha256-/sUW0h0kBsqXLdBujzNCBclQvDlHXIR9J6WPO0b0vXk=",
+        "lastModified": 1652074111,
+        "narHash": "sha256-abM+5ubxIVRuP5T7ObHzyGremiO2nzSHpgwhGqz+SLE=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7157a2cc7d4795f7ed1369265821febfd05da512",
+        "rev": "da216d5e95ce674d36f6ad6bb759c5afb77eb757",
         "type": "github"
       },
       "original": {
