@@ -1,0 +1,54 @@
+From 24506e9141888a548de2cb84fbe95ae0299ba9f4 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
+Date: Tue, 10 May 2022 09:55:17 +0200
+Subject: [PATCH] uni: init at 2.5.1
+
+---
+ pkgs/applications/misc/uni/default.nix | 24 ++++++++++++++++++++++++
+ pkgs/top-level/all-packages.nix        |  2 ++
+ 2 files changed, 26 insertions(+)
+ create mode 100644 pkgs/applications/misc/uni/default.nix
+
+diff --git a/pkgs/applications/misc/uni/default.nix b/pkgs/applications/misc/uni/default.nix
+new file mode 100644
+index 0000000000000..7ccbf3c953d3c
+--- /dev/null
++++ b/pkgs/applications/misc/uni/default.nix
+@@ -0,0 +1,24 @@
++{ lib, buildGoModule, fetchFromGitHub }:
++
++buildGoModule rec {
++  pname = "uni";
++  version = "2.5.1";
++
++  src = fetchFromGitHub {
++    owner = "arp242";
++    repo = "uni";
++    rev = "v${version}";
++    sha256 = "kWiglMuJdcD7z2MDfz1MbItB8r9BJ7LUqfPfJa8QkLA=";
++  };
++
++  vendorSha256 = "6HNFCUSJA6oduCx/SCUQQeCHGS7ohaWRunixdwMurBw=";
++
++  ldflags = [ "-X main.version=${version}" ];
++
++  meta = with lib; {
++    homepage = "https://github.com/arp242/uni";
++    description = "Query the Unicode database from the commandline, with good support for emojis";
++    license = licenses.mit;
++    maintainers = with maintainers; [ chvp ];
++  };
++}
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index bf0e839a16c87..15fc5df2a543d 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -29906,6 +29906,8 @@ with pkgs;
+     channel = "ungoogled-chromium";
+   });
+ 
++  uni = callPackage ../applications/misc/uni { };
++
+   unigine-valley = callPackage ../applications/graphics/unigine-valley { };
+ 
+   unigine-heaven = callPackage ../applications/graphics/unigine-heaven { };
