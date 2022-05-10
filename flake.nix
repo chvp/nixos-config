@@ -161,18 +161,26 @@
                   '';
                 }
                 {
-                  name = "server";
+                  name = "server-support";
                   category = "general commands";
-                  help = "Run everything";
+                  help = "Run everything required for a server";
                   command = ''
                     memcached &
                     mysql &
                     bundle install
                     yarn install
-                    rails s &
                     rails jobs:work &
                     yarn build:css --watch &
                     yarn build:js --watch
+                  '';
+                }
+                {
+                  name = "server";
+                  category = "general commands";
+                  help = "Run everything";
+                  command = ''
+                    server-support &
+                    rails s
                   '';
                 }
               ];
