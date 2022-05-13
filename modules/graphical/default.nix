@@ -77,7 +77,8 @@ in
         mpv
         okular
         ranger
-        youtube-dl
+        uni
+        yt-dlp
       ];
     };
   };
