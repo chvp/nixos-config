@@ -134,6 +134,7 @@
                 findutils
                 gnumake
                 nodejs
+                nodePackages.typescript-language-server
                 ruby_3_0
                 yarn
               ];
