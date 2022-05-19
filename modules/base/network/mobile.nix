@@ -44,7 +44,7 @@
               phase2="auth=MSCHAPV2"
               group=CCMP TKIP
               ca_cert="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              altsubject_match="DNS:ugnps.ugent.be"
+              altsubject_match="DNS:radius.ugent.be"
             '';
           };
         };
