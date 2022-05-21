@@ -57,7 +57,11 @@
     nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     utils = {
       url = "github:gytis-ivaskevicius/flake-utils-plus";

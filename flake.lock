@@ -314,16 +314,22 @@
     },
     "tetris": {
       "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1653013761,
-        "narHash": "sha256-rHdl9AGus3qaslpzr/nfRL7/RcS89Y4M+g4wCfzoW10=",
+        "lastModified": 1653171662,
+        "narHash": "sha256-yVn7Iypcm4xgGHZNqeHZw5qRGo1xfeR7SU8bdYtgH8o=",
         "owner": "chvp",
         "repo": "tetris",
-        "rev": "02bbf22ca1053ad4407d912ec251b4c438bf69f9",
+        "rev": "b4f57cf95093449e0dfbcf2c106e305221e84b06",
         "type": "github"
       },
       "original": {
