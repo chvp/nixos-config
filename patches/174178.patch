@@ -1,0 +1,57 @@
+From b4e4982e6ce36281159e2256a936f302bda1eb5c Mon Sep 17 00:00:00 2001
+From: Tad Fisher <tadfisher@gmail.com>
+Date: Mon, 23 May 2022 12:52:17 -0700
+Subject: [PATCH] emacsPackages.melpaBuild: Update package-build, avoid
+ monkey-patch
+
+---
+ pkgs/build-support/emacs/melpa.nix    |  4 ++--
+ pkgs/build-support/emacs/melpa2nix.el | 18 ++++++++++++++----
+ 2 files changed, 16 insertions(+), 6 deletions(-)
+
+diff --git a/pkgs/build-support/emacs/melpa.nix b/pkgs/build-support/emacs/melpa.nix
+index 408448f26a0e7..924e6d95f14a8 100644
+--- a/pkgs/build-support/emacs/melpa.nix
++++ b/pkgs/build-support/emacs/melpa.nix
+@@ -38,8 +38,8 @@ import ./generic.nix { inherit lib stdenv emacs texinfo writeText gcc; } ({
+   packageBuild = fetchFromGitHub {
+     owner = "melpa";
+     repo = "package-build";
+-    rev = "047801d301a73d4932f33f768d94a8ed26b8d524";
+-    sha256 = "0ygzkpg7xc3mjjbxg1kcyz6fwbkb0prvca499f0ffmhfaiv28h59";
++    rev = "35017a2d87376c70c3239f48bdbac7efca85aa10";
++    sha256 = "07hdmam85452v4r2vaabj1qfyami1hgbh0jgj9dcwbkpr0y1gvqj";
+   };
+ 
+   elpa2nix = ./elpa2nix.el;
+diff --git a/pkgs/build-support/emacs/melpa2nix.el b/pkgs/build-support/emacs/melpa2nix.el
+index 383423af08189..72667dea652c1 100644
+--- a/pkgs/build-support/emacs/melpa2nix.el
++++ b/pkgs/build-support/emacs/melpa2nix.el
+@@ -11,12 +11,22 @@
+ ;; Allow installing package tarfiles larger than 10MB
+ (setq large-file-warning-threshold nil)
+ 
++(defun melpa2nix-build-package-1 (rcp version commit)
++  (let ((source-dir (package-recipe--working-tree rcp)))
++    (unwind-protect
++        (let ((files (package-build-expand-files-spec rcp t)))
++          (cond
++           ((= (length files) 1)
++            (package-build--build-single-file-package
++             rcp version commit files source-dir))
++           ((> (length files) 1)
++            (package-build--build-multi-file-package
++             rcp version commit files source-dir))
++           (t (error "Unable to find files matching recipe patterns")))))))
++
+ (defun melpa2nix-build-package ()
+   (if (not noninteractive)
+       (error "`melpa2nix-build-package' is to be used only with -batch"))
+   (pcase command-line-args-left
+     (`(,package ,version ,commit)
+-     ;; Monkey-patch package-build so it doesn't shell out to git/hg.
+-     (defun package-build--get-commit (&rest _)
+-       commit)
+-     (package-build--package (package-recipe-lookup package) version))))
++     (melpa2nix-build-package-1 (package-recipe-lookup package) version commit))))
