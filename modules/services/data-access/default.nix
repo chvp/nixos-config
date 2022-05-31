@@ -56,6 +56,7 @@
       localAddress = "192.168.100.11";
       localAddress6 = "fc00::2";
       config = { ... }: {
+        system.stateVersion = config.chvp.stateVersion;
         imports = [ ./config.nix ];
       };
     };
