@@ -34,6 +34,8 @@
           AllowTcpForwarding no
           AllowAgentForwarding no
           ForceCommand internal-sftp
+      Match user data
+          PasswordAuthentication no
     '';
     authorizedKeysFiles = [ "/run/secrets/%u_authorized_keys" ];
   };
