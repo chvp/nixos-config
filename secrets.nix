@@ -82,5 +82,7 @@ in
   "secrets/data-access/ssh_host_ed25519_key.pub.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/authorized_keys.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/password_file.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/data-access/readonly_authorized_keys.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/data-access/readonly_password_file.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/create_torrent.age".publicKeys = [ urithiru ] ++ users;
 }

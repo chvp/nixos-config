@@ -9,6 +9,15 @@
     group = "users";
     passwordFile = "/run/secrets/password_file";
   };
+  users.users.readonly = {
+    isNormalUser = true;
+    home = "/home/readonly";
+    description = "Readonly data access";
+    uid = 1001;
+    group = "sftponly";
+    passwordFile = "/run/secrets/readonly_password_file";
+  };
+  users.groups.sftponly = { gid = 10000; };
   environment.systemPackages = [ pkgs.rsync pkgs.mktorrent (pkgs.writeShellScriptBin "create_torrent" ". /run/secrets/create_torrent") ];
   security.sudo.enable = false;
   services.openssh = {
@@ -20,7 +29,12 @@
     ];
     extraConfig = ''
       HostKeyAlgorithms +ssh-rsa
+      Match group sftponly
+          X11Forwarding no
+          AllowTcpForwarding no
+          AllowAgentForwarding no
+          ForceCommand internal-sftp
     '';
-    authorizedKeysFiles = [ "/run/secrets/authorized_keys" ];
+    authorizedKeysFiles = [ "/run/secrets/%u_authorized_keys" ];
   };
 }

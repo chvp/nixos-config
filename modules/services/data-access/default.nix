@@ -40,6 +40,10 @@
           hostPath = "/srv/data";
           isReadOnly = false;
         };
+        "/home/readonly/data" = {
+          hostPath = "/srv/data";
+          isReadOnly = true;
+        };
         "/run/secrets" = {
           hostPath = "/run/data-access";
           isReadOnly = true;
@@ -86,10 +90,22 @@
       path = "/run/data-access/password_file";
       symlink = false;
     };
+    age.secrets."data-access/readonly_password_file" = {
+      file = ../../../secrets/data-access/readonly_password_file.age;
+      path = "/run/data-access/readonly_password_file";
+      symlink = false;
+    };
     age.secrets."data-access/authorized_keys" = {
       file = ../../../secrets/data-access/authorized_keys.age;
       owner = "charlotte";
-      path = "/run/data-access/authorized_keys";
+      path = "/run/data-access/data_authorized_keys";
+      symlink = false;
+    };
+    age.secrets."data-access/readonly_authorized_keys" = {
+      file = ../../../secrets/data-access/readonly_authorized_keys.age;
+      owner = "1001";
+      group = "65534";
+      path = "/run/data-access/readonly_authorized_keys";
       symlink = false;
     };
     age.secrets."data-access/create_torrent" = {
