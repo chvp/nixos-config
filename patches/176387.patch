@@ -1,0 +1,29 @@
+From a354d5b16bea0fe4b6790d2e078551e25f9b0d92 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sun, 5 Jun 2022 14:11:40 +0200
+Subject: [PATCH] mu: 1.6.10 -> 1.6.11
+
+---
+ pkgs/tools/networking/mu/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index 47d0dffda0079..fd140bfe55edc 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -7,13 +7,13 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.6.10";
++  version = "1.6.11";
+ 
+   src = fetchFromGitHub {
+     owner  = "djcb";
+     repo   = "mu";
+     rev    = version;
+-    sha256 = "1uJB8QdR0JgWlogb1cdUicz+LLtYQpAvYJjwcRjXt+E=";
++    sha256 = "E/6+vEwYXk65/ZoAtUeTjvg56g6gz+Qtcaz0qwEru6c=";
+   };
+ 
+   postPatch = lib.optionalString (batchSize != null) ''
