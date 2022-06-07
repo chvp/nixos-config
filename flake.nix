@@ -70,9 +70,14 @@
         devshell.follows = "devshell";
       };
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, rust-overlay, tetris, utils }:
     let
       customPackages = callPackage: {
         jdtls = callPackage ./packages/jdtls { };
@@ -93,6 +98,7 @@
             accentor-web = accentor-web.packages.${self.system}.default;
           })
           nur.overlay
+          rust-overlay.overlay
         ];
       };
       hostDefaults = {
@@ -317,6 +323,22 @@
             scriptingtalen-project = pkgs.devshell.mkShell {
               name = "Scriptingtalen project";
               packages = [ (pkgs.python3.withPackages (ps: with ps; [ beautifulsoup4 requests ])) ];
+            };
+            Rocket = pkgs.devshell.mkShell {
+              name = "Rocket";
+              imports = [ "${devshell}/extra/language/c.nix" ];
+              env = [
+                { name = "PQ_LIB_DIR"; value = "${pkgs.postgresql.lib}/lib"; }
+              ];
+              packages = with pkgs; [
+                binutils
+                (rust-bin.nightly.latest.default.override { extensions = [ "rust-analyzer-preview" "rust-src" ]; })
+              ];
+              language.c = {
+                compiler = pkgs.gcc;
+                includes = [ pkgs.postgresql.lib pkgs.sqlite pkgs.libmysqlclient pkgs.openssl ];
+                libraries = [ pkgs.postgresql.lib pkgs.sqlite pkgs.libmysqlclient pkgs.openssl ];
+              };
             };
           };
         };
