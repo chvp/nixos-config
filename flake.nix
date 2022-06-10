@@ -166,7 +166,7 @@
                     initdb --encoding=UTF8 --no-locale --no-instructions -U postgres
                     echo "listen_addresses = ${"'"}${"'"}" >> $PGDATA/postgresql.conf
                     echo "unix_socket_directories = '$PGDATA'" >> $PGDATA/postgresql.conf
-                    echo "CREATE USER gamification2 WITH PASSWORD 'gamification2' CREATEDB;" | postgres --single -E postgres
+                    echo "CREATE USER gamification2 WITH PASSWORD 'gamification2' CREATEDB SUPERUSER;" | postgres --single -E postgres
                   '';
                 }
                 {
