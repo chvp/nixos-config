@@ -323,25 +323,9 @@
                 })
               ];
             };
-            scriptingtalen-project = pkgs.devshell.mkShell {
+            objectgericht-project = pkgs.devshell.mkShell {
               name = "Scriptingtalen project";
-              packages = [ (pkgs.python3.withPackages (ps: with ps; [ beautifulsoup4 requests ])) ];
-            };
-            Rocket = pkgs.devshell.mkShell {
-              name = "Rocket";
-              imports = [ "${devshell}/extra/language/c.nix" ];
-              env = [
-                { name = "PQ_LIB_DIR"; value = "${pkgs.postgresql.lib}/lib"; }
-              ];
-              packages = with pkgs; [
-                binutils
-                (rust-bin.nightly.latest.default.override { extensions = [ "rust-analyzer-preview" "rust-src" ]; })
-              ];
-              language.c = {
-                compiler = pkgs.gcc;
-                includes = [ pkgs.postgresql.lib pkgs.sqlite pkgs.libmysqlclient pkgs.openssl ];
-                libraries = [ pkgs.postgresql.lib pkgs.sqlite pkgs.libmysqlclient pkgs.openssl ];
-              };
+              packages = with pkgs; [ openssl maven openjdk ];
             };
           };
         };
