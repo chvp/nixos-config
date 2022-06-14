@@ -63,8 +63,9 @@
 
           ;; Project management
           (use-package projectile
+            :after consult
             :commands (projectile-project-root)
-            :custom (consult-project-root-function #'projectile-project-root "Use projectile to determine project roots.")
+            :custom (consult-project-function #'projectile-project-root "Use projectile to determine project roots.")
             :diminish (projectile-mode)
             :config (projectile-mode 1)
             :general
