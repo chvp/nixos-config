@@ -36,6 +36,7 @@
           ForceCommand internal-sftp
       Match user data
           PasswordAuthentication no
+          KbdInteractiveAuthentication no
     '';
     authorizedKeysFiles = [ "/run/secrets/%u_authorized_keys" ];
   };
