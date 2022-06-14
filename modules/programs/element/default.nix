@@ -11,7 +11,12 @@
       { path = ".config/Element"; type = "cache"; }
     ];
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ pkgs.element-desktop ];
+      home = {
+        packages = [ pkgs.element-desktop ];
+        sessionVariables = {
+          NIXOS_OZONE_WL = "1";
+        };
+      };
     };
   };
 }
