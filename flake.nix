@@ -5,9 +5,11 @@
     accentor = {
       url = "github:accentor/flake";
       inputs = {
+        api.follows = "accentor-api";
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
+        web.follows = "accentor-web";
       };
     };
     accentor-api = {
@@ -39,7 +41,10 @@
     };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {

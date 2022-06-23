@@ -2,7 +2,9 @@
   "nodes": {
     "accentor": {
       "inputs": {
-        "api": "api",
+        "api": [
+          "accentor-api"
+        ],
         "devshell": [
           "devshell"
         ],
@@ -12,7 +14,9 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "web": "web"
+        "web": [
+          "accentor-web"
+        ]
       },
       "locked": {
         "lastModified": 1655952929,
@@ -100,36 +104,6 @@
         "type": "github"
       }
     },
-    "api": {
-      "inputs": {
-        "devshell": [
-          "accentor",
-          "devshell"
-        ],
-        "flake-utils": [
-          "accentor",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "accentor",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1655829579,
-        "narHash": "sha256-vYcfo1Op1bzw7WnB7AlYEbm+hsOWKQhMGzQSGT9n5rk=",
-        "owner": "accentor",
-        "repo": "api",
-        "rev": "4722a2d08b3da1b5f4b39017786d6f3c242da497",
-        "type": "github"
-      },
-      "original": {
-        "owner": "accentor",
-        "ref": "v0.17.3",
-        "repo": "api",
-        "type": "github"
-      }
-    },
     "blobs": {
       "flake": false,
       "locked": {
@@ -171,7 +145,9 @@
     },
     "emacs-overlay": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -207,21 +183,6 @@
       }
     },
     "flake-utils": {
-      "locked": {
-        "lastModified": 1653893745,
-        "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
       "locked": {
         "lastModified": 1653893745,
         "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
@@ -373,7 +334,7 @@
         "agenix": "agenix",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs",
@@ -425,36 +386,6 @@
       "original": {
         "owner": "gytis-ivaskevicius",
         "repo": "flake-utils-plus",
-        "type": "github"
-      }
-    },
-    "web": {
-      "inputs": {
-        "devshell": [
-          "accentor",
-          "devshell"
-        ],
-        "flake-utils": [
-          "accentor",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "accentor",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1651315771,
-        "narHash": "sha256-sgO9Ps9uKjMmEZ2wk6nO2+rEA7QN/ToOiUPQO2Bitcc=",
-        "owner": "accentor",
-        "repo": "web",
-        "rev": "8d573abed88681a6b098fe0339aa06f2aeea074b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "accentor",
-        "ref": "v0.30.1",
-        "repo": "web",
         "type": "github"
       }
     }
