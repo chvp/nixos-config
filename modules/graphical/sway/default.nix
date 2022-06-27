@@ -73,8 +73,8 @@ in
           down = "j";
           up = "k";
           right = "l";
-          terminal = "${pkgs.kitty}/bin/kitty";
-          menu = "${terminal} --class launcher -e ${launcher}/bin/launcher";
+          terminal = "${pkgs.wezterm}/bin/wezterm";
+          menu = "${terminal} start --class launcher -- ${launcher}/bin/launcher";
           fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
           bars = [
             {

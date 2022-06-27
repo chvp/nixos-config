@@ -5,7 +5,6 @@ let
     inherit (pkgs)
       fzy
       jq
-      kitty
       libqalculate
       nix
       pass
