@@ -8,7 +8,7 @@
     gnumake
     nodejs
     nodePackages.typescript-language-server
-    ruby_3_0
+    ruby_3_1
     yarn
   ];
   env = [
