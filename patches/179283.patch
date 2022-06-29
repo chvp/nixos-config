@@ -1,0 +1,53 @@
+From 99cf9296092b2b2381058ca855cd435bcba6150d Mon Sep 17 00:00:00 2001
+From: Peter Hoeg <peter@hoeg.com>
+Date: Mon, 27 Jun 2022 11:54:46 +0800
+Subject: [PATCH] mu: no relation to mesa so set platforms directly
+
+For reasons unknown, the list of support platforms tracked that of mesa.
+That makes no sense whatsoever, so set it to a list of platforms that
+actually should be supported.
+---
+ pkgs/tools/networking/mu/default.nix | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index ec5b13b34f26e..98dd7d1a87891 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -17,19 +17,19 @@ stdenv.mkDerivation rec {
+   version = "1.8.1";
+ 
+   src = fetchFromGitHub {
+-    owner  = "djcb";
+-    repo   = "mu";
+-    rev    = "v${version}";
++    owner = "djcb";
++    repo = "mu";
++    rev = "v${version}";
+     sha256 = "dFYITyO9znocf9fv3eh2h83NM3RDYcpDV/uxOISChZo=";
+   };
+ 
+   postPatch = ''
+-      # Fix mu4e-builddir (set it to $out)
+-      substituteInPlace mu4e/mu4e-config.el.in \
+-        --replace "@abs_top_builddir@" "$out"
+-      substituteInPlace lib/utils/mu-utils.cc \
+-        --replace "/bin/rm" "${coreutils}/bin/rm"
+-    '';
++    # Fix mu4e-builddir (set it to $out)
++    substituteInPlace mu4e/mu4e-config.el.in \
++      --replace "@abs_top_builddir@" "$out"
++    substituteInPlace lib/utils/mu-utils.cc \
++      --replace "/bin/rm" "${coreutils}/bin/rm"
++  '';
+ 
+   buildInputs = [ emacs glib gmime3 texinfo xapian ];
+ 
+@@ -50,6 +50,6 @@ stdenv.mkDerivation rec {
+     homepage = "https://www.djcbsoftware.nl/code/mu/";
+     changelog = "https://github.com/djcb/mu/releases/tag/v${version}";
+     maintainers = with maintainers; [ antono chvp peterhoeg ];
+-    platforms = platforms.mesaPlatforms;
++    platforms = platforms.unix;
+   };
+ }
