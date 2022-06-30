@@ -27,4 +27,10 @@ return {
     fade_out_function = "EaseOut",
     fade_out_duration_ms = 150,
   },
+  window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+  },
 }
