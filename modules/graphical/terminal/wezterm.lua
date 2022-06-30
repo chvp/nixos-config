@@ -8,6 +8,7 @@ return {
     background = "#ffffff",
     cursor_bg = "#777777",
     cursor_fg = "#ffffff",
+    cursor_border = "#777777",
     selection_bg = "#000000",
     selection_fg = "#ffffff",
     ansi = { "#282828", "#a60000", "#005e00", "#813e00", "#0031a9", "#721045", "#00538b", "#f8f8f8" },
