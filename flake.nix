@@ -92,13 +92,12 @@
         input = nixpkgs;
         patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
         overlaysBuilder = _: [
+          accentor.overlay
           devshell.overlay
           emacs-overlay.overlay
           (self: super: customPackages self.callPackage)
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
-            accentor-api = accentor-api.packages.${self.system}.default;
-            accentor-web = accentor-web.packages.${self.system}.default;
           })
           nur.overlay
         ];
