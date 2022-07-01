@@ -1,0 +1,29 @@
+From 7e7c6744736c45ab7df708a97942a369bacc5ec2 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
+Date: Fri, 1 Jul 2022 09:52:41 +0200
+Subject: [PATCH] mu: 1.8.2 -> 1.8.3
+
+---
+ pkgs/tools/networking/mu/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index 1a1a8d3c673dd..3e68b54b9b50b 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -14,13 +14,13 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.8.2";
++  version = "1.8.3";
+ 
+   src = fetchFromGitHub {
+     owner = "djcb";
+     repo = "mu";
+     rev = "v${version}";
+-    sha256 = "wpyolNXm5JloKMJarYzSbs2yMcrkl73vOw6951Ol8Rs=";
++    sha256 = "gEqhk600pYHOcYhwr8LGvXHH8KcinX5MbMqYGyYOsnY=";
+   };
+ 
+   postPatch = ''
