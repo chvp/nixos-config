@@ -81,11 +81,6 @@
   };
 
   outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils }:
-    let
-      customPackages = callPackage: {
-        jdtls = callPackage ./packages/jdtls { };
-        kotlin-language-server = callPackage ./packages/kotlin-language-server { };
-      }; in
     utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
@@ -95,7 +90,6 @@
           accentor.overlay
           devshell.overlay
           emacs-overlay.overlay
-          (self: super: customPackages self.callPackage)
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
           })
@@ -121,7 +115,6 @@
       outputsBuilder = channels:
         let pkgs = channels.nixpkgs; in
         {
-          packages = customPackages pkgs.callPackage;
           devShells =
             let
               ls = builtins.readDir ./shells;
