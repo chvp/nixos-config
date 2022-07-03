@@ -61,7 +61,7 @@
         utils.follows = "flake-utils";
       };
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
