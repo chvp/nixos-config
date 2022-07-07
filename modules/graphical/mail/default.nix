@@ -149,7 +149,7 @@ in
                  'mu4e-bookmarks
                   '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX" :key ?i)
                  )
-                (define-advice mu4e~context-ask-user
+                (define-advice mu4e--context-ask-user
                     (:around (orig-fun &rest args) mu4e~context-ask-user-completing-read)
                   "Replace `mu4e-read-option` by general-purpose completing-read"
                   (cl-letf (((symbol-function 'mu4e-read-option)
