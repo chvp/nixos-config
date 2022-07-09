@@ -47,6 +47,7 @@
     home-manager.users = {
       charlotte = { ... }: {
         home.stateVersion = config.chvp.stateVersion;
+        systemd.user.sessionVariables = config.home-manager.users.charlotte.home.sessionVariables;
       };
       root = { ... }: {
         home.stateVersion = config.chvp.stateVersion;
