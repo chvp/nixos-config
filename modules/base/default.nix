@@ -56,6 +56,8 @@
 
     environment.systemPackages = with pkgs; [ git htop moreutils ncdu ripgrep unzip zip ];
 
+    boot.kernelParams = [ "mitigations=off" ];
+
     console = {
       colors = [
         "f8f8f8"
