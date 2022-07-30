@@ -59,7 +59,7 @@
       tetris.server = true;
     };
     services = {
-      garmin-scraper.enable = true;
+      garmin-scraper.enable = false;
       grafana.enable = true;
       mail.enable = true;
       matrix.enable = true;
