@@ -4,6 +4,7 @@
   packages = with pkgs; [
     (pkgs.lowPrio binutils)
     chromedriver
+    ungoogled-chromium
     findutils
     gnumake
     nodejs
