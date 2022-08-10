@@ -50,11 +50,12 @@
         ''
           ;; Magit GitHub/GitLab integration
           (use-package forge
-            :custom (forge-add-default-bindings nil "evil-collection manages bindings")
             :after magit)
 
           ;; Git integration
           (use-package magit
+            :init
+            (setq forge-add-default-bindings nil)
             :general
             (lmap
               "g" '(:ignore t :which-key "git")
