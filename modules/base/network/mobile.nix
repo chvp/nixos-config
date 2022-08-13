@@ -25,7 +25,7 @@
           "Public Universal Friend".psk = "@PSK_PUF@";
           AndroidAP.psk = "@PSK_AndroidAP@";
           draadloosnw.psk = "@PSK_draadloosnw@";
-          jonsnowisdead.psk = "@PSK_jonsnowisdead@";
+          werknet.psk = "@PSK_werknet@";
           Secorima.psk = "@PSK_Secorima@";
           "Zeus WPI" = {
             psk = "@PSK_Zeus@";
@@ -47,6 +47,8 @@
               altsubject_match="DNS:radius.ugent.be"
             '';
           };
+          "GUK-huis".psk = "@PSK_GUKhuis@";
+
         };
       };
       interfaces = {
