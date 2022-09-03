@@ -92,7 +92,8 @@
     system.activationScripts =
       let
         ensureSystemExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureSystemExists);
-        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "/home/charlotte/${path}"; chown charlotte:users /home/charlotte/${path};'') config.chvp.base.zfs.ensureHomeExists);
+        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "/home/charlotte/${path}"'') config.chvp.base.zfs.ensureHomeExists);
+        ensureHomePermissionsScript = lib.concatStringsSep "\n" (map (path: ''chown charlotte:users /home/charlotte/${path}'') config.chvp.base.zfs.ensureHomeExists);
       in
       {
         ensureSystemPathsExist = {
@@ -104,9 +105,15 @@
             mkdir -p /home/charlotte/
             ${ensureHomeExistsScript}
           '';
-          deps = [ "users" "groups" ];
         };
         agenixInstall.deps = [ "ensureSystemPathsExist" "ensureHomePathsExist" ];
+        ensureHomePermissionsScript = {
+          text = ''
+            chown charlotte:users /home/charlotte
+            ${ensureHomePermissionsScript}
+          '';
+          deps = [ "agenixInstall" "users" "groups" ];
+        };
       };
 
     systemd.services =
