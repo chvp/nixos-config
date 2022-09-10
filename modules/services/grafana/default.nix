@@ -64,7 +64,7 @@
         };
       };
       grafana-image-renderer = {
-        enable = false;
+        enable = true;
         provisionGrafana = true;
         chromium = pkgs.ungoogled-chromium;
       };
