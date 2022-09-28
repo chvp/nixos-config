@@ -78,7 +78,7 @@
               {
                 "/_matrix" = matrixRedirect;
                 "/.well-known/matrix" = {
-                  root = pkgs.runCommandNoCC "well-known-matrix" { } ''
+                  root = pkgs.runCommand "well-known-matrix" { } ''
                     mkdir -p $out/.well-known/matrix
                     echo '{"m.server":"matrix.vanpetegem.me:443"}' > $out/.well-known/matrix/server
                     echo '{"m.homeserver":{"base_url":"https://matrix.vanpetegem.me"}}' > $out/.well-known/matrix/client

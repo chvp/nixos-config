@@ -18,7 +18,7 @@ let
     xdgUserDirs = pkgs.xdg-user-dirs;
   };
 in
-pkgs.runCommandNoCC "launcher" { } ''
+pkgs.runCommand "launcher" { } ''
   mkdir -p $out/bin
   cp ${script} $out/bin/launcher
   chmod +x $out/bin/launcher

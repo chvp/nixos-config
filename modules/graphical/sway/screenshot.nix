@@ -22,7 +22,7 @@ pkgs.writeShellScriptBin "screenshot" ''
 
   if [[ -n "$remote" ]]
   then
-    name=$(${pkgs.utillinux}/bin/uuidgen).png
+    name=$(${pkgs.util-linux}/bin/uuidgen).png
     ${pkgs.grim}/bin/grim -t png -g "$dims" - | ${pkgs.openssh}/bin/ssh data "cat > data/public/$name"
     path="https://data.vanpetegem.me/public/$name"
   else

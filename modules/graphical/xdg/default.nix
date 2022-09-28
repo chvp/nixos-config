@@ -19,7 +19,7 @@
     ];
 
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = with pkgs; [ xdg-user-dirs xdg_utils ];
+      home.packages = with pkgs; [ xdg-user-dirs xdg-utils ];
       xdg = {
         enable = true;
         # Some applications overwrite mimeapps.list with an identical file
