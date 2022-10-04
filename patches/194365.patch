@@ -1,0 +1,21 @@
+From f8bec2d9b79c3ed866972fccb3a7d218ef275a45 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
+Date: Tue, 4 Oct 2022 10:05:24 +0200
+Subject: [PATCH] matrix-appservice-slack: fix build
+
+---
+ pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+index a00d983e91bb5c..e365f09ca59282 100644
+--- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
++++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+@@ -20,6 +20,7 @@ nodePackages.package.override {
+   nativeBuildInputs = [ pkgs.makeWrapper ];
+ 
+   postInstall = ''
++    npm run build
+     makeWrapper '${nodejs}/bin/node' "$out/bin/matrix-appservice-slack" \
+     --add-flags "$out/lib/node_modules/matrix-appservice-slack/lib/app.js"
+   '';
