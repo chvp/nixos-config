@@ -5053,19 +5053,19 @@ index 50f5ec3830434..6b4ffb4061c85 100644
  
    maim = callPackage ../tools/graphics/maim {};
 
-From 9927f77fb3c1488344ba2a68b0c75676aa943626 Mon Sep 17 00:00:00 2001
+From a8f5c842896723e65193542cb81d63d5b648e880 Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
 Date: Thu, 6 Oct 2022 10:33:32 +0200
 Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
 
 ---
- .../matrix-appservice-slack/default.nix       |   47 +-
+ .../matrix-appservice-slack/default.nix       |   49 +-
  .../generate-dependencies.sh                  |   17 -
  .../node-composition.nix                      |   17 -
  .../matrix-appservice-slack/node-packages.nix | 5484 -----------------
  .../matrix-appservice-slack/pin.json          |    5 +
  .../matrix-appservice-slack/update.sh         |   35 +
- 6 files changed, 73 insertions(+), 5532 deletions(-)
+ 6 files changed, 75 insertions(+), 5532 deletions(-)
  delete mode 100755 pkgs/servers/matrix-synapse/matrix-appservice-slack/generate-dependencies.sh
  delete mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/node-composition.nix
  delete mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/node-packages.nix
@@ -5073,10 +5073,10 @@ Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
  create mode 100755 pkgs/servers/matrix-synapse/matrix-appservice-slack/update.sh
 
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
-index e365f09ca5928..908b15fa7106a 100644
+index e365f09ca5928..d71510c0c853e 100644
 --- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
 +++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
-@@ -1,30 +1,49 @@
+@@ -1,30 +1,51 @@
 -{ pkgs, nodejs, stdenv, fetchFromGitHub, lib, ... }:
 +{ lib
 +, fetchFromGitHub
@@ -5102,12 +5102,14 @@ index e365f09ca5928..908b15fa7106a 100644
 +    rev = data.version;
 +    sha256 = data.srcHash;
    };
++  packageJSON = src + "/package.json";
++  yarnLock = src + "/yarn.lock";
  
 -  nodePackages = import ./node-composition.nix {
 -    inherit pkgs nodejs;
 -    inherit (stdenv.hostPlatform) system;
 +  offlineCache = fetchYarnDeps {
-+    yarnLoack = src + "/yarn.lock";
++    inherit yarnLock;
 +    sha256 = data.yarnHash;
 +  };
 +  packageResolutions = {
