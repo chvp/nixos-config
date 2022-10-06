@@ -5053,19 +5053,19 @@ index 50f5ec3830434..6b4ffb4061c85 100644
  
    maim = callPackage ../tools/graphics/maim {};
 
-From 4cf83272ad69eb38169ec51db4c1e62be6646d6d Mon Sep 17 00:00:00 2001
+From a0b60e1420a899badb00c86fdb3fda086d8d5393 Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
 Date: Thu, 6 Oct 2022 10:33:32 +0200
-Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
+Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.1
 
 ---
- .../matrix-appservice-slack/default.nix       |   49 +-
+ .../matrix-appservice-slack/default.nix       |   47 +-
  .../generate-dependencies.sh                  |   17 -
  .../node-composition.nix                      |   17 -
  .../matrix-appservice-slack/node-packages.nix | 5484 -----------------
  .../matrix-appservice-slack/pin.json          |    5 +
  .../matrix-appservice-slack/update.sh         |   35 +
- 6 files changed, 75 insertions(+), 5532 deletions(-)
+ 6 files changed, 73 insertions(+), 5532 deletions(-)
  delete mode 100755 pkgs/servers/matrix-synapse/matrix-appservice-slack/generate-dependencies.sh
  delete mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/node-composition.nix
  delete mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/node-packages.nix
@@ -5073,10 +5073,10 @@ Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
  create mode 100755 pkgs/servers/matrix-synapse/matrix-appservice-slack/update.sh
 
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
-index e365f09ca5928..d71510c0c853e 100644
+index e365f09ca5928..fe01a6cb9ed58 100644
 --- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
 +++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
-@@ -1,30 +1,51 @@
+@@ -1,30 +1,49 @@
 -{ pkgs, nodejs, stdenv, fetchFromGitHub, lib, ... }:
 +{ lib
 +, fetchFromGitHub
@@ -5102,14 +5102,12 @@ index e365f09ca5928..d71510c0c853e 100644
 +    rev = data.version;
 +    sha256 = data.srcHash;
    };
-+  packageJSON = src + "/package.json";
-+  yarnLock = src + "/yarn.lock";
  
 -  nodePackages = import ./node-composition.nix {
 -    inherit pkgs nodejs;
 -    inherit (stdenv.hostPlatform) system;
 +  offlineCache = fetchYarnDeps {
-+    inherit yarnLock;
++    yarnLock = src + "/yarn.lock";
 +    sha256 = data.yarnHash;
 +  };
 +  packageResolutions = {
@@ -10680,13 +10678,13 @@ index 6bc864cd1089d..0000000000000
 -}
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json b/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
 new file mode 100644
-index 0000000000000..89b517300cbc0
+index 0000000000000..306f097c97a26
 --- /dev/null
 +++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
 @@ -0,0 +1,5 @@
 +{
-+  "version": "2.0.0",
-+  "srcHash": "iUoZO39v5jvskpF3Rrc0sfeNAbRlqiVa6wFOO8yWH5o=",
++  "version": "2.0.1",
++  "srcHash": "N7EzhqKL3GiuoU2d/Y33eZhKJSCvtLDRVO40mpIBEkw=",
 +  "yarnHash": "1d9kyrzcs1c54xk0yl8n3jp61l3n8dzph1d5a4daifa7ad635hv7"
 +}
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/update.sh b/pkgs/servers/matrix-synapse/matrix-appservice-slack/update.sh
