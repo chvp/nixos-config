@@ -5053,20 +5053,20 @@ index 50f5ec3830434..6b4ffb4061c85 100644
  
    maim = callPackage ../tools/graphics/maim {};
 
-From 9eb71577fcd2419315cd3a1ffd4e49b578c5ff99 Mon Sep 17 00:00:00 2001
+From 3e76dec7b17305665e15248a41a668ac41b11fe8 Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
 Date: Thu, 6 Oct 2022 10:33:32 +0200
 Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
 
 ---
- .../matrix-appservice-slack/default.nix       |   38 +-
+ .../matrix-appservice-slack/default.nix       |   44 +-
  .../generate-dependencies.sh                  |   19 +-
  .../node-composition.nix                      |   17 -
  .../matrix-appservice-slack/node-packages.nix | 5484 -----------------
  .../matrix-appservice-slack/package.json      |   77 +
  .../matrix-appservice-slack/yarn.lock         | 3315 ++++++++++
  .../matrix-appservice-slack/yarn.nix          | 3885 ++++++++++++
- 7 files changed, 7305 insertions(+), 5530 deletions(-)
+ 7 files changed, 7311 insertions(+), 5530 deletions(-)
  delete mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/node-composition.nix
  delete mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/node-packages.nix
  create mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/package.json
@@ -5074,13 +5074,19 @@ Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
  create mode 100644 pkgs/servers/matrix-synapse/matrix-appservice-slack/yarn.nix
 
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
-index e365f09ca5928..3c0004be0ca76 100644
+index e365f09ca5928..d9d561b4c0829 100644
 --- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
 +++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
-@@ -1,30 +1,38 @@
+@@ -1,30 +1,44 @@
 -{ pkgs, nodejs, stdenv, fetchFromGitHub, lib, ... }:
 -let
-+{ mkYarnPackage, nodejs, nodePackages, fetchFromGitHub, matrix-sdk-crypto-nodejs, makeWrapper, lib, ... }:
++{ lib
++, fetchFromGitHub
++, makeWrapper
++, matrix-sdk-crypto-nodejs
++, mkYarnPackage
++, nodejs
++}:
 +
 +mkYarnPackage rec {
 +  pname = "matrix-appservice-slack";
