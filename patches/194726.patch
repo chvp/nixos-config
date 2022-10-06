@@ -5053,7 +5053,7 @@ index 50f5ec3830434..6b4ffb4061c85 100644
  
    maim = callPackage ../tools/graphics/maim {};
 
-From a8f5c842896723e65193542cb81d63d5b648e880 Mon Sep 17 00:00:00 2001
+From 4cf83272ad69eb38169ec51db4c1e62be6646d6d Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
 Date: Thu, 6 Oct 2022 10:33:32 +0200
 Subject: [PATCH 4/4] matrix-appservice-slack: 1.11.0 -> 2.0.0
@@ -10680,13 +10680,13 @@ index 6bc864cd1089d..0000000000000
 -}
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json b/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
 new file mode 100644
-index 0000000000000..189213e62e465
+index 0000000000000..89b517300cbc0
 --- /dev/null
 +++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
 @@ -0,0 +1,5 @@
 +{
 +  "version": "2.0.0",
-+  "srcHash": "AnFIDTf1O9ubDcuCnwvdOKsrF4bG/jlz8kMWVTidfVg=",
++  "srcHash": "iUoZO39v5jvskpF3Rrc0sfeNAbRlqiVa6wFOO8yWH5o=",
 +  "yarnHash": "1d9kyrzcs1c54xk0yl8n3jp61l3n8dzph1d5a4daifa7ad635hv7"
 +}
 diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/update.sh b/pkgs/servers/matrix-synapse/matrix-appservice-slack/update.sh
