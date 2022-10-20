@@ -1,22 +1,32 @@
-From efc5ee9fe6eefdba668ab926142f35ec55a3208c Mon Sep 17 00:00:00 2001
+From fded9bcc63de1243c049dcecb8a4bbddf5b4fdf4 Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte@vanpetegem.me>
 Date: Fri, 14 Oct 2022 21:47:08 +0200
 Subject: [PATCH] matrix-sdk-crypto-nodejs: fix build
 
 ---
- pkgs/development/libraries/matrix-sdk-crypto-nodejs/default.nix | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../libraries/matrix-sdk-crypto-nodejs/default.nix           | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/pkgs/development/libraries/matrix-sdk-crypto-nodejs/default.nix b/pkgs/development/libraries/matrix-sdk-crypto-nodejs/default.nix
-index afb52ddd6b3c8..e9b0cfde1c8c2 100644
+index afb52ddd6b3c8..cce2c24f184df 100644
 --- a/pkgs/development/libraries/matrix-sdk-crypto-nodejs/default.nix
 +++ b/pkgs/development/libraries/matrix-sdk-crypto-nodejs/default.nix
-@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
+@@ -23,10 +23,6 @@ stdenv.mkDerivation rec {
      hash = "sha256-G2Um7vHinOuOx9U2BH14LAx+s/0Sxtlc9Nz6nPJfmU8=";
    };
  
 -  postPatch = ''
-+  preBuild = ''
-     cd bindings/${pname}
-   '';
+-    cd bindings/${pname}
+-  '';
+-
+   nativeBuildInputs = [
+     rustPlatform.cargoSetupHook
+     rustPlatform.rust.cargo
+@@ -40,6 +36,7 @@ stdenv.mkDerivation rec {
+   buildPhase = ''
+     runHook preBuild
  
++    cd bindings/${pname}
+     npm run release-build --offline
+ 
+     runHook postBuild
