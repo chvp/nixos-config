@@ -130,6 +130,7 @@
   (fill-column 80 "Fill at column 80 instead of 70")
   (create-lockfiles nil "I'm the only user on my devices and use emacs as a daemon, so don't clutter with lockfiles")
   (inhibit-startup-screen t "Don't show default startup screen")
+  (comp-deferred-compilation nil "Don't do native-comp at runtime")
   :config
   ;; Only ask for y/n, never for yes/no.
   (defalias 'yes-or-no-p 'y-or-n-p)
