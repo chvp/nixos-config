@@ -137,6 +137,14 @@ in
             "${modifier}+Alt+Right" = "move workspace to output right";
             # Invoke default action on top notification.
             "${modifier}+n" = "exec ${pkgs.mako}/bin/makoctl invoke";
+            "${modifier}+Ctrl+h" = "resize grow width 1 px";
+            "${modifier}+Ctrl+j" = "resize shrink height 1 px";
+            "${modifier}+Ctrl+k" = "resize grow height 1 px";
+            "${modifier}+Ctrl+l" = "resize shrink width 1 px";
+            "${modifier}+Ctrl+Shift+h" = "resize grow width 10 px";
+            "${modifier}+Ctrl+Shift+j" = "resize shrink height 10 px";
+            "${modifier}+Ctrl+Shift+k" = "resize grow height 10 px";
+            "${modifier}+Ctrl+Shift+l" = "resize shrink width 10 px";
           };
         };
         extraConfig = ''
