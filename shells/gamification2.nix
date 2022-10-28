@@ -12,6 +12,7 @@
     yarn
   ];
   env = [
+    { name = "NIX_CC"; value = "${pkgs.gcc}"; }
     { name = "PGDATA"; eval = "$PRJ_DATA_DIR/postgres"; }
     { name = "DATABASE_HOST"; eval = "$PGDATA"; }
     { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
