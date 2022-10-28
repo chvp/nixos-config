@@ -323,12 +323,14 @@ in
           };
         };
         "vdirsyncer/config".text =
-          let nextcloudConfig = type: {
-            inherit type;
-            url = "https://nextcloud.vanpetegem.me/remote.php/dav/";
-            username = "chvp";
-            "password.fetch" = [ "command" "${passwordScript}" "social/Nextcloud" ];
-          }; in
+          let
+            nextcloudConfig = type: {
+              inherit type;
+              url = "https://nextcloud.vanpetegem.me/remote.php/dav/";
+              username = "chvp";
+              "password.fetch" = [ "command" "${passwordScript}" "social/Nextcloud" ];
+            };
+          in
           lib.generators.toINI
             { mkKeyValue = lib.generators.mkKeyValueDefault { mkValueString = builtins.toJSON; } "="; }
             {

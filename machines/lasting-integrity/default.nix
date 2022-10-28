@@ -67,14 +67,17 @@
         {
           fqdn = "vanpetegem.me";
           options = {
-            locations = let matrixRedirect = {
-              proxyPass = "http://127.0.0.1:8448";
-              extraConfig = ''
-                proxy_read_timeout 600;
-                client_max_body_size 10M;
-                proxy_set_header X-Forwarded-Ssl on;
-              '';
-            }; in
+            locations =
+              let
+                matrixRedirect = {
+                  proxyPass = "http://127.0.0.1:8448";
+                  extraConfig = ''
+                    proxy_read_timeout 600;
+                    client_max_body_size 10M;
+                    proxy_set_header X-Forwarded-Ssl on;
+                  '';
+                };
+              in
               {
                 "/_matrix" = matrixRedirect;
                 "/.well-known/matrix" = {
