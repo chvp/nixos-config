@@ -45,6 +45,12 @@
             location = "192.168.0.1";
           }
           {
+            path = "zdata/big-apps/mastodon";
+            remotePath = "zdata/recv/lasting-integrity/big-apps/mastodon";
+            fast = true;
+            location = "192.168.0.1";
+          }
+          {
             path = "zdata/big-apps/nextcloud";
             remotePath = "zdata/recv/lasting-integrity/big-apps/nextcloud";
             fast = true;
@@ -62,6 +68,7 @@
       garmin-scraper.enable = true;
       grafana.enable = true;
       mail.enable = true;
+      mastodon.enable = true;
       matrix.enable = true;
       nginx.hosts = [
         {

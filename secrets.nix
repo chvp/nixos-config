@@ -53,6 +53,11 @@ in
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
+  "secrets/passwords/services/mastodon/otp.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mastodon/key.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mastodon/vapid-public.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mastodon/vapid-private.age".publicKeys = [ lasting-integrity ] ++ users;
+
   "secrets/passwords/services/garmin2influx-env.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/smtp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;

@@ -54,6 +54,10 @@
       device = "zdata/big-apps/influxdb2";
       fsType = "zfs";
     };
+    "/var/lib/mastodon/public-system" = {
+      device = "zdata/big-apps/mastodon";
+      fsType = "zfs";
+    };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";
