@@ -14,6 +14,7 @@
         enable = true;
         autoUpdateApps.enable = true;
         package = pkgs.nextcloud25;
+        caching.redis = true;
         config = {
           dbuser = "nextcloud";
           dbname = "nextcloud";
@@ -22,10 +23,23 @@
           adminuser = "admin";
           adminpassFile = config.age.secrets."passwords/services/nextcloud-admin".path;
         };
+        extraOptions = {
+          redis = {
+            host = "127.0.0.1";
+            port = 31638;
+            dbindex = 0;
+            timeout = 1.5;
+          };
+        };
       };
       nginx.virtualHosts."nextcloud.vanpetegem.me" = {
         forceSSL = true;
         useACMEHost = "vanpetegem.me";
+        extraConfig = ''
+          fastcgi_connect_timeout 10m;
+          fastcgi_read_timeout 10m;
+          fastcgi_send_timeout 10m;
+        '';
       };
       postgresql = {
         enable = true;
@@ -35,6 +49,11 @@
           name = "nextcloud";
           ensurePermissions = { "DATABASE nextcloud" = "ALL PRIVILEGES"; };
         }];
+      };
+      redis.servers.nextcloud = {
+        enable = true;
+        port = 31638;
+        bind = "127.0.0.1";
       };
     };
     age.secrets."passwords/services/nextcloud-admin" = {
