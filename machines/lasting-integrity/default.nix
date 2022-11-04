@@ -74,35 +74,31 @@
         {
           fqdn = "vanpetegem.me";
           options = {
-            locations =
-              let
-                matrixRedirect = {
-                  proxyPass = "http://127.0.0.1:8448";
-                  extraConfig = ''
-                    proxy_read_timeout 600;
-                    client_max_body_size 10M;
-                    proxy_set_header X-Forwarded-Ssl on;
-                  '';
-                };
-              in
-              {
-                "/_matrix" = matrixRedirect;
-                "/.well-known/matrix" = {
-                  root = pkgs.runCommand "well-known-matrix" { } ''
-                    mkdir -p $out/.well-known/matrix
-                    echo '{"m.server":"matrix.vanpetegem.me:443"}' > $out/.well-known/matrix/server
-                    echo '{"m.homeserver":{"base_url":"https://matrix.vanpetegem.me"}}' > $out/.well-known/matrix/client
-                  '';
-                  extraConfig = ''
-                    default_type application/json;
-                    add_header 'access-control-allow-origin' '*' always;
-                    add_header 'access-control-allow-methods' 'GET, HEAD, POST, PUT, DELETE, OPTIONS' always;
-                    add_header 'access-control-allow-headers' 'X-Requested-With, Content-Type, Authorization, Date' always;
-                  '';
-                  priority = 1;
-                };
-                "/".return = "307 https://www.vanpetegem.me$request_uri";
+            locations = {
+              "/_matrix" = {
+                proxyPass = "http://127.0.0.1:8448";
+                extraConfig = ''
+                  proxy_read_timeout 600;
+                  client_max_body_size 10M;
+                  proxy_set_header X-Forwarded-Ssl on;
+                '';
               };
+              "/.well-known/matrix" = {
+                root = pkgs.runCommand "well-known-matrix" { } ''
+                  mkdir -p $out/.well-known/matrix
+                  echo '{"m.server":"matrix.vanpetegem.me:443"}' > $out/.well-known/matrix/server
+                  echo '{"m.homeserver":{"base_url":"https://matrix.vanpetegem.me"}}' > $out/.well-known/matrix/client
+                '';
+                extraConfig = ''
+                  default_type application/json;
+                  add_header 'access-control-allow-origin' '*' always;
+                  add_header 'access-control-allow-methods' 'GET, HEAD, POST, PUT, DELETE, OPTIONS' always;
+                  add_header 'access-control-allow-headers' 'X-Requested-With, Content-Type, Authorization, Date' always;
+                '';
+                priority = 1;
+              };
+              "/".return = "307 https://www.vanpetegem.me$request_uri";
+            };
           };
         }
         { fqdn = "www.vanpetegem.me"; }
