@@ -108,14 +108,20 @@
         { fqdn = "www.vanpetegem.me"; }
         {
           fqdn = "cvpetegem.be";
-          options.locations."/".return = "307 https://www.cvpetegem.be$request_uri";
+          options.locations."/".return = "307 https://www.chvp.be$request_uri";
         }
-        { fqdn = "www.cvpetegem.be"; }
+        {
+          fqdn = "www.cvpetegem.be";
+          options.locations."/".return = "307 https://www.chvp.be$request_uri";
+        }
         {
           fqdn = "chvp.be";
           options.locations."/".return = "307 https://www.chvp.be$request_uri";
         }
-        { fqdn = "www.chvp.be"; options.root = pkgs."www.chvp.be"; }
+        {
+          fqdn = "www.chvp.be";
+          options.root = pkgs."www.chvp.be";
+        }
       ];
       nextcloud.enable = true;
       syncthing.enable = true;
