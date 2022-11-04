@@ -77,9 +77,17 @@
         flake-utils.follows = "flake-utils";
       };
     };
+    www-chvp-be = {
+      url = "github:chvp/www.chvp.be";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
     utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
@@ -93,6 +101,7 @@
             tetris = tetris.packages.${self.system}.default;
           })
           nur.overlay
+          www-chvp-be.overlay
         ];
       };
       hostDefaults = {

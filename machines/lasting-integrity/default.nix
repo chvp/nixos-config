@@ -115,7 +115,7 @@
           fqdn = "chvp.be";
           options.locations."/".return = "307 https://www.chvp.be$request_uri";
         }
-        { fqdn = "www.chvp.be"; }
+        { fqdn = "www.chvp.be"; options.root = pkgs."www.chvp.be"; }
       ];
       nextcloud.enable = true;
       syncthing.enable = true;

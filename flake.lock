@@ -262,11 +262,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1667584046,
-        "narHash": "sha256-M59pWZZrrlMVqei48zKj2T2tB6BdWKenOlSOkvCO0xE=",
+        "lastModified": 1667589396,
+        "narHash": "sha256-M5P+mnQ0/DtSm11sDBT0UQnVtmQoXJh48kL2+6SGC+8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "6876ea53a8623667941553bdf4b470fc2d0a151f",
+        "rev": "ead693159674d2f1ac629539199b7e11e1eb5b70",
         "type": "github"
       },
       "original": {
@@ -289,7 +289,8 @@
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "tetris": "tetris",
-        "utils": "utils"
+        "utils": "utils",
+        "www-chvp-be": "www-chvp-be"
       }
     },
     "tetris": {
@@ -335,6 +336,32 @@
       "original": {
         "owner": "gytis-ivaskevicius",
         "repo": "flake-utils-plus",
+        "type": "github"
+      }
+    },
+    "www-chvp-be": {
+      "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1667591467,
+        "narHash": "sha256-6fqb7ArwKAn5BwB+z6qEBT5rMIntQFrgcIdRngIfTSU=",
+        "owner": "chvp",
+        "repo": "www.chvp.be",
+        "rev": "e242f8473e364981f7f0ca5b84317f68bc1e1cdd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chvp",
+        "repo": "www.chvp.be",
         "type": "github"
       }
     }
