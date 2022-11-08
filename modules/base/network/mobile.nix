@@ -16,7 +16,9 @@
   };
 
   config = with config.chvp.base.network.mobile; lib.mkIf enable {
-    networking.wireless = {
+    networking = {
+      useDHCP = false;
+      wireless = {
       enable = true;
       interfaces = [ wireless-interface ];
       environmentFile = config.age.secrets."passwords/networks.age".path;
@@ -48,6 +50,7 @@
         };
         "GUK-huis".psk = "@PSK_GUKhuis@";
       };
+    };
     };
     systemd.network = {
       enable = true;
