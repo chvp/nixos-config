@@ -44,12 +44,18 @@
       help = "Run everything required for a server";
       command = ''
         memcached &
+        trap "kill $!" 0
         mysql &
+        trap "kill $!" 0
         bundle install
         yarn install
         rails jobs:work &
+        trap "kill $!" 0
         yarn build:css --watch &
-        yarn build:js --watch
+        trap "kill $!" 0
+        yarn build:js --watch &
+        trap "kill $!" 0
+        wait $!
       '';
     }
     {
@@ -57,8 +63,21 @@
       category = "general commands";
       help = "Run everything";
       command = ''
-        server-support &
-        rails s
+        memcached &
+        trap "kill $!" 0
+        mysql &
+        trap "kill $!" 0
+        bundle install
+        yarn install
+        rails jobs:work &
+        trap "kill $!" 0
+        yarn build:css --watch &
+        trap "kill $!" 0
+        yarn build:js --watch &
+        trap "kill $!" 0
+        rails s &
+        trap "kill $!" 0
+        wait $!
       '';
     }
   ];
