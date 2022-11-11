@@ -7,7 +7,7 @@
     file
     findutils
     gnumake
-    ruby_3_1
+    ruby_3_0
     nodejs
     yarn
   ];
