@@ -39,7 +39,7 @@
     games.enable = true;
     graphical.enable = true;
     programs = {
-      calibre.enable = false;
+      calibre.enable = true;
       deluge.enable = true;
       eid.enable = true;
       element.enable = true;
