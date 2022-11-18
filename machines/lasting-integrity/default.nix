@@ -11,17 +11,20 @@
   chvp = {
     stateVersion = "20.09";
     base = {
-      network.ovh = {
-        enable = true;
-        publicIPV4 = {
-          ip = "54.38.222.69";
-          gateway = "54.38.222.254";
+      network = {
+        ovh = {
+          enable = true;
+          publicIPV4 = {
+            ip = "54.38.222.69";
+            gateway = "54.38.222.254";
+          };
+          publicIPV6 = {
+            ip = "2001:41d0:0700:1445::";
+            gateway = "2001:41d0:0700:14ff:ff:ff:ff:ff";
+          };
+          internalIPV4 = "192.168.0.2";
         };
-        publicIPV6 = {
-          ip = "2001:41d0:0700:1445::";
-          gateway = "2001:41d0:0700:14ff:ff:ff:ff:ff";
-        };
-        internalIPV4 = "192.168.0.2";
+        wireguard.server = true;
       };
       nix.enableDirenv = false;
       zfs = {

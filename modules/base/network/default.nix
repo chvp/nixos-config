@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./ovh.nix
     ./mobile.nix
+    ./ovh.nix
+    ./wireguard.nix
   ];
 }

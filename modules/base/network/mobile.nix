@@ -19,38 +19,38 @@
     networking = {
       useDHCP = false;
       wireless = {
-      enable = true;
-      interfaces = [ wireless-interface ];
-      environmentFile = config.age.secrets."passwords/networks.age".path;
-      networks = {
-        "Public Universal Friend".psk = "@PSK_PUF@";
-        AndroidAP.psk = "@PSK_AndroidAP@";
-        draadloosnw.psk = "@PSK_draadloosnw@";
-        werknet.psk = "@PSK_werknet@";
-        Secorima.psk = "@PSK_Secorima@";
-        "Zeus WPI" = {
-          psk = "@PSK_Zeus@";
-          hidden = true;
+        enable = true;
+        interfaces = [ wireless-interface ];
+        environmentFile = config.age.secrets."passwords/networks.age".path;
+        networks = {
+          "Public Universal Friend".psk = "@PSK_PUF@";
+          AndroidAP.psk = "@PSK_AndroidAP@";
+          draadloosnw.psk = "@PSK_draadloosnw@";
+          werknet.psk = "@PSK_werknet@";
+          Secorima.psk = "@PSK_Secorima@";
+          "Zeus WPI" = {
+            psk = "@PSK_Zeus@";
+            hidden = true;
+          };
+          "Zeus Event 5G".psk = "@PSK_Zeus@";
+          eduroam = {
+            authProtocols = [ "WPA-EAP" ];
+            auth = ''
+              eap=PEAP
+              identity="@EDUROAM_USER@"
+              password="@EDUROAM_PASS@"
+            '';
+            extraConfig = ''
+              phase1="peaplabel=0"
+              phase2="auth=MSCHAPV2"
+              group=CCMP TKIP
+              ca_cert="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+              altsubject_match="DNS:radius.ugent.be"
+            '';
+          };
+          "GUK-huis".psk = "@PSK_GUKhuis@";
         };
-        "Zeus Event 5G".psk = "@PSK_Zeus@";
-        eduroam = {
-          authProtocols = [ "WPA-EAP" ];
-          auth = ''
-            eap=PEAP
-            identity="@EDUROAM_USER@"
-            password="@EDUROAM_PASS@"
-          '';
-          extraConfig = ''
-            phase1="peaplabel=0"
-            phase2="auth=MSCHAPV2"
-            group=CCMP TKIP
-            ca_cert="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-            altsubject_match="DNS:radius.ugent.be"
-          '';
-        };
-        "GUK-huis".psk = "@PSK_GUKhuis@";
       };
-    };
     };
     systemd.network = {
       enable = true;
@@ -60,11 +60,13 @@
           DHCP = "yes";
           matchConfig = { Name = wireless-interface; };
         };
-      } // lib.mapAttrs (name: attrs: {
-        enable = true;
-        DHCP = "yes";
-        matchConfig = { Name = name; };
-      } // attrs) wired-interfaces;
+      } // lib.mapAttrs
+        (name: attrs: {
+          enable = true;
+          DHCP = "yes";
+          matchConfig = { Name = name; };
+        } // attrs)
+        wired-interfaces;
       wait-online.anyInterface = true;
     };
 
