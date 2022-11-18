@@ -11,7 +11,6 @@ in
     chvp.base.zfs.systemLinks = [
       { path = "/var/lib/dhparams"; type = "cache"; }
       { path = "/var/lib/dovecot"; type = "cache"; }
-      { path = "/var/lib/knot-resolver"; type = "cache"; }
       { path = "/var/lib/opendkim"; type = "cache"; }
       { path = "/var/lib/postfix"; type = "cache"; }
       { path = "/var/lib/redis-rspamd"; type = "cache"; }
@@ -21,6 +20,7 @@ in
       enable = true;
       fqdn = "mail.vanpetegem.me";
       domains = [ "vanpetegem.me" "cvpetegem.be" "chvp.be" "accentor.tech" "toekomstlabo.be" ];
+      localDnsResolver = false;
       loginAccounts = {
         "charlotte@vanpetegem.me" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/charlotte@vanpetegem.me".path;

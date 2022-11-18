@@ -41,6 +41,32 @@ in
     networking.firewall.allowedUDPPorts = lib.optional config.chvp.base.network.wireguard.server 51820;
     networking.firewall.trustedInterfaces = [ "wg0" ];
     boot.kernel.sysctl = lib.mkIf config.chvp.base.network.wireguard.server { "net.ipv4.ip_forward" = 1; };
+    services.unbound = lib.mkIf config.chvp.base.network.wireguard.server {
+      enable = true;
+      resolveLocalQueries = true;
+      settings = {
+        server = {
+          interface = [ "wg0" "127.0.0.1" "::1" ];
+          access-control = [
+            "127.0.0.0/8 allow"
+            "10.240.0.0/24 allow"
+          ];
+          private-domain = "vpn";
+          local-zone = builtins.map (name: ''"${name}.vpn" redirect'') (builtins.attrNames data);
+          local-data = builtins.map (name: ''"${name}.vpn IN A ${data.${name}.ip}"'') (builtins.attrNames data);
+        };
+        forward-zone = {
+          name = ''"."'';
+          forward-addr = [
+            "1.1.1.1@853"
+            "1.0.0.1@853"
+            "2606:4700:4700::1111@853"
+            "2606:4700:4700::1001@853"
+          ];
+          forward-tls-upstream = "yes";
+        };
+      };
+    };
     systemd.network = {
       netdevs.wg0 = {
         enable = true;
@@ -81,6 +107,8 @@ in
         enable = true;
         name = "wg0";
         address = [ "${data.${config.networking.hostName}.ip}/32" ];
+        domains = [ "vpn" ];
+        dns = [ data.lasting-integrity.ip ];
         routes = [{
           routeConfig =
             if config.chvp.base.network.wireguard.server then {
