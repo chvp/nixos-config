@@ -24,39 +24,42 @@
   };
 
   config = lib.mkIf config.chvp.base.network.ovh.enable {
-    networking = with config.chvp.base.network.ovh; {
-      useDHCP = false;
-      interfaces = {
-        eno1.useDHCP = false;
-        eno2.useDHCP = false;
+    networking.useDHCP = false;
+    systemd.network = {
+      enable = true;
+      networks = with config.chvp.base.network.ovh; {
         eno3 = {
-          useDHCP = false;
-          ipv4.addresses = [{
-            address = publicIPV4.ip;
-            prefixLength = 24;
-          }];
-          ipv6 = {
-            addresses = [{
-              address = publicIPV6.ip;
-              prefixLength = 64;
-            }];
-            routes = [{
-              address = publicIPV6.gateway;
-              prefixLength = 128;
-            }];
-          };
+          enable = true;
+          matchConfig = { Name = "eno3"; };
+          address = [
+            "${publicIPV4.ip}/24"
+            "${publicIPV6.ip}/64"
+          ];
+          gateway = [ publicIPV4.gateway ];
+          routes = [
+            {
+              routeConfig = {
+                Gateway = publicIPV6.gateway;
+                GatewayOnLink = true;
+              };
+            }
+          ];
+          dns = [
+            "1.1.1.1"
+            "1.0.0.1"
+            "2606:4700:4700::1111"
+            "2606:4700:4700::1001"
+          ];
         };
         eno4 = {
-          useDHCP = false;
-          ipv4.addresses = [{
-            address = internalIPV4;
-            prefixLength = 16;
-          }];
+          enable = true;
+          matchConfig = { Name = "eno4"; };
+          address = [ "${internalIPV4}/16" ];
+          routes = [
+            { routeConfig = { Destination = "${internalIPV4}/16"; }; }
+          ];
         };
       };
-      defaultGateway = publicIPV4.gateway;
-      defaultGateway6 = publicIPV6.gateway;
-      nameservers = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
     };
   };
 }
