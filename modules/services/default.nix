@@ -8,7 +8,6 @@
     ./deluge
     ./garmin-scraper
     ./grafana
-    ./headscale
     ./mail
     ./mastodon
     ./matrix

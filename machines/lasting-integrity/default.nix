@@ -67,7 +67,6 @@
     services = {
       garmin-scraper.enable = true;
       grafana.enable = true;
-      headscale.enable = true;
       mail.enable = true;
       mastodon.enable = true;
       matrix.enable = true;

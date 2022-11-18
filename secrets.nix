@@ -53,8 +53,6 @@ in
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
-  "secrets/passwords/services/headscale.age".publicKeys = [ lasting-integrity ] ++ users;
-
   "secrets/passwords/services/mastodon/otp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mastodon/key.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mastodon/vapid-public.age".publicKeys = [ lasting-integrity ] ++ users;
