@@ -51,9 +51,10 @@ in
             "127.0.0.0/8 allow"
             "10.240.0.0/24 allow"
           ];
-          private-domain = "vpn";
-          local-zone = builtins.map (name: ''"${name}.vpn" redirect'') (builtins.attrNames data);
-          local-data = builtins.map (name: ''"${name}.vpn IN A ${data.${name}.ip}"'') (builtins.attrNames data);
+          private-domain = "local";
+          domain-insecure = "local";
+          local-zone = builtins.map (name: ''"${name}.local" redirect'') (builtins.attrNames data);
+          local-data = builtins.map (name: ''"${name}.local IN A ${data.${name}.ip}"'') (builtins.attrNames data);
         };
         forward-zone = {
           name = ''"."'';
@@ -107,7 +108,7 @@ in
         enable = true;
         name = "wg0";
         address = [ "${data.${config.networking.hostName}.ip}/32" ];
-        domains = [ "vpn" ];
+        domains = [ "local" ];
         dns = [ data.lasting-integrity.ip ];
         routes = [{
           routeConfig =
