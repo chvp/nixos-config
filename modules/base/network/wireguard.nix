@@ -37,7 +37,7 @@ in
       example = true;
     };
   };
-  config = {
+  config = lib.mkIf (data ? "${config.networking.hostName}") {
     networking.firewall.allowedUDPPorts = lib.optional config.chvp.base.network.wireguard.server 51820;
     networking.firewall.trustedInterfaces = [ "wg0" ];
     boot.kernel.sysctl = lib.mkIf config.chvp.base.network.wireguard.server { "net.ipv4.ip_forward" = 1; };

@@ -2,6 +2,10 @@
 
 {
   options.chvp.base.zfs = {
+    enable = lib.mkOption {
+      default = true;
+      example = false;
+    };
     encrypted = lib.mkOption {
       default = false;
       example = true;
@@ -42,7 +46,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.chvp.base.zfs.enable {
     chvp.dataPrefix = lib.mkDefault "/data";
     chvp.cachePrefix = lib.mkDefault "/cache";
 

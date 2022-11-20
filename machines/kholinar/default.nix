@@ -7,6 +7,8 @@
 
   time.timeZone = "Europe/Brussels";
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # Machine-specific module settings
   chvp = {
     stateVersion = "20.09";

@@ -2,6 +2,10 @@
 
 {
   options.chvp.base.emacs = {
+    enable = lib.mkOption {
+      default = true;
+      example = false;
+    };
     fullConfig = lib.mkOption {
       readOnly = true;
       default = builtins.readFile ./base-init.el + (lib.concatStringsSep "\n" config.chvp.base.emacs.extraConfig) + ''
@@ -24,7 +28,7 @@
     };
   };
 
-  config = {
+  config = lib.mkIf config.chvp.base.emacs.enable {
     chvp.base.zfs.homeLinks = [
       { path = ".cache/emacs"; type = "cache"; }
     ];
