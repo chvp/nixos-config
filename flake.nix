@@ -54,6 +54,10 @@
         utils.follows = "flake-utils";
       };
     };
+    mobile-nixos = {
+      url = "github:NixOS/mobile-nixos";
+      flake = false;
+    };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs = {
@@ -87,7 +91,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, mobile-nixos, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
     utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
@@ -119,6 +123,13 @@
         kholinar.modules = [ ./machines/kholinar ];
         lasting-integrity.modules = [ ./machines/lasting-integrity ];
         urithiru.modules = [ ./machines/urithiru ];
+        sylphrena = {
+          system = "aarch64-linux";
+          modules = (import "${mobile-nixos}/modules/module-list.nix") ++ [
+            "${mobile-nixos}/devices/oneplus-fajita"
+            ./machines/sylphrena
+          ];
+        };
       };
       outputsBuilder = channels:
         let pkgs = channels.nixpkgs; in

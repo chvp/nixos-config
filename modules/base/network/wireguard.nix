@@ -41,7 +41,7 @@ in
       example = true;
     };
   };
-  config = {
+  config = (data ? "${config.networking.hostName}") {
     networking.firewall = {
       allowedUDPPorts = lib.optional config.chvp.base.network.wireguard.server 51820;
       allowedTCPPorts = lib.optional config.chvp.base.network.wireguard.server 8080;
@@ -142,8 +142,8 @@ in
           wantedBy = [ "multi-user.target" ];
           after = [ "network.target" ];
           script = ''
-           ${pkgs.udp2raw}/bin/udp2raw -s -l 0.0.0.0:8080 -r 127.0.0.1:51820 \
-             -k "$(cat ${config.age.secrets."files/wireguard/udp2raw".path})"
+            ${pkgs.udp2raw}/bin/udp2raw -s -l 0.0.0.0:8080 -r 127.0.0.1:51820 \
+              -k "$(cat ${config.age.secrets."files/wireguard/udp2raw".path})"
           '';
         };
         udp2raw-client = lib.mkIf config.chvp.base.network.wireguard.onCorporate {

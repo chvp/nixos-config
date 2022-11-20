@@ -220,6 +220,22 @@
         "type": "github"
       }
     },
+    "mobile-nixos": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668897543,
+        "narHash": "sha256-1bjvy5zi/6KDzhN3ihOUEA6y5FFEOf5xvIbf65RWIh0=",
+        "owner": "NixOS",
+        "repo": "mobile-nixos",
+        "rev": "25eec596116553112681d72ee4880107fc3957fa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "mobile-nixos",
+        "type": "github"
+      }
+    },
     "nixos-mailserver": {
       "inputs": {
         "blobs": "blobs",
@@ -302,6 +318,7 @@
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "mobile-nixos": "mobile-nixos",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
