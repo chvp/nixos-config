@@ -86,6 +86,7 @@ in
   "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
+  "secrets/files/wireguard/udp2raw.age".publicKeys = hosts ++ users;
 
   "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/ssh_host_rsa_key.pub.age".publicKeys = [ urithiru ] ++ users;
