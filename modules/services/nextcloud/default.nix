@@ -12,6 +12,7 @@
         https = true;
         hostName = "nextcloud.vanpetegem.me";
         enable = true;
+        enableBrokenCiphersForSSE = false;
         autoUpdateApps.enable = true;
         package = pkgs.nextcloud25;
         caching.redis = true;
