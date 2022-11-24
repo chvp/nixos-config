@@ -36,10 +36,17 @@ in
       default = false;
       example = true;
     };
+    onCorporate = lib.mkOption {
+      default = false;
+      example = true;
+    };
   };
   config = {
-    networking.firewall.allowedUDPPorts = lib.optional config.chvp.base.network.wireguard.server 51820;
-    networking.firewall.trustedInterfaces = [ "wg0" ];
+    networking.firewall = {
+      allowedUDPPorts = lib.optional config.chvp.base.network.wireguard.server 51820;
+      allowedTCPPorts = lib.optional config.chvp.base.network.wireguard.server 8080;
+      trustedInterfaces = [ "wg0" ];
+    };
     boot.kernel.sysctl = lib.mkIf config.chvp.base.network.wireguard.server { "net.ipv4.ip_forward" = 1; };
     services.unbound = lib.mkIf config.chvp.base.network.wireguard.server {
       enable = true;
@@ -68,59 +75,80 @@ in
         };
       };
     };
-    systemd.network = {
-      netdevs.wg0 = {
-        enable = true;
-        netdevConfig = {
-          Name = "wg0";
-          Kind = "wireguard";
-        };
-        wireguardConfig =
-          if config.chvp.base.network.wireguard.server then {
-            PrivateKeyFile = data.${config.networking.hostName}.privkeyFile;
-            ListenPort = 51820;
-          } else {
-            PrivateKeyFile = data.${config.networking.hostName}.privkeyFile;
+    systemd = {
+      network = {
+        netdevs.wg0 = {
+          enable = true;
+          netdevConfig = {
+            Name = "wg0";
+            Kind = "wireguard";
+            MTUBytes = "1342";
           };
-        wireguardPeers =
-          if config.chvp.base.network.wireguard.server then
-            (builtins.map
-              (name: {
-                wireguardPeerConfig = {
-                  PublicKey = data.${name}.pubkey;
-                  AllowedIPs = "${data.${name}.ip}/32";
-                  PresharedKeyFile = pskFile;
-                };
-              })
-              (builtins.filter (name: name != config.networking.hostName) (builtins.attrNames data)))
-          else
-            ([{
-              wireguardPeerConfig = {
-                PublicKey = data.lasting-integrity.pubkey;
-                AllowedIPs = subnet;
-                Endpoint = "lasting-integrity.vanpetegem.me:51820";
-                PresharedKeyFile = pskFile;
-                PersistentKeepalive = 25;
-              };
-            }]);
-      };
-      networks.wg0 = {
-        enable = true;
-        name = "wg0";
-        address = [ "${data.${config.networking.hostName}.ip}/32" ];
-        domains = [ "local" ];
-        dns = [ data.lasting-integrity.ip ];
-        routes = [{
-          routeConfig =
+          wireguardConfig =
             if config.chvp.base.network.wireguard.server then {
-              Gateway = "${data.${config.networking.hostName}.ip}";
-              Destination = subnet;
+              PrivateKeyFile = data.${config.networking.hostName}.privkeyFile;
+              ListenPort = 51820;
             } else {
-              Gateway = "${data.lasting-integrity.ip}";
-              Destination = subnet;
-              GatewayOnLink = true;
+              PrivateKeyFile = data.${config.networking.hostName}.privkeyFile;
             };
-        }];
+          wireguardPeers =
+            if config.chvp.base.network.wireguard.server then
+              (builtins.map
+                (name: {
+                  wireguardPeerConfig = {
+                    PublicKey = data.${name}.pubkey;
+                    AllowedIPs = "${data.${name}.ip}/32";
+                    PresharedKeyFile = pskFile;
+                  };
+                })
+                (builtins.filter (name: name != config.networking.hostName) (builtins.attrNames data)))
+            else
+              ([{
+                wireguardPeerConfig = {
+                  PublicKey = data.lasting-integrity.pubkey;
+                  AllowedIPs = subnet;
+                  Endpoint =
+                    if config.chvp.base.network.wireguard.onCorporate
+                    then "127.0.0.1:51820"
+                    else "lasting-integrity.vanpetegem.me:51820";
+                  PresharedKeyFile = pskFile;
+                  PersistentKeepalive = 25;
+                };
+              }]);
+        };
+        networks.wg0 = {
+          enable = true;
+          name = "wg0";
+          address = [ "${data.${config.networking.hostName}.ip}/32" ];
+          domains = [ "local" ];
+          dns = [ data.lasting-integrity.ip ];
+          linkConfig.MTUBytes = "1342";
+          routes = [{
+            routeConfig =
+              if config.chvp.base.network.wireguard.server then {
+                Gateway = "${data.${config.networking.hostName}.ip}";
+                Destination = subnet;
+              } else {
+                Gateway = "${data.lasting-integrity.ip}";
+                Destination = subnet;
+                GatewayOnLink = true;
+              };
+          }];
+        };
+      };
+      services = {
+        udp2raw-server = lib.mkIf config.chvp.base.network.wireguard.server {
+          description = "UDP tunnel over TCP for wireguard";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          script = "${pkgs.udp2raw}/bin/udp2raw -s -l 0.0.0.0:8080 -r 127.0.0.1:51820 -k 'secret'";
+        };
+        udp2raw-client = lib.mkIf config.chvp.base.network.wireguard.onCorporate {
+          description = "UDP tunnel over TCP for wireguard";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          script = "${pkgs.udp2raw}/bin/udp2raw -c -l 127.0.0.1:51820 -r 54.38.222.69:8080 -k 'secret'";
+        };
       };
     };
     age.secrets."files/wireguard/psk" = {

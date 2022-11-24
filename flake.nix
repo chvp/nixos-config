@@ -99,6 +99,7 @@
           emacs-overlay.overlay
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
+            udp2raw = self.callPackage ./packages/udp2raw { };
           })
           nur.overlay
           www-chvp-be.overlay
@@ -131,6 +132,9 @@
               nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs; };
             in
             builtins.listToAttrs (builtins.map (name: { inherit name; value = nameToValue name; }) shellNames);
+          packages = {
+            udp2raw = pkgs.callPackage ./packages/udp2raw { };
+          };
         };
     };
 }

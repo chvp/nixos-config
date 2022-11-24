@@ -12,12 +12,15 @@
     stateVersion = "20.09";
     base = {
       bluetooth.enable = true;
-      network.mobile = {
-        enable = true;
-        wireless-interface = "wlp0s20f3";
-        wired-interfaces = {
-          "enp0s13f0u2u2" = { };
+      network = {
+        mobile = {
+          enable = true;
+          wireless-interface = "wlp0s20f3";
+          wired-interfaces = {
+            "enp0s13f0u2u2" = { };
+          };
         };
+        wireguard.onCorporate = true;
       };
       zfs = {
         encrypted = true;
