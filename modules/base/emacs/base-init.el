@@ -164,12 +164,11 @@
 
 ;; Annotations in selection interface
 (use-package marginalia
-  :after (selectrum)
+  :after (vertico)
   :custom
   (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
   :config
   (marginalia-mode)
-  (advice-add #'marginalia-cycle :after (lambda () (selectrum-exhibit 'keep-selected)))
   :general
   (minibuffer-local-map "M-a" 'marginalia-cycle)
   )
@@ -198,11 +197,9 @@
 
 ;; Orderless filtering
 (use-package orderless
-  :after (selectrum)
+  :after (vertico)
   :custom
-  (completion-styles '(orderless) "Use orderless for filtering")
-  (orderless-skip-highlighting (lambda () selectrum-is-active) "This and the setting below are performance optimisations.")
-  (selectrum-highlight-candidates-function #'orderless-highlight-matches "They make sure only the shown candidates are highlighted.")
+  (completion-styles '(orderless basic) "Use orderless for filtering")
   (orderless-matching-styles '(orderless-regexp orderless-initialism orderless-prefixes) "More matching styles for more flexible matching.")
   :config
   ;; Highlight multiple parts in company matches
@@ -227,17 +224,17 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; List item selection interface
-(use-package selectrum
-  :custom (selectrum-max-window-height 20 "Allow selector to be a bit higher")
-  :config (selectrum-mode 1)
-  :diminish (selectrum-mode)
+(use-package vertico
+  :custom (vertico-count 20 "Allow selector to be a bit higher")
+  :config (vertico-mode)
+  :diminish (vertico-mode)
   )
 
 ;; Prescient integration in selectrum
-(use-package selectrum-prescient
-  :after (selectrum prescient)
-  :custom (selectrum-prescient-enable-filtering nil "`orderless' manages the filtering part.")
-  :config (selectrum-prescient-mode 1))
+(use-package vertico-prescient
+  :after (vertico prescient)
+  :custom (vertico-prescient-enable-filtering nil "`orderless' manages the filtering part.")
+  :config (vertico-prescient-mode 1))
 
 ;; Show keybindings
 (use-package which-key
