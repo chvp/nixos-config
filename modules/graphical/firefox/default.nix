@@ -75,7 +75,6 @@ in
           package = ffPackage;
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
-            better-tweetdeck
             browserpass
             decentraleyes
             ff2mpv
