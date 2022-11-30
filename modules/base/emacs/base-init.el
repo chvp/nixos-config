@@ -101,7 +101,7 @@
   :config (company-prescient-mode 1)
   )
 
-;; Replacements for emacs built-ins that better integrate with `selectrum'.
+;; Replacements for emacs built-ins that better integrate with `vertico'.
 (use-package consult
   :commands (consult-ripgrep)
   :general
@@ -230,7 +230,7 @@
   :diminish (vertico-mode)
   )
 
-;; Prescient integration in selectrum
+;; Prescient integration in vertico
 (use-package vertico-prescient
   :after (vertico prescient)
   :custom (vertico-prescient-enable-filtering nil "`orderless' manages the filtering part.")

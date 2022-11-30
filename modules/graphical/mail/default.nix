@@ -114,7 +114,7 @@ in
                 ;; Use mu4e included in the mu package, see emacs/default.nix
                 :ensure nil
                 :commands (mu4e mu4e-update-index)
-                :after (selectrum)
+                :after (vertico)
                 :hook
                 (mu4e-view-mode . display-line-numbers-mode)
                 (mu4e-view-mode . visual-line-mode)
