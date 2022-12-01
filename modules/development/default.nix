@@ -61,6 +61,10 @@
             :mode "\\.hs\\'"
             )
 
+          (use-package lsp-haskell
+            :hook (haskell-mode . lsp)
+            )
+
           ;; Folding
           (use-package origami
             :hook (prog-mode . origami-mode)
