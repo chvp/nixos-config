@@ -1,0 +1,30 @@
+From 59a1345b42dac8d93d3ec3b2d038e2be04fac66e Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
+Date: Tue, 6 Dec 2022 09:46:31 +0100
+Subject: [PATCH] mu: 1.8.11 -> 1.8.13
+
+https://github.com/djcb/mu/releases/tag/v1.8.13
+---
+ pkgs/tools/networking/mu/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index 0544b6d1ec116b..8c09f1e430f697 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -14,13 +14,13 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.8.11";
++  version = "1.8.13";
+ 
+   src = fetchFromGitHub {
+     owner = "djcb";
+     repo = "mu";
+     rev = "v${version}";
+-    hash = "sha256-IEfwAAUqEGtN4vww0pfW7iuIY/U3eqzC+MJsqtossCw=";
++    hash = "sha256-uXrJOBF3X8UF1ktTfAoYgzc0QBLvyzzGQVJVfs8tjng=";
+   };
+ 
+   postPatch = ''
