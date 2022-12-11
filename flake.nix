@@ -3,7 +3,7 @@
 
   inputs = {
     accentor = {
-      url = "github:accentor/flake";
+      url = "github:accentor/flake/enhc/systemd-socket";
       inputs = {
         api.follows = "accentor-api";
         devshell.follows = "devshell";

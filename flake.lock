@@ -19,15 +19,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1670687442,
-        "narHash": "sha256-RHOkHxq0AIVswFmIPVjsURffarxWoZYl2QyFx9OU5eA=",
+        "lastModified": 1670791269,
+        "narHash": "sha256-QPWQC0JXrpNRcFQp4dZJOHP1HaduChxTJ5vJcMxcNQw=",
         "owner": "accentor",
         "repo": "flake",
-        "rev": "93224d21292dbae2be1eed196cffc65a44f5ca1d",
+        "rev": "d03e004c5156616b9bb2c7d3aafddbdab79b7bdd",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
+        "ref": "enhc/systemd-socket",
         "repo": "flake",
         "type": "github"
       }
