@@ -14,7 +14,7 @@
       home = {
         packages = [ pkgs.element-desktop ];
         sessionVariables = {
-          # NIXOS_OZONE_WL = "1";
+          NIXOS_OZONE_WL = "1";
         };
       };
     };
