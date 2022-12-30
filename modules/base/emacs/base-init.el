@@ -175,12 +175,22 @@
 
 ;; Theming
 (use-package modus-themes
-  :custom
-  (modus-themes-bold-constructs t "Use bold accents")
-  (modus-themes-fringes nil "No fringes")
-  (modus-themes-common-palette-overrides modus-themes-preset-overrides-intense "Colours are nice")
-  (modus-themes-region '(bg-only) "Don't lose syntax highlighting in the active region")
   :config
+  (setq modus-themes-bold-constructs t) ;; Use bold accents
+  (setq modus-themes-fringes nil) ;; No fringes
+  (setq modus-themes-common-palette-overrides
+    `(
+      ;; Colourful active modeline
+      (bg-mode-line-active bg-blue-intense)
+      (fg-mode-line-active fg-main)
+      ;; Borderless modeline
+      (border-mode-line-active unspecified)
+      (border-mode-line-inactive unspecified)
+      ;; Colours are nice
+      ,@modus-themes-preset-overrides-intense
+      )
+    )
+  (setq modus-themes-region '(bg-only)) ;; Don't lose syntax highlighting in the active region
   (load-theme 'modus-operandi t)
   )
 
