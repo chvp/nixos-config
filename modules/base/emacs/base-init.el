@@ -186,6 +186,20 @@
       ;; Borderless modeline
       (border-mode-line-active unspecified)
       (border-mode-line-inactive unspecified)
+      ;; Alt syntax colours
+      (builtin magenta)
+      (comment yellow-cooler)
+      (constant magenta-cooler)
+      (docstring magenta-faint)
+      (docmarkup green-faint)
+      (fnname magenta-warmer)
+      (keyword cyan)
+      (preprocessor cyan-cooler)
+      (string red-cooler)
+      (type magenta-cooler)
+      (variable blue-warmer)
+      (rx-construct magenta-warmer)
+      (rx-backslash blue-cooler)
       ;; Colours are nice
       ,@modus-themes-preset-overrides-intense
       )
