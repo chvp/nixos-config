@@ -177,14 +177,11 @@
 (use-package modus-themes
   :custom
   (modus-themes-bold-constructs t "Use bold accents")
-  (modus-themes-syntax '(alt-syntax yellow-comments) "Show comments in yellow instead of gray")
-  (modus-themes-promts '(intense) "Colours are nice")
-  (modus-themes-completions '(opinionated) "Colours are nice")
-  (modus-themes-mode-line '(borderless accented) "Thin borders are ugly")
-  (modus-themes-region '(bg-only accented) "Don't lose syntax highlighting in the active region")
+  (modus-themes-fringes nil "No fringes")
+  (modus-themes-common-palette-overrides modus-themes-preset-overrides-intense "Colours are nice")
+  (modus-themes-region '(bg-only) "Don't lose syntax highlighting in the active region")
   :config
-  (modus-themes-load-themes)
-  (modus-themes-load-operandi)
+  (load-theme 'modus-operandi t)
   )
 
 (use-package no-littering
