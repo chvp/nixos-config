@@ -53,12 +53,12 @@ in
           };
           "work-undocked" = {
             outputs = [
-              { criteria = "Unknown 0x06D6 0x00000000"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
+              { criteria = "LG Display 0x06D6 Unknown"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
             ];
           };
           "work-docked" = {
             outputs = [
-              { criteria = "Unknown 0x06D6 0x00000000"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
+              { criteria = "LG Display 0x06D6 Unknown"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
               { criteria = "Dell Inc. DELL U2718Q FN84K83Q1KHL"; position = "1920,0"; mode = "3840x2160"; scale = 1.0; }
             ];
           };
