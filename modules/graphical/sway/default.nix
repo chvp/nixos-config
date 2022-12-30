@@ -42,12 +42,12 @@ in
         profiles = {
           "home-undocked" = {
             outputs = [
-              { criteria = "Unknown 0x2036 0x00000000"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
+              { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
             ];
           };
           "home-docked" = {
             outputs = [
-              { criteria = "Unknown 0x2036 0x00000000"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
+              { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
               { criteria = "Dell Inc. DELL U2718Q FN84K01T095L"; position = "2560,0"; mode = "3840x2160"; scale = 1.0; }
             ];
           };
