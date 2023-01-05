@@ -147,7 +147,7 @@ in
                 (setq mu4e-contexts (list ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}))
                 (add-to-list
                  'mu4e-bookmarks
-                  '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX" :key ?i)
+                  '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i)
                  )
                 (define-advice mu4e--context-ask-user
                     (:around (orig-fun &rest args) mu4e~context-ask-user-completing-read)
