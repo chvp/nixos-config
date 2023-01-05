@@ -264,6 +264,18 @@ in
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             };
           };
+          rodekruis-eerstehulp = makeAccount {
+            name = "rodekruis-eerstehulp";
+            address = "eerstehulp@gent.rodekruis.be";
+            imapHost = "imap.gmail.com";
+            smtpHost = "smtp.gmail.com";
+            useStartTls = true;
+            passFile = "rodekruis/EersteHulpAppMail";
+            extraConfig = {
+              folders = { drafts = "[Gmail].Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "[Gmail].Bin"; };
+              flavor = "gmail.com";
+            };
+          };
           webmaster = makeAccount {
             name = "webmaster";
             address = "webmaster@vanpetegem.me";
