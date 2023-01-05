@@ -272,7 +272,7 @@ in
             useStartTls = true;
             passFile = "rodekruis/EersteHulpAppMail";
             extraConfig = {
-              folders = { drafts = "[Gmail].Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "[Gmail].Bin"; };
+              folders = { drafts = "[Gmail].Concepten"; inbox = "INBOX"; sent = "INBOX"; trash = "[Gmail].Prullenbak"; };
               flavor = "gmail.com";
             };
           };
