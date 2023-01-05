@@ -102,7 +102,7 @@ in
           };
           startup = [
             {
-              command = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${pkgs.swaylock}/bin/swaylock -f -c 000000' timeout 150 '${pkgs.sway}/bin/swaymsg \"output * dpms off\"' resume '${pkgs.sway}/bin/swaymsg \"output * dpms on\"' before-sleep '${pkgs.swaylock}/bin/swaylock -f -c 000000'";
+              command = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${pkgs.swaylock}/bin/swaylock -f -c 000000' timeout 150 '${pkgs.sway}/bin/swaymsg \"output * power off\"' resume '${pkgs.sway}/bin/swaymsg \"output * power on\"' before-sleep '${pkgs.swaylock}/bin/swaylock -f -c 000000'";
             }
           ];
           window.commands = [
