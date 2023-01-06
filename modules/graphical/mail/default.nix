@@ -183,6 +183,31 @@ in
                   (interactive)
                   (save-excursion (message-add-header "Cc: dodona@ugent.be\nReply-To: dodona@ugent.be\n"))
                   )
+                (define-skeleton mail/twist-nag-not-enough-nl
+                  "Nags someone in dutch when they should do more exam supervisions"
+                  "Naam collega: "
+                  "Dag " str "\n"
+                  "\n"
+                  "Een deel van lid zijn van de TWIST vakgroep is het bijdragen aan de toezichten bij de examens. Sinds de vakgroepraad van september 2022 is er ook besloten om iets meer te vragen van mensen die minder (of niet) aan onderwijs bijdragen om de mensen met veel verbeterwerk toe te laten om zich daarop te kunnen concentreren. Jij wordt verwacht 3 toezichten te doen, maar voor zover ik kan zien is dat nog niet het geval. Mag ik vragen van je te registreren voor een aantal examentoezichten? Dat kan via de volgende spreadsheet: https://sharepoint.ugent.be/teams/WE02/_layouts/15/WopiFrame2.aspx?sourcedoc=%7BAA66A430-5240-4002-9D47-F6D06CF819AA%7D&file=Examentoezichten.xlsx&action=default&IsList=1&ListId=%7BA2BEB5ED-0C41-4A4B-ADCA-8F7CD56C2BBB%7D&ListItemId=2 (zie ook de mail die op het einde van het semester naar de mailinglijst van de vakgroep werd verstuurd)?\n"
+                  "\n"
+                  "Als je deze mail foutief gekregen hebt, laat het mij dan zeker weten, dan val ik je in de toekomst niet meer lastig.\n"
+                  "\n"
+                  "Alvast bedankt\n"
+                  "Met vriendelijke groeten\n"
+                  "Charlotte Van Petegem"
+                  )
+                (define-skeleton mail/twist-nag-not-enough-en
+                  "Nags someone in English when they should do more exam supervisions"
+                  "Naam collega: "
+                  "Hi " str "\n"
+                  "\n"
+                  "A part of being a member of the TWIST department is contributing to exam supervision. Since the department board meeting of september 2022 it was decided to ask a bit more of people who don't contribute or contribute less to education during the semester, to allow the people who have to mark a lot of exams to concentrate on that. You are expected to do 3 supervisions, but as far as I can see that is not the case yet. Can I ask that you register for a number of exam supervisions? You can do so via the following spreadsheet: https://sharepoint.ugent.be/teams/WE02/_layouts/15/WopiFrame2.aspx?sourcedoc=%7BAA66A430-5240-4002-9D47-F6D06CF819AA%7D&file=Examentoezichten.xlsx&action=default&IsList=1&ListId=%7BA2BEB5ED-0C41-4A4B-ADCA-8F7CD56C2BBB%7D&ListItemId=2 (see also the email that was sent to the department mailing list at the end of the semester).\n"
+                  "\n"
+                  "If you received this mail in error, please let me know, then I won't bother you in the future.\n"
+                  "\n"
+                  "Kind regards\n"
+                  "Charlotte Van Petegem"
+                  )
                 (defun mail/auto-dodona-cc-reply-to ()
                   "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
                   (let ((msg mu4e-compose-parent-message))
@@ -197,6 +222,8 @@ in
                   "SPC s" '(mml-secure-message-sign-pgpmime :which-key "Sign")
                   "SPC c" '(mml-secure-message-encrypt-pgpmime :which-key "Encrypt")
                   "SPC t" '(mail/dodona-teacher-reply-skeleton :which-key "Teacher rights reply")
+                  "SPC m" '(mail/twist-nag-not-enough-en :which-key "Supervision nag (en)")
+                  "SPC n" '(mail/twist-nag-not-enough-nl :which-key "Supervision nag (nl)")
                   "SPC d" '(mail/dodona-cc-reply-to :which-key "Dodona support headers")
                   "SPC f" '(mu4e-toggle-use-hard-newlines :which-key "Toggle format=flowed/hard newlines")
                   )
