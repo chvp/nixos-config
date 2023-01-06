@@ -78,7 +78,6 @@ in
             browserpass
             decentraleyes
             ff2mpv
-            https-everywhere
             ublock-origin
             umatrix
             zotero-connector
@@ -93,7 +92,7 @@ in
             "browser.shell.checkDefaultBrowser" = false;
             "browser.startup.homepage" = "about:blank";
             "browser.startup.page" = 3;
-            "dom.security.https_only_mode_pbm" = true;
+            "dom.security.https_only_mode" = true;
             "network.cookie.cookieBehavior" = 1;
             "privacy.annotate_channels.strict_list.enabled" = true;
             "privacy.trackingprotection.enabled" = true;
