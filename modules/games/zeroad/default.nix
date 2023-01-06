@@ -29,9 +29,10 @@
       allowedTCPPorts = [ 20595 ];
       allowedUDPPorts = [ 20595 ];
     };
-    services.xrdp = lib.mkIf config.chvp.games.zeroad.server {
-      enable = true;
-      defaultWindowManager = "${pkgs.icewm}/bin/icewm";
-    };
+    # Security issues, find suitable alternative
+    # services.xrdp = lib.mkIf config.chvp.games.zeroad.server {
+    #   enable = true;
+    #   defaultWindowManager = "${pkgs.icewm}/bin/icewm";
+    # };
   };
 }
