@@ -1,16 +1,16 @@
-From 2c5c2248451d8966cb589b2e289ee53325d363c6 Mon Sep 17 00:00:00 2001
+From 397d1759f2139a7f4e01b4a2242e1bbf83d0dd9e Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte@vanpetegem.me>
 Date: Sat, 7 Jan 2023 15:32:35 +0100
 Subject: [PATCH] xrdp: 0.9.9 -> 0.9.21, xorgxrdp: 0.2.9 -> 0.9.19
 
 ---
- .../networking/remote/xrdp/default.nix        |  40 +--
+ .../networking/remote/xrdp/default.nix        |  42 +--
  .../remote/xrdp/dynamic_config.patch          | 300 ++++++++++++++++++
- 2 files changed, 314 insertions(+), 26 deletions(-)
+ 2 files changed, 315 insertions(+), 27 deletions(-)
  create mode 100644 pkgs/applications/networking/remote/xrdp/dynamic_config.patch
 
 diff --git a/pkgs/applications/networking/remote/xrdp/default.nix b/pkgs/applications/networking/remote/xrdp/default.nix
-index 3744451f3e282..e8ee37503d539 100644
+index 3744451f3e282..b7c51d70dfecb 100644
 --- a/pkgs/applications/networking/remote/xrdp/default.nix
 +++ b/pkgs/applications/networking/remote/xrdp/default.nix
 @@ -3,13 +3,13 @@
@@ -68,8 +68,9 @@ index 3744451f3e282..e8ee37503d539 100644
      installFlags = [ "DESTDIR=$(out)" "prefix=" ];
  
      postInstall = ''
-       # remove generated keys (as non-determenistic) and upstart script
+-      # remove generated keys (as non-determenistic) and upstart script
 -      rm $out/etc/xrdp/{rsakeys.ini,key.pem,cert.pem,xrdp.sh}
++      # remove generated keys (as non-deterministic)
 +      rm $out/etc/xrdp/{rsakeys.ini,key.pem,cert.pem}
  
        cp $src/keygen/openssl.conf $out/share/xrdp/openssl.conf
