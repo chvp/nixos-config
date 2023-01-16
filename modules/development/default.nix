@@ -20,7 +20,6 @@
           (use-package editorconfig
             :diminish (editorconfig-mode)
             :config
-            (require 'editorconfig-core)
             (editorconfig-mode 1)
             )
 
