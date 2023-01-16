@@ -32,12 +32,13 @@
             )
           
           ;; Language server support
-          (use-package lsp-mode
-            :commands (lsp lsp-deferred)
-            :config (lsp-enable-which-key-integration t)
+          (use-package eglot
             :general
-            (lmap lsp-mode-map
-              "SPC" '(:keymap lsp-command-map)
+            (lmap
+              "SPC s" '(eglot :which-key "Add buffer to eglot")
+              "SPC f" '(eglot-format :which-key "Format region")
+              "SPC F" '(eglot-format :which-key "Format buffer")
+              "SPC r" '(eglot-rename :which-key "Rename symbol")
               )
             )
 
@@ -58,10 +59,8 @@
           ;; Haskell language support
           (use-package haskell-mode
             :mode "\\.hs\\'"
-            )
-
-          (use-package lsp-haskell
-            :hook (haskell-mode . lsp)
+            :config
+            (require 'haskell-doc)
             )
 
           ;; Folding

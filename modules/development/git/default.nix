@@ -35,6 +35,7 @@
             ".data"
             ".direnv"
             ".envrc"
+            ".dir-locals.el"
           ];
           signing = {
             key = "charlotte@vanpetegem.me";
