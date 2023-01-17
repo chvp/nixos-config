@@ -66,6 +66,15 @@
 
           ;; Project management
           (use-package project
+            :custom
+            (project-switch-commands
+              '(
+                (project-find-file "find file")
+                (consult-ripgrep "find regexp" ?r)
+                (project-eshell "eshell")
+                )
+              "Change default actions when switching project"
+              )
             :general
             (lmap
               "p"  '(:ignore t :which-key "project")
