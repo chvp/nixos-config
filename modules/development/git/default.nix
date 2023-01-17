@@ -65,27 +65,18 @@
             )
 
           ;; Project management
-          (use-package projectile
-            :commands (projectile-project-root)
-            :custom (consult-project-function #'projectile-project-root "Use projectile to determine project roots.")
-            :diminish (projectile-mode)
-            :config (projectile-mode 1)
+          (use-package project
             :general
             (lmap
               "p"  '(:ignore t :which-key "project")
-              "pf" '(projectile-find-file :which-key "find")
-              "pp" '(projectile-switch-project :which-key "switch")
-              "pr" '(projectile-replace :which-key "replace")
+              "pf" '(project-find-file :which-key "find")
+              "pp" '(project-switch-project :which-key "switch")
+              "pr" '(project-query-replace-regexp :which-key "replace")
               "ps" '(consult-ripgrep :search "incsearch")
-              "pS" '(projectile-ripgrep :which-key "search")
-              "p!" '(projectile-run-shell-command-in-root :which-key "command")
-              "p&" '(projectile-run-async-shell-command-in-root :which-key "task")
+              "pS" '(project-find-regexp :which-key "search")
+              "p!" '(project-shell-command :which-key "command")
+              "p&" '(project-async-shell-command :which-key "task")
               )
-            )
-
-          ;; Ripgrep support (needed for `projectile-ripgrep')
-          (use-package ripgrep
-            :after (projectile)
             )
         ''
       ];
