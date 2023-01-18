@@ -16,15 +16,10 @@
       readOnly = true;
       default = pkgs.emacsWithPackagesFromUsePackage {
         config = config.chvp.base.emacs.fullConfig;
+        package = pkgs.emacsPgtk;
         alwaysEnsure = true;
         # mu4e is included in the mu package and should be used from there
         extraEmacsPackages = epkgs: lib.optional config.chvp.graphical.mail.enable pkgs.mu;
-        override = epkgs: epkgs // {
-          nix-mode = epkgs.melpaPackages.nix-mode.overrideAttrs (old: {
-            propagatedBuildInputs = old.propagatedBuildInputs ++ [ epkgs.reformatter ];
-            propagatedUserEnvPkgs = old.propagatedUserEnvPkgs ++ [ epkgs.reformatter ];
-          });
-        };
       };
     };
   };
