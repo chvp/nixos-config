@@ -10,9 +10,13 @@
     nodejs
     nodePackages.typescript-language-server
     ruby_3_1
+    rubyPackages_3_1.solargraph
     yarn
   ];
   env = [
+    { name = "CC"; value = "cc"; }
+    { name = "CPP"; value = "cpp"; }
+    { name = "CXX"; value = "c++"; }
     { name = "DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona"; }
     { name = "TEST_DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona_test"; }
     { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
@@ -83,7 +87,7 @@
   ];
   language.c = {
     compiler = pkgs.gcc;
-    includes = [ pkgs.libmysqlclient pkgs.zlib ];
-    libraries = [ pkgs.libmysqlclient pkgs.zlib ];
+    includes = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi ];
+    libraries = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi ];
   };
 }
