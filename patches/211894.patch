@@ -1,0 +1,23 @@
+From f8a3c4e94fb526d108fa8564fbe1fc1b416eea5e Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sat, 21 Jan 2023 10:16:41 +0100
+Subject: [PATCH] nixos/grafana-image-renderer: use grafana freeform settings
+ in provisioning
+
+---
+ nixos/modules/services/monitoring/grafana-image-renderer.nix | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nixos/modules/services/monitoring/grafana-image-renderer.nix b/nixos/modules/services/monitoring/grafana-image-renderer.nix
+index 60f6e84c63c7d..7ea17b07567cd 100644
+--- a/nixos/modules/services/monitoring/grafana-image-renderer.nix
++++ b/nixos/modules/services/monitoring/grafana-image-renderer.nix
+@@ -108,7 +108,7 @@ in {
+ 
+     services.grafana.settings.rendering = mkIf cfg.provisionGrafana {
+       url = "http://localhost:${toString cfg.settings.service.port}/render";
+-      callback_url = "http://localhost:${toString config.services.grafana.port}";
++      callback_url = "http://localhost:${toString config.services.grafana.settings.server.http_port}";
+     };
+ 
+     services.grafana-image-renderer.chromium = mkDefault pkgs.chromium;
