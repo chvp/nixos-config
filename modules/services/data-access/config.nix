@@ -22,13 +22,15 @@
   security.sudo.enable = false;
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
     hostKeys = [
       { bits = 4096; path = "/run/secrets/ssh_host_rsa_key"; type = "rsa"; }
       { path = "/run/secrets/ssh_host_ed25519_key"; type = "ed25519"; }
     ];
+    settings = {
+      HostKeyAlgorithms = "+ssh-rsa";
+      PermitRootLogin = "no";
+    };
     extraConfig = ''
-      HostKeyAlgorithms +ssh-rsa
       Match group sftponly
           X11Forwarding no
           AllowTcpForwarding no
