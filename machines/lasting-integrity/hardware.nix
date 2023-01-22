@@ -58,6 +58,10 @@
       device = "zdata/big-apps/mastodon";
       fsType = "zfs";
     };
+    "/var/lib/git" = {
+      device = "zdata/big-apps/git";
+      fsType = "zfs";
+    };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";

@@ -42,6 +42,12 @@
             location = "192.168.0.1";
           }
           {
+            path = "zdata/big-apps/git";
+            remotePath = "zdata/recv/lasting-integrity/big-apps/git";
+            fast = true;
+            location = "192.168.0.1";
+          }
+          {
             path = "zdata/big-apps/mail";
             remotePath = "zdata/recv/lasting-integrity/big-apps/mail";
             fast = true;
@@ -69,6 +75,7 @@
     };
     services = {
       garmin-scraper.enable = true;
+      git.enable = true;
       grafana.enable = true;
       mail.enable = true;
       mastodon.enable = true;

@@ -7,6 +7,7 @@
     ./data-access
     ./deluge
     ./garmin-scraper
+    ./git
     ./grafana
     ./mail
     ./mastodon
