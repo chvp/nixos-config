@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v18
+        with:
+          github_access_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Cachix
         uses: cachix/cachix-action@v12
         with:
