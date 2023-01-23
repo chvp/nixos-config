@@ -1,4 +1,4 @@
-{ ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -16,4 +16,6 @@
     ./nginx
     ./syncthing
   ];
+
+  services.postgresql.package = pkgs.postgresql_15;
 }
