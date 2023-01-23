@@ -53,6 +53,12 @@ in
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
+  "secrets/passwords/services/git/initial-root-password.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/git/db.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/git/jws.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/git/otp.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/git/secret.age".publicKeys = [ lasting-integrity ] ++ users;
+
   "secrets/passwords/services/mastodon/otp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mastodon/key.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mastodon/vapid-public.age".publicKeys = [ lasting-integrity ] ++ users;

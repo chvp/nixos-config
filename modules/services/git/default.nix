@@ -10,77 +10,67 @@
     chvp.services.nginx.hosts = [{
       fqdn = "git.chvp.be";
       options = {
-        root = pkgs.gitea.data;
-        locations = {
-          "/".tryFiles = "$uri @proxy";
-          "@proxy" = {
-            proxyPass = "http://unix:/run/gitea/gitea.sock";
-            proxyWebsockets = true;
-          };
-        };
+        locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
       };
     }];
     users = {
       users = {
         git = {
-          uid = 963;
-          home = "/var/lib/git";
+          uid = lib.mkForce 963;
           group = "git";
           isSystemUser = true;
           useDefaultShell = true;
         };
         nginx.extraGroups = [ "git" ];
       };
-      groups.git.gid = 963;
+      groups.git.gid = lib.mkForce 963;
     };
     services.openssh.settings.AcceptEnv = "GIT_PROTOCOL";
-    services.gitea = {
+    services.gitlab = {
       enable = true;
-      stateDir = "/var/lib/git";
+      statePath = "/var/lib/git/state";
+      backup.path = "/var/lib/git/backup";
+      databaseCreateLocally = true;
+      databaseUsername = "git";
+      databaseName = "git";
       user = "git";
-      database = {
-        type = "postgres";
-        createDatabase = true;
-        user = "git";
-        name = "git";
+      group = "git";
+      host = "git.chvp.be";
+      port = 443;
+      https = true;
+      initialRootEmail = "charlotte@vanpetegem.me";
+      initialRootPasswordFile = config.age.secrets."passwords/services/git/initial-root-password".path;
+      secrets = {
+        dbFile = config.age.secrets."passwords/services/git/db".path;
+        jwsFile = config.age.secrets."passwords/services/git/jws".path;
+        otpFile = config.age.secrets."passwords/services/git/otp".path;
+        secretFile = config.age.secrets."passwords/services/git/secret".path;
       };
-      dump.enable = true;
-      lfs.enable = true;
-      appName = "Charlotte's personal git server";
-      domain = "git.chvp.be";
-      rootUrl = "https://git.chvp.be/";
-      enableUnixSocket = true;
-      settings = {
-        repository = {
-          DEFAULT_PRIVATE = "private";
-          ENABLE_PUSH_CREATE_USER = true;
-          ENABLE_PUSH_CREATE_ORG = true;
-        };
-        "repository.pull-request".DEFAULT_MERGE_STYLE = "squash";
-        "repository.mimetype_mapping" = {
-          ".apk" = "application/vnd.android.package-archive";
-        };
-        ui.DEFAULT_SHOW_FULL_NAME = true;
-        security.DISABLE_GIT_HOOKS = false;
-        service = {
-          ENABLE_NOTIFY_EMAIL = true;
-          EMAIL_DOMAIN_WHITELIST = "chvp.be";
-          REGISTER_EMAIL_CONFIRM = true;
-          AUTO_WATCH_ON_CHANGES = true;
-        };
-        mailer = {
-          ENABLED = true;
-          FROM = "git@chvp.be";
-          PROTOCOL = "smtp";
-          SMTP_ADDR = "localhost";
-          SMTP_PORT = 25;
-        };
-        session.COOKIE_SECURE = true;
-        cron = {
-          ENABLED = true;
-          SCHEDULE = "@every 1h";
-        };
+      smtp = {
+        enable = true;
+        enableStartTLSAuto = false;
       };
+    };
+
+    age.secrets."passwords/services/git/initial-root-password" = {
+      file = ../../../secrets/passwords/services/git/initial-root-password.age;
+      owner = "git";
+    };
+    age.secrets."passwords/services/git/db" = {
+      file = ../../../secrets/passwords/services/git/db.age;
+      owner = "git";
+    };
+    age.secrets."passwords/services/git/jws" = {
+      file = ../../../secrets/passwords/services/git/jws.age;
+      owner = "git";
+    };
+    age.secrets."passwords/services/git/otp" = {
+      file = ../../../secrets/passwords/services/git/otp.age;
+      owner = "git";
+    };
+    age.secrets."passwords/services/git/secret" = {
+      file = ../../../secrets/passwords/services/git/secret.age;
+      owner = "git";
     };
   };
 }
