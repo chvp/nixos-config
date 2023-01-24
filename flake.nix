@@ -58,12 +58,10 @@
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        nixpkgs-22_11.follows = "nixpkgs-22_11";
         utils.follows = "flake-utils";
       };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-22_11.url = "github:nixos/nixpkgs/nixos-22.11";
     nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
@@ -89,7 +87,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-22_11, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
     utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
@@ -101,12 +99,6 @@
           emacs-overlay.overlay
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
-            mastodon = nixpkgs-22_11.legacyPackages.${self.system}.mastodon;
-            gitlab-pages = nixpkgs-22_11.legacyPackages.${self.system}.gitlab-pages;
-            gitlab = nixpkgs-22_11.legacyPackages.${self.system}.gitlab;
-            gitlab-gitaly = nixpkgs-22_11.legacyPackages.${self.system}.gitlab-gitaly;
-            gitlab-shell = nixpkgs-22_11.legacyPackages.${self.system}.gitlab-shell;
-            gitlab-workhorse = nixpkgs-22_11.legacyPackages.${self.system}.gitlab-workhorse;
           })
           nur.overlay
           www-chvp-be.overlay
