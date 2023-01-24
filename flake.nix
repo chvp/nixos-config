@@ -101,7 +101,6 @@
           emacs-overlay.overlay
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
-            udp2raw = self.callPackage ./packages/udp2raw { };
             mastodon = nixpkgs-22_11.legacyPackages.${self.system}.mastodon;
             gitlab-pages = nixpkgs-22_11.legacyPackages.${self.system}.gitlab-pages;
             gitlab = nixpkgs-22_11.legacyPackages.${self.system}.gitlab;
