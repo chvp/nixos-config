@@ -49,6 +49,7 @@
           enable_registration = false;
           report_stats = false;
           allow_guest_access = false;
+          suppress_key_server_warning = true;
           app_service_config_files = [
             config.age.secrets."files/services/matrix-synapse/whatsapp-registration.yml".path
             config.age.secrets."files/services/matrix-synapse/slack-registration.yml".path
