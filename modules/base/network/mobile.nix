@@ -59,12 +59,16 @@
           enable = true;
           DHCP = "yes";
           matchConfig = { Name = wireless-interface; };
+          dhcpV4Config = { RouteMetric = 20; };
+          ipv6AcceptRAConfig = { RouteMetric = 20; };
         };
       } // lib.mapAttrs
         (name: attrs: {
           enable = true;
           DHCP = "yes";
           matchConfig = { Name = name; };
+          dhcpV4Config = { RouteMetric = 10; };
+          ipv6AcceptRAConfig = { RouteMetric = 10; };
         } // attrs)
         wired-interfaces;
       wait-online.anyInterface = true;
