@@ -20,7 +20,6 @@
 
     sound.enable = true;
     services = {
-      avahi.enable = true;
       pipewire = {
         enable = true;
         alsa.enable = true;
