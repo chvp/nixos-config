@@ -53,6 +53,7 @@
         enable = true;
         count = 6;
       };
+      git.runner.enable = true;
     };
   };
 

@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+  imports = [ ./runner.nix ];
+
   options.chvp.services.git.enable = lib.mkOption {
     default = false;
     example = true;

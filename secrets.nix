@@ -58,6 +58,7 @@ in
   "secrets/passwords/services/git/jws.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/git/otp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/git/secret.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/gitlab-runner/registration.age".publicKeys = [ urithiru ] ++ users;
 
   "secrets/passwords/services/mastodon/otp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mastodon/key.age".publicKeys = [ lasting-integrity ] ++ users;

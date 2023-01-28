@@ -51,6 +51,14 @@
       device = "zdata/data";
       fsType = "zfs";
     };
+    "/var/lib/private/gitlab-runner" = {
+      device = "zdata/big-apps/gitlab-runner";
+      fsType = "zfs";
+    };
+    "/var/lib/docker" = {
+      device = "zdata/big-apps/docker";
+      fsType = "zfs";
+    };
     "/boot/ESP0" = {
       device = "/dev/disk/by-uuid/6ED1-0638";
       fsType = "vfat";
