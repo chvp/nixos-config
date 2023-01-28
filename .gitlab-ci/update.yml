@@ -1,0 +1,45 @@
+stages:
+  - prepare
+  - build
+  - commit
+
+workflow:
+  name: "Update dependencies"
+
+update-flake-lock:
+  stage: prepare
+  script: nix flake update
+  artifacts:
+    paths:
+      - flake.lock
+    expire_in: 1 day
+
+build-nixos-configurations:
+  stage: build
+  parallel:
+    matrix:
+      - HOST_TO_BUILD:
+          - kharbranth
+          - kholinar
+          - lasting-integrity
+          - urithiru
+  needs:
+    - job: update-flake-lock
+      artifacts:  true
+  script:
+    - nix-env --quiet -j8 -iA cachix -f https://cachix.org/api/v1/install
+    - cachix --version
+    - cachix authtoken $CACHIX_AUTH_TOKEN
+    - nix build -L --no-link .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel
+    - nix eval --json .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel | sed 's/"\(.*\)"/\1/' | cachix push chvp
+
+commit-and-push:
+  stage: commit
+  needs:
+    - job: update-flake-lock
+      artifacts: true
+    - job: build
+  script:
+    - url_host=`git remote get-url origin | sed -e "s/https:\/\/gitlab-ci-token:.*@//g"`
+    - git remote set-url origin "https://gitlab-ci-token:${CI_PUSH_TOKEN}@${url_host}"
+    
