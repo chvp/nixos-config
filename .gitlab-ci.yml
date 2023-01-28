@@ -20,4 +20,6 @@ include:
       - if: $CI_PIPELINE_SOURCE == "schedule"
       - if: $CI_PIPELINE_SOURCE == "web" && $WORKFLOW == "update"
 
-    
+show-latest-commit:
+  stage: .pre
+  script: git show HEAD -q
