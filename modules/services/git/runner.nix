@@ -9,6 +9,7 @@
   config = lib.mkIf config.chvp.services.git.runner.enable {
     services.gitlab-runner = {
       enable = true;
+      settings.concurrent = 8;
       services = {
         nix = {
           registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
