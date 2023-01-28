@@ -1,0 +1,27 @@
+default:
+  tags:
+    - nix
+
+stages:
+  - build
+
+build-nixos-configurations:
+  stage: build
+  parallel:
+    matrix:
+      - HOST_TO_BUILD:
+          - kharbranth
+          - kholinar
+          - lasting-integrity
+          - urithiru
+  script:
+    - cat /etc/nix/nix.conf
+    - nix-env --quiet -j8 -iA cachix -f https://cachix.org/api/v1/install
+    - cachix --version
+    - cachix authtoken $CACHIX_AUTH_TOKEN
+    - cachix use chvp
+    - cachix use accentor
+    - cachix use nix-community
+    - nix build -L --no-link .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel
+    - nix eval --json .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel | sed 's/"\(.*\)"/\1/' | cachix push chvp
+    
