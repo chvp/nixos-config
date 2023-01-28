@@ -39,7 +39,7 @@
       stateVersion = config.chvp.stateVersion;
       autoUpgrade = {
         enable = true;
-        flake = "github:chvp/nixos-config";
+        flake = "gitlab:chvp/nixos-config?host=git.chvp.be";
         dates = "01/4:00";
         randomizedDelaySec = "10min";
       };
