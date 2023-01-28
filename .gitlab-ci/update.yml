@@ -27,6 +27,7 @@ build-nixos-configurations:
     - job: update-flake-lock
       artifacts:  true
   script:
+    - git diff --quiet && exit 0 || true
     - nix-env --quiet -j8 -iA cachix -f https://cachix.org/api/v1/install
     - cachix --version
     - cachix authtoken $CACHIX_AUTH_TOKEN
@@ -40,6 +41,7 @@ commit-and-push:
       artifacts: true
     - job: build-nixos-configurations
   script:
+    - git diff --quiet && exit 0 || true
     - git add flake.lock
     - git config user.email "$UPDATE_COMMIT_EMAIL"
     - git config user.name "$UPDATE_COMMIT_NAME"
