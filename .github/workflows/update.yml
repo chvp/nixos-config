@@ -6,11 +6,36 @@ on:
   workflow_dispatch:
 
 jobs:
-  update:
+  flake-update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@25d64bbf11b34ad6443b4169002d4a1b163a4b02
+        with:
+          github_access_token: '${{ secrets.GITHUB_TOKEN }}'
+      - run: nix flake update
+      - name: Upload change flake.lock
+        uses: actions/upload-artifact@v3
+        with:
+          name: flake.lock
+          path: flake.lock
+  build:
+    runs-on: ubuntu-latest
+    needs: flake-update
+    strategy:
+      matrix:
+        host:
+          - kharbranth
+          - kholinar
+          - lasting-integrity
+          - urithiru
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download changed flake.lock
+        uses: actions/download-artifact@v3
+        with:
+          name: flake.lock
+      - uses: cachix/install-nix-action@25d64bbf11b34ad6443b4169002d4a1b163a4b02
         with:
           github_access_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Cachix
@@ -20,15 +45,17 @@ jobs:
           extraPullNames: "nix-community,accentor"
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-      - run: nix flake update
-      - run: nix build -L --no-link .#nixosConfigurations.lasting-integrity.config.system.build.toplevel
-      - run: nix eval --json ".#nixosConfigurations.lasting-integrity.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
-      - run: nix build -L --no-link .#nixosConfigurations.urithiru.config.system.build.toplevel
-      - run: nix eval --json ".#nixosConfigurations.urithiru.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
-      - run: nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
-      - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
-      - run: nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
-      - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix build -L --no-link .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
+      - run: nix eval --json ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+  commit:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download changed flake.lock
+        uses: actions/download-artifact@v3
+        with:
+          name: flake.lock
       - uses: stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "Update dependencies"

@@ -16,7 +16,7 @@ jobs:
           - urithiru
     steps:
       - uses: actions/checkout@v3
-      - uses: cachix/install-nix-action@v18
+      - uses: cachix/install-nix-action@25d64bbf11b34ad6443b4169002d4a1b163a4b02
         with:
           github_access_token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Cachix
