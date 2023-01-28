@@ -38,8 +38,11 @@ commit-and-push:
   needs:
     - job: update-flake-lock
       artifacts: true
-    - job: build
+    - job: build-nixos-configurations
   script:
     - url_host=`git remote get-url origin | sed -e "s/https:\/\/gitlab-ci-token:.*@//g"`
     - git remote set-url origin "https://gitlab-ci-token:${CI_PUSH_TOKEN}@${url_host}"
+    - git add flake.lock
+    - git commit -m "Update dependencies"
+    - git push origin $CI_COMMIT_BRANCH
     
