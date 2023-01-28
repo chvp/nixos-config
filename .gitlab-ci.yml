@@ -2,12 +2,22 @@ default:
   tags:
     - nix
 
+variables:
+  WORKFLOW:
+    options:
+      - update
+      - build
+    description: "Workflow to trigger"
+    value: update
+
 include:
   - local: .gitlab-ci/build.yml
     rules:
       - if: $CI_PIPELINE_SOURCE == "push"
+      - if: $CI_PIPELINE_SOURCE == "web" && $WORKFLOW == "build"
   - local: .gitlab-ci/update.yml
     rules:
       - if: $CI_PIPELINE_SOURCE == "schedule"
+      - if: $CI_PIPELINE_SOURCE == "web" && $WORKFLOW == "update"
 
     
