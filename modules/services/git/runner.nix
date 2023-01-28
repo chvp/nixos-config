@@ -17,6 +17,7 @@
             "/nix/store:/nix/store:ro"
             "/nix/var/nix/db:/nix/var/nix/db:ro"
             "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
+            "/etc/nix/nix.conf:/etc/nix/nix.conf:ro"
           ];
           dockerDisableCache = true;
           preBuildScript = pkgs.writeScript "setup-container" ''
@@ -33,9 +34,6 @@
             . ${pkgs.nix}/etc/profile.d/nix.sh
 
             ${pkgs.nix}/bin/nix-env -i ${lib.concatStringsSep " " (with pkgs; [ nix cacert git openssh ])}
-
-            ${pkgs.nix}/bin/nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-            ${pkgs.nix}/bin/nix-channel --update nixpkgs
           '';
           environmentVariables = {
             ENV = "/etc/profile";
