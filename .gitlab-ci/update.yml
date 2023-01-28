@@ -40,9 +40,9 @@ commit-and-push:
       artifacts: true
     - job: build-nixos-configurations
   script:
-    - url_host=`git remote get-url origin | sed -e "s/https:\/\/gitlab-ci-token:.*@//g"`
-    - git remote set-url origin "https://gitlab-ci-token:${CI_PUSH_TOKEN}@${url_host}"
     - git add flake.lock
+    - git config user.email "$UPDATE_COMMIT_EMAIL"
+    - git config user.name "$UPDATE_COMMIT_NAME"
     - git commit -m "Update dependencies"
-    - git push origin $CI_COMMIT_BRANCH
+    - git push https://gitlab-ci-token:${CI_PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git HEAD:$CI_COMMIT_BRANCH
     
