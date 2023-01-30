@@ -28,6 +28,7 @@
           draadloosnw.psk = "@PSK_draadloosnw@";
           werknet.psk = "@PSK_werknet@";
           Secorima.psk = "@PSK_Secorima@";
+          "Mediaraven Guest".psk = "@PSK_Mediaraven@";
           "Zeus WPI" = {
             psk = "@PSK_Zeus@";
             hidden = true;
