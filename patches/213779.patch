@@ -1,0 +1,29 @@
+From d4e2930fdfa581a89c7c09492b48a54225c75ca0 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
+Date: Tue, 31 Jan 2023 14:52:58 +0100
+Subject: [PATCH] eid-mw: 5.1.4 -> 5.1.9
+
+---
+ pkgs/tools/security/eid-mw/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/security/eid-mw/default.nix b/pkgs/tools/security/eid-mw/default.nix
+index d73a93d851b74..dcd4686bb3ef2 100644
+--- a/pkgs/tools/security/eid-mw/default.nix
++++ b/pkgs/tools/security/eid-mw/default.nix
+@@ -21,13 +21,13 @@
+ stdenv.mkDerivation rec {
+   pname = "eid-mw";
+   # NOTE: Don't just blindly update to the latest version/tag. Releases are always for a specific OS.
+-  version = "5.1.4";
++  version = "5.1.9";
+ 
+   src = fetchFromGitHub {
+     owner = "Fedict";
+     repo = "eid-mw";
+     rev = "v${version}";
+-    sha256 = "pHzjLyQFn7UvFrPUcI/ZQHMOwVp6ndnX9YegJzlhERM=";
++    hash = "sha256-E7mNEgh8hujagqQe0ycEGcRDOlxVY7KzXw+DD8Wf9N8=";
+   };
+ 
+   nativeBuildInputs = [ autoreconfHook autoconf-archive pkg-config makeWrapper ];
