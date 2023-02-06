@@ -73,31 +73,33 @@ in
         firefox = {
           enable = true;
           package = ffPackage;
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            belgium-eid
-            browserpass
-            decentraleyes
-            ff2mpv
-            ublock-origin
-            umatrix
-            zotero-connector
-          ];
-          profiles.default.settings = {
-            "browser.aboutConfig.showWarning" = false;
-            "browser.contentblocking.category" = "custom";
-            "browser.download.dir" = "/home/charlotte/downloads";
-            "browser.newtabpage.enabled" = false;
-            "browser.safebrowsing.malware.enabled" = false;
-            "browser.safebrowsing.phishing.enabled" = false;
-            "browser.shell.checkDefaultBrowser" = false;
-            "browser.startup.homepage" = "about:blank";
-            "browser.startup.page" = 3;
-            "dom.security.https_only_mode" = true;
-            "network.cookie.cookieBehavior" = 1;
-            "privacy.annotate_channels.strict_list.enabled" = true;
-            "privacy.trackingprotection.enabled" = true;
-            "privacy.trackingprotection.socialtracking.enabled" = true;
-            "security.identityblock.show_extended_validation" = true;
+          profiles.default = {
+            extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+              belgium-eid
+              browserpass
+              decentraleyes
+              ff2mpv
+              ublock-origin
+              umatrix
+              zotero-connector
+            ];
+            settings = {
+              "browser.aboutConfig.showWarning" = false;
+              "browser.contentblocking.category" = "custom";
+              "browser.download.dir" = "/home/charlotte/downloads";
+              "browser.newtabpage.enabled" = false;
+              "browser.safebrowsing.malware.enabled" = false;
+              "browser.safebrowsing.phishing.enabled" = false;
+              "browser.shell.checkDefaultBrowser" = false;
+              "browser.startup.homepage" = "about:blank";
+              "browser.startup.page" = 3;
+              "dom.security.https_only_mode" = true;
+              "network.cookie.cookieBehavior" = 1;
+              "privacy.annotate_channels.strict_list.enabled" = true;
+              "privacy.trackingprotection.enabled" = true;
+              "privacy.trackingprotection.socialtracking.enabled" = true;
+              "security.identityblock.show_extended_validation" = true;
+            };
           };
         };
       };
