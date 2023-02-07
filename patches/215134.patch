@@ -1,0 +1,29 @@
+From 7c23fd294ba1e76834b92954d46e77996dff7b08 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte.vanpetegem@ugent.be>
+Date: Tue, 7 Feb 2023 15:12:52 +0100
+Subject: [PATCH] udp2raw: 20200818.0 -> 20230206.0
+
+---
+ pkgs/tools/networking/udp2raw/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/networking/udp2raw/default.nix b/pkgs/tools/networking/udp2raw/default.nix
+index fdb95b121f2d7..1bb063925236f 100644
+--- a/pkgs/tools/networking/udp2raw/default.nix
++++ b/pkgs/tools/networking/udp2raw/default.nix
+@@ -7,13 +7,13 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "udp2raw";
+-  version = "20200818.0";
++  version = "20230206.0";
+ 
+   src = fetchFromGitHub {
+     owner = "wangyu-";
+     repo = "udp2raw";
+     rev = version;
+-    hash = "sha256-TkTOfF1RfHJzt80q0mN4Fek3XSFY/8jdeAVtyluZBt8=";
++    hash = "sha256-mchSaqw6sOJ7+dydCM8juP7QMOVUrPL4MFA79Rvyjdo=";
+   };
+ 
+   nativeBuildInputs = [ makeWrapper ];
