@@ -62,6 +62,7 @@
       };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
     nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
@@ -87,7 +88,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-stable, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
     utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
@@ -100,6 +101,7 @@
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
             matrix-hookshot = self.callPackage ./packages/matrix-hookshot { };
+            wezterm = nixpkgs-stable.legacyPackages.${self.system}.wezterm;
           })
           nur.overlay
           www-chvp-be.overlay

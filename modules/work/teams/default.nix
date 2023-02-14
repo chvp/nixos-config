@@ -8,14 +8,13 @@
 
   config = lib.mkIf config.chvp.work.teams.enable {
     chvp.base = {
-      nix.unfreePackages = [ "teams" ];
       zfs.homeLinks = [
-        { path = ".config/Microsoft"; type = "data"; }
+        { path = ".config/teams-for-linux"; type = "cache"; }
       ];
     };
 
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = with pkgs; [ teams ];
+      home.packages = with pkgs; [ teams-for-linux ];
     };
   };
 }
