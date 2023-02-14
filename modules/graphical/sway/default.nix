@@ -29,7 +29,7 @@ in
       programs = {
         mako = {
           enable = true;
-          font = "Fira Code Normal 9";
+          font = "Hack Regular 9";
         };
         zsh.loginExtra = ''
           if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
@@ -72,9 +72,9 @@ in
           down = "j";
           up = "k";
           right = "l";
-          terminal = "${pkgs.wezterm}/bin/wezterm";
-          menu = "${terminal} start --class launcher -- ${launcher}/bin/launcher";
-          fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
+          terminal = "${pkgs.foot}/bin/footclient";
+          menu = "${terminal} --app-id launcher -- ${launcher}/bin/launcher";
+          fonts = { names = [ "Hack" ]; size = 9.0; style = "Regular"; };
           bars = [
             {
               colors = {
@@ -85,7 +85,7 @@ in
                 inactiveWorkspace = { border = "#ffffff"; background = "#ffffff"; text = "#000000"; };
                 urgentWorkspace = { border = "#ff8892"; background = "#ff8892"; text = "#000000"; };
               };
-              fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
+              fonts = { names = [ "Hack" ]; size = 9.0; style = "Regular"; };
               position = "top";
               statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status-configuration}";
               extraConfig = ''

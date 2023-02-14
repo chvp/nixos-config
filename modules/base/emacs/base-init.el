@@ -138,7 +138,7 @@
   ;; Font configuration
   (defun font-settings ()
     "Setup font settings."
-    (when window-system (set-frame-font "Fira Code 9"))
+    (when window-system (set-frame-font "Hack 9"))
     (set-fontset-font t 'symbol "Noto Color Emoji")
     (set-fontset-font t 'symbol "Symbola" nil 'append))
   ;; Make sure DISPLAY is set correctly in env.

@@ -14,14 +14,13 @@
         defaultFonts = {
           emoji = [ "Noto Color Emoji" ];
           # The Tinos and Amiro fonts overlap with Font Awesome's codepoints, so make sure we give Font Awesome a higher priority.
-          monospace = [ "Fira Code" "Font Awesome 5 Free" ];
-          sansSerif = [ "Noto Sans" "Font Awesome 5 Free" ];
-          serif = [ "Noto Serif" "Font Awesome 5 Free" ];
+          monospace = [ "Hack" "Font Awesome 6 Free" ];
+          sansSerif = [ "Noto Sans" "Font Awesome 6 Free" ];
+          serif = [ "Noto Serif" "Font Awesome 6 Free" ];
         };
       };
       fonts = with pkgs; [
-        fira-code
-        fira-code-symbols
+        hack-font
         font-awesome
         noto-fonts
         noto-fonts-cjk

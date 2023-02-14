@@ -105,7 +105,7 @@ windows() {
   @sway@/bin/swaymsg \[con_id="$window"\] focus
 }
 
-CHOSEN=$(cat <(windows_options) <(systemctl_options) <(pass_options) <(nrun_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 40 | tail -n1)
+CHOSEN=$(cat <(windows_options) <(systemctl_options) <(pass_options) <(nrun_options) <(run_options) <(record_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 80 | tail -n1)
 
 if [ -n "$CHOSEN" ]
 then
