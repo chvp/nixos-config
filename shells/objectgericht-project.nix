@@ -6,11 +6,23 @@
   commands = [
     {
       name = "jdtls";
-      category = "language server";
+      category = "development";
       help = "Start jdt-language-server with configured workspace location";
       command = ''
         ${pkgs.jdt-language-server}/bin/jdt-language-server -data "$PRJ_DATA_DIR/workspace"
       '';
+    }
+    {
+      name = "run";
+      category = "development";
+      help = "Run application";
+      command = "mvn javafx:run";
+    }
+    {
+      name = "clean";
+      category = "development";
+      help = "Clean target";
+      command = "mvn clean";
     }
   ];
 }
