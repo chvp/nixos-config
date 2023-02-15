@@ -40,6 +40,13 @@
               "SPC F" '(eglot-format :which-key "Format buffer")
               "SPC r" '(eglot-rename :which-key "Rename symbol")
               )
+             :config
+             ;;; eclipse-jdt breaks the spec which in turn breaks code actions
+             ;;; This behaviour can't be disabled and needs to be worked around
+             (cl-defmethod eglot-execute-command
+               (_server (_cmd (eql java.apply.workspaceEdit)) arguments)
+               "Eclipse JDT breaks spec and replies with edits as arguments."
+               (mapc #'eglot--apply-workspace-edit arguments))
             )
 
           ;; Forth syntax support
