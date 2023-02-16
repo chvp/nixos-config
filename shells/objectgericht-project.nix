@@ -13,10 +13,16 @@
       '';
     }
     {
-      name = "run";
+      name = "client";
       category = "development";
-      help = "Run application";
-      command = "mvn javafx:run";
+      help = "Run client";
+      command = "mvn package && java -cp target/dominion-1.0-SNAPSHOT.jar:repo/be/ugent/objprog/commhub/1.0/commhub-1.0.jar be.ugent.dominion.Main client";
+    }
+    {
+      name = "server";
+      category = "development";
+      help = "Run server";
+      command = "mvn package && java -cp target/dominion-1.0-SNAPSHOT.jar:repo/be/ugent/objprog/commhub/1.0/commhub-1.0.jar be.ugent.dominion.Main server";
     }
     {
       name = "clean";
