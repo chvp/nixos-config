@@ -39,6 +39,7 @@
               "SPC f" '(eglot-format :which-key "Format region")
               "SPC F" '(eglot-format :which-key "Format buffer")
               "SPC r" '(eglot-rename :which-key "Rename symbol")
+              "SPC a" '(eglot-code-actions :which-key "Relevant local actions")
               )
              :config
              ;;; eclipse-jdt breaks the spec which in turn breaks code actions
