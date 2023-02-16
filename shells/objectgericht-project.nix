@@ -9,7 +9,7 @@
       category = "development";
       help = "Start jdt-language-server with configured workspace location";
       command = ''
-        ${pkgs.jdt-language-server}/bin/jdt-language-server -data "$PRJ_DATA_DIR/workspace"
+        ${pkgs.jdt-language-server}/bin/jdt-language-server -data "$HOME/.cache/jdtls/$PRJ_ROOT"
       '';
     }
     {
