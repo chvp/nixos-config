@@ -12,6 +12,9 @@
     yarn
   ];
   env = [
+    { name = "CC"; value = "cc"; }
+    { name = "CPP"; value = "cpp"; }
+    { name = "CXX"; value = "c++"; }
     { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
     { name = "PATH"; prefix = "$GEM_HOME/bin"; }
   ];
