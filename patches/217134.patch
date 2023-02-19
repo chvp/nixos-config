@@ -1,0 +1,281 @@
+From 582795ab5a273716e9e3843e0de6967eb59d88ef Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sun, 19 Feb 2023 12:58:52 +0100
+Subject: [PATCH] matrix-hookshot: init at 2.7.0
+
+---
+ .../matrix-hookshot/default.nix               |  76 ++++++++++++
+ .../matrix-hookshot/package.json              | 111 ++++++++++++++++++
+ .../matrix-synapse/matrix-hookshot/pin.json   |   5 +
+ .../matrix-synapse/matrix-hookshot/update.sh  |  35 ++++++
+ pkgs/top-level/all-packages.nix               |   2 +
+ 5 files changed, 229 insertions(+)
+ create mode 100644 pkgs/servers/matrix-synapse/matrix-hookshot/default.nix
+ create mode 100644 pkgs/servers/matrix-synapse/matrix-hookshot/package.json
+ create mode 100644 pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
+ create mode 100755 pkgs/servers/matrix-synapse/matrix-hookshot/update.sh
+
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix b/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix
+new file mode 100644
+index 0000000000000..9903dbb1184e4
+--- /dev/null
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix
+@@ -0,0 +1,76 @@
++{ lib
++, stdenv
++, fetchFromGitHub
++, fetchYarnDeps
++, makeWrapper
++, matrix-sdk-crypto-nodejs
++, mkYarnPackage
++, rust
++, rustPlatform
++, napi-rs-cli
++, nodejs
++}:
++
++let
++  data = lib.importJSON ./pin.json;
++in
++mkYarnPackage rec {
++  pname = "matrix-hookshot";
++  version = data.version;
++
++  src = fetchFromGitHub {
++    owner = "matrix-org";
++    repo = "matrix-hookshot";
++    rev = data.version;
++    sha256 = data.srcHash;
++  };
++
++  packageJSON = ./package.json;
++
++  offlineCache = fetchYarnDeps {
++    yarnLock = src + "/yarn.lock";
++    sha256 = data.yarnHash;
++  };
++
++  cargoDeps = rustPlatform.fetchCargoTarball {
++    inherit src;
++    name = "${pname}-${version}";
++    hash = "sha256-WolkDSS5wPxtltKzq4Er2nAQ0GrsF3imim3/Ge4eguQ=";
++  };
++
++  packageResolutions = {
++    "@matrix-org/matrix-sdk-crypto-nodejs" = "${matrix-sdk-crypto-nodejs}/lib/node_modules/@matrix-org/matrix-sdk-crypto-nodejs";
++  };
++
++  nativeBuildInputs = [
++    rustPlatform.cargoSetupHook
++    rustPlatform.rust.cargo
++    rustPlatform.rust.rustc
++    napi-rs-cli
++    makeWrapper
++  ];
++
++  buildPhase = ''
++    runHook preBuild
++    cd deps/${pname}
++    napi build --target ${rust.toRustTargetSpec stdenv.targetPlatform} --dts ../src/libRs.d.ts --release ./lib
++    yarn run build:app:fix-defs
++    yarn run build:app
++    yarn run build:web
++    cd ../..
++    runHook postBuild
++  '';
++
++  postInstall = ''
++    makeWrapper '${nodejs}/bin/node' "$out/bin/matrix-hookshot" --add-flags \
++        "$out/libexec/matrix-hookshot/deps/matrix-hookshot/lib/App/BridgeApp.js"
++  '';
++
++  doDist = false;
++
++  meta = with lib; {
++    description = "A bridge between Matrix and multiple project management services, such as GitHub, GitLab and JIRA";
++    maintainers = with maintainers; [ chvp ];
++    license = licenses.asl20;
++  };
++}
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
+new file mode 100644
+index 0000000000000..6676f3bb9c306
+--- /dev/null
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
+@@ -0,0 +1,111 @@
++{
++  "name": "matrix-hookshot",
++  "version": "2.7.0",
++  "description": "A bridge between Matrix and multiple project management services, such as GitHub, GitLab and JIRA.",
++  "main": "lib/app.js",
++  "repository": "https://github.com/matrix-org/matrix-hookshot",
++  "author": "matrix.org",
++  "license": "Apache-2.0",
++  "napi": {
++    "name": "matrix-hookshot-rs"
++  },
++  "engines": {
++    "node": ">=16"
++  },
++  "scripts": {
++    "build:web": "vite build",
++    "build:app": "tsc --project tsconfig.json",
++    "build:app:rs": "napi build --dts ../src/libRs.d.ts --release ./lib",
++    "build:app:fix-defs": "ts-node scripts/definitions-fixer.ts src/libRs.d.ts",
++    "build:docs": "ts-node scripts/build-metrics-docs.ts > docs/metrics.md && mdbook build",
++    "dev:web": "vite dev",
++    "build": "scripts/build-app.sh",
++    "clean:web": "rimraf public/",
++    "clean:app": "tsc --build tsconfig.json --clean",
++    "clean:app:rs": "rimraf src/libRs.d.ts target/",
++    "clean:docs": "mdbook clean",
++    "clean": "scripts/clean.sh",
++    "prepare": "yarn build",
++    "start": "node --require source-map-support/register lib/App/BridgeApp.js",
++    "start:app": "node --require source-map-support/register lib/App/BridgeApp.js",
++    "start:webhooks": "node --require source-map-support/register lib/App/GithubWebhookApp.js",
++    "start:matrixsender": "node --require source-map-support/register lib/App/MatrixSenderApp.js",
++    "test": "mocha -r ts-node/register tests/init.ts tests/*.ts  tests/**/*.ts",
++    "test:cover": "nyc --reporter=lcov --reporter=text yarn test",
++    "lint": "yarn run lint:js && yarn run lint:rs",
++    "lint:js": "eslint -c .eslintrc.js 'src/**/*.ts' 'tests/**/*.ts' 'web/**/*.ts' 'web/**/*.tsx'",
++    "lint:rs": "cargo fmt --all -- --check",
++    "generate-default-config": "ts-node src/Config/Defaults.ts --config > config.sample.yml",
++    "validate-config": "ts-node src/Config/Config.ts"
++  },
++  "dependencies": {
++    "@alloc/quick-lru": "^5.2.0",
++    "@octokit/auth-app": "^3.3.0",
++    "@octokit/auth-token": "^2.4.5",
++    "@octokit/rest": "^18.10.0",
++    "@octokit/webhooks": "^9.1.2",
++    "ajv": "^8.11.0",
++    "axios": "^0.24.0",
++    "cors": "^2.8.5",
++    "express": "^4.17.3",
++    "figma-js": "^1.14.0",
++    "http-status-codes": "^2.2.0",
++    "ioredis": "^5.2.3",
++    "jira-client": "^8.0.0",
++    "markdown-it": "^12.3.2",
++    "matrix-appservice-bridge": "^6.0.0",
++    "matrix-bot-sdk": "npm:@vector-im/matrix-bot-sdk@^0.6.3-element.0",
++    "matrix-widget-api": "^1.0.0",
++    "micromatch": "^4.0.4",
++    "mime": "^3.0.0",
++    "node-emoji": "^1.11.0",
++    "nyc": "^15.1.0",
++    "p-queue": "^6.6.2",
++    "prom-client": "^14.0.1",
++    "reflect-metadata": "^0.1.13",
++    "rss-parser": "^3.12.0",
++    "source-map-support": "^0.5.21",
++    "string-argv": "^0.3.1",
++    "tiny-typed-emitter": "^2.1.0",
++    "uuid": "^8.3.2",
++    "vm2": "^3.9.11",
++    "winston": "^3.3.3",
++    "xml2js": "^0.4.23",
++    "yaml": "^1.10.2"
++  },
++  "devDependencies": {
++    "@codemirror/lang-javascript": "^6.0.2",
++    "@napi-rs/cli": "^2.2.0",
++    "@preact/preset-vite": "^2.2.0",
++    "@tsconfig/node16": "^1.0.3",
++    "@types/ajv": "^1.0.0",
++    "@types/chai": "^4.2.22",
++    "@types/cors": "^2.8.12",
++    "@types/express": "^4.17.14",
++    "@types/jira-client": "^7.1.0",
++    "@types/markdown-it": "^12.2.3",
++    "@types/micromatch": "^4.0.1",
++    "@types/mime": "^2.0.3",
++    "@types/mocha": "^9.0.0",
++    "@types/node": "^16",
++    "@types/node-emoji": "^1.8.1",
++    "@types/uuid": "^8.3.3",
++    "@types/xml2js": "^0.4.11",
++    "@typescript-eslint/eslint-plugin": "^5.4.0",
++    "@typescript-eslint/parser": "^5.4.0",
++    "@uiw/react-codemirror": "^4.12.3",
++    "chai": "^4.3.4",
++    "eslint": "^8.3.0",
++    "eslint-config-preact": "^1.3.0",
++    "eslint-plugin-mocha": "^9.0.0",
++    "mini.css": "^3.0.1",
++    "mocha": "^8.2.1",
++    "preact": "^10.5.15",
++    "rimraf": "^3.0.2",
++    "sass": "^1.51.0",
++    "ts-node": "^10.4.0",
++    "typescript": "^4.5.2",
++    "vite": "^2.9.13",
++    "vite-svg-loader": "^3.4.0"
++  }
++}
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
+new file mode 100644
+index 0000000000000..d726307eeb000
+--- /dev/null
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
+@@ -0,0 +1,5 @@
++{
++  "version": "2.7.0",
++  "srcHash": "rW5fqKshnF2S4w55V2GaAa2RFVM+YbwRum9OwTTpYuA=",
++  "yarnHash": "0q71901ra9m9rbbczal1imqfba4b07bpr8hkpw1d1r9ghc2xjay4"
++}
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/update.sh b/pkgs/servers/matrix-synapse/matrix-hookshot/update.sh
+new file mode 100755
+index 0000000000000..4d91ec7533297
+--- /dev/null
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/update.sh
+@@ -0,0 +1,35 @@
++#!/usr/bin/env -S nix shell nixpkgs#nix nixpkgs#curl nixpkgs#jq nixpkgs#prefetch-yarn-deps nixpkgs#nix-prefetch-github nixpkgs#nix-prefetch-git --command bash
++
++if [ "$#" -gt 1 ] || [[ "$1" == -* ]]; then
++  echo "Regenerates packaging data for matrix-hookshot."
++  echo "Usage: $0 [git release tag]"
++  exit 1
++fi
++
++version="$1"
++
++set -euo pipefail
++
++if [ -z "$version" ]; then
++  version="$(curl "https://api.github.com/repos/matrix-org/matrix-hookshot/releases?per_page=1" | jq -r '.[0].tag_name')"
++fi
++
++src="https://raw.githubusercontent.com/matrix-org/matrix-hookshot/$version"
++src_hash=$(nix-prefetch-github matrix-org matrix-hookshot --rev ${version} | jq -r .sha256)
++
++tmpdir=$(mktemp -d)
++trap 'rm -rf "$tmpdir"' EXIT
++
++pushd $tmpdir
++curl -O "$src/yarn.lock"
++yarn_hash=$(prefetch-yarn-deps yarn.lock)
++popd
++
++curl -O "$src/package.json"
++cat > pin.json << EOF
++{
++  "version": "$version",
++  "srcHash": "$src_hash",
++  "yarnHash": "$yarn_hash"
++}
++EOF
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index fa05105d53c48..d595b9d8fc338 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -9068,6 +9068,8 @@ with pkgs;
+ 
+   matrix-corporal = callPackage ../servers/matrix-corporal { };
+ 
++  matrix-hookshot = callPackage ../servers/matrix-synapse/matrix-hookshot {};
++
+   mautrix-facebook = callPackage ../servers/mautrix-facebook { };
+ 
+   mautrix-googlechat = callPackage ../servers/mautrix-googlechat { };

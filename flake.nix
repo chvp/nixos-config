@@ -99,7 +99,6 @@
           emacs-overlay.overlay
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
-            matrix-hookshot = self.callPackage ./packages/matrix-hookshot { };
           })
           nur.overlay
           www-chvp-be.overlay
@@ -132,9 +131,6 @@
               nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs; };
             in
             builtins.listToAttrs (builtins.map (name: { inherit name; value = nameToValue name; }) shellNames);
-          packages = {
-            matrix-hookshot = pkgs.callPackage ./packages/matrix-hookshot { };
-          };
         };
     };
 }
