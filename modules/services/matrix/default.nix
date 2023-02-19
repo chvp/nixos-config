@@ -25,8 +25,8 @@
             proxy_set_header X-Forwarded-Ssl on;
           '';
         };
-        "/_hookshot" = {
-          proxyPass = "http://127.0.0.1:9000";
+        "~ ^/_hookshot/(.*)" = {
+          proxyPass = "http://127.0.0.1:9000/$1";
           extraConfig = ''
             proxy_set_header X-Forwarded-Ssl on;
           '';
