@@ -35,11 +35,14 @@
           (use-package eglot
             :general
             (lmap
+              :keymaps 'prog-mode-map
               "SPC s" '(eglot :which-key "Add buffer to eglot")
               "SPC f" '(eglot-format :which-key "Format region")
               "SPC F" '(eglot-format :which-key "Format buffer")
               "SPC r" '(eglot-rename :which-key "Rename symbol")
               "SPC a" '(eglot-code-actions :which-key "Relevant local actions")
+              "SPC n" '(flymake-goto-next-error :which-key "Next error")
+              "SPC p" '(flymake-goto-prev-error :which-key "Previous error")
               )
              :config
              ;;; eclipse-jdt breaks the spec which in turn breaks code actions
