@@ -16,7 +16,7 @@
       name = "start";
       category = "development";
       help = "Run game";
-      command = "mvn javafx:run";
+      command = "mvn clean javafx:run";
     }
     {
       name = "clean";
