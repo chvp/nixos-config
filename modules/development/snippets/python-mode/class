@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: new class
+# key: class
+# --
+class $1:
+    """
+    $2
+    """
+    def __init__(self${3:, *args, **kwargs}):
+        """
+        $4
+        """
+        ${0:pass}
+

@@ -51,6 +51,18 @@
                (_server (_cmd (eql java.apply.workspaceEdit)) arguments)
                "Eclipse JDT breaks spec and replies with edits as arguments."
                (mapc #'eglot--apply-workspace-edit arguments))
+             ;;; eglot replaces company-backends with '(company-capf). I still
+             ;;; want company-yasnippet as well though
+             (add-to-list 'eglot-stay-out-of "company")
+            )
+
+          ;; Snippets
+          (use-package yasnippet
+            ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
+            :custom (yas-snippet-dirs '("/home/charlotte/repos/nixos-config/modules/development/snippets/"))
+            :diminish (yas-minor-mode)
+            :config
+            (yas-global-mode 1)
             )
 
           ;; Forth syntax support
