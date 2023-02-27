@@ -1,4 +1,20 @@
-{ pkgs, inputs }: pkgs.devshell.mkShell {
+{ pkgs, inputs }:
+let
+  support-procfile-text = ''
+    memcached: memcached
+    mysql: mysql
+    worker: rails jobs:work
+    css: yarn build:css --watch
+    js: yarn build:js --watch
+  '';
+  support-procfile = pkgs.writeText "Procfile.supp" support-procfile-text;
+  all-procfile-text = support-procfile-text + ''
+    server: rails s
+  '';
+  all-procfile = pkgs.writeText "Procfile.all" all-procfile-text;
+
+in
+pkgs.devshell.mkShell {
   name = "Dodona";
   imports = [ "${inputs.devshell}/extra/language/c.nix" ];
   packages = with pkgs; [
@@ -34,12 +50,7 @@
       category = "general commands";
       help = "Start mysql (in docker container)";
       command = ''
-        trap "systemd-run --user --no-block docker stop dodona-db" 0
-        docker run -d --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
-        while [ 1 -eq 1 ]
-        do
-          sleep 1000
-        done
+        docker run --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
       '';
     }
     {
@@ -47,19 +58,9 @@
       category = "general commands";
       help = "Run everything required for a server";
       command = ''
-        memcached &
-        trap "kill $!" 0
-        mysql &
-        trap "kill $!" 0
         bundle install
         yarn install
-        rails jobs:work &
-        trap "kill $!" 0
-        yarn build:css --watch &
-        trap "kill $!" 0
-        yarn build:js --watch &
-        trap "kill $!" 0
-        wait $!
+        ${pkgs.honcho}/bin/honcho start -f ${support-procfile} -d $PRJ_ROOT
       '';
     }
     {
@@ -67,21 +68,9 @@
       category = "general commands";
       help = "Run everything";
       command = ''
-        memcached &
-        trap "kill $!" 0
-        mysql &
-        trap "kill $!" 0
         bundle install
         yarn install
-        rails jobs:work &
-        trap "kill $!" 0
-        yarn build:css --watch &
-        trap "kill $!" 0
-        yarn build:js --watch &
-        trap "kill $!" 0
-        rails s &
-        trap "kill $!" 0
-        wait $!
+        ${pkgs.honcho}/bin/honcho start -f ${all-procfile} -d $PRJ_ROOT
       '';
     }
   ];
