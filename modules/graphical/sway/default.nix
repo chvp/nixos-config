@@ -4,7 +4,23 @@ let
   launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
-  status-configuration = import ./status-configuration.nix { inherit pkgs config; };
+  mic-status = pkgs.writeShellScript "mic-status" ''
+    if [ "$(${pkgs.pulseaudio}/bin/pactl list sources | grep -o 'Mute: yes')" = "Mute: yes" ]
+    then
+      echo -e '\uf131'
+    else
+      echo -e '\uf130'
+    fi
+  '';
+  mail-status = pkgs.writeShellScript "mail-status" ''
+    mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
+    if [ "$mails" -gt 0 ]
+    then
+      echo "{ \"state\": \"Info\", \"text\": \"📬 $mails\" }"
+    else
+      echo "{ \"state\": \"Idle\", \"text\": \"📭\" }"
+    fi
+  '';
 in
 {
   options.chvp.graphical.sway.enable = lib.mkOption {
@@ -36,6 +52,92 @@ in
               exec sway
           fi
         '';
+        i3status-rust = {
+          enable = true;
+          bars.default = {
+            icons = "awesome6";
+            settings.theme = {
+              name = "gruvbox-light";
+              overrides = {
+                idle_bg="#ffffff";
+                idle_fg="#000000";
+                info_bg="#6aaeff";
+                info_fg="#000000";
+                good_bg="#5ada88";
+                good_fg="#000000";
+                warning_bg="#f5df23";
+                warning_fg="#000000";
+                critical_bg="#ff8892";
+                critical_fg="#000000";
+                separator="";
+              };
+            };
+            blocks = [
+              {
+                block = "net";
+                device = "wlp2s0";
+                format = "{ssid}";
+                hide_missing = true;
+                hide_inactive = true;
+              }
+              {
+                block = "net";
+                device = "wlp0s20f3";
+                format = "{ssid}";
+                hide_missing = true;
+                hide_inactive = true;
+              }
+              {
+                block = "net";
+                device = "enp0s31f6";
+                format = "{ip}";
+                hide_missing = true;
+                hide_inactive = true;
+              }
+              {
+                block = "net";
+                device = "enp0s13f0u2u2";
+                format = "{ip}";
+                hide_missing = true;
+                hide_inactive = true;
+              }
+              {
+                block = "battery";
+              }
+              {
+                block = "backlight";
+              }
+              {
+                block = "music";
+                player = "firefox";
+                marquee = false;
+                max_width = 40;
+                hide_when_empty = true;
+              }
+              {
+                block = "sound";
+              }
+              {
+                block = "custom";
+                command = "${mic-status}";
+                interval = 1;
+                on_click = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+              }
+              {
+                block = "custom";
+                json = true;
+                command = "${mail-status}";
+                interval = 1;
+                on_click = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
+              }
+              {
+                block = "time";
+                interval = 1;
+                format = "%a %d/%m %H:%M";
+              }
+            ];
+          };
+        };
       };
       services.kanshi = {
         enable = true;
@@ -87,7 +189,7 @@ in
               };
               fonts = { names = [ "Hack" ]; size = 9.0; style = "Regular"; };
               position = "top";
-              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${status-configuration}";
+              statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs $XDG_CONFIG_HOME/i3status-rust/config-default.toml";
               extraConfig = ''
                 status_padding 0
                 icon_theme Arc
