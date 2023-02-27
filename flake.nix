@@ -94,20 +94,20 @@
         input = nixpkgs;
         patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
         overlaysBuilder = _: [
-          accentor.overlay
-          devshell.overlay
+          accentor.overlays.default
+          devshell.overlays.default
           emacs-overlay.overlay
           (self: super: {
             tetris = tetris.packages.${self.system}.default;
           })
           nur.overlay
-          www-chvp-be.overlay
+          www-chvp-be.overlays.default
         ];
       };
       hostDefaults = {
         modules = [
           { nix.generateRegistryFromInputs = true; }
-          accentor.nixosModule
+          accentor.nixosModules.default
           agenix.nixosModules.age
           home-manager.nixosModule
           nixos-mailserver.nixosModule
