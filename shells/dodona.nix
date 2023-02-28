@@ -9,7 +9,7 @@ let
   '';
   support-procfile = pkgs.writeText "Procfile.supp" support-procfile-text;
   all-procfile-text = support-procfile-text + ''
-    server: rails s
+    server: rails s -p 3000
   '';
   all-procfile = pkgs.writeText "Procfile.all" all-procfile-text;
 
