@@ -106,6 +106,7 @@ in
               {
                 block = "music";
                 player = "firefox";
+                buttons = [ "prev" "play" "next" ];
                 marquee = false;
                 max_width = 40;
                 hide_when_empty = true;
