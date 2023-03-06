@@ -78,7 +78,7 @@
       };
     };
     www-chvp-be = {
-      url = "github:chvp/www.chvp.be";
+      url = "gitlab:chvp/www.chvp.be?host=git.chvp.be";
       inputs = {
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
