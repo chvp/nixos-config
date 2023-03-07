@@ -1,0 +1,98 @@
+From 878c20de9c2b9fc4b3e777f5a4d9f5c3b2d723b5 Mon Sep 17 00:00:00 2001
+From: Lin Jian <me@linj.tech>
+Date: Mon, 20 Feb 2023 02:26:31 +0800
+Subject: [PATCH] zsh: set environment variables in zshenv instead of zprofile
+
+This patch fixes two issues:
+
+1. The file in which environment variables are set is inconsistent.
+  - This file sets them in zprofile since 2011[1].  This is the case
+  when programs.zsh.enable is not set.
+  - Zsh module sets them in zshenv since the very beginning in
+  2012[2].  This is the case when programs.zsh.enable is set.
+
+2. Setting environment variables in zprofile overrides what users set
+in .zshenv.  See these[3] home-manager[4] issues[5].
+
+[1]: 0009c1f650ba619de97df36322fbd0346db0c099
+[2]: ffa4b28dcec622c98c1491a09c9b254dc13b0741
+[3]: https://github.com/nix-community/home-manager/issues/2751#issuecomment-1048682643
+[4]: https://github.com/nix-community/home-manager/issues/2991
+[5]: https://github.com/nix-community/home-manager/issues/3681#issuecomment-1436054233
+---
+ .../manual/release-notes/rl-2305.section.md   |  2 ++
+ pkgs/shells/zsh/default.nix                   | 24 +++++++++----------
+ 2 files changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/nixos/doc/manual/release-notes/rl-2305.section.md b/nixos/doc/manual/release-notes/rl-2305.section.md
+index 3e63ddced6115..bb3c5c3356eab 100644
+--- a/nixos/doc/manual/release-notes/rl-2305.section.md
++++ b/nixos/doc/manual/release-notes/rl-2305.section.md
+@@ -187,6 +187,8 @@ In addition to numerous new and upgraded packages, this release has the followin
+   The `{aclUse,superUser,disableActions}` attributes have been renamed, `pluginsConfig` now also accepts an attribute set of booleans, passing plain PHP is deprecated.
+   Same applies to `acl` which now also accepts structured settings.
+ 
++- The `zsh` package is now configured with `--enable-zshenv=${placeholder "out"}/etc/zshenv` instead of `--enable-zprofile=${placeholder "out"}/etc/zprofile` and contents in the previous `$out/zsh/zprofile` is modified and moved to `$out/zsh/zshenv`.  This change only affects NixOS systems where `programs.zsh.enable` is `false`: `zsh` now sources `/etc/profile` in the system-level zshenv instead of zprofile.
++
+ - The `wordpress` service now takes configuration via the `services.wordpress.sites.<name>.settings` attribute set, `extraConfig` is still available to append  additional text to `wp-config.php`.
+ 
+ - To reduce closure size in `nixos/modules/profiles/minimal.nix` profile disabled installation documentations and manuals. Also disabled `logrotate` and `udisks2` services.
+diff --git a/pkgs/shells/zsh/default.nix b/pkgs/shells/zsh/default.nix
+index 5a003b889a04a..1fe94a9506db7 100644
+--- a/pkgs/shells/zsh/default.nix
++++ b/pkgs/shells/zsh/default.nix
+@@ -42,7 +42,7 @@ stdenv.mkDerivation {
+     "--enable-multibyte"
+     "--with-tcsetpgrp"
+     "--enable-pcre"
+-    "--enable-zprofile=${placeholder "out"}/etc/zprofile"
++    "--enable-zshenv=${placeholder "out"}/etc/zshenv"
+     "--disable-site-fndir"
+   ] ++ lib.optionals (stdenv.hostPlatform != stdenv.buildPlatform && !stdenv.hostPlatform.isStatic) [
+     # Also see: https://github.com/buildroot/buildroot/commit/2f32e668aa880c2d4a2cce6c789b7ca7ed6221ba
+@@ -64,10 +64,10 @@ stdenv.mkDerivation {
+   postInstall = ''
+     make install.info install.html
+     mkdir -p $out/etc/
+-    cat > $out/etc/zprofile <<EOF
++    cat > $out/etc/zshenv <<EOF
+ if test -e /etc/NIXOS; then
+-  if test -r /etc/zprofile; then
+-    . /etc/zprofile
++  if test -r /etc/zshenv; then
++    . /etc/zshenv
+   else
+     emulate bash
+     alias shopt=false
+@@ -75,23 +75,23 @@ if test -e /etc/NIXOS; then
+     unalias shopt
+     emulate zsh
+   fi
+-  if test -r /etc/zprofile.local; then
+-    . /etc/zprofile.local
++  if test -r /etc/zshenv.local; then
++    . /etc/zshenv.local
+   fi
+ else
+-  # on non-nixos we just source the global /etc/zprofile as if we did
++  # on non-nixos we just source the global /etc/zshenv as if we did
+   # not use the configure flag
+-  if test -r /etc/zprofile; then
+-    . /etc/zprofile
++  if test -r /etc/zshenv; then
++    . /etc/zshenv
+   fi
+ fi
+ EOF
+     ${if stdenv.hostPlatform == stdenv.buildPlatform then ''
+-      $out/bin/zsh -c "zcompile $out/etc/zprofile"
++      $out/bin/zsh -c "zcompile $out/etc/zshenv"
+     '' else ''
+-      ${lib.getBin buildPackages.zsh}/bin/zsh -c "zcompile $out/etc/zprofile"
++      ${lib.getBin buildPackages.zsh}/bin/zsh -c "zcompile $out/etc/zshenv"
+     ''}
+-    mv $out/etc/zprofile $out/etc/zprofile_zwc_is_used
++    mv $out/etc/zshenv $out/etc/zshenv_zwc_is_used
+ 
+     rm $out/bin/zsh-${version}
+     mkdir -p $out/share/doc/
