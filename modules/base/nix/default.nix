@@ -8,32 +8,10 @@ let
     };
   };
   baseNixIndex = {
-    home.packages = with pkgs; [ nix-index ];
-    programs.zsh.initExtra = ''
-      source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
-    '';
-    systemd.user = {
-      services.nix-index = {
-        Unit = {
-          Description = "Service to run nix-index";
-        };
-        Service = {
-          Type = "oneshot";
-          ExecStart = "${pkgs.nix-index}/bin/nix-index";
-        };
-      };
-      timers.nix-index = {
-        Unit = {
-          Description = "Timer that starts nix-index every two hours";
-          PartOf = [ "nix-index.service" ];
-        };
-        Timer = {
-          OnCalendar = "00/2:30";
-        };
-        Install = {
-          WantedBy = [ "default.target" ];
-        };
-      };
+    programs.command-not-found.enable = false;
+    programs.nix-index = {
+      enable = true;
+      package = config.programs.nix-index.package;
     };
   };
 in
@@ -47,14 +25,10 @@ in
       default = [ ];
       example = [ "teams" ];
     };
-    # Note that this is only enabled for charlotte, until https://github.com/bennofs/nix-index/issues/143 is resolved.
-    enableNixIndex = lib.mkOption {
-      default = true;
-      example = false;
-    };
   };
 
   config = {
+    programs.command-not-found.enable = false;
     chvp.base = {
       emacs.extraConfig = [
         ''
@@ -71,8 +45,7 @@ in
       '';
       zfs = {
         homeLinks =
-          (lib.optional config.chvp.base.nix.enableDirenv { path = ".local/share/direnv"; type = "cache"; }) ++
-          (lib.optional config.chvp.base.nix.enableNixIndex { path = ".cache/nix-index"; type = "cache"; });
+          (lib.optional config.chvp.base.nix.enableDirenv { path = ".local/share/direnv"; type = "cache"; });
         systemLinks =
           (lib.optional config.chvp.base.nix.enableDirenv { path = "/root/.local/share/direnv"; type = "cache"; });
       };
@@ -112,7 +85,7 @@ in
     home-manager.users.charlotte = { ... }:
       lib.recursiveUpdate
         (lib.optionalAttrs config.chvp.base.nix.enableDirenv baseDirenv)
-        (lib.optionalAttrs config.chvp.base.nix.enableNixIndex baseNixIndex);
-    home-manager.users.root = { ... }: lib.optionalAttrs config.chvp.base.nix.enableDirenv baseDirenv;
+        baseNixIndex;
+    home-manager.users.root = { ... }: baseNixIndex;
   };
 }

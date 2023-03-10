@@ -62,6 +62,10 @@
       };
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur.url = "github:nix-community/NUR";
     tetris = {
       url = "github:chvp/tetris";
@@ -87,7 +91,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nix-index-database, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
     utils.lib.mkFlake {
       inherit self inputs;
       channels.nixpkgs = {
@@ -111,6 +115,7 @@
           agenix.nixosModules.age
           home-manager.nixosModule
           nixos-mailserver.nixosModule
+          nix-index-database.nixosModules.nix-index
           ./modules
         ];
       };
