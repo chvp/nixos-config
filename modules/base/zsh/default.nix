@@ -13,6 +13,31 @@ let
         expireDuplicatesFirst = true;
         path = "${config.chvp.cachePrefix}${home}/.local/share/zsh/history";
       };
+      initExtra = ''
+        nshell() {
+         local -a drvs
+         for attr in "$@"; do
+           drvs+=(nixpkgs#$attr)
+         done
+         local paths="$(nix build --no-link --print-out-paths $drvs)"
+         for p in $paths; do
+           export PATH="$p/bin:$PATH"
+         done
+        }
+
+        nrun() {
+          local drv="$1"
+          shift 1
+          nix run nixpkgs#$drv $@
+        }
+
+        nsrun() {
+          local drv="$1"
+          shift 1
+          nix shell nixpkgs#$drv -c $@
+        }
+      '';
+      sessionVariables = { DEFAULT_USER = "charlotte"; };
       oh-my-zsh = {
         enable = true;
         plugins = [
@@ -26,7 +51,6 @@ let
         ];
         theme = "robbyrussell";
       };
-      sessionVariables = { DEFAULT_USER = "charlotte"; };
     };
   });
 in
