@@ -42,6 +42,8 @@
       https = true;
       initialRootEmail = "charlotte@vanpetegem.me";
       initialRootPasswordFile = config.age.secrets."passwords/services/git/initial-root-password".path;
+      # Hack, https://github.com/NixOS/nixpkgs/pull/135926 broke stuff
+      pages.settings.pages-domain = "not.actually.enabled";
       secrets = {
         dbFile = config.age.secrets."passwords/services/git/db".path;
         jwsFile = config.age.secrets."passwords/services/git/jws".path;
