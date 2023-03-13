@@ -33,7 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devshell = {
-      url = "github:numtide/devshell";
+      url = "github:chvp/devshell/background-services";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
