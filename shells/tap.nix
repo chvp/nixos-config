@@ -1,6 +1,6 @@
 { pkgs, inputs }: pkgs.devshell.mkShell {
   name = "Tap";
-  imports = [ "${inputs.devshell}/extra/language/c.nix" ];
+  imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   commands = [
     {
       name = "refresh-deps";
@@ -13,17 +13,8 @@
       '';
     }
   ];
-  env = [
-    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
-    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
-  ];
   packages = with pkgs; [
-    (pkgs.lowPrio binutils)
     imagemagick
-    file
-    findutils
-    gnumake
-    ruby_3_0
     nodejs
     yarn
   ];
@@ -31,9 +22,8 @@
     name = "server";
     command = "rails s -p 3000";
   };
-  language.c = {
-    compiler = pkgs.gcc;
-    includes = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];
-    libraries = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];
+  language.ruby = {
+    package = pkgs.ruby_3_0;
+    nativeDeps = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];
   };
 }

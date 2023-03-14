@@ -1,10 +1,8 @@
 { pkgs, inputs }: pkgs.devshell.mkShell {
   name = "Gamification 2";
-  imports = [ "${inputs.devshell}/extra/language/c.nix" ];
+  imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   env = [
     { name = "DATABASE_HOST"; eval = "$PGDATA"; }
-    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
-    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
     { name = "PGDATA"; eval = "$PRJ_DATA_DIR/postgres"; }
   ];
   commands = [
@@ -48,22 +46,17 @@
     }
   ];
   packages = with pkgs; [
-    (pkgs.lowPrio binutils)
-    findutils
     cmake
-    gnumake
     nodejs
     postgresql_14
-    ruby_3_1
     yarn
   ];
   serviceGroups.server.services = {
     web.command = "rails s -p 3000";
     postgres.command = "pg:start";
   };
-  language.c = {
-    compiler = pkgs.gcc;
-    includes = [ pkgs.zlib pkgs.openssl ];
-    libraries = [ pkgs.zlib pkgs.openssl ];
+  language.ruby = {
+    package = pkgs.ruby_3_1;
+    nativeDeps = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];
   };
 }

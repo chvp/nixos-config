@@ -16,24 +16,18 @@ let
 in
 pkgs.devshell.mkShell {
   name = "Dodona";
-  imports = [ "${inputs.devshell}/extra/language/c.nix" ];
+  imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   packages = with pkgs; [
-    (pkgs.lowPrio binutils)
     chromedriver
     ungoogled-chromium
-    findutils
-    gnumake
     nodejs
     nodePackages.typescript-language-server
-    ruby_3_1
     rubyPackages_3_1.solargraph
     yarn
   ];
   env = [
     { name = "DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona"; }
     { name = "TEST_DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona_test"; }
-    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
-    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
   ];
   commands = [
     {
@@ -65,9 +59,8 @@ pkgs.devshell.mkShell {
     server.services = all-services;
     server-support.services = support-services;
   };
-  language.c = {
-    compiler = pkgs.gcc;
-    includes = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi ];
-    libraries = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi ];
+  language.ruby = {
+    package = pkgs.ruby_3_1;
+    nativeDeps = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi ];
   };
 }
