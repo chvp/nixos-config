@@ -1,6 +1,27 @@
 { pkgs, inputs }: pkgs.devshell.mkShell {
   name = "Tab";
   imports = [ "${inputs.devshell}/extra/language/c.nix" ];
+  commands = [
+    {
+      name = "refresh-deps";
+      category = "general commands";
+      help = "Install dependencies";
+      command = ''
+        yarn install
+        bundle install
+        bundle pristine
+      '';
+    }
+  ];
+  env = [
+    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
+    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
+  ];
+  serviceGroups.server.services = {
+    web.command = "rails s -p 3000";
+    js.command = "yarn build:dev --watch";
+    css.command = "yarn build:css --watch";
+  };
   packages = with pkgs; [
     (pkgs.lowPrio binutils)
     findutils
@@ -8,29 +29,6 @@
     ruby_3_1
     nodejs
     yarn
-  ];
-  env = [
-    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
-    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
-  ];
-  commands = [
-    {
-      name = "server-support";
-      category = "general commands";
-      help = "Run everything required for a server";
-      command = ''
-        bundle install
-      '';
-    }
-    {
-      name = "server";
-      category = "general commands";
-      help = "Run everything";
-      command = ''
-        server-support
-        rails s
-      '';
-    }
   ];
   language.c = {
     compiler = pkgs.gcc;

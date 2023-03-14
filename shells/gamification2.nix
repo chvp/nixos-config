@@ -1,24 +1,23 @@
 { pkgs, inputs }: pkgs.devshell.mkShell {
   name = "Gamification 2";
   imports = [ "${inputs.devshell}/extra/language/c.nix" ];
-  packages = with pkgs; [
-    (pkgs.lowPrio binutils)
-    findutils
-    cmake
-    gnumake
-    nodejs
-    postgresql_14
-    ruby_3_1
-    yarn
-  ];
   env = [
-    { name = "NIX_CC"; value = "${pkgs.gcc}"; }
-    { name = "PGDATA"; eval = "$PRJ_DATA_DIR/postgres"; }
     { name = "DATABASE_HOST"; eval = "$PGDATA"; }
     { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
     { name = "PATH"; prefix = "$GEM_HOME/bin"; }
+    { name = "PGDATA"; eval = "$PRJ_DATA_DIR/postgres"; }
   ];
   commands = [
+    {
+      name = "refresh-deps";
+      category = "general commands";
+      help = "Install dependencies";
+      command = ''
+        yarn install
+        bundle install
+        bundle pristine
+      '';
+    }
     {
       name = "pg:setup";
       category = "database";
@@ -36,15 +35,7 @@
       help = "Start postgres instance";
       command = ''
         [ ! -d $PGDATA ] && pg:setup
-        pg_ctl -D $PGDATA -U postgres start -l log/postgres.log
-      '';
-    }
-    {
-      name = "pg:stop";
-      category = "database";
-      help = "Stop postgres instance";
-      command = ''
-        pg_ctl -D $PGDATA -U postgres stop
+        postgres
       '';
     }
     {
@@ -52,10 +43,24 @@
       category = "database";
       help = "Open database console";
       command = ''
-        psql --host $PGDATA -U postgres
+        psql --host $PGDATA s
       '';
     }
   ];
+  packages = with pkgs; [
+    (pkgs.lowPrio binutils)
+    findutils
+    cmake
+    gnumake
+    nodejs
+    postgresql_14
+    ruby_3_1
+    yarn
+  ];
+  serviceGroups.server.services = {
+    web.command = "rails s -p 3000";
+    postgres.command = "pg:start";
+  };
   language.c = {
     compiler = pkgs.gcc;
     includes = [ pkgs.zlib pkgs.openssl ];

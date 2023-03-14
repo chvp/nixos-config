@@ -33,7 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devshell = {
-      url = "github:chvp/devshell/background-services";
+      url = "github:chvp/devshell";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
@@ -98,6 +98,7 @@
         input = nixpkgs;
         patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
         overlaysBuilder = _: [
+          agenix.overlays.default
           accentor.overlays.default
           devshell.overlays.default
           emacs-overlay.overlay

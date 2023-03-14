@@ -1,6 +1,22 @@
 { pkgs, inputs }: pkgs.devshell.mkShell {
   name = "Tap";
   imports = [ "${inputs.devshell}/extra/language/c.nix" ];
+  commands = [
+    {
+      name = "refresh-deps";
+      category = "general commands";
+      help = "Install dependencies";
+      command = ''
+        yarn install
+        bundle install
+        bundle pristine
+      '';
+    }
+  ];
+  env = [
+    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
+    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
+  ];
   packages = with pkgs; [
     (pkgs.lowPrio binutils)
     imagemagick
@@ -11,32 +27,10 @@
     nodejs
     yarn
   ];
-  env = [
-    { name = "CC"; value = "cc"; }
-    { name = "CPP"; value = "cpp"; }
-    { name = "CXX"; value = "c++"; }
-    { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
-    { name = "PATH"; prefix = "$GEM_HOME/bin"; }
-  ];
-  commands = [
-    {
-      name = "server-support";
-      category = "general commands";
-      help = "Run everything required for a server";
-      command = ''
-        bundle install
-      '';
-    }
-    {
-      name = "server";
-      category = "general commands";
-      help = "Run everything";
-      command = ''
-        server-support
-        rails s
-      '';
-    }
-  ];
+  serviceGroups.server.services.rails = {
+    name = "server";
+    command = "rails s -p 3000";
+  };
   language.c = {
     compiler = pkgs.gcc;
     includes = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];

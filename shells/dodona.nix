@@ -30,15 +30,22 @@ pkgs.devshell.mkShell {
     yarn
   ];
   env = [
-    { name = "CC"; value = "cc"; }
-    { name = "CPP"; value = "cpp"; }
-    { name = "CXX"; value = "c++"; }
     { name = "DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona"; }
     { name = "TEST_DATABASE_URL"; value = "mysql2://root:dodona@127.0.0.1:3306/dodona_test"; }
     { name = "GEM_HOME"; eval = "$PRJ_DATA_DIR/bundle/$(ruby -e 'puts RUBY_VERSION')"; }
     { name = "PATH"; prefix = "$GEM_HOME/bin"; }
   ];
   commands = [
+    {
+      name = "refresh-deps";
+      category = "general commands";
+      help = "Install dependencies";
+      command = ''
+        yarn install
+        bundle install
+        bundle pristine
+      '';
+    }
     {
       name = "memcached";
       category = "general commands";
