@@ -51,51 +51,49 @@ in
         i3status-rust = {
           enable = true;
           bars.default = {
-            icons = "awesome6";
-            settings.theme = {
-              name = "gruvbox-light";
-              overrides = {
-                idle_bg = "#ffffff";
-                idle_fg = "#000000";
-                info_bg = "#6aaeff";
-                info_fg = "#000000";
-                good_bg = "#5ada88";
-                good_fg = "#000000";
-                warning_bg = "#f5df23";
-                warning_fg = "#000000";
-                critical_bg = "#ff8892";
-                critical_fg = "#000000";
-                separator = "";
+            settings = {
+              icons.icons = "awesome6";
+              theme = {
+                theme = "gruvbox-light";
+                overrides = {
+                  idle_bg = "#ffffff";
+                  idle_fg = "#000000";
+                  info_bg = "#6aaeff";
+                  info_fg = "#000000";
+                  good_bg = "#5ada88";
+                  good_fg = "#000000";
+                  warning_bg = "#f5df23";
+                  warning_fg = "#000000";
+                  critical_bg = "#ff8892";
+                  critical_fg = "#000000";
+                  separator = "";
+                };
               };
             };
             blocks = [
               {
                 block = "net";
                 device = "wlp2s0";
-                format = "{ssid}";
-                hide_missing = true;
-                hide_inactive = true;
+                format = " $icon $ssid ";
+                missing_format = "";
               }
               {
                 block = "net";
                 device = "wlp0s20f3";
-                format = "{ssid}";
-                hide_missing = true;
-                hide_inactive = true;
+                format = " $icon $ssid ";
+                missing_format = "";
               }
               {
                 block = "net";
                 device = "enp0s31f6";
-                format = "{ip}";
-                hide_missing = true;
-                hide_inactive = true;
+                format = " $icon $ip ";
+                missing_format = "";
               }
               {
                 block = "net";
                 device = "enp0s13f0u2u2";
-                format = "{ip}";
-                hide_missing = true;
-                hide_inactive = true;
+                format = " $icon $ip ";
+                missing_format = "";
               }
               {
                 block = "battery";
@@ -106,10 +104,7 @@ in
               {
                 block = "music";
                 player = "firefox";
-                buttons = [ "prev" "play" "next" ];
-                marquee = false;
-                max_width = 40;
-                hide_when_empty = true;
+                format = " $icon $combo.str(max_w:40) $play $next |";
               }
               {
                 block = "sound";
@@ -118,19 +113,26 @@ in
                 block = "custom";
                 command = "${mic-status}";
                 interval = 1;
-                on_click = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+                click = [{
+                  button = "left";
+                  cmd = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+                  update = true;
+                }];
               }
               {
                 block = "custom";
                 json = true;
                 command = "${mail-status}";
                 interval = 1;
-                on_click = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
+                click = [{
+                  button = "left";
+                  cmd = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
+                }];
               }
               {
                 block = "time";
                 interval = 1;
-                format = "%a %d/%m %H:%M";
+                format = " $icon $timestamp.datetime(f:'%a %d/%m %H:%M') ";
               }
             ];
           };
