@@ -104,7 +104,7 @@ in
               {
                 block = "music";
                 player = "firefox";
-                format = " $icon $combo.str(max_w:40) $play $next |";
+                format = " $icon $combo.str(w:40) $play $next |";
               }
               {
                 block = "sound";
