@@ -138,9 +138,6 @@
         };
       };
     };
-    systemd.tmpfiles.rules = [
-      "d /var/log/mautrix-whatsapp - mautrix_whatsapp mautrix_whatsapp"
-    ];
 
     users = {
       users = {
