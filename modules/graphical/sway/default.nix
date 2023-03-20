@@ -29,7 +29,25 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.sway.enable {
-    services.dbus.packages = with pkgs; [ dconf ];
+    services = {
+      dbus.packages = with pkgs; [ dconf ];
+      greetd = {
+        enable = true;
+        settings =
+          let
+            wrapped-command = pkgs.writeShellScript "sway-run" "systemd-run sway $@";
+          in
+          {
+            default_session = {
+              command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${wrapped-command}";
+            };
+            initial_session = {
+              command = "${wrapped-command}";
+              user = "charlotte";
+            };
+          };
+      };
+    };
     security.pam.services.swaylock = { };
     xdg.portal = {
       enable = true;
@@ -42,100 +60,93 @@ in
         wf-recorder
         wl-clipboard
       ];
-      programs = {
-        zsh.loginExtra = ''
-          if [[ -z "$DISPLAY" ]] && [[ $(tty) = "/dev/tty1" ]]; then
-              exec sway
-          fi
-        '';
-        i3status-rust = {
-          enable = true;
-          bars.default = {
-            settings = {
-              icons.icons = "awesome6";
-              theme = {
-                theme = "gruvbox-light";
-                overrides = {
-                  idle_bg = "#ffffff";
-                  idle_fg = "#000000";
-                  info_bg = "#6aaeff";
-                  info_fg = "#000000";
-                  good_bg = "#5ada88";
-                  good_fg = "#000000";
-                  warning_bg = "#f5df23";
-                  warning_fg = "#000000";
-                  critical_bg = "#ff8892";
-                  critical_fg = "#000000";
-                  separator = "";
-                };
+      programs.i3status-rust = {
+        enable = true;
+        bars.default = {
+          settings = {
+            icons.icons = "awesome6";
+            theme = {
+              theme = "gruvbox-light";
+              overrides = {
+                idle_bg = "#ffffff";
+                idle_fg = "#000000";
+                info_bg = "#6aaeff";
+                info_fg = "#000000";
+                good_bg = "#5ada88";
+                good_fg = "#000000";
+                warning_bg = "#f5df23";
+                warning_fg = "#000000";
+                critical_bg = "#ff8892";
+                critical_fg = "#000000";
+                separator = "";
               };
             };
-            blocks = [
-              {
-                block = "net";
-                device = "wlp2s0";
-                format = " $icon $ssid ";
-                missing_format = "";
-              }
-              {
-                block = "net";
-                device = "wlp0s20f3";
-                format = " $icon $ssid ";
-                missing_format = "";
-              }
-              {
-                block = "net";
-                device = "enp0s31f6";
-                format = " $icon $ip ";
-                missing_format = "";
-              }
-              {
-                block = "net";
-                device = "enp0s13f0u2u2";
-                format = " $icon $ip ";
-                missing_format = "";
-              }
-              {
-                block = "battery";
-              }
-              {
-                block = "backlight";
-              }
-              {
-                block = "music";
-                player = "firefox";
-                format = " $icon $combo.str(w:40) $play $next |";
-              }
-              {
-                block = "sound";
-              }
-              {
-                block = "custom";
-                command = "${mic-status}";
-                interval = 1;
-                click = [{
-                  button = "left";
-                  cmd = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
-                  update = true;
-                }];
-              }
-              {
-                block = "custom";
-                json = true;
-                command = "${mail-status}";
-                interval = 1;
-                click = [{
-                  button = "left";
-                  cmd = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
-                }];
-              }
-              {
-                block = "time";
-                interval = 1;
-                format = " $icon $timestamp.datetime(f:'%a %d/%m %H:%M') ";
-              }
-            ];
           };
+          blocks = [
+            {
+              block = "net";
+              device = "wlp2s0";
+              format = " $icon $ssid ";
+              missing_format = "";
+            }
+            {
+              block = "net";
+              device = "wlp0s20f3";
+              format = " $icon $ssid ";
+              missing_format = "";
+            }
+            {
+              block = "net";
+              device = "enp0s31f6";
+              format = " $icon $ip ";
+              missing_format = "";
+            }
+            {
+              block = "net";
+              device = "enp0s13f0u2u2";
+              format = " $icon $ip ";
+              missing_format = "";
+            }
+            {
+              block = "battery";
+            }
+            {
+              block = "backlight";
+            }
+            {
+              block = "music";
+              player = "firefox";
+              format = " $icon $combo.str(w:40) $play $next |";
+            }
+            {
+              block = "sound";
+            }
+            {
+              block = "custom";
+              command = "${mic-status}";
+              interval = 1;
+              click = [{
+                button = "left";
+                cmd = "${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+                update = true;
+              }];
+            }
+            {
+              block = "custom";
+              json = true;
+              command = "${mail-status}";
+              interval = 1;
+              click = [{
+                button = "left";
+                cmd = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
+              }];
+            }
+            {
+              block = "time";
+              interval = 1;
+              format = " $icon $timestamp.datetime(f:'%a %d/%m %H:%M') ";
+            }
+          ];
         };
       };
       services = {
