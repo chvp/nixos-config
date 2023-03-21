@@ -24,6 +24,7 @@
     :global-prefix "C-SPC"
     )
 
+  (nmap "<escape>" 'save-buffer)
   (lmap
     ""     nil ;; Unbind SPC, I don't use it for navigation anyway.
 
