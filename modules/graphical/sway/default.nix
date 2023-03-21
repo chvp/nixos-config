@@ -35,7 +35,7 @@ in
         enable = true;
         settings =
           let
-            wrapped-command = pkgs.writeShellScript "sway-run" "systemd-run sway $@";
+            wrapped-command = pkgs.writeShellScript "sway-run" "zsh -c sway";
           in
           {
             default_session = {
