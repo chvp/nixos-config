@@ -233,6 +233,13 @@
   (advice-add 'company-capf--candidates :around #'just-one-face)
   )
 
+;; Org
+(use-package org
+  :custom
+  (org-directory "~/sync/notes" "Store org journal in synced directory")
+  (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
+  )
+
 ;; Sorting when filtering
 (use-package prescient
   :custom
