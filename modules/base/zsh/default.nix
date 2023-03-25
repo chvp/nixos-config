@@ -59,4 +59,5 @@ in
   chvp.base.zfs.homeLinks = [{ path = ".local/share/autojump"; type = "cache"; }];
   home-manager.users.charlotte = { ... }: (base "/home/charlotte");
   home-manager.users.root = { ... }: (base "/root");
+  programs.zsh.enable = true;
 }
