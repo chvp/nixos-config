@@ -244,7 +244,11 @@
   (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
   :general
   (lmap
+    :keymap 'org-mode-map
     "SPC i" '(org-insert-heading :which-key "Insert heading")
+    "SPC <" '(org-promote-subtree :which-key "Decrease level")
+    "SPC >" '(org-demote-subtree :which-key "Increase level")
+    "SPC c" '(orc-clone-subtree-with-time-shift :which-key "Repeat subtree")
     )
   )
 
