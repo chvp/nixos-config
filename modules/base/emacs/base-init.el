@@ -235,9 +235,17 @@
 
 ;; Org
 (use-package org
+  :init
+  (defun set-creation-date-heading-property () (org-set-property "CREATED" (format-time-string (org-time-stamp-format t t))))
+  :hook
+  (org-insert-heading . set-creation-date-heading-property)
   :custom
   (org-directory "~/sync/notes" "Store org journal in synced directory")
   (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
+  :general
+  (lmap
+    "SPC i" '(org-insert-heading :which-key "Insert heading")
+    )
   )
 
 ;; Sorting when filtering
