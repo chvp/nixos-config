@@ -235,13 +235,19 @@
 
 ;; Org
 (use-package org
-  :init
-  (defun set-creation-date-heading-property () (org-set-property "CREATED" (format-time-string (org-time-stamp-format t t))))
   :hook
   (org-insert-heading . set-creation-date-heading-property)
   :custom
   (org-directory "~/sync/notes" "Store org journal in synced directory")
+  (org-default-notes-file (concat org-directory "/inbox.org") "Capture in inbox by default")
   (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
+  :demand t
+  :config
+  (defun find-file-in-org-directory ()
+    (interactive)
+    (ido-find-file-in-dir org-directory)
+    )
+  (defun set-creation-date-heading-property () (org-set-property "CREATED" (format-time-string (org-time-stamp-format t t))))
   :general
   (lmap
     :keymap 'org-mode-map
@@ -249,6 +255,11 @@
     "SPC <" '(org-promote-subtree :which-key "Decrease level")
     "SPC >" '(org-demote-subtree :which-key "Increase level")
     "SPC c" '(orc-clone-subtree-with-time-shift :which-key "Repeat subtree")
+    )
+  (lmap
+    "o a" '(org-agenda :which-key "Agenda")
+    "o t" '(org-todo-list :which-key "Todo list")
+    "o o" '(find-file-in-org-directory :which-key "Find org file")
     )
   )
 
