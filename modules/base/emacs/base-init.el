@@ -92,7 +92,7 @@
   :diminish (company-mode)
   :hook ((text-mode prog-mode) . company-mode)
   :custom
-  (company-backends '((company-capf company-yasnippet) company-files (company-dabbrev-code company-keywords) company-dabbrev))
+  (company-backends '((company-capf company-yasnippet) (company-dabbrev-code company-keywords) company-dabbrev))
   (company-dabbrev-downcase nil "Don't downcase completions")
   (company-dabbrev-ignore-case t "Change full casing of completion if completion has different case")
   (company-minimum-prefix-length 2 "Start autocompletion after 2 characters")
