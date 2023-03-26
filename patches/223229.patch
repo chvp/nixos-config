@@ -1,0 +1,29 @@
+From 325fd25b7a78b40cce3dffcff8dd72fee934b94e Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sun, 26 Mar 2023 12:41:08 +0200
+Subject: [PATCH] mu: 1.8.14 -> 1.10.0
+
+---
+ pkgs/tools/networking/mu/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index 9d2286e2271f1..81515e5d68273 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -14,13 +14,13 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.8.14";
++  version = "1.10.0";
+ 
+   src = fetchFromGitHub {
+     owner = "djcb";
+     repo = "mu";
+     rev = "v${version}";
+-    hash = "sha256-m6if0Br9WRPR8POwOM0Iwido3UR/V0BlkuaLcWsf/c0=";
++    hash = "sha256-l0gtXeXxz4WjQN+7JB9HhMcX3y7EApaEL3TUdI7Lqbo=";
+   };
+ 
+   postPatch = ''

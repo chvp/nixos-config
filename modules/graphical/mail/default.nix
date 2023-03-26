@@ -115,6 +115,9 @@ in
                 :ensure nil
                 :commands (mu4e mu4e-update-index)
                 :after (vertico)
+                :init
+                (defun mu4e--main-action-str (title cmd) "")
+                (defalias 'mu4e~view-quit-buffer 'mu4e-view-quit)
                 :hook
                 (mu4e-view-mode . display-line-numbers-mode)
                 (mu4e-view-mode . visual-line-mode)
@@ -122,6 +125,8 @@ in
                 (mu4e-compose-mode . visual-line-mode)
                 (mu4e-compose-mode . (lambda () (setq use-hard-newlines nil)))
                 :custom
+                (mu4e-read-option-use-builtin nil "Don't use builting autocomplete in mu4e")
+                (mu4e-completing-read-function 'completing-read "Use default completing read function")
                 (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
                 (mu4e-maildir "${hmConfig.accounts.email.maildirBasePath}" "Root of the maildir hierarchy")
                 (mu4e-context-policy 'pick-first "Use the first mail context in the list")
@@ -131,7 +136,6 @@ in
                 (fill-flowed-display-column 1000000000000 "Dont fill when decoding flowed messages, let visual-line-mode handle it")
                 (gnus-treat-fill-long-lines nil "Let visual-line-mode handle filling")
                 (mu4e-confirm-quit nil "Don't confirm when quitting")
-                (mu4e-completing-read-function 'completing-read "Use default completing read function")
                 (mu4e-headers-include-related nil "Don't show related messages by default")
                 (mu4e-headers-skip-duplicates nil "Show duplicate emails")
                 (message-kill-buffer-on-exit t "Close buffer when finished with email")
@@ -144,23 +148,12 @@ in
                 (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
                 (message-cite-reply-position 'below "Bottom posting is the correct way to reply to email")
                 :config
+                (remove-hook 'mu4e-main-mode-hook 'evil-collection-mu4e-update-main-view)
                 (setq mu4e-contexts (list ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}))
                 (add-to-list
                  'mu4e-bookmarks
-                  '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i)
+                  '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
                  )
-                (define-advice mu4e--context-ask-user
-                    (:around (orig-fun &rest args) mu4e~context-ask-user-completing-read)
-                  "Replace `mu4e-read-option` by general-purpose completing-read"
-                  (cl-letf (((symbol-function 'mu4e-read-option)
-                             (lambda (prompt options)
-                               (let* ((prompt (mu4e-format "%s" prompt))
-                                      (choice (completing-read prompt (cl-mapcar #'car options) nil t))
-                                      (chosen-el (cl-find-if (lambda (option) (equal choice (car option))) options)))
-                                 (if chosen-el
-                                     (cdr chosen-el)
-                                   (mu4e-warn "Unknown option: '%s'" choice))))))
-                    (apply orig-fun args)))
                 (define-skeleton mail/dodona-teacher-reply-skeleton
                   "Inserts a typical reply when someone uses the general form for a Dodona teacher request."
                   "Naam leerkracht: "
