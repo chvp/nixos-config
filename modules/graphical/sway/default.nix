@@ -86,25 +86,25 @@ in
             {
               block = "net";
               device = "wlp2s0";
-              format = " $icon $ssid ";
+              format = " $icon {$ssid|No SSID} ";
               missing_format = "";
             }
             {
               block = "net";
               device = "wlp0s20f3";
-              format = " $icon $ssid ";
+              format = " $icon {$ssid|No SSID} ";
               missing_format = "";
             }
             {
               block = "net";
               device = "enp0s31f6";
-              format = " $icon $ip ";
+              format = " $icon {$ip|No IP} ";
               missing_format = "";
             }
             {
               block = "net";
               device = "enp0s13f0u2u2";
-              format = " $icon $ip ";
+              format = " $icon {$ip|No IP} ";
               missing_format = "";
             }
             {
