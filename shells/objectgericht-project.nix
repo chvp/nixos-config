@@ -3,7 +3,7 @@
   packages = with pkgs; [
     openssl
     maven
-    openjdk17
+    (openjdk17.override { enableJavaFX = true; })
   ];
   commands = [
     {
