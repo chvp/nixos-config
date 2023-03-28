@@ -1,4 +1,4 @@
-From 2852d296f1fa43ca89d2c8aa342e3b5d2deb3a42 Mon Sep 17 00:00:00 2001
+From 27b738188ccf62e19911ab581245545715d0d055 Mon Sep 17 00:00:00 2001
 From: Izorkin <izorkin@elven.pw>
 Date: Tue, 28 Mar 2023 13:19:25 +0300
 Subject: [PATCH] mastodon: update ruby package
@@ -31,7 +31,7 @@ index 5c1a1e3d985ee..3e1632860b56e 100644
    bootsnap = {
      dependencies = ["msgpack"];
 diff --git a/pkgs/servers/mastodon/source.nix b/pkgs/servers/mastodon/source.nix
-index b51afb602c2bf..19ee9982aaf73 100644
+index b51afb602c2bf..eced26d6f8a03 100644
 --- a/pkgs/servers/mastodon/source.nix
 +++ b/pkgs/servers/mastodon/source.nix
 @@ -1,5 +1,5 @@
@@ -48,7 +48,7 @@ index b51afb602c2bf..19ee9982aaf73 100644
 -  patches = [];
 +  patches = [
 +    (fetchpatch {
-+      url = "https://github.com/mastodon/mastodon/commit/61b069b20ef6977703721ae44ae8a68be6bb0992.patch";
++      url = "https://github.com/mastodon/mastodon/commit/e7b81d7d9625893b1323e12215a2a98c0f19f58f.patch";
 +      hash = "sha256-cF0wtbjTNbsyqHb3uy5zYFaACIcziJ2ulJpOT5VoDO0=";
 +    })
 +  ];
