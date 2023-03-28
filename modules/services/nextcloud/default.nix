@@ -14,7 +14,7 @@
         enable = true;
         enableBrokenCiphersForSSE = false;
         autoUpdateApps.enable = true;
-        package = pkgs.nextcloud25;
+        package = pkgs.nextcloud26;
         caching.redis = true;
         config = {
           dbuser = "nextcloud";
