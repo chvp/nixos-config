@@ -127,6 +127,7 @@ in
                 :custom
                 (mu4e-read-option-use-builtin nil "Don't use builting autocomplete in mu4e")
                 (mu4e-completing-read-function 'completing-read "Use default completing read function")
+                (mu4e-maildir-initial-input "" "Don't have initial input when completing a maildir")
                 (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
                 (mu4e-maildir "${hmConfig.accounts.email.maildirBasePath}" "Root of the maildir hierarchy")
                 (mu4e-context-policy 'pick-first "Use the first mail context in the list")
