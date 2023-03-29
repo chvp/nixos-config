@@ -113,7 +113,7 @@ in
               (use-package mu4e
                 ;; Use mu4e included in the mu package, see emacs/default.nix
                 :ensure nil
-                :commands (mu4e mu4e-update-index)
+                :demand t
                 :after (vertico)
                 :init
                 (defun mu4e--main-action-str (title cmd) "")
@@ -208,6 +208,7 @@ in
                     (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (mail/dodona-cc-reply-to))
                     )
                   )
+                (mu4e 'background)
                 :general
                 (lmap "m" '(mu4e :which-key "mail"))
                 ;; Unmap SPC in the mail view so we can still use the leader.

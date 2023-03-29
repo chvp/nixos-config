@@ -250,14 +250,14 @@
   (defun set-creation-date-heading-property () (org-set-property "CREATED" (format-time-string (org-time-stamp-format t t))))
   :general
   (lmap
-    :keymap 'org-mode-map
+    :keymaps 'org-mode-map
     "SPC i" '(org-insert-heading :which-key "Insert heading")
     "SPC <" '(org-promote-subtree :which-key "Decrease level")
     "SPC >" '(org-demote-subtree :which-key "Increase level")
     "SPC c" '(orc-clone-subtree-with-time-shift :which-key "Repeat subtree")
     )
   (lmap
-    "o a" '(org-agenda :which-key "Agenda")
+    "o a" '(org-agenda-list :which-key "Agenda")
     "o t" '(org-todo-list :which-key "Todo list")
     "o o" '(find-file-in-org-directory :which-key "Find org file")
     )

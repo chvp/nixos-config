@@ -58,17 +58,6 @@
 
           ;; Snippets
           (use-package yasnippet
-            :init
-            ;; See https://orgmode.org/org.html#index-yasnippet_002eel
-            (defun yas/org-very-safe-expand () (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
-            (defun chvp/yas-org-fix () (
-              (make-variable-buffer-local 'yas/trigger-key)
-              (setq yas/trigger-key [tab])
-              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-              (define-key yas/keymap [tab] 'yas/next-field)
-            ))
-            :hook
-            (org-mode . chvp/yas-org-fix)
             ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
             :custom (yas-snippet-dirs '("/home/charlotte/repos/nixos-config/modules/development/snippets/"))
             :diminish (yas-minor-mode)
