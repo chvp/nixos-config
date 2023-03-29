@@ -149,7 +149,6 @@ in
                 (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
                 (message-cite-reply-position 'below "Bottom posting is the correct way to reply to email")
                 :config
-                (remove-hook 'mu4e-main-mode-hook 'evil-collection-mu4e-update-main-view)
                 (setq mu4e-contexts (list ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}))
                 (add-to-list
                  'mu4e-bookmarks
@@ -210,15 +209,19 @@ in
                   )
                 ;; Never actually quit mu4e, just close the current buffer (making sure the modeline is still visible)
                 (defalias 'mu4e-quit 'kill-this-buffer)
-                (defun chvp--mu4e-read-option (prompt options)
-                  (let* ((prompt (mu4e-format "%s" prompt))
-                         (choice (completing-read prompt (cl-mapcar #'car options) nil t))
-                         (chosen-el (cl-find-if (lambda (option) (equal choice (car option))) options)))
-                    (if chosen-el
-                        (cdr chosen-el)
-                      (mu4e-warn "Unknown option: '%s'" choice)))
-                )
-                (defalias 'mu4e-read-option 'chvp--mu4e-read-option)
+                (define-advice mu4e--context-ask-user
+                    (:around (orig-fun &rest args) mu4e--context-ask-user-completing-read)
+                  "Replace `mu4e-read-option` by general-purpose completing-read"
+                  (cl-letf (((symbol-function 'mu4e-read-option)
+                             (lambda (prompt options)
+                               (let* ((prompt (mu4e-format "%s" prompt))
+                                      (choice (completing-read prompt (cl-mapcar #'car options) nil t))
+                                      (chosen-el (cl-find-if (lambda (option) (equal choice (car option))) options)))
+                                 (if chosen-el
+                                     (cdr chosen-el)
+                                   (mu4e-warn "Unknown option: '%s'" choice))))))
+                    (apply orig-fun args)))
+                (remove-hook 'mu4e-main-mode-hook 'evil-collection-mu4e-update-main-view)
                 (mu4e 'background)
                 :general
                 (lmap "m" '(mu4e :which-key "mail"))
