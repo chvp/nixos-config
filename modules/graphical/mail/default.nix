@@ -121,11 +121,11 @@ in
                 :hook
                 (mu4e-view-mode . display-line-numbers-mode)
                 (mu4e-view-mode . visual-line-mode)
-                (mu4e-compose-mode . mail/auto-dodona-cc-reply-to)
+                (mu4e-compose-mode . chvp--mu4e-auto-dodona-cc-reply-to)
                 (mu4e-compose-mode . visual-line-mode)
                 (mu4e-compose-mode . (lambda () (setq use-hard-newlines nil)))
                 :custom
-                (mu4e-read-option-use-builtin nil "Don't use builting autocomplete in mu4e")
+                (mu4e-read-option-use-builtin nil "Don't use builtin autocomplete in mu4e")
                 (mu4e-completing-read-function 'completing-read "Use default completing read function")
                 (mu4e-maildir-initial-input "" "Don't have initial input when completing a maildir")
                 (mu4e-change-filenames-when-moving t "Avoid sync issues with mbsync")
@@ -155,7 +155,7 @@ in
                  'mu4e-bookmarks
                   '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
                  )
-                (define-skeleton mail/dodona-teacher-reply-skeleton
+                (define-skeleton chvp--mu4e-dodona-teacher-reply-skeleton
                   "Inserts a typical reply when someone uses the general form for a Dodona teacher request."
                   "Naam leerkracht: "
                   "Dag " str ",\n"
@@ -172,12 +172,12 @@ in
                   "Met vriendelijke groeten,\n"
                   "Charlotte Van Petegem"
                   )
-                (defun mail/dodona-cc-reply-to ()
+                (defun chvp--mu4e-dodona-cc-reply-to ()
                   "Add dodona@ugent.be in cc and reply-to headers."
                   (interactive)
                   (save-excursion (message-add-header "Cc: dodona@ugent.be\nReply-To: dodona@ugent.be\n"))
                   )
-                (define-skeleton mail/twist-nag-not-enough-nl
+                (define-skeleton chvp--mu4e-twist-nag-not-enough-nl
                   "Nags someone in dutch when they should do more exam supervisions"
                   "Naam collega: "
                   "Dag " str "\n"
@@ -190,7 +190,7 @@ in
                   "Met vriendelijke groeten\n"
                   "Charlotte Van Petegem"
                   )
-                (define-skeleton mail/twist-nag-not-enough-en
+                (define-skeleton chvp--mu4e-twist-nag-not-enough-en
                   "Nags someone in English when they should do more exam supervisions"
                   "Naam collega: "
                   "Hi " str "\n"
@@ -202,12 +202,23 @@ in
                   "Kind regards\n"
                   "Charlotte Van Petegem"
                   )
-                (defun mail/auto-dodona-cc-reply-to ()
+                (defun chvp--mu4e-auto-dodona-cc-reply-to ()
                   "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
                   (let ((msg mu4e-compose-parent-message))
-                    (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (mail/dodona-cc-reply-to))
+                    (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (chvp--mu4e-dodona-cc-reply-to))
                     )
                   )
+                ;; Never actually quit mu4e, just close the current buffer (making sure the modeline is still visible)
+                (defalias 'mu4e-quit 'kill-this-buffer)
+                (defun chvp--mu4e-read-option (prompt options)
+                  (let* ((prompt (mu4e-format "%s" prompt))
+                         (choice (completing-read prompt (cl-mapcar #'car options) nil t))
+                         (chosen-el (cl-find-if (lambda (option) (equal choice (car option))) options)))
+                    (if chosen-el
+                        (cdr chosen-el)
+                      (mu4e-warn "Unknown option: '%s'" choice)))
+                )
+                (defalias 'mu4e-read-option 'chvp--mu4e-read-option)
                 (mu4e 'background)
                 :general
                 (lmap "m" '(mu4e :which-key "mail"))
@@ -216,10 +227,10 @@ in
                 (lmap mu4e-compose-mode-map
                   "SPC s" '(mml-secure-message-sign-pgpmime :which-key "Sign")
                   "SPC c" '(mml-secure-message-encrypt-pgpmime :which-key "Encrypt")
-                  "SPC t" '(mail/dodona-teacher-reply-skeleton :which-key "Teacher rights reply")
-                  "SPC m" '(mail/twist-nag-not-enough-en :which-key "Supervision nag (en)")
-                  "SPC n" '(mail/twist-nag-not-enough-nl :which-key "Supervision nag (nl)")
-                  "SPC d" '(mail/dodona-cc-reply-to :which-key "Dodona support headers")
+                  "SPC t" '(chvp--mu4e-dodona-teacher-reply-skeleton :which-key "Teacher rights reply")
+                  "SPC m" '(chvp--mu4e-twist-nag-not-enough-en :which-key "Supervision nag (en)")
+                  "SPC n" '(chvp--mu4e-twist-nag-not-enough-nl :which-key "Supervision nag (nl)")
+                  "SPC d" '(chvp--mu4e-dodona-cc-reply-to :which-key "Dodona support headers")
                   "SPC f" '(mu4e-toggle-use-hard-newlines :which-key "Toggle format=flowed/hard newlines")
                   )
                 )
