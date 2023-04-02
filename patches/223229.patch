@@ -1,7 +1,7 @@
 From bbb2708e06578e5d0bcc0b80d91bd739263237e3 Mon Sep 17 00:00:00 2001
 From: Charlotte Van Petegem <charlotte@vanpetegem.me>
 Date: Sun, 26 Mar 2023 12:41:08 +0200
-Subject: [PATCH] mu: 1.18.14 -> 1.10.1
+Subject: [PATCH 1/2] mu: 1.18.14 -> 1.10.1
 
 https://github.com/djcb/mu/releases/tag/v1.10.0
 https://github.com/djcb/mu/releases/tag/v1.10.1
@@ -29,3 +29,28 @@ index 9d2286e2271f1..c8d4bb6f3cb70 100644
    };
  
    postPatch = ''
+
+From ec1701e39b22fcb8a40217582165ea753f721f0a Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sun, 2 Apr 2023 11:22:09 +0200
+Subject: [PATCH 2/2] mu: don't use (very) old version of texinfo
+
+---
+ pkgs/top-level/all-packages.nix | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 4a488e78e97eb..51e1a63f41311 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -22604,9 +22604,7 @@ with pkgs;
+ 
+   mtxclient = callPackage ../development/libraries/mtxclient { };
+ 
+-  mu = callPackage ../tools/networking/mu {
+-    texinfo = texinfo4;
+-  };
++  mu = callPackage ../tools/networking/mu { };
+ 
+   mueval = callPackage ../development/tools/haskell/mueval { };
+ 
