@@ -9,7 +9,6 @@ let
       nix
       pass
       slurp
-      sway
       uni
       zsh
       ;

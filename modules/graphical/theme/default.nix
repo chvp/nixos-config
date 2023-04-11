@@ -40,10 +40,13 @@
           Inherits=Vanilla-DMZ
         '';
       };
-      dconf.settings."org/gnome/desktop/interface" = {
-        gtk-theme = "Breeze";
-        icon-theme = "breeze";
-        cursor-theme = "Vanilla-DMZ";
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          gtk-theme = "Breeze";
+          icon-theme = "breeze";
+          cursor-theme = "Vanilla-DMZ";
+        };
+        "org/gnome/desktop/wm/preferences".button-layout = "";
       };
       gtk = {
         enable = true;

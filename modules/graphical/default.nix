@@ -2,12 +2,12 @@
 
 {
   imports = [
+    ./compositor
     ./firefox
     ./gnupg
     ./mail
     ./pass
     ./sound
-    ./sway
     ./syncthing
     ./terminal
     ./theme
@@ -26,6 +26,7 @@
         nix.unfreePackages = [ "google-chrome" ];
       };
       graphical = {
+        compositor.enable = lib.mkDefault true;
         firefox.enable = lib.mkDefault true;
         gnupg = {
           enable = lib.mkDefault true;
@@ -34,7 +35,6 @@
         mail.enable = lib.mkDefault true;
         pass.enable = lib.mkDefault true;
         sound.enable = lib.mkDefault true;
-        sway.enable = lib.mkDefault true;
         syncthing.enable = lib.mkDefault true;
         terminal.enable = lib.mkDefault true;
         theme.enable = lib.mkDefault true;
