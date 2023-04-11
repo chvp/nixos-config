@@ -4,21 +4,13 @@ let
   launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
-  mic-status = pkgs.writeShellScript "mic-status" ''
-    if [ "$(${pkgs.pulseaudio}/bin/pactl list sources | grep -o 'Mute: yes')" = "Mute: yes" ]
-    then
-      echo -e '\uf131'
-    else
-      echo -e '\uf130'
-    fi
-  '';
   mail-status = pkgs.writeShellScript "mail-status" ''
-    mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | wc -l)
+    mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | ${pkgs.coreutils}/bin/wc -l)
     if [ "$mails" -gt 0 ]
     then
-      echo "{ \"state\": \"Info\", \"text\": \"📬 $mails\" }"
+      echo "{ \"class\": \"has-mail\", \"text\": \"📬 $mails\" }"
     else
-      echo "{ \"state\": \"Idle\", \"text\": \"📭\" }"
+      echo "{ \"text\": \"📭\" }"
     fi
   '';
   river-init = pkgs.writeShellScript "river-init" ''
@@ -106,7 +98,7 @@ let
     riverctl border-color-focused 0x6aaeff
     riverctl border-color-unfocused 0xf2eff3
     riverctl border-color-urgent 0xff8892
-    riverctl border-width 2
+    riverctl border-width 1
     riverctl focus-follows-cursor normal
     riverctl hide-cursor when-typing enabled
     riverctl set-cursor-warp on-output-change
@@ -183,7 +175,7 @@ in
             spacing = 2;
             modules-left = [ "river/tags" ];
             modules-center = [ "river/window" ];
-            modules-right = [ "idle_inhibitor" "network" "pulseaudio" "mpris" "backlight" "battery" "clock" "tray" ];
+            modules-right = [ "idle_inhibitor" "network" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
             backlight = {
               format = "{percent}%";
             };
@@ -198,6 +190,12 @@ in
               format-plugged = "{capacity}% ";
               format-alt = "{time} {icon}";
               format-icons = [ "" "" "" "" "" ];
+            };
+            "custom/mail-status" = {
+              exec = "${mail-status}";
+              return-type = "json";
+              interval = 1;
+              on-click = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
             };
             idle_inhibitor = {
               format = "{icon}";
