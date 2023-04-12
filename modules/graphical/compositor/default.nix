@@ -199,20 +199,24 @@ in
             modules-center = [ "river/window" ];
             modules-right = [ "idle_inhibitor" "network" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
             backlight = {
-              format = "{percent}%";
+              format = "{percent}% {icon}";
+              format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
+              on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl s -- +5%";
+              on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl s -- -5%";
             };
             battery = {
               states = {
-                good = 95;
+                good = 90;
                 warning = 30;
                 critical = 15;
               };
               format = "{capacity}% {icon}";
-              format-charging = "{capacity}% ";
-              format-plugged = "{capacity}% ";
+              format-charging = "{capacity}% \uf1e6";
+              format-plugged = "";
               format-alt = "{time} {icon}";
               format-icons = [ "" "" "" "" "" ];
             };
+            clock.format = " {:%a %d/%m %H:%M}";
             "custom/mail-status" = {
               exec = "${mail-status}";
               return-type = "json";
@@ -226,9 +230,17 @@ in
                 deactivated = "";
               };
             };
-            mpris.player = "firefox";
+            mpris = {
+              player = "firefox";
+              format = "{status_icon} {artist} - {title}";
+              status-icons = {
+                playing = "▶";
+                paused = "";
+                stopped = "";
+              };
+            };
             network = {
-              format-wifi = "{essid} ({signalStrength}%) ";
+              format-wifi = "{essid} ";
               format-ethernet = "{ipaddr}/{cidr} ";
               tooltip-format = "{ifname} via {gwaddr} ";
               format-linked = "{ifname} (No IP) ";
@@ -251,7 +263,9 @@ in
                 car = "";
                 default = [ "" "" "" ];
               };
-              on-click = "pavucontrol";
+              on-click = "${pkgs.pamixer}/bin/pamixer -t";
+              on-click-right = "${pkgs.pamixer}/bin/pamixer --default-source -t";
+              on-click-middle = "${pkgs.pavucontrol}/bin/pavucontrol";
             };
             tray.spacing = 2;
           };
@@ -261,13 +275,60 @@ in
               font-family: Hack, monospace;
               font-size: 11px;
           }
+
+          #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #custom-mail-status, #clock, #tray {
+              padding: 0 5px;
+          }
+
+          button {
+              border: none;
+              border-radius: 0;
+          }
+          button:hover {
+              border: none;
+              border-radius: 0;
+          }
+
           window#waybar {
               background-color: #ffffff;
               color: #000000;
           }
 
+          #backlight {
+              background-color: #6aaeff;
+          }
+
+          #battery {
+              background-color: #5ada88;
+          }
+          #battery.good {
+              background-color: #6aaeff;
+          }
+          #battery.warning {
+              background-color: #f5df23;
+          }
+          #battery.critical {
+              background-color: #ff8892;
+          }
+
+          #clock {
+              padding-right: 0px;
+          }
+
+          #custom-mail-status.has-mail {
+              background-color: #6aaeff;
+          }
+
+          #idle_inhibitor.activated {
+              background-color: #6aaeff;
+          }
+
+          #pulseaudio {
+              background-color: #f5df23;
+          }
+
           #tags button {
-              border-radius: 0;
+              box-shadow: inset 0 -3px transparent
               background-color: #ffffff;
               color: #000000;
           }
@@ -279,6 +340,9 @@ in
           }
           #tags button.urgent {
               background-color: #ff8892;
+          }
+          #tags button:hover {
+              box-shadow: inset 0 -3px #000000;
           }
         '';
         systemd.enable = true;
