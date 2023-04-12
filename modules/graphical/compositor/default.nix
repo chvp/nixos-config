@@ -13,6 +13,37 @@ let
       echo "{ \"text\": \"📭\" }"
     fi
   '';
+  baseWrapper = pkgs.writeShellScriptBin "river" ''
+    export XDG_SESSION_TYPE=wayland
+    export XDG_CURRENT_DESKTOP=river
+    export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+    export QT_AUTO_SCREEN_SCALE_FACTOR=0
+    export QT_SCALE_FACTOR=1
+    export GDK_SCALE=1
+    export GDK_DPI_SCALE=1
+    export MOZ_ENABLE_WAYLAND=1
+    export XCURSOR_SIZE=24
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    if [ "$DBUS_SESSION_BUS_ADDRESS" ]; then
+        export DBUS_SESSION_BUS_ADDRESS
+        exec ${pkgs.river}/bin/river
+    else
+        exec ${pkgs.dbus}/bin/dbus-run-session ${pkgs.river}/bin/river
+    fi
+  '';
+  river = pkgs.symlinkJoin {
+    name = "river-${pkgs.river.version}";
+    paths = [ baseWrapper pkgs.river ];
+    strictDeps = false;
+    nativeBuildInputs = with pkgs; [ makeWrapper wrapGAppsHook ];
+    buildInputs = with pkgs; [ gdk-pixbuf glib gtk3 ];
+    dontWrapGApps = true;
+    postBuild = ''
+      gappsWrapperArgsHook
+
+      wrapProgram $out/bin/river "''${gappsWrapperArgs[@]}"
+    '';
+  };
   river-init = pkgs.writeShellScript "river-init" ''
     riverctl map normal Super Return spawn footclient
     riverctl map normal Super D spawn 'footclient --app-id launcher -- ${launcher}/bin/launcher'
@@ -102,7 +133,7 @@ let
     riverctl focus-follows-cursor normal
     riverctl hide-cursor when-typing enabled
     riverctl set-cursor-warp on-output-change
-    riverctl xcursor-theme Vanilla-DMZ
+    riverctl xcursor-theme Vanilla-DMZ 24
 
     riverctl keyboard-layout -variant altgr-intl -options compose:caps us
 
@@ -114,7 +145,7 @@ let
     configure_touchpads tap enabled
     configure_touchpads scroll-method two-finger
 
-    ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+    ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XCURSOR_SIZE
     systemctl --user start graphical-session.target
   '';
 in
@@ -131,25 +162,16 @@ in
         enable = true;
         settings =
           let
-            wrapped-command = pkgs.writeShellScript "river-run" ''
-              export XDG_SESSION_TYPE=wayland
-              export XDG_CURRENT_DESKTOP=river
-              export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-              export QT_AUTO_SCREEN_SCALE_FACTOR=0
-              export QT_SCALE_FACTOR=1
-              export GDK_SCALE=1
-              export GDK_DPI_SCALE=1
-              export MOZ_ENABLE_WAYLAND=1
-              export _JAVA_AWT_WM_NONREPARENTING=1
-              zsh -c "${pkgs.dbus}/bin/dbus-run-session river"
+            river-run = pkgs.writeShellScript "river-run" ''
+              exec zsh -c "systemd-cat -t river ${river}/bin/river"
             '';
           in
           {
             default_session = {
-              command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${wrapped-command}";
+              command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${river-run}";
             };
             initial_session = {
-              command = "${wrapped-command}";
+              command = "${river-run}";
               user = "charlotte";
             };
           };
@@ -161,12 +183,12 @@ in
       extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
     };
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = with pkgs; [
+      home.packages = [
         river
         color-picker
         screenshot
-        wf-recorder
-        wl-clipboard
+        pkgs.wf-recorder
+        pkgs.wl-clipboard
       ];
       programs.waybar = {
         enable = true;
@@ -307,10 +329,13 @@ in
       xdg.configFile."river/init" = {
         source = river-init;
         onChange = ''
-          WAYLAND_DISPLAY="$(${pkgs.findutils}/bin/find /run/user/$UID -mindepth 1 -maxdepth 1 -type s -name wayland-\*)"
-          if [ -S "WAYLAND_DISPLAY" ]
+          if [ -d /run/user/$UID ]
           then
-            ${river-init}
+            WAYLAND_DISPLAY="$(${pkgs.findutils}/bin/find /run/user/$UID -mindepth 1 -maxdepth 1 -type s -name wayland-\*)"
+            if [ -S "WAYLAND_DISPLAY" ]
+            then
+              ${river-init}
+            fi
           fi
         '';
       };
