@@ -221,7 +221,7 @@ in
               exec = "${mail-status}";
               return-type = "json";
               interval = 1;
-              on-click = "mbsync -a && emacsclient --eval \"(mu4e-update-index)\"";
+              on-click = "${pkgs.isync}/bin/mbsync -a && ${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\"";
             };
             idle_inhibitor = {
               format = "{icon}";
