@@ -49,10 +49,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "flake-utils";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
