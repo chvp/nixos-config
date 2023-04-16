@@ -1,0 +1,36 @@
+From 7a40725f9eb291bb11a46122d93faeb661e536d6 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sun, 16 Apr 2023 22:51:44 +0200
+Subject: [PATCH] mautrix-whatsapp: 0.8.3 -> 0.8.4
+
+https://github.com/mautrix/whatsapp/releases/tag/v0.8.4
+---
+ pkgs/servers/mautrix-whatsapp/default.nix | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pkgs/servers/mautrix-whatsapp/default.nix b/pkgs/servers/mautrix-whatsapp/default.nix
+index 06821636099f7..6e537b88ec7f2 100644
+--- a/pkgs/servers/mautrix-whatsapp/default.nix
++++ b/pkgs/servers/mautrix-whatsapp/default.nix
+@@ -2,18 +2,18 @@
+ 
+ buildGoModule rec {
+   pname = "mautrix-whatsapp";
+-  version = "0.8.3";
++  version = "0.8.4";
+ 
+   src = fetchFromGitHub {
+     owner = "mautrix";
+     repo = "whatsapp";
+     rev = "v${version}";
+-    hash = "sha256-rSyKKWg9PiAZAdmUfWWxU4ZXGHP+LR1kcDXMbkB3wYA=";
++    hash = "sha256-4dOkSnurg2Sk36Z2WNjPaO092IiRlzc9oWM6sQ+wUwM=";
+   };
+ 
+   buildInputs = [ olm ];
+ 
+-  vendorSha256 = "sha256-eHY6YBPDA2uJyhvB/3bd+W2PEfGjyx3BEAlbJvVV0Yo=";
++  vendorSha256 = "sha256-48C9aaOe148emSsxzfKFKtnXyC39IFO8Ge7d+rIhDac=";
+ 
+   doCheck = false;
+ 
