@@ -49,7 +49,6 @@
         okular
         ranger
         uni
-        yt-dlp
       ];
     };
   };
