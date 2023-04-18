@@ -108,7 +108,10 @@
       };
       hostDefaults = {
         modules = [
-          { nix.generateRegistryFromInputs = true; }
+          ({ channel, ... }: {
+            nix.generateRegistryFromInputs = true;
+            environment.etc."nixpkgs".source = channel.path;
+          })
           accentor.nixosModules.default
           agenix.nixosModules.age
           home-manager.nixosModule
