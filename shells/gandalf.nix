@@ -27,6 +27,7 @@
   packages = with pkgs; [
     imagemagick
     libyaml
+    nodejs
   ];
   env = [
     { name = "DATABASE_URL"; value = "mysql2://root:gandalf@127.0.0.1:3306/gandalf"; }
