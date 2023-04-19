@@ -156,29 +156,6 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.compositor.enable {
-    nixpkgs.overlays = [
-      (self: super: {
-        gtk3 = super.gtk3.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [
-            (pkgs.writeText "no-csd.patch" ''
-              diff --git a/gtk/gtkwindow.c b/gtk/gtkwindow.c
-              index 8df1c8e861..d102017942 100644
-              --- a/gtk/gtkwindow.c
-              +++ b/gtk/gtkwindow.c
-              @@ -6121,8 +6121,7 @@ gtk_window_should_use_csd (GtkWindow *window)
-               #ifdef GDK_WINDOWING_WAYLAND
-                 if (GDK_IS_WAYLAND_DISPLAY (gtk_widget_get_display (GTK_WIDGET (window))))
-                   {
-              -      GdkDisplay *gdk_display = gtk_widget_get_display (GTK_WIDGET (window));
-              -      return !gdk_wayland_display_prefers_ssd (gdk_display);
-              +      return FALSE;
-                   }
-               #endif
-            '')
-          ];
-        });
-      })
-    ];
     services = {
       dbus.packages = with pkgs; [ dconf ];
       greetd = {
