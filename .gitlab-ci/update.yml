@@ -31,7 +31,7 @@ build-nixos-configurations:
     - nix-env --quiet -j8 -iA cachix -f https://cachix.org/api/v1/install
     - cachix --version
     - cachix authtoken $CACHIX_AUTH_TOKEN
-    - nix build -L --no-link .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel
+    - nix build -j 8 --cores 1 -L --no-link .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel
     - nix eval --json .#nixosConfigurations.${HOST_TO_BUILD}.config.system.build.toplevel | sed 's/"\(.*\)"/\1/' | cachix push chvp
 
 commit-and-push:
