@@ -20,6 +20,10 @@
         docker run --name gandalf-db -p 3306:3306 --rm -v gandalf-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=gandalf mariadb:latest
       '';
     }
+    {
+      name = "redis";
+      package = pkgs.redis;
+    }
   ];
   packages = with pkgs; [
     imagemagick
@@ -37,6 +41,7 @@
       command = "rails s -p 3000";
     };
     mysql.command = "mysql";
+    redis.command = "redis-server --port 6379";
   };
   language.ruby = {
     package = pkgs.ruby_3_0;
