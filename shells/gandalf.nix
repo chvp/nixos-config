@@ -43,7 +43,7 @@
     sidekiq.command = "bundle exec sidekiq";
   };
   language.ruby = {
-    package = pkgs.ruby_3_0;
+    package = pkgs.ruby_3_2;
     nativeDeps = [ pkgs.libmysqlclient pkgs.zlib ];
   };
 }
