@@ -39,6 +39,7 @@
     };
     mysql.command = "mysql";
     redis.command = "redis-server --port 6379";
+    sidekiq.command = "bundle exec sidekiq";
   };
   language.ruby = {
     package = pkgs.ruby_3_0;
