@@ -7,7 +7,6 @@
       category = "general commands";
       help = "Install dependencies";
       command = ''
-        yarn install
         bundle install
         bundle pristine
       '';
@@ -28,8 +27,6 @@
   packages = with pkgs; [
     imagemagick
     libyaml
-    nodejs
-    yarn
   ];
   env = [
     { name = "DATABASE_URL"; value = "mysql2://root:gandalf@127.0.0.1:3306/gandalf"; }
@@ -45,6 +42,6 @@
   };
   language.ruby = {
     package = pkgs.ruby_3_0;
-    nativeDeps = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];
+    nativeDeps = [ pkgs.libmysqlclient pkgs.zlib ];
   };
 }
