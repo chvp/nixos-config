@@ -211,7 +211,7 @@ in
                 critical = 15;
               };
               format = "{capacity}% {icon}";
-              format-charging = "{capacity}% \uf1e6";
+              format-charging = "{capacity}% ";
               format-plugged = "";
               format-alt = "{time} {icon}";
               format-icons = [ "" "" "" "" "" ];
