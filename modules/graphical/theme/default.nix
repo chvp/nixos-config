@@ -59,9 +59,27 @@
           gtk-cursor-theme-name = "Vanilla-DMZ"
           gtk-cursor-theme-size = 24
         '';
-        gtk3.extraConfig = {
-          gtk-cursor-theme-name = "Vanilla-DMZ";
-          gtk-cursor-theme-size = 24;
+        gtk3 = {
+          extraConfig = {
+            gtk-cursor-theme-name = "Vanilla-DMZ";
+            gtk-cursor-theme-size = 24;
+          };
+          extraCss = ''
+            headerbar {
+                min-height: 0px;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            headerbar entry,
+            headerbar spinbutton,
+            headerbar button,
+            headerbar separator {
+                min-height: 0px;
+                padding: 0px;
+                margin: 0px;
+            }
+          '';
         };
         iconTheme = {
           package = pkgs.libsForQt5.breeze-icons;
