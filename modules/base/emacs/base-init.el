@@ -255,6 +255,8 @@
     "SPC <" '(org-promote-subtree :which-key "Decrease level")
     "SPC >" '(org-demote-subtree :which-key "Increase level")
     "SPC c" '(orc-clone-subtree-with-time-shift :which-key "Repeat subtree")
+    "SPC x" '(org-cut-subtree :which-key "Cut subtree")
+    "SPC p" '(org-paste-subtree :which-key "Paste subtree")
     )
   (lmap
     "o a" '(org-agenda-list :which-key "Agenda")
