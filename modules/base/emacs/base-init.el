@@ -241,6 +241,7 @@
   (org-directory "~/sync/notes" "Store org journal in synced directory")
   (org-default-notes-file (concat org-directory "/inbox.org") "Capture in inbox by default")
   (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
+  (org-todo-keywords '((sequence "TODO" "NEXT" "DOING" "DONE")) "Add next and doing states")
   :demand t
   :config
   (defun find-file-in-org-directory ()
@@ -257,6 +258,7 @@
     "SPC c" '(orc-clone-subtree-with-time-shift :which-key "Repeat subtree")
     "SPC x" '(org-cut-subtree :which-key "Cut subtree")
     "SPC p" '(org-paste-subtree :which-key "Paste subtree")
+    "SPC t" '(org-todo :which-key "Cycle todo state")
     )
   (lmap
     "o a" '(org-agenda-list :which-key "Agenda")
