@@ -16,7 +16,7 @@
         patches = (old.patches or [ ]) ++ [
           (fetchpatch {
             url = https://github.com/yt-dlp/yt-dlp/pull/6654.patch;
-            hash = "sha256-MDQKda37LqvhUhr+0yJqsmziTs/eUZ/LRfKyyVDbrBM=";
+            hash = "sha256-ezJjZyxaSsPfXRoyxL2FQhbO1YUtwhb6mM0atFfO3JY=";
           })
         ];
       }))
