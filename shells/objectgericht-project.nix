@@ -27,4 +27,10 @@
       command = "mvn clean";
     }
   ];
+  env = [
+    {
+    name = "LD_PRELOAD";
+    value = "${pkgs.xorg.libXtst}/lib/libXtst.so.6";
+    }
+  ];
 }
