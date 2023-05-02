@@ -190,162 +190,169 @@ in
         pkgs.wf-recorder
         pkgs.wl-clipboard
       ];
-      programs.waybar = {
-        enable = true;
-        settings = {
-          mainBar = {
-            spacing = 2;
-            modules-left = [ "river/tags" ];
-            modules-center = [ "river/window" ];
-            modules-right = [ "idle_inhibitor" "network" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
-            backlight = {
-              format = "{percent}% {icon}";
-              format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
-              on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl s -- +5%";
-              on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl s -- -5%";
-            };
-            battery = {
-              states = {
-                good = 90;
-                warning = 30;
-                critical = 15;
+      programs = {
+        waybar = {
+          enable = true;
+          settings = {
+            mainBar = {
+              spacing = 2;
+              modules-left = [ "river/tags" ];
+              modules-center = [ "river/window" ];
+              modules-right = [ "idle_inhibitor" "network" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
+              backlight = {
+                format = "{percent}% {icon}";
+                format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
+                on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl s -- +5%";
+                on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl s -- -5%";
               };
-              format = "{capacity}% {icon}";
-              format-charging = "{capacity}% ";
-              format-plugged = "";
-              format-alt = "{time} {icon}";
-              format-icons = [ "" "" "" "" "" ];
-            };
-            clock.format = " {:%a %d/%m %H:%M}";
-            "custom/mail-status" = {
-              exec = "${mail-status}";
-              return-type = "json";
-              interval = 1;
-              on-click = "${pkgs.isync}/bin/mbsync -a && ${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\"";
-            };
-            idle_inhibitor = {
-              format = "{icon}";
-              format-icons = {
-                activated = "";
-                deactivated = "";
+              battery = {
+                states = {
+                  good = 90;
+                  warning = 30;
+                  critical = 15;
+                };
+                format = "{capacity}% {icon}";
+                format-charging = "{capacity}% ";
+                format-plugged = "";
+                format-alt = "{time} {icon}";
+                format-icons = [ "" "" "" "" "" ];
               };
-            };
-            mpris = {
-              player = "firefox";
-              format = "{status_icon} {artist} - {title}";
-              status-icons = {
-                playing = "▶";
-                paused = "";
-                stopped = "";
+              clock.format = " {:%a %d/%m %H:%M}";
+              "custom/mail-status" = {
+                exec = "${mail-status}";
+                return-type = "json";
+                interval = 1;
+                on-click = "${pkgs.isync}/bin/mbsync -a && ${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\"";
               };
-            };
-            network = {
-              format-wifi = "{essid} ";
-              format-ethernet = "{ipaddr}/{cidr} ";
-              tooltip-format = "{ifname} via {gwaddr} ";
-              format-linked = "{ifname} (No IP) ";
-              format-disconnected = "Disconnected ⚠";
-              format-alt = "{ifname}: {ipaddr}/{cidr}";
-            };
-            pulseaudio = {
-              format = "{volume}% {icon} {format_source}";
-              format-bluetooth = "{volume}% {icon} {format_source}";
-              format-bluetooth-muted = " {icon} {format_source}";
-              format-muted = " {format_source}";
-              format-source = "{volume}% ";
-              format-source-muted = "";
-              format-icons = {
-                headphone = "";
-                hands-free = "";
-                headset = "";
-                phone = "";
-                portable = "";
-                car = "";
-                default = [ "" "" "" ];
+              idle_inhibitor = {
+                format = "{icon}";
+                format-icons = {
+                  activated = "";
+                  deactivated = "";
+                };
               };
-              on-click = "${pkgs.pamixer}/bin/pamixer -t";
-              on-click-right = "${pkgs.pamixer}/bin/pamixer --default-source -t";
-              on-click-middle = "${pkgs.pavucontrol}/bin/pavucontrol";
+              mpris = {
+                player = "firefox";
+                format = "{status_icon} {artist} - {title}";
+                status-icons = {
+                  playing = "▶";
+                  paused = "";
+                  stopped = "";
+                };
+              };
+              network = {
+                format-wifi = "{essid} ";
+                format-ethernet = "{ipaddr}/{cidr} ";
+                tooltip-format = "{ifname} via {gwaddr} ";
+                format-linked = "{ifname} (No IP) ";
+                format-disconnected = "Disconnected ⚠";
+                format-alt = "{ifname}: {ipaddr}/{cidr}";
+              };
+              pulseaudio = {
+                format = "{volume}% {icon} {format_source}";
+                format-bluetooth = "{volume}% {icon} {format_source}";
+                format-bluetooth-muted = " {icon} {format_source}";
+                format-muted = " {format_source}";
+                format-source = "{volume}% ";
+                format-source-muted = "";
+                format-icons = {
+                  headphone = "";
+                  hands-free = "";
+                  headset = "";
+                  phone = "";
+                  portable = "";
+                  car = "";
+                  default = [ "" "" "" ];
+                };
+                on-click = "${pkgs.pamixer}/bin/pamixer -t";
+                on-click-right = "${pkgs.pamixer}/bin/pamixer --default-source -t";
+                on-click-middle = "${pkgs.pavucontrol}/bin/pavucontrol";
+              };
+              tray.spacing = 2;
             };
-            tray.spacing = 2;
           };
+          style = ''
+            * {
+                font-family: Hack, monospace;
+                font-size: 11px;
+            }
+
+            #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #custom-mail-status, #clock, #tray {
+                padding: 0 5px;
+            }
+
+            button {
+                border: none;
+                border-radius: 0;
+            }
+            button:hover {
+                border: none;
+                border-radius: 0;
+            }
+
+            window#waybar {
+                background-color: #ffffff;
+                color: #000000;
+            }
+
+            #backlight {
+                background-color: #6aaeff;
+            }
+
+            #battery {
+                background-color: #5ada88;
+            }
+            #battery.good {
+                background-color: #6aaeff;
+            }
+            #battery.warning {
+                background-color: #f5df23;
+            }
+            #battery.critical {
+                background-color: #ff8892;
+            }
+
+            #clock {
+                padding-right: 0px;
+            }
+
+            #custom-mail-status.has-mail {
+                background-color: #6aaeff;
+            }
+
+            #idle_inhibitor.activated {
+                background-color: #6aaeff;
+            }
+
+            #pulseaudio {
+                background-color: #f5df23;
+            }
+
+            #tags button {
+                box-shadow: inset 0 -3px transparent
+                background-color: #ffffff;
+                color: #000000;
+            }
+            #tags button.occupied {
+                background-color: #f2eff3;
+            }
+            #tags button.focused {
+                background-color: #6aaeff;
+            }
+            #tags button.urgent {
+                background-color: #ff8892;
+            }
+            #tags button:hover {
+                box-shadow: inset 0 -3px #000000;
+            }
+          '';
+          systemd.enable = true;
         };
-        style = ''
-          * {
-              font-family: Hack, monospace;
-              font-size: 11px;
-          }
-
-          #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #custom-mail-status, #clock, #tray {
-              padding: 0 5px;
-          }
-
-          button {
-              border: none;
-              border-radius: 0;
-          }
-          button:hover {
-              border: none;
-              border-radius: 0;
-          }
-
-          window#waybar {
-              background-color: #ffffff;
-              color: #000000;
-          }
-
-          #backlight {
-              background-color: #6aaeff;
-          }
-
-          #battery {
-              background-color: #5ada88;
-          }
-          #battery.good {
-              background-color: #6aaeff;
-          }
-          #battery.warning {
-              background-color: #f5df23;
-          }
-          #battery.critical {
-              background-color: #ff8892;
-          }
-
-          #clock {
-              padding-right: 0px;
-          }
-
-          #custom-mail-status.has-mail {
-              background-color: #6aaeff;
-          }
-
-          #idle_inhibitor.activated {
-              background-color: #6aaeff;
-          }
-
-          #pulseaudio {
-              background-color: #f5df23;
-          }
-
-          #tags button {
-              box-shadow: inset 0 -3px transparent
-              background-color: #ffffff;
-              color: #000000;
-          }
-          #tags button.occupied {
-              background-color: #f2eff3;
-          }
-          #tags button.focused {
-              background-color: #6aaeff;
-          }
-          #tags button.urgent {
-              background-color: #ff8892;
-          }
-          #tags button:hover {
-              box-shadow: inset 0 -3px #000000;
+        zsh.initExtra = ''
+          rs() {
+            riverctl spawn "$*"
           }
         '';
-        systemd.enable = true;
       };
       services = {
         kanshi = {
