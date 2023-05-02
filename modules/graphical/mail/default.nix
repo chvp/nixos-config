@@ -146,6 +146,10 @@ in
                 (message-send-mail-function 'message-send-mail-with-sendmail "Use sendmail to send mail instead internal smtp")
                 (message-cite-reply-position 'below "Bottom posting is the correct way to reply to email")
                 :config
+                ;; mu4e should just open in the currently focused window instead of taking up the whole frame
+                (add-to-list 'display-buffer-alist
+                    `(,(regexp-quote mu4e-main-buffer-name)
+                    display-buffer-same-window))
                 (setq mu4e-contexts (list ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}))
                 (add-to-list
                  'mu4e-bookmarks
