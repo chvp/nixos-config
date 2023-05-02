@@ -115,9 +115,6 @@ in
                 :ensure nil
                 :demand t
                 :after (vertico)
-                :init
-                (defun mu4e--main-action-str (title cmd) "")
-                (defalias 'mu4e~view-quit-buffer 'mu4e-view-quit)
                 :hook
                 (mu4e-view-mode . display-line-numbers-mode)
                 (mu4e-view-mode . visual-line-mode)
@@ -221,7 +218,6 @@ in
                                      (cdr chosen-el)
                                    (mu4e-warn "Unknown option: '%s'" choice))))))
                     (apply orig-fun args)))
-                (remove-hook 'mu4e-main-mode-hook 'evil-collection-mu4e-update-main-view)
                 (mu4e 'background)
                 :general
                 (lmap "m" '(mu4e :which-key "mail"))
