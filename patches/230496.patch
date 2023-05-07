@@ -1,0 +1,23 @@
+From 7c3dbef887397493cbbbb0aa9f90187517cbfa44 Mon Sep 17 00:00:00 2001
+From: Charlotte Van Petegem <charlotte@vanpetegem.me>
+Date: Sun, 7 May 2023 12:45:07 +0200
+Subject: [PATCH] xrdp: 0.9.21.1 -> 0.9.22
+
+https://github.com/neutrinolabs/xrdp/releases/tag/v0.9.22
+---
+ pkgs/applications/networking/remote/xrdp/default.nix | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/applications/networking/remote/xrdp/default.nix b/pkgs/applications/networking/remote/xrdp/default.nix
+index b7c51d70dfecb..6998e58d6f5f9 100644
+--- a/pkgs/applications/networking/remote/xrdp/default.nix
++++ b/pkgs/applications/networking/remote/xrdp/default.nix
+@@ -34,7 +34,7 @@ let
+   };
+ 
+   xrdp = stdenv.mkDerivation rec {
+-    version = "0.9.21.1";
++    version = "0.9.22";
+     pname = "xrdp";
+ 
+     src = fetchFromGitHub {
