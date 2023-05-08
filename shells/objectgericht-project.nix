@@ -4,6 +4,7 @@
     openssl
     maven
     (openjdk17.override { enableJavaFX = true; })
+    (python3.withPackages (ps: [ ps.pyyaml ps.beautifulsoup4 ]))
   ];
   commands = [
     {
