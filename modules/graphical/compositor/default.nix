@@ -116,6 +116,13 @@ let
     riverctl map normal None XF86AudioRaiseVolume spawn '${pkgs.pamixer}/bin/pamixer -i 5'
     riverctl map normal None XF86AudioLowerVolume spawn '${pkgs.pamixer}/bin/pamixer -d 5'
     riverctl map normal None XF86AudioMute spawn '${pkgs.pamixer}/bin/pamixer --toggle-mute'
+    riverctl map normal None XF86MonBrightnessDown spawn '${pkgs.brightnessctl}/bin/brightnessctl s -- -5%'
+    riverctl map normal None XF86MonBrightnessUp spawn '${pkgs.brightnessctl}/bin/brightnessctl s -- +5%'
+
+    riverctl map normal None Print spawn '${screenshot}/bin/screenshot'
+    riverctl map normal Alt Print spawn '${screenshot}/bin/screenshot -d'
+    riverctl map normal Shift Print spawn '${screenshot}/bin/screenshot -r'
+    riverctl map normal Alt+Shift Print spawn '${screenshot}/bin/screenshot -r -d'
 
     riverctl float-filter-add app-id launcher
     riverctl float-filter-add app-id be.ugent.dominion.Main
