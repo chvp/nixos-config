@@ -107,7 +107,7 @@
         nur.overlay
         www-chvp-be.overlays.default
       ];
-      baseModules = [
+      commonModules = [
         accentor.nixosModules.default
         agenix.nixosModules.age
         home-manager.nixosModule
@@ -115,21 +115,24 @@
         nix-index-database.nixosModules.nix-index
         ./modules
       ];
-      nixosSystem = system: name: nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = baseModules ++ [
-          ({ config, ... }:
-            let nixpkgs = nixpkgsForSystem system; in
-            {
-              nixpkgs.pkgs = import nixpkgs { inherit overlays system; config = config.nixpkgs.config; };
-              networking.hostName = name;
-              nix = {
-                extraOptions = "extra-experimental-features = nix-command flakes";
-                registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs.flake = nixpkgs; };
-              };
-            })
-          ./machines/${name}
-        ];
+      nixosSystem = system: name: let nixpkgs = nixpkgsForSystem system; in
+        inputs.nixpkgs.lib.nixosSystem {
+          lib = (import nixpkgs { inherit overlays system; }).lib;
+          specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
+          system = "x86_64-linux";
+          baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
+          modules = commonModules ++ [
+            ({ config, ... }:
+              {
+                nixpkgs.pkgs = import nixpkgs { inherit overlays system; config = config.nixpkgs.config; };
+                networking.hostName = name;
+                nix = {
+                  extraOptions = "extra-experimental-features = nix-command flakes";
+                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs.flake = nixpkgs; };
+                };
+              })
+            ./machines/${name}
+          ];
       };
       nixosConfigurations = {
         kharbranth = nixosSystem "x86_64-linux" "kharbranth";
