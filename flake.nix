@@ -121,12 +121,11 @@
           ({ config, ... }:
             let nixpkgs = nixpkgsForSystem system; in
             {
-              environment.etc.nixpkgs.source = nixpkgs;
               nixpkgs.pkgs = import nixpkgs { inherit overlays system; config = config.nixpkgs.config; };
               networking.hostName = name;
               nix = {
                 extraOptions = "extra-experimental-features = nix-command flakes";
-                registry = builtins.mapAttrs (name: v: { flake = v; }) inputs;
+                registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs.flake = nixpkgs; };
               };
             })
           ./machines/${name}
