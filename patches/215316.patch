@@ -1,0 +1,654 @@
+From 82b4d7ec39ae3e8e3f04668624475076c82b84a0 Mon Sep 17 00:00:00 2001
+From: Jan Tojnar <jtojnar@gmail.com>
+Date: Sun, 5 Mar 2023 12:42:32 +0100
+Subject: [PATCH 1/4] transmission: Clean up the expression
+
+- Use one dependency per-line for cleaner diffs.
+- Order derivation attributes according to convention.
+- Extract apparmor rules expression into let binding.
+- Use finalAttrs instead of let binding for consistent overriding.
+---
+ .../networking/p2p/transmission/default.nix   | 132 ++++++++++--------
+ 1 file changed, 77 insertions(+), 55 deletions(-)
+
+diff --git a/pkgs/applications/networking/p2p/transmission/default.nix b/pkgs/applications/networking/p2p/transmission/default.nix
+index 8f44d79f817dd..9e3d69fb93e7d 100644
+--- a/pkgs/applications/networking/p2p/transmission/default.nix
++++ b/pkgs/applications/networking/p2p/transmission/default.nix
+@@ -32,17 +32,16 @@
+ , apparmorRulesFromClosure
+ }:
+ 
+-let
++stdenv.mkDerivation (finalAttrs: {
++  pname = "transmission";
+   version = "3.00";
+ 
+-in stdenv.mkDerivation {
+-  pname = "transmission";
+-  inherit version;
++  outputs = [ "out" "apparmor" ];
+ 
+   src = fetchFromGitHub {
+     owner = "transmission";
+     repo = "transmission";
+-    rev = version;
++    rev = finalAttrs.version;
+     sha256 = "0ccg0km54f700x9p0jsnncnwvfnxfnxf7kcm7pcx1cj0vw78924z";
+     fetchSubmodules = true;
+   };
+@@ -55,28 +54,14 @@ in stdenv.mkDerivation {
+     })
+   ];
+ 
+-  outputs = [ "out" "apparmor" ];
+-
+-  cmakeFlags =
+-    let
+-      mkFlag = opt: if opt then "ON" else "OFF";
+-    in
+-    [
+-      "-DENABLE_MAC=OFF" # requires xcodebuild
+-      "-DENABLE_GTK=${mkFlag enableGTK3}"
+-      "-DENABLE_QT=${mkFlag enableQt}"
+-      "-DENABLE_DAEMON=${mkFlag enableDaemon}"
+-      "-DENABLE_CLI=${mkFlag enableCli}"
+-      "-DINSTALL_LIB=${mkFlag installLib}"
+-    ];
+-
+   nativeBuildInputs = [
+     pkg-config
+     cmake
+-  ]
+-  ++ lib.optionals enableGTK3 [ wrapGAppsHook ]
+-  ++ lib.optionals enableQt [ qt5.wrapQtAppsHook ]
+-  ;
++  ] ++ lib.optionals enableGTK3 [
++    wrapGAppsHook
++  ] ++ lib.optionals enableQt [
++    qt5.wrapQtAppsHook
++  ];
+ 
+   buildInputs = [
+     openssl
+@@ -89,38 +74,76 @@ in stdenv.mkDerivation {
+     miniupnpc
+     dht
+     libnatpmp
+-  ]
+-  ++ lib.optionals enableQt [ qt5.qttools qt5.qtbase ]
+-  ++ lib.optionals enableGTK3 [ gtk3 xorg.libpthreadstubs ]
+-  ++ lib.optionals enableSystemd [ systemd ]
+-  ++ lib.optionals stdenv.isLinux [ inotify-tools ]
+-  ++ lib.optionals stdenv.isDarwin [ libiconv ];
++  ] ++ lib.optionals enableQt [
++    qt5.qttools
++    qt5.qtbase
++  ] ++ lib.optionals enableGTK3 [
++    gtk3
++    xorg.libpthreadstubs
++  ] ++ lib.optionals enableSystemd [
++    systemd
++  ] ++ lib.optionals stdenv.isLinux [
++    inotify-tools
++  ] ++ lib.optionals stdenv.isDarwin [
++    libiconv
++  ];
++
++  cmakeFlags =
++    let
++      mkFlag = opt: if opt then "ON" else "OFF";
++    in
++    [
++      "-DENABLE_MAC=OFF" # requires xcodebuild
++      "-DENABLE_GTK=${mkFlag enableGTK3}"
++      "-DENABLE_QT=${mkFlag enableQt}"
++      "-DENABLE_DAEMON=${mkFlag enableDaemon}"
++      "-DENABLE_CLI=${mkFlag enableCli}"
++      "-DINSTALL_LIB=${mkFlag installLib}"
++    ];
+ 
+-  postInstall = ''
+-    mkdir $apparmor
+-    cat >$apparmor/bin.transmission-daemon <<EOF
+-    include <tunables/global>
+-    $out/bin/transmission-daemon {
+-      include <abstractions/base>
+-      include <abstractions/nameservice>
+-      include <abstractions/ssl_certs>
+-      include "${apparmorRulesFromClosure { name = "transmission-daemon"; } ([
+-        curl libevent openssl pcre zlib libnatpmp miniupnpc
+-      ] ++ lib.optionals enableSystemd [ systemd ]
+-        ++ lib.optionals stdenv.isLinux [ inotify-tools ]
+-      )}"
+-      r @{PROC}/sys/kernel/random/uuid,
+-      r @{PROC}/sys/vm/overcommit_memory,
+-      r @{PROC}/@{pid}/environ,
+-      r @{PROC}/@{pid}/mounts,
+-      rwk /tmp/tr_session_id_*,
++  postInstall =
++    let
++      rules =
++        apparmorRulesFromClosure
++          {
++            name = "transmission-daemon";
++          }
++          ([
++            curl
++            libevent
++            openssl
++            pcre
++            zlib
++            libnatpmp
++            miniupnpc
++          ] ++ lib.optionals enableSystemd [
++            systemd
++          ]
++          ++ lib.optionals stdenv.isLinux [
++            inotify-tools
++          ]);
++    in
++    ''
++      mkdir "$apparmor"
++      cat >"$apparmor/bin.transmission-daemon" <<EOF
++      include <tunables/global>
++      $out/bin/transmission-daemon {
++        include <abstractions/base>
++        include <abstractions/nameservice>
++        include <abstractions/ssl_certs>
++        include "${rules}"
++        r @{PROC}/sys/kernel/random/uuid,
++        r @{PROC}/sys/vm/overcommit_memory,
++        r @{PROC}/@{pid}/environ,
++        r @{PROC}/@{pid}/mounts,
++        rwk /tmp/tr_session_id_*,
+ 
+-      r $out/share/transmission/web/**,
++        r $out/share/transmission/web/**,
+ 
+-      include <local/bin.transmission-daemon>
+-    }
+-    EOF
+-  '';
++        include <local/bin.transmission-daemon>
++      }
++      EOF
++    '';
+ 
+   passthru.tests = {
+     apparmor = nixosTests.transmission; # starts the service with apparmor enabled
+@@ -145,5 +168,4 @@ in stdenv.mkDerivation {
+     maintainers = with lib.maintainers; [ astsmtl vcunat wizeman ];
+     platforms = lib.platforms.unix;
+   };
+-
+-}
++})
+
+From 69c10553ec4a2bf05196bf44f4f189007d52c737 Mon Sep 17 00:00:00 2001
+From: Jan Tojnar <jtojnar@gmail.com>
+Date: Sun, 5 Mar 2023 15:16:29 +0100
+Subject: [PATCH 2/4] =?UTF-8?q?libutp:=20unstable-2017-01-02=20=E2=86=92?=
+ =?UTF-8?q?=20unstable-2023-03-05?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+https://github.com/transmission/libutp/compare/fda9f4b3db97ccb243fcbed2ce280eb4135d705b...9cb9f9c4f0073d78b08d6542cebaea6564ecadfe
+
+Will be required for Transmission 4.0.0, keep the old version for other programs.
+---
+ .../networking/p2p/libutp/3.3.nix             | 24 +++++++++++++++++
+ .../networking/p2p/libutp/default.nix         | 27 ++++++++++++++-----
+ .../networking/p2p/torrential/default.nix     |  4 +--
+ .../networking/p2p/transmission/default.nix   |  4 +--
+ pkgs/top-level/all-packages.nix               |  2 ++
+ 5 files changed, 50 insertions(+), 11 deletions(-)
+ create mode 100644 pkgs/applications/networking/p2p/libutp/3.3.nix
+
+diff --git a/pkgs/applications/networking/p2p/libutp/3.3.nix b/pkgs/applications/networking/p2p/libutp/3.3.nix
+new file mode 100644
+index 0000000000000..a07ffdea6b69d
+--- /dev/null
++++ b/pkgs/applications/networking/p2p/libutp/3.3.nix
+@@ -0,0 +1,24 @@
++{ stdenv, lib, fetchFromGitHub, cmake }:
++
++stdenv.mkDerivation rec {
++  pname = "libutp";
++  version = "unstable-2017-01-02";
++
++  src = fetchFromGitHub {
++    # Use transmission fork from post-3.3-transmission branch
++    owner = "transmission";
++    repo = pname;
++    rev = "fda9f4b3db97ccb243fcbed2ce280eb4135d705b";
++    sha256 = "CvuZLOBksIl/lS6LaqOIuzNvX3ihlIPjI3Eqwo7YJH0=";
++  };
++
++  nativeBuildInputs = [ cmake ];
++
++  meta = with lib; {
++    description = "uTorrent Transport Protocol library";
++    homepage = "https://github.com/transmission/libutp";
++    license = licenses.mit;
++    maintainers = with maintainers; [ emilytrau ];
++    platforms = platforms.unix;
++  };
++}
+diff --git a/pkgs/applications/networking/p2p/libutp/default.nix b/pkgs/applications/networking/p2p/libutp/default.nix
+index a07ffdea6b69d..a7a7c7325bca5 100644
+--- a/pkgs/applications/networking/p2p/libutp/default.nix
++++ b/pkgs/applications/networking/p2p/libutp/default.nix
+@@ -1,18 +1,31 @@
+-{ stdenv, lib, fetchFromGitHub, cmake }:
++{ stdenv
++, lib
++, fetchFromGitHub
++, cmake
++, unstableGitUpdater
++}:
+ 
+ stdenv.mkDerivation rec {
+   pname = "libutp";
+-  version = "unstable-2017-01-02";
++  version = "unstable-2023-03-05";
+ 
+   src = fetchFromGitHub {
+-    # Use transmission fork from post-3.3-transmission branch
++    # Use transmission fork from post-3.4-transmission branch
+     owner = "transmission";
+-    repo = pname;
+-    rev = "fda9f4b3db97ccb243fcbed2ce280eb4135d705b";
+-    sha256 = "CvuZLOBksIl/lS6LaqOIuzNvX3ihlIPjI3Eqwo7YJH0=";
++    repo = "libutp";
++    rev = "9cb9f9c4f0073d78b08d6542cebaea6564ecadfe";
++    sha256 = "dpbX1h/gpuVIAXC4hwwuRwQDJ0pwVVEsgemOVN0Dv9Q=";
+   };
+ 
+-  nativeBuildInputs = [ cmake ];
++  nativeBuildInputs = [
++    cmake
++  ];
++
++  passthru = {
++    updateScript = unstableGitUpdater {
++      branch = "post-3.4-transmission";
++    };
++  };
+ 
+   meta = with lib; {
+     description = "uTorrent Transport Protocol library";
+diff --git a/pkgs/applications/networking/p2p/torrential/default.nix b/pkgs/applications/networking/p2p/torrential/default.nix
+index 4cf4e1becf053..a03e73d194fc2 100644
+--- a/pkgs/applications/networking/p2p/torrential/default.nix
++++ b/pkgs/applications/networking/p2p/torrential/default.nix
+@@ -17,7 +17,7 @@
+ , libgee
+ , libnatpmp
+ , libtransmission
+-, libutp
++, libutp_3_3
+ , miniupnpc
+ , openssl
+ , pantheon
+@@ -54,7 +54,7 @@ stdenv.mkDerivation rec {
+     libgee
+     libnatpmp
+     libtransmission
+-    libutp
++    libutp_3_3
+     miniupnpc
+     openssl
+     pantheon.granite
+diff --git a/pkgs/applications/networking/p2p/transmission/default.nix b/pkgs/applications/networking/p2p/transmission/default.nix
+index 9e3d69fb93e7d..47b70133414a9 100644
+--- a/pkgs/applications/networking/p2p/transmission/default.nix
++++ b/pkgs/applications/networking/p2p/transmission/default.nix
+@@ -12,7 +12,7 @@
+ , zlib
+ , pcre
+ , libb64
+-, libutp
++, libutp_3_3
+ , miniupnpc
+ , dht
+ , libnatpmp
+@@ -70,7 +70,7 @@ stdenv.mkDerivation (finalAttrs: {
+     zlib
+     pcre
+     libb64
+-    libutp
++    libutp_3_3
+     miniupnpc
+     dht
+     libnatpmp
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 5fefc525beaac..27067d1054f80 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -31442,6 +31442,8 @@ with pkgs;
+ 
+   libutp = callPackage ../applications/networking/p2p/libutp { };
+ 
++  libutp_3_3 = callPackage ../applications/networking/p2p/libutp/3.3.nix { };
++
+   lifelines = callPackage ../applications/misc/lifelines { };
+ 
+   liferea = callPackage ../applications/networking/newsreaders/liferea { };
+
+From d4014dd04dfc01bf35265717c4922456f44a3e7d Mon Sep 17 00:00:00 2001
+From: Jan Tojnar <jtojnar@gmail.com>
+Date: Sun, 5 Mar 2023 13:00:23 +0100
+Subject: [PATCH 3/4] transmission_3: init at 3.00
+
+Introduces pared down Transmission 3 package for apps that depend on it, until they are ported to Transmission 4.
+Only keeping the library and daemon, as they are needed for Torrential and Fragments, respectively.
+Not separating into different derivations them since the daemon only adds 1M to the closure.
+---
+ .../networking/p2p/fragments/default.nix      |  4 +-
+ .../networking/p2p/torrential/default.nix     |  4 +-
+ .../networking/p2p/transmission/3.x.nix       | 79 +++++++++++++++++++
+ pkgs/top-level/all-packages.nix               |  1 +
+ 4 files changed, 84 insertions(+), 4 deletions(-)
+ create mode 100644 pkgs/applications/networking/p2p/transmission/3.x.nix
+
+diff --git a/pkgs/applications/networking/p2p/fragments/default.nix b/pkgs/applications/networking/p2p/fragments/default.nix
+index 932cfbbbe3a20..a29136a7df4d6 100644
+--- a/pkgs/applications/networking/p2p/fragments/default.nix
++++ b/pkgs/applications/networking/p2p/fragments/default.nix
+@@ -15,12 +15,12 @@
+ , pkg-config
+ , rustPlatform
+ , sqlite
+-, transmission
++, transmission_3
+ , wrapGAppsHook4
+ }:
+ 
+ let
+-  patchedTransmission = transmission.overrideAttrs (oldAttrs: {
++  patchedTransmission = transmission_3.overrideAttrs (oldAttrs: {
+     patches = (oldAttrs.patches or []) ++ [
+       (fetchpatch {
+         url = "https://raw.githubusercontent.com/flathub/de.haeckerfelix.Fragments/2aee477c8e26a24570f8dbbdbd1c49e017ae32eb/transmission_pdeathsig.patch";
+diff --git a/pkgs/applications/networking/p2p/torrential/default.nix b/pkgs/applications/networking/p2p/torrential/default.nix
+index a03e73d194fc2..6f8c6281fc3a6 100644
+--- a/pkgs/applications/networking/p2p/torrential/default.nix
++++ b/pkgs/applications/networking/p2p/torrential/default.nix
+@@ -16,7 +16,7 @@
+ , libevent
+ , libgee
+ , libnatpmp
+-, libtransmission
++, transmission_3
+ , libutp_3_3
+ , miniupnpc
+ , openssl
+@@ -53,7 +53,7 @@ stdenv.mkDerivation rec {
+     libevent
+     libgee
+     libnatpmp
+-    libtransmission
++    transmission_3
+     libutp_3_3
+     miniupnpc
+     openssl
+diff --git a/pkgs/applications/networking/p2p/transmission/3.x.nix b/pkgs/applications/networking/p2p/transmission/3.x.nix
+new file mode 100644
+index 0000000000000..d429079af3f11
+--- /dev/null
++++ b/pkgs/applications/networking/p2p/transmission/3.x.nix
+@@ -0,0 +1,79 @@
++{ stdenv
++, lib
++, fetchFromGitHub
++, fetchurl
++, cmake
++, pkg-config
++, openssl
++, curl
++, libevent
++, inotify-tools
++, zlib
++, pcre
++, libb64
++, libutp
++, miniupnpc
++, dht
++, libnatpmp
++, libiconv
++}:
++
++stdenv.mkDerivation (finalAttrs: {
++  pname = "transmission3";
++  version = "3.00";
++
++  src = fetchFromGitHub {
++    owner = "transmission";
++    repo = "transmission";
++    rev = finalAttrs.version;
++    sha256 = "0ccg0km54f700x9p0jsnncnwvfnxfnxf7kcm7pcx1cj0vw78924z";
++    fetchSubmodules = true;
++  };
++
++  patches = [
++    # fix build with openssl 3.0
++    (fetchurl {
++      url = "https://gitweb.gentoo.org/repo/gentoo.git/plain/net-p2p/transmission/files/transmission-3.00-openssl-3.patch";
++      hash = "sha256-peVrkGck8AfbC9uYNfv1CIu1alIewpca7A6kRXjVlVs=";
++    })
++  ];
++
++  nativeBuildInputs = [
++    pkg-config
++    cmake
++  ];
++
++  buildInputs = [
++    openssl
++    curl
++    libevent
++    zlib
++    pcre
++    libb64
++    libutp
++    miniupnpc
++    dht
++    libnatpmp
++  ] ++ lib.optionals stdenv.isLinux [
++    inotify-tools
++  ] ++ lib.optionals stdenv.isDarwin [
++    libiconv
++  ];
++
++  cmakeFlags = [
++    "-DENABLE_MAC=OFF" # requires xcodebuild
++    "-DENABLE_GTK=OFF"
++    "-DENABLE_QT=OFF"
++    "-DENABLE_DAEMON=ON"
++    "-DENABLE_CLI=OFF"
++    "-DINSTALL_LIB=ON"
++  ];
++
++  meta = {
++    description = "Old version of libtransmission library for apps that depend on it";
++    homepage = "http://www.transmissionbt.com/";
++    license = lib.licenses.gpl2Plus; # parts are under MIT
++    maintainers = with lib.maintainers; [ ];
++    platforms = lib.platforms.unix;
++  };
++})
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 27067d1054f80..05be06aa31eb5 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -33913,6 +33913,7 @@ with pkgs;
+   transcribe = callPackage ../applications/audio/transcribe { };
+ 
+   transmission = callPackage ../applications/networking/p2p/transmission { };
++  transmission_3 = callPackage ../applications/networking/p2p/transmission/3.x.nix { };
+   libtransmission = transmission.override {
+     installLib = true;
+     enableDaemon = false;
+
+From 16d92f3826f2a7711f55cc4b7483f4db9c82aef3 Mon Sep 17 00:00:00 2001
+From: ajs124 <git@ajs124.de>
+Date: Wed, 8 Feb 2023 15:13:44 +0100
+Subject: [PATCH 4/4] =?UTF-8?q?transmission:=203.0.0=20=E2=86=92=204.0.2?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+https://github.com/transmission/transmission/releases/tag/4.0.0
+https://github.com/transmission/transmission/releases/tag/4.0.1
+https://github.com/transmission/transmission/releases/tag/4.0.2
+
+Not adding fmt and utf8cpp to AppArmor list since those are header only.
+
+Co-Authored-By: Jan Tojnar <jtojnar@gmail.com>
+---
+ .../networking/p2p/transmission/default.nix   | 56 ++++++++++++++-----
+ 1 file changed, 41 insertions(+), 15 deletions(-)
+
+diff --git a/pkgs/applications/networking/p2p/transmission/default.nix b/pkgs/applications/networking/p2p/transmission/default.nix
+index 47b70133414a9..b86851c56716f 100644
+--- a/pkgs/applications/networking/p2p/transmission/default.nix
++++ b/pkgs/applications/networking/p2p/transmission/default.nix
+@@ -1,7 +1,6 @@
+ { stdenv
+ , lib
+ , fetchFromGitHub
+-, fetchurl
+ , cmake
+ , pkg-config
+ , openssl
+@@ -12,14 +11,19 @@
+ , zlib
+ , pcre
+ , libb64
+-, libutp_3_3
++, libutp
+ , miniupnpc
+ , dht
+ , libnatpmp
+ , libiconv
++, libdeflate
++, utf8cpp
++, fmt
++, libpsl
++, python3
+   # Build options
+ , enableGTK3 ? false
+-, gtk3
++, gtkmm3
+ , xorg
+ , wrapGAppsHook
+ , enableQt ? false
+@@ -30,11 +34,12 @@
+ , enableCli ? true
+ , installLib ? false
+ , apparmorRulesFromClosure
++, darwin
+ }:
+ 
+ stdenv.mkDerivation (finalAttrs: {
+   pname = "transmission";
+-  version = "3.00";
++  version = "4.0.2";
+ 
+   outputs = [ "out" "apparmor" ];
+ 
+@@ -42,21 +47,14 @@ stdenv.mkDerivation (finalAttrs: {
+     owner = "transmission";
+     repo = "transmission";
+     rev = finalAttrs.version;
+-    sha256 = "0ccg0km54f700x9p0jsnncnwvfnxfnxf7kcm7pcx1cj0vw78924z";
++    hash = "sha256-DaaJnnWEZOl6zLVxgg+U8C5ztv7Iq0wJ9yle0Gxwybc=";
+     fetchSubmodules = true;
+   };
+ 
+-  patches = [
+-    # fix build with openssl 3.0
+-    (fetchurl {
+-      url = "https://gitweb.gentoo.org/repo/gentoo.git/plain/net-p2p/transmission/files/transmission-3.00-openssl-3.patch";
+-      hash = "sha256-peVrkGck8AfbC9uYNfv1CIu1alIewpca7A6kRXjVlVs=";
+-    })
+-  ];
+-
+   nativeBuildInputs = [
+     pkg-config
+     cmake
++    python3
+   ] ++ lib.optionals enableGTK3 [
+     wrapGAppsHook
+   ] ++ lib.optionals enableQt [
+@@ -70,15 +68,19 @@ stdenv.mkDerivation (finalAttrs: {
+     zlib
+     pcre
+     libb64
+-    libutp_3_3
++    libutp
+     miniupnpc
+     dht
+     libnatpmp
++    libdeflate
++    utf8cpp
++    fmt
++    libpsl
+   ] ++ lib.optionals enableQt [
+     qt5.qttools
+     qt5.qtbase
+   ] ++ lib.optionals enableGTK3 [
+-    gtk3
++    gtkmm3
+     xorg.libpthreadstubs
+   ] ++ lib.optionals enableSystemd [
+     systemd
+@@ -86,6 +88,7 @@ stdenv.mkDerivation (finalAttrs: {
+     inotify-tools
+   ] ++ lib.optionals stdenv.isDarwin [
+     libiconv
++    darwin.apple_sdk.frameworks.Foundation
+   ];
+ 
+   cmakeFlags =
+@@ -99,8 +102,29 @@ stdenv.mkDerivation (finalAttrs: {
+       "-DENABLE_DAEMON=${mkFlag enableDaemon}"
+       "-DENABLE_CLI=${mkFlag enableCli}"
+       "-DINSTALL_LIB=${mkFlag installLib}"
++    ] ++ lib.optionals stdenv.isDarwin [
++      # Transmission sets this to 10.13 if not explicitly specified, see https://github.com/transmission/transmission/blob/0be7091eb12f4eb55f6690f313ef70a66795ee72/CMakeLists.txt#L7-L16.
++      "-DCMAKE_OSX_DEPLOYMENT_TARGET=${stdenv.hostPlatform.darwinMinVersion}"
+     ];
+ 
++  postPatch = ''
++    # Clean third-party libraries to ensure system ones are used.
++    # Excluding gtest since it is hardcoded to vendored version. The rest of the listed libraries are not packaged.
++    pushd third-party
++    for f in *; do
++        if [[ ! $f =~ googletest|wildmat|fast_float|wide-integer|jsonsl ]]; then
++            rm -r "$f"
++        fi
++    done
++    popd
++    rm \
++      cmake/FindFmt.cmake \
++      cmake/FindUtfCpp.cmake
++
++    # Upstream uses different config file name.
++    substituteInPlace CMakeLists.txt --replace 'find_package(UtfCpp)' 'find_package(utf8cpp)'
++  '';
++
+   postInstall =
+     let
+       rules =
+@@ -114,6 +138,8 @@ stdenv.mkDerivation (finalAttrs: {
+             openssl
+             pcre
+             zlib
++            libdeflate
++            libpsl
+             libnatpmp
+             miniupnpc
+           ] ++ lib.optionals enableSystemd [
