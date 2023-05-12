@@ -30,7 +30,10 @@
     };
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     devshell = {
       url = "github:chvp/devshell";
@@ -72,12 +75,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    utils = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-      };
-    };
     www-chvp-be = {
       url = "gitlab:chvp/www.chvp.be?host=git.chvp.be";
       inputs = {
@@ -88,55 +85,71 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nix-index-database, nixos-mailserver, nur, tetris, utils, www-chvp-be }:
-    utils.lib.mkFlake {
-      inherit self inputs;
-      channels.nixpkgs = {
-        input = nixpkgs;
-        patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
-        overlaysBuilder = _: [
-          agenix.overlays.default
-          accentor.overlays.default
-          devshell.overlays.default
-          emacs-overlay.overlay
-          (self: super: {
-            tetris = tetris.packages.${self.system}.default;
-          })
-          nur.overlay
-          www-chvp-be.overlays.default
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be }:
+    let
+      patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
+      # Avoid IFD if there are no patches
+      nixpkgsForSystem = system: if patches == [ ] then inputs.nixpkgs else
+      (
+        (import inputs.nixpkgs { inherit system; }).pkgs.applyPatches {
+          inherit patches;
+          name = "nixpkgs-patched-${inputs.nixpkgs.shortRev}";
+          src = inputs.nixpkgs;
+        });
+      overlays = [
+        agenix.overlays.default
+        accentor.overlays.default
+        devshell.overlays.default
+        emacs-overlay.overlay
+        (self: super: {
+          tetris = tetris.packages.${self.system}.default;
+        })
+        nur.overlay
+        www-chvp-be.overlays.default
+      ];
+      baseModules = [
+        accentor.nixosModules.default
+        agenix.nixosModules.age
+        home-manager.nixosModule
+        nixos-mailserver.nixosModule
+        nix-index-database.nixosModules.nix-index
+        ./modules
+      ];
+      nixosSystem = system: name: nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = baseModules ++ [
+          ({ config, ... }:
+            let nixpkgs = nixpkgsForSystem system; in
+            {
+              environment.etc.nixpkgs.source = nixpkgs;
+              nixpkgs.pkgs = import nixpkgs { inherit overlays system; config = config.nixpkgs.config; };
+              networking.hostName = name;
+              nix = {
+                extraOptions = "extra-experimental-features = nix-command flakes";
+                registry = builtins.mapAttrs (name: v: { flake = v; }) inputs;
+              };
+            })
+          ./machines/${name}
         ];
       };
-      hostDefaults = {
-        modules = [
-          ({ channel, ... }: {
-            nix.generateRegistryFromInputs = true;
-            environment.etc."nixpkgs".source = channel.path;
-          })
-          accentor.nixosModules.default
-          agenix.nixosModules.age
-          home-manager.nixosModule
-          nixos-mailserver.nixosModule
-          nix-index-database.nixosModules.nix-index
-          ./modules
-        ];
+      nixosConfigurations = {
+        kharbranth = nixosSystem "x86_64-linux" "kharbranth";
+        kholinar = nixosSystem "x86_64-linux" "kholinar";
+        lasting-integrity = nixosSystem "x86_64-linux" "lasting-integrity";
+        urithiru = nixosSystem "x86_64-linux" "urithiru";
       };
-      hosts = {
-        kharbranth.modules = [ ./machines/kharbranth ];
-        kholinar.modules = [ ./machines/kholinar ];
-        lasting-integrity.modules = [ ./machines/lasting-integrity ];
-        urithiru.modules = [ ./machines/urithiru ];
-      };
-      outputsBuilder = channels:
-        let pkgs = channels.nixpkgs; in
+      lsShells = builtins.readDir ./shells;
+      shellFiles = builtins.filter (name: lsShells.${name} == "regular") (builtins.attrNames lsShells);
+      shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) shellFiles;
+      systemAttrs = flake-utils.lib.eachDefaultSystem (system:
+        let
+          pkgs = import (nixpkgsForSystem system) { inherit overlays system; };
+          nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs; };
+        in
         {
-          devShells =
-            let
-              ls = builtins.readDir ./shells;
-              files = builtins.filter (name: ls.${name} == "regular") (builtins.attrNames ls);
-              shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) files;
-              nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs; };
-            in
-            builtins.listToAttrs (builtins.map (name: { inherit name; value = nameToValue name; }) shellNames);
-        };
-    };
+          devShells = builtins.listToAttrs (builtins.map (name: { inherit name; value = nameToValue name; }) shellNames);
+        }
+      );
+    in
+    systemAttrs // { inherit nixosConfigurations; };
 }
