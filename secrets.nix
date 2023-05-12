@@ -82,6 +82,8 @@ in
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = hosts ++ users;
 
+  "secrets/files/programs/transmission/config.json.age".publicKeys = [ urithiru ] ++ users;
+
   "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-hookshot/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
