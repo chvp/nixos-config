@@ -8,11 +8,9 @@
 
   config = lib.mkIf config.chvp.programs.deluge.enable {
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = with pkgs; [ deluge ];
+      home.packages = with pkgs; [ transmission-remote-gtk ];
     };
 
-    chvp.base.zfs.homeLinks = [
-      { path = ".config/deluge"; type = "data"; }
-    ];
+    chvp.base.zfs.homeLinks = [ { path = ".config/transmission-remote-gtk"; type = "data"; } ];
   };
 }
