@@ -15,6 +15,7 @@ let
   base = home: user: {
     programs.ssh = {
       enable = true;
+      package = if config.chvp.graphical.enable then ssh else pkgs.openssh;
       compression = true;
       controlMaster = "auto";
       controlPersist = "10m";
@@ -27,7 +28,7 @@ let
         HostKeyAlgorithms = "ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa";
       };
     };
-    home.packages = lib.mkIf config.chvp.graphical.enable [ ssh pkgs.sshfs ];
+    home.packages = lib.mkIf config.chvp.graphical.enable [ pkgs.sshfs ];
   };
 in
 {
