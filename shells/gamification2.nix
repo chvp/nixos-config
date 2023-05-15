@@ -1,4 +1,4 @@
-{ pkgs, inputs }: pkgs.devshell.mkShell {
+{ pkgs, inputs, ... }: pkgs.devshell.mkShell {
   name = "Gamification 2";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   env = [

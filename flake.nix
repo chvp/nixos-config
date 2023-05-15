@@ -146,7 +146,7 @@
       systemAttrs = flake-utils.lib.eachDefaultSystem (system:
         let
           pkgs = import (nixpkgsForSystem system) { inherit overlays system; };
-          nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs; };
+          nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs system; };
         in
         {
           devShells = builtins.listToAttrs (builtins.map (name: { inherit name; value = nameToValue name; }) shellNames);

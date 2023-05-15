@@ -1,4 +1,4 @@
-{ pkgs, inputs }:
+{ pkgs, inputs, ... }:
 let
   support-services = {
     memcached.command = "memcached";

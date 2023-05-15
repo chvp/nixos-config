@@ -1,4 +1,4 @@
-{ pkgs, inputs }: pkgs.devshell.mkShell {
+{ pkgs, inputs, ... }: pkgs.devshell.mkShell {
   name = "Tap";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   commands = [

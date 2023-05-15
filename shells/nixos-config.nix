@@ -1,4 +1,4 @@
-{ pkgs, inputs }: pkgs.devshell.mkShell {
+{ pkgs, ... }: pkgs.devshell.mkShell {
   name = "NixOS config";
   commands = [
     {
