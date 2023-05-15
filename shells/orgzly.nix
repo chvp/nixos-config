@@ -19,7 +19,7 @@ in
   env = [
     { name = "ANDROID_SDK_ROOT"; eval = "${composed.androidsdk}/libexec/android-sdk/"; }
     { name = "BUILD_TOOLS_PATH"; eval = "$ANDROID_SDK_ROOT/build-tools/${buildToolsVersion}"; }
-    { name = "APK_DIR"; eval = "$PRJ_ROOT/app/build/outputs/apk/release"; }
+    { name = "APK_DIR"; eval = "$PRJ_ROOT/app/build/outputs/apk/premium/release"; }
   ];
   commands = [
     {
@@ -35,7 +35,7 @@ in
       command = ''
                   rm -f "$APK_DIR/"*
                   gradle assembleRelease
-                  "$BUILD_TOOLS_PATH/zipalign" -v -p 4 "$APK_DIR/app-release-unsigned.apk" "$APK_DIR/app-release-unsigned-aligned.apk"
+                  "$BUILD_TOOLS_PATH/zipalign" -v -p 4 "$APK_DIR/app-premium-release-unsigned.apk" "$APK_DIR/app-release-unsigned-aligned.apk"
                   echo android | "$BUILD_TOOLS_PATH/apksigner" sign --ks "$HOME/.android/debug.keystore" --out "$APK_DIR/app-release.apk" "$APK_DIR/app-release-unsigned-aligned.apk"
                   adb install -r "$APK_DIR/app-release.apk"
                 '';
