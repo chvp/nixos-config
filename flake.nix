@@ -115,7 +115,8 @@
         nix-index-database.nixosModules.nix-index
         ./modules
       ];
-      nixosSystem = system: name: let nixpkgs = nixpkgsForSystem system; in
+      nixosSystem = system: name:
+        let nixpkgs = nixpkgsForSystem system; in
         inputs.nixpkgs.lib.nixosSystem {
           lib = (import nixpkgs { inherit overlays system; }).lib;
           specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
@@ -133,7 +134,7 @@
               })
             ./machines/${name}
           ];
-      };
+        };
       nixosConfigurations = {
         kharbranth = nixosSystem "x86_64-linux" "kharbranth";
         kholinar = nixosSystem "x86_64-linux" "kholinar";

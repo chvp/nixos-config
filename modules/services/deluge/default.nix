@@ -17,9 +17,10 @@
       (n: {
         fqdn = "del${toString (n + 1)}.vanpetegem.me";
         basicProxy = "http://localhost:${toString (8112 + n)}";
-      }) config.chvp.services.deluge.count) ++ [
-        { fqdn = "transmission.vanpetegem.me"; basicProxy = "http://localhost:9091"; }
-      ];
+      })
+      config.chvp.services.deluge.count) ++ [
+      { fqdn = "transmission.vanpetegem.me"; basicProxy = "http://localhost:9091"; }
+    ];
 
     networking.firewall = {
       allowedTCPPortRanges = [
