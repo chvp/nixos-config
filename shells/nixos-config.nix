@@ -11,7 +11,7 @@
       name = "fetchpatch";
       category = "general commands";
       help = "Fetch a patch from a nixpkgs PR by its ID";
-      command = "curl -L https://github.com/NixOS/nixpkgs/pull/$1.patch -o $PRJ_ROOT/patches/$1.patch";
+      command = "curl -L https://github.com/NixOS/nixpkgs/pull/$1.diff -o $PRJ_ROOT/patches/$1.patch";
     }
   ];
   packages = [
