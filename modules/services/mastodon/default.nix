@@ -7,6 +7,8 @@
   };
 
   config = lib.mkIf config.chvp.services.mastodon.enable {
+    # :'(
+    nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1t" ];
     chvp.services.nginx.hosts = [{
       fqdn = "social.chvp.be";
       options = {
