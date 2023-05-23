@@ -135,6 +135,7 @@
   (create-lockfiles nil "I'm the only user on my devices and use emacs as a daemon, so don't clutter with lockfiles")
   (inhibit-startup-screen t "Don't show default startup screen")
   (comp-deferred-compilation nil "Don't do native-comp at runtime")
+  (project-vc-merge-submodules nil "Don't consider submodules as the same project")
   :config
 
   ;; Font configuration
