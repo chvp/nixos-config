@@ -64,7 +64,7 @@ in
       };
       mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
       useFsLayout = false;
-      certificateScheme = 1;
+      certificateScheme = "manual";
       certificateFile = certFile;
       keyFile = keyFile;
       dkimKeyDirectory = "${config.chvp.dataPrefix}/var/dkim";
