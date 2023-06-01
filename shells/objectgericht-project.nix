@@ -3,7 +3,7 @@
   packages = with pkgs; [
     openssl
     maven
-    (openjdk17.override { enableJavaFX = true; })
+    (openjdk17.override { enableJavaFX = true; openjfx = openjfx17.override { withWebKit = true; }; })
     (python3.withPackages (ps: [ ps.pyyaml ps.beautifulsoup4 ps.notmuch ]))
   ];
   commands = [
