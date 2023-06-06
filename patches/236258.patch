@@ -1,0 +1,21 @@
+diff --git a/pkgs/tools/security/browserpass/default.nix b/pkgs/tools/security/browserpass/default.nix
+index 83f34e2f066f5..ee774172f9122 100644
+--- a/pkgs/tools/security/browserpass/default.nix
++++ b/pkgs/tools/security/browserpass/default.nix
+@@ -4,6 +4,7 @@
+ , fetchFromGitHub
+ , gnupg
+ , makeWrapper
++, autoPatchelfHook
+ }:
+ 
+ buildGoModule rec {
+@@ -17,7 +18,7 @@ buildGoModule rec {
+     sha256 = "sha256-UZzOPRRiCUIG7uSSp9AEPMDN/+4cgyK47RhrI8oUx8U=";
+   };
+ 
+-  nativeBuildInputs = [ makeWrapper ];
++  nativeBuildInputs = [ makeWrapper autoPatchelfHook ];
+ 
+   vendorHash = "sha256-CjuH4ANP2bJDeA+o+1j+obbtk5/NVLet/OFS3Rms4r0=";
+ 
