@@ -12,6 +12,8 @@
 
   home-manager.users.charlotte = { ... }: {
     home.packages = with pkgs; [
+      jq
+      xsv
       (yt-dlp.overrideAttrs (old: {
         version = "unstable";
         src = pkgs.fetchFromGitHub {
