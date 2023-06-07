@@ -46,6 +46,7 @@
       element.enable = true;
       hledger.enable = true;
       obs.enable = true;
+      torrents.enable = true;
     };
     work.enable = true;
   };

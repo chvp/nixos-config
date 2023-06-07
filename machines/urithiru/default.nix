@@ -49,10 +49,7 @@
       accentor.enable = true;
       containers.externalInterface = "eno3";
       data-access.enable = true;
-      deluge = {
-        enable = true;
-        count = 6;
-      };
+      torrents.enable = true;
       git.runner.enable = true;
     };
   };

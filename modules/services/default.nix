@@ -5,7 +5,6 @@
     ./accentor
     ./containers
     ./data-access
-    ./deluge
     ./garmin-scraper
     ./git
     ./grafana
@@ -15,6 +14,7 @@
     ./nextcloud
     ./nginx
     ./syncthing
+    ./torrents
   ];
 
   services.postgresql.package = pkgs.postgresql_15;

@@ -3,11 +3,11 @@
 {
   imports = [
     ./calibre
-    ./deluge
     ./eid
     ./element
     ./hledger
     ./obs
+    ./torrents
   ];
 
   home-manager.users.charlotte = { ... }: {

@@ -40,11 +40,11 @@
     graphical.enable = true;
     programs = {
       calibre.enable = true;
-      deluge.enable = true;
       eid.enable = true;
       element.enable = true;
       hledger.enable = true;
       obs.enable = true;
+      torrents.enable = true;
     };
     # It's a pandemic.
     work.enable = true;
