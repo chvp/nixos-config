@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.chvp.graphical.pass.enable = lib.mkOption {
@@ -7,19 +7,12 @@
   };
 
   config = lib.mkIf config.chvp.graphical.pass.enable {
-    nixpkgs.overlays = [
-      (self: super: {
-        pass = (super.pass.override { pass = super.pass-wayland; }).withExtensions (ext: [ ext.pass-otp ]);
-      })
-    ];
-
     chvp.base.emacs.extraConfig = [
       ''
-        (use-package auth-source-pass
+        (use-package secrets
          :ensure nil
          :custom
-         (auth-sources '(password-store))
-         (auth-source-pass-filename "${config.home-manager.users.charlotte.programs.password-store.settings.PASSWORD_STORE_DIR}")
+         (auth-sources '(default))
          )
       ''
     ];
@@ -30,6 +23,7 @@
         settings = { PASSWORD_STORE_DIR = "/home/charlotte/repos/passwords"; };
       };
       services.password-store-sync.enable = true;
+      home.packages = [ pkgs.keepassxc ];
     };
   };
 }
