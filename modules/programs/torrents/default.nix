@@ -7,10 +7,10 @@
   };
 
   config = lib.mkIf config.chvp.programs.torrents.enable {
+    chvp.base.zfs.homeLinks = [{ path = ".config/transmission-remote-gtk"; type = "data"; }];
+
     home-manager.users.charlotte = { pkgs, ... }: {
       home.packages = with pkgs; [ transmission-remote-gtk ];
     };
-
-    chvp.base.zfs.homeLinks = [{ path = ".config/transmission-remote-gtk"; type = "data"; }];
   };
 }
