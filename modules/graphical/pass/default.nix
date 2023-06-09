@@ -23,12 +23,19 @@
     ];
 
     home-manager.users.charlotte = { ... }: {
-      programs.password-store = {
-        enable = true;
-        settings = { PASSWORD_STORE_DIR = "/home/charlotte/repos/passwords"; };
-      };
-      services.password-store-sync.enable = true;
       home.packages = [ pkgs.keepassxc ];
+      systemd.user.services.keepassxc = {
+        Unit = {
+          Description = "KeepassXC startup";
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
+        };
+        Service = {
+          ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
+          Restart = "always";
+        };
+        Install.WantedBy = [ "graphical-session.target" ];
+      };
     };
   };
 }
