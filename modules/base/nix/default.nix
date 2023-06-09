@@ -57,7 +57,7 @@ in
         dates = "hourly";
         options = "--delete-older-than 7d";
       };
-      package = pkgs.nixStable;
+      package = pkgs.nixVersions.nix_2_14;
       settings = {
         auto-optimise-store = true;
         substituters = [
