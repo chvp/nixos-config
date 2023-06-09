@@ -7,11 +7,11 @@
   };
 
   config = lib.mkIf config.chvp.graphical.pass.enable {
-
     chvp.base.zfs.homeLinks = [
       { path = ".config/keepassxc"; type = "data"; }
       { path = ".cache/keepassxc"; type = "cache"; }
     ];
+
     chvp.base.emacs.extraConfig = [
       ''
         (use-package secrets

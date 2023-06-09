@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  passwordScript = pkgs.writeShellScript "get_mail_password" ''${pkgs.pass}/bin/pass show "$@" | ${pkgs.coreutils}/bin/head -n1 | ${pkgs.coreutils}/bin/tr -d "\n"'';
+  passwordScript = pkgs.writeShellScript "get_mail_password" ''${pkgs.libsecret}/bin/secret-tool lookup secret-tool-id $1 | ${pkgs.coreutils}/bin/tr -d "\n"'';
   notifyScript = name: pkgs.writeShellScript "notify_${name}_mail" ''
     unseen_count=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | ${pkgs.coreutils}/bin/wc -l)
 
@@ -13,7 +13,7 @@ let
       ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' "$unseen_count unseen mails"
     fi
   '';
-  makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, passFile, extraConfig ? { } }: (lib.recursiveUpdate
+  makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, secretToolId, extraConfig ? { } }: (lib.recursiveUpdate
     {
       inherit address;
       gpg = {
@@ -41,7 +41,7 @@ let
       };
       msmtp.enable = true;
       mu.enable = true;
-      passwordCommand = "${passwordScript} ${passFile}";
+      passwordCommand = "${passwordScript} ${secretToolId}";
       realName = "Charlotte Van Petegem";
       signature = {
         showSignature = "none";
@@ -265,7 +265,7 @@ in
             name = "personal";
             address = "charlotte@vanpetegem.me";
             host = "mail.vanpetegem.me";
-            passFile = "mail/Personal";
+            secretToolId = "personal-mail";
             extraConfig = {
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
               primary = true;
@@ -275,7 +275,7 @@ in
             name = "work";
             address = "charlotte.vanpetegem@ugent.be";
             host = "mail.vanpetegem.me";
-            passFile = "work/UGentNet";
+            secretToolId = "work-mail";
             useStartTls = true;
             extraConfig = {
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
@@ -286,7 +286,7 @@ in
             name = "posteo";
             address = "chvp@posteo.net";
             host = "posteo.de";
-            passFile = "mail/Posteo";
+            secretToolId = "posteo";
             extraConfig = {
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             };
@@ -295,7 +295,7 @@ in
             name = "postbot";
             address = "postbot@vanpetegem.me";
             host = "mail.vanpetegem.me";
-            passFile = "mail/Postbot";
+            secretToolId = "postbot";
             extraConfig = {
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             };
@@ -306,7 +306,7 @@ in
             imapHost = "imap.gmail.com";
             smtpHost = "smtp.gmail.com";
             useStartTls = true;
-            passFile = "rodekruis/EersteHulpAppMail";
+            secretToolId = "eerstehulp-mail";
             extraConfig = {
               folders = { drafts = "[Gmail].Concepten"; inbox = "INBOX"; sent = "INBOX"; trash = "[Gmail].Prullenbak"; };
               flavor = "gmail.com";
@@ -316,7 +316,7 @@ in
             name = "webmaster";
             address = "webmaster@vanpetegem.me";
             host = "mail.vanpetegem.me";
-            passFile = "mail/Webmaster";
+            secretToolId = "webmaster";
             extraConfig = {
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             };
@@ -376,7 +376,7 @@ in
               inherit type;
               url = "https://nextcloud.vanpetegem.me/remote.php/dav/";
               username = "chvp";
-              "password.fetch" = [ "command" "${passwordScript}" "social/Nextcloud" ];
+              "password.fetch" = [ "command" "${passwordScript}" "nextcloud" ];
             };
           in
           lib.generators.toINI
