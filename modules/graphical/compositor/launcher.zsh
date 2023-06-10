@@ -35,26 +35,6 @@ nrun() {
    riverctl spawn "@nix@/bin/nix run nixpkgs\#$1"
 }
 
-pass_options(){
-  prefix=${PASSWORD_STORE_DIR-~/.password-store}
-  password_files=( "$prefix"/**/*.gpg )
-  printf 'password %s\n' ${${password_files%.gpg}#$prefix/}
-  printf 'username %s\n' ${${password_files%.gpg}#$prefix/}
-  printf 'otp %s\n' ${${password_files%.gpg}#$prefix/}
-}
-
-username() {
-  riverctl spawn "@pass@/bin/pass show '$@' | sed -n 's/^Username: *//p' | tr -d '\n' | @wlClipboard@/bin/wl-copy --foreground"
-}
-
-password() {
-  riverctl spawn "@pass@/bin/pass show -c0 '$@'"
-}
-
-otp() {
-  riverctl spawn "@pass@/bin/pass otp -c '$@'"
-}
-
 run_options() {
   print -rl -- ''${(ko)commands} | grep -v "^\\." | sed "s/^/run /"
 }
@@ -70,7 +50,7 @@ systemctl_options() {
   echo systemctl suspend
 }
 
-CHOSEN=$(cat <(systemctl_options) <(pass_options) <(nrun_options) <(run_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 80 | tail -n1)
+CHOSEN=$(cat <(systemctl_options) <(nrun_options) <(run_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 80 | tail -n1)
 
 if [ -n "$CHOSEN" ]
 then
