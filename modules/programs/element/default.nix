@@ -8,15 +8,12 @@
 
   config = lib.mkIf config.chvp.programs.element.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/Element"; type = "cache"; }
+      { path = ".config/nheko"; type = "data"; }
+      { path = ".local/share/nheko"; type = "data"; }
+      { path = ".cache/nheko"; type = "cache"; }
     ];
     home-manager.users.charlotte = { ... }: {
-      home = {
-        packages = [ pkgs.element-desktop ];
-        sessionVariables = {
-          NIXOS_OZONE_WL = "1";
-        };
-      };
+      home.packages = [ pkgs.nheko ];
     };
   };
 }
