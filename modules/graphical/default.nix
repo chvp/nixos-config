@@ -30,7 +30,7 @@
         firefox.enable = lib.mkDefault true;
         gnupg = {
           enable = lib.mkDefault true;
-          pinentryFlavor = "qt";
+          pinentryFlavor = "gtk2";
         };
         mail.enable = lib.mkDefault true;
         pass.enable = lib.mkDefault true;
