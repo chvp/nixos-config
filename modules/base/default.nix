@@ -7,6 +7,7 @@
     ./mail
     ./network
     ./nix
+    ./phone-push
     ./smartd
     ./ssh
     ./sshd
