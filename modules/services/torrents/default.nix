@@ -13,6 +13,7 @@
 
     services.transmission = {
       enable = true;
+      package = pkgs.transmission_4;
       user = "charlotte";
       group = "users";
       home = "/data/var/lib/transmission";
@@ -22,11 +23,14 @@
       settings = {
         umask = 18;
         download-dir = "/srv/data";
+        incomplete-dir = "/srv/data/.incomplete";
         rpc-authentication-required = true;
         rpc-bind-address = "0.0.0.0";
         rpc-enabled = true;
         rpc-host-whitelist-enabled = false;
         rpc-whitelist-enabled = false;
+        speed-limit-down = 51200;
+        speed-limit-down-enabled = true;
       };
     };
     # Temporary workaround
