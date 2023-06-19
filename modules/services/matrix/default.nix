@@ -10,7 +10,7 @@
     nixpkgs.overlays = [
       (self: super: {
         matrix-hookshot = super.matrix-hookshot.overrideAttrs (old: {
-          patches = (old.patches or []) ++ [ ./hookshot-atom-links.patch ];
+          patches = (old.patches or [ ]) ++ [ ./hookshot-atom-links.patch ];
         });
       })
     ];

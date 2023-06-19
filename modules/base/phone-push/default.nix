@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, ... }:
 
 let
   phone-push = pkgs.writeShellScriptBin "phone-push" ''
