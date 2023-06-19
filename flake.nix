@@ -54,6 +54,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs = {
@@ -85,7 +89,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, lanzaboote, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -111,6 +115,7 @@
         accentor.nixosModules.default
         agenix.nixosModules.age
         home-manager.nixosModule
+        lanzaboote.nixosModules.lanzaboote
         nixos-mailserver.nixosModule
         nix-index-database.nixosModules.nix-index
         ./modules
