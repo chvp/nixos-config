@@ -4,10 +4,11 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
     };
+    loader.efi.canTouchEfiVariables = true;
     initrd = {
       availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
       kernelModules = [ "i915" ];
@@ -18,6 +19,11 @@
       "vm.swappiness" = 1;
     };
   };
+
+  chvp.base.zfs.systemLinks = [{ path = "/etc/secureboot"; type = "cache"; }];
+
+  # For Secure Boot management
+  environment.systemPackages = [ pkgs.sbctl ];
 
   fileSystems."/" = {
     device = "rpool/local/root";
