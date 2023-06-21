@@ -202,7 +202,7 @@ index 0000000000000..905a2909c58d0
 +  };
 +})
 diff --git a/pkgs/applications/networking/p2p/transmission/default.nix b/pkgs/applications/networking/p2p/transmission/default.nix
-index cc82c5038083c..b6fafd54bee85 100644
+index cc82c5038083c..cde2704083c25 100644
 --- a/pkgs/applications/networking/p2p/transmission/default.nix
 +++ b/pkgs/applications/networking/p2p/transmission/default.nix
 @@ -1,7 +1,6 @@
@@ -243,7 +243,7 @@ index cc82c5038083c..b6fafd54bee85 100644
 +stdenv.mkDerivation (finalAttrs: {
    pname = "transmission";
 -  inherit version;
-+  version = "4.0.3";
++  version = "4.0.2";
 +
 +  outputs = [ "out" "apparmor" ];
  
@@ -253,7 +253,7 @@ index cc82c5038083c..b6fafd54bee85 100644
 -    rev = version;
 -    sha256 = "0ccg0km54f700x9p0jsnncnwvfnxfnxf7kcm7pcx1cj0vw78924z";
 +    rev = finalAttrs.version;
-+    hash = "sha256-P7omd49xLmReo9Zrg0liO1msUVzCa5CxH7PGmH4oPzg=";
++    hash = "sha256-DaaJnnWEZOl6zLVxgg+U8C5ztv7Iq0wJ9yle0Gxwybc=";
      fetchSubmodules = true;
    };
  
@@ -435,11 +435,31 @@ index cc82c5038083c..b6fafd54bee85 100644
 -
 -}
 +})
+diff --git a/pkgs/top-level/aliases.nix b/pkgs/top-level/aliases.nix
+index f3df5f2cc5d6c..541c91f832223 100644
+--- a/pkgs/top-level/aliases.nix
++++ b/pkgs/top-level/aliases.nix
+@@ -907,6 +907,7 @@ mapAliases ({
+   libtorrentRasterbar = libtorrent-rasterbar; # Added 2020-12-20
+   libtorrentRasterbar-1_2_x = libtorrent-rasterbar-1_2_x; # Added 2020-12-20
+   libtorrentRasterbar-2_0_x = libtorrent-rasterbar-2_0_x; # Added 2020-12-20
++  libtransmission = transmission_3;
+   libtxc_dxtn = throw "libtxc_dxtn was removed 2020-03-16, now integrated in Mesa";
+   libtxc_dxtn_s2tc = throw "libtxc_dxtn_s2tc was removed 2020-03-16, now integrated in Mesa";
+   libudev = throw "'libudev' has been renamed to/replaced by 'udev'"; # Converted to throw 2022-02-22
+@@ -1687,6 +1688,7 @@ mapAliases ({
+   torchPackages = throw "torchPackages has been removed, as the upstream project has been abandoned"; # Added 2020-03-28
+   trang = throw "'trang' has been renamed to/replaced by 'jing-trang'"; # Converted to throw 2022-02-22
+   transfig = fig2dev; # Added 2022-02-15
++  transmission = transmission_3;
+   transmission-remote-cli = throw "transmission-remote-cli has been removed, as the upstream project has been abandoned. Please use tremc instead"; # Added 2020-10-14
+   transmission_gtk = throw "'transmission_gtk' has been renamed to/replaced by 'transmission-gtk'"; # Converted to throw 2022-02-22
+   transmission_remote_gtk = throw "'transmission_remote_gtk' has been renamed to/replaced by 'transmission-remote-gtk'"; # Converted to throw 2022-02-22
 diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
-index 1e6233ca454bc..b85deda21c4e9 100644
+index ec146342702aa..332af40ebb854 100644
 --- a/pkgs/top-level/all-packages.nix
 +++ b/pkgs/top-level/all-packages.nix
-@@ -32356,6 +32356,8 @@ with pkgs;
+@@ -32469,6 +32469,8 @@ with pkgs;
  
    libutp = callPackage ../applications/networking/p2p/libutp { };
  
@@ -448,22 +468,26 @@ index 1e6233ca454bc..b85deda21c4e9 100644
    lifelines = callPackage ../applications/misc/lifelines { };
  
    liferea = callPackage ../applications/networking/newsreaders/liferea { };
-@@ -34882,14 +34884,16 @@ with pkgs;
+@@ -34989,14 +34991,18 @@ with pkgs;
  
    transcribe = callPackage ../applications/audio/transcribe { };
  
 -  transmission = callPackage ../applications/networking/p2p/transmission { };
 -  libtransmission = transmission.override {
-+  transmission_4 = callPackage ../applications/networking/p2p/transmission { };
 +  transmission_3 = callPackage ../applications/networking/p2p/transmission/3.x.nix { };
-+  libtransmission_4 = transmission.override {
++  transmission-gtk = transmission_3.override { enableGTK3 = true; };
++  transmission-qt = transmission_3.override { enableQt = true; };
++
++  transmission_4 = callPackage ../applications/networking/p2p/transmission { };
++  transmission_4-gtk = transmission_4.override { enableGTK3 = true; };
++  transmission_4-qt = transmission_4.override { enableQt = true; };
++  libtransmission_4 = transmission_4.override {
      installLib = true;
      enableDaemon = false;
      enableCli = false;
    };
-   transmission-gtk = transmission.override { enableGTK3 = true; };
-   transmission-qt = transmission.override { enableQt = true; };
-+  libtransmission = transmission_3;
+-  transmission-gtk = transmission.override { enableGTK3 = true; };
+-  transmission-qt = transmission.override { enableQt = true; };
  
    transmission-remote-gtk = callPackage ../applications/networking/p2p/transmission-remote-gtk { };
  
