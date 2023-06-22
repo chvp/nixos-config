@@ -6,10 +6,10 @@ index 0000000..63f29a9
 @@ -0,0 +1 @@
 +Feeds now tries to find an HTML-type link before falling back to the first link when parsing atom feeds
 diff --git a/src/feeds/parser.rs b/src/feeds/parser.rs
-index c7f59ec..4f1ca71 100644
+index c7f59ec..473ef88 100644
 --- a/src/feeds/parser.rs
 +++ b/src/feeds/parser.rs
-@@ -81,7 +81,13 @@ fn parse_feed_to_js_result(feed: &Feed) -> JsRssChannel {
+@@ -81,7 +81,12 @@ fn parse_feed_to_js_result(feed: &Feed) -> JsRssChannel {
              .iter()
              .map(|item| FeedItem {
                  title: Some(item.title().value.clone()),
@@ -17,8 +17,7 @@ index c7f59ec..4f1ca71 100644
 +                link: item
 +                    .links()
 +                    .iter()
-+                    .filter(|l| l.mime_type.as_ref().map_or(false, |t| t == "text/html"))
-+                    .next()
++                    .find(|l| l.mime_type.as_ref().map_or(false, |t| t == "text/html"))
 +                    .or_else(|| item.links().first())
 +                    .map(|f| f.href.clone()),
                  id: Some(item.id.clone()),
