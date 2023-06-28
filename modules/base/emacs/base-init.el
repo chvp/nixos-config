@@ -242,7 +242,7 @@
   (org-directory "~/sync/notes" "Store org journal in synced directory")
   (org-default-notes-file (concat org-directory "/inbox.org") "Capture in inbox by default")
   (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
-  (org-todo-keywords '((sequence "TODO" "NEXT" "DOING" "DONE")) "Add next and doing states")
+  (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "DOING(i)" "DONE(d)")) "Add next and doing states")
   :demand t
   :config
   (defun find-file-in-org-directory ()
