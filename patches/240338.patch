@@ -1,0 +1,28 @@
+diff --git a/pkgs/games/0ad/default.nix b/pkgs/games/0ad/default.nix
+index 860db7c6d5ae6..a97d9f4cda3a4 100644
+--- a/pkgs/games/0ad/default.nix
++++ b/pkgs/games/0ad/default.nix
+@@ -1,9 +1,9 @@
+-{ wxGTK, stdenv, newScope }:
++{ fmt, wxGTK, stdenv, newScope }:
+ let
+   callPackage = newScope self;
+ 
+   self = {
+-    zeroad-unwrapped = callPackage ./game.nix { inherit wxGTK stdenv; };
++    zeroad-unwrapped = callPackage ./game.nix { inherit fmt wxGTK stdenv; };
+ 
+     zeroad-data = callPackage ./data.nix { inherit stdenv; };
+ 
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index ef522b1c3c331..09b639d45e747 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -37763,6 +37763,7 @@ with pkgs;
+ 
+   zeroadPackages = recurseIntoAttrs (callPackage ../games/0ad {
+     wxGTK = wxGTK32;
++    fmt = fmt_9;
+   });
+ 
+   zeroad = zeroadPackages.zeroad;
