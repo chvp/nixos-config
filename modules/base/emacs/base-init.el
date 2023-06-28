@@ -243,6 +243,7 @@
   (org-default-notes-file (concat org-directory "/inbox.org") "Capture in inbox by default")
   (org-agenda-files '("~/sync/notes") "Let's say all files can contain events for now")
   (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "DOING(i)" "DONE(d)")) "Add next and doing states")
+  (org-log-into-drawer "LOGBOOK" "Log repeated task state changes into drawer named LOGBOOK")
   :demand t
   :config
   (defun find-file-in-org-directory ()
