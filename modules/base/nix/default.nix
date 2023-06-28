@@ -52,6 +52,7 @@ in
     };
 
     nix = {
+      package = pkgs.nixVersions.unstable;
       gc = {
         automatic = true;
         dates = "hourly";
