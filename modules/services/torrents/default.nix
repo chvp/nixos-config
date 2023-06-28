@@ -13,7 +13,7 @@
 
     services.transmission = {
       enable = true;
-      package = pkgs.transmission_4;
+      package = pkgs.transmission_4.override { fmt = pkgs.fmt_9; };
       user = "charlotte";
       group = "users";
       home = "/data/var/lib/transmission";
