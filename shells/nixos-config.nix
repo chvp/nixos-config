@@ -17,7 +17,7 @@
   packages = [
     pkgs.agenix
     # Use nixos-rebuild from flake, since it might be patched
-    (pkgs.nixos-rebuild.override { nix = pkgs.nixVersions.nix_2_14; })
+    pkgs.nixos-rebuild
     pkgs.nixpkgs-fmt
   ];
 }
