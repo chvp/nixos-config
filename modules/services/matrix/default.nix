@@ -7,14 +7,6 @@
   };
 
   config = lib.mkIf config.chvp.services.matrix.enable {
-    nixpkgs.overlays = [
-      (self: super: {
-        matrix-hookshot = super.matrix-hookshot.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [ ./hookshot-atom-links.patch ];
-        });
-      })
-    ];
-
     chvp.base.zfs.systemLinks = [{ path = "/var/lib/matrix-hookshot"; type = "data"; }];
     chvp.services.nginx.hosts = [{
       fqdn = "matrix.vanpetegem.me";

@@ -1,0 +1,80 @@
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix b/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix
+index 1a7e233c6e89d..d6d42472ba6ba 100644
+--- a/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/default.nix
+@@ -10,7 +10,9 @@
+ , rustPlatform
+ , rustc
+ , napi-rs-cli
++, pkg-config
+ , nodejs
++, openssl
+ }:
+ 
+ let
+@@ -44,8 +46,11 @@ mkYarnPackage rec {
+     "@matrix-org/matrix-sdk-crypto-nodejs" = "${matrix-sdk-crypto-nodejs}/lib/node_modules/@matrix-org/matrix-sdk-crypto-nodejs";
+   };
+ 
++  extraBuildInputs = [ openssl ];
++
+   nativeBuildInputs = [
+     rustPlatform.cargoSetupHook
++    pkg-config
+     cargo
+     rustc
+     napi-rs-cli
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
+index 4d1acc779dff1..2ae23cb09a3ac 100644
+--- a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "matrix-hookshot",
+-  "version": "4.3.0",
++  "version": "4.4.0",
+   "description": "A bridge between Matrix and multiple project management services, such as GitHub, GitLab and JIRA.",
+   "main": "lib/app.js",
+   "repository": "https://github.com/matrix-org/matrix-hookshot",
+@@ -64,7 +64,7 @@
+     "node-emoji": "^1.11.0",
+     "nyc": "^15.1.0",
+     "p-queue": "^6.6.2",
+-    "prom-client": "^14.0.1",
++    "prom-client": "^14.2.0",
+     "reflect-metadata": "^0.1.13",
+     "source-map-support": "^0.5.21",
+     "string-argv": "^0.3.1",
+@@ -76,7 +76,7 @@
+   },
+   "devDependencies": {
+     "@codemirror/lang-javascript": "^6.0.2",
+-    "@napi-rs/cli": "^2.2.0",
++    "@napi-rs/cli": "^2.13.2",
+     "@preact/preset-vite": "^2.2.0",
+     "@tsconfig/node18": "^2.0.0",
+     "@types/ajv": "^1.0.0",
+@@ -105,7 +105,7 @@
+     "rimraf": "^3.0.2",
+     "sass": "^1.51.0",
+     "ts-node": "^10.9.1",
+-    "typescript": "^5.0.4",
++    "typescript": "^5.1.3",
+     "vite": "^4.1.5",
+     "vite-svg-loader": "^4.0.0"
+   }
+diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
+index 159c666459231..008bbe5ab50e1 100644
+--- a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
++++ b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
+@@ -1,6 +1,6 @@
+ {
+-  "version": "4.3.0",
+-  "srcHash": "7iBQkTY1K05M3EiEP+IXziztyL0+Wrlz/ezlWwWE1iw=",
+-  "yarnHash": "0p543f11wi6m0h29jmd8w3idqp9qacmxksj1njll7z51gjh52qjl",
+-  "cargoHash": "eDWZSbTS9V5MzLkbnhhPEObP1QFeTZLWCymapaDc1Lo="
++  "version": "4.4.0",
++  "srcHash": "mPLDdAVIMb5d2LPGtIfm/ofRs42081S3+QTsvqkfp3s=",
++  "yarnHash": "0qd3h870mk3a2lzm0r7kyh07ykw86h9xwai9h205gnv1w0d59z6i",
++  "cargoHash": "NGcnRKasYE4dleQLq+E4cM6C04Rfu4AsenDznGyC2Nk="
+ }
