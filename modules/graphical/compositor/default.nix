@@ -279,6 +279,37 @@ in
             };
           };
           style = ''
+            @define-color base   #eff1f5;
+            @define-color mantle #e6e9ef;
+            @define-color crust  #dce0e8;
+
+            @define-color text     #4c4f69;
+            @define-color subtext0 #6c6f85;
+            @define-color subtext1 #5c5f77;
+
+            @define-color surface0 #ccd0da;
+            @define-color surface1 #bcc0cc;
+            @define-color surface2 #acb0be;
+
+            @define-color overlay0 #9ca0b0;
+            @define-color overlay1 #8c8fa1;
+            @define-color overlay2 #7c7f93;
+
+            @define-color blue      #1e66f5;
+            @define-color lavender  #7287fd;
+            @define-color sapphire  #209fb5;
+            @define-color sky       #04a5e5;
+            @define-color teal      #179299;
+            @define-color green     #40a02b;
+            @define-color yellow    #df8e1d;
+            @define-color peach     #fe640b;
+            @define-color maroon    #e64553;
+            @define-color red       #d20f39;
+            @define-color mauve     #8839ef;
+            @define-color pink      #ea76cb;
+            @define-color flamingo  #dd7878;
+            @define-color rosewater #dc8a78;
+
             * {
                 font-family: Hack, monospace;
                 font-size: 11px;
@@ -298,25 +329,25 @@ in
             }
 
             window#waybar {
-                background-color: #ffffff;
-                color: #000000;
+                background-color: @base;
+                color: @text;
             }
 
             #backlight {
-                background-color: #6aaeff;
+                background-color: @sky;
             }
 
             #battery {
-                background-color: #5ada88;
+                background-color: @green;
             }
             #battery.good {
-                background-color: #6aaeff;
+                background-color: @sky;
             }
             #battery.warning {
-                background-color: #f5df23;
+                background-color: @yellow;
             }
             #battery.critical {
-                background-color: #ff8892;
+                background-color: @pink;
             }
 
             #clock {
@@ -324,33 +355,34 @@ in
             }
 
             #custom-mail-status.has-mail {
-                background-color: #6aaeff;
+                background-color: @sky;
             }
 
             #idle_inhibitor.activated {
-                background-color: #6aaeff;
+                background-color: @sky;
             }
 
             #pulseaudio {
-                background-color: #f5df23;
+                background-color: @yellow;
             }
 
             #tags button {
+                padding: 0;
                 box-shadow: inset 0 -3px transparent
-                background-color: #ffffff;
-                color: #000000;
+                background-color: @base;
+                color: @text;
             }
             #tags button.occupied {
-                background-color: #f2eff3;
+                background-color: @crust;
             }
             #tags button.focused {
-                background-color: #6aaeff;
+                background-color: @sky;
             }
             #tags button.urgent {
-                background-color: #ff8892;
+                background-color: @pink;
             }
             #tags button:hover {
-                box-shadow: inset 0 -3px #000000;
+                box-shadow: inset 0 -3px @text;
             }
           '';
           systemd.enable = true;

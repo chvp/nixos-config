@@ -7,6 +7,7 @@
   };
 
   config = lib.mkIf config.chvp.graphical.theme.enable {
+    chvp.base.zfs.homeLinks = [{ path = ".config/qt5ct"; type = "cache"; }];
     fonts = {
       fontDir.enable = true;
       fontconfig = {
@@ -31,23 +32,16 @@
 
     programs.dconf.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = [ pkgs.vanilla-dmz ];
+      home.packages = [ pkgs.catppuccin-cursors.latteLight ];
       home.file = {
         ".icons/default/index.theme".text = ''
           [Icon Theme]
           Name=Default
           Comment=Default Cursor Theme
-          Inherits=Vanilla-DMZ
+          Inherits=Catppuccin-Latte-Light-Cursors
         '';
       };
-      dconf.settings = {
-        "org/gnome/desktop/interface" = {
-          gtk-theme = "Breeze";
-          icon-theme = "breeze";
-          cursor-theme = "Vanilla-DMZ";
-        };
-        "org/gnome/desktop/wm/preferences".button-layout = "";
-      };
+      dconf.settings."org/gnome/desktop/wm/preferences".button-layout = "";
       gtk = {
         enable = true;
         font = {
@@ -56,46 +50,30 @@
           size = 10;
         };
         gtk2.extraConfig = ''
-          gtk-cursor-theme-name = "Vanilla-DMZ"
+          gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors"
           gtk-cursor-theme-size = 24
         '';
         gtk3 = {
           extraConfig = {
-            gtk-cursor-theme-name = "Vanilla-DMZ";
+            gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors";
             gtk-cursor-theme-size = 24;
           };
-          extraCss = ''
-            headerbar {
-                min-height: 0px;
-                padding: 0px;
-                margin: 0px;
-            }
-
-            headerbar entry,
-            headerbar spinbutton,
-            headerbar button,
-            headerbar separator {
-                min-height: 0px;
-                padding: 0px;
-                margin: 0px;
-            }
-          '';
         };
         iconTheme = {
           package = pkgs.libsForQt5.breeze-icons;
           name = "breeze";
         };
         theme = {
-          package = pkgs.libsForQt5.breeze-gtk;
-          name = "Breeze";
+          package = pkgs.catppuccin-gtk.override { size = "compact"; variant = "latte"; };
+          name = "Catppuccin-Latte-Compact-Blue-light";
         };
       };
       qt = {
         enable = true;
-        platformTheme = "gnome";
+        platformTheme = "qtct";
         style = {
-          name = "breeze";
-          package = pkgs.libsForQt5.breeze-qt5;
+          name = "lightly";
+          package = pkgs.lightly-qt;
         };
       };
     };

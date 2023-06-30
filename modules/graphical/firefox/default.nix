@@ -72,8 +72,10 @@ in
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
             decentraleyes
+            firefox-color
             ff2mpv
             keepassxc-browser
+            stylus
             ublock-origin
             umatrix
             zotero-connector
