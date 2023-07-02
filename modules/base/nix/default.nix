@@ -21,6 +21,10 @@ in
       default = true;
       example = false;
     };
+    slowGc = lib.mkOption {
+      default = false;
+      example = true;
+    };
     unfreePackages = lib.mkOption {
       default = [ ];
       example = [ "teams" ];
@@ -55,7 +59,7 @@ in
       package = pkgs.nixVersions.nix_2_13;
       gc = {
         automatic = true;
-        dates = "hourly";
+        dates = if config.chvp.base.nix.slowGc then "daily" else "hourly";
         options = "--delete-older-than 7d";
       };
       settings = {

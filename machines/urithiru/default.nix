@@ -10,7 +10,10 @@
   chvp = {
     stateVersion = "20.09";
     base = {
-      nix.enableDirenv = false;
+      nix = {
+        enableDirenv = false;
+        slowGc = true;
+      };
       network.ovh = {
         enable = true;
         publicIPV4 = {
