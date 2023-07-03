@@ -140,7 +140,7 @@ let
     riverctl focus-follows-cursor normal
     riverctl hide-cursor when-typing enabled
     riverctl set-cursor-warp on-output-change
-    riverctl xcursor-theme Vanilla-DMZ 24
+    riverctl xcursor-theme Catppuccin-Latte-Light-Cursors 24
 
     riverctl keyboard-layout -variant altgr-intl -options compose:caps us
 
