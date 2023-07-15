@@ -45,12 +45,6 @@
               "SPC p" '(flymake-goto-prev-error :which-key "Previous error")
               )
              :config
-             ;;; eclipse-jdt breaks the spec which in turn breaks code actions
-             ;;; This behaviour can't be disabled and needs to be worked around
-             (cl-defmethod eglot-execute-command
-               (_server (_cmd (eql java.apply.workspaceEdit)) arguments)
-               "Eclipse JDT breaks spec and replies with edits as arguments."
-               (mapc #'eglot--apply-workspace-edit arguments))
              ;;; eglot replaces company-backends with '(company-capf). I still
              ;;; want company-yasnippet as well though
              (add-to-list 'eglot-stay-out-of "company")
