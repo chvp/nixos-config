@@ -153,7 +153,7 @@ let
     configure_touchpads scroll-method two-finger
 
     ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XCURSOR_SIZE
-    systemctl --user start graphical-session.target
+    systemctl --user start river-session.target
   '';
 in
 {
@@ -396,7 +396,7 @@ in
       services = {
         kanshi = {
           enable = true;
-          systemdTarget = "graphical-session.target";
+          systemdTarget = "river-session.target";
           profiles = {
             "home-undocked" = {
               outputs = [
@@ -428,13 +428,19 @@ in
         };
         swayidle = {
           enable = true;
-          systemdTarget = "graphical-session.target";
+          systemdTarget = "river-session.target";
           events = [{ event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock"; }];
           timeouts = [
             { timeout = 150; command = "${pkgs.wlopm}/bin/wlopm --off '*'"; resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'"; }
             { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -fF"; }
           ];
         };
+      };
+      systemd.user.targets.river-session.Unit = {
+        Description = "river compositor session";
+        BindsTo = [ "graphical-session.target" ];
+        Wants = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
       xdg.configFile."river/init" = {
         source = river-init;

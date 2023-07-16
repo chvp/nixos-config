@@ -27,14 +27,15 @@
       systemd.user.services.keepassxc = {
         Unit = {
           Description = "KeepassXC startup";
-          PartOf = [ "graphical-session.target" ];
-          After = [ "graphical-session.target" ];
+          PartOf = [ "river-session.target" ];
+          Wants = [ "waybar.service" ];
+          After = [ "river-session.target" "waybar.service" ];
         };
         Service = {
           ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
           Restart = "always";
         };
-        Install.WantedBy = [ "graphical-session.target" ];
+        Install.WantedBy = [ "river-session.target" ];
       };
     };
   };
