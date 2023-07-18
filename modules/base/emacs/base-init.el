@@ -81,6 +81,20 @@
   :config (evil-collection-init)
   )
 
+;; Easymotion-like jumping
+(use-package avy
+  :custom
+  (avy-style 'pre "Insert decision characters instead of overwriting")
+  :general
+  (lmap
+    "jc" '(avy-goto-char :which-key "Jump to character")
+    "j2" '(avy-goto-char-2 :which-key "Jump to 2 character sequence")
+    "jl" '(avy-goto-line :which-key "Jump to line number")
+    "jw" '(avy-goto-word-0 :which-key "Jump to word")
+    "js" '(avy-goto-word-1 :which-key "Jump to word starting with character")
+    )
+  )
+
 ;; Better defaults that aren't defaults for some reason.
 (use-package better-defaults
   ;; But don't enable ido-mode...
@@ -109,10 +123,10 @@
   :commands (consult-ripgrep)
   :general
   (lmap
-    "bb"  '(consult-buffer :which-key "switch")
-    "fr"  '(consult-recent-file :which-key "recent")
-    "ha"  '(consult-apropos :which-key "apropos")
-    "ss"  '(consult-line :which-key "search")
+    "bb" '(consult-buffer :which-key "switch")
+    "fr" '(consult-recent-file :which-key "recent")
+    "ha" '(consult-apropos :which-key "apropos")
+    "ss" '(consult-line :which-key "search")
     )
   )
 
