@@ -71,6 +71,7 @@ in
         profiles.default = {
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
+            cookie-autodelete
             decentraleyes
             firefox-color
             ff2mpv
@@ -78,7 +79,6 @@ in
             multi-account-containers
             stylus
             ublock-origin
-            umatrix
             zotero-connector
           ];
           settings = {
