@@ -75,6 +75,7 @@ in
             firefox-color
             ff2mpv
             keepassxc-browser
+            multi-account-containers
             stylus
             ublock-origin
             umatrix
