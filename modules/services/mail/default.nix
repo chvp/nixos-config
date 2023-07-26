@@ -113,7 +113,6 @@ in
       "files/services/tunnel/key".file = ../../../secrets/files/services/tunnel/key.age;
       "files/services/tunnel/env".file = ../../../secrets/files/services/tunnel/env.age;
       "passwords/services/mail/charlotte@vanpetegem.me".file = ../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.me.age;
-      "passwords/services/mail/expenses-noreply@vanpetegem.me".file = ../../../secrets/passwords/services/mail/expenses-noreply_at_vanpetegem.me.age;
       "passwords/services/mail/hallo@robbe.be".file = ../../../secrets/passwords/services/mail/hallo_at_robbe.be.age;
       "passwords/services/mail/huis@vanpetegem.me".file = ../../../secrets/passwords/services/mail/huis_at_vanpetegem.me.age;
       "passwords/services/mail/noreply@vanpetegem.me".file = ../../../secrets/passwords/services/mail/noreply_at_vanpetegem.me.age;
