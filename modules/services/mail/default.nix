@@ -19,7 +19,16 @@ in
     mailserver = {
       enable = true;
       fqdn = "mail.vanpetegem.me";
-      domains = [ "vanpetegem.me" "cvpetegem.be" "chvp.be" "accentor.tech" "toekomstlabo.be" ];
+      domains = [
+        "accentor.tech"
+        "chvp.be"
+        "cvpetegem.be"
+        "robbe.be"
+        "robbevanpetegem.be"
+        "robbevp.be"
+        "toekomstlabo.be"
+        "vanpetegem.me"
+      ];
       localDnsResolver = false;
       loginAccounts = {
         "charlotte@vanpetegem.me" = {
@@ -43,6 +52,14 @@ in
         "robbe@vanpetegem.me" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@vanpetegem.me".path;
           aliases = [ "robbe.nb@vanpetegem.me" ];
+        };
+        "robbe@robbevanpetegem.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@robbevanpetegem.be".path;
+          aliases = [ "@robbevanpetegem.be" ];
+        };
+        "hallo@robbe.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/hallo@robbe.be".path;
+          aliases = [ "@robbe.be" "@robbevp.be" ];
         };
         "ugent@cvpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/ugent@cvpetegem.be".path;
@@ -101,10 +118,12 @@ in
       "files/services/tunnel/env".file = ../../../secrets/files/services/tunnel/env.age;
       "passwords/services/mail/charlotte@vanpetegem.me".file = ../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.me.age;
       "passwords/services/mail/expenses-noreply@vanpetegem.me".file = ../../../secrets/passwords/services/mail/expenses-noreply_at_vanpetegem.me.age;
+      "passwords/services/mail/hallo@robbevp.be".file = ../../../secrets/passwords/services/mail/hallo_at_robbevp.be.age;
       "passwords/services/mail/huis@vanpetegem.me".file = ../../../secrets/passwords/services/mail/huis_at_vanpetegem.me.age;
       "passwords/services/mail/noreply@vanpetegem.me".file = ../../../secrets/passwords/services/mail/noreply_at_vanpetegem.me.age;
       "passwords/services/mail/peter@vanpetegem.me".file = ../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
       "passwords/services/mail/postbot@vanpetegem.me".file = ../../../secrets/passwords/services/mail/postbot_at_vanpetegem.me.age;
+      "passwords/services/mail/robbe@robbevanpetegem.be".file = ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
       "passwords/services/mail/robbe@vanpetegem.me".file = ../../../secrets/passwords/services/mail/robbe_at_vanpetegem.me.age;
       "passwords/services/mail/ugent@cvpetegem.be".file = ../../../secrets/passwords/services/mail/ugent_at_cvpetegem.be.age;
       "passwords/services/mail/webmaster@vanpetegem.me".file = ../../../secrets/passwords/services/mail/webmaster_at_vanpetegem.me.age;
