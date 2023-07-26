@@ -35,10 +35,6 @@ in
           hashedPasswordFile = config.age.secrets."passwords/services/mail/charlotte@vanpetegem.me".path;
           aliases = [ "@chvp.be" "@cvpetegem.be" ];
         };
-        "expenses-noreply@vanpetegem.me" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/expenses-noreply@vanpetegem.me".path;
-          sendOnly = true;
-        };
         "huis@vanpetegem.me".hashedPasswordFile = config.age.secrets."passwords/services/mail/huis@vanpetegem.me".path;
         "noreply@vanpetegem.me" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
