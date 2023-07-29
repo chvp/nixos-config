@@ -20,7 +20,7 @@
           serif = [ "Noto Serif" "Font Awesome 6 Free" ];
         };
       };
-      fonts = with pkgs; [
+      packages = with pkgs; [
         hack-font
         font-awesome
         noto-fonts
