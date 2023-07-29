@@ -40,6 +40,7 @@
       android.enable = true;
       git.email = "charlotte.vanpetegem@ugent.be";
     };
+    games.enable = true;
     graphical.enable = true;
     programs = {
       eid.enable = true;
