@@ -18,6 +18,7 @@ in
     ];
     mailserver = {
       enable = true;
+      enableManageSieve = true;
       fqdn = "mail.vanpetegem.me";
       domains = [
         "accentor.tech"
