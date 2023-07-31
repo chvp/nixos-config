@@ -1,0 +1,41 @@
+diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/package.json b/pkgs/servers/matrix-synapse/matrix-appservice-slack/package.json
+index aa3225725df3f..d4a27436aea1e 100644
+--- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/package.json
++++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/package.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "matrix-appservice-slack",
+-  "version": "2.1.1",
++  "version": "2.1.2",
+   "description": "A Matrix <--> Slack bridge",
+   "engines": {
+     "node": ">=16 <=18"
+@@ -42,12 +42,13 @@
+     "axios": "^0.27.2",
+     "classnames": "^2.3.2",
+     "escape-string-regexp": "^4.0.0",
+-    "matrix-appservice-bridge": "^8.1.1",
++    "https-proxy-agent": "^5.0.1",
++    "matrix-appservice-bridge": "^8.1.2",
+     "matrix-widget-api": "^1.1.1",
+     "minimist": "^1.2.6",
+     "nedb": "^1.8.0",
+     "node-emoji": "^1.10.0",
+-    "nunjucks": "^3.2.3",
++    "nunjucks": "^3.2.4",
+     "p-queue": "^6.0.0",
+     "pg-promise": "^10.11.1",
+     "randomstring": "^1.2.1",
+diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json b/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
+index f5b5f49390abc..3adfcbabae62b 100644
+--- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
++++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/pin.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": "2.1.1",
+-  "srcHash": "sha256-+NO/V3EyqdxavnSTBU7weJnueL6+aCH3UWkqclpsId0=",
+-  "yarnHash": "1pqv7g3xbfs4zhmyxy5p216kq2jwjfjzxw2dv2a7hl0qwk6igyki"
++  "version": "2.1.2",
++  "srcHash": "sha256-e9k+5xvgHkVt/fKAr0XhYjbEzHYwdGRdqiPWWbT0T5M=",
++  "yarnHash": "0266rrfx0fnrhn64ivy4iygf6nl5vc5i08j6h72k2zrh3rg203kz"
+ }
