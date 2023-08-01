@@ -102,20 +102,20 @@
   )
 
 ;; Autocomplete
-(use-package company
-  :diminish (company-mode)
-  :hook ((text-mode prog-mode) . company-mode)
+(use-package corfu
+  :diminish (corfu-mode)
   :custom
-  (company-backends '((company-capf company-yasnippet) (company-dabbrev-code company-keywords) company-dabbrev))
-  (company-dabbrev-downcase nil "Don't downcase completions")
-  (company-dabbrev-ignore-case t "Change full casing of completion if completion has different case")
-  (company-minimum-prefix-length 2 "Start autocompletion after 2 characters")
+  (corfu-cycle t "Enable cycling through completions")
+  (corfu-auto t "Auto completion")
+  (corfu-auto-prefix 2 "Show completion after two characters")
+  :config
+  (global-corfu-mode)
   )
 
 ;; Prescient in company
-(use-package company-prescient
-  :after (company prescient)
-  :config (company-prescient-mode 1)
+(use-package corfu-prescient
+  :after (corfu prescient)
+  :config (corfu-prescient-mode 1)
   )
 
 ;; Replacements for emacs built-ins that better integrate with `vertico'.
