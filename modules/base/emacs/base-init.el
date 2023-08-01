@@ -112,7 +112,7 @@
   (global-corfu-mode)
   )
 
-;; Prescient in company
+;; Prescient in corfu
 (use-package corfu-prescient
   :after (corfu prescient)
   :config (corfu-prescient-mode 1)
@@ -210,13 +210,6 @@
   :custom
   (completion-styles '(orderless basic) "Use orderless for filtering")
   (orderless-matching-styles '(orderless-regexp orderless-initialism orderless-prefixes) "More matching styles for more flexible matching.")
-  :config
-  ;; Highlight multiple parts in company matches
-  (defun just-one-face (fn &rest args)
-    (let ((orderless-match-faces [completions-common-part]))
-      (apply fn args)))
-
-  (advice-add 'company-capf--candidates :around #'just-one-face)
   )
 
 ;; Org

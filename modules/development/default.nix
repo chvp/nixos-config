@@ -44,10 +44,6 @@
               "SPC n" '(flymake-goto-next-error :which-key "Next error")
               "SPC p" '(flymake-goto-prev-error :which-key "Previous error")
               )
-             :config
-             ;;; eglot replaces company-backends with '(company-capf). I still
-             ;;; want company-yasnippet as well though
-             (add-to-list 'eglot-stay-out-of "company")
             )
 
           ;; Snippets
