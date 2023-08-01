@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: new function
-# key: def
-# --
-def $1(${2:*args, **kwargs}):
-    """
-    $3
-    """
-    ${0:pass}

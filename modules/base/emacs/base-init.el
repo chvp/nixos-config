@@ -261,6 +261,18 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; Tempel (snippet expansion)
+(use-package tempel
+  ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
+  :custom (tempel-path "/home/charlotte/repos/nixos-config/modules/base/emacs/snippets/*.eld")
+  :general
+  (lmap
+    "t i" '(tempel-insert :which-key "Insert template")
+    )
+  :config
+  (setq completion-at-point-functions (cons #'tempel-complete completion-at-point-functions))
+  )
+
 ;; List item selection interface
 (use-package vertico
   :custom (vertico-count 20 "Allow selector to be a bit higher")

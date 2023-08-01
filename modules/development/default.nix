@@ -46,15 +46,6 @@
               )
             )
 
-          ;; Snippets
-          (use-package yasnippet
-            ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
-            :custom (yas-snippet-dirs '("/home/charlotte/repos/nixos-config/modules/development/snippets/"))
-            :diminish (yas-minor-mode)
-            :config
-            (yas-global-mode 1)
-            )
-
           ;; Forth syntax support
           (use-package forth-mode
             :mode ("\\.fs\\'" . forth-mode)
