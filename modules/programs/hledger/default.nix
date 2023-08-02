@@ -20,6 +20,8 @@
          (ledger-post-amount-alignment-at :decimal "Align on the decimal")
          (ledger-post-amount-alignment-column 69 "Align on column 70")
          (ledger-post-auto-align t "Align when moving to the next line")
+         :config
+         (advice-add 'ledger-complete-at-point :around #'cape-wrap-nonexclusive)
          )
       ''
     ];

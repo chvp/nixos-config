@@ -24,8 +24,6 @@
     :global-prefix "C-SPC"
     )
 
-  ;; Overwrite evil's evil-complete-next
-  (imap "C-n" 'completion-at-point)
   (nmap "<escape>" 'save-buffer)
   (lmap
     ""     nil ;; Unbind SPC, I don't use it for navigation anyway.
@@ -112,7 +110,7 @@
   (defun chvp--setup-capfs ()
     (add-hook 'completion-at-point-functions #'tempel-complete -50 t)
     (add-hook 'completion-at-point-functions #'cape-file 10 t)
-    (add-hook 'completion-at-point-functions #'dabbrev-capf 15 t)
+    (add-hook 'completion-at-point-functions #'cape-dabbrev 15 t)
     (add-hook 'completion-at-point-functions #'cape-line 20 t)
     )
   )
@@ -124,8 +122,14 @@
   (corfu-cycle t "Enable cycling through completions")
   (corfu-auto t "Show completion preview by default")
   (corfu-auto-prefix 2 "Show completion after two characters")
+  (corfu-quit-no-match t "Quit completion without match, even if separator has been entered")
   :config
   (global-corfu-mode)
+  )
+
+(use-package corfu-popupinfo
+  :ensure nil ;; Part of corfu
+  :config (corfu-popupinfo-mode)
   )
 
 ;; Prescient in corfu
@@ -225,7 +229,7 @@
   :after (vertico)
   :custom
   (completion-styles '(orderless basic) "Use orderless for filtering")
-  (orderless-matching-styles '(orderless-regexp orderless-initialism orderless-prefixes) "More matching styles for more flexible matching.")
+  (orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-flex) "More matching styles for more flexible matching.")
   )
 
 ;; Org
