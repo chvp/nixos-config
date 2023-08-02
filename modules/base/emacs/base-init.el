@@ -24,6 +24,8 @@
     :global-prefix "C-SPC"
     )
 
+  ;; Overwrite evil's evil-complete-next
+  (imap "C-n" 'completion-at-point)
   (nmap "<escape>" 'save-buffer)
   (lmap
     ""     nil ;; Unbind SPC, I don't use it for navigation anyway.
@@ -101,12 +103,26 @@
   :config (ido-mode nil)
   )
 
+;; Handy completion-at-point-functions
+(use-package cape
+  :hook
+  (prog-mode . chvp--setup-capfs)
+  (text-mode . chvp--setup-capfs)
+  :config
+  (defun chvp--setup-capfs ()
+    (add-hook 'completion-at-point-functions #'tempel-complete -50 t)
+    (add-hook 'completion-at-point-functions #'cape-file 10 t)
+    (add-hook 'completion-at-point-functions #'dabbrev-capf 15 t)
+    (add-hook 'completion-at-point-functions #'cape-line 20 t)
+    )
+  )
+
 ;; Autocomplete
 (use-package corfu
   :diminish (corfu-mode)
   :custom
   (corfu-cycle t "Enable cycling through completions")
-  (corfu-auto t "Auto completion")
+  (corfu-auto t "Show completion preview by default")
   (corfu-auto-prefix 2 "Show completion after two characters")
   :config
   (global-corfu-mode)
@@ -263,14 +279,14 @@
 
 ;; Tempel (snippet expansion)
 (use-package tempel
+  :demand t
+  :after cape
   ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
   :custom (tempel-path "/home/charlotte/repos/nixos-config/modules/base/emacs/snippets/*.eld")
   :general
   (lmap
     "t i" '(tempel-insert :which-key "Insert template")
     )
-  :config
-  (setq completion-at-point-functions (cons #'tempel-complete completion-at-point-functions))
   )
 
 ;; List item selection interface
