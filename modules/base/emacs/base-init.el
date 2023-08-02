@@ -123,6 +123,8 @@
   (corfu-auto t "Show completion preview by default")
   (corfu-auto-prefix 2 "Show completion after two characters")
   (corfu-quit-no-match t "Quit completion without match, even if separator has been entered")
+  ;; Only confirm autocompletion with TAB
+  :bind (:map corfu-map ("RET" . nil))
   :config
   (global-corfu-mode)
   )
