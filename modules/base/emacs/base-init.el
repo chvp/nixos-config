@@ -122,7 +122,7 @@
   (corfu-cycle t "Enable cycling through completions")
   (corfu-auto t "Show completion preview by default")
   (corfu-auto-prefix 2 "Show completion after two characters")
-  (corfu-quit-no-match t "Quit completion without match, even if separator has been entered")
+  (corfu-separator ?# "I use # as a component separator in orderless")
   ;; Only confirm autocompletion with TAB
   :bind (:map corfu-map ("RET" . nil))
   :config
@@ -137,6 +137,7 @@
 ;; Prescient in corfu
 (use-package corfu-prescient
   :after (corfu prescient)
+  :custom (corfu-prescient-enable-filtering nil "Orderless handles filtering")
   :config (corfu-prescient-mode 1)
   )
 
@@ -230,8 +231,9 @@
 (use-package orderless
   :after (vertico)
   :custom
+  (orderless-component-separator "#" "Use # for component separation")
   (completion-styles '(orderless basic) "Use orderless for filtering")
-  (orderless-matching-styles '(orderless-initialism orderless-prefixes orderless-flex) "More matching styles for more flexible matching.")
+  (orderless-matching-styles '(orderless-literal orderless-initialism orderless-prefixes) "More matching styles for more flexible matching.")
   )
 
 ;; Org
