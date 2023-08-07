@@ -92,11 +92,15 @@
       # Avoid IFD if there are no patches
       nixpkgsForSystem = system: if patches == [ ] then inputs.nixpkgs else
       (
-        (import inputs.nixpkgs { inherit system; }).pkgs.applyPatches {
+        ((import inputs.nixpkgs { inherit system; }).pkgs.applyPatches {
           inherit patches;
           name = "nixpkgs-patched-${inputs.nixpkgs.shortRev}";
           src = inputs.nixpkgs;
-        });
+        }).overrideAttrs (old: {
+          preferLocalBuild = false;
+          allowSubstitutes = true;
+        })
+      );
       overlays = [
         agenix.overlays.default
         accentor.overlays.default
