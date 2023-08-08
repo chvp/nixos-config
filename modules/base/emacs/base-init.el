@@ -253,6 +253,14 @@
     (ido-find-file-in-dir org-directory)
     )
   (defun set-creation-date-heading-property () (org-set-property "CREATED" (format-time-string (org-time-stamp-format t t))))
+  (defun chvp--org-inbox-length ()
+    (length (org-map-entries t t (list (concat org-directory "/inbox.org"))))
+    )
+  (defun chvp--org-inbox-length-modeline ()
+    (let ((org-len (chvp--org-inbox-length)))
+      (if (<= org-len 0) nil
+        (concat "Org inbox: " (propertize (format "%d" org-len) 'face 'error)))))
+  (add-to-list 'global-mode-string '(:eval (chvp--org-inbox-length-modeline)))
   :general
   (lmap
     :keymaps 'org-mode-map
