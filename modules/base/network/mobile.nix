@@ -22,6 +22,7 @@
         enable = true;
         interfaces = [ wireless-interface ];
         environmentFile = config.age.secrets."passwords/networks.age".path;
+        userControlled.enable = true;
         networks = {
           "Public Universal Friend".psk = "@PSK_PUF@";
           AndroidAP.psk = "@PSK_AndroidAP@";
@@ -29,6 +30,7 @@
           werknet.psk = "@PSK_werknet@";
           Secorima.psk = "@PSK_Secorima@";
           "Mediaraven Guest".psk = "@PSK_Mediaraven@";
+          "down".psk = "@PSK_down@";
           "Zeus WPI" = {
             psk = "@PSK_Zeus@";
             hidden = true;
