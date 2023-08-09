@@ -16,13 +16,17 @@
   };
 
   config = with config.chvp.base.network.mobile; lib.mkIf enable {
+    users.users.charlotte.extraGroups = [ "network" ];
     networking = {
       useDHCP = false;
       wireless = {
         enable = true;
         interfaces = [ wireless-interface ];
         environmentFile = config.age.secrets."passwords/networks.age".path;
-        userControlled.enable = true;
+        userControlled = {
+          enable = true;
+          group = "network";
+        };
         networks = {
           "Public Universal Friend".psk = "@PSK_PUF@";
           AndroidAP.psk = "@PSK_AndroidAP@";
