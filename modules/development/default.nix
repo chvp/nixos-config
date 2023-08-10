@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -33,9 +33,10 @@
           
           ;; Language server support
           (use-package eglot
+            :demand t
             :general
             (lmap
-              :keymaps 'prog-mode-map
+              :keymaps '(prog-mode-map vue-mode-map)
               "SPC s" '(eglot :which-key "Add buffer to eglot")
               "SPC f" '(eglot-format :which-key "Format region")
               "SPC F" '(eglot-format :which-key "Format buffer")
@@ -110,6 +111,23 @@
           ;; Vue language support
           (use-package vue-mode
             :mode "\\.vue\\'"
+            :config
+            (defun vue-eglot-init-options ()
+              (let ((tsdk-path "${pkgs.typescript}/lib/node_modules/typescript/lib"))
+                `(:typescript (:tsdk ,tsdk-path
+                              :languageFeatures (:completion
+                                                 (:defaultTagNameCase "kebab"
+                                                  :defaultAttrNameCase "kebab"
+                                                  :getDocumentNameCasesRequest nil
+                                                  :getDocumentSelectionRequest nil)
+                                                 :diagnostics
+                                                 (:getDocumentVersionRequest nil))
+                              :documentFeatures (:documentFormatting
+                                                 (:defaultPrintWidth 100
+                                                  :getDocumentPrintWidthRequest nil)
+                                                 :documentSymbol t
+                                                 :documentColor t)))))
+            (add-to-list 'eglot-server-programs `(vue-mode . ("${pkgs.nodePackages.volar}/bin/vue-language-server" "--stdio" :initializationOptions ,(vue-eglot-init-options))))
             )
           
           ;; HTML (and HTML template) support
