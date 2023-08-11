@@ -111,6 +111,8 @@
           ;; Vue language support
           (use-package vue-mode
             :mode "\\.vue\\'"
+            :custom
+            (mmm-submode-decoration-level 0 "Don't color submodes differently")
             :config
             (defun vue-eglot-init-options ()
               (let ((tsdk-path "${pkgs.typescript}/lib/node_modules/typescript/lib"))
@@ -128,6 +130,32 @@
                                                  :documentSymbol t
                                                  :documentColor t)))))
             (add-to-list 'eglot-server-programs `(vue-mode . ("${pkgs.nodePackages.volar}/bin/vue-language-server" "--stdio" :initializationOptions ,(vue-eglot-init-options))))
+            (setq vue--front-tag-lang-regex
+              (concat "<%s"                               ; The tag name
+                      "\\(?:"                             ; Zero of more of...
+                      "\\(?:\\s-+\\w+=[\"'].*?[\"']\\)"   ; Any optional key-value pairs like type="foo/bar"
+                      "\\|\\(?:\\s-+scoped\\)"            ; The optional "scoped" attribute
+                      "\\|\\(?:\\s-+module\\)"            ; The optional "module" attribute
+                      "\\|\\(?:\\s-+setup\\)"             ; The optional "setup" attribute
+                      "\\)*"
+                      "\\(?:\\s-+lang=[\"']%s[\"']\\)"    ; The language specifier (required)
+                      "\\(?:"                             ; Zero of more of...
+                      "\\(?:\\s-+\\w+=[\"'].*?[\"']\\)"   ; Any optional key-value pairs like type="foo/bar"
+                      "\\|\\(?:\\s-+scoped\\)"            ; The optional "scoped" attribute
+                      "\\|\\(?:\\s-+module\\)"            ; The optional "module" attribute
+                      "\\|\\(?:\\s-+setup\\)"             ; The optional "setup" attribute
+                      "\\)*"
+                      " *>\n"))                           ; The end of the tag
+            (setq vue--front-tag-regex
+              (concat "<%s"                        ; The tag name
+                      "\\(?:"                      ; Zero of more of...
+                      "\\(?:\\s-+" vue--not-lang-key "[\"'][^\"']*?[\"']\\)" ; Any optional key-value pairs like type="foo/bar".
+                      ;; ^ Disallow "lang" in k/v pairs to avoid matching regions with non-default languages
+                      "\\|\\(?:\\s-+scoped\\)"      ; The optional "scoped" attribute
+                      "\\|\\(?:\\s-+module\\)"      ; The optional "module" attribute
+                      "\\|\\(?:\\s-+setup\\)"       ; The optional "setup" attribute
+                      "\\)*"
+                      "\\s-*>\n"))                  ; The end of the tag
             )
           
           ;; HTML (and HTML template) support
