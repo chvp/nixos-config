@@ -26,3 +26,12 @@ mu4e-compose-mode
  "Met vriendelijke groeten" n
  "Charlotte Van Petegem"
  )
+
+(rode-kruis-vrijwilliger-cursussen
+ "Dag " p n n
+ "Je wil vrijwilliger worden bij het Rode Kruis. Super! Daarom krijg je bij het inschrijven voor de cursussen ook wat voorrang, zodat je je zeker kan inschrijven. Dit zijn de opties:" n n
+ q n n
+ "Kan je een seintje geven wanneer je dit gedaan hebt (of moest het niet passen)? Dan kan ik daarna de mail naar het grote publiek sturen om in te schrijven." n n
+ "Met vriendelijke groeten" n
+ "Charlotte Van Petegem"
+ )
