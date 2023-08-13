@@ -79,6 +79,7 @@ in
             multi-account-containers
             stylus
             ublock-origin
+            vue-js-devtools
             zotero-connector
           ];
           settings = {
