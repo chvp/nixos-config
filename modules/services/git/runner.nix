@@ -13,7 +13,6 @@
       services = {
         nix = {
           registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
-          registrationFlags = [ "--docker-host" "tcp://127.0.0.1:2375" ];
           dockerImage = "alpine";
           dockerVolumes = [
             "/nix/store:/nix/store:ro"
@@ -48,7 +47,6 @@
         };
         docker-images = {
           registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
-          registrationFlags = [ "--docker-host" "tcp://127.0.0.1:2375" ];
           dockerImage = "docker:stable";
           dockerVolumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
@@ -58,7 +56,6 @@
         };
         default = {
           registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
-          registrationFlags = [ "--docker-host" "tcp://127.0.0.1:2375" ];
           dockerImage = "debian:stable";
         };
       };
@@ -66,7 +63,6 @@
     virtualisation.docker = {
       enable = true;
       storageDriver = "zfs";
-      listenOptions = [ "/run/docker.sock" "127.0.0.1:2375" ];
     };
     age.secrets."passwords/services/gitlab-runner/registration" = {
       file = ../../../secrets/passwords/services/gitlab-runner/registration.age;
