@@ -1,0 +1,13 @@
+diff --git a/nixos/modules/services/databases/influxdb2.nix b/nixos/modules/services/databases/influxdb2.nix
+index 8e3135c9e235e..329533b35dc8e 100644
+--- a/nixos/modules/services/databases/influxdb2.nix
++++ b/nixos/modules/services/databases/influxdb2.nix
+@@ -107,7 +107,7 @@ in
+         LimitNOFILE = 65536;
+         KillMode = "control-group";
+         Restart = "on-failure";
+-        LoadCredential = [
++        LoadCredential = mkIf cfg.provision.enable [
+           "admin-password:${cfg.provision.initialSetup.passwordFile}"
+           "admin-token:${cfg.provision.initialSetup.tokenFile}"
+         ];
