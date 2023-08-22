@@ -122,7 +122,6 @@
   (corfu-cycle t "Enable cycling through completions")
   (corfu-auto t "Show completion preview by default")
   (corfu-auto-prefix 2 "Show completion after two characters")
-  (corfu-separator ?# "I use # as a component separator in orderless")
   ;; Only confirm autocompletion with TAB
   :bind (:map corfu-map ("RET" . nil))
   :config
@@ -231,7 +230,6 @@
 (use-package orderless
   :after (vertico)
   :custom
-  (orderless-component-separator "#" "Use # for component separation")
   (completion-styles '(orderless basic) "Use orderless for filtering")
   (orderless-matching-styles '(orderless-literal orderless-initialism orderless-prefixes) "More matching styles for more flexible matching.")
   )
