@@ -130,7 +130,6 @@
         }
       ];
       nextcloud.enable = true;
-      syncthing.enable = true;
     };
   };
   programs.msmtp.enable = false;

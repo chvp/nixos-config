@@ -13,7 +13,6 @@
     ./matrix
     ./nextcloud
     ./nginx
-    ./syncthing
     ./torrents
   ];
 

@@ -8,7 +8,6 @@
     ./mail
     ./pass
     ./sound
-    ./syncthing
     ./terminal
     ./theme
     ./xdg
@@ -35,7 +34,6 @@
         mail.enable = lib.mkDefault true;
         pass.enable = lib.mkDefault true;
         sound.enable = lib.mkDefault true;
-        syncthing.enable = lib.mkDefault true;
         terminal.enable = lib.mkDefault true;
         theme.enable = lib.mkDefault true;
         xdg.enable = lib.mkDefault true;
