@@ -6,6 +6,7 @@
     ./firefox
     ./gnupg
     ./mail
+    ./nextcloud-client
     ./pass
     ./sound
     ./terminal
@@ -32,6 +33,7 @@
           pinentryFlavor = "gtk2";
         };
         mail.enable = lib.mkDefault true;
+        nextcloud-client.enable = lib.mkDefault true;
         pass.enable = lib.mkDefault true;
         sound.enable = lib.mkDefault true;
         terminal.enable = lib.mkDefault true;
