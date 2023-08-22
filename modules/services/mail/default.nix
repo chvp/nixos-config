@@ -15,6 +15,7 @@ in
       { path = "/var/lib/postfix"; type = "cache"; }
       { path = "/var/lib/redis-rspamd"; type = "cache"; }
       { path = "/var/lib/rspamd"; type = "cache"; }
+      { path = "/var/sieve"; type = "data"; }
     ];
     mailserver = {
       enable = true;
