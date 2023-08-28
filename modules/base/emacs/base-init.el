@@ -122,6 +122,7 @@
   (corfu-cycle t "Enable cycling through completions")
   (corfu-auto t "Show completion preview by default")
   (corfu-auto-prefix 2 "Show completion after two characters")
+  (corfu-quit-no-match t "Space occurs too often in my normal workflow to not quit on no match")
   ;; Only confirm autocompletion with TAB
   :bind (:map corfu-map ("RET" . nil))
   :config
