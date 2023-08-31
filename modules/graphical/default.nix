@@ -49,6 +49,7 @@
         okular
         ranger
         uni
+        wtype
       ];
     };
   };
