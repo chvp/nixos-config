@@ -56,7 +56,6 @@ in
     };
 
     nix = {
-      package = pkgs.nixVersions.nix_2_13;
       gc = {
         automatic = true;
         dates = if config.chvp.base.nix.slowGc then "daily" else "hourly";
