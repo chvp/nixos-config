@@ -6,7 +6,7 @@ let
       (
         pkgs.writeShellScriptBin "ssh" ''
           export TERM=xterm-256color
-          ${pkgs.openssh}/bin/ssh $@
+          ${pkgs.openssh}/bin/ssh "$@"
         ''
       )
       pkgs.openssh
