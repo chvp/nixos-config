@@ -57,6 +57,6 @@
   };
   language.ruby = {
     package = pkgs.ruby_3_1;
-    nativeDeps = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib ];
+    nativeDeps = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib pkgs.openssl ];
   };
 }
