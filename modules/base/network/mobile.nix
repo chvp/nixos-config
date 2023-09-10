@@ -17,7 +17,7 @@
 
   config = with config.chvp.base.network.mobile; lib.mkIf enable {
     users.users.charlotte.extraGroups = [ "network" ];
-    users.groups.network = {};
+    users.groups.network = { };
     networking = {
       useDHCP = false;
       wireless = {
