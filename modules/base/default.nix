@@ -121,9 +121,9 @@
           home = "/home/charlotte";
           description = "Charlotte Van Petegem";
           extraGroups = [ "systemd-journal" ];
-          passwordFile = config.age.secrets."passwords/users/charlotte".path;
+          hashedPasswordFile = config.age.secrets."passwords/users/charlotte".path;
         };
-        root.passwordFile = config.age.secrets."passwords/users/root".path;
+        root.hashedPasswordFile = config.age.secrets."passwords/users/root".path;
       };
     };
 
