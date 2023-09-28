@@ -65,7 +65,7 @@
         };
         theme = {
           package = pkgs.catppuccin-gtk.override { size = "compact"; variant = "latte"; };
-          name = "Catppuccin-Latte-Compact-Blue-light";
+          name = "Catppuccin-Latte-Compact-Blue-Light";
         };
       };
       qt = {
