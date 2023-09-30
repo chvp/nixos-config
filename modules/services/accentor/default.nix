@@ -16,7 +16,6 @@
       enable = true;
       home = "${config.chvp.dataPrefix}/var/lib/accentor";
       hostname = "accentor.vanpetegem.me";
-      workers = 4;
       environmentFile = config.age.secrets."passwords/services/accentor".path;
       rescanTimer = {
         enable = true;
