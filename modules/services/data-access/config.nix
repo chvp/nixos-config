@@ -7,7 +7,7 @@
     description = "Data Access";
     uid = 1000;
     group = "users";
-    passwordFile = "/run/secrets/password_file";
+    hashedPasswordFile = "/run/secrets/password_file";
   };
   users.users.readonly = {
     isNormalUser = true;
@@ -15,7 +15,7 @@
     description = "Readonly data access";
     uid = 1001;
     group = "sftponly";
-    passwordFile = "/run/secrets/readonly_password_file";
+    hashedPasswordFile = "/run/secrets/readonly_password_file";
   };
   users.groups.sftponly = { gid = 10000; };
   environment.systemPackages = [ pkgs.rsync pkgs.mktorrent (pkgs.writeShellScriptBin "create_torrent" ". /run/secrets/create_torrent") ];
