@@ -25,6 +25,7 @@ in
       default = false;
       example = true;
     };
+    # Used in /flake.nix, since we have to use it at nixpkgs import time
     unfreePackages = lib.mkOption {
       default = [ ];
       example = [ "teams" ];
@@ -84,8 +85,6 @@ in
         keep-derivations = true
       '';
     };
-
-    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
 
     home-manager.users.charlotte = { ... }:
       lib.recursiveUpdate

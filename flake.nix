@@ -122,16 +122,21 @@
         ./modules
       ];
       nixosSystem = system: name:
-        let nixpkgs = nixpkgsForSystem system; in
-        inputs.nixpkgs.lib.nixosSystem {
+        let
+          nixpkgs = nixpkgsForSystem system;
           lib = (import nixpkgs { inherit overlays system; }).lib;
+        in
+        inputs.nixpkgs.lib.nixosSystem {
+          inherit lib system;
           specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
-          system = "x86_64-linux";
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
           modules = commonModules ++ [
             ({ config, ... }:
               {
-                nixpkgs.overlays = overlays;
+                nixpkgs.pkgs = import nixpkgs {
+                  inherit overlays system;
+                  config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                };
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
