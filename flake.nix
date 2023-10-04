@@ -131,7 +131,7 @@
           modules = commonModules ++ [
             ({ config, ... }:
               {
-                nixpkgs.pkgs = import nixpkgs { inherit overlays system; config = config.nixpkgs.config; };
+                nixpkgs.overlays = overlays;
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
