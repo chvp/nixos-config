@@ -365,10 +365,7 @@ in
       programs = {
         mbsync.enable = true;
         msmtp.enable = true;
-        mu = {
-          enable = true;
-          package = pkgs.mu.override { emacs = pkgs.emacs-pgtk; };
-        };
+        mu.enable = true;
       };
       services = {
         imapnotify.enable = true;
