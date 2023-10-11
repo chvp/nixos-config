@@ -154,6 +154,7 @@ let
 
     ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XCURSOR_SIZE QT_QPA_PLATFORM_THEME QT_STYLE_OVERRIDE QT_PLUGIN_PATH QTWEBKIT_PLUGIN_PATH
     systemctl --user start river-session.target
+    systemctl --user start tray.target
   '';
 in
 {
@@ -436,11 +437,18 @@ in
           ];
         };
       };
-      systemd.user.targets.river-session.Unit = {
-        Description = "river compositor session";
-        BindsTo = [ "graphical-session.target" ];
-        Wants = [ "graphical-session-pre.target" ];
-        After = [ "graphical-session-pre.target" ];
+      systemd.user.targets = {
+        river-session.Unit = {
+          Description = "river compositor session";
+          BindsTo = [ "graphical-session.target" ];
+          Wants = [ "graphical-session-pre.target" ];
+          After = [ "graphical-session-pre.target" ];
+        };
+        tray.Unit = {
+          Description = "tray target";
+          Wants = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
+        };
       };
       xdg.configFile."river/init" = {
         source = river-init;
