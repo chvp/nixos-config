@@ -73,11 +73,9 @@ in
             belgium-eid
             cookie-autodelete
             decentraleyes
-            firefox-color
             ff2mpv
             keepassxc-browser
             multi-account-containers
-            stylus
             ublock-origin
             vue-js-devtools
             zotero-connector

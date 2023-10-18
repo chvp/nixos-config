@@ -7,7 +7,10 @@
   };
 
   config = lib.mkIf config.chvp.graphical.theme.enable {
-    chvp.base.zfs.homeLinks = [{ path = ".config/qt5ct"; type = "cache"; }];
+    chvp.base.zfs.homeLinks = [
+      { path = ".config/qt5ct"; type = "cache"; }
+      { path = ".config/qt6ct"; type = "cache"; }
+    ];
     fonts = {
       fontDir.enable = true;
       fontconfig = {
@@ -32,7 +35,11 @@
 
     programs.dconf.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = [ pkgs.catppuccin-cursors.latteLight ];
+      home.packages = [
+        pkgs.catppuccin-cursors.latteLight
+        # Also install dark mode to profile for darkman
+        (pkgs.catppuccin-gtk.override { size = "compact"; variant = "frappe"; })
+      ];
       home.file = {
         ".icons/default/index.theme".text = ''
           [Icon Theme]
@@ -74,6 +81,42 @@
         style = {
           name = "lightly";
           package = pkgs.lightly-qt;
+        };
+      };
+      services.darkman = {
+        enable = true;
+        settings = {
+          lat = 51.0;
+          lng = 3.7;
+          usegeoclue = false;
+          dbusserver = true;
+          portal = true;
+        };
+        darkModeScripts = {
+          emacs = ''
+            emacsclient --eval "(setq catppuccin-flavor 'frappe)"
+            emacsclient --eval "(load-theme 'catppuccin :no-confirm)"
+          '';
+          gtk = ''
+            ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Frappe-Compact-Blue-Dark
+          '';
+          qt = ''
+            sed -i "s/Latte/Frappe/" ~/.config/qt5ct/qt5ct.conf
+            sed -i "s/Latte/Frappe/" ~/.config/qt6ct/qt6ct.conf
+          '';
+        };
+        lightModeScripts = {
+          emacs = ''
+            emacsclient --eval "(setq catppuccin-flavor 'latte)"
+            emacsclient --eval "(load-theme 'catppuccin :no-confirm)"
+          '';
+          gtk = ''
+            ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Latte-Compact-Blue-Light
+          '';
+          qt = ''
+            sed -i "s/Frappe/Latte/" ~/.config/qt5ct/qt5ct.conf
+            sed -i "s/Frappe/Latte/" ~/.config/qt6ct/qt6ct.conf
+          '';
         };
       };
     };
