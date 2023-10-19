@@ -72,6 +72,7 @@ in
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
             cookie-autodelete
+            darkreader
             decentraleyes
             ff2mpv
             keepassxc-browser

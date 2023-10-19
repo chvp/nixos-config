@@ -22,10 +22,7 @@
             notify = true;
           };
           scrollback.lines = 10000;
-          cursor = {
-            blink = true;
-            color = "ffffff 777777";
-          };
+          cursor.blink = true;
           mouse.hide-when-typing = true;
           colors = {
             foreground = "4c4f69";

@@ -34,7 +34,7 @@
     };
 
     programs.dconf.enable = true;
-    home-manager.users.charlotte = { pkgs, ... }: {
+    home-manager.users.charlotte = { pkgs, lib, ... }: {
       home.packages = [
         pkgs.catppuccin-cursors.latteLight
         # Also install dark mode to profile for darkman
@@ -100,9 +100,22 @@
           gtk = ''
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Frappe-Compact-Blue-Dark
           '';
+          river = ''
+            riverctl background-color 0x303446
+            riverctl border-color-focused 0x99d1db
+            riverctl border-color-unfocused 0x232634
+            riverctl border-color-urgent 0xf4b8e4
+          '';
           qt = ''
             sed -i "s/Latte/Frappe/" ~/.config/qt5ct/qt5ct.conf
             sed -i "s/Latte/Frappe/" ~/.config/qt6ct/qt6ct.conf
+          '';
+          terminal = ''
+            pkill -SIGUSR2 zsh
+          '';
+          waybar = ''
+            ln -sf ~/.config/waybar/frappe.css ~/.config/waybar/colors.css
+            systemctl --user restart waybar.service
           '';
         };
         lightModeScripts = {
@@ -113,11 +126,29 @@
           gtk = ''
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Latte-Compact-Blue-Light
           '';
+          river = ''
+            riverctl background-color 0xeff1f5
+            riverctl border-color-focused 0x04e5e5
+            riverctl border-color-unfocused 0xdce0e8
+            riverctl border-color-urgent 0xea76cb
+          '';
           qt = ''
             sed -i "s/Frappe/Latte/" ~/.config/qt5ct/qt5ct.conf
             sed -i "s/Frappe/Latte/" ~/.config/qt6ct/qt6ct.conf
           '';
+          terminal = ''
+            pkill -SIGUSR1 zsh
+          '';
+          waybar = ''
+            ln -sf ~/.config/waybar/latte.css ~/.config/waybar/colors.css
+            systemctl --user restart waybar.service
+          '';
         };
+      };
+      home.activation = {
+        linkWaybarCssColors = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          $DRY_RUN_CMD ln -sf $VERBOSE_ARG ~/.config/waybar/latte.css ~/.config/waybar/colors.css
+        '';
       };
     };
   };

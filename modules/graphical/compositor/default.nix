@@ -13,6 +13,14 @@ let
       echo "{ \"text\": \"📭\" }"
     fi
   '';
+  lock = pkgs.writeShellScript "lock" ''
+    if [ "$(darkman get)" == "light" ]
+    then
+      ${pkgs.swaylock}/bin/swaylock -fF -c eff1f5
+    else
+      ${pkgs.swaylock}/bin/swaylock -fF -c 303446
+    fi
+  '';
   baseWrapper = pkgs.writeShellScriptBin "river" ''
     export XDG_SESSION_TYPE=wayland
     export XDG_CURRENT_DESKTOP=river
@@ -46,9 +54,9 @@ let
   };
   river-init = pkgs.writeShellScript "river-init" ''
     riverctl map normal Super Return spawn footclient
-    riverctl map normal Super D spawn 'footclient --app-id launcher -- ${launcher}/bin/launcher'
+    riverctl map normal Super D spawn 'footclient --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
 
-    riverctl map normal Super C spawn ${pkgs.swaylock}/bin/swaylock
+    riverctl map normal Super C spawn ${lock}
 
     riverctl map normal Super+Shift C close
 
@@ -132,10 +140,10 @@ let
     rivertile -view-padding 0 -outer-padding 0 &
 
     riverctl attach-mode bottom
-    riverctl background-color 0x000000
-    riverctl border-color-focused 0x6aaeff
-    riverctl border-color-unfocused 0xf2eff3
-    riverctl border-color-urgent 0xff8892
+    riverctl background-color 0xeff1f5
+    riverctl border-color-focused 0x04e5e5
+    riverctl border-color-unfocused 0xdce0e8
+    riverctl border-color-urgent 0xea76cb
     riverctl border-width 1
     riverctl focus-follows-cursor normal
     riverctl hide-cursor when-typing enabled
@@ -280,36 +288,7 @@ in
             };
           };
           style = ''
-            @define-color base   #eff1f5;
-            @define-color mantle #e6e9ef;
-            @define-color crust  #dce0e8;
-
-            @define-color text     #4c4f69;
-            @define-color subtext0 #6c6f85;
-            @define-color subtext1 #5c5f77;
-
-            @define-color surface0 #ccd0da;
-            @define-color surface1 #bcc0cc;
-            @define-color surface2 #acb0be;
-
-            @define-color overlay0 #9ca0b0;
-            @define-color overlay1 #8c8fa1;
-            @define-color overlay2 #7c7f93;
-
-            @define-color blue      #1e66f5;
-            @define-color lavender  #7287fd;
-            @define-color sapphire  #209fb5;
-            @define-color sky       #04a5e5;
-            @define-color teal      #179299;
-            @define-color green     #40a02b;
-            @define-color yellow    #df8e1d;
-            @define-color peach     #fe640b;
-            @define-color maroon    #e64553;
-            @define-color red       #d20f39;
-            @define-color mauve     #8839ef;
-            @define-color pink      #ea76cb;
-            @define-color flamingo  #dd7878;
-            @define-color rosewater #dc8a78;
+            @import "colors.css";
 
             * {
                 font-family: Hack, monospace;
@@ -317,7 +296,9 @@ in
             }
 
             #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #custom-mail-status, #clock, #tray {
+                margin: 0;
                 padding: 0 5px;
+                background-color: @surface0;
             }
 
             button {
@@ -335,52 +316,47 @@ in
             }
 
             #backlight {
-                background-color: @sky;
+                color: @sky;
             }
 
             #battery {
-                background-color: @green;
+                color: @green;
             }
             #battery.good {
-                background-color: @sky;
+                color: @sky;
             }
             #battery.warning {
-                background-color: @yellow;
+                color: @yellow;
             }
             #battery.critical {
-                background-color: @pink;
-            }
-
-            #clock {
-                padding-right: 0px;
+                color: @pink;
             }
 
             #custom-mail-status.has-mail {
-                background-color: @sky;
+                color: @sky;
             }
 
             #idle_inhibitor.activated {
-                background-color: @sky;
+                color: @sky;
             }
 
             #pulseaudio {
-                background-color: @yellow;
+                color: @yellow;
             }
 
             #tags button {
                 padding: 0;
                 box-shadow: inset 0 -3px transparent
-                background-color: @base;
                 color: @text;
             }
             #tags button.occupied {
-                background-color: @crust;
+                background-color: @surface1;
             }
             #tags button.focused {
-                background-color: @sky;
+                color: @sky;
             }
             #tags button.urgent {
-                background-color: @pink;
+                color: @pink;
             }
             #tags button:hover {
                 box-shadow: inset 0 -3px @text;
@@ -430,10 +406,10 @@ in
         swayidle = {
           enable = true;
           systemdTarget = "river-session.target";
-          events = [{ event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock"; }];
+          events = [{ event = "before-sleep"; command = "${lock}"; }];
           timeouts = [
             { timeout = 150; command = "${pkgs.wlopm}/bin/wlopm --off '*'"; resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'"; }
-            { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -fF"; }
+            { timeout = 300; command = "${lock}"; }
           ];
         };
       };
@@ -450,19 +426,85 @@ in
           After = [ "graphical-session.target" ];
         };
       };
-      xdg.configFile."river/init" = {
-        source = river-init;
-        onChange = ''
-          if [ -d /run/user/$UID ]
-          then
-            WAYLAND_DISPLAY="$(${pkgs.findutils}/bin/find /run/user/$UID -mindepth 1 -maxdepth 1 -type s -name wayland-\*)"
-            if [ -S "WAYLAND_DISPLAY" ]
+      xdg.configFile = {
+        "river/init" = {
+          source = river-init;
+          onChange = ''
+            if [ -d /run/user/$UID ]
             then
-              ${river-init}
+                WAYLAND_DISPLAY="$(${pkgs.findutils}/bin/find /run/user/$UID -mindepth 1 -maxdepth 1 -type s -name wayland-\*)"
+                if [ -S "WAYLAND_DISPLAY" ]
+                then
+                ${river-init}
+                fi
             fi
-          fi
+          '';
+        };
+        "waybar/frappe.css".text = ''
+          @define-color base   #303446;
+          @define-color mantle #292c3c;
+          @define-color crust  #232634;
+
+          @define-color text     #c6d0f5;
+          @define-color subtext0 #a5adce;
+          @define-color subtext1 #b5bfe2;
+
+          @define-color surface0 #414559;
+          @define-color surface1 #51576d;
+          @define-color surface2 #626880;
+
+          @define-color overlay0 #737994;
+          @define-color overlay1 #838ba7;
+          @define-color overlay2 #949cbb;
+
+          @define-color blue      #8caaee;
+          @define-color lavender  #babbf1;
+          @define-color sapphire  #85c1dc;
+          @define-color sky       #99d1db;
+          @define-color teal      #81c8be;
+          @define-color green     #a6d189;
+          @define-color yellow    #e5c890;
+          @define-color peach     #ef9f76;
+          @define-color maroon    #ea999c;
+          @define-color red       #e78284;
+          @define-color mauve     #ca9ee6;
+          @define-color pink      #f4b8e4;
+          @define-color flamingo  #eebebe;
+          @define-color rosewater #f2d5cf;
+        '';
+        "waybar/latte.css".text = ''
+          @define-color base   #eff1f5;
+          @define-color mantle #e6e9ef;
+          @define-color crust  #dce0e8;
+
+          @define-color text     #4c4f69;
+          @define-color subtext0 #6c6f85;
+          @define-color subtext1 #5c5f77;
+
+          @define-color surface0 #ccd0da;
+          @define-color surface1 #bcc0cc;
+          @define-color surface2 #acb0be;
+
+          @define-color overlay0 #9ca0b0;
+          @define-color overlay1 #8c8fa1;
+          @define-color overlay2 #7c7f93;
+
+          @define-color blue      #1e66f5;
+          @define-color lavender  #7287fd;
+          @define-color sapphire  #209fb5;
+          @define-color sky       #04a5e5;
+          @define-color teal      #179299;
+          @define-color green     #40a02b;
+          @define-color yellow    #df8e1d;
+          @define-color peach     #fe640b;
+          @define-color maroon    #e64553;
+          @define-color red       #d20f39;
+          @define-color mauve     #8839ef;
+          @define-color pink      #ea76cb;
+          @define-color flamingo  #dd7878;
+          @define-color rosewater #dc8a78;
         '';
       };
     };
   };
-}
+}  
