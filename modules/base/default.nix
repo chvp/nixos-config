@@ -60,6 +60,25 @@
     boot.kernelParams = [ "mitigations=off" ];
 
     console = {
+      colors = [
+        "51576d"
+        "e78284"
+        "a6d189"
+        "e5c890"
+        "8caaee"
+        "f4b8e4"
+        "81c8be"
+        "b5bfe2"
+        "626880"
+        "e78284"
+        "a6d189"
+        "e5c890"
+        "8caaee"
+        "f4b8e4"
+        "81c8be"
+        "a5adce"
+      ];
+      earlySetup = true;
       font = "Lat2-Terminus16";
       keyMap = "us";
     };
