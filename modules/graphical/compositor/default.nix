@@ -140,7 +140,7 @@ let
     rivertile -view-padding 0 -outer-padding 0 &
 
     riverctl attach-mode bottom
-    riverctl background-color 0xeff1f5
+    riverctl background-color 0xacb0be
     riverctl border-color-focused 0x04e5e5
     riverctl border-color-unfocused 0xdce0e8
     riverctl border-color-urgent 0xea76cb

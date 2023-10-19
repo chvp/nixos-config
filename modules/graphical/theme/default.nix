@@ -101,7 +101,7 @@
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Frappe-Compact-Blue-Dark
           '';
           river = ''
-            riverctl background-color 0x303446
+            riverctl background-color 0x626880
             riverctl border-color-focused 0x99d1db
             riverctl border-color-unfocused 0x232634
             riverctl border-color-urgent 0xf4b8e4
@@ -127,7 +127,7 @@
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Latte-Compact-Blue-Light
           '';
           river = ''
-            riverctl background-color 0xeff1f5
+            riverctl background-color 0xacb0be
             riverctl border-color-focused 0x04e5e5
             riverctl border-color-unfocused 0xdce0e8
             riverctl border-color-urgent 0xea76cb
