@@ -279,6 +279,9 @@
     )
   )
 
+;; Citations with citeproc in org
+(use-package citeproc)
+
 ;; Sorting when filtering
 (use-package prescient
   :custom
