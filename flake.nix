@@ -135,7 +135,11 @@
               {
                 nixpkgs.pkgs = import nixpkgs {
                   inherit overlays system;
-                  config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                  config = {
+                    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                    # I really need this for my PhD thesis
+                    permittedInsecurePackages = [ "zotero-6.0.27" ];
+                  };
                 };
                 networking.hostName = name;
                 nix = {
