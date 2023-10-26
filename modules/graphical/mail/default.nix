@@ -82,11 +82,6 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.mail.enable {
-    nixpkgs.overlays = [
-      (self: super: {
-        khal = super.khal.overrideAttrs (old: { doInstallCheck = false; });
-      })
-    ];
     chvp = {
       base = {
         emacs.extraConfig =
@@ -206,9 +201,6 @@ in
         zfs.homeLinks = [
           { path = "mail"; type = "data"; }
           { path = ".cache/mu"; type = "cache"; }
-          { path = ".local/share/contacts"; type = "cache"; }
-          { path = ".local/share/calendars"; type = "cache"; }
-          { path = ".local/share/vdirsyncer"; type = "cache"; }
         ];
       };
     };
@@ -278,90 +270,6 @@ in
           };
         };
       };
-      home.packages = [ pkgs.khal pkgs.khard ];
-      xdg.configFile = {
-        "khal/config".text = toRecursiveINI {
-          calendars = {
-            calendar = {
-              path = "~/.local/share/calendars/*";
-              type = "discover";
-            };
-          };
-          locale = {
-            timeformat = "%H:%M";
-            dateformat = "%Y-%m-%d";
-            longdateformat = "%Y-%m-%d";
-            datetimeformat = "%Y-%m-%d %H:%M";
-            longdatetimeformat = "%Y-%m-%d %H:%M";
-          };
-        };
-        "khard/khard.conf".text = toRecursiveINI {
-          addressbooks = {
-            contacts = {
-              path = "~/.local/share/contacts/contacts";
-            };
-          };
-          general = {
-            debug = "no";
-            default_action = "list";
-            editor = "emacs";
-            merge_editor = "${pkgs.writeShellScript "ediff" ''emacs --eval "(ediff-merge-files \"$1\" \"$2\")"''}";
-          };
-          "contact table" = {
-            display = "formatted_name";
-            group_by_addressbook = "no";
-            reverse = "no";
-            show_nicknames = "no";
-            show_uids = "yes";
-            sort = "last_name";
-            localize_dates = "yes";
-            preferred_phone_number_type = "pref, cell, home";
-            preferred_email_address_type = "pref, work, home";
-          };
-          vcard = {
-            private_objects = ",";
-            preferred_version = "4.0";
-            search_in_source_files = "no";
-            skip_unparsable = "no";
-          };
-        };
-        "vdirsyncer/config".text =
-          let
-            nextcloudConfig = type: {
-              inherit type;
-              url = "https://nextcloud.vanpetegem.me/remote.php/dav/";
-              username = "chvp";
-              "password.fetch" = [ "command" "${passwordScript}" "nextcloud" ];
-            };
-          in
-          lib.generators.toINI
-            { mkKeyValue = lib.generators.mkKeyValueDefault { mkValueString = builtins.toJSON; } "="; }
-            {
-              general.status_path = "~/.local/share/vdirsyncer";
-              "pair nextcloud_contacts" = {
-                a = "nextcloud_contacts_local";
-                b = "nextcloud_contacts_remote";
-                collections = [ "from a" "from b" ];
-              };
-              "storage nextcloud_contacts_local" = {
-                type = "filesystem";
-                path = "~/.local/share/contacts";
-                fileext = ".vcf";
-              };
-              "storage nextcloud_contacts_remote" = nextcloudConfig "carddav";
-              "pair nextcloud_calendars" = {
-                a = "nextcloud_calendars_local";
-                b = "nextcloud_calendars_remote";
-                collections = [ "from a" "from b" ];
-              };
-              "storage nextcloud_calendars_local" = {
-                type = "filesystem";
-                path = "~/.local/share/calendars";
-                fileext = ".ics";
-              };
-              "storage nextcloud_calendars_remote" = nextcloudConfig "caldav";
-            };
-      };
       programs = {
         mbsync.enable = true;
         msmtp.enable = true;
@@ -381,17 +289,6 @@ in
             Service = {
               Type = "oneshot";
               ExecStart = [ "${pkgs.isync}/bin/mbsync -a" "${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\"" ];
-            };
-          };
-          vdirsyncer = {
-            Unit = {
-              Description = "VDirSyncer WebDAV syncer";
-              After = "network-online.target";
-              Wants = "network-online.target";
-            };
-            Service = {
-              Type = "oneshot";
-              ExecStart = "${pkgs.vdirsyncer}/bin/vdirsyncer sync";
             };
           };
         };
