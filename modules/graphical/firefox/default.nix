@@ -71,6 +71,7 @@ in
         profiles.default = {
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
+            consent-o-matic
             cookie-autodelete
             darkreader
             decentraleyes
