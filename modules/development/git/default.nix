@@ -19,12 +19,9 @@
   config =
     let
       base = {
-        home.packages = with pkgs; [
-          gitAndTools.gitflow
-          git-crypt
-        ];
         programs.git = {
           enable = true;
+          lfs.enable = true;
           extraConfig = {
             branch.autosetuprebase = "always";
             pull.rebase = true;
