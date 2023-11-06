@@ -1,5 +1,10 @@
 mu4e-compose-mode
 
+(mvg
+ "Met vriendelijke groeten" n
+ "Charlotte Van Petegem"
+ )
+
 (teacher-reply
  "Dag " q n n
  r n
