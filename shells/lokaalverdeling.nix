@@ -32,5 +32,6 @@ pkgs.devshell.mkShell {
   name = "Lokaalverdeling";
   packages = with pkgs; [
     (python3.withPackages (ps: with ps; [ click pandas-ods-reader jinja2 pyyaml ]))
+    xsv
   ];
 }
