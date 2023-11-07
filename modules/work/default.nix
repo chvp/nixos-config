@@ -25,5 +25,8 @@
         zotero.enable = lib.mkDefault true;
       };
     };
+    home-manager.users.charlotte = { pkgs, ... }: {
+      home.packages = with pkgs; [ libreoffice ];
+    };
   };
 }
