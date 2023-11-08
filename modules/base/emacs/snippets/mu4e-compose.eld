@@ -5,6 +5,13 @@ mu4e-compose-mode
  "Charlotte Van Petegem"
  )
 
+(spelletjesavond-schulden
+"Dag " p n n
+"Na de spelletjesavond van vrijdag zou je mij € " q " moeten. Kan je dat overschrijven op BE08 8908 0409 9113? Alvast bedankt!" n n
+"Groetjes" n
+"Charlotte"
+ )
+
 (teacher-reply
  "Dag " q n n
  r n
