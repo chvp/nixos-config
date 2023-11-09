@@ -13,7 +13,7 @@
       };
     };
     accentor-api = {
-      url = "github:accentor/api/c410fdc82f747c24555c0e9f39f942720c0e6204";
+      url = "github:accentor/api";
       inputs = {
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
