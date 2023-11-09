@@ -83,6 +83,9 @@ in
       certificateFile = certFile;
       keyFile = keyFile;
       dkimKeyDirectory = "${config.chvp.dataPrefix}/var/dkim";
+      policydSPFExtraConfig = ''
+        whitelist = 40.92.0.0/15,40.107.0.0/16,52.100.0.0/14,104.47.0.0/17,2a01:111:f400::/48,2a01:111:f403::/49,2a01:111:f403:8000::/50,2a01:111:f403:c000::/51,2a01:111:f403:f000::/52
+      '';
     };
 
     services.postfix = {
