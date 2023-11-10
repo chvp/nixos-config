@@ -210,6 +210,7 @@ in
         zfs.homeLinks = [
           { path = "mail"; type = "data"; }
           { path = ".cache/mu"; type = "cache"; }
+          { path = ".cache/mfauth"; type = "cache"; }
         ];
       };
     };
