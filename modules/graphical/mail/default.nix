@@ -13,7 +13,7 @@ let
       ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' "$unseen_count unseen mails"
     fi
   '';
-  makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, secretToolId, extraConfig ? { } }: (lib.recursiveUpdate
+  makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, secretToolId, extraConfig ? { }, oauth ? false }: (lib.recursiveUpdate
     {
       inherit address;
       gpg = {
@@ -30,6 +30,7 @@ let
         boxes = [ "INBOX" ];
         onNotify = "${pkgs.isync}/bin/mbsync ${name}:INBOX";
         onNotifyPost = "${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\" && ${notifyScript name}";
+        extraConfig = lib.mkIf oauth { xoauth2 = true; };
       };
       mbsync = {
         enable = true;
@@ -37,11 +38,14 @@ let
         expunge = "both";
         flatten = ".";
         remove = "both";
-        extraConfig.account.AuthMechs = "LOGIN";
+        extraConfig.account.AuthMechs = if (oauth) then "XOAUTH2" else "LOGIN";
       };
-      msmtp.enable = true;
+      msmtp = {
+        enable = true;
+        extraConfig = lib.mkIf oauth { auth = "xoauth2"; };
+      };
       mu.enable = true;
-      passwordCommand = "${passwordScript} ${secretToolId}";
+      passwordCommand = if oauth then "${pkgs.mfauth}/bin/mfauth access ${name}" else "${passwordScript} ${secretToolId}";
       realName = "Charlotte Van Petegem";
       signature = {
         showSignature = "none";
@@ -82,6 +86,11 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.mail.enable {
+    nixpkgs.overlays = [
+      (self: super: rec {
+        isync = super.isync.override { withCyrusSaslXoauth2 = true; };
+      })
+    ];
     chvp = {
       base = {
         emacs.extraConfig =
@@ -205,6 +214,16 @@ in
       };
     };
     home-manager.users.charlotte = { ... }: {
+      home.packages = [ pkgs.mfauth ];
+      xdg.configFile."mfauth/config.toml".text = ''
+        # Public thunderbird secrets
+        [accounts.work]
+        client_id = "08162f7c-0fd2-4200-a84a-f25a4db0b584"
+        client_secret = "TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82"
+        authorize_url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+        token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+        scope = "https://outlook.office365.com/IMAP.AccessAsUser.All https://outlook.office365.com/POP.AccessAsUser.All https://outlook.office365.com/SMTP.Send offline_access"
+      '';
       accounts.email = {
         maildirBasePath = "/home/charlotte/mail";
         accounts = {
@@ -221,13 +240,12 @@ in
           work = makeAccount {
             name = "work";
             address = "charlotte.vanpetegem@ugent.be";
-            host = "mail.vanpetegem.me";
+            host = "outlook.office365.com";
+            smtpHost = "smtp.office365.com";
             secretToolId = "work-mail";
             useStartTls = true;
-            extraConfig = {
-              folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
-              userName = "ugent@cvpetegem.be";
-            };
+            oauth = true;
+            extraConfig.folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
           };
           posteo = makeAccount {
             name = "posteo";

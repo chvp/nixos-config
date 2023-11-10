@@ -55,6 +55,13 @@
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mfauth = {
+      url = "github:rien/mfauth";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs = {
@@ -86,7 +93,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, lanzaboote, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, lanzaboote, mfauth, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -107,6 +114,7 @@
         devshell.overlays.default
         emacs-overlay.overlay
         (self: super: {
+          mfauth = mfauth.packages.${self.system}.mfauth;
           tetris = tetris.packages.${self.system}.default;
         })
         nur.overlay
