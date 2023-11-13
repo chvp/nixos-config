@@ -24,8 +24,10 @@
           lfs.enable = true;
           extraConfig = {
             branch.autosetuprebase = "always";
-            pull.rebase = true;
             github.user = "chvp";
+            merge.conflictStyle = "diff3";
+            pull.rebase = true;
+            rerere.enabled = true;
             tag.gpgSign = true;
           };
           ignores = [
