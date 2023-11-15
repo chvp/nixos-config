@@ -246,7 +246,7 @@ in
             secretToolId = "work-mail";
             useStartTls = true;
             oauth = true;
-            extraConfig.folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
+            extraConfig.folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Deleted Items"; };
           };
           posteo = makeAccount {
             name = "posteo";
