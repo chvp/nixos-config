@@ -61,6 +61,6 @@ pkgs.devshell.mkShell {
   };
   language.ruby = {
     package = pkgs.ruby_3_1;
-    nativeDeps = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi ];
+    nativeDeps = [ pkgs.libmysqlclient pkgs.zlib pkgs.libffi pkgs.libyaml ];
   };
 }
