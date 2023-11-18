@@ -37,6 +37,7 @@
       configureNginx = false;
       localDomain = "social.chvp.be";
       enableUnixSocket = true;
+      streamingProcesses = 4;
 
       database.createLocally = true;
       redis.createLocally = true;

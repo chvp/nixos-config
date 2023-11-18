@@ -108,10 +108,9 @@ in
                   PublicKey = data.lasting-integrity.pubkey;
                   AllowedIPs = subnet;
                   Endpoint =
-                    #if config.chvp.base.network.wireguard.onCorporate
-                    #then "127.0.0.1:51820"
-                    #else "lasting-integrity.vanpetegem.me:51820";
-                    "lasting-integrity.vanpetegem.me:51820";
+                    if config.chvp.base.network.wireguard.onCorporate
+                    then "127.0.0.1:51820"
+                    else "lasting-integrity.vanpetegem.me:51820";
                   PresharedKeyFile = pskFile;
                   PersistentKeepalive = 25;
                 };
@@ -138,24 +137,24 @@ in
         };
       };
       services = {
-        #udp2raw-server = lib.mkIf config.chvp.base.network.wireguard.server {
-        #  description = "UDP tunnel over TCP for wireguard";
-        #  wantedBy = [ "multi-user.target" ];
-        #  after = [ "network.target" ];
-        #  script = ''
-        #    ${pkgs.udp2raw}/bin/udp2raw -s -l 0.0.0.0:8080 -r 127.0.0.1:51820 \
-        #      -k "$(cat ${config.age.secrets."files/wireguard/udp2raw".path})"
-        #  '';
-        #};
-        #udp2raw-client = lib.mkIf config.chvp.base.network.wireguard.onCorporate {
-        #  description = "UDP tunnel over TCP for wireguard";
-        #  wantedBy = [ "multi-user.target" ];
-        #  after = [ "network.target" ];
-        #  script = ''
-        #    ${pkgs.udp2raw}/bin/udp2raw -c -l 127.0.0.1:51820 -r 54.38.222.69:8080 \
-        #      -k "$(cat ${config.age.secrets."files/wireguard/udp2raw".path})"
-        #  '';
-        #};
+        udp2raw-server = lib.mkIf config.chvp.base.network.wireguard.server {
+          description = "UDP tunnel over TCP for wireguard";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          script = ''
+            ${pkgs.udp2raw}/bin/udp2raw -s -l 0.0.0.0:8080 -r 127.0.0.1:51820 \
+              -k "$(cat ${config.age.secrets."files/wireguard/udp2raw".path})"
+          '';
+        };
+        udp2raw-client = lib.mkIf config.chvp.base.network.wireguard.onCorporate {
+          description = "UDP tunnel over TCP for wireguard";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
+          script = ''
+            ${pkgs.udp2raw}/bin/udp2raw -c -l 127.0.0.1:51820 -r 54.38.222.69:8080 \
+              -k "$(cat ${config.age.secrets."files/wireguard/udp2raw".path})"
+          '';
+        };
       };
     };
     age.secrets."files/wireguard/psk" = {
