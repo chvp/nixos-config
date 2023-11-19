@@ -25,15 +25,6 @@ let
   ffPackage = pkgs.firefox.override {
     nativeMessagingHosts = [ ff2mpv-host ];
     pkcs11Modules = [ pkgs.eid-mw ];
-    extraPolicies = {
-      DisableFirefoxStudies = true;
-      DisablePocket = true;
-      DisableTelemetry = true;
-      DisableFirefoxAccounts = true;
-      FirefoxHome = { Pocket = false; Snippets = false; };
-      OfferToSaveLogins = false;
-      UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
-    };
   };
   zotero-connector = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
     pname = "zotero-connector";
@@ -68,6 +59,15 @@ in
       programs.firefox = {
         enable = true;
         package = ffPackage;
+        policies = {
+          DisableFirefoxStudies = true;
+          DisablePocket = true;
+          DisableTelemetry = true;
+          DisableFirefoxAccounts = true;
+          FirefoxHome = { Pocket = false; Snippets = false; };
+          OfferToSaveLogins = false;
+          UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
+        };
         profiles.default = {
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
