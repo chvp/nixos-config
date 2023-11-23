@@ -1,5 +1,5 @@
 diff --git a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
-index a30f5be4ce9f37..cfd2ce320aa23e 100644
+index 4194043574d879..ed8ed30327816a 100644
 --- a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
 +++ b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
 @@ -19,18 +19,18 @@
@@ -23,4 +23,4 @@ index a30f5be4ce9f37..cfd2ce320aa23e 100644
 +    hash = "sha256-ydhJXAvz3k6GwpnSL6brl9xFpb+ooi8Am89TkcE00hc=";
    };
  
-   nativeBuildInputs = [ yarn fixup_yarn_lock nodejs copyDesktopItems makeWrapper ];
+   nativeBuildInputs = [ yarn prefetch-yarn-deps nodejs copyDesktopItems makeWrapper ];

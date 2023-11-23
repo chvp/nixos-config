@@ -1,5 +1,5 @@
 diff --git a/pkgs/os-specific/linux/firmware/fwupd/default.nix b/pkgs/os-specific/linux/firmware/fwupd/default.nix
-index f4914d8432728f..13457c69082b03 100644
+index f4914d8432728f..c77c01df85086b 100644
 --- a/pkgs/os-specific/linux/firmware/fwupd/default.nix
 +++ b/pkgs/os-specific/linux/firmware/fwupd/default.nix
 @@ -19,7 +19,6 @@
@@ -15,7 +15,7 @@ index f4914d8432728f..13457c69082b03 100644
  stdenv.mkDerivation (finalAttrs: {
    pname = "fwupd";
 -  version = "1.9.7";
-+  version = "1.9.8";
++  version = "1.9.9";
  
    # libfwupd goes to lib
    # daemon, plug-ins and libfwupdplugin go to out
@@ -24,7 +24,7 @@ index f4914d8432728f..13457c69082b03 100644
      repo = "fwupd";
      rev = finalAttrs.version;
 -    hash = "sha256-NhVCIjkwoTZptctIrkU9HgXzjr+KCUZfEKcjoYgAEdM=";
-+    hash = "sha256-2nOpo6HJteZlMEFyXUIWGpoZxzEb7s9HmC2yOMvMqAM=";
++    hash = "sha256-UUrG3CMCAC5hyy2U5I4zqvJoSP/+zuiq1P+2Pdb3QD0=";
    };
  
    patches = [
