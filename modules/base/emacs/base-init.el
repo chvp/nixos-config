@@ -295,6 +295,15 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; Side window with symbols or headline
+(use-package sr-speedbar
+  :custom
+  (speedbar-use-images nil "Don't use images in speedbar")
+  :general
+  (lmap
+    "wb" '(sr-speedbar-toggle :which-key "Outline bar"))
+  )
+
 ;; Tempel (snippet expansion)
 (use-package tempel
   :demand t
