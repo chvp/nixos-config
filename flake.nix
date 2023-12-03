@@ -63,7 +63,7 @@
       };
     };
     nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      url = "gitlab:robbevp/nixos-mailserver/customize-sieve-extentions";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";

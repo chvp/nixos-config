@@ -74,6 +74,7 @@ in
         "info@toekomstlabo.be" = "robbe+toekomstlabo@robbevanpetegem.be";
       };
       mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
+      sieveExtensions = [ "+editheader" ];
       useFsLayout = false;
       certificateScheme = "manual";
       certificateFile = certFile;
