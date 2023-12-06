@@ -1,17 +1,26 @@
 diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
-index 5f4e0c309f09fb..7159d048364db4 100644
+index 5f4e0c309f09fb..0ff87211985ff3 100644
 --- a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
 +++ b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
 @@ -1,6 +1,6 @@
  {
    "name": "matrix-hookshot",
 -  "version": "4.5.1",
-+  "version": "4.6.0",
++  "version": "4.7.0",
    "description": "A bridge between Matrix and multiple project management services, such as GitHub, GitLab and JIRA.",
    "main": "lib/app.js",
    "repository": "https://github.com/matrix-org/matrix-hookshot",
+@@ -48,7 +48,7 @@
+     "@octokit/webhooks": "^9.1.2",
+     "@sentry/node": "^7.52.1",
+     "ajv": "^8.11.0",
+-    "axios": "^0.24.0",
++    "axios": "^1.6.2",
+     "cors": "^2.8.5",
+     "express": "^4.17.3",
+     "figma-js": "^1.14.0",
 diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
-index e27f39681c78e4..f3986eeb4d463c 100644
+index e27f39681c78e4..64b40c341cc9d2 100644
 --- a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
 +++ b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
 @@ -1,6 +1,6 @@
@@ -20,8 +29,8 @@ index e27f39681c78e4..f3986eeb4d463c 100644
 -  "srcHash": "sha256-uqLpwgVEfwcMTeGMDn3lDUD91GHPNyWHmCSPxuV/VC0=",
 -  "yarnHash": "08dw9vbhlmqwj2nah6fv1b2sf15ibl5kg38ghkxkbccs4j7adans",
 -  "cargoHash": "sha256-bIpsQni3kaoYCGLz01YdauYM8ybpx+BvVTiB6N72rIA="
-+  "version": "4.6.0",
-+  "srcHash": "sha256-Z+i9v7LH7IpM2TbBONrwe+fcqsLqlUeOOT2D1+CUEMk=",
-+  "yarnHash": "02iwhcspawgh73qf45kdz422np868dbzgddpr14bv14dx4hj431d",
-+  "cargoHash": "sha256-h10JUVATFWk4CBMGrQ5WMEuYkRk7eToPLylUwwOA/BY="
++  "version": "4.7.0",
++  "srcHash": "sha256-27PBuLyk/1ER26pus5tbe9CxeYEZgZrYBYy5l3B/19c=",
++  "yarnHash": "05mh3q5zw1aiznvbkhp7spb1bgcv32ncdb4zpyvhhv74pyhjnsn2",
++  "cargoHash": "sha256-cAjsNVQfXfZbM1/MoiEh/Qp0uW/iXsxBVx7cRZY3tN0="
  }
