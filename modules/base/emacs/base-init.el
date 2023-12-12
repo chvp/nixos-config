@@ -198,8 +198,15 @@
 
 ;; Linting
 (use-package flycheck
+  :custom (flycheck-checker-error-threshold 10000 "Set error threshold a lot higher")
   :hook ((text-mode prog-mode) . flycheck-mode)
   :diminish (flycheck-mode)
+  )
+
+(use-package flycheck-languagetool
+  :hook (text-mode . flycheck-languagetool-setup)
+  :custom
+  (flycheck-languagetool-url "http://localhost:8081")
   )
 
 ;; Annotations in selection interface

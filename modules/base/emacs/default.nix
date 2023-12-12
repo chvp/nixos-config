@@ -28,6 +28,11 @@
       { path = ".cache/emacs"; type = "cache"; }
     ];
 
+    services.languagetool = {
+      enable = true;
+      settings.cacheSize = 10000;
+    };
+
     home-manager.users.charlotte = { ... }: {
       services.emacs = {
         enable = true;
