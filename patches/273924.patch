@@ -1,0 +1,25 @@
+diff --git a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+index 1fc99bb203369a..bbfc36ad42688a 100644
+--- a/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
++++ b/pkgs/servers/matrix-synapse/matrix-appservice-slack/default.nix
+@@ -11,6 +11,8 @@ let
+   data = lib.importJSON ./pin.json;
+ in
+ mkYarnPackage rec {
++  inherit nodejs;
++
+   pname = "matrix-appservice-slack";
+   version = data.version;
+ 
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 4f89a1d73db67b..2b7b478aba3d12 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -10098,6 +10098,7 @@ with pkgs;
+ 
+   matrix-appservice-slack = callPackage ../servers/matrix-synapse/matrix-appservice-slack {
+     matrix-sdk-crypto-nodejs = matrix-sdk-crypto-nodejs-0_1_0-beta_3;
++    nodejs = nodejs_18;
+   };
+ 
+   matrix-appservice-discord = callPackage ../servers/matrix-appservice-discord {
