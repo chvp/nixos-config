@@ -43,6 +43,7 @@
     games.enable = true;
     graphical.enable = true;
     programs = {
+      calibre.enable = true;
       eid.enable = true;
       element.enable = true;
       hledger.enable = true;
