@@ -259,7 +259,7 @@ in
           };
           postbot = makeAccount {
             name = "postbot";
-            address = "postbot@vanpetegem.me";
+            address = "postbot@vanpetegem.be";
             host = "mail.vanpetegem.me";
             secretToolId = "postbot";
             extraConfig = {

@@ -44,8 +44,8 @@ in
           sendOnly = true;
         };
         "peter@vanpetegem.me".hashedPasswordFile = config.age.secrets."passwords/services/mail/peter@vanpetegem.me".path;
-        "postbot@vanpetegem.me" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.me".path;
+        "postbot@vanpetegem.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.be".path;
           aliases = [ "@vanpetegem.me" "@vanpetegem.be" ];
         };
         "robbe@vanpetegem.me" = {
@@ -100,7 +100,7 @@ in
       "passwords/services/mail/huis@vanpetegem.me".file = ../../../secrets/passwords/services/mail/huis_at_vanpetegem.me.age;
       "passwords/services/mail/noreply@vanpetegem.me".file = ../../../secrets/passwords/services/mail/noreply_at_vanpetegem.me.age;
       "passwords/services/mail/peter@vanpetegem.me".file = ../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
-      "passwords/services/mail/postbot@vanpetegem.me".file = ../../../secrets/passwords/services/mail/postbot_at_vanpetegem.me.age;
+      "passwords/services/mail/postbot@vanpetegem.be".file = ../../../secrets/passwords/services/mail/postbot_at_vanpetegem.be.age;
       "passwords/services/mail/robbe@robbevanpetegem.be".file = ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
       "passwords/services/mail/robbe@vanpetegem.me".file = ../../../secrets/passwords/services/mail/robbe_at_vanpetegem.me.age;
       "passwords/services/mail/webmaster@vanpetegem.be".file = ../../../secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age;
