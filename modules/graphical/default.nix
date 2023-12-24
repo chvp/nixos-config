@@ -30,7 +30,7 @@
         firefox.enable = lib.mkDefault true;
         gnupg = {
           enable = lib.mkDefault true;
-          pinentryFlavor = "gtk2";
+          pinentryFlavor = "qt";
         };
         mail.enable = lib.mkDefault true;
         nextcloud-client.enable = lib.mkDefault true;
