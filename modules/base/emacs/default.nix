@@ -30,6 +30,7 @@
 
     services.languagetool = {
       enable = true;
+      port = 15151;
       settings.cacheSize = 10000;
     };
 

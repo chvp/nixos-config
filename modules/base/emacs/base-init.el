@@ -206,7 +206,7 @@
 (use-package flycheck-languagetool
   :hook (text-mode . flycheck-languagetool-setup)
   :custom
-  (flycheck-languagetool-url "http://localhost:8081")
+  (flycheck-languagetool-url "http://localhost:15151")
   )
 
 ;; Annotations in selection interface
