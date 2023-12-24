@@ -230,7 +230,7 @@ in
         accounts = {
           personal = makeAccount {
             name = "personal";
-            address = "charlotte@vanpetegem.me";
+            address = "charlotte@vanpetegem.be";
             host = "mail.vanpetegem.me";
             secretToolId = "personal-mail";
             extraConfig = {
