@@ -40,7 +40,7 @@
       host = "git.chvp.be";
       port = 443;
       https = true;
-      initialRootEmail = "charlotte@vanpetegem.me";
+      initialRootEmail = "charlotte@vanpetegem.be";
       initialRootPasswordFile = config.age.secrets."passwords/services/git/initial-root-password".path;
       # Hack, https://github.com/NixOS/nixpkgs/pull/135926 broke stuff
       pages.settings.pages-domain = "not.actually.enabled";

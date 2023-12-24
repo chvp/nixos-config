@@ -8,8 +8,8 @@
     };
     email = lib.mkOption {
       type = lib.types.str;
-      default = "charlotte@vanpetegem.me";
-      example = "charlotte@vanpetegem.me";
+      default = "charlotte@vanpetegem.be";
+      example = "charlotte@vanpetegem.be";
       description = ''
         Default email set in global git config.
       '';
