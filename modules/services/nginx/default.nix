@@ -41,6 +41,8 @@
           "*.cvpetegem.be"
           "chvp.be"
           "*.chvp.be"
+          "vanpetegem.be"
+          "*.vanpetegem.be"
         ];
       };
       defaults.email = "webmaster@vanpetegem.me";
