@@ -50,8 +50,7 @@ in
   "secrets/passwords/services/mail/postbot_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/robbe_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/ugent_at_cvpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/webmaster_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/ssmtp-pass.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;

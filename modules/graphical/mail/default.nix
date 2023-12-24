@@ -280,7 +280,7 @@ in
           };
           webmaster = makeAccount {
             name = "webmaster";
-            address = "webmaster@vanpetegem.me";
+            address = "webmaster@vanpetegem.be";
             host = "mail.vanpetegem.me";
             secretToolId = "webmaster";
             extraConfig = {
