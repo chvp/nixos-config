@@ -79,21 +79,15 @@
         ensureUsers = [
           {
             name = "matrix_appservice_slack";
-            ensurePermissions = {
-              "DATABASE matrix_appservice_slack" = "ALL PRIVILEGES";
-            };
+            ensureDBOwnership = true;
           }
           {
             name = "mautrix_whatsapp";
-            ensurePermissions = {
-              "DATABASE mautrix_whatsapp" = "ALL PRIVILEGES";
-            };
+            ensureDBOwnership = true;
           }
           {
             name = "matrix-synapse";
-            ensurePermissions = {
-              "DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
-            };
+            ensureDBOwnership = true;
           }
         ];
       };
