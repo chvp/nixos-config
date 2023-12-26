@@ -48,9 +48,9 @@ in
           hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.be".path;
           aliases = [ "@vanpetegem.me" "@vanpetegem.be" ];
         };
-        "robbe@vanpetegem.me" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@vanpetegem.me".path;
-          aliases = [ "robbe.nb@vanpetegem.me" ];
+        "robbe@vanpetegem.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@vanpetegem.be".path;
+          aliases = [ "robbe.nb@vanpetegem.me" "robbe@vanpetegem.me" ];
         };
         "robbe@robbevanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@robbevanpetegem.be".path;
@@ -72,7 +72,7 @@ in
       };
       lmtpSaveToDetailMailbox = "no";
       extraVirtualAliases = {
-        "team@accentor.tech" = [ "charlotte@vanpetegem.be" "robbe@vanpetegem.me" ];
+        "team@accentor.tech" = [ "charlotte@vanpetegem.be" "robbe@vanpetegem.be" ];
       };
       forwards = {
         "info@toekomstlabo.be" = "robbe+toekomstlabo@robbevanpetegem.be";
@@ -102,7 +102,7 @@ in
       "passwords/services/mail/peter@vanpetegem.me".file = ../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
       "passwords/services/mail/postbot@vanpetegem.be".file = ../../../secrets/passwords/services/mail/postbot_at_vanpetegem.be.age;
       "passwords/services/mail/robbe@robbevanpetegem.be".file = ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
-      "passwords/services/mail/robbe@vanpetegem.me".file = ../../../secrets/passwords/services/mail/robbe_at_vanpetegem.me.age;
+      "passwords/services/mail/robbe@vanpetegem.be".file = ../../../secrets/passwords/services/mail/robbe_at_vanpetegem.be.age;
       "passwords/services/mail/webmaster@vanpetegem.be".file = ../../../secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age;
     };
   };
