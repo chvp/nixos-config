@@ -71,6 +71,26 @@ in
         memoryLimit = 4000;
       };
       lmtpSaveToDetailMailbox = "no";
+      mailboxes = {
+        Trash = {
+          auto = "no";
+          specialUse = "Trash";
+          autoexpunge = "60d";
+        };
+        Junk = {
+          auto = "subscribe";
+          specialUse = "Junk";
+          autoexpunge = "60d";
+        };
+        Drafts = {
+          auto = "subscribe";
+          specialUse = "Drafts";
+        };
+        Sent = {
+          auto = "subscribe";
+          specialUse = "Sent";
+        };
+      };
       extraVirtualAliases = {
         "team@accentor.tech" = [ "charlotte@vanpetegem.be" "robbe@vanpetegem.be" ];
       };
