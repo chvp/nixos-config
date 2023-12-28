@@ -82,6 +82,11 @@
       matrix.enable = true;
       nginx.hosts = [
         {
+          fqdn = "vanpetegem.be";
+          options.locations."/".return = "307 https://www.vanpetegem.be$request_uri";
+        }
+        { fqdn = "www.vanpetegem.be"; }
+        {
           fqdn = "vanpetegem.me";
           options = {
             locations = {
