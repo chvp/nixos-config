@@ -1,12 +1,12 @@
 diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
-index 0ff87211985ff3..9017656fc66275 100644
+index 0ff87211985ff3..984791ddf9a39a 100644
 --- a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
 +++ b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
 @@ -1,6 +1,6 @@
  {
    "name": "matrix-hookshot",
 -  "version": "4.7.0",
-+  "version": "5.1.0",
++  "version": "5.1.1",
    "description": "A bridge between Matrix and multiple project management services, such as GitHub, GitLab and JIRA.",
    "main": "lib/app.js",
    "repository": "https://github.com/matrix-org/matrix-hookshot",
@@ -136,7 +136,7 @@ index 0ff87211985ff3..9017656fc66275 100644
    }
  }
 diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
-index 64b40c341cc9d2..e4173b080a028b 100644
+index 64b40c341cc9d2..f24026246d9826 100644
 --- a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
 +++ b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
 @@ -1,6 +1,6 @@
@@ -145,8 +145,8 @@ index 64b40c341cc9d2..e4173b080a028b 100644
 -  "srcHash": "sha256-27PBuLyk/1ER26pus5tbe9CxeYEZgZrYBYy5l3B/19c=",
 -  "yarnHash": "05mh3q5zw1aiznvbkhp7spb1bgcv32ncdb4zpyvhhv74pyhjnsn2",
 -  "cargoHash": "sha256-cAjsNVQfXfZbM1/MoiEh/Qp0uW/iXsxBVx7cRZY3tN0="
-+  "version": "5.1.0",
-+  "srcHash": "sha256-cFbcrToPGUh4B4+5ackH/kNTCAbF8V2JZQ13vGqESRE=",
++  "version": "5.1.1",
++  "srcHash": "sha256-5iln+FURXwRTd4UPSk9shiBo1zV0zXrwEDNOAPsaCoI=",
 +  "yarnHash": "0ywfg0l33iyfbg4za37hm60z28qddbxmjxdgdbks0yqhhf8mgd4b",
-+  "cargoHash": "sha256-7MfyfuVop5uMoKWKIXnhsfIdOl4RJ3Z+i52kH9Bo5vc="
++  "cargoHash": "sha256-CgXcZAXey36UQGY6f1/Gb45IQ7DhYGDXuAuGtqJ/FlE="
  }
