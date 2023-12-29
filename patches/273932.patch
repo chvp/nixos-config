@@ -1,8 +1,16 @@
 diff --git a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
-index ed8ed30327816a..9cb695cc4ad255 100644
+index ed8ed30327816a..a859efd3fae70f 100644
 --- a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
 +++ b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
-@@ -19,18 +19,18 @@
+@@ -1,6 +1,7 @@
+ { lib
+ , stdenv
+ , fetchFromGitHub
++, fetchpatch
+ , makeWrapper
+ , makeDesktopItem
+ , copyDesktopItems
+@@ -19,20 +20,30 @@
  
  stdenv.mkDerivation (finalAttrs: {
    pname = "teams-for-linux";
@@ -23,7 +31,19 @@ index ed8ed30327816a..9cb695cc4ad255 100644
 +    hash = "sha256-ef+JW5ud9LlRxaCJC2iOT5N7FgZO7IkAABJcMQPvIBA=";
    };
  
++  patches = [
++    # remove when IsmaelMartinez/teams-for-linux#1058 is merged
++    (fetchpatch {
++      name = "teams-for-linux-fix-version.patch";
++      url = "https://github.com/IsmaelMartinez/teams-for-linux/commit/1d14947eef35c6a2e0cbdfcce405820f8dd36c68.diff";
++      hash = "sha256-kj2jEAqgZ0frUw85hY23mFYFcXz95z/WQSDymsheDfg=";
++    })
++  ];
++
++
    nativeBuildInputs = [ yarn prefetch-yarn-deps nodejs copyDesktopItems makeWrapper ];
+ 
+   configurePhase = ''
 diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
 index 6dc814930760ff..1e0345a0ac263a 100644
 --- a/pkgs/top-level/all-packages.nix
