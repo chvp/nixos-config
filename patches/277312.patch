@@ -1,12 +1,12 @@
 diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
-index 0ff87211985ff3..984791ddf9a39a 100644
+index 0ff87211985ff3..8d3204fa2b4f8c 100644
 --- a/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
 +++ b/pkgs/servers/matrix-synapse/matrix-hookshot/package.json
 @@ -1,6 +1,6 @@
  {
    "name": "matrix-hookshot",
 -  "version": "4.7.0",
-+  "version": "5.1.1",
++  "version": "5.1.2",
    "description": "A bridge between Matrix and multiple project management services, such as GitHub, GitLab and JIRA.",
    "main": "lib/app.js",
    "repository": "https://github.com/matrix-org/matrix-hookshot",
@@ -27,7 +27,7 @@ index 0ff87211985ff3..984791ddf9a39a 100644
      "test:cover": "nyc --reporter=lcov --reporter=text yarn test",
      "lint": "yarn run lint:js && yarn run lint:rs",
      "lint:js": "eslint -c .eslintrc.js 'src/**/*.ts' 'tests/**/*.ts' 'web/**/*.ts' 'web/**/*.tsx'",
-@@ -42,55 +43,58 @@
+@@ -42,71 +43,77 @@
    },
    "dependencies": {
      "@alloc/quick-lru": "^5.2.0",
@@ -43,7 +43,8 @@ index 0ff87211985ff3..984791ddf9a39a 100644
 +    "@vector-im/compound-design-tokens": "^0.1.0",
 +    "@vector-im/compound-web": "^0.9.4",
      "ajv": "^8.11.0",
-     "axios": "^1.6.2",
+-    "axios": "^1.6.2",
++    "axios": "^1.6.3",
      "cors": "^2.8.5",
 -    "express": "^4.17.3",
 +    "express": "^4.18.2",
@@ -72,7 +73,7 @@ index 0ff87211985ff3..984791ddf9a39a 100644
 -    "reflect-metadata": "^0.1.13",
 +    "preact-render-to-string": "^6.3.1",
 +    "prom-client": "^15.1.0",
-+    "quickjs-emscripten": "^0.24.0",
++    "quickjs-emscripten": "^0.26.0",
 +    "reflect-metadata": "^0.2.1",
      "source-map-support": "^0.5.21",
      "string-argv": "^0.3.1",
@@ -80,7 +81,7 @@ index 0ff87211985ff3..984791ddf9a39a 100644
 -    "winston": "^3.3.3",
 -    "xml2js": "^0.5.0",
 -    "yaml": "^2.2.2"
-+    "vite-plugin-magical-svg": "^1.0.3",
++    "vite-plugin-magical-svg": "^1.1.1",
 +    "winston": "^3.11.0",
 +    "xml2js": "^0.6.2",
 +    "yaml": "^2.3.4"
@@ -108,11 +109,14 @@ index 0ff87211985ff3..984791ddf9a39a 100644
 -    "@types/uuid": "^8.3.3",
 +    "@types/mime": "^3.0.4",
 +    "@types/mocha": "^10.0.6",
-+    "@types/node": "20.10.5",
++    "@types/node": "20.10.6",
      "@types/xml2js": "^0.4.11",
-     "@typescript-eslint/eslint-plugin": "^6.6.0",
-     "@typescript-eslint/parser": "^6.6.0",
-@@ -99,14 +103,17 @@
+-    "@typescript-eslint/eslint-plugin": "^6.6.0",
+-    "@typescript-eslint/parser": "^6.6.0",
++    "@typescript-eslint/eslint-plugin": "^6.17.0",
++    "@typescript-eslint/parser": "^6.17.0",
+     "@uiw/react-codemirror": "^4.12.3",
+     "chai": "^4.3.4",
      "eslint": "^8.49.0",
      "eslint-config-preact": "^1.3.0",
      "eslint-plugin-mocha": "^10.1.0",
@@ -124,8 +128,9 @@ index 0ff87211985ff3..984791ddf9a39a 100644
 +    "nyc": "^15.1.0",
      "preact": "^10.5.15",
 -    "rimraf": "^3.0.2",
+-    "sass": "^1.51.0",
 +    "rimraf": "^5.0.5",
-     "sass": "^1.51.0",
++    "sass": "^1.69.6",
 +    "ts-jest": "^29.1.1",
      "ts-node": "^10.9.1",
 -    "typescript": "^5.1.3",
@@ -136,7 +141,7 @@ index 0ff87211985ff3..984791ddf9a39a 100644
    }
  }
 diff --git a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
-index 64b40c341cc9d2..f24026246d9826 100644
+index 64b40c341cc9d2..51dab75959ade7 100644
 --- a/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
 +++ b/pkgs/servers/matrix-synapse/matrix-hookshot/pin.json
 @@ -1,6 +1,6 @@
@@ -145,8 +150,8 @@ index 64b40c341cc9d2..f24026246d9826 100644
 -  "srcHash": "sha256-27PBuLyk/1ER26pus5tbe9CxeYEZgZrYBYy5l3B/19c=",
 -  "yarnHash": "05mh3q5zw1aiznvbkhp7spb1bgcv32ncdb4zpyvhhv74pyhjnsn2",
 -  "cargoHash": "sha256-cAjsNVQfXfZbM1/MoiEh/Qp0uW/iXsxBVx7cRZY3tN0="
-+  "version": "5.1.1",
-+  "srcHash": "sha256-5iln+FURXwRTd4UPSk9shiBo1zV0zXrwEDNOAPsaCoI=",
-+  "yarnHash": "0ywfg0l33iyfbg4za37hm60z28qddbxmjxdgdbks0yqhhf8mgd4b",
-+  "cargoHash": "sha256-CgXcZAXey36UQGY6f1/Gb45IQ7DhYGDXuAuGtqJ/FlE="
++  "version": "5.1.2",
++  "srcHash": "sha256-dBuk/kpU5/GnwoTDh8FdnetK2hEBBTwrUA3fP/L9mWU=",
++  "yarnHash": "100lfm0pr0l33j1bl9zmw1s7fm4ihrwppyvq6x8ahx1sjrr1m0lp",
++  "cargoHash": "sha256-4cFhV5y7tqUZ4pQWQKIbOZ0qXo0ya5gnMizCNcxYZS0="
  }
