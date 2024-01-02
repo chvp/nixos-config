@@ -58,6 +58,7 @@
             '';
           };
           "GUK-huis".psk = "@PSK_GUKhuis@";
+          "DasNetwerk".psk = "@PSK_DasNetwerk@";
         };
       };
     };
