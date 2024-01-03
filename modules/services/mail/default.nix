@@ -97,6 +97,14 @@ in
       forwards = {
         "info@toekomstlabo.be" = "robbe+toekomstlabo@robbevanpetegem.be";
       };
+      rejectRecipients = [
+        "cindy@vanpetegem.be"
+        "contact@vanpetegem.be"
+        "info@vanpetegem.be"
+        "isabelle@vanpetegem.be"
+        "rudy@vanpetegem.be"
+        "sarina@vanpetegem.be"
+      ];
       mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
       sieveExtensions = [ "+editheader" ];
       useFsLayout = false;
