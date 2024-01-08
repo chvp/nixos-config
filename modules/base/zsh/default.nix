@@ -91,11 +91,14 @@ let
           darkmode
         }
 
-        if [ "$(darkman get)" = "dark" ]
+        if type darkman >/dev/null
         then
-          darkmode
-        else
-          lightmode
+          if [ "$(darkman get)" = "dark" ]
+          then
+            darkmode
+          else
+            lightmode
+          fi
         fi
       '';
       sessionVariables = { DEFAULT_USER = "charlotte"; };
