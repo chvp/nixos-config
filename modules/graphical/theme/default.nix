@@ -146,7 +146,7 @@
         };
       };
       home.activation = {
-        linkWaybarCssColors = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        linkWaybarCssColors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           $DRY_RUN_CMD ln -sf $VERBOSE_ARG ~/.config/waybar/latte.css ~/.config/waybar/colors.css
         '';
       };
