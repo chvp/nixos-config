@@ -28,10 +28,10 @@ let
   };
   zotero-connector = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
     pname = "zotero-connector";
-    version = "5.0.107";
+    version = "5.0.114";
     addonId = "zotero@chnm.gmu.edu";
     url = "https://download.zotero.org/connector/firefox/release/Zotero_Connector-${version}.xpi";
-    sha256 = "RuAhWGvUhkog8SxzKhRwQQwzTQLzBKlHjSsFj9e25e4=";
+    sha256 = "sha256-HGbY/MvccJbPxbS18lDEJJ++SDlcG5RNL9JtUkNKLb0=";
     meta = with lib; {
       homepage = "https://www.zotero.org";
       description = "Save references to Zotero from your web browser";
