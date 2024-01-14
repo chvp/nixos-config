@@ -74,7 +74,7 @@
       tetris.server = true;
     };
     services = {
-      garmin-scraper.enable = true;
+      garmin-scraper.enable = false;
       git.enable = true;
       grafana.enable = true;
       mail.enable = true;
