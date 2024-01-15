@@ -102,6 +102,7 @@ in
         "contact@vanpetegem.be"
         "info@vanpetegem.be"
         "isabelle@vanpetegem.be"
+        "marierose@vanpetegem.be"
         "rudy@vanpetegem.be"
         "sarina@vanpetegem.be"
       ];
