@@ -53,8 +53,8 @@ let
     '';
   };
   river-init = pkgs.writeShellScript "river-init" ''
-    riverctl map normal Super Return spawn footclient
-    riverctl map normal Super D spawn 'footclient --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
+    riverctl map normal Super Return spawn foot
+    riverctl map normal Super D spawn 'foot --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
 
     riverctl map normal Super C spawn ${lock}
 

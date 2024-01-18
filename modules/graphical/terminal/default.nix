@@ -11,7 +11,6 @@
       home.packages = [ pkgs.foot ];
       programs.foot = {
         enable = true;
-        server.enable = true;
         settings = {
           main = {
             font = "Hack:size=9";
