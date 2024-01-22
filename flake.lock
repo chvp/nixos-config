@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705790712,
-        "narHash": "sha256-0YsziaOGLeAfVyml7wV4VJkOJ25m6j6jlmw3g3z0KA4=",
+        "lastModified": 1705920413,
+        "narHash": "sha256-ire2AA7TWmkjgtTYeD7C+HaFBjNHOe0rtSWLn5CJxHQ=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "cb126ddfef3f6cc689825ede13856e05a0e4d164",
+        "rev": "a2d831ec54d46bbe395c233398a932c83f37b81d",
         "type": "github"
       },
       "original": {
@@ -72,11 +72,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1705790502,
-        "narHash": "sha256-NaPkul7HxIgWSbM0VbZ4Mds3x/d+aQFeW/fmx+x0CgU=",
+        "lastModified": 1705920270,
+        "narHash": "sha256-oMjQwtlH67ewwWXYkKITTDdzFA7q0uph+3BtiVEqwpk=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "f63bf23c7019f8d0ab7da5c7fb5a271d1065f697",
+        "rev": "a1be7a4ed73812679dd14d50aa82863ba6e53075",
         "type": "github"
       },
       "original": {
@@ -476,11 +476,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1705677747,
-        "narHash": "sha256-eyM3okYtMgYDgmYukoUzrmuoY4xl4FUujnsv/P6I/zI=",
+        "lastModified": 1705856552,
+        "narHash": "sha256-JXfnuEf5Yd6bhMs/uvM67/joxYKoysyE3M2k6T3eWbg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "bbe7d8f876fbbe7c959c90ba2ae2852220573261",
+        "rev": "612f97239e2cc474c13c9dafa0df378058c5ad8d",
         "type": "github"
       },
       "original": {
@@ -554,11 +554,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1705912985,
-        "narHash": "sha256-aXJDCQfWyJRmCgOVQP63xxKbpTlTuBUVqhdBqVRkGOQ=",
+        "lastModified": 1705916665,
+        "narHash": "sha256-yiZ8oRi6bDMmAw2lQTtKL/dIedBuiTwyC0pjqKaWqLA=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "49dc0fef1a407cfb96daad2c0609a009496cc2df",
+        "rev": "6e3012237f99313423d356e18ac6dfda289d8cfb",
         "type": "github"
       },
       "original": {
@@ -771,11 +771,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705790113,
-        "narHash": "sha256-B5Ays/h5nf5GgyLI1bSpZ81kfdNj7N5+tAzSYhkB1xM=",
+        "lastModified": 1705916135,
+        "narHash": "sha256-CCJlEmSwdMkUJwMBq2w2iifm0k80HAzBX7BJML2TnMs=",
         "owner": "chvp",
         "repo": "tetris",
-        "rev": "7aa664a96cfd2c41a0fb468cdba2dae591a46b74",
+        "rev": "f85a649d46ce22bd55d01a7f2c414eefcb63eb99",
         "type": "github"
       },
       "original": {
