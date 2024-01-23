@@ -218,7 +218,7 @@ in
               spacing = 2;
               modules-left = [ "river/tags" ];
               modules-center = [ "river/window" ];
-              modules-right = [ "idle_inhibitor" "network" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
+              modules-right = [ "idle_inhibitor" "network#wlp0s20f3" "network#enp0s13f0u2u2" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
               backlight = {
                 format = "{percent}% {icon}";
                 format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
@@ -260,8 +260,17 @@ in
                   stopped = "";
                 };
               };
-              "network" = {
+              "network#wlp0s20f3" = {
                 interface = "wlp0s20f3";
+                format-wifi = "{essid} ";
+                format-ethernet = "{ipaddr}/{cidr} ";
+                tooltip-format = "{ifname} via {gwaddr} ";
+                format-linked = "{ifname} (No IP) ";
+                format-disconnected = "";
+                format-alt = "{ifname}: {ipaddr}/{cidr}";
+              };
+              "network#enp0s13f0u2u2" = {
+                interface = "enp0s13f0u2u2";
                 format-wifi = "{essid} ";
                 format-ethernet = "{ipaddr}/{cidr} ";
                 tooltip-format = "{ifname} via {gwaddr} ";
