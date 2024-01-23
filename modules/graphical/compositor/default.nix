@@ -260,12 +260,13 @@ in
                   stopped = "";
                 };
               };
-              network = {
+              "network" = {
+                interface = "wlp0s20f3";
                 format-wifi = "{essid} ";
                 format-ethernet = "{ipaddr}/{cidr} ";
                 tooltip-format = "{ifname} via {gwaddr} ";
                 format-linked = "{ifname} (No IP) ";
-                format-disconnected = "Disconnected ⚠";
+                format-disconnected = "";
                 format-alt = "{ifname}: {ipaddr}/{cidr}";
               };
               pulseaudio = {
