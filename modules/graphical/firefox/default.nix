@@ -22,10 +22,7 @@ let
       cp ff2mpv.json $out/lib/mozilla/native-messaging-hosts
     '';
   };
-  ffPackage = pkgs.firefox.override {
-    nativeMessagingHosts = [ ff2mpv-host ];
-    pkcs11Modules = [ pkgs.eid-mw ];
-  };
+  ffPackage = pkgs.firefox.override { pkcs11Modules = [ pkgs.eid-mw ]; };
   zotero-connector = pkgs.nur.repos.rycee.firefox-addons.buildFirefoxXpiAddon rec {
     pname = "zotero-connector";
     version = "5.0.114";
@@ -59,6 +56,10 @@ in
       programs.firefox = {
         enable = true;
         package = ffPackage;
+        nativeMessagingHosts = [
+          pkgs.keepassxc
+          ff2mpv-host
+        ];
         policies = {
           DisableFirefoxStudies = true;
           DisablePocket = true;
