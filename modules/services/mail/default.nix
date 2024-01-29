@@ -114,27 +114,25 @@ in
       dkimKeyDirectory = "${config.chvp.dataPrefix}/var/dkim";
     };
 
-    services.dovecot2 = {
-      sieve = {
-        extensions = [ "+editheader" ];
-        scripts.after2 = pkgs.writeText "custom-spam.sieve" ''
-          require ["fileinto", "regex"];
+    services.dovecot2.sieve = {
+      extensions = [ "+editheader" ];
+      scripts.after2 = pkgs.writeText "custom-spam.sieve" ''
+        require ["fileinto", "regex"];
 
-          if anyof(address :is "From" ["junjunggaming07@gmail.com",
-                               "censysnetbackup@gmail.com",
-                               "vitor.carvalheiro@escola.pr.gov.br",
-                               "spam@vuztc.ru",
-                               # itsme spam
-                               "noreply.mailing.itsme@online.be",
-                               "mailing.itsme@online.be"],
-           # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
-           address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
-           header :contains "From" ["jakubbielec", "Jakub Bielec"]) {
-              fileinto "Junk";
-              stop;
-          }
-        '';
-      };
+        if anyof(address :is "From" ["junjunggaming07@gmail.com",
+                             "censysnetbackup@gmail.com",
+                             "vitor.carvalheiro@escola.pr.gov.br",
+                             "spam@vuztc.ru",
+                             # itsme spam
+                             "noreply.mailing.itsme@online.be",
+                             "mailing.itsme@online.be"],
+         # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
+         address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
+         header :contains "From" ["jakubbielec", "Jakub Bielec"]) {
+            fileinto "Junk";
+            stop;
+        }
+      '';
     };
 
     services.rspamd.extraConfig = ''
