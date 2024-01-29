@@ -23,13 +23,11 @@
           adminuser = "admin";
           adminpassFile = config.age.secrets."passwords/services/nextcloud-admin".path;
         };
-        extraOptions = {
-          redis = {
-            host = "127.0.0.1";
-            port = 31638;
-            dbindex = 0;
-            timeout = 1.5;
-          };
+        settings.redis = {
+          host = "127.0.0.1";
+          port = 31638;
+          dbindex = 0;
+          timeout = 1.5;
         };
       };
       nginx.virtualHosts."nextcloud.vanpetegem.me" = {
