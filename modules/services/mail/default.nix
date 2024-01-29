@@ -115,7 +115,7 @@ in
     };
 
     services.dovecot2.sieve = {
-      extensions = [ "+editheader" ];
+      extensions = [ "editheader" ];
       scripts.after2 = pkgs.writeText "custom-spam.sieve" ''
         require ["fileinto", "regex"];
 
