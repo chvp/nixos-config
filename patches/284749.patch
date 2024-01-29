@@ -1,0 +1,25 @@
+diff --git a/nixos/modules/services/mail/dovecot.nix b/nixos/modules/services/mail/dovecot.nix
+index 8d298de6945bbc..3d3489164ac2f0 100644
+--- a/nixos/modules/services/mail/dovecot.nix
++++ b/nixos/modules/services/mail/dovecot.nix
+@@ -1,8 +1,8 @@
+-{ options, config, lib, pkgs, ... }:
++{ config, lib, pkgs, ... }:
+ 
+ let
+-  inherit (lib) any attrValues concatMapStringsSep concatStrings
+-    concatStringsSep flatten imap1 isList literalExpression mapAttrsToList
++  inherit (lib) attrValues concatMapStringsSep concatStrings
++    concatStringsSep flatten imap1 literalExpression mapAttrsToList
+     mkEnableOption mkIf mkOption mkRemovedOptionModule optional optionalAttrs
+     optionalString singleton types mkRenamedOptionModule nameValuePair
+     mapAttrs' listToAttrs filter;
+@@ -14,7 +14,7 @@ let
+   baseDir = "/run/dovecot2";
+   stateDir = "/var/lib/dovecot";
+ 
+-  sieveScriptSettings = mapAttrs' (to: from: nameValuePair "sieve_${to}" "${stateDir}/sieve/${from}") cfg.sieve.scripts;
++  sieveScriptSettings = mapAttrs' (to: from: nameValuePair "sieve_${to}" "${stateDir}/sieve/${to}") cfg.sieve.scripts;
+   imapSieveMailboxSettings = listToAttrs (flatten (imap1 (idx: el:
+     singleton {
+       name = "imapsieve_mailbox${toString idx}_name";
