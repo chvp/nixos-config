@@ -58,10 +58,10 @@ in
             "127.0.0.0/8 allow"
             "10.240.0.0/24 allow"
           ];
-          private-domain = "private";
-          domain-insecure = "private";
-          local-zone = builtins.map (name: ''"${name}.private" redirect'') (builtins.attrNames data);
-          local-data = builtins.map (name: ''"${name}.private IN A ${data.${name}.ip}"'') (builtins.attrNames data);
+          private-domain = "internal";
+          domain-insecure = "internal";
+          local-zone = builtins.map (name: ''"${name}.internal" redirect'') (builtins.attrNames data);
+          local-data = builtins.map (name: ''"${name}.internal IN A ${data.${name}.ip}"'') (builtins.attrNames data);
         };
         forward-zone = {
           name = ''"."'';
@@ -120,7 +120,7 @@ in
           enable = true;
           name = "wg0";
           address = [ "${data.${config.networking.hostName}.ip}/32" ];
-          domains = [ "private" ];
+          domains = [ "internal" ];
           dns = [ data.lasting-integrity.ip ];
           linkConfig.MTUBytes = "1342";
           routes = [{
