@@ -1,5 +1,10 @@
 { config, lib, pkgs, ... }:
 
+let
+  teamsWrapper = pkgs.writeShellScriptBin "teams-for-linux" ''
+    ${pkgs.teams-for-linux}/bin/teams-for-linux --followSystemTheme
+  '';
+in
 {
   options.chvp.work.teams.enable = lib.mkOption {
     default = false;
@@ -14,9 +19,7 @@
     };
 
     home-manager.users.charlotte = { pkgs, ... }: {
-      home.packages = with pkgs; [
-        teams-for-linux
-      ];
+      home.packages = with pkgs; [ teamsWrapper ];
     };
   };
 }
