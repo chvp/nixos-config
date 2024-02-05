@@ -65,6 +65,48 @@
             gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors";
             gtk-cursor-theme-size = 24;
           };
+          extraCss = ''
+            /* No (default) titlebar on wayland */
+            headerbar.titlebar.default-decoration {
+              background: transparent;
+              padding: 0;
+              margin: 0 0 -17px 0;
+              border: 0;
+              min-height: 0;
+              font-size: 0;
+              box-shadow: none;
+            }
+
+            /* rm -rf window shadows */
+            window.csd,             /* gtk4? */
+            window.csd decoration { /* gtk3 */
+              box-shadow: none;
+            }
+          '';
+        };
+        gtk4 = {
+          extraConfig = {
+            gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors";
+            gtk-cursor-theme-size = 24;
+          };
+          extraCss = ''
+            /* No (default) titlebar on wayland */
+            headerbar.titlebar.default-decoration {
+              background: transparent;
+              padding: 0;
+              margin: 0 0 -17px 0;
+              border: 0;
+              min-height: 0;
+              font-size: 0;
+              box-shadow: none;
+            }
+
+            /* rm -rf window shadows */
+            window.csd,             /* gtk4? */
+            window.csd decoration { /* gtk3 */
+              box-shadow: none;
+            }
+          '';
         };
         iconTheme = {
           package = pkgs.libsForQt5.breeze-icons;
