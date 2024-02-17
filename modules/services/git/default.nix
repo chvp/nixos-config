@@ -12,7 +12,12 @@
     chvp.services.nginx.hosts = [{
       fqdn = "git.chvp.be";
       options = {
-        locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+        locations."/" = {
+          proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+          extraConfig = ''
+            client_max_body_size 50M;
+          '';
+        };
       };
     }];
     users = {
