@@ -1,0 +1,142 @@
+diff --git a/pkgs/by-name/cl/cld2/package.nix b/pkgs/by-name/cl/cld2/package.nix
+new file mode 100644
+index 00000000000000..f26a685ea3885d
+--- /dev/null
++++ b/pkgs/by-name/cl/cld2/package.nix
+@@ -0,0 +1,50 @@
++{ lib
++, stdenv
++, fetchFromGitHub
++, cmake
++, fetchpatch
++}:
++
++stdenv.mkDerivation (finalAttrs: {
++  pname = "cld2";
++  version = "unstable-2015-08-21";
++
++  src = fetchFromGitHub {
++    owner = "CLD2Owners";
++    repo = "cld2";
++    rev = "b56fa78a2fe44ac2851bae5bf4f4693a0644da7b";
++    hash = "sha256-YhXs45IbriKWKULguZM4DgfV/Fzr73VHxA1pFTXCyv8=";
++  };
++
++  patches = [
++    (fetchpatch {
++      name = "add-cmakelists.txt";
++      url = "https://github.com/CLD2Owners/cld2/pull/65/commits/9cfac02c2ac7802ab7079560b38a474473c45f51.patch";
++      hash = "sha256-uOjmUk8kMFl+wED44ErXoLRyblhgDwFx9K1Wj65Omh8=";
++    })
++  ];
++
++  nativeBuildInputs = [ cmake ];
++
++  meta = {
++    homepage = "https://github.com/CLD2Owners/cld2";
++    description = "Compact Language Detector 2";
++    longDescription = ''
++      CLD2 probabilistically detects over 80 languages in Unicode UTF-8 text,
++      either plain text or HTML/XML. Legacy encodings must be converted to valid
++      UTF-8 by the caller. For mixed-language input, CLD2 returns the top three
++      languages found and their approximate percentages of the total text bytes
++      (e.g. 80% English and 20% French out of 1000 bytes of text means about 800
++      bytes of English and 200 bytes of French). Optionally, it also returns a
++      vector of text spans with the language of each identified. This may be
++      useful for applying different spelling-correction dictionaries or
++      different machine translation requests to each span. The design target is
++      web pages of at least 200 characters (about two sentences); CLD2 is not
++      designed to do well on very short text, lists of proper names, part
++      numbers, etc.
++    '';
++    license = lib.licenses.asl20;
++    maintainers = with lib.maintainers; [ chvp ];
++    platforms = lib.platforms.all;
++  };
++})
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index 6f3f556e259287..f1094fcd8d3664 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -1,21 +1,23 @@
+ { lib
+ , stdenv
+ , fetchFromGitHub
++, glibcLocales
+ , meson
+ , ninja
+ , pkg-config
++, python3
++, cld2
+ , coreutils
+ , emacs
+ , glib
+ , gmime3
+ , texinfo
+ , xapian
+-, fetchpatch
+ }:
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.10.8";
++  version = "1.12.0";
+ 
+   outputs = [ "out" "mu4e" ];
+ 
+@@ -23,23 +25,17 @@ stdenv.mkDerivation rec {
+     owner = "djcb";
+     repo = "mu";
+     rev = "v${version}";
+-    hash = "sha256-cDfW0yXA+0fZY5lv4XCHWu+5B0svpMeVMf8ttX/z4Og=";
++    hash = "sha256-z0sHDZlhsSeIf+ZRCni3j/DbfYrmn6bvYmKpt4PA2i8=";
+   };
+ 
+-  patches = [
+-    (fetchpatch {
+-      name = "add-mu4e-pkg.el";
+-      url = "https://github.com/djcb/mu/commit/00f7053d51105eea0c72151f1a8cf0b6d8478e4e.patch";
+-      hash = "sha256-21c7djmYTcqyyygqByo9vu/GsH8WMYcq8NOAvJsS5AQ=";
+-    })
+-  ];
+-
+   postPatch = ''
+-    # Fix mu4e-builddir (set it to $out)
+-    substituteInPlace mu4e/mu4e-config.el.in \
+-      --replace "@abs_top_builddir@" "$out"
+-    substituteInPlace lib/utils/mu-test-utils.cc \
+-      --replace "/bin/rm" "${coreutils}/bin/rm"
++    substituteInPlace lib/utils/mu-utils-file.cc \
++      --replace-fail "/bin/rm" "${coreutils}/bin/rm"
++    substituteInPlace lib/tests/bench-indexer.cc \
++      --replace-fail "/bin/rm" "${coreutils}/bin/rm"
++    substituteInPlace lib/mu-maildir.cc \
++      --replace-fail "/bin/mv" "${coreutils}/bin/mv"
++    patchShebangs build-aux/date.py
+   '';
+ 
+   postInstall = ''
+@@ -61,7 +57,7 @@ stdenv.mkDerivation rec {
+     fi
+   '';
+ 
+-  buildInputs = [ emacs glib gmime3 texinfo xapian ];
++  buildInputs = [ cld2 emacs glib gmime3 texinfo xapian ];
+ 
+   mesonFlags = [
+     "-Dguile=disabled"
+@@ -69,10 +65,13 @@ stdenv.mkDerivation rec {
+     "-Dlispdir=${placeholder "mu4e"}/share/emacs/site-lisp"
+   ];
+ 
+-  nativeBuildInputs = [ pkg-config meson ninja ];
++  nativeBuildInputs = [ pkg-config meson ninja python3 glibcLocales ];
+ 
+   doCheck = true;
+ 
++  # Tests need a UTF-8 aware locale configured
++  LANG = "C.UTF-8";
++
+   meta = with lib; {
+     description = "A collection of utilities for indexing and searching Maildirs";
+     license = licenses.gpl3Plus;
