@@ -1,6 +1,6 @@
 diff --git a/pkgs/by-name/cl/cld2/package.nix b/pkgs/by-name/cl/cld2/package.nix
 new file mode 100644
-index 00000000000000..f26a685ea3885d
+index 00000000000000..bf28b160f2bab7
 --- /dev/null
 +++ b/pkgs/by-name/cl/cld2/package.nix
 @@ -0,0 +1,50 @@
@@ -11,7 +11,7 @@ index 00000000000000..f26a685ea3885d
 +, fetchpatch
 +}:
 +
-+stdenv.mkDerivation (finalAttrs: {
++stdenv.mkDerivation {
 +  pname = "cld2";
 +  version = "unstable-2015-08-21";
 +
@@ -32,7 +32,7 @@ index 00000000000000..f26a685ea3885d
 +
 +  nativeBuildInputs = [ cmake ];
 +
-+  meta = {
++  meta = with lib; {
 +    homepage = "https://github.com/CLD2Owners/cld2";
 +    description = "Compact Language Detector 2";
 +    longDescription = ''
@@ -49,13 +49,13 @@ index 00000000000000..f26a685ea3885d
 +      designed to do well on very short text, lists of proper names, part
 +      numbers, etc.
 +    '';
-+    license = lib.licenses.asl20;
-+    maintainers = with lib.maintainers; [ chvp ];
-+    platforms = lib.platforms.all;
++    license = licenses.asl20;
++    maintainers = with maintainers; [ chvp ];
++    platforms = platforms.all;
 +  };
-+})
++}
 diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
-index 6f3f556e259287..f1094fcd8d3664 100644
+index 6f3f556e259287..46519c730446b9 100644
 --- a/pkgs/tools/networking/mu/default.nix
 +++ b/pkgs/tools/networking/mu/default.nix
 @@ -1,21 +1,23 @@
@@ -135,7 +135,7 @@ index 6f3f556e259287..f1094fcd8d3664 100644
    doCheck = true;
  
 +  # Tests need a UTF-8 aware locale configured
-+  LANG = "C.UTF-8";
++  env.LANG = "C.UTF-8";
 +
    meta = with lib; {
      description = "A collection of utilities for indexing and searching Maildirs";
