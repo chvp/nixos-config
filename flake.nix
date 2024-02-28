@@ -141,14 +141,17 @@
           modules = commonModules ++ [
             ({ config, ... }:
               {
-                nixpkgs.pkgs = import nixpkgs {
-                  inherit overlays system;
-                  config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                nixpkgs = {
+                  pkgs = import nixpkgs {
+                    inherit overlays system;
+                    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                  };
+                  flake.source = lib.mkForce "${nixpkgs}";
                 };
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs = { flake = nixpkgs; to.path = lib.mkForce "${nixpkgs}"; }; };
+                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs = { flake = nixpkgs; }; };
                 };
               })
             ./machines/${name}
