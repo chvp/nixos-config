@@ -53,7 +53,7 @@ in
       resolveLocalQueries = true;
       settings = {
         server = {
-          interface = [ "wg0" "127.0.0.1" "::1" ];
+          interface = [ "10.240.0.1" "127.0.0.1" "::1" ];
           access-control = [
             "127.0.0.0/8 allow"
             "10.240.0.0/24 allow"
