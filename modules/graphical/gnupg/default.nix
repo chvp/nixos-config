@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.chvp.graphical.gnupg = {
@@ -22,7 +22,7 @@
     ];
     programs.gnupg.agent = {
       enable = true;
-      pinentryFlavor = config.chvp.graphical.gnupg.pinentryFlavor;
+      pinentryPackage = pkgs."pinentry-${config.chvp.graphical.gnupg.pinentryFlavor}";
     };
     home-manager.users.charlotte = { lib, ... }: {
       home.activation.fixPermissionsCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
