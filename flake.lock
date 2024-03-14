@@ -362,15 +362,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1710401383,
-        "narHash": "sha256-jskq7uDpKXrRoY4hDpNqykmSSKHUXYlo7ZFc/se7fus=",
-        "owner": "nix-community",
+        "lastModified": 1710406899,
+        "narHash": "sha256-s4hglPVPec3jO81ejYgz24JKVV/8e3Qb2tcJHAccuxM=",
+        "owner": "cpcloud",
         "repo": "home-manager",
-        "rev": "1ab3cec3a1bbb065b2d52b913d1431366028d5b5",
+        "rev": "8dfd51061ff9aee35d6fc03c360c8fa846bd495f",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
+        "owner": "cpcloud",
+        "ref": "fix-pinetrypackage-ref",
         "repo": "home-manager",
         "type": "github"
       }

@@ -48,7 +48,7 @@
     };
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:cpcloud/home-manager/fix-pinetrypackage-ref";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
