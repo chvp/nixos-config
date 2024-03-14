@@ -34,7 +34,7 @@
         enable = true;
         defaultCacheTtl = 7200;
         maxCacheTtl = 99999;
-        pinentryFlavor = config.chvp.graphical.gnupg.pinentryFlavor;
+        pinentryPackage = pkgs."pinentry-${config.chvp.graphical.gnupg.pinentryFlavor}";
       };
     };
   };
