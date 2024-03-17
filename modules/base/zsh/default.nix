@@ -5,7 +5,7 @@ let
     home.packages = [ pkgs.autojump ];
     programs.zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       autocd = true;
       dotDir = ".config/zsh";
