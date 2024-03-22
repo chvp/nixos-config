@@ -105,6 +105,7 @@ in
         "marierose@vanpetegem.be"
         "rudy@vanpetegem.be"
         "sarina@vanpetegem.be"
+        "sabrina@vanpetegem.be"
       ];
       mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
       useFsLayout = false;
@@ -125,6 +126,7 @@ in
                              "spam@vuztc.ru",
                              # itsme spam
                              "noreply.mailing.itsme@online.be",
+                             "itsme-id@webmail.net",
                              "mailing.itsme@online.be"],
          # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
          address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
