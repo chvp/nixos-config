@@ -115,6 +115,7 @@ in
         # itsme spam
         "noreply.mailing.itsme@online.be"
         "itsme-id@webmail.net"
+        "service.itsme@online.be"
         "mailing.itsme-id@online.be"
         "mailing.itsme@online.be"
       ];
