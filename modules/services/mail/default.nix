@@ -112,12 +112,6 @@ in
         "censysnetbackup@gmail.com"
         "vitor.carvalheiro@escola.pr.gov.br"
         "spam@vuztc.ru"
-        # itsme spam
-        "noreply.mailing.itsme@online.be"
-        "itsme-id@webmail.net"
-        "service.itsme@online.be"
-        "mailing.itsme-id@online.be"
-        "mailing.itsme@online.be"
       ];
       mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
       useFsLayout = false;
@@ -135,7 +129,12 @@ in
         if anyof(
           # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
           address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
-          header :contains "From" ["jakubbielec", "Jakub Bielec"]
+          header :contains "From" ["jakubbielec", "Jakub Bielec"],
+          # Stop any mail pretending to be from itsme not from their official domains
+          allof(
+            address :contains "From" "itsme",
+            not address :matches :domain "from" ["*itsme.be", "*itsme-id.com"]
+          )
         ) {
             fileinto "Junk";
             stop;
