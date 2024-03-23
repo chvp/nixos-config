@@ -2,8 +2,8 @@
   name = "Gamification 2";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   env = [
-    { name = "DATABASE_HOST"; eval = "$PGDATA"; }
     { name = "PGDATA"; eval = "$PRJ_DATA_DIR/postgres"; }
+    { name = "DATABASE_HOST"; eval = "$PGDATA"; }
   ];
   commands = [
     {
