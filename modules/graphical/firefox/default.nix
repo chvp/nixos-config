@@ -32,7 +32,7 @@ let
     meta = with lib; {
       homepage = "https://www.zotero.org";
       description = "Save references to Zotero from your web browser";
-      license = licenses.agpl3;
+      license = licenses.agpl3Plus;
       platforms = platforms.all;
     };
   };
