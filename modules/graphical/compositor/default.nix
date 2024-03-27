@@ -134,6 +134,7 @@ let
     riverctl map normal Alt+Shift Print spawn '${screenshot}/bin/screenshot -r -d'
 
     riverctl float-filter-add app-id launcher
+    riverctl float-filter-add app-id be.ugent.objprog.ugentopoly.Ugentopoly
     riverctl float-filter-add title "Quick Format Citation"
 
     riverctl default-layout rivertile
