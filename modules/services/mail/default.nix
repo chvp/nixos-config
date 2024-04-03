@@ -67,7 +67,7 @@ in
       };
       indexDir = "${config.chvp.cachePrefix}/var/lib/dovecot/indices";
       fullTextSearch = {
-        enable = true;
+        enable = false;
         memoryLimit = 4000;
       };
       lmtpSaveToDetailMailbox = "no";
