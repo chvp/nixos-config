@@ -1,0 +1,13 @@
+diff --git a/pkgs/development/tools/electron/common.nix b/pkgs/development/tools/electron/common.nix
+index 9881c26f659e40..a29de512404d1b 100644
+--- a/pkgs/development/tools/electron/common.nix
++++ b/pkgs/development/tools/electron/common.nix
+@@ -127,7 +127,7 @@ in (chromium.override { upstream-info = info.chromium; }).mkDerivation (base: {
+         for patch in $(cat $patch_dir/.patches)
+         do
+           echo applying in $repo: $patch
+-          git apply -p1 --directory=$repo --exclude='src/third_party/blink/web_tests/*' $patch_dir/$patch
++          git apply -p1 --directory=$repo --exclude='src/third_party/blink/web_tests/*' --exclude='src/content/test/data/*' $patch_dir/$patch
+         done
+       done
+     )
