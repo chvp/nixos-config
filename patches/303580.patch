@@ -1,0 +1,39 @@
+diff --git a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
+index a5d3fc19bf3cbf..18c7713589f0d9 100644
+--- a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
++++ b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
+@@ -20,18 +20,18 @@
+ 
+ stdenv.mkDerivation (finalAttrs: {
+   pname = "teams-for-linux";
+-  version = "1.4.17";
++  version = "1.4.22";
+ 
+   src = fetchFromGitHub {
+     owner = "IsmaelMartinez";
+     repo = "teams-for-linux";
+     rev = "v${finalAttrs.version}";
+-    hash = "sha256-fpz3JzJ6RaSajCwc44Uavln572mT5ixLnIK8FFoKWMg=";
++    hash = "sha256-eNd12p9QvuYpiy9FaGaMSfQ3qVYzmYyO2/v/rdV3nN8=";
+   };
+ 
+   offlineCache = fetchYarnDeps {
+     yarnLock = "${finalAttrs.src}/yarn.lock";
+-    hash = "sha256-/8Jxly02EZxp5JZ3mVlv01aWX53V9eSy0pvVMfpb9I0=";
++    hash = "sha256-jBwyIyiWeqNmOnxmVOr7c4oMWwHElEjM25sShhTMi78=";
+   };
+ 
+   nativeBuildInputs = [ yarn prefetch-yarn-deps nodejs copyDesktopItems makeWrapper ];
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 45f166400973ba..aa913ee2737fe7 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -34965,7 +34965,7 @@ with pkgs;
+   teams = callPackage ../applications/networking/instant-messengers/teams { };
+ 
+   teams-for-linux = callPackage ../applications/networking/instant-messengers/teams-for-linux {
+-    electron = electron_28;
++    electron = electron_29;
+   };
+ 
+   teamspeak_client = libsForQt5.callPackage ../applications/networking/instant-messengers/teamspeak/client.nix { };
