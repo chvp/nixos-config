@@ -1,0 +1,20 @@
+diff --git a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
+index 464e80a4046455..037d27cf06602f 100644
+--- a/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
++++ b/pkgs/applications/networking/instant-messengers/teams-for-linux/default.nix
+@@ -20,13 +20,13 @@
+ 
+ stdenv.mkDerivation (finalAttrs: {
+   pname = "teams-for-linux";
+-  version = "1.4.24";
++  version = "1.4.27";
+ 
+   src = fetchFromGitHub {
+     owner = "IsmaelMartinez";
+     repo = "teams-for-linux";
+     rev = "v${finalAttrs.version}";
+-    hash = "sha256-Bo70L0EPHdbef4Vmizy4yrePAr/sh/2ZkRAyvOd2NYA=";
++    hash = "sha256-nUHiveS1XI+vC2Tj1DK/DS4CrKTLMg1IYgTPWXuLrAc=";
+   };
+ 
+   offlineCache = fetchYarnDeps {
