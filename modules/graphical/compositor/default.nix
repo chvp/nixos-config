@@ -72,8 +72,8 @@ let
     riverctl map normal Super H focus-output next
     riverctl map normal Super L focus-output previous
 
-    riverctl map normal Super+Shift H send-to-output next
-    riverctl map normal Super+Shift L send-to-output previous
+    riverctl map normal Super+Shift H send-to-output -current-tags next
+    riverctl map normal Super+Shift L send-to-output -current-tags previous
 
     riverctl map normal Super F zoom
     riverctl map normal Super+Shift F toggle-fullscreen
@@ -133,14 +133,16 @@ let
     riverctl map normal Shift Print spawn '${screenshot}/bin/screenshot -r'
     riverctl map normal Alt+Shift Print spawn '${screenshot}/bin/screenshot -r -d'
 
-    riverctl float-filter-add app-id launcher
-    riverctl float-filter-add app-id be.ugent.objprog.ugentopoly.Ugentopoly
-    riverctl float-filter-add title "Quick Format Citation"
+    riverctl rule-add -app-id launcher float
+    riverctl rule-add -app-id be.ugent.objprog.ugentopoly.Ugentopoly float
+    riverctl rule-add -title "Quick Format Citation" float
+
+    riverctl rule-add ssd
 
     riverctl default-layout rivertile
     rivertile -view-padding 0 -outer-padding 0 &
 
-    riverctl attach-mode bottom
+    riverctl default-attach-mode bottom
     riverctl background-color 0xacb0be
     riverctl border-color-focused 0x04e5e5
     riverctl border-color-unfocused 0xdce0e8
