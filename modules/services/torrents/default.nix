@@ -33,9 +33,6 @@
         speed-limit-down-enabled = true;
       };
     };
-    # Temporary workaround
-    systemd.services.transmission.environment.TR_CURL_SSL_NO_VERIFY = "1";
-
     age.secrets."files/programs/transmission/config.json" = {
       file = ../../../secrets/files/programs/transmission/config.json.age;
       owner = "charlotte";
