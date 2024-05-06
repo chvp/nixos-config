@@ -127,7 +127,10 @@
         }
         {
           fqdn = "chvp.be";
-          options.locations."/".return = "307 https://www.chvp.be$request_uri";
+          options.locations = {
+            "/".return = "307 https://www.chvp.be$request_uri";
+            "/phd/register".return = "307 https://nextcloud.vanpetegem.me/apps/forms/s/PrWYKWkwgwA7naE3ryRwmfcd";
+          };
         }
         {
           fqdn = "www.chvp.be";
