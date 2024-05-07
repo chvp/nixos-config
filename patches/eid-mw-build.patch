@@ -1,0 +1,13 @@
+diff --git a/pkgs/tools/security/eid-mw/default.nix b/pkgs/tools/security/eid-mw/default.nix
+index 5a330c7126fa..070e1bae0b00 100644
+--- a/pkgs/tools/security/eid-mw/default.nix
++++ b/pkgs/tools/security/eid-mw/default.nix
+@@ -71,6 +71,8 @@ stdenv.mkDerivation rec {
+ 
+   enableParallelBuilding = true;
+ 
++  env.LD_LIBRARY_PATH = lib.makeLibraryPath [ pcsclite ];
++
+   doCheck = true;
+ 
+   meta = with lib; {
