@@ -112,6 +112,7 @@ in
         "censysnetbackup@gmail.com"
         "vitor.carvalheiro@escola.pr.gov.br"
         "spam@vuztc.ru"
+        "mofos@theportalnetworks.com" # Someone registered my f-droid contact address on a porn site :(
       ];
       mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
       useFsLayout = false;
