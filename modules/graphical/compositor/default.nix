@@ -391,30 +391,42 @@ in
         kanshi = {
           enable = true;
           systemdTarget = "river-session.target";
-          profiles = {
-            "home-undocked" = {
-              outputs = [
-                { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
-              ];
-            };
-            "home-docked" = {
-              outputs = [
-                { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
-                { criteria = "Dell Inc. DELL U2718Q FN84K01T095L"; position = "2560,0"; mode = "3840x2160"; scale = 1.0; }
-              ];
-            };
-            "work-undocked" = {
-              outputs = [
-                { criteria = "LG Display 0x06D6 Unknown"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
-              ];
-            };
-            "work-docked" = {
-              outputs = [
-                { criteria = "LG Display 0x06D6 Unknown"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
-                { criteria = "Dell Inc. DELL U2718Q FN84K83Q1KHL"; position = "1920,0"; mode = "3840x2160"; scale = 1.0; }
-              ];
-            };
-          };
+          settings = [
+            {
+              profile = {
+                name = "home-undocked";
+                outputs = [
+                  { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
+                ];
+              };
+            }
+            {
+              profile = {
+                name = "home-docked";
+                outputs = [
+                  { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
+                  { criteria = "Dell Inc. DELL U2718Q FN84K01T095L"; position = "2560,0"; mode = "3840x2160"; scale = 1.0; }
+                ];
+              };
+            }
+            {
+              profile = {
+                name = "work-undocked";
+                outputs = [
+                  { criteria = "LG Display 0x06D6 Unknown"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
+                ];
+              };
+            }
+            {
+              profile = {
+                name = "work-docked";
+                outputs = [
+                  { criteria = "LG Display 0x06D6 Unknown"; position = "0,0"; mode = "1920x1080"; scale = 1.0; }
+                  { criteria = "Dell Inc. DELL U2718Q FN84K83Q1KHL"; position = "1920,0"; mode = "3840x2160"; scale = 1.0; }
+                ];
+              };
+            }
+          ];
         };
         mako = {
           enable = true;
