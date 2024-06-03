@@ -38,10 +38,8 @@
           gateway = [ publicIPV4.gateway ];
           routes = [
             {
-              routeConfig = {
-                Gateway = publicIPV6.gateway;
-                GatewayOnLink = true;
-              };
+              Gateway = publicIPV6.gateway;
+              GatewayOnLink = true;
             }
           ];
           dns = [
@@ -56,7 +54,7 @@
           matchConfig = { Name = "eno4"; };
           address = [ "${internalIPV4}/16" ];
           routes = [
-            { routeConfig = { Destination = "${internalIPV4}/16"; }; }
+            { Destination = "${internalIPV4}/16"; }
           ];
         };
       };
