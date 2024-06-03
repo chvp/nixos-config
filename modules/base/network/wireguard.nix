@@ -95,25 +95,21 @@ in
             if config.chvp.base.network.wireguard.server then
               (builtins.map
                 (name: {
-                  wireguardPeerConfig = {
-                    PublicKey = data.${name}.pubkey;
-                    AllowedIPs = "${data.${name}.ip}/32";
-                    PresharedKeyFile = pskFile;
-                  };
+                  PublicKey = data.${name}.pubkey;
+                  AllowedIPs = "${data.${name}.ip}/32";
+                  PresharedKeyFile = pskFile;
                 })
                 (builtins.filter (name: name != config.networking.hostName) (builtins.attrNames data)))
             else
               ([{
-                wireguardPeerConfig = {
-                  PublicKey = data.lasting-integrity.pubkey;
-                  AllowedIPs = subnet;
-                  Endpoint =
-                    if config.chvp.base.network.wireguard.onCorporate
-                    then "127.0.0.1:51820"
-                    else "lasting-integrity.vanpetegem.me:51820";
-                  PresharedKeyFile = pskFile;
-                  PersistentKeepalive = 25;
-                };
+                PublicKey = data.lasting-integrity.pubkey;
+                AllowedIPs = subnet;
+                Endpoint =
+                  if config.chvp.base.network.wireguard.onCorporate
+                  then "127.0.0.1:51820"
+                  else "lasting-integrity.vanpetegem.me:51820";
+                PresharedKeyFile = pskFile;
+                PersistentKeepalive = 25;
               }]);
         };
         networks.wg0 = {
@@ -123,8 +119,7 @@ in
           domains = [ "internal" ];
           dns = [ data.lasting-integrity.ip ];
           linkConfig.MTUBytes = "1342";
-          routes = [{
-            routeConfig =
+          routes = [(
               if config.chvp.base.network.wireguard.server then {
                 Gateway = "${data.${config.networking.hostName}.ip}";
                 Destination = subnet;
@@ -132,8 +127,8 @@ in
                 Gateway = "${data.lasting-integrity.ip}";
                 Destination = subnet;
                 GatewayOnLink = true;
-              };
-          }];
+              }
+          )];
         };
       };
       services = {
