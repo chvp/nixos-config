@@ -63,7 +63,7 @@
       };
     };
     nixos-mailserver = {
-      url = "gitlab:RoastedCheese/nixos-mailserver";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         utils.follows = "flake-utils";
