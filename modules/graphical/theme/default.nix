@@ -46,7 +46,7 @@
           [Icon Theme]
           Name=Default
           Comment=Default Cursor Theme
-          Inherits=Catppuccin-Latte-Light-Cursors
+          Inherits=catppuccin-latte-light-cursors
         '';
       };
       dconf.settings."org/gnome/desktop/wm/preferences".button-layout = "";
@@ -58,12 +58,12 @@
           size = 10;
         };
         gtk2.extraConfig = ''
-          gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors"
+          gtk-cursor-theme-name = "catppuccin-latte-light-cursors"
           gtk-cursor-theme-size = 24
         '';
         gtk3 = {
           extraConfig = {
-            gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors";
+            gtk-cursor-theme-name = "catppuccin-latte-light-cursors";
             gtk-cursor-theme-size = 24;
           };
           extraCss = ''
@@ -87,7 +87,7 @@
         };
         gtk4 = {
           extraConfig = {
-            gtk-cursor-theme-name = "Catppuccin-Latte-Light-Cursors";
+            gtk-cursor-theme-name = "catppuccin-latte-light-cursors";
             gtk-cursor-theme-size = 24;
           };
           extraCss = ''
