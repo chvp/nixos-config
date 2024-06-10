@@ -43,6 +43,7 @@
           };
           "Zeus Event 5G".psk = "@PSK_Zeus@";
           "Rode Kruis-Gent (internet)".psk = "@PSK_RKG@";
+          "CityStayNet".psk = "@PSK_CityStayNet@";
           eduroam = {
             authProtocols = [ "WPA-EAP" ];
             auth = ''
