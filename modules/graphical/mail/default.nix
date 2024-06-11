@@ -171,7 +171,7 @@ in
                     )
                   )
                 ;; Never actually quit mu4e, just close the current buffer (making sure the modeline is still visible)
-                (defalias 'mu4e-quit 'kill-this-buffer)
+                (defalias 'mu4e-quit 'chvp--kill-current-buffer)
                 (define-advice mu4e--context-ask-user
                     (:around (orig-fun &rest args) mu4e--context-ask-user-completing-read)
                   "Replace `mu4e-read-option` by general-purpose completing-read"

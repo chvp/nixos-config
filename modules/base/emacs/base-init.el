@@ -17,6 +17,11 @@
   :config
   (general-evil-setup t)
 
+  (defun chvp--kill-current-buffer ()
+    (interactive)
+    (kill-buffer (current-buffer))
+    )
+
   ;; Create bindings under the leader
   (general-create-definer lmap
     :states '(normal visual insert emacs motion)
@@ -33,7 +38,7 @@
     ":"    '(eval-expression :which-key "eval")
 
     "b"    '(:ignore t :which-key "buffer")
-    "bd"   '(kill-this-buffer :which-key "kill")
+    "bd"   '(chvp--kill-current-buffer :which-key "kill")
     "br"   '(rename-buffer :which-key "rename")
 
     "f"    '(:ignore t :which-key "file")
