@@ -119,7 +119,8 @@ in
           domains = [ "internal" ];
           dns = [ data.lasting-integrity.ip ];
           linkConfig.MTUBytes = "1342";
-          routes = [(
+          routes = [
+            (
               if config.chvp.base.network.wireguard.server then {
                 Gateway = "${data.${config.networking.hostName}.ip}";
                 Destination = subnet;
@@ -128,7 +129,8 @@ in
                 Destination = subnet;
                 GatewayOnLink = true;
               }
-          )];
+            )
+          ];
         };
       };
       services = {
