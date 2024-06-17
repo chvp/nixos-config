@@ -8,37 +8,31 @@
 
   config = lib.mkIf config.chvp.services.matrix.enable {
     chvp.base.zfs.systemLinks = [{ path = "/var/lib/matrix-hookshot"; type = "data"; }];
-    chvp.services.nginx.hosts = [
-      {
-        fqdn = "matrix.vanpetegem.me";
-        options.locations = {
-          "/" = {
-            proxyPass = "http://127.0.0.1:8448";
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Ssl on;
-              proxy_read_timeout 600;
-              client_max_body_size 10M;
-            '';
-          };
-          "/_slack" = {
-            proxyPass = "http://127.0.0.1:9898";
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Ssl on;
-            '';
-          };
-          "~ ^/_hookshot/(.*)" = {
-            proxyPass = "http://127.0.0.1:9000/$1";
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Ssl on;
-            '';
-          };
+    chvp.services.nginx.hosts = [{
+      fqdn = "matrix.vanpetegem.me";
+      options.locations = {
+        "/" = {
+          proxyPass = "http://127.0.0.1:8448";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-Ssl on;
+            proxy_read_timeout 600;
+            client_max_body_size 10M;
+          '';
         };
-      }
-      {
-        fqdn = "matrix-sync.vanpetegem.me";
-        basicProxy = "http://localhost:8009";
-      }
-    ];
+        "/_slack" = {
+          proxyPass = "http://127.0.0.1:9898";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-Ssl on;
+          '';
+        };
+        "~ ^/_hookshot/(.*)" = {
+          proxyPass = "http://127.0.0.1:9000/$1";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-Ssl on;
+          '';
+        };
+      };
+    }];
 
     services = {
       matrix-synapse = {
@@ -96,14 +90,6 @@
             ensureDBOwnership = true;
           }
         ];
-      };
-      matrix-sliding-sync = {
-        enable = true;
-        settings = {
-          SYNCV3_SERVER = "https://matrix.vanpetegem.me";
-        };
-        environmentFile = config.age.secrets."files/servers/matrix-sliding-sync/env".path;
-        createDatabase = true;
       };
     };
 
@@ -224,6 +210,5 @@
       file = ../../../secrets/files/services/matrix-hookshot/registration.yml.age;
       owner = "matrix-synapse";
     };
-    age.secrets."files/servers/matrix-sliding-sync/env".file = ../../../secrets/files/services/matrix-sliding-sync/env.age;
   };
 }
