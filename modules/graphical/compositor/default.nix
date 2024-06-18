@@ -205,13 +205,14 @@ in
         "org.freedesktop.impl.portal.Screencast" = "wlr";
       };
     };
-    home-manager.users.charlotte = { pkgs, ... }: {
+    home-manager.users.charlotte = { ... }: {
       home.packages = [
         river
         color-picker
         screenshot
         pkgs.wf-recorder
         pkgs.wl-clipboard
+        pkgs.wl-mirror
       ];
       programs = {
         waybar = {
