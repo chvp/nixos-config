@@ -7,8 +7,8 @@
   };
 
   config = lib.mkIf config.chvp.games.steam.enable {
-    hardware.opengl = {
-      driSupport32Bit = true;
+    hardware.graphics = {
+      enable32Bit = true;
       extraPackages = with pkgs.pkgsi686Linux; [ libva ];
     };
     services.pipewire.alsa.support32Bit = true;

@@ -20,7 +20,7 @@
     ];
 
     # Needs to be here, since a headless server probably doesn't have this enabled yet.
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
     home-manager.users.charlotte = { pkgs, ... }: {
       home.packages = [ pkgs.zeroad ];
     };
