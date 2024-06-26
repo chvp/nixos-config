@@ -9,7 +9,6 @@ build-nixos-configurations:
   parallel:
     matrix:
       - HOST_TO_BUILD:
-          - kharbranth
           - kholinar
           - lasting-integrity
           - urithiru

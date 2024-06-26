@@ -1,16 +1,13 @@
 let
-  kharbranth = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKWu55zjDTl0qr5+kWNzuxGe5qem40ML8ELohapW/xug";
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   lasting-integrity = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKJmeY7j5LxWVv3fKzqG4Bvg/ZhOp8iwk0utpyMWMSk";
   urithiru = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrzOpyzDc5BVtAeb5//PnMRcp+9B+DjfU7p2YpaH6a2";
   hosts = [
-    kharbranth
     kholinar
     lasting-integrity
     urithiru
   ];
   laptops = [
-    kharbranth
     kholinar
   ];
   servers = [
@@ -94,7 +91,6 @@ in
   "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/matrix-sliding-sync/env.age".publicKeys = [ lasting-integrity ] ++ users;
 
-  "secrets/files/wireguard/kharbranth.privkey.age".publicKeys = [ kharbranth ] ++ users;
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;

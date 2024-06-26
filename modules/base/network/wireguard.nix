@@ -4,17 +4,12 @@ let
   data = {
     fairphone = {
       pubkey = "mHAq+2AP1EZdlSZIxA8UCret8EStrR3nEIU2x6NVETE=";
-      ip = "10.240.0.5";
-    };
-    kharbranth = {
-      pubkey = "Zc45PJl+kaa/2GnIs1ObfAmbe640uJ4h1oRn6+qOQHU=";
-      privkeyFile = config.age.secrets."files/wireguard/kharbranth.privkey".path;
-      ip = "10.240.0.3";
+      ip = "10.240.0.4";
     };
     kholinar = {
       pubkey = "oRA22ymFeNQBeRx6Jyd6Gd8EOUpAv9QSFkGs+Br7yEk=";
       privkeyFile = config.age.secrets."files/wireguard/kholinar.privkey".path;
-      ip = "10.240.0.4";
+      ip = "10.240.0.3";
     };
     lasting-integrity = {
       pubkey = "mid3XfCY2jaNK0J6C9ltFLAbxL0IApwMw9K1Z+PU8C0=";
