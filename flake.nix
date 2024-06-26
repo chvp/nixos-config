@@ -155,7 +155,6 @@
           ];
         };
       nixosConfigurations = {
-        kharbranth = nixosSystem "x86_64-linux" "kharbranth";
         kholinar = nixosSystem "x86_64-linux" "kholinar";
         lasting-integrity = nixosSystem "x86_64-linux" "lasting-integrity";
         urithiru = nixosSystem "x86_64-linux" "urithiru";

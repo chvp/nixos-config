@@ -8,6 +8,5 @@
     ./graphical
     ./programs
     ./services
-    ./work
   ];
 }
