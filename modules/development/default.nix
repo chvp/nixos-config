@@ -129,7 +129,7 @@
                                                   :getDocumentPrintWidthRequest nil)
                                                  :documentSymbol t
                                                  :documentColor t)))))
-            (add-to-list 'eglot-server-programs `(vue-mode . ("${pkgs.nodePackages.volar}/bin/vue-language-server" "--stdio" :initializationOptions ,(vue-eglot-init-options))))
+            (add-to-list 'eglot-server-programs `(vue-mode . ("${pkgs.vue-language-server}/bin/vue-language-server" "--stdio" :initializationOptions ,(vue-eglot-init-options))))
             (setq vue--front-tag-lang-regex
               (concat "<%s"                               ; The tag name
                       "\\(?:"                             ; Zero of more of...
