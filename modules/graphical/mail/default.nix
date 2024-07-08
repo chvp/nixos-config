@@ -157,7 +157,7 @@ in
                 (setq mu4e-contexts (list ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}))
                 (add-to-list
                  'mu4e-bookmarks
-                  '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/work/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
+                  '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
                  )
                 (defun chvp--mu4e-dodona-cc-reply-to ()
                   "Add dodona@ugent.be in cc and reply-to headers."
@@ -215,16 +215,6 @@ in
       };
     };
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ pkgs.mfauth ];
-      xdg.configFile."mfauth/config.toml".text = ''
-        # Public thunderbird secrets
-        [accounts.work]
-        client_id = "08162f7c-0fd2-4200-a84a-f25a4db0b584"
-        client_secret = "TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82"
-        authorize_url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
-        token_url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-        scope = "https://outlook.office365.com/IMAP.AccessAsUser.All https://outlook.office365.com/POP.AccessAsUser.All https://outlook.office365.com/SMTP.Send offline_access"
-      '';
       accounts.email = {
         maildirBasePath = "/home/charlotte/mail";
         accounts = {
@@ -237,16 +227,6 @@ in
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
               primary = true;
             };
-          };
-          work = makeAccount {
-            name = "work";
-            address = "charlotte.vanpetegem@ugent.be";
-            host = "outlook.office365.com";
-            smtpHost = "smtp.office365.com";
-            secretToolId = "work-mail";
-            useStartTls = true;
-            oauth = true;
-            extraConfig.folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Deleted Items"; };
           };
           posteo = makeAccount {
             name = "posteo";

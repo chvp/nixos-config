@@ -402,30 +402,6 @@
         "type": "github"
       }
     },
-    "mfauth": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay_2"
-      },
-      "locked": {
-        "lastModified": 1656592749,
-        "narHash": "sha256-7Rzjvegv6wb6LLWrNUvFkDmbYIhiBNH6zTcNgtOEWqk=",
-        "owner": "rien",
-        "repo": "mfauth",
-        "rev": "b88b9f431449495737f0cb43860fdc78756156ed",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rien",
-        "repo": "mfauth",
-        "type": "github"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -589,7 +565,6 @@
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
-        "mfauth": "mfauth",
         "nix-index-database": "nix-index-database",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs",
@@ -615,31 +590,6 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "2c417c0460b788328220120c698630947547ee83",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "type": "github"
-      }
-    },
-    "rust-overlay_2": {
-      "inputs": {
-        "flake-utils": [
-          "mfauth",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "mfauth",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1656567145,
-        "narHash": "sha256-2xlv+g7kIb3f+1QdHlqpHPFfFw4myXUCC+cWk+6C4aE=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "3e95d6696b51f88b3ebfc7a21aefaeeb70a245bd",
         "type": "github"
       },
       "original": {
