@@ -12,7 +12,7 @@
       settings.concurrent = 8;
       services = {
         nix = {
-          registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
+          authenticationTokenConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
           dockerImage = "alpine";
           dockerVolumes = [
             "/nix/store:/nix/store:ro"
@@ -42,21 +42,7 @@
             PATH = "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
             NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
           };
-          tagList = [ "nix" ];
           requestConcurrency = 4;
-        };
-        docker-images = {
-          registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
-          dockerImage = "docker:stable";
-          dockerVolumes = [
-            "/var/run/docker.sock:/var/run/docker.sock"
-          ];
-          tagList = [ "docker-images" ];
-          requestConcurrency = 8;
-        };
-        default = {
-          registrationConfigFile = config.age.secrets."passwords/services/gitlab-runner/registration".path;
-          dockerImage = "debian:stable";
         };
       };
     };
