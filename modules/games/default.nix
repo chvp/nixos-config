@@ -6,9 +6,7 @@
     ./mumble
     ./particles
     ./steam
-    ./teeworlds
     ./tetris
-    ./zeroad
   ];
 
   options.chvp.games.enable = lib.mkOption {
@@ -21,7 +19,6 @@
       minecraft.client = lib.mkDefault false;
       mumble.enable = lib.mkDefault true;
       steam.enable = lib.mkDefault true;
-      zeroad.client = lib.mkDefault true;
     };
   };
 }

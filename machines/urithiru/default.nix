@@ -44,10 +44,6 @@
         rootDataset = "zroot/local/root";
       };
     };
-    games = {
-      teeworlds.server = false;
-      zeroad.server = true;
-    };
     services = {
       accentor.enable = true;
       containers.externalInterface = "eno3";
