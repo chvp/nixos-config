@@ -1,4 +1,4 @@
-{ pkgs, ... }: pkgs.devshell.mkShell {
+{ pkgs, inputs, system, ... }: pkgs.devshell.mkShell {
   name = "NixOS config";
   commands = [
     {
@@ -17,6 +17,7 @@
   packages = [
     pkgs.agenix
     pkgs.nixos-rebuild
+    inputs.darwin.packages.${system}.default
     pkgs.nixpkgs-fmt
   ];
 }

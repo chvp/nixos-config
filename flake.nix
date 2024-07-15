@@ -26,18 +26,28 @@
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
+        darwin.follows = "darwin";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
-    devshell = {
-      url = "github:numtide/devshell";
+    darwin = {
+      url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    devshell = {
+      url = "github:chvp/devshell/ruby-darwin-fix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
@@ -46,7 +56,10 @@
         flake-utils.follows = "flake-utils";
       };
     };
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,6 +78,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";
+    systems.url = "github:nix-systems/default";
     tetris = {
       url = "github:chvp/tetris";
       inputs = {
@@ -83,7 +97,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, lanzaboote, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, darwin, devshell, emacs-overlay, flake-utils, home-manager, lanzaboote, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -151,18 +165,26 @@
         lasting-integrity = nixosSystem "x86_64-linux" "lasting-integrity";
         urithiru = nixosSystem "x86_64-linux" "urithiru";
       };
+      darwinConfigurations.thaylen-city = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./machines/thaylen-city
+          home-manager.darwinModules.home-manager
+        ];
+      };
       lsShells = builtins.readDir ./shells;
       shellFiles = builtins.filter (name: lsShells.${name} == "regular") (builtins.attrNames lsShells);
       shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) shellFiles;
       systemAttrs = flake-utils.lib.eachDefaultSystem (system:
         let
-          pkgs = import (nixpkgsForSystem system) { inherit overlays system; };
-          nameToValue = name: import (./shells + "/${name}.nix") { inherit pkgs inputs system; };
+          pkgs = import (nixpkgsForSystem system) { inherit overlays system; config.permittedInsecurePackages = [ "imagemagick-6.9.13-10" ]; };
+          lib = pkgs.lib;
+          nameToValue = name: import (./shells + "/${name}.nix") { inherit lib pkgs inputs system; };
         in
         {
           devShells = builtins.listToAttrs (builtins.map (name: { inherit name; value = nameToValue name; }) shellNames);
         }
       );
     in
-    systemAttrs // { inherit nixosConfigurations; };
+    systemAttrs // { inherit nixosConfigurations darwinConfigurations; };
 }
