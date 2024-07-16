@@ -4,7 +4,7 @@ pkgs.devshell.mkShell {
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   devshell.startup = {
     "link-devshell-dir".text = ''
-      ln -sf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
+      ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
     '';
   };
   packages = with pkgs; [
