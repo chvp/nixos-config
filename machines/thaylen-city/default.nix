@@ -38,7 +38,36 @@
     home = "/Users/charlotte.vanpetegem";
     shell = pkgs.zsh;
   };
-  system.stateVersion = 4;
+  system = {
+    defaults = {
+      dock = {
+        appswitcher-all-displays = true;
+        autohide = true;
+        launchanim = false;
+        minimize-to-application = true;
+        show-recents = false;
+      };
+      finder = {
+        AppleShowAllExtensions = true;
+        FXEnableExtensionChangeWarning = false;
+        FXPreferredViewStyle = "Nlsv";
+        ShowPathbar = true;
+      };
+      loginwindow.GuestEnabled = false;
+      menuExtraClock.ShowSeconds = true;
+      screencapture.location = "/Users/charlotte.vanpetegem/Pictures/Nextcloud/Inbox/Screenshots";
+      trackpad = {
+        Clicking = true;
+        Dragging = true;
+      };
+    };
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+    };
+    startup.chime = false;
+    stateVersion = 4;
+  };
 
   home-manager.users."charlotte.vanpetegem" = {
     programs = {
