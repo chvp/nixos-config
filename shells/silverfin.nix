@@ -7,6 +7,17 @@ pkgs.devshell.mkShell {
       ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
     '';
   };
+  commands = [
+    {
+      name = "delete-merged";
+      category = "general commands";
+      help = "Delete merged branches";
+      command = ''
+        git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f - <(git branch -vv | grep origin) | awk '{print $1}' | xargs -r git branch -D
+      '';
+    }
+
+  ];
   packages = with pkgs; [
     cmake
     ghostscript
