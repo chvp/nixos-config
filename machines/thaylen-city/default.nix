@@ -38,6 +38,7 @@
     home = "/Users/charlotte.vanpetegem";
     shell = pkgs.zsh;
   };
+  system.stateVersion = 4;
 
   home-manager.users."charlotte.vanpetegem" = {
     programs = {
