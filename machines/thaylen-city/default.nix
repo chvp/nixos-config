@@ -107,7 +107,14 @@
           ];
           theme = "robbyrussell";
         };
-        sessionVariables = { DEFAULT_USER = "charlotte.vanpetegem"; };
+        sessionVariables = { 
+          DEFAULT_USER = "charlotte.vanpetegem"; 
+          # Until I get emacs set up on this machine
+	  EDITOR = "vim";
+        };
+        shellAliases = {
+          gupd = "gfa && gprom";
+        };
         syntaxHighlighting.enable = true;
       };
       git = {
