@@ -66,7 +66,10 @@
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
@@ -93,6 +96,7 @@
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
       };
     };
   };
