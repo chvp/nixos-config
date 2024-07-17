@@ -3,10 +3,13 @@
 {
   homebrew = {
     enable = true;
+    brews = [
+    ];
     casks = [
       "docker"
       "libreoffice"
       "rubymine"
+      "tsh"
     ];
     global.brewfile = true;
     onActivation = {
