@@ -133,9 +133,9 @@
       nixosModules = [
         accentor.nixosModules.default
         agenix.nixosModules.default
-        home-manager.nixosModule.default
+        home-manager.nixosModules.default
         lanzaboote.nixosModules.lanzaboote
-        nixos-mailserver.nixosModule
+        nixos-mailserver.nixosModules.default
         nix-index-database.nixosModules.nix-index
         ./modules
       ];
