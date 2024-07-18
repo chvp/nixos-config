@@ -73,8 +73,6 @@ let
 in
 {
   chvp.base.zsh.usersToConfigure = [ "charlotte" "root" ];
-  chvp.base.zfs.systemLinks = [{ path = "/root/.local/share/autojump"; type = "cache"; }];
-  chvp.base.zfs.homeLinks = [{ path = ".local/share/autojump"; type = "cache"; }];
 } // {
   home-manager.users = builtins.foldl' (a: b: a // b) { } (
     builtins.map

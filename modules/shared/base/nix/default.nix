@@ -36,6 +36,7 @@ in
   };
 
   config = {
+    chvp.base.zfs.homeLinks = (lib.optional config.chvp.base.nix.enableDirenv { path = ".local/share/direnv"; type = "cache"; });
     nix = {
       gc = {
         automatic = true;

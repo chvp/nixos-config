@@ -65,6 +65,8 @@ in
 
   config = {
     programs.zsh.enable = true;
+    chvp.base.zfs.homeLinks = lib.mkIf (builtins.elem username config.chvp.base.zsh.usersToConfigure) [{ path = ".local/share/autojump"; type = "cache"; }];
+    chvp.base.zfs.systemLinks = lib.mkIf (builtins.elem "root" config.chvp.base.zsh.usersToConfigure) [{ path = "/root/.local/share/autojump"; type = "cache"; }];
   } // {
     home-manager.users = builtins.foldl' (a: b: a // b) { } (
       builtins.map

@@ -27,6 +27,7 @@
         internalIPV4 = "192.168.0.1";
       };
       zfs = {
+        enable = true;
         backups = [
           {
             path = "zroot/safe/data";

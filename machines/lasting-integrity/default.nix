@@ -28,6 +28,7 @@
       };
       nix.enableDirenv = false;
       zfs = {
+        enable = true;
         backups = [
           {
             path = "zroot/safe/data";

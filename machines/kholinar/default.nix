@@ -20,6 +20,7 @@
         };
       };
       zfs = {
+        enable = true;
         encrypted = true;
         backups = [
           {

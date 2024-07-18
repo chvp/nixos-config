@@ -3,6 +3,7 @@
 {
   imports = [
     ./nix
+    ./zfs
     ./zsh
   ];
 
