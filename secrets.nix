@@ -14,10 +14,10 @@ let
     thaylen-city
     urithiru
   ];
-  nixosLaptops = [
+  nixosPersonals = [
     kholinar
   ];
-  laptops = [
+  personals = [
     kholinar
     thaylen-city
   ];
@@ -38,10 +38,10 @@ in
   "secrets/authorized_keys/charlotte.age".publicKeys = hosts ++ users;
   "secrets/authorized_keys/root.age".publicKeys = hosts ++ users;
 
-  "secrets/passwords/networks.age".publicKeys = nixosLaptops ++ users;
+  "secrets/passwords/networks.age".publicKeys = nixosPersonals ++ users;
 
-  "secrets/files/programs/vpn/local.age".publicKeys = laptops ++ users;
-  "secrets/files/programs/vpn/global.age".publicKeys = laptops ++ users;
+  "secrets/files/programs/vpn/local.age".publicKeys = personals ++ users;
+  "secrets/files/programs/vpn/global.age".publicKeys = personals ++ users;
 
   "secrets/passwords/services/accentor.age".publicKeys = [ urithiru ] ++ users;
 
