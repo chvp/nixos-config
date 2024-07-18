@@ -141,7 +141,14 @@
     };
 
     home = {
-      packages = [ pkgs.nix-direnv pkgs.docker-compose pkgs.autojump pkgs.tmux pkgs.ripgrep ];
+      packages = with pkgs; [
+        autojump
+        coreutils
+        docker-compose
+        nix-direnv
+        ripgrep
+        tmux
+      ];
       stateVersion = "24.11";
     };
   };
