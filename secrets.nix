@@ -1,37 +1,45 @@
 let
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   lasting-integrity = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKJmeY7j5LxWVv3fKzqG4Bvg/ZhOp8iwk0utpyMWMSk";
+  thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/6GDhlqX3/al9jx48DXS/uCwfwrdZty1rl6N8X8TZ8";
   urithiru = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrzOpyzDc5BVtAeb5//PnMRcp+9B+DjfU7p2YpaH6a2";
-  hosts = [
+  nixosHosts = [
     kholinar
     lasting-integrity
     urithiru
   ];
+  hosts = [
+    kholinar
+    lasting-integrity
+    thaylen-city
+    urithiru
+  ];
+  nixosLaptops = [
+    kholinar
+  ];
   laptops = [
     kholinar
+    thaylen-city
   ];
   servers = [
     lasting-integrity
     urithiru
   ];
-
   charlotte = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDb17zAg3zwvdYHNZqXSGYKseCz5281Ha6oOYPbwFYD"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJY5nXR/V6wcMRxugD7GTOF8kwfGnAT2CRuJ2Qi60vsm"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJLsSFEi4CGpkWIJxXJC78bhibrBRxClBbpS9n7PQGYL"
   ];
   users = charlotte;
 in
 {
-  "secrets/passwords/users/charlotte.age".publicKeys = hosts ++ users;
-  "secrets/passwords/users/root.age".publicKeys = hosts ++ users;
+  "secrets/passwords/users/charlotte.age".publicKeys = nixosHosts ++ users;
+  "secrets/passwords/users/root.age".publicKeys = nixosHosts ++ users;
 
   "secrets/authorized_keys/charlotte.age".publicKeys = hosts ++ users;
   "secrets/authorized_keys/root.age".publicKeys = hosts ++ users;
 
-  "secrets/passwords/networks.age".publicKeys = laptops ++ users;
+  "secrets/passwords/networks.age".publicKeys = nixosLaptops ++ users;
 
-  "secrets/passwords/ugent-mount-credentials.age".publicKeys = laptops ++ users;
-  "secrets/passwords/ugent-vpn.age".publicKeys = laptops ++ users;
   "secrets/files/programs/vpn/local.age".publicKeys = laptops ++ users;
   "secrets/files/programs/vpn/global.age".publicKeys = laptops ++ users;
 
@@ -48,7 +56,7 @@ in
   "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/robbe_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/ssmtp-pass.age".publicKeys = hosts ++ users;
+  "secrets/passwords/services/ssmtp-pass.age".publicKeys = nixosHosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
@@ -72,12 +80,9 @@ in
 
   "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ lasting-integrity ] ++ users;
 
-  "secrets/files/services/tunnel/key.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/tunnel/env.age".publicKeys = [ lasting-integrity ] ++ users;
-
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ urithiru ] ++ users;
 
-  "secrets/files/programs/ssh/host_configuration.age".publicKeys = hosts ++ users;
+  "secrets/files/programs/ssh/host_configuration.age".publicKeys = nixosHosts ++ users;
 
   "secrets/files/programs/transmission/config.json.age".publicKeys = [ urithiru ] ++ users;
 
@@ -95,7 +100,6 @@ in
   "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
-  "secrets/files/wireguard/udp2raw.age".publicKeys = hosts ++ users;
 
   "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ urithiru ] ++ users;
   "secrets/data-access/ssh_host_rsa_key.pub.age".publicKeys = [ urithiru ] ++ users;

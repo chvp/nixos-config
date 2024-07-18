@@ -18,13 +18,9 @@
       upgrade = true;
     };
   };
-  networking = {
-    computerName = "Thaylen City";
-    hostName = "thaylen-city";
-  };
+  networking.computerName = "Thaylen City";
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
     '';

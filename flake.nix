@@ -128,13 +128,21 @@
         www-chvp-be.overlays.default
       ];
       commonModules = [
+        ./modules/shared
+      ];
+      nixosModules = [
         accentor.nixosModules.default
-        agenix.nixosModules.age
-        home-manager.nixosModule
+        agenix.nixosModules.default
+        home-manager.nixosModule.default
         lanzaboote.nixosModules.lanzaboote
         nixos-mailserver.nixosModule
         nix-index-database.nixosModules.nix-index
         ./modules
+      ];
+      darwinModules = [
+        agenix.darwinModules.default
+        home-manager.darwinModules.default
+        ./modules/darwin
       ];
       nixosSystem = system: name:
         let
@@ -145,7 +153,7 @@
           inherit lib system;
           specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
-          modules = commonModules ++ [
+          modules = commonModules ++ nixosModules ++ [
             ({ config, ... }:
               {
                 nixpkgs = {
@@ -164,18 +172,36 @@
             ./machines/${name}
           ];
         };
+      darwinSystem = system: name:
+        let
+          nixpkgs = nixpkgsForSystem system;
+          lib = (import nixpkgs { inherit overlays system; }).lib;
+        in
+        darwin.lib.darwinSystem {
+          inherit lib system;
+          modules = commonModules ++ darwinModules ++ [
+            ({ config, ... }:
+              {
+                nixpkgs.pkgs = import nixpkgs {
+                  inherit overlays system;
+                  config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                };
+                networking.hostName = name;
+                nix = {
+                  extraOptions = "extra-experimental-features = nix-command flakes";
+                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs = { flake = nixpkgs; }; };
+                };
+              })
+            ./machines/${name}
+            home-manager.darwinModules.home-manager
+          ];
+        };
       nixosConfigurations = {
         kholinar = nixosSystem "x86_64-linux" "kholinar";
         lasting-integrity = nixosSystem "x86_64-linux" "lasting-integrity";
         urithiru = nixosSystem "x86_64-linux" "urithiru";
       };
-      darwinConfigurations.thaylen-city = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./machines/thaylen-city
-          home-manager.darwinModules.home-manager
-        ];
-      };
+      darwinConfigurations.thaylen-city = darwinSystem "aarch64-darwin" "thaylen-city";
       lsShells = builtins.readDir ./shells;
       shellFiles = builtins.filter (name: lsShells.${name} == "regular") (builtins.attrNames lsShells);
       shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) shellFiles;
