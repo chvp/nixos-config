@@ -3,6 +3,7 @@ pkgs.devshell.mkShell {
   name = "Silverfin";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   devshell.startup = {
+    # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
     "link-devshell-dir".text = ''
       ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
     '';
@@ -36,6 +37,11 @@ pkgs.devshell.mkShell {
     {
       name = "LIBRARY_PATH";
       eval = "$LD_LIBRARY_PATH";
+    }
+    # Workaround for Rubymine not setting a TERM and some applications not being able to handle that
+    {
+      name = "TERM";
+      eval = "\${TERM:-xterm-256color}";
     }
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
