@@ -137,7 +137,7 @@
         lanzaboote.nixosModules.lanzaboote
         nixos-mailserver.nixosModules.default
         nix-index-database.nixosModules.nix-index
-        ./modules
+        ./modules/nixos
       ];
       darwinModules = [
         agenix.darwinModules.default
