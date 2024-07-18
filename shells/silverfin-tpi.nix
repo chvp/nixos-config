@@ -2,11 +2,14 @@
 pkgs.devshell.mkShell {
   name = "Silverfin";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
-  devshell.startup = {
-    # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
-    "link-devshell-dir".text = ''
-      ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
-    '';
+  devshell = {
+    motd = "";
+    startup = {
+      # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
+      "link-devshell-dir".text = ''
+        ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
+      '';
+    };
   };
   packages = with pkgs; [
     cmake

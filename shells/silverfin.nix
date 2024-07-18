@@ -2,16 +2,19 @@
 pkgs.devshell.mkShell {
   name = "Silverfin";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
-  devshell.startup = {
-    # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
-    "link-devshell-dir".text = ''
-      ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
-    '';
+  devshell = {
+    motd = "";
+    startup = {
+      # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
+      "link-devshell-dir".text = ''
+        ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
+      '';
+    };
   };
   commands = [
     {
       name = "delete-merged";
-      category = "general commands";
+      category = "[general commands]";
       help = "Delete merged branches";
       command = ''
         git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f - <(git branch -vv | grep origin) | awk '{print $1}' | xargs -r git branch -D
