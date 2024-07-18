@@ -1,10 +1,15 @@
 { pkgs, ... }:
 
 {
+  chvp = {
+    homeStateVersion = "24.11";
+    systemStateVersion = 4;
+    username = "charlotte.vanpetegem";
+  };
+  networking.computerName = "Thaylen City";
+
   homebrew = {
     enable = true;
-    brews = [
-    ];
     casks = [
       "docker"
       "libreoffice"
@@ -18,25 +23,7 @@
       upgrade = true;
     };
   };
-  networking.computerName = "Thaylen City";
-  nix = {
-    extraOptions = ''
-      keep-outputs = true
-      keep-derivations = true
-    '';
-    configureBuildUsers = true;
-  };
-  programs = {
-    bash.enable = false;
-    zsh.enable = true;
-  };
   security.pam.enableSudoTouchIdAuth = true;
-  services.nix-daemon.enable = true;
-  users.users."charlotte.vanpetegem" = {
-    name = "charlotte.vanpetegem";
-    home = "/Users/charlotte.vanpetegem";
-    shell = pkgs.zsh;
-  };
   system = {
     defaults = {
       dock = {
@@ -65,54 +52,12 @@
       remapCapsLockToEscape = true;
     };
     startup.chime = false;
-    stateVersion = 4;
   };
 
   home-manager.users."charlotte.vanpetegem" = {
     programs = {
-      direnv = {
-        enable = true;
-        enableZshIntegration = true;
-        nix-direnv = {
-          enable = true;
-        };
-        config = {
-          global = {
-            load_dotenv = true;
-          };
-        };
-      };
-      zsh = {
-        enable = true;
-        autocd = true;
-        autosuggestion.enable = true;
-        dotDir = ".config/zsh";
-        history = {
-          expireDuplicatesFirst = true;
-          path = "$HOME/.local/share/zsh/history";
-        };
-        oh-my-zsh = {
-          enable = true;
-          plugins = [
-            "autojump"
-            "common-aliases"
-            "extract"
-            "history-substring-search"
-            "git"
-            "tmux"
-          ];
-          theme = "robbyrussell";
-        };
-        sessionVariables = {
-          DEFAULT_USER = "charlotte.vanpetegem";
-          # Until I get emacs set up on this machine
-          EDITOR = "vim";
-        };
-        shellAliases = {
-          gupd = "gfa && gprom";
-        };
-        syntaxHighlighting.enable = true;
-      };
+      # Until I get emacs set up on this machine
+      zsh.sessionVariables.EDITOR = "vim";
       git = {
         enable = true;
         extraConfig = {
@@ -138,14 +83,9 @@
 
     home = {
       packages = with pkgs; [
-        autojump
-        coreutils
         docker-compose
-        nix-direnv
-        ripgrep
         tmux
       ];
-      stateVersion = "24.11";
     };
   };
 }

@@ -17,45 +17,21 @@
     ./zsh
   ];
 
-  options.chvp = {
-    stateVersion = lib.mkOption {
-      example = "20.09";
-    };
-
-    dataPrefix = lib.mkOption {
-      default = "";
-      example = "/data";
-    };
-
-    cachePrefix = lib.mkOption {
-      default = "";
-      example = "/cache";
-    };
-  };
-
   config = {
-    home-manager.useGlobalPkgs = true;
-
-    system = {
-      stateVersion = config.chvp.stateVersion;
-      autoUpgrade = {
-        enable = true;
-        flake = "gitlab:chvp/nixos-config?host=git.chvp.be";
-        dates = "01/4:00";
-        randomizedDelaySec = "10min";
-      };
+    system.autoUpgrade = {
+      enable = true;
+      flake = "gitlab:chvp/nixos-config?host=git.chvp.be";
+      dates = "01/4:00";
+      randomizedDelaySec = "10min";
     };
     home-manager.users = {
       charlotte = { ... }: {
-        home.stateVersion = config.chvp.stateVersion;
         systemd.user.sessionVariables = config.home-manager.users.charlotte.home.sessionVariables;
       };
       root = { ... }: {
-        home.stateVersion = config.chvp.stateVersion;
+        home.stateVersion = config.chvp.homeStateVersion;
       };
     };
-
-    environment.systemPackages = with pkgs; [ git htop moreutils ncdu ripgrep unzip zip ];
 
     boot.kernelParams = [ "mitigations=off" ];
 
@@ -120,7 +96,6 @@
         charlotte = {
           isNormalUser = true;
           home = "/home/charlotte";
-          description = "Charlotte Van Petegem";
           extraGroups = [ "systemd-journal" ];
           hashedPasswordFile = config.age.secrets."passwords/users/charlotte".path;
         };
