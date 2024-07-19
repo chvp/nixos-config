@@ -180,23 +180,6 @@
   (project-vc-merge-submodules nil "Don't consider submodules as the same project")
   :config
 
-  ;; Font configuration
-  (defun font-settings ()
-    "Setup font settings."
-    (when window-system (set-frame-font "Hack 9"))
-    (set-fontset-font t 'symbol "Noto Color Emoji")
-    (set-fontset-font t 'symbol "Symbola" nil 'append))
-  ;; Make sure DISPLAY is set correctly in env.
-  (defun display-env-hack ()
-    "Hack DISPLAY env variable back into env."
-    (setenv "DISPLAY" ":0")
-    )
-  (if (daemonp)
-      (progn
-        (add-hook 'server-after-make-frame-hook #'font-settings)
-        (add-hook 'server-after-make-frame-hook #'display-env-hack))
-    (font-settings))
-
   ;; Always display column number in mode line
   (column-number-mode)
   )
@@ -206,12 +189,6 @@
   :custom (flycheck-checker-error-threshold 10000 "Set error threshold a lot higher")
   :hook ((text-mode prog-mode) . flycheck-mode)
   :diminish (flycheck-mode)
-  )
-
-(use-package flycheck-languagetool
-  :hook (text-mode . flycheck-languagetool-setup)
-  :custom
-  (flycheck-languagetool-url "http://localhost:15151")
   )
 
 ;; Annotations in selection interface
@@ -291,9 +268,6 @@
     )
   )
 
-;; Citations with citeproc in org
-(use-package citeproc)
-
 ;; Sorting when filtering
 (use-package prescient
   :custom
@@ -321,7 +295,7 @@
   :demand t
   :after cape
   ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
-  :custom (tempel-path "/home/charlotte/repos/nixos-config/modules/base/emacs/snippets/*.eld")
+  :custom (tempel-path "~/repos/nixos-config/modules/shared/base/emacs/snippets/*.eld")
   :general
   (lmap
     "t i" '(tempel-insert :which-key "Insert template")

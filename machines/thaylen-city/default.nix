@@ -55,30 +55,26 @@
   };
 
   home-manager.users."charlotte.vanpetegem" = {
-    programs = {
-      # Until I get emacs set up on this machine
-      zsh.sessionVariables.EDITOR = "vim";
-      git = {
-        enable = true;
-        extraConfig = {
-          branch.autosetuprebase = "always";
-          github.user = "chvp";
-          merge.conflictStyle = "diff3";
-          pull.rebase = true;
-          rerere.enabled = true;
-          rebase.autoStash = true;
-        };
-        ignores = [
-          ".DS_Store"
-          ".data"
-          ".direnv"
-          ".envrc"
-          ".idea"
-          ".dir-locals.el"
-        ];
-        userEmail = "charlotte.vanpetegem@silverfin.com";
-        userName = "Charlotte Van Petegem";
+    programs.git = {
+      enable = true;
+      extraConfig = {
+        branch.autosetuprebase = "always";
+        github.user = "chvp";
+        merge.conflictStyle = "diff3";
+        pull.rebase = true;
+        rerere.enabled = true;
+        rebase.autoStash = true;
       };
+      ignores = [
+        ".DS_Store"
+        ".data"
+        ".direnv"
+        ".envrc"
+        ".idea"
+        ".dir-locals.el"
+      ];
+      userEmail = "charlotte.vanpetegem@silverfin.com";
+      userName = "Charlotte Van Petegem";
     };
 
     home = {

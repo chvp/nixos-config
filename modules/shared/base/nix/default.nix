@@ -36,7 +36,22 @@ in
   };
 
   config = {
-    chvp.base.zfs.homeLinks = (lib.optional config.chvp.base.nix.enableDirenv { path = ".local/share/direnv"; type = "cache"; });
+    chvp.base = {
+      emacs.extraConfig = [
+        ''
+          ;; Nix syntax support
+          (use-package nix-mode
+            :mode "\\.nix\\'"
+            )
+        ''
+      ] ++ lib.optional config.chvp.base.nix.enableDirenv ''
+        ;; Direnv integration in emacs.
+        (use-package direnv
+          :config (direnv-mode)
+          )
+      '';
+      zfs.homeLinks = (lib.optional config.chvp.base.nix.enableDirenv { path = ".local/share/direnv"; type = "cache"; });
+    };
     nix = {
       gc = {
         automatic = true;

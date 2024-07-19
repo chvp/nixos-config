@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    ./emacs
     ./nix
   ];
 

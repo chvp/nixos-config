@@ -2,7 +2,10 @@
 
 {
   imports = [
+    ./emacs
     ./nix
+    ./phone-push
+    ./tmux
     ./zfs
     ./zsh
   ];
