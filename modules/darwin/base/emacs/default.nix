@@ -4,7 +4,10 @@ let
   username = config.chvp.username;
 in
 {
-  chvp.base.emacs.basePackage = pkgs.emacs;
+  chvp.base.emacs = {
+    basePackage = pkgs.emacs;
+    extraConfig = [ (builtins.readFile ./darwin-init.el) ];
+  };
   services.emacs = {
     enable = true;
     package = config.chvp.base.emacs.package;
