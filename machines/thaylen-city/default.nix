@@ -5,6 +5,10 @@
     homeStateVersion = "24.11";
     systemStateVersion = 4;
     username = "charlotte.vanpetegem";
+    development = {
+      enable = true;
+      git.email = "charlotte.vanpetegem@silverfin.com";
+    };
   };
   networking.computerName = "Thaylen City";
 
@@ -54,34 +58,5 @@
     startup.chime = false;
   };
 
-  home-manager.users."charlotte.vanpetegem" = {
-    programs.git = {
-      enable = true;
-      extraConfig = {
-        branch.autosetuprebase = "always";
-        github.user = "chvp";
-        merge.conflictStyle = "diff3";
-        pull.rebase = true;
-        rerere.enabled = true;
-        rebase.autoStash = true;
-      };
-      ignores = [
-        ".DS_Store"
-        ".data"
-        ".direnv"
-        ".envrc"
-        ".idea"
-        ".dir-locals.el"
-      ];
-      userEmail = "charlotte.vanpetegem@silverfin.com";
-      userName = "Charlotte Van Petegem";
-    };
-
-    home = {
-      packages = with pkgs; [
-        docker-compose
-        tmux
-      ];
-    };
-  };
+  home-manager.users."charlotte.vanpetegem".home.packages = with pkgs; [ docker-compose ];
 }
