@@ -16,6 +16,7 @@
     enable = true;
     casks = [
       "docker"
+      "inkscape"
       "libreoffice"
       "rubymine"
       "tsh"
