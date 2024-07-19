@@ -9,6 +9,7 @@
       enable = true;
       git.email = "charlotte.vanpetegem@silverfin.com";
     };
+    programs.hledger.enable = true;
   };
   networking.computerName = "Thaylen City";
 

@@ -4,5 +4,6 @@
   imports = [
     ./base
     ./development
+    ./programs
   ];
 }

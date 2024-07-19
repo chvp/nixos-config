@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.programs.hledger.enable = lib.mkOption {
     default = false;
@@ -26,8 +29,6 @@
       ''
     ];
 
-    home-manager.users.charlotte = { ... }: {
-      home.packages = [ pkgs.hledger ];
-    };
+    home-manager.users.${username}.home.packages = [ pkgs.hledger ];
   };
 }
