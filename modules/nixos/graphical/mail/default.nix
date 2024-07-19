@@ -94,7 +94,7 @@ in
     chvp = {
       base = {
         emacs = {
-          extraPackages = [ (epkgs: epkgs.mu4e) ];
+          extraPackages = [ (epkgs: [ epkgs.mu4e ]) ];
           extraConfig =
             let
               mkAccountConfig = account: ''
