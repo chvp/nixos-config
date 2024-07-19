@@ -11,6 +11,10 @@ in
   services.emacs = {
     enable = true;
     package = config.chvp.base.emacs.package;
+    additionalPath = [
+      "/run/current-system/sw/bin/"
+      "/Users/${username}/.nix-profile/bin"
+    ];
   };
   home-manager.users.${username} = {
     home.packages = [
