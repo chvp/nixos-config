@@ -6,6 +6,7 @@
     ./nix
     ./phone-push
     ./tmux
+    ./wireguard
     ./zfs
     ./zsh
   ];

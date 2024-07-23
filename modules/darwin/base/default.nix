@@ -7,6 +7,7 @@ in
   imports = [
     ./emacs
     ./nix
+    ./wireguard
   ];
 
   users.users.${username}.home = "/Users/${username}";

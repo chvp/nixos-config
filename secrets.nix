@@ -98,6 +98,7 @@ in
 
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/wireguard/thaylen-city.privkey.age".publicKeys = [ thaylen-city ] ++ users;
   "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
 
