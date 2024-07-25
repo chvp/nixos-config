@@ -179,6 +179,15 @@
   (comp-deferred-compilation nil "Don't do native-comp at runtime")
   (project-vc-merge-submodules nil "Don't consider submodules as the same project")
   :config
+  (defun font-settings ()
+    "Setup font settings."
+    (when window-system
+      (progn (set-frame-font "Hack 9")
+             (set-fontset-font t 'symbol "Noto Color Emoji"))))
+
+  (if (daemonp)
+      (add-hook 'server-after-make-frame-hook #'font-settings)
+    (font-settings))
 
   ;; Always display column number in mode line
   (column-number-mode)

@@ -13,6 +13,16 @@
   };
   networking.computerName = "Thaylen City";
 
+  fonts.packages = with pkgs; [
+    hack-font
+    font-awesome
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    noto-fonts-extra
+    roboto
+  ];
+
   homebrew = {
     enable = true;
     casks = [
