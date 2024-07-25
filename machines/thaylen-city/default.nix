@@ -29,6 +29,7 @@
       "docker"
       "inkscape"
       "libreoffice"
+      "platypus"
       "rubymine"
       "tsh"
     ];
