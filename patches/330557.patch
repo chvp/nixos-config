@@ -1,0 +1,22 @@
+diff --git a/pkgs/tools/networking/mu/default.nix b/pkgs/tools/networking/mu/default.nix
+index b54c07eae9afbed..f58851df6a4b543 100644
+--- a/pkgs/tools/networking/mu/default.nix
++++ b/pkgs/tools/networking/mu/default.nix
+@@ -17,7 +17,7 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "mu";
+-  version = "1.12.5";
++  version = "1.12.6";
+ 
+   outputs = [ "out" "mu4e" ];
+ 
+@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
+     owner = "djcb";
+     repo = "mu";
+     rev = "v${version}";
+-    hash = "sha256-dQeXL+CcysmlV6VYSuZtWGSgIhoqP6Y20Qora4l0iP8=";
++    hash = "sha256-/aWKhqDWkdOGuLViBkzqQ3WdULaEdcPnWTSthQZ8j4s=";
+   };
+ 
+   postPatch = ''
