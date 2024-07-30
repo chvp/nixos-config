@@ -26,6 +26,7 @@
   homebrew = {
     enable = true;
     casks = [
+      "cyberduck"
       "docker"
       "inkscape"
       "libreoffice"
