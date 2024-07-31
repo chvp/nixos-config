@@ -30,6 +30,7 @@
       "docker"
       "inkscape"
       "libreoffice"
+      "mpv"
       "platypus"
       "rubymine"
       "tsh"
