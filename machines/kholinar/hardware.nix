@@ -21,7 +21,10 @@
   };
 
 
-  chvp.base.zfs.systemLinks = [{ path = "/etc/secureboot"; type = "cache"; }];
+  chvp.base = {
+    nix.unfreePackages = [ "displaylink" ];
+    zfs.systemLinks = [{ path = "/etc/secureboot"; type = "cache"; }];
+  };
 
   # For Secure Boot management
   environment.systemPackages = [ pkgs.sbctl ];
@@ -73,5 +76,21 @@
       ];
     };
   };
-  services.fstrim.enable = true;
+  services = {
+    fstrim.enable = true;
+    xserver.videoDrivers = [ "displaylink" "modesetting" "fbdev" ];
+  };
+  nixpkgs.overlays = [
+    (final: prev: {
+      wlroots = prev.wlroots.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [(
+          final.fetchpatch {
+            url = "https://gitlab.freedesktop.org/wlroots/wlroots/uploads/b4f932e370ed03d88f202191eaf60965/DisplayLink.patch";
+            hash = "sha256-1HheLsOSnj4OMiA35QCHkWprTNgAeG2tXrGbaQyUrF4=";
+          }
+        )];
+      });
+    })
+  ];
+  environment.variables.WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
 }
