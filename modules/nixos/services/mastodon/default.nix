@@ -7,24 +7,27 @@
   };
 
   config = lib.mkIf config.chvp.services.mastodon.enable {
-    chvp.services.nginx.hosts = [{
-      fqdn = "social.chvp.be";
-      options = {
-        root = "${pkgs.mastodon}/public/";
-        locations = {
-          "/system/".alias = "/var/lib/mastodon/public-system/";
-          "/".tryFiles = "$uri @proxy";
-          "@proxy" = {
-            proxyPass = "http://unix:/run/mastodon-web/web.socket";
-            proxyWebsockets = true;
-          };
-          "/api/v1/streaming" = {
-            proxyPass = "http://unix:/run/mastodon-streaming/streaming.socket";
-            proxyWebsockets = true;
+    chvp = {
+      base.zfs.systemLinks = [{ path = "/var/lib/redis-mastodon"; type = "cache"; }];
+      services.nginx.hosts = [{
+        fqdn = "social.chvp.be";
+        options = {
+          root = "${pkgs.mastodon}/public/";
+          locations = {
+            "/system/".alias = "/var/lib/mastodon/public-system/";
+            "/".tryFiles = "$uri @proxy";
+            "@proxy" = {
+              proxyPass = "http://unix:/run/mastodon-web/web.socket";
+              proxyWebsockets = true;
+            };
+            "/api/v1/streaming" = {
+              proxyPass = "http://unix:/run/mastodon-streaming/streaming.socket";
+              proxyWebsockets = true;
+            };
           };
         };
-      };
-    }];
+      }];
+    };
     users = {
       users = {
         mastodon.uid = 989;
