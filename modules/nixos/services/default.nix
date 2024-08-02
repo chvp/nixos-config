@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -16,5 +16,8 @@
     ./torrents
   ];
 
-  services.postgresql.package = pkgs.postgresql_15;
+  services.postgresql = {
+    package = pkgs.postgresql_15;
+    dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
+  };
 }

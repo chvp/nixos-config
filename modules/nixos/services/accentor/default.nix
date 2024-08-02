@@ -7,10 +7,7 @@
   };
 
   config = lib.mkIf config.chvp.services.accentor.enable {
-    services.postgresql = {
-      enable = true;
-      dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
-    };
+    services.postgresql.enable = true;
 
     services.accentor = {
       enable = true;

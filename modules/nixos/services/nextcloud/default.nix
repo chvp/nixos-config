@@ -41,7 +41,6 @@
       };
       postgresql = {
         enable = true;
-        dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
         ensureDatabases = [ "nextcloud" ];
         ensureUsers = [{
           name = "nextcloud";

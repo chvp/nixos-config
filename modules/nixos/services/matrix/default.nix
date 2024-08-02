@@ -76,7 +76,6 @@
       };
       postgresql = {
         enable = true;
-        dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
         ensureDatabases = [
           "matrix-synapse"
           "matrix_appservice_slack"
