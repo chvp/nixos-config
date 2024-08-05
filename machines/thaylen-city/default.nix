@@ -30,9 +30,9 @@
       "docker"
       "inkscape"
       "libreoffice"
-      "mpv"
       "platypus"
       "rubymine"
+      "stolendata-mpv"
       "tsh"
     ];
     global.brewfile = true;
