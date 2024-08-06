@@ -23,6 +23,7 @@ pkgs.devshell.mkShell {
 
   ];
   packages = with pkgs; [
+    chromedriver
     cmake
     ghostscript
     graphicsmagick
@@ -45,6 +46,10 @@ pkgs.devshell.mkShell {
     {
       name = "TERM";
       eval = "\${TERM:-xterm-256color}";
+    }
+    {
+      name = "DISABLE_SPRING";
+      value = "1";
     }
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
