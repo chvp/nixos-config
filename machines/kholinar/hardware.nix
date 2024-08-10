@@ -82,17 +82,16 @@
   };
   nixpkgs.overlays = [
     (final: prev: {
-      wlroots = prev.wlroots.overrideAttrs (old: {
+      wlroots_0_18 = prev.wlroots_0_18.overrideAttrs (old: {
         patches = (old.patches or [ ]) ++ [
           (
             final.fetchpatch {
-              url = "https://gitlab.freedesktop.org/wlroots/wlroots/uploads/b4f932e370ed03d88f202191eaf60965/DisplayLink.patch";
-              hash = "sha256-1HheLsOSnj4OMiA35QCHkWprTNgAeG2tXrGbaQyUrF4=";
+              url = "https://gitlab.freedesktop.org/kennylevinsen/wlroots/-/commit/7e5bf4aef5c61401aaf777bd45cf393c538dac3e.patch";
+              hash = "sha256-62C7xtqrPgZm+vpjKyp8OsEyE6yIyf4bgecmILi+Qy4=";
             }
           )
         ];
       });
     })
   ];
-  environment.variables.WLR_DRM_DEVICES = "/dev/dri/card0:/dev/dri/card1";
 }
