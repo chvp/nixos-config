@@ -29,10 +29,13 @@
       "cyberduck"
       "docker"
       "inkscape"
+      "jordanbaird-ice"
       "libreoffice"
       "platypus"
       "rubymine"
+      "sf-symbols"
       "stolendata-mpv"
+      "swiftbar"
       "tsh"
     ];
     global.brewfile = true;
