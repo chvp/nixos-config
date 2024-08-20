@@ -159,7 +159,10 @@
                 nixpkgs = {
                   pkgs = import nixpkgs {
                     inherit overlays system;
-                    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                    config = {
+                      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
+                      permittedInsecurePackages = [ "olm-3.2.16" ];
+                    };
                   };
                   flake.source = lib.mkForce "${nixpkgs}";
                 };
