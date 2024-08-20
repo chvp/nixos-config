@@ -20,7 +20,22 @@ pkgs.devshell.mkShell {
         git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f - <(git branch -vv | grep origin) | awk '{print $1}' | xargs -r git branch -D
       '';
     }
-
+    {
+      name = "reset-test-assets";
+      category = "[general commands]";
+      help = "Force reset test assets";
+      command = ''
+        RAILS_ENV=test bundle exec rake webpacker:clobber && RAILS_ENV=test bundle exec rake webpacker:compile
+      '';
+    }
+    {
+      name = "reset-dev-translations-js";
+      category = "[general commands]";
+      help = "Force reset translations for JS inclusion";
+      command = ''
+        WEBPACKER_PRECOMPILE=false bundle exec rails assets:precompile
+      '';
+    }
   ];
   packages = with pkgs; [
     chromedriver
