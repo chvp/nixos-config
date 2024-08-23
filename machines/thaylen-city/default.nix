@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   chvp = {
@@ -76,5 +76,8 @@
     startup.chime = false;
   };
 
-  home-manager.users."charlotte.vanpetegem".home.packages = with pkgs; [ docker-compose ];
+  home-manager.users."charlotte.vanpetegem".home = {
+    packages = with pkgs; [ docker-compose ];
+    sessionPath = [ config.homebrew.brewPrefix ];
+  };
 }
