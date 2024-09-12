@@ -137,8 +137,7 @@
         };
         darkModeScripts = {
           emacs = ''
-            emacsclient --eval "(setq catppuccin-flavor 'frappe)"
-            emacsclient --eval "(load-theme 'catppuccin :no-confirm)"
+            emacsclient --eval "(chvp--dark-mode)"
           '';
           gtk = ''
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Frappe-Compact-Blue-Dark
@@ -163,8 +162,7 @@
         };
         lightModeScripts = {
           emacs = ''
-            emacsclient --eval "(setq catppuccin-flavor 'latte)"
-            emacsclient --eval "(load-theme 'catppuccin :no-confirm)"
+            emacsclient --eval "(chvp--light-mode)"
           '';
           gtk = ''
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Catppuccin-Latte-Compact-Blue-Light

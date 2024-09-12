@@ -214,7 +214,18 @@
 ;; Theming
 (use-package catppuccin-theme
   :custom (catppuccin-flavor 'latte)
-  :config (load-theme 'catppuccin :no-confirm)
+  :config
+  (load-theme 'catppuccin :no-confirm)
+  (defun chvp--dark-mode ()
+    (interactive)
+    (progn
+      (setq catppuccin-flavor 'frappe)
+      (load-theme 'catppuccin :no-confirm)))
+  (defun chvp--light-mode ()
+    (interactive)
+    (progn
+      (setq catppuccin-flavor 'latte)
+      (load-theme 'catppuccin :no-confirm)))
   )
 
 (use-package no-littering
