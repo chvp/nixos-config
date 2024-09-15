@@ -24,43 +24,25 @@
       wireless = {
         enable = true;
         interfaces = [ wireless-interface ];
-        environmentFile = config.age.secrets."passwords/networks.age".path;
+        secretsFile = config.age.secrets."passwords/networks.age".path;
         userControlled = {
           enable = true;
           group = "network";
         };
         networks = {
-          "Public Universal Friend".psk = "@PSK_PUF@";
-          AndroidAP.psk = "@PSK_AndroidAP@";
-          draadloosnw.psk = "@PSK_draadloosnw@";
-          werknet.psk = "@PSK_werknet@";
-          Secorima.psk = "@PSK_Secorima@";
-          "Mediaraven Guest".psk = "@PSK_Mediaraven@";
-          "down".psk = "@PSK_down@";
+          "Public Universal Friend".pskRaw = "ext:PSK_PUF";
+          AndroidAP.pskRaw = "ext:PSK_AndroidAP";
+          draadloosnw.pskRaw = "ext:PSK_draadloosnw";
+          werknet.pskRaw = "ext:PSK_werknet";
+          Secorima.pskRaw = "ext:PSK_Secorima";
+          "down".pskRaw = "ext:PSK_down";
           "Zeus WPI" = {
-            psk = "@PSK_Zeus@";
+            pskRaw = "ext:PSK_Zeus";
             hidden = true;
           };
-          "Zeus Event 5G".psk = "@PSK_Zeus@";
-          "Rode Kruis-Gent (internet)".psk = "@PSK_RKG@";
-          "CityStayNet".psk = "@PSK_CityStayNet@";
-          eduroam = {
-            authProtocols = [ "WPA-EAP" ];
-            auth = ''
-              eap=PEAP
-              identity="@EDUROAM_USER@"
-              password="@EDUROAM_PASS@"
-            '';
-            extraConfig = ''
-              phase1="peaplabel=0"
-              phase2="auth=MSCHAPV2"
-              group=CCMP TKIP
-              ca_cert="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-              altsubject_match="DNS:radius.ugent.be"
-            '';
-          };
-          "GUK-huis".psk = "@PSK_GUKhuis@";
-          "DasNetwerk".psk = "@PSK_DasNetwerk@";
+          "Zeus Event 5G".pskRaw = "ext:PSK_Zeus";
+          "Rode Kruis-Gent (internet)".pskRaw = "ext:PSK_RKG";
+          "DasNetwerk".pskRaw = "ext:PSK_DasNetwerk";
         };
       };
     };
