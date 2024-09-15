@@ -30,19 +30,19 @@
           group = "network";
         };
         networks = {
-          "Public Universal Friend".pskRaw = "ext:PSK_PUF";
-          AndroidAP.pskRaw = "ext:PSK_AndroidAP";
-          draadloosnw.pskRaw = "ext:PSK_draadloosnw";
-          werknet.pskRaw = "ext:PSK_werknet";
-          Secorima.pskRaw = "ext:PSK_Secorima";
-          "down".pskRaw = "ext:PSK_down";
+          "Public Universal Friend".pskRaw = "ext:psk_puf";
+          AndroidAP.pskRaw = "ext:psk_androidap";
+          draadloosnw.pskRaw = "ext:psk_draadloosnw";
+          werknet.pskRaw = "ext:psk_werknet";
+          Secorima.pskRaw = "ext:psk_secorima";
+          "down".pskRaw = "ext:psk_down";
           "Zeus WPI" = {
-            pskRaw = "ext:PSK_Zeus";
+            pskRaw = "ext:psk_zeus";
             hidden = true;
           };
-          "Zeus Event 5G".pskRaw = "ext:PSK_Zeus";
-          "Rode Kruis-Gent (internet)".pskRaw = "ext:PSK_RKG";
-          "DasNetwerk".pskRaw = "ext:PSK_DasNetwerk";
+          "Zeus Event 5G".pskRaw = "ext:psk_zeus";
+          "Rode Kruis-Gent (internet)".pskRaw = "ext:psk_rkg";
+          "DasNetwerk".pskRaw = "ext:psk_dasnetwerk";
         };
       };
     };
@@ -70,6 +70,7 @@
 
     age.secrets."passwords/networks.age" = {
       file = ../../../../secrets/passwords/networks.age;
+      group = "network";
     };
   };
 }
