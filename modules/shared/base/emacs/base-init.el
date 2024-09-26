@@ -251,9 +251,6 @@
   :custom
   (org-directory "~/sync/Notes" "Store org journal in synced directory")
   (org-default-notes-file (concat org-directory "/inbox.org") "Capture in inbox by default")
-  (org-agenda-files '("~/sync/Notes") "Let's say all files can contain events for now")
-  (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "DOING(i)" "DONE(d)")) "Add next and doing states")
-  (org-log-into-drawer "LOGBOOK" "Log repeated task state changes into drawer named LOGBOOK")
   :demand t
   :config
   (defun find-file-in-org-directory ()
@@ -261,14 +258,6 @@
     (ido-find-file-in-dir org-directory)
     )
   (defun set-creation-date-heading-property () (org-set-property "CREATED" (format-time-string (org-time-stamp-format t t))))
-  (defun chvp--org-inbox-length ()
-    (length (org-map-entries t t (list (concat org-directory "/inbox.org"))))
-    )
-  (defun chvp--org-inbox-length-modeline ()
-    (let ((org-len (chvp--org-inbox-length)))
-      (if (<= org-len 0) nil
-        (concat "Org inbox: " (propertize (format "%d" org-len) 'face 'error)))))
-  (add-to-list 'global-mode-string '(:eval (chvp--org-inbox-length-modeline)))
   :general
   (lmap
     :keymaps 'org-mode-map
@@ -282,8 +271,6 @@
     "SPC t" '(org-todo :which-key "Cycle todo state")
     )
   (lmap
-    "o a" '(org-agenda-list :which-key "Agenda")
-    "o t" '(org-todo-list :which-key "Todo list")
     "o o" '(find-file-in-org-directory :which-key "Find org file")
     )
   )
