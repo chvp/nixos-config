@@ -13,7 +13,7 @@
         hostName = "nextcloud.vanpetegem.me";
         enable = true;
         autoUpdateApps.enable = true;
-        package = pkgs.nextcloud29;
+        package = pkgs.nextcloud30;
         caching.redis = true;
         config = {
           dbuser = "nextcloud";
