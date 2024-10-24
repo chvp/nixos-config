@@ -96,14 +96,6 @@
           }
         ];
       };
-      matrix-sliding-sync = {
-        enable = true;
-        settings = {
-          SYNCV3_SERVER = "https://matrix.vanpetegem.me";
-        };
-        environmentFile = config.age.secrets."files/servers/matrix-sliding-sync/env".path;
-        createDatabase = true;
-      };
     };
 
     systemd.services = {
@@ -223,6 +215,5 @@
       file = ../../../../secrets/files/services/matrix-hookshot/registration.yml.age;
       owner = "matrix-synapse";
     };
-    age.secrets."files/servers/matrix-sliding-sync/env".file = ../../../../secrets/files/services/matrix-sliding-sync/env.age;
   };
 }
