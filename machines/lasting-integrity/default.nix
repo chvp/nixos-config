@@ -103,7 +103,7 @@
                 root = pkgs.runCommand "well-known-matrix" { } ''
                   mkdir -p $out/.well-known/matrix
                   echo '{"m.server":"matrix.vanpetegem.me:443"}' > $out/.well-known/matrix/server
-                  echo '{"m.homeserver":{"base_url":"https://matrix.vanpetegem.me"},"org.matrix.msc3575.proxy":{"url":"https://matrix-sync.vanpetegem.me"}}' > $out/.well-known/matrix/client
+                  echo '{"m.homeserver":{"base_url":"https://matrix.vanpetegem.me"}}' > $out/.well-known/matrix/client
                 '';
                 extraConfig = ''
                   default_type application/json;

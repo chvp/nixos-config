@@ -34,10 +34,6 @@
           };
         };
       }
-      {
-        fqdn = "matrix-sync.vanpetegem.me";
-        basicProxy = "http://localhost:8009";
-      }
     ];
 
     services = {
