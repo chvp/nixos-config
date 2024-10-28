@@ -31,6 +31,7 @@
       "inkscape"
       "jordanbaird-ice"
       "libreoffice"
+      "musicbrainz-picard"
       "platypus"
       "rubymine"
       "sf-symbols"
