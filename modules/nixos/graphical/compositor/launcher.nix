@@ -12,7 +12,7 @@ let
       uni
       zsh
       ;
-    wfRecorder = pkgs.wf-recorder;
+    # wfRecorder = pkgs.wf-recorder;
     wlClipboard = pkgs.wl-clipboard;
     xdgUserDirs = pkgs.xdg-user-dirs;
   };

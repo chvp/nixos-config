@@ -210,7 +210,7 @@ in
         river
         color-picker
         screenshot
-        pkgs.wf-recorder
+        # pkgs.wf-recorder
         pkgs.wl-clipboard
         pkgs.wl-mirror
       ];
