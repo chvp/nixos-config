@@ -36,10 +36,28 @@
             location = "192.168.0.2";
           }
           {
+            path = "zroot/safe/data";
+            remotePath = "zdata/recv/urithiru/safe/data";
+            fast = true;
+            location = "192.168.0.2";
+          }
+          {
+            path = "zdata/big-apps/accentor";
+            remotePath = "zdata/recv/urithiru/big-apps/accentor";
+            fast = true;
+            location = "192.168.0.2";
+          }
+          {
             path = "zdata/data";
             remotePath = "zdata/data";
             fast = false;
             location = "192.168.0.2";
+          }
+          {
+            path = "zdata/data";
+            remotePath = "zdata/data";
+            fast = false;
+            location = "socrates.machines.robbevp.be";
           }
         ];
         rootDataset = "zroot/local/root";
