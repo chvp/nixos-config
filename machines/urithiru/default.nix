@@ -53,12 +53,6 @@
             fast = false;
             location = "192.168.0.2";
           }
-          {
-            path = "zdata/data";
-            remotePath = "zdata/data";
-            fast = false;
-            location = "socrates.machines.robbevp.be";
-          }
         ];
         rootDataset = "zroot/local/root";
       };
@@ -72,5 +66,10 @@
     };
   };
 
+  services.znapzend.zetup."zdata/data".destinations."socrates.machines.robbevp.be" = {
+    plan = "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
+    host = "socrates.machines.robbevp.be";
+    dataset = "zdata/data";
+  };
   services.telegraf.extraConfig.inputs.disk.mount_points = [ "/boot/ESP0" "/boot/ESP1" ];
 }
