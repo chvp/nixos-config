@@ -25,6 +25,8 @@ in
         "accentor.tech"
         "chvp.be"
         "cvpetegem.be"
+        "estherdereys.be"
+        "eenstweedrie.be"
         "robbe.be"
         "robbevanpetegem.be"
         "robbevp.be"
@@ -63,6 +65,14 @@ in
         "webmaster@vanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/webmaster@vanpetegem.be".path;
           aliases = [ "webmaster@vanpetegem.me" ];
+        };
+        "info@eenstweedrie.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/info@eenstweedrie.be".path;
+          aliases = [ "@eenstweedrie.be" ];
+        };
+        "hallo@estherdereys.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/hallo@estherdereys.be".path;
+          aliases = [ "@estherdereys.be" ];
         };
       };
       indexDir = "${config.chvp.cachePrefix}/var/lib/dovecot/indices";
@@ -153,8 +163,10 @@ in
 
     age.secrets = {
       "passwords/services/mail/charlotte@vanpetegem.be".file = ../../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age;
+      "passwords/services/mail/hallo@estherdereys.be".file = ../../../../secrets/passwords/services/mail/hallo_at_estherdereys.be.age;
       "passwords/services/mail/hallo@robbe.be".file = ../../../../secrets/passwords/services/mail/hallo_at_robbe.be.age;
       "passwords/services/mail/huis@vanpetegem.me".file = ../../../../secrets/passwords/services/mail/huis_at_vanpetegem.me.age;
+      "passwords/services/mail/info@eenstweedrie.be".file = ../../../../secrets/passwords/services/mail/info_at_eenstweedrie.be.age;
       "passwords/services/mail/noreply@vanpetegem.me".file = ../../../../secrets/passwords/services/mail/noreply_at_vanpetegem.me.age;
       "passwords/services/mail/peter@vanpetegem.me".file = ../../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
       "passwords/services/mail/postbot@vanpetegem.be".file = ../../../../secrets/passwords/services/mail/postbot_at_vanpetegem.be.age;

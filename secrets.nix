@@ -48,8 +48,10 @@ in
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/hallo_at_estherdereys.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/hallo_at_robbe.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/huis_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/info_at_eenstweedrie.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/noreply_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/postbot_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
