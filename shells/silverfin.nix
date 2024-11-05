@@ -48,6 +48,7 @@ pkgs.devshell.mkShell {
     minikube
     mupdf-headless
     nodejs_18
+    poppler_utils
     (pkgs.lowPrio postgresql)
     xsv
     yarn
