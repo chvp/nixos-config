@@ -48,7 +48,7 @@
   packages = with pkgs; [
     cmake
     nodejs
-    postgresql_14
+    (lib.lowPrio postgresql_14)
     yarn
   ];
   serviceGroups.server.services = {
@@ -57,6 +57,6 @@
   };
   language.ruby = {
     package = pkgs.ruby_3_3;
-    nativeDeps = [ pkgs.sqlite pkgs.libmysqlclient pkgs.zlib pkgs.openssl pkgs.libyaml ];
+    nativeDeps = [ pkgs.postgresql_14 pkgs.zlib pkgs.openssl pkgs.libyaml ];
   };
 }
