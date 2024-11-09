@@ -16,6 +16,11 @@ let
       privkeyFile = config.age.secrets."files/wireguard/lasting-integrity.privkey".path;
       ip = "10.240.0.1";
     };
+    marabethia = {
+      pubkey = "h451oXBTzim1POLmnJC1OtFzbIXyxg6d5qpFFdHLbRs=";
+      privkeyFile = config.age.secrets."files/wireguard/marabethia.privkey".path;
+      ip = "10.240.0.6";
+    };
     thaylen-city = {
       pubkey = "O0q2/W7dRM4LvAL9MSDZqAbGSzqi8AHLVl1sJsRDsUY=";
       privkeyFile = config.age.secrets."files/wireguard/thaylen-city.privkey".path;

@@ -6,6 +6,10 @@
       default = false;
       example = true;
     };
+    publicInterface = lib.mkOption {
+      default = "eno3";
+      example = "eno1";
+    };
     publicIPV4 = lib.mkOption {
       example = {
         ip = "1.2.3.4";
@@ -18,6 +22,10 @@
         gateway = "1:2:3:ff:ff:ff:ff:ff";
       };
     };
+    internalInterface = lib.mkOption {
+      default = "eno4";
+      example = "eno2";
+    };
     internalIPV4 = lib.mkOption {
       example = "192.168.0.1";
     };
@@ -28,9 +36,9 @@
     systemd.network = {
       enable = true;
       networks = with config.chvp.base.network.ovh; {
-        eno3 = {
+        "${publicInterface}" = {
           enable = true;
-          matchConfig = { Name = "eno3"; };
+          matchConfig = { Name = "${publicInterface}"; };
           address = [
             "${publicIPV4.ip}/24"
             "${publicIPV6.ip}/64"
@@ -49,9 +57,9 @@
             "2606:4700:4700::1001"
           ];
         };
-        eno4 = {
+        "${internalInterface}" = {
           enable = true;
-          matchConfig = { Name = "eno4"; };
+          matchConfig = { Name = "${internalInterface}"; };
           address = [ "${internalIPV4}/16" ];
           routes = [
             { Destination = "${internalIPV4}/16"; }

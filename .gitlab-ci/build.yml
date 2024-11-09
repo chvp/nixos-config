@@ -11,6 +11,7 @@ build-nixos-configurations:
       - HOST_TO_BUILD:
           - kholinar
           - lasting-integrity
+          - marabethia
           - urithiru
   script:
     - nix-env --quiet -j8 -iA cachix -f https://cachix.org/api/v1/install

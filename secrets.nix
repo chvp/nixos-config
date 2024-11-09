@@ -1,16 +1,19 @@
 let
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   lasting-integrity = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKJmeY7j5LxWVv3fKzqG4Bvg/ZhOp8iwk0utpyMWMSk";
+  marabethia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUP1r937+PLiqdyUuqbYoyAs04/2AxuXS13grU+fvpA";
   thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/sIkgf7aYX/JcWWp/dCHgq7sJ5WDYYyWSn3DvkW4gB";
   urithiru = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrzOpyzDc5BVtAeb5//PnMRcp+9B+DjfU7p2YpaH6a2";
   nixosHosts = [
     kholinar
     lasting-integrity
+    marabethia
     urithiru
   ];
   hosts = [
     kholinar
     lasting-integrity
+    marabethia
     thaylen-city
     urithiru
   ];
@@ -23,6 +26,7 @@ let
   ];
   servers = [
     lasting-integrity
+    marabethia
     urithiru
   ];
   charlotte = [
@@ -56,7 +60,7 @@ in
   "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/postbot_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/robbe_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/robbe_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/ssmtp-pass.age".publicKeys = nixosHosts ++ users;
 
@@ -99,6 +103,7 @@ in
 
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/wireguard/marabethia.privkey.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/wireguard/thaylen-city.privkey.age".publicKeys = [ thaylen-city ] ++ users;
   "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
