@@ -19,6 +19,7 @@ build-nixos-configurations:
   parallel:
     matrix:
       - HOST_TO_BUILD:
+          - elendel
           - kholinar
           - lasting-integrity
           - marabethia

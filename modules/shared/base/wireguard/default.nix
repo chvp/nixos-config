@@ -2,6 +2,11 @@
 
 let
   data = {
+    elendel = {
+      pubkey = "XqDE9FuVWnQOANsyDkbZMPzJ10MoAKkwewmP/kujlGY=";
+      privkeyFile = config.age.secrets."files/wireguard/elendel.privkey".path;
+      ip = "10.240.0.7";
+    };
     fairphone = {
       pubkey = "mHAq+2AP1EZdlSZIxA8UCret8EStrR3nEIU2x6NVETE=";
       ip = "10.240.0.4";

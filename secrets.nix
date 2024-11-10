@@ -1,16 +1,19 @@
 let
+  elendel = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZU5fDbqEkllipbknJy/Dm3Fcicb5gscVzmsFG/9RoA";
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   lasting-integrity = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKJmeY7j5LxWVv3fKzqG4Bvg/ZhOp8iwk0utpyMWMSk";
   marabethia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUP1r937+PLiqdyUuqbYoyAs04/2AxuXS13grU+fvpA";
   thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/sIkgf7aYX/JcWWp/dCHgq7sJ5WDYYyWSn3DvkW4gB";
   urithiru = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrzOpyzDc5BVtAeb5//PnMRcp+9B+DjfU7p2YpaH6a2";
   nixosHosts = [
+    elendel
     kholinar
     lasting-integrity
     marabethia
     urithiru
   ];
   hosts = [
+    elendel
     kholinar
     lasting-integrity
     marabethia
@@ -25,6 +28,7 @@ let
     thaylen-city
   ];
   servers = [
+    elendel
     lasting-integrity
     marabethia
     urithiru
@@ -101,6 +105,7 @@ in
   "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
 
+  "secrets/files/wireguard/elendel.privkey.age".publicKeys = [ elendel ] ++ users;
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/wireguard/marabethia.privkey.age".publicKeys = [ marabethia ] ++ users;
