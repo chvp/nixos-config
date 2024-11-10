@@ -77,12 +77,6 @@ in
   "secrets/passwords/services/git/secret.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/gitlab-runner/registration.age".publicKeys = [ urithiru ] ++ users;
 
-  "secrets/passwords/services/mastodon/otp.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mastodon/key.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mastodon/vapid-public.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mastodon/vapid-private.age".publicKeys = [ lasting-integrity ] ++ users;
-
-  "secrets/passwords/services/garmin2influx-env.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/smtp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/secret-key.age".publicKeys = [ lasting-integrity ] ++ users;

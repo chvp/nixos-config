@@ -54,10 +54,6 @@
       device = "zdata/big-apps/influxdb2";
       fsType = "zfs";
     };
-    "/var/lib/mastodon/public-system" = {
-      device = "zdata/big-apps/mastodon";
-      fsType = "zfs";
-    };
     "/var/lib/git" = {
       device = "zdata/big-apps/git";
       fsType = "zfs";

@@ -7,7 +7,6 @@
     ./data-access
     ./git
     ./mail
-    ./mastodon
     ./matrix
     ./nextcloud
     ./nginx
