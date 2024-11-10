@@ -5,9 +5,7 @@
     ./accentor
     ./containers
     ./data-access
-    ./garmin-scraper
     ./git
-    ./grafana
     ./mail
     ./mastodon
     ./matrix

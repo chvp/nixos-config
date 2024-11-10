@@ -72,5 +72,4 @@
     host = "socrates.machines.robbevp.be";
     dataset = "zdata/data";
   };
-  services.telegraf.extraConfig.inputs.disk.mount_points = [ "/boot/ESP0" "/boot/ESP1" ];
 }

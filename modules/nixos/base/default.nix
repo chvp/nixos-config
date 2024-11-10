@@ -10,7 +10,6 @@
     ./smartd
     ./ssh
     ./sshd
-    ./telegraf
     ./tmux
     ./zfs
     ./zsh

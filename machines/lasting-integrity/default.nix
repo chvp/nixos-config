@@ -72,9 +72,7 @@
       };
     };
     services = {
-      garmin-scraper.enable = true;
       git.enable = true;
-      grafana.enable = true;
       mail.enable = true;
       mastodon.enable = true;
       matrix.enable = true;
@@ -139,5 +137,4 @@
     };
   };
   programs.msmtp.enable = false;
-  services.telegraf.extraConfig.inputs.disk.mount_points = [ "/boot/ESP0" "/boot/ESP1" ];
 }

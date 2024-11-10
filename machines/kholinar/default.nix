@@ -49,6 +49,4 @@
       torrents.enable = true;
     };
   };
-
-  services.telegraf.extraConfig.inputs.disk.mount_points = [ "/boot" ];
 }
