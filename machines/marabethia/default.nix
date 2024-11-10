@@ -37,5 +37,32 @@
       particles.server = true;
       tetris.server = true;
     };
+    services = {
+      nginx.hosts = [
+        {
+          fqdn = "cvpetegem.be";
+          options.locations."/".return = "307 https://www.chvp.be$request_uri";
+        }
+        {
+          fqdn = "www.cvpetegem.be";
+          options.locations."/".return = "307 https://www.chvp.be$request_uri";
+        }
+        {
+          fqdn = "chvp.be";
+          options.locations = {
+            "/".return = "307 https://www.chvp.be$request_uri";
+          };
+        }
+        {
+          fqdn = "www.chvp.be";
+          options.root = pkgs."www.chvp.be";
+        }
+        {
+          fqdn = "vanpetegem.be";
+          options.locations."/".return = "307 https://www.vanpetegem.be$request_uri";
+        }
+        { fqdn = "www.vanpetegem.be"; }
+      ];
+    };
   };
 }

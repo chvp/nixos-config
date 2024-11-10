@@ -78,11 +78,6 @@
       matrix.enable = true;
       nginx.hosts = [
         {
-          fqdn = "vanpetegem.be";
-          options.locations."/".return = "307 https://www.vanpetegem.be$request_uri";
-        }
-        { fqdn = "www.vanpetegem.be"; }
-        {
           fqdn = "vanpetegem.me";
           options = {
             locations = {
@@ -113,25 +108,6 @@
           };
         }
         { fqdn = "www.vanpetegem.me"; }
-        {
-          fqdn = "cvpetegem.be";
-          options.locations."/".return = "307 https://www.chvp.be$request_uri";
-        }
-        {
-          fqdn = "www.cvpetegem.be";
-          options.locations."/".return = "307 https://www.chvp.be$request_uri";
-        }
-        {
-          fqdn = "chvp.be";
-          options.locations = {
-            "/".return = "307 https://www.chvp.be$request_uri";
-            "/phd/register".return = "307 https://nextcloud.vanpetegem.me/apps/forms/s/PrWYKWkwgwA7naE3ryRwmfcd";
-          };
-        }
-        {
-          fqdn = "www.chvp.be";
-          options.root = pkgs."www.chvp.be";
-        }
       ];
       nextcloud.enable = true;
     };
