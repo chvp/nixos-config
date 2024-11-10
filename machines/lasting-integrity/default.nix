@@ -71,10 +71,6 @@
         rootPool = "zroot";
       };
     };
-    games = {
-      particles.server = true;
-      tetris.server = true;
-    };
     services = {
       garmin-scraper.enable = true;
       git.enable = true;

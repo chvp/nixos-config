@@ -33,5 +33,9 @@
         rootPool = "zroot";
       };
     };
+    games = {
+      particles.server = true;
+      tetris.server = true;
+    };
   };
 }
