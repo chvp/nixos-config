@@ -31,6 +31,7 @@
           }
         ];
         rootDataset = "rpool/local/root";
+        rootPool = "rpool";
       };
     };
     development = {

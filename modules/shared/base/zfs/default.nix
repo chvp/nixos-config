@@ -45,5 +45,8 @@
     rootDataset = lib.mkOption {
       example = "rpool/local/root";
     };
+    rootPool = lib.mkOption {
+      example = "rpool";
+    };
   };
 }

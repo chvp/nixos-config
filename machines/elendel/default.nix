@@ -42,6 +42,7 @@
       zfs = {
         enable = true;
         rootDataset = "zroot/local/root";
+        rootPool = "zroot";
       };
     };
   };

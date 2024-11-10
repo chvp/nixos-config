@@ -68,6 +68,7 @@
           }
         ];
         rootDataset = "zroot/local/root";
+        rootPool = "zroot";
       };
     };
     games = {

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   config = lib.mkIf config.chvp.base.zfs.enable {
@@ -8,9 +8,21 @@
     boot = {
       supportedFilesystems = [ "zfs" ];
       zfs.requestEncryptionCredentials = config.chvp.base.zfs.encrypted;
-      initrd.postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r ${config.chvp.base.zfs.rootDataset}@blank
-      '';
+      initrd.systemd = {
+        enable = true;
+        services.rollback = {
+          description = "Rollback root filesystem to a pristine state on boot";
+          wantedBy = [ "initrd.target" ];
+          after = [ "zfs-import-${config.chvp.base.zfs.rootPool}.service" ];
+          before = [ "sysroot.mount" ];
+          path = with pkgs; [ zfs ];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig.Type = "oneshot";
+          script = ''
+            zfs rollback -r ${config.chvp.base.zfs.rootDataset}@blank && echo "  >> >> rollback complete << <<"
+          '';
+        };
+      };
     };
 
     services = {

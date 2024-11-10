@@ -55,6 +55,7 @@
           }
         ];
         rootDataset = "zroot/local/root";
+        rootPool = "zroot";
       };
     };
     services = {
