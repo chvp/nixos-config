@@ -50,10 +50,6 @@
       device = "zdata/big-apps/nextcloud";
       fsType = "zfs";
     };
-    "/var/lib/influxdb2" = {
-      device = "zdata/big-apps/influxdb2";
-      fsType = "zfs";
-    };
     "/var/lib/git" = {
       device = "zdata/big-apps/git";
       fsType = "zfs";

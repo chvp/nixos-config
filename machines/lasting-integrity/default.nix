@@ -37,12 +37,6 @@
             location = "192.168.0.1";
           }
           {
-            path = "zdata/big-apps/influxdb2";
-            remotePath = "zdata/recv/lasting-integrity/big-apps/influxdb2";
-            fast = true;
-            location = "192.168.0.1";
-          }
-          {
             path = "zdata/big-apps/git";
             remotePath = "zdata/recv/lasting-integrity/big-apps/git";
             fast = true;
