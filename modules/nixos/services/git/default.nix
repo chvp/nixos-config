@@ -1,85 +1,97 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./runner.nix ];
-
   options.chvp.services.git.enable = lib.mkOption {
     default = false;
     example = true;
   };
 
   config = lib.mkIf config.chvp.services.git.enable {
-    chvp.services.nginx.hosts = [{
-      fqdn = "git.chvp.be";
-      options = {
-        locations."/" = {
-          proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
-          extraConfig = ''
-            client_max_body_size 50M;
-          '';
+    chvp.services.nginx.hosts = [
+      {
+        fqdn = "git.chvp.be";
+        options = {
+          locations."/" = {
+            proxyPass = "http://unix:/run/forgejo/forgejo.socket";
+            extraConfig = ''
+              client_max_body_size 50M;
+            '';
+          };
         };
-      };
-    }];
+      }
+    ];
     users = {
       users = {
         git = {
-          uid = lib.mkForce 963;
+          home = "/var/lib/forgejo";
           group = "git";
           isSystemUser = true;
           useDefaultShell = true;
         };
         nginx.extraGroups = [ "git" ];
       };
-      groups.git.gid = lib.mkForce 963;
+      groups.git = {};
     };
-    services.openssh.settings.AcceptEnv = "GIT_PROTOCOL";
-    services.gitlab = {
-      enable = true;
-      statePath = "/var/lib/git/state";
-      backup.path = "/var/lib/git/backup";
-      databaseCreateLocally = true;
-      databaseUsername = "git";
-      databaseName = "git";
-      user = "git";
-      group = "git";
-      host = "git.chvp.be";
-      port = 443;
-      https = true;
-      initialRootEmail = "charlotte@vanpetegem.be";
-      initialRootPasswordFile = config.age.secrets."passwords/services/git/initial-root-password".path;
-      # Hack, https://github.com/NixOS/nixpkgs/pull/135926 broke stuff
-      pages.settings.pages-domain = "not.actually.enabled";
-      secrets = {
-        dbFile = config.age.secrets."passwords/services/git/db".path;
-        jwsFile = config.age.secrets."passwords/services/git/jws".path;
-        otpFile = config.age.secrets."passwords/services/git/otp".path;
-        secretFile = config.age.secrets."passwords/services/git/secret".path;
-      };
-      smtp = {
+    services = {
+      forgejo = {
         enable = true;
-        enableStartTLSAuto = false;
+        stateDir = "/var/lib/forgejo";
+        user = "git";
+        group = "git";
+        database = {
+          type = "postgres";
+          user = "git";
+          name = "git";
+          createDatabase = true;
+        };
+        settings = {
+          repository = {
+            ENABLE_PUSH_CREATE_USER = true;
+            ENABLE_PUSH_CREATE_ORG = true;
+          };
+          server = {
+            DOMAIN = "git.chvp.be";
+            PROTOCOL = "http+unix";
+            ROOT_URL = "https://git.chvp.be/";
+            HTTP_ADDR = "/run/forgejo/forgejo.socket";
+          };
+          service.EMAIL_DOMAIN_ALLOWLIST = "vanpetegem.be";
+          mailer = {
+            ENABLED = true;
+            PROTOCOL = "smtps";
+            SMTP_ADDR = "mail.vanpetegem.me";
+            SMPT_PORT = 465;
+            USER = "git@chvp.be";
+            FROM = "Git <git@chvp.be>";
+          };
+          "email.incoming" = {
+            ENABLED = true;
+            REPLY_TO_ADDRESS = "git+%{token}@chvp.be";
+            HOST = "mail.vanpetegem.me";
+            PORT = 993;
+            USERNAME = "git@chvp.be";
+            USE_TLS = true;
+          };
+          session = {
+            COOKIE_SECURE = true;
+            PROVIDER = "db";
+            COOKIE_NAME = "forgejo_session";
+          };
+          log = {
+            ROOT_PATH = "/var/log/forgejo";
+          };
+        };
+        secrets = {
+          mailer.PASSWD = config.age.secrets."passwords/services/git/mail-password".path;
+          "email.incoming".PASSWORD = config.age.secrets."passwords/services/git/mail-password".path;
+        };
       };
     };
-
-    age.secrets."passwords/services/git/initial-root-password" = {
-      file = ../../../../secrets/passwords/services/git/initial-root-password.age;
-      owner = "git";
-    };
-    age.secrets."passwords/services/git/db" = {
-      file = ../../../../secrets/passwords/services/git/db.age;
-      owner = "git";
-    };
-    age.secrets."passwords/services/git/jws" = {
-      file = ../../../../secrets/passwords/services/git/jws.age;
-      owner = "git";
-    };
-    age.secrets."passwords/services/git/otp" = {
-      file = ../../../../secrets/passwords/services/git/otp.age;
-      owner = "git";
-    };
-    age.secrets."passwords/services/git/secret" = {
-      file = ../../../../secrets/passwords/services/git/secret.age;
-      owner = "git";
+    age.secrets = {
+      "passwords/services/git/mail-password" = {
+        file = ../../../../secrets/passwords/services/git/mail-password.age;
+        owner = "git";
+      };
     };
   };
 }

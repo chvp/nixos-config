@@ -63,7 +63,6 @@
       containers.externalInterface = "eno3";
       data-access.enable = true;
       torrents.enable = true;
-      git.runner.enable = true;
     };
   };
 

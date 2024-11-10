@@ -57,6 +57,14 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+    "/var/lib/forgejo" = {
+      device = "zroot/safe/services/forgejo";
+      fsType = "zfs";
+    };
+    "/var/lib/postgresql" = {
+      device = "zroot/safe/services/postgresql";
+      fsType = "zfs";
+    };
   };
 
   swapDevices = [

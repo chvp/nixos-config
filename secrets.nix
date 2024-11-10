@@ -56,6 +56,7 @@ in
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/git_at_chvp.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/hallo_at_estherdereys.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/hallo_at_robbe.be.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/mail/huis_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
@@ -70,12 +71,7 @@ in
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
-  "secrets/passwords/services/git/initial-root-password.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/git/db.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/git/jws.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/git/otp.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/git/secret.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/gitlab-runner/registration.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/passwords/services/git/mail-password.age".publicKeys = [ marabethia ] ++ users;
 
   "secrets/passwords/services/grafana/smtp.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;

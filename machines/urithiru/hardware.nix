@@ -49,10 +49,6 @@
       device = "zdata/data";
       fsType = "zfs";
     };
-    "/var/lib/private/gitlab-runner" = {
-      device = "zdata/big-apps/gitlab-runner";
-      fsType = "zfs";
-    };
     "/var/lib/accentor" = {
       device = "zdata/big-apps/accentor";
       fsType = "zfs";

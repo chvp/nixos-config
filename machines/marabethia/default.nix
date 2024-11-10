@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, config, ... }:
 
 {
   imports = [ ./hardware.nix ];
@@ -38,6 +38,7 @@
       tetris.server = true;
     };
     services = {
+      git.enable = true;
       nginx.hosts = [
         {
           fqdn = "cvpetegem.be";
@@ -65,4 +66,5 @@
       ];
     };
   };
+  services.postgresql.dataDir = lib.mkForce "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
 }

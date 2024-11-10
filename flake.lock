@@ -629,19 +629,17 @@
         ]
       },
       "locked": {
-        "host": "git.chvp.be",
         "lastModified": 1731254890,
         "narHash": "sha256-NPDg6upIPvfp9dMB1HucAfkPn2NkwRhjd99dSRwdq3E=",
-        "owner": "chvp",
-        "repo": "www.chvp.be",
+        "ref": "refs/heads/main",
         "rev": "55c0a8de44be8bf46081c8310fbd9e89d62281b2",
-        "type": "gitlab"
+        "revCount": 29,
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/www.chvp.be"
       },
       "original": {
-        "host": "git.chvp.be",
-        "owner": "chvp",
-        "repo": "www.chvp.be",
-        "type": "gitlab"
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/www.chvp.be"
       }
     }
   },

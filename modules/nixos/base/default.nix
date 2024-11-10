@@ -18,7 +18,7 @@
   config = {
     system.autoUpgrade = {
       enable = true;
-      flake = "gitlab:chvp/nixos-config?host=git.chvp.be";
+      flake = "git+https://git.chvp.be/chvp/nixos-config";
       dates = "01/4:00";
       randomizedDelaySec = "10min";
     };

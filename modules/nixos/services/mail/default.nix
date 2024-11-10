@@ -45,6 +45,9 @@ in
           hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
           sendOnly = true;
         };
+        "git@chvp.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/git@chvp.be".path;
+        };
         "peter@vanpetegem.me".hashedPasswordFile = config.age.secrets."passwords/services/mail/peter@vanpetegem.me".path;
         "postbot@vanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.be".path;
@@ -163,6 +166,7 @@ in
 
     age.secrets = {
       "passwords/services/mail/charlotte@vanpetegem.be".file = ../../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age;
+      "passwords/services/mail/git@chvp.be".file = ../../../../secrets/passwords/services/mail/git_at_chvp.be.age;
       "passwords/services/mail/hallo@estherdereys.be".file = ../../../../secrets/passwords/services/mail/hallo_at_estherdereys.be.age;
       "passwords/services/mail/hallo@robbe.be".file = ../../../../secrets/passwords/services/mail/hallo_at_robbe.be.age;
       "passwords/services/mail/huis@vanpetegem.me".file = ../../../../secrets/passwords/services/mail/huis_at_vanpetegem.me.age;

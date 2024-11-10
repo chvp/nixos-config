@@ -88,7 +88,7 @@
       };
     };
     www-chvp-be = {
-      url = "gitlab:chvp/www.chvp.be?host=git.chvp.be";
+      url = "git+https://git.chvp.be/chvp/www.chvp.be";
       inputs = {
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
