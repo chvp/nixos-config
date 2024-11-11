@@ -37,8 +37,20 @@
             location = "elendel.vanpetegem.me";
           }
           {
+            path = "zroot/safe/services/dkim";
+            remotePath = "zdata/recv/marabethia/safe/services/dkim";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
             path = "zroot/safe/services/forgejo";
             remotePath = "zdata/recv/marabethia/safe/services/forgejo";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
+            path = "zroot/safe/services/mail";
+            remotePath = "zdata/recv/marabethia/safe/services/mail";
             fast = true;
             location = "elendel.vanpetegem.me";
           }
@@ -51,6 +63,12 @@
           {
             path = "zroot/safe/services/postgresql";
             remotePath = "zdata/recv/marabethia/safe/services/postgresql";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
+            path = "zroot/safe/services/sieve";
+            remotePath = "zdata/recv/marabethia/safe/services/sieve";
             fast = true;
             location = "elendel.vanpetegem.me";
           }
