@@ -7,7 +7,6 @@
   };
 
   config = lib.mkIf config.chvp.services.matrix.enable {
-    chvp.base.zfs.systemLinks = [{ path = "/var/lib/matrix-hookshot"; type = "data"; }];
     chvp.services.nginx.hosts = [
       {
         fqdn = "matrix.vanpetegem.me";
@@ -68,22 +67,22 @@
         extraConfigFiles = [
           config.age.secrets."files/services/matrix-synapse/config.yml".path
         ];
-        dataDir = "${config.chvp.dataPrefix}/var/lib/matrix-synapse";
+        dataDir = "/var/lib/matrix-synapse";
       };
       postgresql = {
         enable = true;
         ensureDatabases = [
           "matrix-synapse"
-          "matrix_appservice_slack"
-          "mautrix_whatsapp"
+          "matrix-appservice-slack"
+          "mautrix-whatsapp"
         ];
         ensureUsers = [
           {
-            name = "matrix_appservice_slack";
+            name = "matrix-appservice-slack";
             ensureDBOwnership = true;
           }
           {
-            name = "mautrix_whatsapp";
+            name = "mautrix-whatsapp";
             ensureDBOwnership = true;
           }
           {
@@ -102,8 +101,8 @@
         requires = [ "postgresql.service" "matrix-synapse.service" ];
         script = "${pkgs.matrix-appservice-slack}/bin/matrix-appservice-slack --config ${config.age.secrets."files/services/matrix-appservice-slack/config.yml".path} --file ${config.age.secrets."files/services/matrix-appservice-slack/registration.yml".path}";
         serviceConfig = {
-          User = "matrix_appservice_slack";
-          Group = "matrix_appservice_slack";
+          User = "matrix-appservice-slack";
+          Group = "matrix-appservice-slack";
         };
       };
       matrix-synapse = {
@@ -116,8 +115,8 @@
         requires = [ "postgresql.service" "matrix-synapse.service" ];
         script = "${pkgs.mautrix-whatsapp}/bin/mautrix-whatsapp --config ${config.age.secrets."files/services/mautrix-whatsapp/config.yml".path}";
         serviceConfig = {
-          User = "mautrix_whatsapp";
-          Group = "mautrix_whatsapp";
+          User = "mautrix-whatsapp";
+          Group = "mautrix-whatsapp";
         };
       };
       matrix-hookshot = {
@@ -127,8 +126,8 @@
         requires = [ "matrix-synapse.service" ];
         script = "${pkgs.matrix-hookshot}/bin/matrix-hookshot ${config.age.secrets."files/services/matrix-hookshot/config.yml".path} ${config.age.secrets."files/services/matrix-hookshot/registration.yml".path}";
         serviceConfig = {
-          User = "matrix_hookshot";
-          Group = "matrix_hookshot";
+          User = "matrix-hookshot";
+          Group = "matrix-hookshot";
           WorkingDirectory = "/var/lib/matrix-hookshot";
         };
       };
@@ -136,64 +135,60 @@
 
     users = {
       users = {
-        matrix_appservice_slack = {
-          uid = 998;
-          group = "matrix_appservice_slack";
+        matrix-appservice-slack = {
+          group = "matrix-appservice-slack";
+          home = "/var/lib/matrix-appservice-slack";
+          createHome = true;
           isSystemUser = true;
         };
-        mautrix_whatsapp = {
-          uid = 997;
-          group = "mautrix_whatsapp";
+        mautrix-whatsapp = {
+          group = "mautrix-whatsapp";
+          home = "/var/lib/mautrix-whatsapp";
+          createHome = true;
           isSystemUser = true;
         };
-        matrix_hookshot = {
-          uid = 979;
-          group = "matrix_hookshot";
+        matrix-hookshot = {
+          group = "matrix-hookshot";
           home = "/var/lib/matrix-hookshot";
+          createHome = true;
           isSystemUser = true;
         };
       };
       groups = {
-        matrix_appservice_slack = {
-          gid = 998;
-        };
-        mautrix_whatsapp = {
-          gid = 997;
-        };
-        matrix_hookshot = {
-          gid = 979;
-        };
+        matrix-appservice-slack = {};
+        matrix-hookshot = {};
+        mautrix-whatsapp = {};
       };
     };
 
     age.secrets."files/services/matrix-appservice-slack/config.yml" = {
       file = ../../../../secrets/files/services/matrix-appservice-slack/config.yml.age;
-      owner = "matrix_appservice_slack";
+      owner = "matrix-appservice-slack";
     };
     age.secrets."files/services/matrix-appservice-slack/registration.yml" = {
       file = ../../../../secrets/files/services/matrix-appservice-slack/registration.yml.age;
-      owner = "matrix_appservice_slack";
+      owner = "matrix-appservice-slack";
     };
     age.secrets."files/services/matrix-hookshot/config.yml" = {
       file = ../../../../secrets/files/services/matrix-hookshot/config.yml.age;
-      owner = "matrix_hookshot";
+      owner = "matrix-hookshot";
     };
     age.secrets."files/services/matrix-hookshot/registration.yml" = {
       file = ../../../../secrets/files/services/matrix-hookshot/registration.yml.age;
-      owner = "matrix_hookshot";
+      owner = "matrix-hookshot";
     };
     age.secrets."files/services/matrix-hookshot/passkey.pem" = {
       path = "/var/lib/matrix-hookshot/passkey.pem";
       file = ../../../../secrets/files/services/matrix-hookshot/passkey.pem.age;
-      owner = "matrix_hookshot";
+      owner = "matrix-hookshot";
     };
     age.secrets."files/services/mautrix-whatsapp/config.yml" = {
       file = ../../../../secrets/files/services/mautrix-whatsapp/config.yml.age;
-      owner = "mautrix_whatsapp";
+      owner = "mautrix-whatsapp";
     };
     age.secrets."files/services/mautrix-whatsapp/registration.yml" = {
       file = ../../../../secrets/files/services/mautrix-whatsapp/registration.yml.age;
-      owner = "mautrix_whatsapp";
+      owner = "mautrix-whatsapp";
     };
     age.secrets."files/services/matrix-synapse/config.yml" = {
       file = ../../../../secrets/files/services/matrix-synapse/config.yml.age;

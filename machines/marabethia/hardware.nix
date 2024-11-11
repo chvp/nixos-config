@@ -69,6 +69,10 @@
       device = "zroot/safe/services/mail";
       fsType = "zfs";
     };
+    "/var/lib/matrix-synapse" = {
+      device = "zroot/safe/services/matrix-synapse";
+      fsType = "zfs";
+    };
     "/var/lib/nextcloud" = {
       device = "zroot/safe/services/nextcloud";
       fsType = "zfs";

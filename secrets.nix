@@ -82,14 +82,14 @@ in
 
   "secrets/files/programs/transmission/config.json.age".publicKeys = [ urithiru ] ++ users;
 
-  "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/matrix-hookshot/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/matrix-hookshot/passkey.pem.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/matrix-hookshot/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/matrix-hookshot/config.yml.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/matrix-hookshot/passkey.pem.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/matrix-hookshot/registration.yml.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ marabethia ] ++ users;
 
   "secrets/files/wireguard/elendel.privkey.age".publicKeys = [ elendel ] ++ users;
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
