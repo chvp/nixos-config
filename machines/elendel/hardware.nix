@@ -59,6 +59,14 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+    "/var/lib/docker" = {
+      device = "zroot/local/services/docker";
+      fsType = "zfs";
+    };
+    "/var/lib/private/gitea-runner" = {
+      device = "zroot/local/services/gitea-runner";
+      fsType = "zfs";
+    };
   };
 
   swapDevices = [

@@ -6,6 +6,8 @@
     example = true;
   };
 
+  imports = [ ./runner.nix ];
+
   config = lib.mkIf config.chvp.services.git.enable {
     chvp.services.nginx.hosts = [
       {

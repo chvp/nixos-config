@@ -1,0 +1,36 @@
+name: Cachix
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  USER: root
+
+jobs:
+  build:
+    runs-on: docker
+    strategy:
+      matrix:
+        host:
+          - elendel
+          - kholinar
+          - lasting-integrity
+          - marabethia
+          - urithiru
+    steps:
+      - uses: actions/checkout@v4
+      - run: apt update && apt install -y sudo
+      - uses: https://github.com/cachix/install-nix-action@v30
+        with:
+          enable_kvm: false
+          github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
+      - name: Cachix
+        uses: https://github.com/cachix/cachix-action@v15
+        with:
+          name: chvp
+          extraPullNames: "nix-community,accentor"
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+      - run: nix build -L --no-link .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
+      - run: nix eval --json ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp

@@ -45,5 +45,6 @@
         rootPool = "zroot";
       };
     };
+    services.git.runner.enable = true;
   };
 }

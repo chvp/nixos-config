@@ -1,0 +1,69 @@
+name: Update
+
+on:
+  schedule:
+    - cron: '45 */2 * * *'
+  workflow_dispatch:
+
+env:
+  USER: root
+
+jobs:
+  flake-update:
+    runs-on: docker
+    steps:
+      - uses: actions/checkout@v3
+      - run: apt update && apt install -y sudo
+      - uses: cachix/install-nix-action@v30
+        with:
+          enable_kvm: false
+          github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
+      - run: nix flake update
+      - name: Upload changed flake.lock
+        uses: actions/upload-artifact@v3
+        with:
+          name: flake.lock
+          path: flake.lock
+  build:
+    runs-on: docker
+    needs: flake-update
+    strategy:
+      matrix:
+        host:
+          - elendel
+          - kholinar
+          - lasting-integrity
+          - marabethia
+          - urithiru
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download changed flake.lock
+        uses: actions/download-artifact@v3
+        with:
+          name: flake.lock
+      - run: apt update && apt install -y sudo
+      - uses: https://github.com/cachix/install-nix-action@v30
+        with:
+          enable_kvm: false
+          github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
+      - name: Cachix
+        uses: https://github.com/cachix/cachix-action@v15
+        with:
+          name: chvp
+          extraPullNames: "nix-community,accentor"
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+      - run: nix build -L --no-link .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
+      - run: nix eval --json ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+  commit:
+    runs-on: docker
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download changed flake.lock
+        uses: actions/download-artifact@v3
+        with:
+          name: flake.lock
+      - uses: https://github.com/stefanzweifel/git-auto-commit-action@v5.0.1
+        with:
+          commit_message: "Update dependencies"
