@@ -37,6 +37,7 @@
     services = {
       forgejo = {
         enable = true;
+        package = pkgs.forgejo;
         stateDir = "/var/lib/forgejo";
         user = "git";
         group = "git";
