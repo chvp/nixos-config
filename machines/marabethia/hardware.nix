@@ -57,8 +57,16 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+    "/var/dkim" = {
+      device = "zroot/safe/services/dkim";
+      fsType = "zfs";
+    };
     "/var/lib/forgejo" = {
       device = "zroot/safe/services/forgejo";
+      fsType = "zfs";
+    };
+    "/var/vmail" = {
+      device = "zroot/safe/services/mail";
       fsType = "zfs";
     };
     "/var/lib/nextcloud" = {
@@ -67,6 +75,10 @@
     };
     "/var/lib/postgresql" = {
       device = "zroot/safe/services/postgresql";
+      fsType = "zfs";
+    };
+    "/var/sieve" = {
+      device = "zroot/safe/services/sieve";
       fsType = "zfs";
     };
   };
