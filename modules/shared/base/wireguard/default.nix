@@ -19,12 +19,12 @@ let
     lasting-integrity = {
       pubkey = "mid3XfCY2jaNK0J6C9ltFLAbxL0IApwMw9K1Z+PU8C0=";
       privkeyFile = config.age.secrets."files/wireguard/lasting-integrity.privkey".path;
-      ip = "10.240.0.1";
+      ip = "10.240.0.6";
     };
     marabethia = {
       pubkey = "h451oXBTzim1POLmnJC1OtFzbIXyxg6d5qpFFdHLbRs=";
       privkeyFile = config.age.secrets."files/wireguard/marabethia.privkey".path;
-      ip = "10.240.0.6";
+      ip = "10.240.0.1";
     };
     thaylen-city = {
       pubkey = "O0q2/W7dRM4LvAL9MSDZqAbGSzqi8AHLVl1sJsRDsUY=";
