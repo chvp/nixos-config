@@ -109,6 +109,7 @@
           options.locations."/".return = "307 https://www.vanpetegem.be$request_uri";
         }
         { fqdn = "www.vanpetegem.be"; }
+        { fqdn = "www.vanpetegem.me"; }
       ];
     };
   };

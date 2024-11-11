@@ -74,7 +74,6 @@
             };
           };
         }
-        { fqdn = "www.vanpetegem.me"; }
       ];
     };
   };
