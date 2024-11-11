@@ -78,7 +78,7 @@ in
   "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/passwords/services/grafana/secret-key.age".publicKeys = [ lasting-integrity ] ++ users;
 
-  "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ marabethia ] ++ users;
 
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ urithiru ] ++ users;
 

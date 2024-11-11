@@ -61,6 +61,10 @@
       device = "zroot/safe/services/forgejo";
       fsType = "zfs";
     };
+    "/var/lib/nextcloud" = {
+      device = "zroot/safe/services/nextcloud";
+      fsType = "zfs";
+    };
     "/var/lib/postgresql" = {
       device = "zroot/safe/services/postgresql";
       fsType = "zfs";

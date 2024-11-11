@@ -42,12 +42,6 @@
             fast = true;
             location = "192.168.0.1";
           }
-          {
-            path = "zdata/big-apps/nextcloud";
-            remotePath = "zdata/recv/lasting-integrity/big-apps/nextcloud";
-            fast = true;
-            location = "192.168.0.1";
-          }
         ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
@@ -89,13 +83,7 @@
         }
         { fqdn = "www.vanpetegem.me"; }
       ];
-      nextcloud.enable = true;
     };
   };
   programs.msmtp.enable = false;
-  services.znapzend.zetup."zdata/big-apps/nextcloud".destinations."marabethia.vanpetegem.me" = {
-    plan = "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
-    host = "marabethia.vanpetegem.me";
-    dataset = "zroot/safe/services/nextcloud";
-  };
 }

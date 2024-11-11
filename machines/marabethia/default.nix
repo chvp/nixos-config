@@ -39,6 +39,7 @@
     };
     services = {
       git.enable = true;
+      nextcloud.enable = true;
       nginx.hosts = [
         {
           fqdn = "cvpetegem.be";
