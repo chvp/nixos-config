@@ -24,7 +24,6 @@
           };
           internalIPV4 = "192.168.0.2";
         };
-        wireguard.server = true;
       };
       nix.enableDirenv = false;
       zfs = {

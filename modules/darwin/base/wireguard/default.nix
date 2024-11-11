@@ -14,10 +14,10 @@ in
   #   peers = [
   #     {
   #       allowedIPs = [ subnet ];
-  #       endpoint = "lasting-integrity.vanpetegem.me:51820";
+  #       endpoint = "marabethia.vanpetegem.me:51820";
   #       presharedKeyFile = pskFile;
   #       persistentKeepalive = 25;
-  #       publicKey = data.lasting-integrity.pubkey;
+  #       publicKey = data.marabethia.pubkey;
   #     }
   #   ];
   #   privateKeyFile = data.${config.networking.hostName}.privkeyFile;

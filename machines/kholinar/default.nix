@@ -27,7 +27,7 @@
             path = "rpool/safe/data";
             remotePath = "zdata/recv/kholinar/safe/data";
             fast = true;
-            location = "lasting-integrity";
+            location = "elendel";
           }
         ];
         rootDataset = "rpool/local/root";

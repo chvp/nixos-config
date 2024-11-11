@@ -66,9 +66,9 @@ in
               (builtins.filter (name: name != config.networking.hostName) (builtins.attrNames data)))
           else
             ([{
-              PublicKey = data.lasting-integrity.pubkey;
+              PublicKey = data.marabethia.pubkey;
               AllowedIPs = subnet;
-              Endpoint = "lasting-integrity.vanpetegem.me:51820";
+              Endpoint = "marabethia.vanpetegem.me:51820";
               PresharedKeyFile = pskFile;
               PersistentKeepalive = 25;
             }]);
@@ -78,7 +78,7 @@ in
         name = "wg0";
         address = [ "${data.${config.networking.hostName}.ip}/32" ];
         domains = [ "internal" ];
-        dns = [ data.lasting-integrity.ip ];
+        dns = [ data.marabethia.ip ];
         linkConfig.MTUBytes = "1342";
         routes = [
           (
@@ -86,7 +86,7 @@ in
               Gateway = "${data.${config.networking.hostName}.ip}";
               Destination = subnet;
             } else {
-              Gateway = "${data.lasting-integrity.ip}";
+              Gateway = "${data.marabethia.ip}";
               Destination = subnet;
               GatewayOnLink = true;
             }

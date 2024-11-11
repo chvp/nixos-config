@@ -25,6 +25,7 @@
           internalInterface = "eno2";
           internalIPV4 = "192.168.0.3";
         };
+        wireguard.server = true;
       };
       nix.enableDirenv = true;
       zfs = {

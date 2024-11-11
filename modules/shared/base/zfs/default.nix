@@ -39,7 +39,7 @@
         path = "rpool/safe/data";
         remotePath = "zdata/recv/<hostname>/safe/data";
         fast = false;
-        location = "lasting-integrity.vanpetegem.me";
+        location = "marabethia.vanpetegem.me";
       }];
     };
     rootDataset = lib.mkOption {
