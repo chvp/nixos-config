@@ -42,10 +42,6 @@
       fsType = "zfs";
       neededForBoot = true;
     };
-    "/data/var/vmail" = {
-      device = "zdata/big-apps/mail";
-      fsType = "zfs";
-    };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";
