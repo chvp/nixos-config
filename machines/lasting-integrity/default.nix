@@ -86,4 +86,9 @@
     };
   };
   programs.msmtp.enable = false;
+  services.znapzend.zetup."zdata/big-apps/mail".destinations."marabethia.vanpetegem.me" = {
+    plan = "1day=>1hour,1week=>1day,4week=>1week,1year=>4week,10year=>1year";
+    host = "marabethia.vanpetegem.me";
+    dataset = "zroot/safe/services/mail";
+  };
 }
