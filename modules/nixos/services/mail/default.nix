@@ -15,7 +15,6 @@ in
       { path = "/var/lib/postfix"; type = "cache"; }
       { path = "/var/lib/redis-rspamd"; type = "cache"; }
       { path = "/var/lib/rspamd"; type = "cache"; }
-      { path = "/var/sieve"; type = "data"; }
     ];
     mailserver = {
       enable = true;
@@ -78,7 +77,7 @@ in
           aliases = [ "@estherdereys.be" ];
         };
       };
-      indexDir = "${config.chvp.cachePrefix}/var/lib/dovecot/indices";
+      indexDir = "/var/lib/dovecot/indices";
       fullTextSearch = {
         enable = false;
         memoryLimit = 4000;
@@ -127,12 +126,12 @@ in
         "spam@vuztc.ru"
         "mofos@theportalnetworks.com" # Someone registered my f-droid contact address on a porn site :(
       ];
-      mailDirectory = "${config.chvp.dataPrefix}/var/vmail";
+      mailDirectory = "/var/vmail";
       useFsLayout = false;
       certificateScheme = "manual";
       certificateFile = certFile;
       keyFile = keyFile;
-      dkimKeyDirectory = "${config.chvp.dataPrefix}/var/dkim";
+      dkimKeyDirectory = "/var/dkim";
     };
 
     services.dovecot2.sieve = {

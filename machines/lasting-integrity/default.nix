@@ -36,19 +36,12 @@
             fast = true;
             location = "192.168.0.1";
           }
-          {
-            path = "zdata/big-apps/mail";
-            remotePath = "zdata/recv/lasting-integrity/big-apps/mail";
-            fast = true;
-            location = "192.168.0.1";
-          }
         ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
       };
     };
     services = {
-      mail.enable = true;
       matrix.enable = true;
       nginx.hosts = [
         {
@@ -84,11 +77,5 @@
         { fqdn = "www.vanpetegem.me"; }
       ];
     };
-  };
-  programs.msmtp.enable = false;
-  services.znapzend.zetup."zdata/big-apps/mail".destinations."marabethia.vanpetegem.me" = {
-    plan = "1day=>1hour,1week=>1day,4week=>1week,1year=>4week,10year=>1year";
-    host = "marabethia.vanpetegem.me";
-    dataset = "zroot/safe/services/mail";
   };
 }

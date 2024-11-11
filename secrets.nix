@@ -55,28 +55,24 @@ in
 
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
-  "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/git_at_chvp.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/hallo_at_estherdereys.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/hallo_at_robbe.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/huis_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/info_at_eenstweedrie.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/noreply_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/postbot_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/robbe_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [ lasting-integrity ] ++ users;
+  "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/git_at_chvp.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/hallo_at_estherdereys.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/hallo_at_robbe.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/huis_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/info_at_eenstweedrie.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/noreply_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/postbot_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/robbe_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/ssmtp-pass.age".publicKeys = nixosHosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
   "secrets/passwords/services/git/mail-password.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/git/token-file.age".publicKeys = [ elendel ] ++ users;
-
-  "secrets/passwords/services/grafana/smtp.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/grafana/admin-password.age".publicKeys = [ lasting-integrity ] ++ users;
-  "secrets/passwords/services/grafana/secret-key.age".publicKeys = [ lasting-integrity ] ++ users;
 
   "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ marabethia ] ++ users;
 

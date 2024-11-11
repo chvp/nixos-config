@@ -65,6 +65,7 @@
     };
     services = {
       git.enable = true;
+      mail.enable = true;
       nextcloud.enable = true;
       nginx.hosts = [
         {
@@ -93,5 +94,6 @@
       ];
     };
   };
+  programs.msmtp.enable = false;
   services.postgresql.dataDir = lib.mkForce "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
 }
