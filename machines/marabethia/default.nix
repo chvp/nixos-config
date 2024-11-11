@@ -56,6 +56,12 @@
             location = "elendel.vanpetegem.me";
           }
           {
+            path = "zroot/safe/services/matrix-synapse";
+            remotePath = "zdata/recv/marabethia/safe/services/matrix-synapse";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
             path = "zroot/safe/services/nextcloud";
             remotePath = "zdata/recv/marabethia/safe/services/nextcloud";
             fast = true;
