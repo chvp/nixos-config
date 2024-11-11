@@ -29,6 +29,32 @@
       nix.enableDirenv = true;
       zfs = {
         enable = true;
+        backups = [
+          {
+            path = "zroot/safe/data";
+            remotePath = "zdata/recv/marabethia/safe/data";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
+            path = "zroot/safe/services/forgejo";
+            remotePath = "zdata/recv/marabethia/safe/services/forgejo";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
+            path = "zroot/safe/services/nextcloud";
+            remotePath = "zdata/recv/marabethia/safe/services/nextcloud";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
+            path = "zroot/safe/services/postgresql";
+            remotePath = "zdata/recv/marabethia/safe/services/postgresql";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+        ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
       };

@@ -41,6 +41,14 @@
       nix.enableDirenv = true;
       zfs = {
         enable = true;
+        backups = [
+          {
+            path = "zroot/safe/data";
+            remotePath = "zroot/recv/elendel/safe/data";
+            fast = true;
+            location = "marabethia.vanpetegem.me";
+          }
+        ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
       };
