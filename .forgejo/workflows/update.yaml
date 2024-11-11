@@ -67,3 +67,6 @@ jobs:
       - uses: https://github.com/stefanzweifel/git-auto-commit-action@v5.0.1
         with:
           commit_message: "Update dependencies"
+          commit_user_name: "CharBOTte"
+          commit_user_email: "commit-bot@chvp.be"
+          commit_author: "CharBOTte <commit-bot@chvp.be>"
