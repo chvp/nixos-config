@@ -46,10 +46,6 @@
       device = "zdata/big-apps/mail";
       fsType = "zfs";
     };
-    "/data/var/lib/nextcloud" = {
-      device = "zdata/big-apps/nextcloud";
-      fsType = "zfs";
-    };
     "/cache" = {
       device = "zroot/safe/cache";
       fsType = "zfs";
