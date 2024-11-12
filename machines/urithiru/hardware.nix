@@ -53,10 +53,6 @@
       device = "zdata/big-apps/accentor";
       fsType = "zfs";
     };
-    "/var/lib/docker" = {
-      device = "zdata/big-apps/docker";
-      fsType = "zfs";
-    };
     "/boot/ESP0" = {
       device = "/dev/disk/by-uuid/6ED1-0638";
       fsType = "vfat";
