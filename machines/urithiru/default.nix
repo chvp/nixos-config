@@ -49,9 +49,9 @@
           }
           {
             path = "zdata/data";
-            remotePath = "zdata/data";
+            remotePath = "zdata/safe/data";
             fast = false;
-            location = "192.168.0.2";
+            location = "elendel.vanpetegem.me";
           }
         ];
         rootDataset = "zroot/local/root";
