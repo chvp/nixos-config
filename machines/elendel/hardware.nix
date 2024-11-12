@@ -46,7 +46,7 @@
       neededForBoot = true;
     };
     "/srv/data" = {
-      device = "zdata/data";
+      device = "zdata/safe/data";
       fsType = "zfs";
     };
     "/boot/ESP0" = {

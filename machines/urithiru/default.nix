@@ -36,16 +36,10 @@
             location = "192.168.0.2";
           }
           {
-            path = "zroot/safe/data";
-            remotePath = "zdata/recv/urithiru/safe/data";
-            fast = true;
-            location = "192.168.0.2";
-          }
-          {
             path = "zdata/big-apps/accentor";
-            remotePath = "zdata/recv/urithiru/big-apps/accentor";
+            remotePath = "zdata/local/services/accentor-transcode-cache";
             fast = true;
-            location = "192.168.0.2";
+            location = "elendel.vanpetegem.me";
           }
           {
             path = "zdata/data";
