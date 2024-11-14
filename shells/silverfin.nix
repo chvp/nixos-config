@@ -71,7 +71,13 @@ pkgs.devshell.mkShell {
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
   language.ruby = {
-    package = pkgs.ruby_3_2;
+    package = pkgs.ruby_3_2.overrideAttrs (old: {
+      version = (import "${inputs.nixpkgs}/pkgs/development/interpreters/ruby/ruby-version.nix" { inherit lib; }) "3" "2" "4" "";
+      src = pkgs.fetchurl {
+          url = "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.4.tar.gz";
+          hash = "sha256-xys8XDBILcoYsPhoyQdfP0fYFo6vYm1OaCzltZyFhpI=";
+      };
+    });
     nativeDeps = with pkgs; [
       git
       graphicsmagick
