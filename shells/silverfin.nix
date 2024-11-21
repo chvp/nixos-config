@@ -51,6 +51,7 @@ pkgs.devshell.mkShell {
     nodejs_18
     poppler_utils
     (pkgs.lowPrio postgresql)
+    stern
     xsv
     yarn
     zlib
