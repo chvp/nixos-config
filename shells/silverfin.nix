@@ -41,6 +41,7 @@ pkgs.devshell.mkShell {
     chromedriver
     cmake
     ghostscript
+    google-cloud-sdk
     graphicsmagick
     imagemagick6
     jq
