@@ -46,6 +46,7 @@ pkgs.devshell.mkShell {
     imagemagick6
     jq
     kubectl
+    llvmPackages.libllvm
     minikube
     mupdf-headless
     nodejs_18
