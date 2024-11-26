@@ -5,7 +5,7 @@ let
 in
 {
   chvp.base.emacs = {
-    basePackage = pkgs.emacs-pgtk;
+    basePackage = pkgs.emacs29-pgtk;
     extraConfig = [ (builtins.readFile ./linux-init.el) ];
   };
   home-manager.users.${username} = { ... }: {
