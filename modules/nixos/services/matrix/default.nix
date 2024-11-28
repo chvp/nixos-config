@@ -155,9 +155,9 @@
         };
       };
       groups = {
-        matrix-appservice-slack = {};
-        matrix-hookshot = {};
-        mautrix-whatsapp = {};
+        matrix-appservice-slack = { };
+        matrix-hookshot = { };
+        mautrix-whatsapp = { };
       };
     };
 

@@ -32,7 +32,7 @@
         };
         nginx.extraGroups = [ "git" ];
       };
-      groups.git = {};
+      groups.git = { };
     };
     services = {
       forgejo = {

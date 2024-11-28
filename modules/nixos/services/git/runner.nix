@@ -13,7 +13,7 @@
       instances.default = {
         enable = true;
         url = "https://git.chvp.be";
-        labels = [];
+        labels = [ ];
         name = config.networking.hostName;
         tokenFile = config.age.secrets."passwords/services/git/token-file".path;
         settings = {
