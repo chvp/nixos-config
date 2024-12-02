@@ -4,10 +4,6 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
     loader.efi.canTouchEfiVariables = true;
     initrd = {
       availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
@@ -21,10 +17,7 @@
   };
 
 
-  chvp.base = {
-    nix.unfreePackages = [ "displaylink" ];
-    zfs.systemLinks = [{ path = "/etc/secureboot"; type = "cache"; }];
-  };
+  chvp.base.nix.unfreePackages = [ "displaylink" ];
 
   # For Secure Boot management
   environment.systemPackages = [ pkgs.sbctl ];
