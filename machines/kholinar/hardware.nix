@@ -4,7 +4,10 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    loader.efi.canTouchEfiVariables = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
     initrd = {
       availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
       kernelModules = [ "i915" ];
@@ -18,9 +21,6 @@
 
 
   chvp.base.nix.unfreePackages = [ "displaylink" ];
-
-  # For Secure Boot management
-  environment.systemPackages = [ pkgs.sbctl ];
 
   fileSystems."/" = {
     device = "rpool/local/root";
