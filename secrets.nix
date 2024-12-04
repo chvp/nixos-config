@@ -1,24 +1,18 @@
 let
   elendel = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZU5fDbqEkllipbknJy/Dm3Fcicb5gscVzmsFG/9RoA";
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
-  lasting-integrity = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMKJmeY7j5LxWVv3fKzqG4Bvg/ZhOp8iwk0utpyMWMSk";
   marabethia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUP1r937+PLiqdyUuqbYoyAs04/2AxuXS13grU+fvpA";
   thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/sIkgf7aYX/JcWWp/dCHgq7sJ5WDYYyWSn3DvkW4gB";
-  urithiru = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOrzOpyzDc5BVtAeb5//PnMRcp+9B+DjfU7p2YpaH6a2";
   nixosHosts = [
     elendel
     kholinar
-    lasting-integrity
     marabethia
-    urithiru
   ];
   hosts = [
     elendel
     kholinar
-    lasting-integrity
     marabethia
     thaylen-city
-    urithiru
   ];
   nixosPersonals = [
     kholinar
@@ -29,9 +23,7 @@ let
   ];
   servers = [
     elendel
-    lasting-integrity
     marabethia
-    urithiru
   ];
   charlotte = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDb17zAg3zwvdYHNZqXSGYKseCz5281Ha6oOYPbwFYD"
@@ -93,10 +85,8 @@ in
 
   "secrets/files/wireguard/elendel.privkey.age".publicKeys = [ elendel ] ++ users;
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
-  "secrets/files/wireguard/lasting-integrity.privkey.age".publicKeys = [ lasting-integrity ] ++ users;
   "secrets/files/wireguard/marabethia.privkey.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/wireguard/thaylen-city.privkey.age".publicKeys = [ thaylen-city ] ++ users;
-  "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
 
   "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ elendel ] ++ users;

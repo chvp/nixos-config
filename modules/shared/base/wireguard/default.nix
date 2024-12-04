@@ -16,11 +16,6 @@ let
       privkeyFile = config.age.secrets."files/wireguard/kholinar.privkey".path;
       ip = "10.240.0.3";
     };
-    lasting-integrity = {
-      pubkey = "mid3XfCY2jaNK0J6C9ltFLAbxL0IApwMw9K1Z+PU8C0=";
-      privkeyFile = config.age.secrets."files/wireguard/lasting-integrity.privkey".path;
-      ip = "10.240.0.6";
-    };
     marabethia = {
       pubkey = "h451oXBTzim1POLmnJC1OtFzbIXyxg6d5qpFFdHLbRs=";
       privkeyFile = config.age.secrets."files/wireguard/marabethia.privkey".path;
@@ -30,11 +25,6 @@ let
       pubkey = "O0q2/W7dRM4LvAL9MSDZqAbGSzqi8AHLVl1sJsRDsUY=";
       privkeyFile = config.age.secrets."files/wireguard/thaylen-city.privkey".path;
       ip = "10.240.0.5";
-    };
-    urithiru = {
-      pubkey = "f4bnm/qNhMW5iXdQcBMmP8IUN6n+pDS15Ikct7QPr0E=";
-      privkeyFile = config.age.secrets."files/wireguard/urithiru.privkey".path;
-      ip = "10.240.0.2";
     };
   };
   subnet = "10.240.0.0/24";

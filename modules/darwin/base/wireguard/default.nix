@@ -9,7 +9,7 @@ in
   # networking.wg-quick.interfaces."wg0" = {
   #   address = [ "${data.${config.networking.hostName}.ip}/32" ];
   #   autostart = true;
-  #   dns = [ data.lasting-integrity.ip ];
+  #   dns = [ data.marabethia.ip ];
   #   mtu = 1342;
   #   peers = [
   #     {

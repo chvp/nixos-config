@@ -191,9 +191,7 @@
       nixosConfigurations = {
         elendel = nixosSystem "x86_64-linux" "elendel";
         kholinar = nixosSystem "x86_64-linux" "kholinar";
-        lasting-integrity = nixosSystem "x86_64-linux" "lasting-integrity";
         marabethia = nixosSystem "x86_64-linux" "marabethia";
-        urithiru = nixosSystem "x86_64-linux" "urithiru";
       };
       darwinConfigurations.thaylen-city = darwinSystem "aarch64-darwin" "thaylen-city";
       lsShells = builtins.readDir ./shells;
