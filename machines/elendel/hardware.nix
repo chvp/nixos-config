@@ -60,7 +60,7 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
     "/var/lib/accentor" = {
-      device = "zroot/local/services/accentor";
+      device = "zroot/safe/services/accentor";
       fsType = "zfs";
     };
     "/var/lib/accentor/transcodes" = {
@@ -69,6 +69,10 @@
     };
     "/var/lib/docker" = {
       device = "zroot/local/services/docker";
+      fsType = "zfs";
+    };
+    "/var/lib/postgresql" = {
+      device = "zroot/safe/services/postgresql";
       fsType = "zfs";
     };
     "/var/lib/transmission" = {

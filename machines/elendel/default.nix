@@ -49,6 +49,18 @@
             location = "marabethia.vanpetegem.me";
           }
           {
+            path = "zroot/safe/services/accentor";
+            remotePath = "zroot/recv/elendel/safe/services/accentor";
+            fast = true;
+            location = "marabethia.vanpetegem.me";
+          }
+          {
+            path = "zroot/safe/services/postgresql";
+            remotePath = "zroot/recv/elendel/safe/services/postgresql";
+            fast = true;
+            location = "marabethia.vanpetegem.me";
+          }
+          {
             path = "zroot/safe/services/transmission";
             remotePath = "zroot/recv/elendel/safe/services/transmission";
             fast = true;
@@ -73,5 +85,4 @@
       torrents.enable = true;
     };
   };
-  services.postgresql.dataDir = lib.mkForce "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
 }

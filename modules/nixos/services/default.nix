@@ -15,6 +15,6 @@
 
   services.postgresql = {
     package = pkgs.postgresql_15;
-    dataDir = "${config.chvp.dataPrefix}/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
+    dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
   };
 }

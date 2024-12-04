@@ -152,5 +152,4 @@
     };
   };
   programs.msmtp.enable = false;
-  services.postgresql.dataDir = lib.mkForce "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
 }
