@@ -56,7 +56,6 @@
       accentor.enable = true;
       containers.externalInterface = "eno3";
       data-access.enable = true;
-      torrents.enable = true;
     };
   };
 
