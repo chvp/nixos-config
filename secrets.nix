@@ -80,7 +80,7 @@ in
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = nixosHosts ++ users;
 
-  "secrets/files/programs/transmission/config.json.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/files/programs/transmission/config.json.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ marabethia ] ++ users;
