@@ -32,9 +32,7 @@ jobs:
         host:
           - elendel
           - kholinar
-          - lasting-integrity
           - marabethia
-          - urithiru
     steps:
       - uses: actions/checkout@v4
       - name: Download changed flake.lock
