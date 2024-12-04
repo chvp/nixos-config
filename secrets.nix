@@ -76,7 +76,7 @@ in
 
   "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ marabethia ] ++ users;
 
-  "secrets/passwords/services/data-basic-auth.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/passwords/services/data-basic-auth.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = nixosHosts ++ users;
 
@@ -99,13 +99,13 @@ in
   "secrets/files/wireguard/urithiru.privkey.age".publicKeys = [ urithiru ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
 
-  "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/ssh_host_rsa_key.pub.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/ssh_host_ed25519_key.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/ssh_host_ed25519_key.pub.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/authorized_keys.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/password_file.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/readonly_authorized_keys.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/readonly_password_file.age".publicKeys = [ urithiru ] ++ users;
-  "secrets/data-access/create_torrent.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/ssh_host_rsa_key.pub.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/ssh_host_ed25519_key.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/ssh_host_ed25519_key.pub.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/authorized_keys.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/password_file.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/readonly_authorized_keys.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/readonly_password_file.age".publicKeys = [ elendel ] ++ users;
+  "secrets/data-access/create_torrent.age".publicKeys = [ elendel ] ++ users;
 }
