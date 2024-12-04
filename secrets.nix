@@ -51,7 +51,7 @@ in
   "secrets/files/programs/vpn/local.age".publicKeys = personals ++ users;
   "secrets/files/programs/vpn/global.age".publicKeys = personals ++ users;
 
-  "secrets/passwords/services/accentor.age".publicKeys = [ urithiru ] ++ users;
+  "secrets/passwords/services/accentor.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 

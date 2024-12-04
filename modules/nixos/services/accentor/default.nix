@@ -8,7 +8,6 @@
 
   config = lib.mkIf config.chvp.services.accentor.enable {
     services.postgresql.enable = true;
-    chvp.services.nginx.hosts = [{ fqdn = "dummy.vanpetegem.me"; basicProxy = "http://localhost:3000"; }];
 
     services.accentor = {
       enable = true;

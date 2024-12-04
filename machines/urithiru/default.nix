@@ -46,8 +46,5 @@
         rootPool = "zroot";
       };
     };
-    services = {
-      accentor.enable = true;
-    };
   };
 }
