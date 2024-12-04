@@ -28,20 +28,7 @@
       };
       zfs = {
         enable = true;
-        backups = [
-          {
-            path = "zroot/safe/data";
-            remotePath = "zdata/recv/urithiru/safe/data";
-            fast = true;
-            location = "192.168.0.2";
-          }
-          {
-            path = "zdata/big-apps/accentor";
-            remotePath = "zdata/local/services/accentor-transcode-cache";
-            fast = true;
-            location = "elendel.vanpetegem.me";
-          }
-        ];
+        backups = [ ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
       };

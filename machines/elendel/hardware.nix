@@ -59,6 +59,14 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+    "/var/lib/accentor" = {
+      device = "zroot/local/services/accentor";
+      fsType = "zfs";
+    };
+    "/var/lib/accentor/transcodes" = {
+      device = "zdata/local/services/accentor-transcode-cache";
+      fsType = "zfs";
+    };
     "/var/lib/docker" = {
       device = "zroot/local/services/docker";
       fsType = "zfs";
