@@ -41,12 +41,6 @@
             fast = true;
             location = "elendel.vanpetegem.me";
           }
-          {
-            path = "zdata/data";
-            remotePath = "zdata/safe/data";
-            fast = false;
-            location = "elendel.vanpetegem.me";
-          }
         ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
@@ -54,14 +48,6 @@
     };
     services = {
       accentor.enable = true;
-      containers.externalInterface = "eno3";
-      data-access.enable = true;
     };
-  };
-
-  services.znapzend.zetup."zdata/data".destinations."socrates.machines.robbevp.be" = {
-    plan = "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
-    host = "socrates.machines.robbevp.be";
-    dataset = "zdata/data";
   };
 }

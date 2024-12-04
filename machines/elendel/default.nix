@@ -48,11 +48,20 @@
             fast = true;
             location = "marabethia.vanpetegem.me";
           }
+          {
+            path = "zdata/safe/data";
+            remotePath = "zdata/data";
+            fast = false;
+            location = "socrates.machines.robbevp.be";
+          }
         ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
       };
     };
-    services.git.runner.enable = true;
+    services = {
+      git.runner.enable = true;
+      torrents.enable = true;
+    };
   };
 }

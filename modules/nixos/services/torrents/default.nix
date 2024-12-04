@@ -31,7 +31,7 @@
       package = pkgs.transmission_4;
       user = "charlotte";
       group = "users";
-      home = "/data/var/lib/transmission";
+      home = "/var/lib/transmission";
       openRPCPort = false;
       openPeerPorts = true;
       credentialsFile = config.age.secrets."files/programs/transmission/config.json".path;

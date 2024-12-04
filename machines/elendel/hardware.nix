@@ -63,6 +63,10 @@
       device = "zroot/local/services/docker";
       fsType = "zfs";
     };
+    "/var/lib/transmission" = {
+      device = "zroot/safe/services/transmission";
+      fsType = "zfs";
+    };
     "/var/lib/private/gitea-runner" = {
       device = "zroot/local/services/gitea-runner";
       fsType = "zfs";
