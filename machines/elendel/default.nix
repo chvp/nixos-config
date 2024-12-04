@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ ./hardware.nix ];
@@ -73,4 +73,5 @@
       torrents.enable = true;
     };
   };
+  services.postgresql.dataDir = lib.mkForce "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
 }
