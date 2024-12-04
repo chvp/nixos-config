@@ -49,6 +49,12 @@
             location = "marabethia.vanpetegem.me";
           }
           {
+            path = "zroot/safe/services/transmission";
+            remotePath = "zroot/recv/elendel/safe/services/transmission";
+            fast = true;
+            location = "marabethia.vanpetegem.me";
+          }
+          {
             path = "zdata/safe/data";
             remotePath = "zdata/data";
             fast = false;
