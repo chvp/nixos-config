@@ -43,14 +43,7 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = with pkgs; [
-        google-chrome
-        mpv
-        okular
-        ranger
-        uni
-        wtype
-      ];
+      home.packages = with pkgs; [ mpv okular ranger uni wtype ];
     };
   };
 }
