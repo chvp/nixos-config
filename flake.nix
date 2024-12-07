@@ -70,7 +70,10 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     systems.url = "github:nix-systems/default";
     tetris = {
       url = "github:chvp/tetris";
@@ -110,11 +113,11 @@
         agenix.overlays.default
         accentor.overlays.default
         devshell.overlays.default
-        emacs-overlay.overlay
+        emacs-overlay.overlays.default
         (self: super: {
           tetris = tetris.packages.${self.system}.default;
         })
-        nur.overlay
+        nur.overlays.default
         www-chvp-be.overlays.default
       ];
       commonModules = [
