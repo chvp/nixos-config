@@ -74,11 +74,11 @@ pkgs.devshell.mkShell {
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
   language.ruby = {
-    package = pkgs.ruby_3_2.overrideAttrs (old: {
-      version = (import "${inputs.nixpkgs}/pkgs/development/interpreters/ruby/ruby-version.nix" { inherit lib; }) "3" "2" "4" "";
+    package = pkgs.ruby_3_3.overrideAttrs (old: {
+      version = (import "${inputs.nixpkgs}/pkgs/development/interpreters/ruby/ruby-version.nix" { inherit lib; }) "3" "3" "6" "";
       src = pkgs.fetchurl {
-        url = "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.4.tar.gz";
-        hash = "sha256-xys8XDBILcoYsPhoyQdfP0fYFo6vYm1OaCzltZyFhpI=";
+        url = "https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.6.tar.gz";
+        hash = "sha256-jcSP/68nD4bxAZBT8o5R5NpMzjKjZ2CgYDqa7mfX/Y0=";
       };
     });
     nativeDeps = with pkgs; [
