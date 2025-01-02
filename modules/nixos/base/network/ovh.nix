@@ -22,13 +22,6 @@
         gateway = "1:2:3:ff:ff:ff:ff:ff";
       };
     };
-    internalInterface = lib.mkOption {
-      default = "eno4";
-      example = "eno2";
-    };
-    internalIPV4 = lib.mkOption {
-      example = "192.168.0.1";
-    };
   };
 
   config = lib.mkIf config.chvp.base.network.ovh.enable {
@@ -55,14 +48,6 @@
             "1.0.0.1"
             "2606:4700:4700::1111"
             "2606:4700:4700::1001"
-          ];
-        };
-        "${internalInterface}" = {
-          enable = true;
-          matchConfig = { Name = "${internalInterface}"; };
-          address = [ "${internalIPV4}/16" ];
-          routes = [
-            { Destination = "${internalIPV4}/16"; }
           ];
         };
       };

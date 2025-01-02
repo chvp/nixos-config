@@ -22,8 +22,6 @@
             ip = "2001:41d0:203:cdee::";
             gateway = "2001:41d0:0203:cdff:00ff:00ff:00ff:00ff";
           };
-          internalInterface = "eno2";
-          internalIPV4 = "192.168.0.3";
         };
         wireguard.server = true;
       };
