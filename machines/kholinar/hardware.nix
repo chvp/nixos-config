@@ -20,8 +20,6 @@
   };
 
 
-  chvp.base.nix.unfreePackages = [ "displaylink" ];
-
   fileSystems."/" = {
     device = "rpool/local/root";
     fsType = "zfs";
@@ -71,20 +69,6 @@
   };
   services = {
     fstrim.enable = true;
-    xserver.videoDrivers = [ "displaylink" "modesetting" "fbdev" ];
+    xserver.videoDrivers = [ "modesetting" "fbdev" ];
   };
-  nixpkgs.overlays = [
-    (final: prev: {
-      wlroots_0_18 = prev.wlroots_0_18.overrideAttrs (old: {
-        patches = (old.patches or [ ]) ++ [
-          (
-            final.fetchpatch {
-              url = "https://gitlab.freedesktop.org/kennylevinsen/wlroots/-/commit/7e5bf4aef5c61401aaf777bd45cf393c538dac3e.patch";
-              hash = "sha256-62C7xtqrPgZm+vpjKyp8OsEyE6yIyf4bgecmILi+Qy4=";
-            }
-          )
-        ];
-      });
-    })
-  ];
 }
