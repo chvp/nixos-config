@@ -158,7 +158,7 @@ in
     services.rspamd.extraConfig = ''
       actions {
         reject = null;
-        add_header = 6;
+        add_header = 5;
         greylist = 4;
       }
     '';
