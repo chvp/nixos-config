@@ -1,0 +1,28 @@
+diff --git a/pkgs/servers/matrix-synapse/default.nix b/pkgs/servers/matrix-synapse/default.nix
+index 79b5cdc861a5b..422097f9e490d 100644
+--- a/pkgs/servers/matrix-synapse/default.nix
++++ b/pkgs/servers/matrix-synapse/default.nix
+@@ -10,6 +10,7 @@
+   rustc,
+   nixosTests,
+   callPackage,
++  fetchpatch2,
+ }:
+ 
+ let
+@@ -34,6 +35,15 @@ python3.pkgs.buildPythonApplication rec {
+     hash = "sha256-LGFuz3NtNqH+XumJOirvflH0fyfTtqz5qgYlJx2fmAU=";
+   };
+ 
++  patches = [
++    # Fixes test compat with twisted 24.11.0.
++    # Can be removed in next release.
++    (fetchpatch2 {
++      url = "https://github.com/element-hq/synapse/commit/3eb92369ca14012a07da2fbf9250e66f66afb710.patch";
++      sha256 = "sha256-VDn3kQy23+QC2WKhWfe0FrUOnLuI1YwH5GxdTTVWt+A=";
++    })
++  ];
++
+   postPatch = ''
+     # Remove setuptools_rust from runtime dependencies
+     # https://github.com/element-hq/synapse/blob/v1.69.0/pyproject.toml#L177-L185
