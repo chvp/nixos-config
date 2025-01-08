@@ -1,5 +1,5 @@
 diff --git a/pkgs/servers/matrix-synapse/default.nix b/pkgs/servers/matrix-synapse/default.nix
-index 79b5cdc861a5b..422097f9e490d 100644
+index 79b5cdc861a5b..db9ba29a0c828 100644
 --- a/pkgs/servers/matrix-synapse/default.nix
 +++ b/pkgs/servers/matrix-synapse/default.nix
 @@ -10,6 +10,7 @@
@@ -26,3 +26,14 @@ index 79b5cdc861a5b..422097f9e490d 100644
    postPatch = ''
      # Remove setuptools_rust from runtime dependencies
      # https://github.com/element-hq/synapse/blob/v1.69.0/pyproject.toml#L177-L185
+@@ -47,6 +57,10 @@ python3.pkgs.buildPythonApplication rec {
+     # Don't force pillow to be 10.0.1 because we already have patched it, and
+     # we don't use the pillow wheels.
+     sed -i 's/Pillow = ".*"/Pillow = ">=5.4.0"/' pyproject.toml
++
++    # https://github.com/element-hq/synapse/pull/17878#issuecomment-2575412821
++    substituteInPlace tests/storage/databases/main/test_events_worker.py \
++      --replace-fail "def test_recovery" "def no_test_recovery"
+   '';
+ 
+   nativeBuildInputs = with python3.pkgs; [
