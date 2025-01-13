@@ -2,6 +2,8 @@
 
 let
   username = config.chvp.username;
+  homeDir = config.home-manager.users.${username}.home.homeDirectory;
+  sshKeyFile = config.home-manager.users.${username}.programs.ssh.extraOptionOverrides.IdentityFile or "${homeDir}/.ssh/id_ed25519";
 in
 {
   options.chvp.development.git = {
@@ -68,11 +70,15 @@ in
         lfs.enable = true;
         extraConfig = {
           branch.autosetuprebase = "always";
+          commit.gpgSign = true;
           github.user = "chvp";
+          gpg.format = "ssh";
           merge.conflictStyle = "diff3";
           pull.rebase = true;
           rebase.autoStash = true;
           rerere.enabled = true;
+          tag.gpgSign = true;
+          user.signingKey = sshKeyFile;
         };
         ignores = [
           ".DS_Store"
