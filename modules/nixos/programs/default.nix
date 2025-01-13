@@ -5,7 +5,6 @@
     ./calibre
     ./eid
     ./element
-    ./obs
     ./torrents
   ];
 }

@@ -94,6 +94,8 @@
            :mode "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'"
            :custom
            (ruby-insert-encoding-magic-comment nil "Don't insert encoding magic comment")
+           :config
+           (add-to-list 'eglot-server-programs `(ruby-mode . ("ruby-lsp")))
            )
 
           ;; Rust language support

@@ -3,7 +3,6 @@
 {
   imports = [
     ./minecraft
-    ./mumble
     ./particles
     ./steam
     ./tetris
@@ -17,7 +16,6 @@
   config = lib.mkIf config.chvp.games.enable {
     chvp.games = {
       minecraft.client = lib.mkDefault false;
-      mumble.enable = lib.mkDefault true;
       steam.enable = lib.mkDefault true;
     };
   };
