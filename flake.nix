@@ -134,6 +134,7 @@
       darwinModules = [
         agenix.darwinModules.default
         home-manager.darwinModules.default
+        nix-index-database.darwinModules.nix-index
         ./modules/darwin
       ];
       nixosSystem = system: name:
