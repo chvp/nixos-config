@@ -13,6 +13,12 @@
   };
   networking.computerName = "Thaylen City";
 
+  age.identityPaths =
+    [
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_rsa_key"
+    ];
+
   fonts.packages = with pkgs; [
     hack-font
     font-awesome
@@ -48,6 +54,7 @@
     };
   };
   security.pam.enableSudoTouchIdAuth = true;
+  services.openssh.enable = true;
   system = {
     defaults = {
       dock = {
