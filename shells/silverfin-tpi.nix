@@ -14,6 +14,7 @@ pkgs.devshell.mkShell {
   packages = with pkgs; [
     cmake
     nodejs_18
+    (pkgs.lowPrio postgresql)
     shared-mime-info
     yarn
   ];
@@ -26,6 +27,10 @@ pkgs.devshell.mkShell {
     {
       name = "TERM";
       eval = "\${TERM:-xterm-256color}";
+    }
+    {
+      name = "DISABLE_SPRING";
+      value = "1";
     }
     {
       name = "POSTGRESQL_ADDRESS";
@@ -42,7 +47,13 @@ pkgs.devshell.mkShell {
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
   language.ruby = {
-    package = pkgs.ruby_3_2;
+    package = pkgs.ruby_3_2.overrideAttrs (old: {
+      version = (import "${inputs.nixpkgs}/pkgs/development/interpreters/ruby/ruby-version.nix" { inherit lib; }) "3" "2" "2" "";
+      src = pkgs.fetchurl {
+        url = "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.2.tar.gz";
+        hash = "sha256-lsV1WIcaZ0jeW8nydOk/S1qtBs2PN776Do2U57ikI7w=";
+      };
+    });
     nativeDeps = with pkgs; [
       postgresql
       libffi
