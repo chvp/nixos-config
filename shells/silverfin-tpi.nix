@@ -14,7 +14,7 @@ pkgs.devshell.mkShell {
   packages = with pkgs; [
     cmake
     nodejs_18
-    (pkgs.lowPrio postgresql)
+    (pkgs.lowPrio postgresql_14)
     shared-mime-info
     yarn
   ];
@@ -55,7 +55,7 @@ pkgs.devshell.mkShell {
       };
     });
     nativeDeps = with pkgs; [
-      postgresql
+      postgresql_14
       libffi
       zlib
     ];

@@ -51,7 +51,7 @@ pkgs.devshell.mkShell {
     mupdf-headless
     nodejs_18
     poppler_utils
-    (pkgs.lowPrio postgresql)
+    (pkgs.lowPrio postgresql_14)
     stern
     xsv
     yarn
@@ -87,7 +87,7 @@ pkgs.devshell.mkShell {
       icu
       imagemagick6
       openssl
-      postgresql
+      postgresql_14
       libffi
       libyaml
       zlib
