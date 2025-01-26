@@ -22,6 +22,6 @@
       zfs.homeLinks = [{ path = ".android"; type = "cache"; }];
     };
     programs.adb.enable = true;
-    users.users.charlotte.extraGroups = [ "adbusers" ];
+    users.users.charlotte.extraGroups = [ "adbusers" "dialout" "uucp" ];
   };
 }

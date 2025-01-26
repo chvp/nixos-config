@@ -13,7 +13,6 @@
       { path = "downloads"; type = "cache"; }
       { path = "music"; type = "data"; }
       { path = "pictures"; type = "cache"; }
-      { path = "repos"; type = "cache"; }
       { path = "templates"; type = "data"; }
       { path = "videos"; type = "data"; }
     ];
