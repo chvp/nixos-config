@@ -65,55 +65,31 @@ in
       ''
     ];
     home-manager.users.${username} = {
-      programs = {
-        gh = {
-          enable = true;
-          extensions = [
-            (pkgs.buildGoModule {
-              pname = "gh-skyline";
-              version = "0.1.2";
-              src = pkgs.fetchFromGitHub {
-                owner = "github";
-                repo = "gh-skyline";
-                tag = "v0.1.2";
-                hash = "sha256-fe2mM46DM7LhbZP2QhcwkXUWp8o4iY/LLgALJ+H60P0=";
-              };
-              vendorHash = "sha256-rfv9KTTWs68pqSdgWo9dIn+PTe+77ZMOEhG0P37QwKo=";
-
-              ldflags = [
-                "-s"
-                "-w"
-                "-X main.Version=0.1.2"
-              ];
-            })
-          ];
+      programs.git = {
+        enable = true;
+        lfs.enable = true;
+        extraConfig = {
+          branch.autosetuprebase = "always";
+          commit.gpgSign = true;
+          github.user = "chvp";
+          gpg.format = "ssh";
+          merge.conflictStyle = "diff3";
+          pull.rebase = true;
+          rebase.autoStash = true;
+          rerere.enabled = true;
+          tag.gpgSign = true;
+          user.signingKey = sshKeyFile;
         };
-        git = {
-          enable = true;
-          lfs.enable = true;
-          extraConfig = {
-            branch.autosetuprebase = "always";
-            commit.gpgSign = true;
-            github.user = "chvp";
-            gpg.format = "ssh";
-            merge.conflictStyle = "diff3";
-            pull.rebase = true;
-            rebase.autoStash = true;
-            rerere.enabled = true;
-            tag.gpgSign = true;
-            user.signingKey = sshKeyFile;
-          };
-          ignores = [
-            ".DS_Store"
-            ".data"
-            ".direnv"
-            ".envrc"
-            ".idea"
-            ".dir-locals.el"
-          ];
-          userEmail = config.chvp.development.git.email;
-          userName = "Charlotte Van Petegem";
-        };
+        ignores = [
+          ".DS_Store"
+          ".data"
+          ".direnv"
+          ".envrc"
+          ".idea"
+          ".dir-locals.el"
+        ];
+        userEmail = config.chvp.development.git.email;
+        userName = "Charlotte Van Petegem";
       };
     };
   };
