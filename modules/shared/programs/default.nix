@@ -8,9 +8,5 @@ in
     ./hledger
   ];
 
-  home-manager.users.${username}.home.packages = with pkgs; [
-    jq
-    xsv
-    yt-dlp
-  ];
+  home-manager.users.${username}.home.packages = with pkgs; [ jq yt-dlp ];
 }

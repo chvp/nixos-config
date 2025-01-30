@@ -53,7 +53,6 @@ pkgs.devshell.mkShell {
     poppler_utils
     (pkgs.lowPrio postgresql_14)
     stern
-    xsv
     yarn
     zlib
   ];
