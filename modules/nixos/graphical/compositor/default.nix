@@ -434,7 +434,6 @@ in
           After = [ "graphical-session-pre.target" ];
         };
         tray.Unit = {
-          Description = "tray target";
           Wants = [ "graphical-session.target" ];
           After = [ "graphical-session.target" ];
         };
