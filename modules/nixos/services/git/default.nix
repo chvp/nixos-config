@@ -58,7 +58,10 @@
             ROOT_URL = "https://git.chvp.be/";
             HTTP_ADDR = "/run/forgejo/forgejo.socket";
           };
-          service.EMAIL_DOMAIN_ALLOWLIST = "vanpetegem.be";
+          service = {
+            EMAIL_DOMAIN_ALLOWLIST = "vanpetegem.be";
+            ENABLE_NOTIFY_MAIL = true;
+          };
           mailer = {
             ENABLED = true;
             PROTOCOL = "smtps";
