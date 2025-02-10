@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download changed flake.lock
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: flake.lock
       - run: apt update && apt install -y sudo
@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Download changed flake.lock
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: flake.lock
       - uses: https://github.com/stefanzweifel/git-auto-commit-action@v5.1.0
