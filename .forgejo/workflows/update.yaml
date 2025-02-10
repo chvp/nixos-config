@@ -20,7 +20,7 @@ jobs:
           github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
       - run: nix flake update
       - name: Upload changed flake.lock
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: flake.lock
           path: flake.lock
