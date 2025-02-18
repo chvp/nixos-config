@@ -10,8 +10,8 @@
       automatically-unhide-macos-hidden-apps = true;
       on-focused-monitor-changed = ["move-mouse monitor-lazy-center"];
       mode.main.binding = {
-        alt-enter = "exec-and-forget open -na iTerm.app";
-        alt-shift-enter = "exec-and-forget open -na emacs.app";
+        ctrl-alt-enter = "exec-and-forget open -na iTerm.app";
+        ctrl-alt-shift-enter = "exec-and-forget open -na emacs.app";
         alt-h = "focus left";
         alt-j = "focus down";
         alt-k = "focus up";
