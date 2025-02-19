@@ -42,6 +42,7 @@
         alt-shift-9 = "move-node-to-workspace 9";
         alt-tab = "workspace-back-and-forth";
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
+        alt-space = "layout floating tiling";
       };
       workspace-to-monitor-force-assignment = {
         "1" = "main";
