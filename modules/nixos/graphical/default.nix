@@ -43,7 +43,7 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = with pkgs; [ gimp mpv okular ranger uni wtype ];
+      home.packages = with pkgs; [ gimp mpv kdePackages.okular ranger uni wtype ];
     };
   };
 }
