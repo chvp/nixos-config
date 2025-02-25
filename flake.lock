@@ -304,11 +304,11 @@
         "nixpkgs-24_11": "nixpkgs-24_11"
       },
       "locked": {
-        "lastModified": 1740409919,
-        "narHash": "sha256-Y6m+gyRLZjFqoSspLZd3BWUdf9KAIYm/favaiAbmrY0=",
+        "lastModified": 1740437053,
+        "narHash": "sha256-exPTta4qI1ka9sk+jPcLogGffJ1OVXnAsTRqpeAXeNw=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "f23faf97d6668a4847be5d5c6399493e596b406d",
+        "rev": "c8ec4d5e432f5df4838eacd39c11828d23ce66ec",
         "type": "gitlab"
       },
       "original": {
@@ -373,11 +373,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1740502105,
-        "narHash": "sha256-TtfCsLwgmdvWPJbIdR3owvWM0gzAWLkFAdhZxxLaey0=",
+        "lastModified": 1740514125,
+        "narHash": "sha256-i0lyXlWnZzxVVS18LwgJy9+UoquaZDggh5B/oCOM6Ak=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "2125f607c8da8affb1fce57a422ee078ba399954",
+        "rev": "2af8d925c5c7049921438f8dd7e7ef7566c6313a",
         "type": "github"
       },
       "original": {
