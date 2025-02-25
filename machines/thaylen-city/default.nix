@@ -53,7 +53,7 @@
       upgrade = true;
     };
   };
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   services.openssh.enable = true;
   system = {
     defaults = {
