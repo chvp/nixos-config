@@ -70,7 +70,7 @@ in
           UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
         };
         profiles.default = {
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
             belgium-eid
             consent-o-matic
             cookie-autodelete
