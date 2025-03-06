@@ -16,7 +16,7 @@
         hostName = "nextcloud.vanpetegem.me";
         enable = true;
         autoUpdateApps.enable = true;
-        package = pkgs.nextcloud30;
+        package = pkgs.nextcloud31;
         caching.redis = true;
         configureRedis = true;
         config = {
