@@ -33,7 +33,7 @@
     networking.firewall.allowedTCPPorts = [ 80 443 ];
     security.acme = {
       certs."vanpetegem.me" = {
-        dnsProvider = "cloudflare";
+        dnsProvider = "ovh";
         credentialsFile = config.age.secrets."passwords/services/acme".path;
         extraDomainNames = [
           "*.vanpetegem.me"
