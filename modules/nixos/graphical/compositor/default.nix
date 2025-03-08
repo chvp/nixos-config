@@ -125,6 +125,7 @@ let
     riverctl map normal None XF86AudioRaiseVolume spawn '${pkgs.pamixer}/bin/pamixer -i 5'
     riverctl map normal None XF86AudioLowerVolume spawn '${pkgs.pamixer}/bin/pamixer -d 5'
     riverctl map normal None XF86AudioMute spawn '${pkgs.pamixer}/bin/pamixer --toggle-mute'
+    riverctl map normal None XF86AudioPlay spawn '${pkgs.playerctl}/bin/playerctl play-pause'
     riverctl map normal None XF86MonBrightnessDown spawn '${pkgs.brightnessctl}/bin/brightnessctl s -- -5%'
     riverctl map normal None XF86MonBrightnessUp spawn '${pkgs.brightnessctl}/bin/brightnessctl s -- +5%'
 
@@ -416,6 +417,7 @@ in
           enable = true;
           font = "Hack Regular 9";
         };
+        playerctld.enable = true;
         swayidle = {
           enable = true;
           systemdTarget = "river-session.target";
