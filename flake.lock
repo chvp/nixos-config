@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741473579,
-        "narHash": "sha256-0o818nxs8I5if11W5xNEAl+Ud92Ab4AKZnUqp5AxLoE=",
+        "lastModified": 1741632511,
+        "narHash": "sha256-fnWy7nbB81S/5/dNwIncmD4kmxofI/qMSY7TXjwcmbY=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "c9ab641e61b158e766cf5a5e1143d29db2d11221",
+        "rev": "b60c583231467509eb09e443dee57637c8d0aaaa",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741473768,
-        "narHash": "sha256-NqA58KN7RygKClBLilGPoz0TnB5ymY/0R5LJOKhq/tw=",
+        "lastModified": 1741632676,
+        "narHash": "sha256-qAYqPipoW/PCvXiuM+FMc1UIZl7Cs4IiqcLD1LvKfdc=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "50366917f29335910cf02bd26e970519d8d6115c",
+        "rev": "13239b3383652eee7dd18d95f1b4303f39805d96",
         "type": "github"
       },
       "original": {
@@ -276,11 +276,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741613526,
-        "narHash": "sha256-HUEfRLqCy47BQ7kOG4SRVhqE7J6lkFzAagnd13I17qk=",
+        "lastModified": 1741635347,
+        "narHash": "sha256-2aYfV44h18alHXopyfL4D9GsnpE5XlSVkp4MGe586VU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3593ee59a44974b8518829a5239b2f77222e3c81",
+        "rev": "7fb8678716c158642ac42f9ff7a18c0800fea551",
         "type": "github"
       },
       "original": {
@@ -444,11 +444,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1741629836,
-        "narHash": "sha256-0ehENQIYRJl8W1xX8D4ihkJ5zxMmR/xAggzyadGhtnQ=",
+        "lastModified": 1741638742,
+        "narHash": "sha256-fs/K+/6L7zJpDnAixGCnYCP5pTpBys8PgHWPtc+QTZs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c7acd5a8358884334d2064086e6237eaac3b593d",
+        "rev": "b4a0e8b582386f8f5c279e5be02a35738d4c595e",
         "type": "github"
       },
       "original": {
