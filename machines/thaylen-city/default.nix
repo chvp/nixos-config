@@ -37,6 +37,7 @@
       "docker"
       "inkscape"
       "jordanbaird-ice"
+      "keepassxc"
       "libreoffice"
       "musicbrainz-picard"
       "platypus"
