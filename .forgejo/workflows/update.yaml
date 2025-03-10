@@ -45,7 +45,7 @@ jobs:
           enable_kvm: false
           github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
       - name: Cachix
-        uses: https://github.com/cachix/cachix-action@v15
+        uses: https://github.com/cachix/cachix-action@v16
         with:
           name: chvp
           extraPullNames: "nix-community,accentor"
