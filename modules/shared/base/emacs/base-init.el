@@ -288,6 +288,9 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; String manipulation
+(use-package s)
+
 ;; Side window with symbols or headline
 (use-package sr-speedbar
   :custom
