@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: apt update && apt install -y sudo
-      - uses: https://github.com/cachix/install-nix-action@v30
+      - uses: https://github.com/cachix/install-nix-action@v31
         with:
           enable_kvm: false
           github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
@@ -40,7 +40,7 @@ jobs:
         with:
           name: flake.lock
       - run: apt update && apt install -y sudo
-      - uses: https://github.com/cachix/install-nix-action@v30
+      - uses: https://github.com/cachix/install-nix-action@v31
         with:
           enable_kvm: false
           github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
