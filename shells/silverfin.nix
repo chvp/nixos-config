@@ -49,7 +49,7 @@ pkgs.devshell.mkShell {
     llvmPackages.libllvm
     minikube
     mupdf-headless
-    nodejs_18
+    nodejs_22
     (inputs.nixpkgs-23-05.legacyPackages.aarch64-darwin.poppler_utils.overrideAttrs (old: rec {
       version = "22.12.0";
       src = pkgs.fetchurl {
