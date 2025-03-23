@@ -69,7 +69,7 @@
       };
     };
     nixos-mailserver = {
-      url = "gitlab:yu-re-ka/nixos-mailserver/dovecot2-modules";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
