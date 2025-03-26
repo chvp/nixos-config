@@ -129,7 +129,7 @@
         www-chvp-be.overlays.default
       ];
       commonModules = [
-        lix-module.nixosModules.default # Even though it's a "nixosModule" it's actually compatible with Darwin as well
+        lix-module.nixosModules.lixFromNixpkgs # Even though it's a "nixosModule" it's actually compatible with Darwin as well
         ./modules/shared
       ];
       nixosModules = [
