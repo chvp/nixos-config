@@ -91,6 +91,7 @@
       git.enable = true;
       mail.enable = true;
       matrix.enable = true;
+      mumble.enable = true;
       nextcloud.enable = true;
       nginx.hosts = [
         {

@@ -8,6 +8,7 @@
     ./git
     ./mail
     ./matrix
+    ./mumble
     ./nextcloud
     ./nginx
     ./torrents

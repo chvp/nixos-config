@@ -65,6 +65,10 @@
       device = "zroot/safe/services/forgejo";
       fsType = "zfs";
     };
+    "/var/lib/murmur" = {
+      device = "zroot/local/services/murmur";
+      fsType = "zfs";
+    };
     "/var/vmail" = {
       device = "zroot/safe/services/mail";
       fsType = "zfs";
