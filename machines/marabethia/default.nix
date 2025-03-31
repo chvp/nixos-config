@@ -13,7 +13,7 @@
       network = {
         ovh = {
           enable = true;
-          publicInterface = "eno1";
+          publicInterface = "eno1np0";
           publicIPV4 = {
             ip = "162.19.60.238";
             gateway = "162.19.60.254";
