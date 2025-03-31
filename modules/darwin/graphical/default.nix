@@ -8,7 +8,7 @@
       enable-normalization-opposite-orientation-for-nested-containers = true;
       start-at-login = true;
       automatically-unhide-macos-hidden-apps = true;
-      on-focused-monitor-changed = ["move-mouse monitor-lazy-center"];
+      on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
       mode.main.binding = {
         ctrl-alt-enter = "exec-and-forget open -na iTerm.app";
         ctrl-alt-shift-enter = "exec-and-forget open -na emacs.app";
