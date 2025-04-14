@@ -5,7 +5,7 @@ let
 in
 {
   chvp.base.emacs = {
-    basePackage = pkgs.emacs;
+    basePackage = pkgs.emacs.override { withNativeCompilation = false; };
     extraConfig = [ (builtins.readFile ./darwin-init.el) ];
   };
   services.emacs = {
