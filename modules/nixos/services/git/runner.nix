@@ -16,9 +16,13 @@
         labels = [ ];
         name = config.networking.hostName;
         tokenFile = config.age.secrets."passwords/services/git/token-file".path;
+        settings.container.enable_ipv6 = false;
       };
     };
-    virtualisation.docker.enable = true;
+    virtualisation.docker = {
+      enable = true;
+      daemon.settings.ipv6 = false;
+    };
 
     age.secrets."passwords/services/git/token-file" = {
       file = ../../../../secrets/passwords/services/git/token-file.age;
