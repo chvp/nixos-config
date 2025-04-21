@@ -23,10 +23,10 @@
     };
     virtualisation.docker = {
       enable = true;
-      # daemon.settings = {
-      #   fixed-cidr-v6 = "fd00::/80";
-      #   ipv6 = true;
-      # };
+      daemon.settings = {
+        fixed-cidr-v6 = "fd00::/80";
+        ipv6 = true;
+      };
     };
 
     age.secrets."passwords/services/git/token-file" = {
