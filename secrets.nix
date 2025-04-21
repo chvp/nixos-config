@@ -64,7 +64,7 @@ in
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;
 
   "secrets/passwords/services/git/mail-password.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/passwords/services/git/token-file.age".publicKeys = [ elendel ] ++ users;
+  "secrets/passwords/services/git/token-file.age".publicKeys = [ marabethia ] ++ users;
 
   "secrets/passwords/services/murmur.age".publicKeys = [ marabethia ] ++ users;
 

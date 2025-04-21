@@ -81,7 +81,6 @@
       accentor.enable = true;
       containers.externalInterface = "enp7s0";
       data-access.enable = true;
-      git.runner.enable = true;
       torrents.enable = true;
     };
   };

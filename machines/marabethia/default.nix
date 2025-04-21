@@ -88,7 +88,10 @@
       tetris.server = true;
     };
     services = {
-      git.enable = true;
+      git = {
+        enable = true;
+        runner.enable = true;
+      };
       mail.enable = true;
       matrix.enable = true;
       mumble.enable = true;

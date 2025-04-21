@@ -61,6 +61,10 @@
       device = "zroot/safe/services/dkim";
       fsType = "zfs";
     };
+    "/var/lib/docker" = {
+      device = "zroot/local/services/docker";
+      fsType = "zfs";
+    };
     "/var/lib/forgejo" = {
       device = "zroot/safe/services/forgejo";
       fsType = "zfs";
@@ -83,6 +87,10 @@
     };
     "/var/lib/postgresql" = {
       device = "zroot/safe/services/postgresql";
+      fsType = "zfs";
+    };
+    "/var/lib/private/gitea-runner" = {
+      device = "zroot/local/services/gitea-runner";
       fsType = "zfs";
     };
     "/var/sieve" = {

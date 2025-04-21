@@ -16,12 +16,17 @@
         labels = [ ];
         name = config.networking.hostName;
         tokenFile = config.age.secrets."passwords/services/git/token-file".path;
-        settings.container.enable_ipv6 = false;
+        settings = {
+          container.enable_ipv6 = true;
+        };
       };
     };
     virtualisation.docker = {
       enable = true;
-      daemon.settings.ipv6 = false;
+      daemon.settings = {
+        fixed-cidr-v6 = "fd00::/80";
+        ipv6 = true;
+      };
     };
 
     age.secrets."passwords/services/git/token-file" = {
