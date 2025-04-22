@@ -10,7 +10,7 @@
     virtualisation.docker = {
       enable = true;
       extraOptions = "--data-root ${config.chvp.dataPrefix}/var/lib/docker";
-      storageDriver = "zfs";
+      storageDriver = "overlay2";
     };
 
     environment.systemPackages = [ pkgs.docker-compose ];
