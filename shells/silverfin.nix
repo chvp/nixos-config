@@ -76,6 +76,10 @@ pkgs.devshell.mkShell {
       name = "DISABLE_SPRING";
       value = "1";
     }
+    {
+      name = "OBJC_DISABLE_INITIALIZE_FORK_SAFETY";
+      value = "YES";
+    }
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
   language.ruby = {
