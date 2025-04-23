@@ -14,7 +14,7 @@ let
         expireDuplicatesFirst = true;
         path = "${config.chvp.cachePrefix}${home}/.local/share/zsh/history";
       };
-      initExtra = ''
+      initContent = ''
         nshell() {
          local -a drvs
          for attr in "$@"; do

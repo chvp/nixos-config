@@ -383,7 +383,7 @@ in
           '';
           systemd.enable = true;
         };
-        zsh.initExtra = ''
+        zsh.initContent = ''
           rs() {
             riverctl spawn "$*"
           }

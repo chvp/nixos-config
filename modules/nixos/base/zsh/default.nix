@@ -3,7 +3,7 @@
 let
   base = (home: {
     programs.zsh = {
-      initExtra = ''
+      initContent = ''
         lightmode() {
           printf "\033]10;rgb:4c/4f/69\007"
           printf "\033]11;rgb:ef/f1/f5\007"
