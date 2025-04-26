@@ -30,7 +30,6 @@ let
     export GDK_SCALE=1
     export GDK_DPI_SCALE=1
     export MOZ_ENABLE_WAYLAND=1
-    export XCURSOR_SIZE=24
     export _JAVA_AWT_WM_NONREPARENTING=1
     if [ "$DBUS_SESSION_BUS_ADDRESS" ]; then
         export DBUS_SESSION_BUS_ADDRESS
@@ -152,7 +151,7 @@ let
     riverctl focus-follows-cursor normal
     riverctl hide-cursor when-typing enabled
     riverctl set-cursor-warp on-output-change
-    riverctl xcursor-theme Catppuccin-Latte-Light-Cursors 24
+    riverctl xcursor-theme ${config.home-manager.users.charlotte.home.pointerCursor.name} ${toString config.home-manager.users.charlotte.home.pointerCursor.size}
 
     riverctl keyboard-layout -variant altgr-intl -options compose:caps us
 
