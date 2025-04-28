@@ -76,8 +76,6 @@ in
 
   "secrets/files/programs/transmission/config.json.age".publicKeys = [ elendel ] ++ users;
 
-  "secrets/files/services/matrix-appservice-slack/config.yml.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/files/services/matrix-appservice-slack/registration.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/matrix-hookshot/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/matrix-hookshot/passkey.pem.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/matrix-hookshot/registration.yml.age".publicKeys = [ marabethia ] ++ users;
