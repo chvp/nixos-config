@@ -49,6 +49,7 @@
           url_preview_enabled = true;
           enable_metrics = false;
           enable_registration = false;
+          forgotten_room_retention_period = "28d";
           report_stats = false;
           allow_guest_access = false;
           suppress_key_server_warning = true;
