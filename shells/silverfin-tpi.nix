@@ -13,7 +13,7 @@ pkgs.devshell.mkShell {
   };
   packages = with pkgs; [
     cmake
-    nodejs_18
+    nodejs_20
     (pkgs.lowPrio postgresql_14)
     shared-mime-info
     yarn
@@ -48,10 +48,10 @@ pkgs.devshell.mkShell {
   language.c.compiler = lib.mkForce pkgs.clang;
   language.ruby = {
     package = pkgs.ruby_3_2.overrideAttrs (old: {
-      version = (import "${inputs.nixpkgs}/pkgs/development/interpreters/ruby/ruby-version.nix" { inherit lib; }) "3" "2" "2" "";
+      version = (import "${inputs.nixpkgs}/pkgs/development/interpreters/ruby/ruby-version.nix" { inherit lib; }) "3" "2" "8" "";
       src = pkgs.fetchurl {
-        url = "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.2.tar.gz";
-        hash = "sha256-lsV1WIcaZ0jeW8nydOk/S1qtBs2PN776Do2U57ikI7w=";
+        url = "https://cache.ruby-lang.org/pub/ruby/3.2/ruby-3.2.8.tar.gz";
+        hash = "sha256-d6zdjPu+H45XO15lNuA8UQPfmJ3AX6aMcPARgzw1YHU=";
       };
     });
     nativeDeps = with pkgs; [
