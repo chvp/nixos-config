@@ -24,7 +24,7 @@ emoji_options() {
 
 emoji() {
   char=$(echo -n "$1" | sed "s/^\([^ ]*\) .*/\1/")
-  riverctl spawn "echo -n $char | @wlClipboard@/bin/wl-copy --foreground"
+  riverctl spawn "echo -n $char | @wl-clipboard@/bin/wl-copy --foreground"
 }
 
 nrun_options() {

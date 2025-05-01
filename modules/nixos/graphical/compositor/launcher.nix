@@ -6,9 +6,9 @@ let
       libqalculate
       nix
       uni
+      wl-clipboard
       zsh
       ;
-    wlClipboard = pkgs.wl-clipboard;
   };
 in
 pkgs.runCommand "launcher" { } ''
