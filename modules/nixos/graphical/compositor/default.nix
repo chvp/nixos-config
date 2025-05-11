@@ -414,7 +414,7 @@ in
         };
         mako = {
           enable = true;
-          font = "Hack Regular 9";
+          settings.font = "Hack Regular 9";
         };
         playerctld.enable = true;
         swayidle = {
