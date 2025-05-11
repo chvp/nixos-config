@@ -62,7 +62,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=stable";
+      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.93";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
@@ -129,7 +129,7 @@
         www-chvp-be.overlays.default
       ];
       commonModules = [
-        lix-module.nixosModules.lixFromNixpkgs # Even though it's a "nixosModule" it's actually compatible with Darwin as well
+        lix-module.nixosModules.default # Even though it's a "nixosModule" it's actually compatible with Darwin as well
         ./modules/shared
       ];
       nixosModules = [
