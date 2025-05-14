@@ -254,21 +254,6 @@
         "type": "github"
       }
     },
-    "flakey-profile": {
-      "locked": {
-        "lastModified": 1712898590,
-        "narHash": "sha256-FhGIEU93VHAChKEXx905TSiPZKga69bWl1VB37FK//I=",
-        "owner": "lf-",
-        "repo": "flakey-profile",
-        "rev": "243c903fd8eadc0f63d205665a92d4df91d42d9d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lf-",
-        "repo": "flakey-profile",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -287,46 +272,6 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "lix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746827286,
-        "narHash": "sha256-qCRBy8Bbh5XhPalPkhonxNgfsbw3lP0UIXBLSrhxAvI=",
-        "rev": "dcb0a97000d50b2868ed4f8d9fd465c5a5b8eb3a",
-        "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/dcb0a97000d50b2868ed4f8d9fd465c5a5b8eb3a.tar.gz?rev=dcb0a97000d50b2868ed4f8d9fd465c5a5b8eb3a"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://git.lix.systems/lix-project/lix/archive/main.tar.gz"
-      }
-    },
-    "lix-module": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "flakey-profile": "flakey-profile",
-        "lix": "lix",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1746839156,
-        "narHash": "sha256-4wPryIk4yXSmxEBmxMsMaeG/7as5EXQxVXs+LjTY8fI=",
-        "ref": "release-2.93",
-        "rev": "4ca269a38949de3ef7f47da25576dc8974855f8f",
-        "revCount": 141,
-        "type": "git",
-        "url": "https://git.lix.systems/lix-project/nixos-module"
-      },
-      "original": {
-        "ref": "release-2.93",
-        "type": "git",
-        "url": "https://git.lix.systems/lix-project/nixos-module"
       }
     },
     "nix-index-database": {
@@ -468,7 +413,6 @@
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "lix-module": "lix-module",
         "nix-index-database": "nix-index-database",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs",

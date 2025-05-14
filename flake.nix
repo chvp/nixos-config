@@ -61,13 +61,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=release-2.93";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -102,7 +95,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, darwin, devshell, emacs-overlay, flake-utils, home-manager, lix-module, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, darwin, devshell, emacs-overlay, flake-utils, home-manager, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -129,7 +122,6 @@
         www-chvp-be.overlays.default
       ];
       commonModules = [
-        lix-module.nixosModules.default # Even though it's a "nixosModule" it's actually compatible with Darwin as well
         ./modules/shared
       ];
       nixosModules = [
