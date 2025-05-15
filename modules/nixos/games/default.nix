@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 {
   imports = [
@@ -18,6 +18,5 @@
       minecraft.client = lib.mkDefault false;
       steam.enable = lib.mkDefault true;
     };
-    environment.systemPackages = [ pkgs.zeroad ];
   };
 }
