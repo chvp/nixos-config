@@ -197,6 +197,32 @@
         "type": "github"
       }
     },
+    "entrance-exam": {
+      "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1747833382,
+        "narHash": "sha256-Y5wAdHAhjkFwS6Jg30fSR516q6EljREnAkjwV7tJz9Y=",
+        "ref": "refs/heads/main",
+        "rev": "284d8881f93be4d29bdb2aa5afa94fd6e8a59a8a",
+        "revCount": 10,
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/entrance-exam"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/entrance-exam"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -461,6 +487,7 @@
         "darwin": "darwin",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
+        "entrance-exam": "entrance-exam",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",

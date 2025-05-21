@@ -5,6 +5,7 @@
     ./accentor
     ./containers
     ./data-access
+    ./entrance-exam
     ./git
     ./mail
     ./matrix
