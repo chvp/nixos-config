@@ -210,11 +210,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748010325,
-        "narHash": "sha256-gCQet+zuWzOk8S5d+hGx2NtiSVWENhYQqDi+E6/Eq1s=",
+        "lastModified": 1748013113,
+        "narHash": "sha256-Yur/M8ua/8YG0rWmCRSfkWOV4YYfb4IT1voIocc5Ywg=",
         "ref": "refs/heads/main",
-        "rev": "7656f2a2778489035008afb2ad9676822f76d1e5",
-        "revCount": 12,
+        "rev": "fbcea15e3528d1c9e8c26dabdc2ff37653ba9522",
+        "revCount": 14,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },
@@ -465,11 +465,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1748008505,
-        "narHash": "sha256-sfYPS6CJ8fbKHtbxWCK+7BH7ABB32aRUhCd0H1tLQx8=",
+        "lastModified": 1748012308,
+        "narHash": "sha256-Q+ddw4PxvkzT4prWrIhIt6HJ+qBS/Yo8i8AOyOfSvY8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "bd5d62abb5ce1d98698476157003c6645d48edf5",
+        "rev": "21ae3a580bc806abf68840bdf6595481725a4514",
         "type": "github"
       },
       "original": {
