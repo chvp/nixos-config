@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748071179,
-        "narHash": "sha256-Jv9Uq2AjRWGvr+ryBWaSIKmilVeapO3sJLVniFhYL2s=",
+        "lastModified": 1748112493,
+        "narHash": "sha256-kxNyA3qrgRuQ0f5zeF/7bI90YLWbs8jaNNT0LoSYDBY=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "af58f698ad8fb74ca2973079a10d5780123d20b5",
+        "rev": "1db38c95e3629a288fc4c3c00d97d2ab70b58041",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747800862,
-        "narHash": "sha256-qr4Kln0qPOip9M5FeogIBS03hs+FufyeD4OPFV9lMCA=",
+        "lastModified": 1748112601,
+        "narHash": "sha256-LF4d221WE0vcBbEslYk0QhBIedQTX4O7mp281KHBJl8=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "7a029e0a0f547c9638efe56e01b28ba202032007",
+        "rev": "33fc92c630b5dd7197125b930ee5520bfb24a7fa",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748082177,
-        "narHash": "sha256-7r/3MLUQYeW5wFR/t9cpbkhrdQqaxQg7nOqQ5txMFFs=",
+        "lastModified": 1748116292,
+        "narHash": "sha256-FNXumoVDfamrM42gqy9Fc/G9Yrlwc1eWX2pCIHWtPjA=",
         "ref": "refs/heads/main",
-        "rev": "b0dca834516fc56da18c6f92fae1d234c0eb650b",
-        "revCount": 20,
+        "rev": "8ff4c9d30b21cb0a916a218d7b91d2f89cfc9e87",
+        "revCount": 22,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },
@@ -335,11 +335,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747978958,
-        "narHash": "sha256-pQQnbxWpY3IiZqgelXHIe/OAE/Yv4NSQq7fch7M6nXQ=",
+        "lastModified": 1748119343,
+        "narHash": "sha256-/3J/o+qZrn3IJdbi+jde+W0jHA/OAeqa3hH6VA53DWA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7419250703fd5eb50e99bdfb07a86671939103ea",
+        "rev": "8fc1e46ab6d5daac4563c2a3684d68cc0106f458",
         "type": "github"
       },
       "original": {
@@ -465,11 +465,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1748110792,
-        "narHash": "sha256-5W3EVwVeZbHu3SSbLHNlkoWTiOwxcxYjuTYOj5JsoXo=",
+        "lastModified": 1748115910,
+        "narHash": "sha256-XrtByWu6NjrGq1nysW4XsliVLslZXXKzCKHSC6QM5dY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "ef00ffe32b92434654b451fe532112177cb3c3e8",
+        "rev": "24dcce023477b994838e387ae042c6b93a749288",
         "type": "github"
       },
       "original": {
