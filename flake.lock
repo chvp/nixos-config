@@ -408,22 +408,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-23-05": {
-      "locked": {
-        "lastModified": 1704290814,
-        "narHash": "sha256-LWvKHp7kGxk/GEtlrGYV68qIvPHkU9iToomNFGagixU=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "70bdadeb94ffc8806c0570eb5c2695ad29f0e421",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-23.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-25_05": {
       "locked": {
         "lastModified": 1747610100,
@@ -493,7 +477,6 @@
         "nix-index-database": "nix-index-database",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-23-05": "nixpkgs-23-05",
         "nur": "nur",
         "systems": "systems",
         "tetris": "tetris",

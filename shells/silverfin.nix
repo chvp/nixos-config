@@ -50,13 +50,7 @@ pkgs.devshell.mkShell {
     minikube
     mupdf-headless
     nodejs_22
-    (inputs.nixpkgs-23-05.legacyPackages.aarch64-darwin.poppler_utils.overrideAttrs (old: rec {
-      version = "22.12.0";
-      src = pkgs.fetchurl {
-        url = "https://poppler.freedesktop.org/poppler-${version}.tar.xz";
-        hash = "sha256-2aqcrN+9D46Y/Cs7sAjmRVl+1IBoV1fD57x0tCeNFcA=";
-      };
-    }))
+    poppler_utils
     (pkgs.lowPrio postgresql_14)
     stern
     yarn
