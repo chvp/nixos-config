@@ -18,6 +18,7 @@ in
     ];
     mailserver = {
       enable = true;
+      stateVersion = 1;
       enableManageSieve = true;
       fqdn = "mail.vanpetegem.me";
       domains = [
