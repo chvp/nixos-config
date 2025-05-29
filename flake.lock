@@ -184,11 +184,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1748449332,
-        "narHash": "sha256-3Qr0pThpHgbIhscOia2ETxo2ge7el458Z9pv5+ONTKc=",
+        "lastModified": 1748512354,
+        "narHash": "sha256-t2NakedcQrHpt1+wAf9kOCdHqB6WfNIw6yDfF/CDv7k=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "44f10e03d04b678d13ee9c36a9bd632dbce84103",
+        "rev": "8a6d70fbe08c7be6b1832a1c4614d5f71e8ccf82",
         "type": "github"
       },
       "original": {
@@ -210,11 +210,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748281250,
-        "narHash": "sha256-PRkSD0V3ocnbHCGFV7UaYR9eusyqxOmetsnzNHQUPk4=",
+        "lastModified": 1748514353,
+        "narHash": "sha256-kpG2mIxj+18WjhcPJkGqCqmggyPf3um9ZX96Klv8HSA=",
         "ref": "refs/heads/main",
-        "rev": "84ddd0c4e5b5640cfffc902f4d0e95f00d56490c",
-        "revCount": 32,
+        "rev": "8ea2452ba4eb5eb238edffe98cf5402bee8abee0",
+        "revCount": 33,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },
@@ -379,11 +379,11 @@
         "nixpkgs-25_05": "nixpkgs-25_05"
       },
       "locked": {
-        "lastModified": 1747965231,
-        "narHash": "sha256-BW3ktviEhfCN/z3+kEyzpDKAI8qFTwO7+S0NVA0C90o=",
+        "lastModified": 1748501919,
+        "narHash": "sha256-UcPtnBgdIzsTwmw9MBOtxZsT8MHrVCwO11+04pHRuJU=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "53007af63fade28853408370c4c600a63dd97f41",
+        "rev": "506c6151d6f1dc11c4de3876863b9793fe8f3c8f",
         "type": "gitlab"
       },
       "original": {
@@ -449,11 +449,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1748493509,
-        "narHash": "sha256-4JtE6D3LXy8NYX0um1ngXrAkb4ulI162MteDAecLX/M=",
+        "lastModified": 1748511404,
+        "narHash": "sha256-VpvtwBu7EZwdj3BrWyRNGRFTqnH/HrglK6EK9PGhtDY=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7afd5e9da1518ffeaa6f410f65cf30effb554e65",
+        "rev": "f9f791cebffb924dfe16f0af39e5b485b21afc7f",
         "type": "github"
       },
       "original": {
