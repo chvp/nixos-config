@@ -379,16 +379,15 @@
         "nixpkgs-25_05": "nixpkgs-25_05"
       },
       "locked": {
-        "lastModified": 1748609342,
+        "lastModified": 1748610851,
         "narHash": "sha256-IKB5hh2BVJ8XsNqFvmQn2I34BwRLVRbIRq9gQN6tN84=",
-        "owner": "chvp",
+        "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "519a85a801c84341f0d007af86734ba2b5780a24",
+        "rev": "c8bc3e4f1f0abebdc8e4b44450d3e53a9307e0c6",
         "type": "gitlab"
       },
       "original": {
-        "owner": "chvp",
-        "ref": "ldap-mail-directory-assertion",
+        "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
         "type": "gitlab"
       }
