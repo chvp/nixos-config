@@ -78,9 +78,6 @@ in
 
   "secrets/files/programs/transmission/config.json.age".publicKeys = [ elendel ] ++ users;
 
-  "secrets/files/services/matrix-hookshot/config.yml.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/files/services/matrix-hookshot/passkey.pem.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/files/services/matrix-hookshot/registration.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ marabethia ] ++ users;

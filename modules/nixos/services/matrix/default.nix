@@ -19,12 +19,6 @@
               client_max_body_size 10M;
             '';
           };
-          "~ ^/_hookshot/(.*)" = {
-            proxyPass = "http://127.0.0.1:9000/$1";
-            extraConfig = ''
-              proxy_set_header X-Forwarded-Ssl on;
-            '';
-          };
         };
       }
     ];
@@ -55,7 +49,6 @@
           suppress_key_server_warning = true;
           app_service_config_files = [
             config.age.secrets."files/services/matrix-synapse/whatsapp-registration.yml".path
-            config.age.secrets."files/services/matrix-synapse/hookshot-registration.yml".path
           ];
         };
         extraConfigFiles = [
@@ -97,54 +90,18 @@
           Group = "mautrix-whatsapp";
         };
       };
-      matrix-hookshot = {
-        description = "Matrix <-> Services bridge";
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" "matrix-synapse.service" ];
-        requires = [ "matrix-synapse.service" ];
-        script = "${pkgs.matrix-hookshot}/bin/matrix-hookshot ${config.age.secrets."files/services/matrix-hookshot/config.yml".path} ${config.age.secrets."files/services/matrix-hookshot/registration.yml".path}";
-        serviceConfig = {
-          User = "matrix-hookshot";
-          Group = "matrix-hookshot";
-          WorkingDirectory = "/var/lib/matrix-hookshot";
-        };
-      };
     };
 
     users = {
-      users = {
-        mautrix-whatsapp = {
-          group = "mautrix-whatsapp";
-          home = "/var/lib/mautrix-whatsapp";
-          createHome = true;
-          isSystemUser = true;
-        };
-        matrix-hookshot = {
-          group = "matrix-hookshot";
-          home = "/var/lib/matrix-hookshot";
-          createHome = true;
-          isSystemUser = true;
-        };
+      users.mautrix-whatsapp = {
+        group = "mautrix-whatsapp";
+        home = "/var/lib/mautrix-whatsapp";
+        createHome = true;
+        isSystemUser = true;
       };
-      groups = {
-        matrix-hookshot = { };
-        mautrix-whatsapp = { };
-      };
+      groups.mautrix-whatsapp = { };
     };
 
-    age.secrets."files/services/matrix-hookshot/config.yml" = {
-      file = ../../../../secrets/files/services/matrix-hookshot/config.yml.age;
-      owner = "matrix-hookshot";
-    };
-    age.secrets."files/services/matrix-hookshot/registration.yml" = {
-      file = ../../../../secrets/files/services/matrix-hookshot/registration.yml.age;
-      owner = "matrix-hookshot";
-    };
-    age.secrets."files/services/matrix-hookshot/passkey.pem" = {
-      path = "/var/lib/matrix-hookshot/passkey.pem";
-      file = ../../../../secrets/files/services/matrix-hookshot/passkey.pem.age;
-      owner = "matrix-hookshot";
-    };
     age.secrets."files/services/mautrix-whatsapp/config.yml" = {
       file = ../../../../secrets/files/services/mautrix-whatsapp/config.yml.age;
       owner = "mautrix-whatsapp";
@@ -159,10 +116,6 @@
     };
     age.secrets."files/services/matrix-synapse/whatsapp-registration.yml" = {
       file = ../../../../secrets/files/services/mautrix-whatsapp/registration.yml.age;
-      owner = "matrix-synapse";
-    };
-    age.secrets."files/services/matrix-synapse/hookshot-registration.yml" = {
-      file = ../../../../secrets/files/services/matrix-hookshot/registration.yml.age;
       owner = "matrix-synapse";
     };
   };
