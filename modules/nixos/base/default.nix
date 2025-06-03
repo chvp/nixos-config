@@ -19,8 +19,13 @@
     system.autoUpgrade = {
       enable = true;
       flake = "git+https://git.chvp.be/chvp/nixos-config";
-      dates = "01/4:00";
+      dates = "01/2:00";
       randomizedDelaySec = "10min";
+      allowReboot = true;
+      rebootWindow = {
+        lower = "01:00";
+        upper = "05:00";
+      };
     };
     home-manager.users = {
       charlotte = { ... }: {
