@@ -62,7 +62,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: flake.lock
-      - uses: https://github.com/stefanzweifel/git-auto-commit-action@v6.0.0
+      - uses: https://github.com/stefanzweifel/git-auto-commit-action@v6.0.1
         with:
           commit_message: "Update dependencies"
           commit_user_name: "CharBOTte"
