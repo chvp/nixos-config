@@ -52,6 +52,7 @@
         "5" = "secondary";
         "6" = "secondary";
         "7" = "secondary";
+        "8" = "secondary";
       };
     };
   };
