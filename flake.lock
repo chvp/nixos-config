@@ -210,11 +210,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749023534,
-        "narHash": "sha256-pZcoIizU6jTCA6jhCmWFkJyDmz/XaCosBtey5IHCWE0=",
+        "lastModified": 1749905607,
+        "narHash": "sha256-AWoZZ0Fs+RwgD7L79oonB1Ar3UNqzRe2f5fcn0izSrc=",
         "ref": "refs/heads/main",
-        "rev": "50d87ab03ff7e463069df2af189406756455e28d",
-        "revCount": 34,
+        "rev": "bf2421eb60fcaec25931f1298913ff657ec5f10f",
+        "revCount": 35,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },
@@ -379,11 +379,11 @@
         "nixpkgs-25_05": "nixpkgs-25_05"
       },
       "locked": {
-        "lastModified": 1749856827,
-        "narHash": "sha256-HOhyPMWlt+UQIaVqYG/uq/RDGN6W7r3E4/wh8ncF54o=",
+        "lastModified": 1749905278,
+        "narHash": "sha256-fwb0SLRj8yqhdFqqafrlUZzwwSHYV1L75AaJ0wMXREM=",
         "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "e0ab4eeb673391ac148f7c6951fe1181a61f1fdb",
+        "rev": "23cc9a3996ac2f203f974798d3dcb56277b00aee",
         "type": "gitlab"
       },
       "original": {
@@ -449,11 +449,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1749896926,
-        "narHash": "sha256-7OGsj5QsI68M2ZkNfXqInTTCBuZHiBX+BoOjna+G3Eg=",
+        "lastModified": 1749902193,
+        "narHash": "sha256-3YlxeL3wjg9s5AxoADha9bG95SvDF3qoMNzoRVlLIgo=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f90225f386384fa2b599778750e85e492076d124",
+        "rev": "2a4dbf6cd17b4ccf30a26225add086d7681e351f",
         "type": "github"
       },
       "original": {
