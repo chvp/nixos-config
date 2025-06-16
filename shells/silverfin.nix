@@ -25,7 +25,7 @@ pkgs.devshell.mkShell {
       category = "[general commands]";
       help = "Force reset test assets";
       command = ''
-        RAILS_ENV=test bundle exec rake webpacker:clobber && RAILS_ENV=test bundle exec rake webpacker:compile
+        RAILS_ENV=test bundle exec rake shakapacker:clobber && RAILS_ENV=test bundle exec rake shakapacker:compile
       '';
     }
     {
@@ -33,7 +33,7 @@ pkgs.devshell.mkShell {
       category = "[general commands]";
       help = "Force reset translations for JS inclusion";
       command = ''
-        WEBPACKER_PRECOMPILE=false bundle exec rails assets:precompile
+        SHAKAPACKER_PRECOMPILE=false bundle exec rails assets:precompile
       '';
     }
   ];
