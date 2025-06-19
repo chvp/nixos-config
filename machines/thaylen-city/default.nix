@@ -32,6 +32,7 @@
   homebrew = {
     enable = true;
     casks = [
+      "background-music"
       "calibre"
       "cyberduck"
       "docker"
