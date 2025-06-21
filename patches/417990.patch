@@ -1,0 +1,68 @@
+diff --git a/nixos/tests/matrix/synapse.nix b/nixos/tests/matrix/synapse.nix
+index 323fa25ccb6c9d..4b9ade875a7832 100644
+--- a/nixos/tests/matrix/synapse.nix
++++ b/nixos/tests/matrix/synapse.nix
+@@ -187,8 +187,6 @@ in
+           networksStyle = "subnet";
+           enableSubmission = true;
+           tlsTrustedAuthorities = "${mailerCerts.ca.cert}";
+-          sslCert = "${mailerCerts.${mailerDomain}.cert}";
+-          sslKey = "${mailerCerts.${mailerDomain}.key}";
+ 
+           # blackhole transport
+           transport = "example.com discard:silently";
+@@ -205,6 +203,14 @@ in
+             smtp_tls_protocols = "TLSv1.3, TLSv1.2, !TLSv1.1, !TLSv1, !SSLv2, !SSLv3";
+             smtpd_tls_mandatory_protocols = "TLSv1.3, TLSv1.2, !TLSv1.1, !TLSv1, !SSLv2, !SSLv3";
+             smtp_tls_mandatory_protocols = "TLSv1.3, TLSv1.2, !TLSv1.1, !TLSv1, !SSLv2, !SSLv3";
++            smtp_tls_chain_files = [
++              "${mailerCerts.${mailerDomain}.key}"
++              "${mailerCerts.${mailerDomain}.cert}"
++            ];
++            smtpd_tls_chain_files = [
++              "${mailerCerts.${mailerDomain}.key}"
++              "${mailerCerts.${mailerDomain}.cert}"
++            ];
+           };
+         };
+       };
+diff --git a/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix b/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix
+index 69acde9bad8c12..2b0914ba526f85 100644
+--- a/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix
++++ b/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix
+@@ -2,6 +2,7 @@
+   lib,
+   stdenv,
+   fetchFromGitHub,
++  fetchpatch,
+   python3,
+   openssl,
+   libiconv,
+@@ -17,16 +18,25 @@ let
+ in
+ python3.pkgs.buildPythonApplication rec {
+   pname = "matrix-synapse";
+-  version = "1.131.0";
++  version = "1.132.0";
+   format = "pyproject";
+ 
+   src = fetchFromGitHub {
+     owner = "element-hq";
+     repo = "synapse";
+     rev = "v${version}";
+-    hash = "sha256-nXDVkuV5GCk0Lp4LfyiModKdO30PJ40B5mXdm5tMHQo=";
++    hash = "sha256-yKoBYwd2djHAawBJRcbdrJH16+MHpYQnU7h39SvWqYE=";
+   };
+ 
++  patches = [
++    # Skip broken HTML preview test case with libxml >= 2.14
++    # https://github.com/element-hq/synapse/pull/18413
++    (fetchpatch {
++      url = "https://github.com/element-hq/synapse/commit/8aad32965888476b4660bf8228d2d2aa9ccc848b.patch";
++      hash = "sha256-EUEbF442nOAybMI8EL6Ee0ib3JqSlQQ04f5Az3quKko=";
++    })
++  ];
++
+   cargoDeps = rustPlatform.fetchCargoVendor {
+     inherit pname version src;
+     hash = "sha256-9VJnn8aPkShqK2wYGFr+S5koIjma7VOr+LkLXwStL1E=";
