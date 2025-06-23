@@ -35,7 +35,7 @@
       "background-music"
       "calibre"
       "cyberduck"
-      "docker"
+      "docker-desktop"
       "inkscape"
       "jordanbaird-ice"
       "keepassxc"
