@@ -31,6 +31,9 @@
 
   homebrew = {
     enable = true;
+    brews = [
+      "docker-compose"
+    ];
     casks = [
       "background-music"
       "calibre"
