@@ -13,7 +13,7 @@ let
       ${pkgs.libnotify}/bin/notify-send -t 5000 'New ${name} mail arrived' "$unseen_count unseen mails"
     fi
   '';
-  makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, secretToolId, extraConfig ? { }, oauth ? false }: (lib.recursiveUpdate
+  makeAccount = { name, address, host ? "", imapHost ? host, smtpHost ? host, useStartTls ? false, secretToolId ? "", extraConfig ? { }, oauth ? false }: (lib.recursiveUpdate
     {
       inherit address;
       gpg = {
@@ -45,7 +45,7 @@ let
         extraConfig = lib.mkIf oauth { auth = "xoauth2"; };
       };
       mu.enable = true;
-      passwordCommand = if oauth then "${pkgs.mfauth}/bin/mfauth access ${name}" else "${passwordScript} ${secretToolId}";
+      passwordCommand = if oauth then "${pkgs.oauth2ms}/bin/oauth2ms" else "${passwordScript} ${secretToolId}";
       realName = "Charlotte Van Petegem";
       signature = {
         showSignature = "none";
@@ -213,7 +213,7 @@ in
         zfs.homeLinks = [
           { path = "mail"; type = "data"; }
           { path = ".cache/mu"; type = "cache"; }
-          { path = ".cache/mfauth"; type = "cache"; }
+          { path = ".local/share/oauth2ms"; type = "cache"; }
         ];
       };
     };
@@ -249,6 +249,17 @@ in
               folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Trash"; };
             };
           };
+          dodona = makeAccount {
+            name = "dodona";
+            address = "charlotte.vanpetegem@dodona.be";
+            imapHost = "outlook.office365.com";
+            smtpHost = "smtp-mail.outlook.com";
+            extraConfig = {
+              folders = { drafts = "Drafts"; inbox = "INBOX"; sent = "INBOX"; trash = "Deleted Items"; };
+            };
+            oauth = true;
+            useStartTls = true;
+          };
           rodekruis-eerstehulp = makeAccount {
             name = "rodekruis-eerstehulp";
             address = "eerstehulp@gent.rodekruis.be";
@@ -272,6 +283,7 @@ in
           };
         };
       };
+      home.packages = [ pkgs.oauth2ms ];
       programs = {
         mbsync.enable = true;
         msmtp.enable = true;
@@ -313,6 +325,11 @@ in
           };
         };
       };
+    };
+    age.secrets."files/programs/oauth2ms" = {
+      file = ../../../../secrets/files/programs/oauth2ms.age;
+      owner = "charlotte";
+      path = "/home/charlotte/.config/oauth2ms/config.json";
     };
   };
 }
