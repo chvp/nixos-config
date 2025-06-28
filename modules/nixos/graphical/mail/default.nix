@@ -159,7 +159,7 @@ in
                   (setq mu4e-contexts (list ${lib.concatStringsSep "\n" (map mkAccountConfig (lib.attrValues hmConfig.accounts.email.accounts))}))
                   (add-to-list
                    'mu4e-bookmarks
-                    '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
+                    '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/dodona/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
                    )
                   (defun chvp--mu4e-dodona-cc-reply-to ()
                     "Add dodona@ugent.be in cc and reply-to headers."
