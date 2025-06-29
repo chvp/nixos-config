@@ -217,7 +217,7 @@ in
         ];
       };
     };
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.charlotte = { lib, ... }: {
       accounts.email = {
         maildirBasePath = "/home/charlotte/mail";
         accounts = {
@@ -283,7 +283,15 @@ in
           };
         };
       };
-      home.packages = [ pkgs.oauth2ms ];
+      home = {
+        # We can't just use agenix' `.path` option, since agenix creates the necessary directories as root
+        # This leaves root-owned directories in the home directory, messing up the rest of the boot sequence
+        activation.linkOauth2msConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+          run mkdir -p $VERBOSE_ARG $HOME/.config/oauth2ms
+          run ln -s $VERBOSE_ARG ${config.age.secrets."files/programs/oauth2ms".path} $HOME/.config/oauth2ms/config.json
+        '';
+        packages = [ pkgs.oauth2ms ];
+      };
       programs = {
         mbsync.enable = true;
         msmtp.enable = true;
@@ -329,7 +337,6 @@ in
     age.secrets."files/programs/oauth2ms" = {
       file = ../../../../secrets/files/programs/oauth2ms.age;
       owner = "charlotte";
-      path = "/home/charlotte/.config/oauth2ms/config.json";
     };
   };
 }
