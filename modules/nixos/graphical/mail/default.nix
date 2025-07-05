@@ -288,7 +288,7 @@ in
         # This leaves root-owned directories in the home directory, messing up the rest of the boot sequence
         activation.linkOauth2msConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
           run mkdir -p $VERBOSE_ARG $HOME/.config/oauth2ms
-          run ln -s $VERBOSE_ARG ${config.age.secrets."files/programs/oauth2ms".path} $HOME/.config/oauth2ms/config.json
+          run ln -sf $VERBOSE_ARG ${config.age.secrets."files/programs/oauth2ms".path} $HOME/.config/oauth2ms/config.json
         '';
         packages = [ pkgs.oauth2ms ];
       };
