@@ -70,7 +70,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver?ref=b10c54606bb5293158c37b1fac3909dc3a26449f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
