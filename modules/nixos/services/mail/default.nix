@@ -21,6 +21,8 @@ in
       stateVersion = 3;
       enableManageSieve = true;
       fqdn = "mail.vanpetegem.me";
+      systemName = "vanpetegem.me";
+      systemDomain = "mail.vanpetegem.me";
       domains = [
         "accentor.tech"
         "chvp.be"
