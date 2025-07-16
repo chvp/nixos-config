@@ -74,6 +74,10 @@ pkgs.devshell.mkShell {
       name = "OBJC_DISABLE_INITIALIZE_FORK_SAFETY";
       value = "YES";
     }
+    {
+      name = "ENABLE_MESSAGE_BUS";
+      value = "true";
+    }
   ];
   language.c.compiler = lib.mkForce pkgs.clang;
   language.ruby = {
