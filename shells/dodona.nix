@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 let
   support-services = {
-    memcached.command = "memcached";
     mysql.command = "mysql";
     worker.command = "rails jobs:work";
     css.command = "yarn build:css --watch";
@@ -26,6 +25,7 @@ pkgs.devshell.mkShell {
   ];
   env = [
     { name = "DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona"; }
+    { name = "CACHE_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_cache"; }
     { name = "TEST_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_test"; }
   ];
   commands = [
@@ -38,12 +38,6 @@ pkgs.devshell.mkShell {
         bundle install
         bundle pristine
       '';
-    }
-    {
-      name = "memcached";
-      category = "general commands";
-      help = "Start caching server";
-      package = pkgs.memcached;
     }
     {
       name = "mysql";
