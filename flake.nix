@@ -205,9 +205,9 @@
           ];
         };
       nixosConfigurations = {
-        elendel = nixosSystem "x86_64-linux" "elendel" [];
-        kholinar = nixosSystem "x86_64-linux" "kholinar" [nixos-hardware.nixosModules.framework-amd-ai-300-series];
-        marabethia = nixosSystem "x86_64-linux" "marabethia" [];
+        elendel = nixosSystem "x86_64-linux" "elendel" [ ];
+        kholinar = nixosSystem "x86_64-linux" "kholinar" [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
+        marabethia = nixosSystem "x86_64-linux" "marabethia" [ ];
       };
       darwinConfigurations.thaylen-city = darwinSystem "aarch64-darwin" "thaylen-city";
       lsShells = builtins.readDir ./shells;

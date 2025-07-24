@@ -11,7 +11,7 @@
       example = "wlp2s0";
     };
     wired-interfaces = lib.mkOption {
-      default = {};
+      default = { };
       example = { "enp0s29f0u1u2" = { macAddress = "10:65:30:85:bb:18"; }; };
     };
   };

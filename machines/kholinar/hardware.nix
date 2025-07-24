@@ -9,7 +9,7 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = ["nvme" "sd_mod" "thunderbolt" "usb_storage" "xhci_pci"];
+      availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "xhci_pci" ];
       kernelModules = [ "i915" ];
     };
     kernelModules = [ "kvm-amd" ];
@@ -54,7 +54,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/6c09b90f-8971-4702-a18a-f06dfb3d8dcd"; }
+    { device = "/dev/disk/by-uuid/4fed750f-818e-4f5d-9818-2c56e0299f5e"; }
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
