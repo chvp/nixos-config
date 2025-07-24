@@ -9,14 +9,11 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "sdhci_pci" ];
+      availableKernelModules = ["nvme" "sd_mod" "thunderbolt" "usb_storage" "xhci_pci"];
       kernelModules = [ "i915" ];
     };
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
-    kernel.sysctl = {
-      "vm.swappiness" = 1;
-    };
   };
 
 
@@ -28,6 +25,12 @@
 
   fileSystems."/nix" = {
     device = "rpool/local/nix";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
+
+  fileSystems."/nix/store" = {
+    device = "rpool/local/nix-store";
     fsType = "zfs";
     neededForBoot = true;
   };
@@ -45,8 +48,9 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/BEEE-D83A";
+    device = "/dev/disk/by-uuid/E13E-B160";
     fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
   };
 
   swapDevices = [
@@ -55,20 +59,9 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware = {
-    cpu.intel.updateMicrocode = true;
+    cpu.amd.updateMicrocode = true;
     enableRedistributableFirmware = true;
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
-        libvdpau-va-gl
-        intel-media-driver
-      ];
-    };
+    graphics.enable = true;
   };
-  services = {
-    fstrim.enable = true;
-    xserver.videoDrivers = [ "modesetting" "fbdev" ];
-  };
+  services.fstrim.enable = true;
 }

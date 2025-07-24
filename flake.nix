@@ -78,6 +78,7 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -102,7 +103,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, darwin, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, darwin, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -148,7 +149,7 @@
         nix-index-database.darwinModules.nix-index
         ./modules/darwin
       ];
-      nixosSystem = system: name:
+      nixosSystem = system: name: extraModules:
         let
           nixpkgs = nixpkgsForSystem system;
           lib = (import nixpkgs { inherit overlays system; }).lib;
@@ -157,7 +158,7 @@
           inherit lib system;
           specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
-          modules = commonModules ++ nixosModules ++ [
+          modules = commonModules ++ nixosModules ++ extraModules ++ [
             ({ config, ... }:
               {
                 nixpkgs = {
@@ -204,9 +205,9 @@
           ];
         };
       nixosConfigurations = {
-        elendel = nixosSystem "x86_64-linux" "elendel";
-        kholinar = nixosSystem "x86_64-linux" "kholinar";
-        marabethia = nixosSystem "x86_64-linux" "marabethia";
+        elendel = nixosSystem "x86_64-linux" "elendel" [];
+        kholinar = nixosSystem "x86_64-linux" "kholinar" [nixos-hardware.nixosModules.framework-amd-ai-300-series];
+        marabethia = nixosSystem "x86_64-linux" "marabethia" [];
       };
       darwinConfigurations.thaylen-city = darwinSystem "aarch64-darwin" "thaylen-city";
       lsShells = builtins.readDir ./shells;

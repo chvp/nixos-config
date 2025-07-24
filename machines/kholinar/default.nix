@@ -3,7 +3,7 @@
 {
   imports = [ ./hardware.nix ];
 
-  networking.hostId = "3cc1a4b2";
+  networking.hostId = "6008fa3f";
 
   time.timeZone = "Europe/Brussels";
 
@@ -14,10 +14,7 @@
       bluetooth.enable = true;
       network.mobile = {
         enable = true;
-        wireless-interface = "wlp0s20f3";
-        wired-interfaces = {
-          "enp0s31f6" = { };
-        };
+        wireless-interface = "wlp192s0";
       };
       zfs = {
         enable = true;
