@@ -35,7 +35,6 @@
       "docker-compose"
     ];
     casks = [
-      "background-music"
       "calibre"
       "cyberduck"
       "docker-desktop"
