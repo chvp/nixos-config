@@ -398,7 +398,7 @@ in
               profile = {
                 name = "home-undocked";
                 outputs = [
-                  { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
+                  { criteria = "BOE 0x0BCA"; position = "0,0"; mode = "2256x1504"; scale = 1.0; }
                 ];
               };
             }
@@ -406,8 +406,8 @@ in
               profile = {
                 name = "home-docked";
                 outputs = [
-                  { criteria = "AU Optronics 0x2036 Unknown"; position = "0,0"; mode = "2560x1440"; scale = 1.0; }
-                  { criteria = "Dell Inc. DELL U2718Q FN84K01T095L"; position = "2560,0"; mode = "3840x2160"; scale = 1.0; }
+                  { criteria = "BOE 0x0BCA"; position = "0,0"; mode = "2256x1504"; scale = 1.0; }
+                  { criteria = "LG Electronics LG ULTRAFINE 411NTJJ2F300"; position = "2560,0"; mode = "3840x2160"; scale = 1.0; }
                 ];
               };
             }
