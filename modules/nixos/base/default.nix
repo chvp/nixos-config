@@ -19,9 +19,12 @@
     system.autoUpgrade = {
       enable = true;
       flake = "git+https://git.chvp.be/chvp/nixos-config";
-      dates = "01/2:00";
-      randomizedDelaySec = "10min";
+      dates = "2:00";
+      operation = "boot";
+      randomizedDelaySec = "30min";
       allowReboot = true;
+      persistent = true;
+      upgrade = false;
       rebootWindow = {
         lower = "01:00";
         upper = "05:00";
