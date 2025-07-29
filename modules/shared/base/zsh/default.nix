@@ -9,7 +9,7 @@ let
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       autocd = true;
-      dotDir = ".config/zsh";
+      dotDir = "${home}/.config/zsh";
       history = {
         expireDuplicatesFirst = true;
         path = "${config.chvp.cachePrefix}${home}/.local/share/zsh/history";
