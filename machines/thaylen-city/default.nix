@@ -48,7 +48,6 @@
       "sf-symbols"
       "stolendata-mpv"
       "swiftbar"
-      "tsh"
     ];
     global.brewfile = true;
     onActivation = {
@@ -90,7 +89,7 @@
   };
 
   home-manager.users."charlotte.vanpetegem".home = {
-    packages = with pkgs; [ docker-compose ];
+    packages = with pkgs; [ docker-compose teleport_17.client ];
     sessionPath = [ config.homebrew.brewPrefix ];
   };
 }
