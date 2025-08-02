@@ -133,6 +133,8 @@ let
     riverctl map normal Alt Print spawn '${screenshot}/bin/screenshot -d'
     riverctl map normal Shift Print spawn '${screenshot}/bin/screenshot -r'
     riverctl map normal Alt+Shift Print spawn '${screenshot}/bin/screenshot -r -d'
+    riverctl map normal Control Print spawn '${screenshot}/bin/screenshot -f'
+    riverctl map normal Control+Alt Print spawn '${screenshot}/bin/screenshot -f -d'
 
     riverctl rule-add -app-id launcher float
     riverctl rule-add -app-id be.ugent.objprog.ugentopoly.Ugentopoly float
