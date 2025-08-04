@@ -16,7 +16,7 @@ in
 {
   imports = [ ./hardware.nix ];
 
-  boot.kernelPackages = latestKernelPackage;
+  boot.kernelPackages = lib.mkForce latestKernelPackage;
 
   networking.hostId = "6008fa3f";
 
