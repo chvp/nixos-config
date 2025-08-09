@@ -75,6 +75,7 @@ in
         };
         extraConfig = {
           branch.autosetuprebase = "always";
+          fetch.prune = true;
           github.user = "chvp";
           merge.conflictStyle = "diff3";
           pull.rebase = true;
