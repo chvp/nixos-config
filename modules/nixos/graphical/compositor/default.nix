@@ -190,7 +190,7 @@ in
           in
           {
             default_session = {
-              command = "${pkgs.greetd.greetd}/bin/agreety --cmd ${river-run}";
+              command = "${pkgs.greetd}/bin/agreety --cmd ${river-run}";
             };
             initial_session = {
               command = "${river-run}";
