@@ -52,6 +52,7 @@ in
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/forgejo_at_robbevp.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/git_at_chvp.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/hallo_at_estherdereys.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/hallo_at_robbe.be.age".publicKeys = [ marabethia ] ++ users;

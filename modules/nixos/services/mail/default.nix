@@ -43,18 +43,7 @@ in
           aliases = [ "@chvp.be" "@cvpetegem.be" "charlotte@vanpetegem.me" ];
         };
         "huis@vanpetegem.me".hashedPasswordFile = config.age.secrets."passwords/services/mail/huis@vanpetegem.me".path;
-        "noreply@vanpetegem.me" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
-          sendOnly = true;
-        };
-        "git@chvp.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/git@chvp.be".path;
-        };
         "peter@vanpetegem.me".hashedPasswordFile = config.age.secrets."passwords/services/mail/peter@vanpetegem.me".path;
-        "postbot@vanpetegem.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.be".path;
-          aliases = [ "@vanpetegem.me" "@vanpetegem.be" ];
-        };
         "robbe@vanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@vanpetegem.be".path;
           aliases = [ "robbe.nb@vanpetegem.me" "robbe@vanpetegem.me" ];
@@ -67,10 +56,6 @@ in
           hashedPasswordFile = config.age.secrets."passwords/services/mail/hallo@robbe.be".path;
           aliases = [ "@robbe.be" "@robbevp.be" ];
         };
-        "webmaster@vanpetegem.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/webmaster@vanpetegem.be".path;
-          aliases = [ "webmaster@vanpetegem.me" ];
-        };
         "info@eenstweedrie.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/info@eenstweedrie.be".path;
           aliases = [ "@eenstweedrie.be" ];
@@ -78,6 +63,25 @@ in
         "hallo@estherdereys.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/hallo@estherdereys.be".path;
           aliases = [ "@estherdereys.be" ];
+        };
+        # Service accounts
+        "forgejo@robbevp.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/forgejo@robbevp.be".path;
+        };
+        "git@chvp.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/git@chvp.be".path;
+        };
+        "noreply@vanpetegem.me" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
+          sendOnly = true;
+        };
+        "postbot@vanpetegem.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.be".path;
+          aliases = [ "@vanpetegem.me" "@vanpetegem.be" ];
+        };
+        "webmaster@vanpetegem.be" = {
+          hashedPasswordFile = config.age.secrets."passwords/services/mail/webmaster@vanpetegem.be".path;
+          aliases = [ "webmaster@vanpetegem.me" ];
         };
       };
       indexDir = "/var/lib/dovecot/indices";
@@ -168,6 +172,7 @@ in
 
     age.secrets = {
       "passwords/services/mail/charlotte@vanpetegem.be".file = ../../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age;
+      "passwords/services/mail/forgejo@robbevp.be".file = ../../../../secrets/passwords/services/mail/forgejo_at_robbevp.be.age;
       "passwords/services/mail/git@chvp.be".file = ../../../../secrets/passwords/services/mail/git_at_chvp.be.age;
       "passwords/services/mail/hallo@estherdereys.be".file = ../../../../secrets/passwords/services/mail/hallo_at_estherdereys.be.age;
       "passwords/services/mail/hallo@robbe.be".file = ../../../../secrets/passwords/services/mail/hallo_at_robbe.be.age;
