@@ -9,7 +9,7 @@
   config = lib.mkIf config.chvp.services.git.runner.enable {
     networking.firewall.trustedInterfaces = [ "br-+" ];
     services.gitea-actions-runner = {
-      package = pkgs.forgejo-actions-runner;
+      package = pkgs.forgejo-runner;
       instances.default = {
         enable = true;
         url = "https://git.chvp.be";
