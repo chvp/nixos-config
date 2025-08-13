@@ -206,6 +206,7 @@
         };
       nixosConfigurations = {
         elendel = nixosSystem "x86_64-linux" "elendel" [ ];
+        kharbranth = nixosSystem "x86_64-linux" "kharbranth" [ nixos-hardware.nixosModules.lenovo-thinkpad-t14s ];
         kholinar = nixosSystem "x86_64-linux" "kholinar" [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
         marabethia = nixosSystem "x86_64-linux" "marabethia" [ ];
       };

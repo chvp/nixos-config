@@ -11,6 +11,11 @@ let
       pubkey = "mHAq+2AP1EZdlSZIxA8UCret8EStrR3nEIU2x6NVETE=";
       ip = "10.240.0.4";
     };
+    kharbranth = {
+      pubkey = "qfDLgVt4veWIpAjKWkI9di18hkLF+UxpAs2k89ZkQ0A=";
+      privkeyFile = config.age.secrets."files/wireguard/kharbranth.privkey".path;
+      ip = "10.240.0.2";
+    };
     kholinar = {
       pubkey = "oRA22ymFeNQBeRx6Jyd6Gd8EOUpAv9QSFkGs+Br7yEk=";
       privkeyFile = config.age.secrets."files/wireguard/kholinar.privkey".path;

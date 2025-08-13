@@ -1,26 +1,18 @@
 let
   elendel = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZU5fDbqEkllipbknJy/Dm3Fcicb5gscVzmsFG/9RoA";
+  kharbranth = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBNnO7to/xHVcUIi+CUd3WuOB3A22sPIQoTlx2zPTnXv";
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   marabethia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUP1r937+PLiqdyUuqbYoyAs04/2AxuXS13grU+fvpA";
   thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/sIkgf7aYX/JcWWp/dCHgq7sJ5WDYYyWSn3DvkW4gB";
   nixosHosts = [
     elendel
+    kharbranth
     kholinar
     marabethia
   ];
-  hosts = [
-    elendel
-    kholinar
-    marabethia
-    thaylen-city
-  ];
-  nixosPersonals = [
-    kholinar
-  ];
-  personals = [
-    kholinar
-    thaylen-city
-  ];
+  hosts = nixosHosts ++ [ thaylen-city ];
+  nixosPersonals = [ kharbranth kholinar ];
+  personals = nixosPersonals ++ [ thaylen-city ];
   servers = [
     elendel
     marabethia
@@ -28,6 +20,7 @@ let
   charlotte = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDb17zAg3zwvdYHNZqXSGYKseCz5281Ha6oOYPbwFYD"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJLsSFEi4CGpkWIJxXJC78bhibrBRxClBbpS9n7PQGYL"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVNXuXhJvixUAeRhtFxK1tRyf+Z6lbkSiq6kEEpndoX"
   ];
   users = charlotte;
 in
@@ -86,6 +79,7 @@ in
   "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ marabethia ] ++ users;
 
   "secrets/files/wireguard/elendel.privkey.age".publicKeys = [ elendel ] ++ users;
+  "secrets/files/wireguard/kharbranth.privkey.age".publicKeys = [ kharbranth ] ++ users;
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/marabethia.privkey.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/wireguard/thaylen-city.privkey.age".publicKeys = [ thaylen-city ] ++ users;
