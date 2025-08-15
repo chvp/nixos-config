@@ -47,7 +47,6 @@
       };
       defaults.email = "webmaster@vanpetegem.me";
       acceptTerms = true;
-      preliminarySelfsigned = false;
     };
     age.secrets."passwords/services/acme" = {
       file = ../../../../secrets/passwords/services/acme.age;
