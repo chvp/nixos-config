@@ -89,9 +89,7 @@
     },
     "agenix": {
       "inputs": {
-        "darwin": [
-          "darwin"
-        ],
+        "darwin": "darwin",
         "home-manager": [
           "home-manager"
         ],
@@ -135,6 +133,7 @@
     "darwin": {
       "inputs": {
         "nixpkgs": [
+          "agenix",
           "nixpkgs"
         ]
       },
@@ -148,30 +147,27 @@
       },
       "original": {
         "owner": "lnl7",
+        "ref": "master",
         "repo": "nix-darwin",
         "type": "github"
       }
     },
     "devshell": {
       "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1721051506,
-        "narHash": "sha256-E31R7SYC7rGmVL4tdkpckIW1od2hVpg/FYqAKPLjnhE=",
-        "owner": "chvp",
+        "lastModified": 1741473158,
+        "narHash": "sha256-kWNaq6wQUbUMlPgw8Y+9/9wP0F8SHkjy24/mN3UAppg=",
+        "owner": "numtide",
         "repo": "devshell",
-        "rev": "58180de0a0349c7dae5f100c576ec27fbd504fd4",
+        "rev": "7c9e793ebe66bcba8292989a68c0419b737a22a0",
         "type": "github"
       },
       "original": {
-        "owner": "chvp",
-        "ref": "ruby-darwin-fix",
+        "owner": "numtide",
         "repo": "devshell",
         "type": "github"
       }
@@ -482,7 +478,6 @@
         "accentor-api": "accentor-api",
         "accentor-web": "accentor-web",
         "agenix": "agenix",
-        "darwin": "darwin",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
         "entrance-exam": "entrance-exam",

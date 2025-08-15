@@ -32,21 +32,15 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
-        darwin.follows = "darwin";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
       };
     };
-    darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     devshell = {
-      url = "github:chvp/devshell/ruby-darwin-fix";
+      url = "github:numtide/devshell";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
       };
     };
     emacs-overlay = {
@@ -103,7 +97,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, darwin, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -143,12 +137,6 @@
         nix-index-database.nixosModules.nix-index
         ./modules/nixos
       ];
-      darwinModules = [
-        agenix.darwinModules.default
-        home-manager.darwinModules.default
-        nix-index-database.darwinModules.nix-index
-        ./modules/darwin
-      ];
       nixosSystem = system: name: extraModules:
         let
           nixpkgs = nixpkgsForSystem system;
@@ -180,37 +168,12 @@
             ./machines/${name}
           ];
         };
-      darwinSystem = system: name:
-        let
-          nixpkgs = nixpkgsForSystem system;
-          lib = (import nixpkgs { inherit overlays system; }).lib;
-        in
-        darwin.lib.darwinSystem {
-          inherit lib system;
-          modules = commonModules ++ darwinModules ++ [
-            ({ config, ... }:
-              {
-                nixpkgs.pkgs = import nixpkgs {
-                  inherit overlays system;
-                  config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
-                };
-                networking.hostName = name;
-                nix = {
-                  extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs = { flake = nixpkgs; }; };
-                };
-              })
-            ./machines/${name}
-            home-manager.darwinModules.home-manager
-          ];
-        };
       nixosConfigurations = {
         elendel = nixosSystem "x86_64-linux" "elendel" [ ];
         kharbranth = nixosSystem "x86_64-linux" "kharbranth" [ nixos-hardware.nixosModules.lenovo-thinkpad-t14s ];
         kholinar = nixosSystem "x86_64-linux" "kholinar" [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
         marabethia = nixosSystem "x86_64-linux" "marabethia" [ ];
       };
-      darwinConfigurations.thaylen-city = darwinSystem "aarch64-darwin" "thaylen-city";
       lsShells = builtins.readDir ./shells;
       shellFiles = builtins.filter (name: lsShells.${name} == "regular") (builtins.attrNames lsShells);
       shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) shellFiles;
@@ -225,5 +188,5 @@
         }
       );
     in
-    systemAttrs // { inherit nixosConfigurations darwinConfigurations; };
+    systemAttrs // { inherit nixosConfigurations; };
 }
