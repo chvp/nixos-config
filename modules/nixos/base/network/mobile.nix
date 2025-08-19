@@ -62,9 +62,10 @@
           enable = true;
           DHCP = "yes";
           matchConfig = { Name = name; };
+          linkConfig = attrs;
           dhcpV4Config = { RouteMetric = 10; };
           ipv6AcceptRAConfig = { RouteMetric = 10; };
-        } // attrs)
+        })
         wired-interfaces;
       wait-online.anyInterface = true;
     };

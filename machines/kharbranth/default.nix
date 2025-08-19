@@ -32,6 +32,9 @@ in
       network.mobile = {
         enable = true;
         wireless-interface = "wlp0s20f3";
+        wired-interfaces = {
+          "enp0s13f0u1u2".MACAddress = "b8:85:84:a9:7d:02";
+        };
       };
       zfs = {
         enable = true;
