@@ -21,6 +21,7 @@ pkgs.devshell.mkShell {
     ungoogled-chromium
     nodejs
     nodePackages.typescript-language-server
+    rsync
     yarn
   ];
   env = [
