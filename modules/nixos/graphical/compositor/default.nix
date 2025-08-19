@@ -261,6 +261,8 @@ in
               mpris = {
                 player = "firefox";
                 format = "{status_icon} {artist} - {title}";
+                artist-len = 20;
+                title-len = 20;
                 status-icons = {
                   playing = "▶";
                   paused = "";
@@ -305,6 +307,7 @@ in
                 on-click-right = "${pkgs.pamixer}/bin/pamixer --default-source -t";
                 on-click-middle = "${pkgs.pavucontrol}/bin/pavucontrol";
               };
+              "river/window".max-length = 30;
               tray.spacing = 2;
             };
           };
