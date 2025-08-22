@@ -22,6 +22,8 @@ pkgs.devshell.mkShell {
     nodejs
     nodePackages.typescript-language-server
     rsync
+    fpart
+    cpio
     yarn
   ];
   env = [
