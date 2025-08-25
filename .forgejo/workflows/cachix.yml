@@ -15,6 +15,7 @@ jobs:
       matrix:
         host:
           - elendel
+          - kharbranth
           - kholinar
           - marabethia
     steps:
