@@ -34,7 +34,7 @@ pkgs.devshell.mkShell {
   commands = [
     {
       name = "refresh-deps";
-      category = "general commands";
+      category = "[general commands]";
       help = "Install dependencies";
       command = ''
         yarn install
@@ -44,10 +44,18 @@ pkgs.devshell.mkShell {
     }
     {
       name = "mysql";
-      category = "general commands";
+      category = "[general commands]";
       help = "Start mysql (in docker container)";
       command = ''
         docker run --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
+      '';
+    }
+    {
+      name = "delete-merged";
+      category = "[general commands]";
+      help = "Delete merged branches";
+      command = ''
+        git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f - <(git branch -vv | grep origin) | awk '{print $1}' | xargs -r git branch -D
       '';
     }
   ];
