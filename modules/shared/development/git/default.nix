@@ -3,7 +3,7 @@
 let
   username = config.chvp.username;
   homeDir = config.home-manager.users.${username}.home.homeDirectory;
-  sshKeyFile = config.home-manager.users.${username}.programs.ssh.extraOptionOverrides.IdentityFile or "${homeDir}/.ssh/id_ed25519";
+  sshKeyFile = "${config.chvp.dataPrefix}${homeDir}/.ssh/id_ed25519";
 in
 {
   options.chvp.development.git = {
