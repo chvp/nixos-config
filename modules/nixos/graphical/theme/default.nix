@@ -128,6 +128,7 @@ in
             emacsclient --eval "(chvp--dark-mode)"
           '';
           gtk = ''
+            ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Dark-Compact-Catppuccin
           '';
           river = ''
@@ -153,6 +154,7 @@ in
             emacsclient --eval "(chvp--light-mode)"
           '';
           gtk = ''
+            ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
             ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Light-Compact-Catppuccin
           '';
           river = ''
