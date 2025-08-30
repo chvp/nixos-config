@@ -16,17 +16,23 @@ let
     programs.ssh = {
       enable = true;
       package = if config.chvp.graphical.enable then ssh else pkgs.openssh;
-      compression = true;
-      controlMaster = "auto";
-      controlPersist = "10m";
-      hashKnownHosts = true;
-      userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
-      serverAliveInterval = 10;
-      extraOptionOverrides = {
-        Include = config.age.secrets."files/programs/ssh/host_configuration_${user}".path;
-        IdentityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
-        HostKeyAlgorithms = "ssh-ed25519-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com,rsa-sha2-256-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa";
+      enableDefaultConfig = false;
+      matchBlocks."*" = {
+        addKeysToAgent = "no";
+        compression = true;
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "10m";
+        forwardAgent = false;
+        hashKnownHosts = true;
+        identityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
+        serverAliveInterval = 10;
+        serverAliveCountMax = 3;
+        userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
       };
+      includes = [
+        config.age.secrets."files/programs/ssh/host_configuration_${user}".path
+      ];
     };
     home.packages = lib.mkIf config.chvp.graphical.enable [ pkgs.sshfs ];
   };
