@@ -323,14 +323,6 @@ in
             };
             Install = { WantedBy = [ "timers.target" ]; };
           };
-          vdirsyncer = {
-            Unit = { Description = "VDirSyncer WebDAV syncer"; };
-            Timer = {
-              OnCalendar = "*:0/5";
-              Unit = "vdirsyncer.service";
-            };
-            Install = { WantedBy = [ "timers.target" ]; };
-          };
         };
       };
     };
