@@ -5,6 +5,7 @@
     ./calibre
     ./eid
     ./element
+    ./slack
     ./teams
     ./torrents
   ];
