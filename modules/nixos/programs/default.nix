@@ -5,6 +5,7 @@
     ./calibre
     ./eid
     ./element
+    ./teams
     ./torrents
   ];
 }
