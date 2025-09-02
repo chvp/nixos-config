@@ -44,6 +44,7 @@
           "Zeus Event 5G".pskRaw = "ext:psk_zeus";
           "Rode Kruis-Gent (internet)".pskRaw = "ext:psk_rkg";
           "DasNetwerk".pskRaw = "ext:psk_dasnetwerk";
+          "MeetdistrictGuest".pskRaw = "ext:psk_meetdistrict_guest";
         };
       };
     };
