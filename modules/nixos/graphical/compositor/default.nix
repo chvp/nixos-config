@@ -33,14 +33,14 @@ let
     export _JAVA_AWT_WM_NONREPARENTING=1
     if [ "$DBUS_SESSION_BUS_ADDRESS" ]; then
         export DBUS_SESSION_BUS_ADDRESS
-        exec ${pkgs.river}/bin/river
+        exec ${pkgs.river-classic}/bin/river
     else
-        exec ${pkgs.dbus}/bin/dbus-run-session ${pkgs.river}/bin/river
+        exec ${pkgs.dbus}/bin/dbus-run-session ${pkgs.river-classic}/bin/river
     fi
   '';
   river = pkgs.symlinkJoin {
-    name = "river-${pkgs.river.version}";
-    paths = [ baseWrapper pkgs.river ];
+    name = "river-${pkgs.river-classic.version}";
+    paths = [ baseWrapper pkgs.river-classic ];
     strictDeps = false;
     nativeBuildInputs = with pkgs; [ makeWrapper wrapGAppsHook ];
     buildInputs = with pkgs; [ gdk-pixbuf glib gtk3 ];
