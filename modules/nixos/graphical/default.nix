@@ -24,6 +24,7 @@
     chvp = {
       base = {
         nix.unfreePackages = [ "google-chrome" ];
+        zfs.homeLinks = [{ path = ".config/qalculate"; type = "cache"; }];
       };
       graphical = {
         compositor.enable = lib.mkDefault true;
@@ -43,7 +44,7 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = with pkgs; [ gimp mpv kdePackages.okular ranger uni wtype ];
+      home.packages = with pkgs; [ gimp mpv kdePackages.okular libqalculate ranger uni wtype ];
     };
   };
 }
