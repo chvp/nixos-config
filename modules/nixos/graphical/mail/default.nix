@@ -161,17 +161,21 @@ in
                    'mu4e-bookmarks
                     '(:name "Combined inbox" :query "maildir:/personal/INBOX or maildir:/dodona/INBOX or maildir:/posteo/INBOX or maildir:/rodekruis-eerstehulp/INBOX" :key ?i :favorite t)
                    )
-                  (defun chvp--mu4e-dodona-cc-reply-to ()
-                    "Add dodona@ugent.be in cc and reply-to headers."
+                  (defun chvp--mu4e-dodona-support-cc-reply-to ()
+                    "Add support@dodona.be in cc and reply-to headers."
                     (interactive)
-                    (save-excursion (message-add-header "Cc: dodona@ugent.be\nReply-To: dodona@ugent.be\n"))
+                    (save-excursion (message-add-header "Cc: Dodona Support <support@dodona.be>\nReply-To: Dodona Support <support@dodona.be>\n"))
                     )
+                  (defun chvp--mu4e-dodona-team-cc-reply-to ()
+                    "Add team@dodona.be in cc and reply-to headers."
+                    (interactive)
+                    (save-excursion (message-add-header "Cc: Team Dodona <team@dodona.be>\nReply-To: Team Dodona <team@dodona.be>\n")))
                   (defun chvp--mu4e-auto-dodona-cc-reply-to ()
-                    "Set dodona@ugent.be in CC and Reply-To headers when message was directed to dodona@ugent.be"
+                    "Set support@dodona.be in CC and Reply-To headers when message was directed to support@dodona.be"
                     (let ((msg mu4e-compose-parent-message))
-                      (when (and msg (mu4e-message-contact-field-matches msg :to "dodona@ugent.be")) (chvp--mu4e-dodona-cc-reply-to))
-                      )
-                    )
+                      (when msg (cond
+                                  ((mu4e-message-contact-field-matches msg :to "support@dodona.be") (chvp--mu4e-dodona-support-cc-reply-to))
+                                  ((mu4e-message-contact-field-matches msg :to "team@dodona.be") (chvp--mu4e-dodona-team-cc-reply-to))))))
                   ;; Never actually quit mu4e, just close the current buffer (making sure the modeline is still visible)
                   (defalias 'mu4e-quit 'chvp--kill-current-buffer)
                   (define-advice mu4e--context-ask-user
