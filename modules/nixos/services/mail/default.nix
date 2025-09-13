@@ -111,6 +111,7 @@ in
         };
       };
       extraVirtualAliases = {
+        "android@accentor.tech" = [ "charlotte@vanpetegem.be" ];
         "team@accentor.tech" = [ "charlotte@vanpetegem.be" "robbe@vanpetegem.be" ];
       };
       forwards = {
