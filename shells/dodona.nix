@@ -51,6 +51,14 @@ pkgs.devshell.mkShell {
       '';
     }
     {
+      name = "dbshell";
+      category = "[general commands]";
+      help = "Attach a client to the db";
+      command = ''
+        docker exec -it dodona-db mariadb --user=root --password=dodona dodona
+      '';
+    }
+    {
       name = "delete-merged";
       category = "[general commands]";
       help = "Delete merged branches";
