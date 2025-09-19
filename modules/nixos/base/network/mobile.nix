@@ -25,7 +25,7 @@
         ensureProfiles = {
           environmentFiles = [ config.age.secrets."passwords/networks.age".path ];
           profiles = {
-            MeetDistrict = {
+            "MeetDistrict Member" = {
               "802-1x" = {
                 ca-cert = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
                 domain-suffix-match = "services.meetdistrict.com";
@@ -35,7 +35,7 @@
                 phase2-auth = "mschapv2";
               };
               connection = {
-                id = "MeetDistrict";
+                id = "MeetDistrict Member";
                 interface-name = config.chvp.base.network.mobile.wireless-interface;
                 type = "wifi";
                 uuid = "f8f1ee59-caf5-4c73-b0ef-bb4c3a667ce9";
@@ -50,7 +50,7 @@
               proxy = { };
               wifi = {
                 mode = "infrastructure";
-                ssid = "MeetDistrict";
+                ssid = "MeetDistrict Member";
               };
               wifi-security = {
                 auth-alg = "open";
