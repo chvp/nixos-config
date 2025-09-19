@@ -30,6 +30,7 @@ pkgs.devshell.mkShell {
     { name = "DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona"; }
     { name = "CACHE_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_cache"; }
     { name = "TEST_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_test"; }
+    { name = "NODE_ENV"; value = "development"; }
   ];
   commands = [
     {
