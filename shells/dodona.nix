@@ -16,6 +16,15 @@ in
 pkgs.devshell.mkShell {
   name = "Dodona";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
+  devshell = {
+    motd = "";
+    startup = {
+      # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
+      "link-devshell-dir".text = ''
+        ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
+      '';
+    };
+  };
   packages = with pkgs; [
     chromedriver
     ungoogled-chromium
