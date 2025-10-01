@@ -217,6 +217,8 @@ in
         zfs.homeLinks = [
           { path = "mail"; type = "data"; }
           { path = ".cache/mu"; type = "cache"; }
+          { path = ".cache/thunderbird"; type = "cache"; }
+          { path = ".thunderbird"; type = "cache"; }
           { path = ".local/share/oauth2ms"; type = "cache"; }
         ];
       };
@@ -294,7 +296,7 @@ in
           run mkdir -p $VERBOSE_ARG $HOME/.config/oauth2ms
           run ln -sf $VERBOSE_ARG ${config.age.secrets."files/programs/oauth2ms".path} $HOME/.config/oauth2ms/config.json
         '';
-        packages = [ pkgs.oauth2ms ];
+        packages = [ pkgs.oauth2ms pkgs.thunderbird ];
       };
       programs = {
         mbsync.enable = true;

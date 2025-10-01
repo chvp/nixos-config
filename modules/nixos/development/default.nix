@@ -10,7 +10,11 @@
     chvp = {
       base = {
         nix.unfreePackages = [ "ruby-mine" ];
-        zfs.homeLinks = [{ path = "repos"; type = "cache"; }];
+        zfs.homeLinks = [
+          { path = "repos"; type = "cache"; }
+          { path = ".config/JetBrains"; type = "cache"; }
+          { path = ".cache/JetBrains"; type = "cache"; }
+        ];
       };
       development.docker.enable = lib.mkDefault true;
     };
