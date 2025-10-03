@@ -4,15 +4,6 @@ let
   launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
-  mail-status = pkgs.writeShellScript "mail-status" ''
-    mails=$(${pkgs.mblaze}/bin/mlist -N ~/mail/*/INBOX | ${pkgs.coreutils}/bin/wc -l)
-    if [ "$mails" -gt 0 ]
-    then
-      echo "{ \"class\": \"has-mail\", \"text\": \"📬 $mails\" }"
-    else
-      echo "{ \"text\": \"📭\" }"
-    fi
-  '';
   lock = pkgs.writeShellScript "lock" ''
     if [ "$(darkman get)" == "light" ]
     then
@@ -225,7 +216,7 @@ in
               spacing = 2;
               modules-left = [ "river/tags" ];
               modules-center = [ "river/window" ];
-              modules-right = [ "idle_inhibitor" "network#wlp192s0" "network#wlp0s20f3" "battery" "backlight" "mpris" "pulseaudio" "custom/mail-status" "clock" "tray" ];
+              modules-right = [ "idle_inhibitor" "network#wlp192s0" "network#wlp0s20f3" "battery" "backlight" "mpris" "pulseaudio" "clock" "tray" ];
               backlight = {
                 format = "{percent}% {icon}";
                 format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
@@ -245,12 +236,6 @@ in
                 format-icons = [ "" "" "" "" "" ];
               };
               clock.format = " {:%a %d/%m %H:%M}";
-              "custom/mail-status" = {
-                exec = "${mail-status}";
-                return-type = "json";
-                interval = 1;
-                on-click = "${pkgs.isync}/bin/mbsync -a && ${config.chvp.base.emacs.package}/bin/emacsclient --eval \"(mu4e-update-index)\"";
-              };
               idle_inhibitor = {
                 format = "{icon}";
                 format-icons = {
@@ -319,7 +304,7 @@ in
                 font-size: 11px;
             }
 
-            #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #custom-mail-status, #clock, #tray {
+            #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #clock, #tray {
                 margin: 0;
                 padding: 0 5px;
                 background-color: @surface0;
@@ -354,10 +339,6 @@ in
             }
             #battery.critical {
                 color: @pink;
-            }
-
-            #custom-mail-status.has-mail {
-                color: @sky;
             }
 
             #idle_inhibitor.activated {
