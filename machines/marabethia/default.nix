@@ -88,7 +88,6 @@
         rootPool = "zroot";
       };
     };
-    development.enable = true;
     games = {
       particles.server = true;
       tetris.server = true;
