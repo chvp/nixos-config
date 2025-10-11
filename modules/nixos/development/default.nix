@@ -22,6 +22,10 @@
 
     home-manager.users.charlotte = { ... }: {
       home.packages = [ pkgs.jetbrains.ruby-mine ];
+      home.file.".ideavimrc".text = ''
+        set clipboard+=unnamedplus,ideaput
+        set ideajoin
+      '';
     };
 
     boot.kernel.sysctl."fs.inotify.max_user_watches" = 1048576;
