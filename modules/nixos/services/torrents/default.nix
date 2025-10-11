@@ -48,6 +48,7 @@
         speed-limit-down-enabled = true;
       };
     };
+    systemd.services.transmission.serviceConfig.TimeoutStartSec = 60 * 10;
     age.secrets."files/programs/transmission/config.json" = {
       file = ../../../../secrets/files/programs/transmission/config.json.age;
       owner = "charlotte";
