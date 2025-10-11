@@ -77,13 +77,18 @@
 
     systemd.services = {
       matrix-synapse = {
+        after = [ "postgresql.service" ];
         requires = [ "postgresql.service" ];
+        serviceConfig = {
+          RestartMode = "direct";
+        };
       };
       mautrix-whatsapp = {
         description = "Matrix <-> WhatsApp bridge";
         wantedBy = [ "multi-user.target" ];
         after = [ "network.target" "postgresql.service" "matrix-synapse.service" ];
         requires = [ "postgresql.service" "matrix-synapse.service" ];
+        upholds = [ "matrix-synapse.service" ];
         script = "${pkgs.mautrix-whatsapp}/bin/mautrix-whatsapp --config ${config.age.secrets."files/services/mautrix-whatsapp/config.yml".path}";
         serviceConfig = {
           User = "mautrix-whatsapp";
