@@ -15,6 +15,7 @@
           { path = ".config/JetBrains"; type = "cache"; }
           { path = ".local/share/JetBrains"; type = "cache"; }
           { path = ".cache/JetBrains"; type = "cache"; }
+          { path = ".java/.userPrefs"; type = "cache"; }
         ];
       };
       development.docker.enable = lib.mkDefault true;
