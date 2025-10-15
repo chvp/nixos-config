@@ -30,5 +30,9 @@
     };
 
     boot.kernel.sysctl."fs.inotify.max_user_watches" = 1048576;
+
+    users.users.charlotte.extraGroups = [ "vboxusers" ];
+
+    virtualisation.virtualbox.host.enable = true;
   };
 }
