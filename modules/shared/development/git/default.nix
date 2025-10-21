@@ -73,7 +73,7 @@ in
           key = sshKeyFile;
           signByDefault = true;
         };
-        extraConfig = {
+        settings = {
           branch.autosetuprebase = "always";
           fetch.prune = true;
           github.user = "chvp";
@@ -81,7 +81,10 @@ in
           pull.rebase = true;
           rebase.autoStash = true;
           rerere.enabled = true;
-          tag.gpgSign = true;
+          user = {
+            email = config.chvp.development.git.email;
+            name = "Charlotte Van Petegem";
+          };
         };
         ignores = [
           ".DS_Store"
@@ -91,8 +94,6 @@ in
           ".idea"
           ".dir-locals.el"
         ];
-        userEmail = config.chvp.development.git.email;
-        userName = "Charlotte Van Petegem";
       };
     };
   };
