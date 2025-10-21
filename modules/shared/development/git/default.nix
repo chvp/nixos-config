@@ -74,11 +74,12 @@ in
           signByDefault = true;
         };
         settings = {
-          branch.autosetuprebase = "always";
+          branch.autoSetupRebase = "always";
           fetch.prune = true;
           github.user = "chvp";
           merge.conflictStyle = "diff3";
           pull.rebase = true;
+          push.autoSetupRemote = true;
           rebase.autoStash = true;
           rerere.enabled = true;
           user = {
