@@ -26,6 +26,7 @@ pkgs.devshell.mkShell {
     };
   };
   packages = with pkgs; [
+    (azure-cli.withExtensions [ azure-cli-extensions.monitor-control-service ])
     chromedriver
     ungoogled-chromium
     nodejs
