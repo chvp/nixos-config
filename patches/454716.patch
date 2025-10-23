@@ -1,0 +1,22 @@
+diff --git a/pkgs/by-name/ne/nextcloud-client/package.nix b/pkgs/by-name/ne/nextcloud-client/package.nix
+index 44dcf47ce335f2..f55675dff4ed78 100644
+--- a/pkgs/by-name/ne/nextcloud-client/package.nix
++++ b/pkgs/by-name/ne/nextcloud-client/package.nix
+@@ -23,7 +23,7 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "nextcloud-client";
+-  version = "3.17.2";
++  version = "4.0.0";
+ 
+   outputs = [
+     "out"
+@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
+     owner = "nextcloud-releases";
+     repo = "desktop";
+     tag = "v${version}";
+-    hash = "sha256-jBlQh5tHP+2LyFCnP0m/ud3nU40i5cWtUwSeM5auQX8=";
++    hash = "sha256-IXX1PdMR3ptgH7AufnGKBeKftZgai7KGvYW+OCkM8jo=";
+   };
+ 
+   patches = [
