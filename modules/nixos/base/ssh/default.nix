@@ -20,14 +20,14 @@ let
       matchBlocks."*" = {
         addKeysToAgent = "no";
         compression = true;
-        controlMaster = "auto";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "10m";
+        # controlMaster = "auto";
+        # controlPath = "~/.ssh/master-%r@%n:%p";
+        # controlPersist = "10m";
         forwardAgent = false;
         hashKnownHosts = true;
         identityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
-        serverAliveInterval = 10;
-        serverAliveCountMax = 3;
+        # serverAliveInterval = 10;
+        # serverAliveCountMax = 3;
         userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
       };
       includes = [
