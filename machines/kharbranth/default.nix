@@ -19,6 +19,7 @@ in
   imports = [ ./hardware.nix ];
 
   boot.kernelPackages = lib.mkForce latestKernelPackage;
+  boot.zfs.package = pkgs.zfs_unstable;
 
   networking.hostId = "93decfce";
 
