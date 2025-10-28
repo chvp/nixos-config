@@ -8,9 +8,6 @@
 
   config = lib.mkIf config.chvp.programs.eid.enable {
     environment.systemPackages = [ pkgs.eid-mw ];
-    services.pcscd = {
-      enable = true;
-      plugins = [ pkgs.ccid ];
-    };
+    services.pcscd.enable = true;
   };
 }
