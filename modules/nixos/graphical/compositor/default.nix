@@ -33,7 +33,7 @@ let
     name = "river-${pkgs.river-classic.version}";
     paths = [ baseWrapper pkgs.river-classic ];
     strictDeps = false;
-    nativeBuildInputs = with pkgs; [ makeWrapper wrapGAppsHook ];
+    nativeBuildInputs = with pkgs; [ makeWrapper wrapGAppsHook3 ];
     buildInputs = with pkgs; [ gdk-pixbuf glib gtk3 ];
     dontWrapGApps = true;
     postBuild = ''
