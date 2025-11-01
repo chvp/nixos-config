@@ -57,7 +57,7 @@
     jobs.command = "bin/jobs start";
   };
   language.ruby = {
-    package = pkgs.ruby_3_3;
+    package = pkgs.ruby_3_4;
     nativeDeps = [ pkgs.postgresql_14 pkgs.zlib pkgs.openssl pkgs.libyaml ];
   };
 }
