@@ -54,6 +54,7 @@
   serviceGroups.server.services = {
     web.command = "rails s -p 3000";
     postgres.command = "pg:start";
+    jobs.command = "bin/jobs start";
   };
   language.ruby = {
     package = pkgs.ruby_3_3;
