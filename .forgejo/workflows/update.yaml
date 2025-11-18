@@ -9,31 +9,8 @@ env:
   USER: root
 
 jobs:
-  flake-update:
+  update:
     runs-on: docker
-    steps:
-      - uses: actions/checkout@v4
-      - run: apt update && apt install -y sudo
-      - uses: https://github.com/cachix/install-nix-action@v31
-        with:
-          enable_kvm: false
-          github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
-      - run: nix flake update
-      - name: Upload changed flake.lock
-        uses: actions/upload-artifact@v3
-        with:
-          name: flake.lock
-          path: flake.lock
-  build:
-    runs-on: docker
-    needs: flake-update
-    strategy:
-      matrix:
-        host:
-          - elendel
-          - kharbranth
-          - kholinar
-          - marabethia
     steps:
       - uses: actions/checkout@v4
       - name: Download changed flake.lock
@@ -52,17 +29,15 @@ jobs:
           extraPullNames: "nix-community,accentor"
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
-      - run: nix build -L --no-link .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
-      - run: nix eval --json ".#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
-  commit:
-    runs-on: docker
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download changed flake.lock
-        uses: actions/download-artifact@v3
-        with:
-          name: flake.lock
+      - run: nix flake update
+      - run: nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
+      - run: nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
+      - run: nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
+      - run: nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
+      - run: nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+      - run: nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
       - uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.0.0
         with:
           commit_message: "Update dependencies"
