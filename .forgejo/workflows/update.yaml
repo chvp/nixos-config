@@ -13,10 +13,6 @@ jobs:
     runs-on: docker
     steps:
       - uses: actions/checkout@v4
-      - name: Download changed flake.lock
-        uses: actions/download-artifact@v3
-        with:
-          name: flake.lock
       - run: apt update && apt install -y sudo
       - uses: https://github.com/cachix/install-nix-action@v31
         with:
