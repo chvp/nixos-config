@@ -12,7 +12,7 @@ jobs:
   update:
     runs-on: docker
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: apt update && apt install -y sudo
       - uses: https://github.com/cachix/install-nix-action@v31
         with:
