@@ -4,7 +4,6 @@
   imports = [ ./hardware.nix ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.zfs.package = pkgs.zfs_unstable;
 
   networking.hostId = "93decfce";
 
