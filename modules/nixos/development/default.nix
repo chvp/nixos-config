@@ -13,6 +13,7 @@
         zfs.homeLinks = [
           { path = "repos"; type = "cache"; }
           { path = ".config/JetBrains"; type = "cache"; }
+          { path = ".config/github-copilot"; type = "cache"; }
           { path = ".local/share/JetBrains"; type = "cache"; }
           { path = ".cache/JetBrains"; type = "cache"; }
           { path = ".java/.userPrefs"; type = "cache"; }
