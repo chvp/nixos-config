@@ -424,7 +424,7 @@ in
         swayidle = {
           enable = true;
           systemdTarget = "river-session.target";
-          events = [{ event = "before-sleep"; command = "${lock}"; }];
+          events."before-sleep" = "${lock}";
           timeouts = [
             { timeout = 150; command = "${pkgs.wlopm}/bin/wlopm --off '*'"; resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'"; }
             { timeout = 300; command = "${lock}"; }
