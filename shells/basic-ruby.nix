@@ -5,11 +5,11 @@ pkgs.devshell.mkShell {
   packages = with pkgs; [
     nodejs
     nodePackages.typescript-language-server
-    rubyPackages_3_3.solargraph
+    rubyPackages_3_4.solargraph
     yarn
   ];
   language.ruby = {
-    package = pkgs.ruby_3_3;
+    package = pkgs.ruby_3_4;
     nativeDeps = [ pkgs.zlib pkgs.libffi pkgs.libyaml ];
   };
 }
