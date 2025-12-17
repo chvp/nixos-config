@@ -34,7 +34,7 @@ jobs:
       - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
       - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
       - run: nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
-      - uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.0.0
+      - uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0
         with:
           commit_message: "Update dependencies"
           commit_user_name: "CharBOTte"
