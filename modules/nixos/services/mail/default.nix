@@ -151,7 +151,7 @@ in
           header :contains "From" ["jakubbielec", "Jakub Bielec"],
           # Stop any mail pretending to be from itsme not from their official domains
           allof(
-            address :contains "From" "itsme",
+            header :contains "From" "itsme",
             not address :matches :domain "from" ["*itsme.be", "*itsme-id.com"]
           )
         ) {
