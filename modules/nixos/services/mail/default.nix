@@ -148,6 +148,7 @@ in
         if anyof(
           # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
           address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
+          address :regex "From" "[a-z\d]+@tiscali.it",
           header :contains "From" ["jakubbielec", "Jakub Bielec"],
           # Stop any mail pretending to be from itsme not from their official domains
           allof(
