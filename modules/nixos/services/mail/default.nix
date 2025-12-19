@@ -136,10 +136,8 @@ in
       ];
       mailDirectory = "/var/vmail";
       useFsLayout = false;
-      certificateScheme = "manual";
-      certificateFile = certFile;
-      keyFile = keyFile;
       dkimKeyDirectory = "/var/dkim";
+      x509.useACMEHost = "vanpetegem.me";
     };
 
     services.dovecot2.sieve = {
