@@ -73,6 +73,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    nix-jetbrains-plugins = {
+      url = "github:nix-community/nix-jetbrains-plugins";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -149,6 +157,7 @@
           modules = commonModules ++ nixosModules ++ extraModules ++ [
             ({ config, ... }:
               {
+                _module.args = { inherit inputs; };
                 nixpkgs = {
                   pkgs = import nixpkgs {
                     inherit overlays system;

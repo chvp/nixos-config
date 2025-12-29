@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 
 {
   imports = [
@@ -25,7 +25,7 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ (pkgs.jetbrains.plugins.addPlugins pkgs.jetbrains.ruby-mine [ "17718" ]) ];
+      home.packages = [ (inputs.nix-jetbrains-plugins.lib."${pkgs.stdenv.hostPlatform.system}".buildIdeWithPlugins pkgs.jetbrains "ruby-mine" [ "com.github.copilot" ]) ];
       home.file.".ideavimrc".text = ''
         set clipboard+=unnamedplus,ideaput
         set ideajoin
