@@ -21,7 +21,7 @@
       };
     };
     accentor-web = {
-      url = "github:accentor/web";
+      url = "github:accentor/web?ref=tmp/prod-debug";
       inputs = {
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";

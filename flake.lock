@@ -75,15 +75,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1767121825,
-        "narHash": "sha256-q6QqqrgCh4gIoSO77SPDoPA/loFUsthK+5dJq42a6vk=",
+        "lastModified": 1767138560,
+        "narHash": "sha256-okYZyp47cZKnvIE+lVVwe+hyIaxUegZUwNiabWn3SXQ=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "2e21edac78681121ebd85127acb7d2241668ee76",
+        "rev": "14680bc7f5dc666066af437f63e6583680d6c849",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
+        "ref": "tmp/prod-debug",
         "repo": "web",
         "type": "github"
       }
