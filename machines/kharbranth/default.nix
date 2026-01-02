@@ -3,7 +3,8 @@
 {
   imports = [ ./hardware.nix ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_17;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.zfs.package = pkgs.zfs_2_4;
 
   networking.hostId = "93decfce";
 
