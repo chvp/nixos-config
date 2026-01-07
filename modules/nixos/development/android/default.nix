@@ -21,7 +21,7 @@
       home.packages = [ pkgs.android-studio ];
     };
 
-    programs.adb.enable = true;
+    environment.systemPackages = with pkgs; [ android-tools ];
     users.users.charlotte.extraGroups = [ "adbusers" "dialout" "uucp" ];
   };
 }
