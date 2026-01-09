@@ -26,15 +26,29 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
       - run: nix flake update
+        id: update
       - run: nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
+        id: elendel
+        if: ${{ steps.update.conclusion == 'success' }}
       - run: nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
+        id: kharbranth
+        if: ${{ steps.update.conclusion == 'success' }}
       - run: nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
+        id: kholinar
+        if: ${{ steps.update.conclusion == 'success' }}
       - run: nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
+        id: marabethia
+        if: ${{ steps.update.conclusion == 'success' }}
       - run: nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+        if: ${{ steps.elendel.conclusion == 'success' }}
       - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+        if: ${{ steps.kharbranth.conclusion == 'success' }}
       - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+        if: ${{ steps.kholinar.conclusion == 'success' }}
       - run: nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | cachix push chvp
+        if: ${{ steps.marabethia.conclusion == 'success' }}
       - uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0
+        if: ${{ success() }}
         with:
           commit_message: "Update dependencies"
           commit_user_name: "CharBOTte"
