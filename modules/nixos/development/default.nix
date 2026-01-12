@@ -25,7 +25,7 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ (inputs.nix-jetbrains-plugins.lib."${pkgs.stdenv.hostPlatform.system}".buildIdeWithPlugins pkgs.jetbrains "ruby-mine" [ "com.github.copilot" ]) ];
+      home.packages = [ (inputs.nix-jetbrains-plugins.lib.buildIdeWithPlugins pkgs "ruby-mine" [ "com.github.copilot" ]) ];
       home.file.".ideavimrc".text = ''
         set clipboard+=unnamedplus,ideaput
         set ideajoin
