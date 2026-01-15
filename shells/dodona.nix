@@ -32,9 +32,6 @@ pkgs.devshell.mkShell {
     nodejs_22
     nodePackages.typescript-language-server
     rsync
-    fpart
-    cpio
-    yarn
   ];
   env = [
     { name = "DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona"; }
