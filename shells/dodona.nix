@@ -29,7 +29,7 @@ pkgs.devshell.mkShell {
     (azure-cli.withExtensions [ azure-cli-extensions.monitor-control-service ])
     chromedriver
     ungoogled-chromium
-    nodejs
+    nodejs_22
     nodePackages.typescript-language-server
     rsync
     fpart
