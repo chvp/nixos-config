@@ -21,7 +21,7 @@
       };
     };
     accentor-web = {
-      url = "github:accentor/web";
+      url = "github:accentor/web?ref=vue-3";
       inputs = {
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";
@@ -74,7 +74,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nix-jetbrains-plugins = {
-      url = "github:SamueleFacenda/nix-jetbrains-plugins?ref=special_plugins_build";
+      url = "github:SamueleFacenda/nix-jetbrains-plugins";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";

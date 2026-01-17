@@ -75,15 +75,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1768444478,
-        "narHash": "sha256-go49i6w7NF2OhYDdoELco+WaU9EPVtb34gW64jcFdKg=",
+        "lastModified": 1768659264,
+        "narHash": "sha256-HZu8RQK0mdwRP004OOi3FwQg3XOTqxkGKZ7MH/URSyU=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "ed65f042b966f1116e3770d1037aa806d9ae65a9",
+        "rev": "5cc6ed4131d40a750966c778f4eb8bfb107540dd",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
+        "ref": "vue-3",
         "repo": "web",
         "type": "github"
       }
@@ -244,11 +245,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1767039857,
-        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "lastModified": 1765121682,
+        "narHash": "sha256-4VBOP18BFeiPkyhy9o4ssBNQEvfvv1kXkasAYd0+rrA=",
         "owner": "NixOS",
         "repo": "flake-compat",
-        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "rev": "65f23138d8d09a92e30f1e5c87611b23ef451bf3",
         "type": "github"
       },
       "original": {
@@ -416,16 +417,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1768045819,
-        "narHash": "sha256-PrZBF5MdOtF615wH9U4Dcg+l7ga+X/C+FaoVwj/MIlM=",
+        "lastModified": 1767434185,
+        "narHash": "sha256-S289tJM4HQQStEF9QMCtS93duiYwfecWy/zhBoEb890=",
         "owner": "SamueleFacenda",
         "repo": "nix-jetbrains-plugins",
-        "rev": "a779b31e01f231bf6ec508154f2e1fa39933ea9f",
+        "rev": "d3b3c5d901ce5980dec75f54f2ca6446f51b3451",
         "type": "github"
       },
       "original": {
         "owner": "SamueleFacenda",
-        "ref": "special_plugins_build",
         "repo": "nix-jetbrains-plugins",
         "type": "github"
       }
