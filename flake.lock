@@ -245,11 +245,11 @@
     "flake-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1765121682,
-        "narHash": "sha256-4VBOP18BFeiPkyhy9o4ssBNQEvfvv1kXkasAYd0+rrA=",
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
         "owner": "NixOS",
         "repo": "flake-compat",
-        "rev": "65f23138d8d09a92e30f1e5c87611b23ef451bf3",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
         "type": "github"
       },
       "original": {
@@ -417,15 +417,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1767434185,
-        "narHash": "sha256-S289tJM4HQQStEF9QMCtS93duiYwfecWy/zhBoEb890=",
-        "owner": "SamueleFacenda",
+        "lastModified": 1768636789,
+        "narHash": "sha256-SWZmZkGGshHMePX5XM3iK/Q3fxN4s/Uri7pCd5IJtvs=",
+        "owner": "nix-community",
         "repo": "nix-jetbrains-plugins",
-        "rev": "d3b3c5d901ce5980dec75f54f2ca6446f51b3451",
+        "rev": "2ad85db8258dc3e32fb47eefe414095f5bc359d5",
         "type": "github"
       },
       "original": {
-        "owner": "SamueleFacenda",
+        "owner": "nix-community",
         "repo": "nix-jetbrains-plugins",
         "type": "github"
       }
