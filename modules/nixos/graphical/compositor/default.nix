@@ -215,6 +215,7 @@ in
               "${pkgs.anyrun}/lib/libapplications.so"
               "${pkgs.anyrun}/lib/libsymbols.so"
               "${pkgs.anyrun}/lib/librink.so"
+              "${pkgs.anyrun}/lib/libshell.so"
               "${pkgs.anyrun}/lib/libnix_run.so"
             ];
             y.fraction = 0.4;
