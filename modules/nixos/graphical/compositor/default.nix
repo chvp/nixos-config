@@ -216,7 +216,7 @@ in
               spacing = 2;
               modules-left = [ "river/tags" ];
               modules-center = [ "river/window" ];
-              modules-right = [ "idle_inhibitor" "network#wlp192s0" "network#wlp0s20f3" "battery" "backlight" "mpris" "pulseaudio" "clock" "tray" ];
+              modules-right = [ "idle_inhibitor" "network#wlp192s0" "network#wlp0s20f3" "battery" "backlight" "custom/notification" "pulseaudio" "clock" "tray" ];
               backlight = {
                 format = "{percent}% {icon}";
                 format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
@@ -236,22 +236,30 @@ in
                 format-icons = [ "" "" "" "" "" ];
               };
               clock.format = " {:%a %d/%m %H:%M}";
+              "custom/notification" = {
+                tooltip = true;
+                format = "{icon} {0}";
+                format-icons = {
+                  notification = "󱅫";
+                  none = "󰂜";
+                  dnd-notification = "󰂠";
+                  dnd-none = "󰪓";
+                  inhibited-notification = "󰂛";
+                  inhibited-none = "󰪑";
+                  dnd-inhibited-notification = "󰂛";
+                  dnd-inhibited-none = "󰪑";
+                };
+                return-type = "json";
+                exec = "${pkgs.swaynotificationcenter}/bin/swaync-client -swb";
+                on-click = "${pkgs.swaynotificationcenter}/bin/swaync-client -t -sw";
+                on-click-right = "${pkgs.swaynotificationcenter}/bin/swaync-client -d -sw";
+                escape = true;
+              };
               idle_inhibitor = {
                 format = "{icon}";
                 format-icons = {
                   activated = "";
                   deactivated = "";
-                };
-              };
-              mpris = {
-                player = "firefox";
-                format = "{status_icon} {artist} - {title}";
-                artist-len = 20;
-                title-len = 20;
-                status-icons = {
-                  playing = "▶";
-                  paused = "";
-                  stopped = "";
                 };
               };
               "network#wlp192s0" = {
@@ -304,7 +312,7 @@ in
                 font-size: 11px;
             }
 
-            #window, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #clock, #tray {
+            #window, #custom-notification, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #clock, #tray {
                 margin: 0;
                 padding: 0 5px;
                 background-color: @surface0;
@@ -416,10 +424,6 @@ in
             }
           ];
         };
-        mako = {
-          enable = true;
-          settings.font = "Hack Regular 9";
-        };
         playerctld.enable = true;
         swayidle = {
           enable = true;
@@ -429,6 +433,15 @@ in
             { timeout = 150; command = "${pkgs.wlopm}/bin/wlopm --off '*'"; resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'"; }
             { timeout = 300; command = "${lock}"; }
           ];
+        };
+        swaync = {
+          enable = true;
+          settings = {
+            control-center-margin-top = 16;
+            control-center-margin-bottom = 16;
+            control-center-margin-right = 16;
+            widgets = [ "mpris" "inhibitors" "title" "dnd" "notifications" ];
+          };
         };
       };
       systemd.user.targets = {

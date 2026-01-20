@@ -21,14 +21,15 @@ in
         defaultFonts = {
           emoji = [ "Noto Color Emoji" ];
           # The Tinos and Amiro fonts overlap with Font Awesome's codepoints, so make sure we give Font Awesome a higher priority.
-          monospace = [ "Hack" "Font Awesome 6 Free" ];
-          sansSerif = [ "Noto Sans" "Font Awesome 6 Free" ];
-          serif = [ "Noto Serif" "Font Awesome 6 Free" ];
+          monospace = [ "Hack" "Hack Nerd Font" ];
+          sansSerif = [ "Noto Sans" "NotoSans Nerd Font" ];
+          serif = [ "Noto Serif" "NotoSerif Nerd Font" ];
         };
       };
       packages = with pkgs; [
         hack-font
-        font-awesome
+        nerd-fonts.hack
+        nerd-fonts.noto
         noto-fonts
         noto-fonts-cjk-sans
         noto-fonts-color-emoji
