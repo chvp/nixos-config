@@ -308,8 +308,8 @@ in
             @import "colors.css";
 
             * {
-                font-family: Hack, monospace;
-                font-size: 11px;
+                font-family: "Noto Sans", sans-serif;
+                font-size: 13px;
             }
 
             #window, #custom-notification, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #clock, #tray {
