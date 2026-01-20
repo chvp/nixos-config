@@ -440,6 +440,7 @@ in
             control-center-margin-top = 16;
             control-center-margin-bottom = 16;
             control-center-margin-right = 16;
+            hide-on-action = false;
             widgets = [ "mpris" "inhibitors" "title" "dnd" "notifications" ];
           };
         };
