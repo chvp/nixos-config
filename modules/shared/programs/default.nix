@@ -8,5 +8,5 @@ in
     ./hledger
   ];
 
-  home-manager.users.${username}.home.packages = with pkgs; [ jq xan yt-dlp ];
+  home-manager.users.${username}.home.packages = with pkgs; [ jq xan yt-dlp libqalculate ];
 }

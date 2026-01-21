@@ -4,20 +4,6 @@ _sighandler() {
   kill -INT "$child" 2>/dev/null
 }
 
-calc_options() {
-  echo "calc "
-}
-
-calc() {
-  if [ -n "$1" ]
-  then
-    @libqalculate@/bin/qalc "$1"
-    sleep 5
-  else
-    @libqalculate@/bin/qalc
-  fi
-}
-
 emoji_options() {
   @uni@/bin/uni emoji all | sed "s/^/emoji /"
 }
@@ -43,14 +29,29 @@ run() {
   riverctl spawn $1
 }
 
+trun_options() {
+  run_options | sed "s/^/t/"
+}
+
+trun() {
+    riverctl spawn "@foot@/bin/foot zsh -ic $1"
+}
+
 systemctl_options() {
-  echo systemctl hibernate
   echo systemctl poweroff
   echo systemctl reboot
   echo systemctl suspend
+  echo systemctl hibernate
 }
 
-CHOSEN=$(cat <(systemctl_options) <(nrun_options) <(run_options) <(calc_options) <(emoji_options) | @fzy@/bin/fzy --lines 80 | tail -n1)
+if [[ "$(@darkman@/bin/darkman get)" == "light" ]]
+then
+  export BEMENU_OPTS='--fb "#eff1f5" --ff "#4c4f69" --nb "#eff1f5" --nf "#4c4f69" --tb "#eff1f5" --hb "#eff1f5" --tf "#d20f39" --hf "#df8e1d" --af "#4c4f69" --ab "#eff1f5"'
+else
+  export BEMENU_OPTS='--fb "#303446" --ff "#c6d0f5" --nb "#303446" --nf "#c6d0f5" --tb "#303446" --hb "#303446" --tf "#e78284" --hf "#e5c890" --af "#c6d0f5" --ab "#303446"'
+fi
+
+CHOSEN=$(cat <(systemctl_options) <(nrun_options) <(run_options) <(trun_options) <(emoji_options) | @bemenu@/bin/bemenu -w -l 40 -p select -n --counter always -P '*')
 
 if [ -n "$CHOSEN" ]
 then

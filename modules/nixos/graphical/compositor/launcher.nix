@@ -2,8 +2,9 @@
 let
   script = pkgs.replaceVars ./launcher.zsh {
     inherit (pkgs)
-      fzy
-      libqalculate
+      bemenu
+      darkman
+      foot
       nix
       uni
       wl-clipboard

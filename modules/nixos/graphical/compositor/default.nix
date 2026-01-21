@@ -5,7 +5,7 @@ let
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
   lock = pkgs.writeShellScript "lock" ''
-    if [ "$(darkman get)" == "light" ]
+    if [ "$(${pkgs.darkman}/bin/darkman get)" == "light" ]
     then
       ${pkgs.swaylock}/bin/swaylock -fF -c eff1f5
     else
@@ -45,8 +45,8 @@ let
   river-init = pkgs.writeShellScript "river-init" ''
     riverctl map normal Super Return spawn foot
     riverctl map normal Super+Shift Return spawn emacs
-    riverctl map normal Super D spawn 'foot --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
-    riverctl map normal None Menu spawn 'foot --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
+    riverctl map normal Super D spawn '${launcher}/bin/launcher'
+    riverctl map normal None Menu spawn '${launcher}/bin/launcher'
 
     riverctl map normal Super C spawn ${lock}
 
@@ -126,10 +126,6 @@ let
     riverctl map normal Alt+Shift Print spawn '${screenshot}/bin/screenshot -r -d'
     riverctl map normal Control Print spawn '${screenshot}/bin/screenshot -f'
     riverctl map normal Control+Alt Print spawn '${screenshot}/bin/screenshot -f -d'
-
-    riverctl rule-add -app-id launcher float
-    riverctl rule-add -app-id be.ugent.objprog.ugentopoly.Ugentopoly float
-    riverctl rule-add -title "Quick Format Citation" float
 
     riverctl rule-add ssd
 
