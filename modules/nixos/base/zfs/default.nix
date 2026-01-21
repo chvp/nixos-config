@@ -19,7 +19,7 @@
           unitConfig.DefaultDependencies = "no";
           serviceConfig.Type = "oneshot";
           script = ''
-            zfs rollback -r ${config.chvp.base.zfs.rootDataset}@blank && echo "  >> >> rollback complete << <<"
+            ${config.boot.zfs.package}/bin/zfs rollback -r ${config.chvp.base.zfs.rootDataset}@blank && echo "  >> >> rollback complete << <<"
           '';
         };
       };
