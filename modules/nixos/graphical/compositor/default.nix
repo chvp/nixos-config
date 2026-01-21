@@ -1,10 +1,11 @@
 { config, lib, pkgs, ... }:
 
 let
+  launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
   lock = pkgs.writeShellScript "lock" ''
-    if [ "$(${pkgs.darkman}/bin/darkman get)" == "light" ]
+    if [ "$(darkman get)" == "light" ]
     then
       ${pkgs.swaylock}/bin/swaylock -fF -c eff1f5
     else
@@ -44,8 +45,8 @@ let
   river-init = pkgs.writeShellScript "river-init" ''
     riverctl map normal Super Return spawn foot
     riverctl map normal Super+Shift Return spawn emacs
-    riverctl map normal Super D spawn '${pkgs.anyrun}/bin/anyrun'
-    riverctl map normal None Menu spawn '${pkgs.anyrun}/bin/anyrun'
+    riverctl map normal Super D spawn 'foot --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
+    riverctl map normal None Menu spawn 'foot --app-id launcher -- zsh -ic ${launcher}/bin/launcher'
 
     riverctl map normal Super C spawn ${lock}
 
@@ -203,23 +204,11 @@ in
         river
         color-picker
         screenshot
+        # pkgs.wf-recorder
         pkgs.wl-clipboard
         pkgs.wl-mirror
       ];
       programs = {
-        anyrun = {
-          enable = true;
-          config = {
-            closeOnClick = true;
-            plugins = [
-              "${pkgs.anyrun}/lib/libapplications.so"
-              "${pkgs.anyrun}/lib/libsymbols.so"
-              "${pkgs.anyrun}/lib/librink.so"
-              "${pkgs.anyrun}/lib/libnix_run.so"
-            ];
-            y.fraction = 0.4;
-          };
-        };
         waybar = {
           enable = true;
           settings = {
@@ -456,29 +445,16 @@ in
           };
         };
       };
-      systemd.user = {
-        services.anyrun = {
-          Service.ExecStart = "${pkgs.anyrun}/bin/anyrun daemon";
-          Unit = {
-            Description = "Anyrun Daemon";
-            PartOf = [ "graphical-session.target" ];
-            After = [ "graphical-session.target" ];
-          };
-          Install = {
-            WantedBy = [ "river-session.target" ];
-          };
+      systemd.user.targets = {
+        river-session.Unit = {
+          Description = "river compositor session";
+          BindsTo = [ "graphical-session.target" ];
+          Wants = [ "graphical-session-pre.target" ];
+          After = [ "graphical-session-pre.target" ];
         };
-        targets = {
-          river-session.Unit = {
-            Description = "river compositor session";
-            BindsTo = [ "graphical-session.target" ];
-            Wants = [ "graphical-session-pre.target" ];
-            After = [ "graphical-session-pre.target" ];
-          };
-          tray.Unit = {
-            Wants = [ "graphical-session.target" ];
-            After = [ "graphical-session.target" ];
-          };
+        tray.Unit = {
+          Wants = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
         };
       };
       xdg.configFile = {
