@@ -8,7 +8,7 @@
 
   config = lib.mkIf config.chvp.development.android.enable {
     chvp.base = {
-      nix.unfreePackages = [ "android-studio-stable" ];
+      nix.unfreePackages = [ "android-studio" ];
       zfs.homeLinks = [
         { path = ".android"; type = "cache"; }
         { path = ".config/Google"; type = "cache"; }
