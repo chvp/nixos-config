@@ -25,7 +25,7 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ (inputs.nix-jetbrains-plugins.lib.buildIdeWithPlugins pkgs "ruby-mine" [ "com.github.copilot" "IdeaVIM" ]) ];
+      home.packages = [ (inputs.nix-jetbrains-plugins.lib.buildIdeWithPlugins pkgs "ruby-mine" [ "com.github.copilot" "IdeaVIM" ]) pkgs.nodejs ];
       home.file.".ideavimrc".text = ''
         set clipboard+=unnamedplus,ideaput
         set ideajoin
