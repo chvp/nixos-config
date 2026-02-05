@@ -42,38 +42,43 @@ pkgs.devshell.mkShell {
   ];
   commands = [
     {
-      name = "refresh-deps";
+      name = "deps:install";
       category = "[general commands]";
       help = "Install dependencies";
       command = ''
-        yarn install
+        bundle install
+        npm install
+      '';
+    }
+    {
+      name = "deps:install:force";
+      category = "[general commands]";
+      help = "Install dependencies";
+      command = ''
         bundle install
         bundle pristine
+        npm install
       '';
     }
     {
-      name = "mysql";
-      category = "[general commands]";
-      help = "Start mysql (in docker container)";
-      command = ''
-        docker run --name dodona-db -p 3306:3306 --rm -v dodona-db-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=dodona mariadb:latest
-      '';
-    }
-    {
-      name = "dbshell";
-      category = "[general commands]";
-      help = "Attach a client to the db";
-      command = ''
-        docker exec -it dodona-db mariadb --user=root --password=dodona dodona
-      '';
-    }
-    {
-      name = "delete-merged";
+      name = "git:delete-merged";
       category = "[general commands]";
       help = "Delete merged branches";
       command = ''
         git fetch -p ; git branch -r | awk '{print $1}' | egrep -v -f - <(git branch -vv | grep origin) | awk '{print $1}' | xargs -r git branch -D
       '';
+    }
+    {
+      name = "lint:all";
+      category = "[general commands]";
+      help = "Run all linters in fix mode";
+      command = "rubocop; npm run lint; npm run lint:css; erb_lint --lint-all;";
+    }
+    {
+      name = "lint:all:fix";
+      category = "[general commands]";
+      help = "Run all linters in fix mode";
+      command = "rubocop -a; npm run lint --fix; npm run lint:css --fix; erb_lint --lint-all -a;";
     }
   ];
   serviceGroups = {
