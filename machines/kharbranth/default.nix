@@ -3,8 +3,6 @@
 {
   imports = [ ./hardware.nix ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
-
   networking.hostId = "93decfce";
 
   time.timeZone = "Europe/Brussels";

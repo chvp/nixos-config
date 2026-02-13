@@ -9,7 +9,7 @@
   config = lib.mkIf config.chvp.development.enable {
     chvp = {
       base = {
-        nix.unfreePackages = [ "ruby-mine" "ruby-mine-with-plugins" "Oracle_VirtualBox_Extension_Pack" ];
+        nix.unfreePackages = [ "ruby-mine" "ruby-mine-with-plugins" "virtualbox-extpack" ];
         zfs.homeLinks = [
           { path = "repos"; type = "cache"; }
           { path = ".config/JetBrains"; type = "cache"; }
