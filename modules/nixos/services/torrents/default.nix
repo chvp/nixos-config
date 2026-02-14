@@ -22,6 +22,43 @@
             hash = "sha256-gd1LGAhMuSyC/19wxkoE2mqVozjGPfupIPGojKY0Hn4=";
             fetchSubmodules = true;
           };
+
+          patches = [
+            (pkgs.fetchpatch2 {
+              url = "https://github.com/transmission/transmission/commit/febfe49ca3ecab1a7142ecb34012c1f0b2bcdee8.patch?full_index=1";
+              hash = "sha256-Ge0+AXf/ilfMieGBAdvvImY7JOb0gGIdeKprC37AROs=";
+              excludes = [
+                # The submodule that we don't use (we use our miniupnp)
+                "third-party/miniupnp"
+                # Hunk fails for this one, but we don't care because we don't rely upon
+                # xcode definitions even for the Darwin build.
+                "Transmission.xcodeproj/project.pbxproj"
+              ];
+            })
+          ];
+
+          postPatch = ''
+            # Clean third-party libraries to ensure system ones are used.
+            # Excluding gtest since it is hardcoded to vendored version. The rest of the listed libraries are not packaged.
+            pushd third-party
+            for f in *; do
+                if [[ ! $f =~ googletest|wildmat|fast_float|wide-integer|jsonsl ]]; then
+                    rm -r "$f"
+                fi
+            done
+            popd
+            rm \
+              cmake/FindFmt.cmake \
+              cmake/FindUtfCpp.cmake
+            # Upstream uses different config file name.
+            substituteInPlace CMakeLists.txt --replace 'find_package(UtfCpp)' 'find_package(utf8cpp)'
+
+            # Use gettext even on Darwin
+            substituteInPlace libtransmission/utils.h \
+              --replace-fail '#if defined(HAVE_GETTEXT) && !defined(__APPLE__)' '#if defined(HAVE_GETTEXT)'
+          '';
+
+          postInstall = builtins.replaceStrings [ "/icons/hicolor_apps_scalable_transmission.svg" ] [ "/qt/icons/transmission.svg" ] old.postInstall;
         });
       })
     ];
