@@ -74,7 +74,7 @@
     };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nix-jetbrains-plugins = {
-      url = "github:SamueleFacenda/nix-jetbrains-plugins?ref=special_plugins_build";
+      url = "github:nix-community/nix-jetbrains-plugins";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
