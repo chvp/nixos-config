@@ -90,8 +90,8 @@
     systemd.services =
       let
         makeLinkScript = config: lib.concatStringsSep "\n" (map (location: ''mkdir -p "${location.path}"'') config);
-        systemLinksScript = makeLinkScript config.chvp.base.zfs.systemLinks;
-        homeLinksScript = makeLinkScript config.chvp.base.zfs.homeLinks;
+        systemLinksScript = makeLinkScript (builtins.filter (link: !(link.file or false)) config.chvp.base.zfs.systemLinks);
+        homeLinksScript = makeLinkScript (builtins.filter (link: !(link.file or false)) config.chvp.base.zfs.homeLinks);
       in
       {
         make-system-links-destinations = {
