@@ -142,7 +142,7 @@ in
             sed -i "s/Latte/Frappe/" ~/.config/qt6ct/qt6ct.conf
           '';
           terminal = ''
-            pkill -SIGUSR2 zsh
+            pkill -SIGUSR1 foot
           '';
           waybar = ''
             ln -sf ~/.config/waybar/frappe.css ~/.config/waybar/colors.css
@@ -168,7 +168,7 @@ in
             sed -i "s/Frappe/Latte/" ~/.config/qt6ct/qt6ct.conf
           '';
           terminal = ''
-            pkill -SIGUSR1 zsh
+            pkill -SIGUSR2 foot
           '';
           waybar = ''
             ln -sf ~/.config/waybar/latte.css ~/.config/waybar/colors.css

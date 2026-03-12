@@ -12,7 +12,6 @@
     ./sshd
     ./tmux
     ./zfs
-    ./zsh
   ];
 
   config = {
