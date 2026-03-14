@@ -37,6 +37,11 @@ let
           shift 1
           nix shell nixpkgs#$drv -c $@
         }
+
+        if [ "$(darkman get)" = "dark" ]
+        then
+          pkill -SIGUSR1 foot
+        fi
       '';
       shellAliases = {
         gupd = "gfa && gprom";
