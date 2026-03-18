@@ -26,6 +26,7 @@ pkgs.devshell.mkShell {
     };
   };
   packages = with pkgs; [
+    azure-cli
     chromedriver
     ungoogled-chromium
     nodejs_22
