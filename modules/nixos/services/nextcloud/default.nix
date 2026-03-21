@@ -25,6 +25,9 @@
           adminpassFile = config.age.secrets."passwords/services/nextcloud-admin".path;
         };
         database.createLocally = true;
+        settings = {
+          mail_smtpmode = "sendmail";
+        };
       };
       nginx.virtualHosts."nextcloud.vanpetegem.me" = {
         forceSSL = true;
