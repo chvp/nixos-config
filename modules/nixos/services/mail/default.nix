@@ -136,7 +136,7 @@ in
       ];
       mailDirectory = "/var/vmail";
       useFsLayout = false;
-      dkimKeyDirectory = "/var/dkim";
+      dkim.keyDirectory = "/var/dkim";
       x509.useACMEHost = "vanpetegem.me";
     };
 
