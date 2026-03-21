@@ -301,8 +301,6 @@ in
             };
           };
           style = ''
-            @import "colors.css";
-
             * {
                 font-family: "Noto Sans", sans-serif;
                 font-size: 13px;
@@ -311,7 +309,7 @@ in
             #window, #custom-notification, #idle_inhibitor, #network, #battery, #backlight, #mpris, #pulseaudio, #clock, #tray {
                 margin: 0;
                 padding: 0 5px;
-                background-color: @surface0;
+                background-color: @unfocused_borders;
             }
 
             button {
@@ -324,51 +322,51 @@ in
             }
 
             window#waybar {
-                background-color: @base;
-                color: @text;
+                background-color: @theme_bg_color;
+                color: @theme_text_color;
             }
 
             #backlight {
-                color: @sky;
+                color: @wm_button_min_active_bg;
             }
 
             #battery {
-                color: @green;
+                color: @success_color;
             }
             #battery.good {
-                color: @sky;
+                color: @wm_button_min_active_bg;
             }
             #battery.warning {
-                color: @yellow;
+                color: @warning_color;
             }
             #battery.critical {
-                color: @pink;
+                color: @error_color;
             }
 
             #idle_inhibitor.activated {
-                color: @sky;
+                color: @wm_button_min_active_bg;
             }
 
             #pulseaudio {
-                color: @yellow;
+                color: @wm_button_min_active_bg;
             }
 
             #tags button {
                 padding: 0;
                 box-shadow: inset 0 -3px transparent
-                color: @text;
+                color: @theme_text_color;
             }
             #tags button.occupied {
-                background-color: @surface1;
+                background-color: @unfocused_borders;
             }
             #tags button.focused {
-                color: @sky;
+                color: @wm_button_min_active_bg;
             }
             #tags button.urgent {
-                color: @pink;
+                color: @error_color;
             }
             #tags button:hover {
-                box-shadow: inset 0 -3px @text;
+                box-shadow: inset 0 -3px @theme_text_color;
             }
           '';
           systemd.enable = true;
@@ -467,70 +465,6 @@ in
             fi
           '';
         };
-        "waybar/frappe.css".text = ''
-          @define-color base   #303446;
-          @define-color mantle #292c3c;
-          @define-color crust  #232634;
-
-          @define-color text     #c6d0f5;
-          @define-color subtext0 #a5adce;
-          @define-color subtext1 #b5bfe2;
-
-          @define-color surface0 #414559;
-          @define-color surface1 #51576d;
-          @define-color surface2 #626880;
-
-          @define-color overlay0 #737994;
-          @define-color overlay1 #838ba7;
-          @define-color overlay2 #949cbb;
-
-          @define-color blue      #8caaee;
-          @define-color lavender  #babbf1;
-          @define-color sapphire  #85c1dc;
-          @define-color sky       #99d1db;
-          @define-color teal      #81c8be;
-          @define-color green     #a6d189;
-          @define-color yellow    #e5c890;
-          @define-color peach     #ef9f76;
-          @define-color maroon    #ea999c;
-          @define-color red       #e78284;
-          @define-color mauve     #ca9ee6;
-          @define-color pink      #f4b8e4;
-          @define-color flamingo  #eebebe;
-          @define-color rosewater #f2d5cf;
-        '';
-        "waybar/latte.css".text = ''
-          @define-color base   #eff1f5;
-          @define-color mantle #e6e9ef;
-          @define-color crust  #dce0e8;
-
-          @define-color text     #4c4f69;
-          @define-color subtext0 #6c6f85;
-          @define-color subtext1 #5c5f77;
-
-          @define-color surface0 #ccd0da;
-          @define-color surface1 #bcc0cc;
-          @define-color surface2 #acb0be;
-
-          @define-color overlay0 #9ca0b0;
-          @define-color overlay1 #8c8fa1;
-          @define-color overlay2 #7c7f93;
-
-          @define-color blue      #1e66f5;
-          @define-color lavender  #7287fd;
-          @define-color sapphire  #209fb5;
-          @define-color sky       #04a5e5;
-          @define-color teal      #179299;
-          @define-color green     #40a02b;
-          @define-color yellow    #df8e1d;
-          @define-color peach     #fe640b;
-          @define-color maroon    #e64553;
-          @define-color red       #d20f39;
-          @define-color mauve     #8839ef;
-          @define-color pink      #ea76cb;
-          @define-color flamingo  #dd7878;
-          @define-color rosewater #dc8a78;
-        '';
       };
     };
   };

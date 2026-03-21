@@ -144,10 +144,6 @@ in
           terminal = ''
             pkill -SIGUSR1 foot
           '';
-          waybar = ''
-            ln -sf ~/.config/waybar/frappe.css ~/.config/waybar/colors.css
-            systemctl --user restart waybar.service
-          '';
         };
         lightModeScripts = {
           emacs = ''
@@ -170,16 +166,7 @@ in
           terminal = ''
             pkill -SIGUSR2 foot
           '';
-          waybar = ''
-            ln -sf ~/.config/waybar/latte.css ~/.config/waybar/colors.css
-            systemctl --user restart waybar.service
-          '';
         };
-      };
-      home.activation = {
-        linkWaybarCssColors = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          $DRY_RUN_CMD ln -sf $VERBOSE_ARG ~/.config/waybar/latte.css ~/.config/waybar/colors.css
-        '';
       };
     };
   };
