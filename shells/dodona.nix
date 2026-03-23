@@ -27,10 +27,7 @@ pkgs.devshell.mkShell {
   };
   packages = with pkgs; [
     azure-cli
-    chromedriver
-    ungoogled-chromium
     nodejs_22
-    nodePackages.typescript-language-server
     rsync
   ];
   env = [
@@ -38,7 +35,7 @@ pkgs.devshell.mkShell {
     { name = "CACHE_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_cache"; }
     { name = "TEST_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_test"; }
     { name = "NODE_ENV"; value = "development"; }
-    { name = "PUPPETEER_EXECUTABLE_PATH"; value = "${pkgs.ungoogled-chromium.outPath}/bin/chromium"; }
+    { name = "PLAYWRIGHT_BROWSERS_PATH"; value = "${pkgs.playwright.browsers}"; }
   ];
   commands = [
     {
