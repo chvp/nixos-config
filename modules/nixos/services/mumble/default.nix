@@ -13,9 +13,11 @@
       environmentFile = config.age.secrets."passwords/services/murmur".path;
       openFirewall = true;
       password = "$MURMURD_PASSWORD";
-      sslKey = "${config.security.acme.certs."vanpetegem.me".directory}/key.pem";
-      sslCert = "${config.security.acme.certs."vanpetegem.me".directory}/cert.pem";
-      sslCa = "${config.security.acme.certs."vanpetegem.me".directory}/chain.pem";
+      tls = {
+        keyPath = "${config.security.acme.certs."vanpetegem.me".directory}/key.pem";
+        certPath = "${config.security.acme.certs."vanpetegem.me".directory}/cert.pem";
+        caPath = "${config.security.acme.certs."vanpetegem.me".directory}/chain.pem";
+      };
     };
     users.users.murmur.extraGroups = [ "acme" ];
     age.secrets."passwords/services/murmur" = {

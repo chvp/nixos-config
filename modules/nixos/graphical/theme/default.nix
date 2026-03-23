@@ -79,7 +79,8 @@ in
             box-shadow: none;
           }
         '';
-        gtk4.extraCss = ''
+        gtk4 = {
+          extraCss = ''
           /* No (default) titlebar on wayland */
           headerbar.titlebar.default-decoration {
             background: transparent;
@@ -97,6 +98,11 @@ in
             box-shadow: none;
           }
         '';
+          theme = {
+            package = gtkTheme;
+            name = "Colloid-Orange-Light-Compact-Catppuccin";
+          };
+        };
         iconTheme = {
           package = pkgs.libsForQt5.breeze-icons;
           name = "breeze";
