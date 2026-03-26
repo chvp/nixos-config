@@ -37,7 +37,7 @@ in
         "vanpetegem.me"
       ];
       localDnsResolver = false;
-      loginAccounts = {
+      accounts = {
         "charlotte@vanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/charlotte@vanpetegem.be".path;
           aliases = [ "@chvp.be" "@cvpetegem.be" "charlotte@vanpetegem.me" ];
@@ -110,7 +110,7 @@ in
           specialUse = "Sent";
         };
       };
-      extraVirtualAliases = {
+      aliases = {
         "android@accentor.tech" = [ "charlotte@vanpetegem.be" ];
         "team@accentor.tech" = [ "charlotte@vanpetegem.be" "robbe@vanpetegem.be" ];
       };
@@ -134,8 +134,10 @@ in
         "spam@vuztc.ru"
         "mofos@theportalnetworks.com" # Someone registered my f-droid contact address on a porn site :(
       ];
-      mailDirectory = "/var/vmail";
-      useFsLayout = false;
+      storage = {
+        path = "/var/vmail";
+        directoryLayout = "maildir++";
+      };
       dkim.keyDirectory = "/var/dkim";
       x509.useACMEHost = "vanpetegem.me";
     };
