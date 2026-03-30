@@ -380,7 +380,6 @@ in
       services = {
         kanshi = {
           enable = true;
-          systemdTarget = "river-session.target";
           settings = [
             {
               profile = {
@@ -421,7 +420,6 @@ in
         playerctld.enable = true;
         swayidle = {
           enable = true;
-          systemdTarget = "river-session.target";
           events."before-sleep" = "${lock}";
           timeouts = [
             { timeout = 150; command = "${pkgs.wlopm}/bin/wlopm --off '*'"; resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'"; }
@@ -466,6 +464,7 @@ in
           '';
         };
       };
+      wayland.systemd.target = "river-session.target";
     };
   };
 }  
