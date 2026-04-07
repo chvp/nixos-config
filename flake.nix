@@ -84,6 +84,13 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    playwright = {
+      url = "github:pietdevries94/playwright-web-flake/1.59.0";
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     systems.url = "github:nix-systems/default";
     tetris = {
       url = "github:chvp/tetris";
@@ -104,7 +111,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, playwright, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -125,12 +132,15 @@
         devshell.overlays.default
         emacs-overlay.overlays.default
         (self: super: {
-          tetris = tetris.packages.${self.system}.default;
+          tetris = tetris.packages.${self.stdenv.hostPlatform.system}.default;
         })
         (self: super: {
-          entrance-exam = entrance-exam.packages.${self.system}.default;
+          entrance-exam = entrance-exam.packages.${self.stdenv.hostPlatform.system}.default;
         })
         nur.overlays.default
+        (self: super: {
+          playwright-driver = playwright.packages.${self.stdenv.hostPlatform.system}.playwright-driver;
+        })
         www-chvp-be.overlays.default
       ];
       commonModules = [
