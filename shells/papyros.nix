@@ -13,12 +13,10 @@
   packages = with pkgs; [
     (python3.withPackages (ps: [ ps.pip ]))
     nodejs
-    playwright-driver.browsers
     yarn
   ];
   env = [
-    { name = "PLAYWRIGHT_BROWSERS_PATH"; value = pkgs.playwright-driver.browsers; }
-    { name = "PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS"; value = "true"; }
+    { name = "PLAYWRIGHT_BROWSERS_PATH"; value = "${pkgs.playwright.browsers-chromium.override { withChromiumHeadlessShell = true; }}"; }
   ];
   language.ruby = {
     package = pkgs.ruby_3_3;
