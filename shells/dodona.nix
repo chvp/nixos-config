@@ -27,7 +27,7 @@ pkgs.devshell.mkShell {
   };
   packages = with pkgs; [
     azure-cli
-    nodejs_22
+    nodejs_24
     rsync
   ];
   env = [
