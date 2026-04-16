@@ -83,7 +83,7 @@ pkgs.devshell.mkShell {
     server-support.services = support-services;
   };
   language.ruby = {
-    package = pkgs.ruby_3_4;
+    package = pkgs.ruby_4_0;
     nativeDeps = [ pkgs.libmysqlclient pkgs.openssl pkgs.zlib pkgs.libffi pkgs.libyaml ];
   };
 }
