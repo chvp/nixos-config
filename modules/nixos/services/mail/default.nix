@@ -89,25 +89,25 @@ in
         enable = false;
         memoryLimit = 4000;
       };
-      lmtpSaveToDetailMailbox = "no";
+      lmtpSaveToDetailMailbox = false;
       mailboxes = {
         Trash = {
           auto = "no";
-          specialUse = "Trash";
+          special_use = "\\Trash";
           autoexpunge = "60d";
         };
         Junk = {
           auto = "subscribe";
-          specialUse = "Junk";
+          special_use = "\\Junk";
           autoexpunge = "60d";
         };
         Drafts = {
           auto = "subscribe";
-          specialUse = "Drafts";
+          special_use = "\\Drafts";
         };
         Sent = {
           auto = "subscribe";
-          specialUse = "Sent";
+          special_use = "\\Sent";
         };
       };
       aliases = {
