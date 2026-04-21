@@ -81,23 +81,23 @@ in
         '';
         gtk4 = {
           extraCss = ''
-          /* No (default) titlebar on wayland */
-          headerbar.titlebar.default-decoration {
-            background: transparent;
-            padding: 0;
-            margin: 0 0 -17px 0;
-            border: 0;
-            min-height: 0;
-            font-size: 0;
-            box-shadow: none;
-          }
+            /* No (default) titlebar on wayland */
+            headerbar.titlebar.default-decoration {
+              background: transparent;
+              padding: 0;
+              margin: 0 0 -17px 0;
+              border: 0;
+              min-height: 0;
+              font-size: 0;
+              box-shadow: none;
+            }
 
-          /* rm -rf window shadows */
-          window.csd,             /* gtk4? */
-          window.csd decoration { /* gtk3 */
-            box-shadow: none;
-          }
-        '';
+            /* rm -rf window shadows */
+            window.csd,             /* gtk4? */
+            window.csd decoration { /* gtk3 */
+              box-shadow: none;
+            }
+          '';
           theme = {
             package = gtkTheme;
             name = "Colloid-Orange-Light-Compact-Catppuccin";

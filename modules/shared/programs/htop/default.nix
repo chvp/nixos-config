@@ -17,7 +17,19 @@ in
         settings = {
           hide_userland_threads = 1;
           fields = with config.lib.htop.fields; [
-            PID USER PRIORITY NICE M_VIRT M_RESIDENT M_SWAP M_SHARE STATE PERCENT_CPU PERCENT_MEM TIME COMM
+            PID
+            USER
+            PRIORITY
+            NICE
+            M_VIRT
+            M_RESIDENT
+            M_SWAP
+            M_SHARE
+            STATE
+            PERCENT_CPU
+            PERCENT_MEM
+            TIME
+            COMM
           ];
         };
       };
