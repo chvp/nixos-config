@@ -11,8 +11,8 @@
     };
   };
   packages = with pkgs; [
-    (python3.withPackages (ps: [ ps.pip ]))
-    nodejs
+    (python313.withPackages (ps: [ ps.pip ]))
+    nodejs_24
     yarn
   ];
   env = [
