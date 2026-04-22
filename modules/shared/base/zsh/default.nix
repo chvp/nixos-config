@@ -38,11 +38,12 @@ let
           nix shell nixpkgs#$drv -c $@
         }
 
+      '' + (lib.optionalString (home == config.users.users.charlotte.home && config.chvp.graphical.compositor.enable) ''
         if [ "$(darkman get)" = "dark" ]
         then
           pkill -SIGUSR1 foot
         fi
-      '';
+'');
       shellAliases = {
         gupd = "gfa && gprom";
       };
