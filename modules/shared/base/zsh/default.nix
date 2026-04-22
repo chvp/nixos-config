@@ -65,7 +65,7 @@ let
 in
 {
   options.chvp.base.zsh.usersToConfigure = lib.mkOption {
-    default = [ username ];
+    default = [ username "root" ];
   };
 
   config = {
