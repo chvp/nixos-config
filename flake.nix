@@ -85,7 +85,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     playwright = {
-      url = "github:pietdevries94/playwright-web-flake/1.59.0";
+      url = "github:pietdevries94/playwright-web-flake/1.59.1";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
