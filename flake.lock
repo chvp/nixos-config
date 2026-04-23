@@ -451,16 +451,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1776948322,
+        "lastModified": 1776950941,
         "narHash": "sha256-idwZcvnxHUTd6qI2E0SW4gzeyfBlVZq7JoEonjAY2Dc=",
-        "owner": "chvp",
+        "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
-        "rev": "6e9a4420b396df77e527f0ccb9ac9d1b40539145",
+        "rev": "e6c4a96f5034c3686c24021d03515e17d02c46cd",
         "type": "gitlab"
       },
       "original": {
-        "owner": "chvp",
-        "ref": "fix/overeager-scheme-prepend",
+        "owner": "simple-nixos-mailserver",
         "repo": "nixos-mailserver",
         "type": "gitlab"
       }
