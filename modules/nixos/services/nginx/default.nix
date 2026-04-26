@@ -34,7 +34,7 @@
     security.acme = {
       certs."vanpetegem.me" = {
         dnsProvider = "ovh";
-        credentialsFile = config.age.secrets."passwords/services/acme".path;
+        environmentFile = config.age.secrets."passwords/services/acme".path;
         extraDomainNames = [
           "*.vanpetegem.me"
           "cvpetegem.be"
