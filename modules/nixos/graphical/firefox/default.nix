@@ -36,12 +36,13 @@ in
 
   config = lib.mkIf config.chvp.graphical.firefox.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".mozilla"; type = "data"; }
+      { path = ".config/mozilla"; type = "data"; }
       { path = ".cache/mozilla"; type = "cache"; }
     ];
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.charlotte = { config, ... }: {
       programs.firefox = {
         enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
         package = ffPackage;
         nativeMessagingHosts = [
           pkgs.keepassxc
