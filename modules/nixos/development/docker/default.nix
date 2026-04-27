@@ -9,7 +9,7 @@
   config = lib.mkIf config.chvp.development.docker.enable {
     virtualisation.docker = {
       enable = true;
-      extraOptions = "--data-root ${config.chvp.dataPrefix}/var/lib/docker";
+      extraOptions = "--data-root ${config.chvp.cachePrefix}/var/lib/docker";
       storageDriver = "overlay2";
     };
 
