@@ -10,7 +10,10 @@
     chvp.base.zfs.systemLinks = [{ path = "/var/lib/bluetooth"; type = "cache"; }];
 
     hardware.bluetooth.enable = true;
-    services.blueman.enable = true;
+    services.blueman = {
+      enable = true;
+      withApplet = false;
+    };
 
     home-manager.users.charlotte = lib.mkIf config.chvp.graphical.enable ({ ... }: {
       services.blueman-applet.enable = true;
