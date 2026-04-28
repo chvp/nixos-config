@@ -90,7 +90,6 @@
     };
     games = {
       particles.server = true;
-      tetris.server = true;
     };
     services = {
       git = {
