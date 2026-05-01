@@ -186,7 +186,7 @@
       shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) shellFiles;
       systemAttrs = flake-utils.lib.eachDefaultSystem (system:
         let
-          pkgs = import (nixpkgsForSystem system) { inherit overlays system; config.permittedInsecurePackages = [ "imagemagick-6.9.13-10" ]; };
+          pkgs = import (nixpkgsForSystem system) { inherit overlays system; };
           lib = pkgs.lib;
           nameToValue = name: import (./shells + "/${name}.nix") { inherit lib pkgs inputs system; };
         in
