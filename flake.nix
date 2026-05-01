@@ -21,7 +21,7 @@
       };
     };
     accentor-web = {
-      url = "github:accentor/web?ref=fix/nix-update";
+      url = "github:accentor/web";
       inputs = {
         devshell.follows = "devshell";
         flake-utils.follows = "flake-utils";

@@ -75,16 +75,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1777407146,
-        "narHash": "sha256-CZq6flAV/Fm4NlOHLEgeSeN8rUoH3j5U34YWHzQZplk=",
+        "lastModified": 1777635720,
+        "narHash": "sha256-afElIUcsMDw98lsKY4nstpGDsyEyZpbZM4o4PMfHduM=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "4e02923200898715a7e8b2af4cea4ff52e448c46",
+        "rev": "19faef7c492c4df9361df36111dc646af28c197e",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
-        "ref": "fix/nix-update",
         "repo": "web",
         "type": "github"
       }
