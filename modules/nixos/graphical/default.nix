@@ -24,7 +24,10 @@
     chvp = {
       base = {
         nix.unfreePackages = [ "google-chrome" ];
-        zfs.homeLinks = [{ path = ".config/qalculate"; type = "cache"; }];
+        zfs.homeLinks = [
+          { path = ".config/qalculate"; type = "cache"; }
+          { path = ".local/share/accentor"; type = "cache"; }
+        ];
       };
       graphical = {
         compositor.enable = lib.mkDefault true;
@@ -44,7 +47,19 @@
     };
 
     home-manager.users.charlotte = { ... }: {
-      home.packages = with pkgs; [ gimp mpv kdePackages.okular ranger uni wtype google-chrome ];
+      home.packages = with pkgs; [ gimp mpv kdePackages.okular ranger uni wtype google-chrome accentor-desktop ];
+    systemd.user.services.accentord = {
+      Unit = {
+        Description = "Accentor Desktop daemon";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.accentor-desktop}/bin/accentord";
+        Restart = "always";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
     };
   };
 }
