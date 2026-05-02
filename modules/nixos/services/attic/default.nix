@@ -32,12 +32,22 @@
       };
       groups.atticd = { };
     };
-    services.atticd = {
-      enable = true;
-      environmentFile = config.age.secrets."passwords/services/atticd".path;
-      settings = {
-        listen = "[::]:8080";
-        garbage-collection.default-retention-period = "2 months";
+    services = {
+      atticd = {
+        enable = true;
+        environmentFile = config.age.secrets."passwords/services/atticd".path;
+        settings = {
+          database.url = "postgresql://%2Frun%2Fpostgresql/atticd";
+          listen = "[::]:8080";
+          garbage-collection.default-retention-period = "2 months";
+        };
+      };
+      postgresql = {
+        ensureUsers = [{
+          name = "atticd";
+          ensureDBOwnership = true;
+        }];
+        ensureDatabases = [ "atticd" ];
       };
     };
     age.secrets = {
