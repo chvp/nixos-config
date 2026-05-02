@@ -61,6 +61,10 @@
       device = "zroot/safe/services/dkim";
       fsType = "zfs";
     };
+    "/var/lib/atticd" = {
+      device = "zroot/local/services/attic";
+      fsType = "zfs";
+    };
     "/var/lib/docker" = {
       device = "zroot/local/services/docker";
       fsType = "zfs";

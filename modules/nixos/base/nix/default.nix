@@ -6,9 +6,10 @@
 
   chvp.base.zfs.homeLinks = [
     { path = ".config/cachix"; type = "cache"; }
+    { path = ".config/attic"; type = "cache"; }
   ];
 
   home-manager.users.charlotte = { ... }: {
-    home.packages = [ pkgs.cachix ];
+    home.packages = [ pkgs.cachix pkgs.attic-client ];
   };
 }

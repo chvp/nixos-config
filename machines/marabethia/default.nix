@@ -92,6 +92,7 @@
       particles.server = true;
     };
     services = {
+      attic.enable = true;
       git = {
         enable = true;
         runner.enable = true;

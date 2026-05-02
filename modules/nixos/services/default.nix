@@ -3,6 +3,7 @@
 {
   imports = [
     ./accentor
+    ./attic
     ./containers
     ./data-access
     ./entrance-exam
