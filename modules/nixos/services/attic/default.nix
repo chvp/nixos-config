@@ -14,7 +14,7 @@
           locations."/" = {
             proxyPass = "http://localhost:8080";
             extraConfig = ''
-              client_max_body_size 50M;
+              client_max_body_size 5G;
             '';
           };
         };

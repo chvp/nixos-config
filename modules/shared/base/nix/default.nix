@@ -65,13 +65,13 @@ in
         substituters = [
           "https://cache.nixos.org"
           "https://accentor.cachix.org"
-          "https://chvp.cachix.org"
+          "https://attic.chvp.be/chvp"
           "https://nix-community.cachix.org"
         ];
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
           "accentor.cachix.org-1:QP+oJwzmeq5Fsyp4Vk501UgUSbl5VIna/ard/XOePH8="
-          "chvp.cachix.org-1:eIG26KkeA+R3tCpvmaayA9i3KVVL06G+qB5ci4dHBT4="
+          "chvp:Ci/uzyNiRXcnrSfC0GVrjBQojkKx3M5V2zoIyFw33ok="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];
         trusted-users = [ username ];
