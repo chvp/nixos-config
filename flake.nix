@@ -20,6 +20,14 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    accentor-desktop = {
+      url = "github:accentor/desktop";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     accentor-web = {
       url = "github:accentor/web";
       inputs = {
@@ -103,7 +111,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, playwright, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-desktop, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, playwright, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -123,14 +131,13 @@
         accentor.overlays.default
         devshell.overlays.default
         emacs-overlay.overlays.default
-        (self: super: {
-          entrance-exam = entrance-exam.packages.${self.stdenv.hostPlatform.system}.default;
-        })
         nur.overlays.default
+        www-chvp-be.overlays.default
         (self: super: {
+          accentor-desktop = accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
+          entrance-exam = entrance-exam.packages.${self.stdenv.hostPlatform.system}.default;
           playwright-driver = playwright.packages.${self.stdenv.hostPlatform.system}.playwright-driver;
         })
-        www-chvp-be.overlays.default
       ];
       commonModules = [
         ./modules/shared

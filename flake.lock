@@ -59,6 +59,32 @@
         "type": "github"
       }
     },
+    "accentor-desktop": {
+      "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777740505,
+        "narHash": "sha256-bkjGdoehLDTKjshUW76s/UwTGuh7VuuX6jOuRpbEQfQ=",
+        "owner": "accentor",
+        "repo": "desktop",
+        "rev": "804ca151e637615a096ed16b52a67246ff410e9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "accentor",
+        "repo": "desktop",
+        "type": "github"
+      }
+    },
     "accentor-web": {
       "inputs": {
         "devshell": [
@@ -545,6 +571,7 @@
       "inputs": {
         "accentor": "accentor",
         "accentor-api": "accentor-api",
+        "accentor-desktop": "accentor-desktop",
         "accentor-web": "accentor-web",
         "agenix": "agenix",
         "devshell": "devshell",
