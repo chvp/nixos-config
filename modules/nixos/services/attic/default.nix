@@ -40,6 +40,12 @@
           database.url = "postgresql://%2Frun%2Fpostgresql/atticd";
           listen = "[::]:8080";
           garbage-collection.default-retention-period = "2 months";
+          chunking = {
+            nar-size-threshold = 0;
+            min-size = 65536;
+            avg-size = 131072;
+            max-size = 262144;
+          };
         };
       };
       postgresql = {
