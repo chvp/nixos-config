@@ -6,6 +6,7 @@
     ./mumble
     ./particles
     ./steam
+    ./tetris
   ];
 
   options.chvp.games.enable = lib.mkOption {

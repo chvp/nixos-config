@@ -587,6 +587,7 @@
         "nur": "nur",
         "playwright": "playwright",
         "systems": "systems",
+        "tetris": "tetris",
         "www-chvp-be": "www-chvp-be"
       }
     },
@@ -602,6 +603,32 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tetris": {
+      "inputs": {
+        "devshell": [
+          "devshell"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777764790,
+        "narHash": "sha256-wxUhsZMeRGv2wU0XFDPd2URTk90hNJd+mY4Gocip4rw=",
+        "owner": "chvp",
+        "repo": "tetris",
+        "rev": "98a3ca36575e78bd6ab30eb1b565af5bb06e10e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "chvp",
+        "repo": "tetris",
         "type": "github"
       }
     },

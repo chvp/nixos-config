@@ -90,6 +90,7 @@
     };
     games = {
       particles.server = true;
+      tetris.server = true;
     };
     services = {
       attic.enable = true;

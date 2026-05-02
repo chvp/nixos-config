@@ -100,6 +100,14 @@
       };
     };
     systems.url = "github:nix-systems/default";
+    tetris = {
+      url = "github:chvp/tetris";
+      inputs = {
+        devshell.follows = "devshell";
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     www-chvp-be = {
       url = "git+https://git.chvp.be/chvp/www.chvp.be";
       inputs = {
@@ -111,7 +119,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-desktop, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, playwright, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-desktop, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, playwright, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -137,6 +145,7 @@
           accentor-desktop = accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
           entrance-exam = entrance-exam.packages.${self.stdenv.hostPlatform.system}.default;
           playwright-driver = playwright.packages.${self.stdenv.hostPlatform.system}.playwright-driver;
+          tetris = tetris.packages.${self.stdenv.hostPlatform.system}.default;
         })
       ];
       commonModules = [
