@@ -7,7 +7,10 @@
 
     boot = {
       supportedFilesystems = [ "zfs" ];
-      zfs.requestEncryptionCredentials = config.chvp.base.zfs.encrypted;
+      zfs = {
+        forceImportRoot = false;
+        requestEncryptionCredentials = config.chvp.base.zfs.encrypted;
+      };
       initrd.systemd = {
         enable = true;
         services.rollback = {
