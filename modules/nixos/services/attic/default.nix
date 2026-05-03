@@ -23,7 +23,7 @@
     users = {
       users = {
         atticd = {
-          home = "/var/lib/atticd";
+          home = "/var/lib/attic";
           group = "atticd";
           isSystemUser = true;
           useDefaultShell = true;
@@ -45,6 +45,10 @@
             min-size = 65536;
             avg-size = 131072;
             max-size = 262144;
+          };
+          storage = {
+            type = "local";
+            path = "/var/lib/attic/storage";
           };
         };
       };
