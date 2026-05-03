@@ -27,6 +27,7 @@
         database.createLocally = true;
         settings = {
           mail_smtpmode = "sendmail";
+          mail_domain = "vanpetegem.me";
         };
       };
       nginx.virtualHosts."nextcloud.vanpetegem.me" = {
