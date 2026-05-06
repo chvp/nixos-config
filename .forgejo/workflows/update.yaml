@@ -27,26 +27,22 @@ jobs:
           skip-push: true
       - run: nix flake update
         id: update
-      - run: nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
-        id: elendel
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
-        id: kharbranth
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
-        id: kholinar
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
-        id: marabethia
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.elendel.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.kharbranth.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.kholinar.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.marabethia.conclusion == 'success' }}
       - uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0
         if: ${{ success() }}
         with:

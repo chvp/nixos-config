@@ -25,23 +25,23 @@ jobs:
           cache: chvp
           token: '${{ secrets.ATTIC_AUTH_TOKEN }}'
           skip-push: true
-      - run: nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: elendel
         if: ${{ always() }}
-      - run: nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: kharbranth
         if: ${{ always() }}
-      - run: nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: kholinar
         if: ${{ always() }}
-      - run: nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
+      - run: |
+          nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: marabethia
         if: ${{ always() }}
-      - run: nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.elendel.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.kharbranth.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.kholinar.conclusion == 'success' }}
-      - run: nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.marabethia.conclusion == 'success' }}
