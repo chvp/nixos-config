@@ -28,7 +28,7 @@
 
     home-manager.users.charlotte = { ... }: {
       home.packages = [
-        (inputs.nix-jetbrains-plugins.lib.buildIdeWithPlugins pkgs "ruby-mine" [ "com.github.copilot" "com.anthropic.code.plugin" "IdeaVIM" ])
+        (inputs.nix-jetbrains-plugins.lib.buildIdeWithPlugins pkgs "ruby-mine" [ "com.anthropic.code.plugin" "IdeaVIM" ])
         pkgs.claude-code
       ];
       home.file.".ideavimrc".text = ''
