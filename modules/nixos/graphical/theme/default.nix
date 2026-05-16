@@ -104,7 +104,7 @@ in
           };
         };
         iconTheme = {
-          package = pkgs.libsForQt5.breeze-icons;
+          package = pkgs.kdePackages.breeze-icons;
           name = "breeze";
         };
         theme = {
