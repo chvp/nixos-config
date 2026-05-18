@@ -13,8 +13,10 @@ jobs:
     runs-on: docker
     steps:
       - uses: actions/checkout@v6
-      - run: apt update && apt install -y sudo
-      - uses: https://github.com/cachix/install-nix-action@v31
+      - name: Install sudo
+        run: apt update && apt install -y sudo
+      - name: Install nix
+        uses: https://github.com/cachix/install-nix-action@v31
         with:
           enable_kvm: false
           install_options: "--daemon"
@@ -28,23 +30,28 @@ jobs:
           skip-push: true
       - run: nix flake update
         id: update
-      - run: |
+      - name: Build and cache elendel
+        run: |
           nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: |
+      - name: Build and cache kharbranth
+        run: |
           nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: |
+      - name: Build and cache kholinar
+        run: |
           nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - run: |
+      - name: Build and cache marabethia
+        run: |
           nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
-      - uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0
+      - name: Commit and push
+        uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0
         if: ${{ success() }}
         with:
           commit_message: "Update dependencies"

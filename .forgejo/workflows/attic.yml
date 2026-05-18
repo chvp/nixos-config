@@ -13,8 +13,10 @@ jobs:
     runs-on: docker
     steps:
       - uses: actions/checkout@v6
-      - run: apt update && apt install -y sudo
-      - uses: https://github.com/cachix/install-nix-action@v31
+      - name: Install sudo
+        run: apt update && apt install -y sudo
+      - name: Install nix
+        uses: https://github.com/cachix/install-nix-action@v31
         with:
           enable_kvm: false
           install_options: "--daemon"
@@ -26,22 +28,26 @@ jobs:
           cache: chvp
           token: '${{ secrets.ATTIC_AUTH_TOKEN }}'
           skip-push: true
-      - run: |
+      - name: Build and cache elendel
+        run: |
           nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: elendel
         if: ${{ always() }}
-      - run: |
+      - name: Build and cache kharbranth
+        run: |
           nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: kharbranth
         if: ${{ always() }}
-      - run: |
+      - name: Build and cache kholinar
+        run: |
           nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: kholinar
         if: ${{ always() }}
-      - run: |
+      - name: Build and cache marabethia
+        run: |
           nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         id: marabethia
