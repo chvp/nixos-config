@@ -17,18 +17,20 @@ let
       enable = true;
       package = if config.chvp.graphical.enable then ssh else pkgs.openssh;
       enableDefaultConfig = false;
-      matchBlocks."*" = {
-        addKeysToAgent = "no";
-        compression = true;
-        # controlMaster = "auto";
-        # controlPath = "~/.ssh/master-%r@%n:%p";
-        # controlPersist = "10m";
-        forwardAgent = false;
-        hashKnownHosts = true;
-        identityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
-        # serverAliveInterval = 10;
-        # serverAliveCountMax = 3;
-        userKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
+      settings = {
+        "Host *" = {
+          AddKeysToAgent = "no";
+          Compression = true;
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/master-%r@%n:%p";
+          ControlPersist = "10m";
+          ForwardAgent = false;
+          HashKnownHosts = true;
+          IdentityFile = "${config.chvp.dataPrefix}${home}/.ssh/id_ed25519";
+          ServerAliveInterval = 10;
+          ServerAliveCountMax = 3;
+          UserKnownHostsFile = "${config.chvp.cachePrefix}${home}/.ssh/known_hosts";
+        };
       };
       includes = [
         config.age.secrets."files/programs/ssh/host_configuration_${user}".path
