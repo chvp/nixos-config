@@ -27,28 +27,28 @@ jobs:
           endpoint: https://attic.chvp.be
           cache: chvp
           token: '${{ secrets.ATTIC_AUTH_TOKEN }}'
-          skip-push: true
       - name: Build and cache elendel
         run: |
           nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        id: elendel
         if: ${{ always() }}
       - name: Build and cache kharbranth
         run: |
           nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        id: kharbranth
         if: ${{ always() }}
       - name: Build and cache kholinar
         run: |
           nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        id: kholinar
         if: ${{ always() }}
       - name: Build and cache marabethia
         run: |
           nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        id: marabethia
+        if: ${{ always() }}
+      - name: Build and cache purelake
+        run: |
+          nix build -L --no-link .#nixosConfigurations.purelake.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.purelake.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ always() }}

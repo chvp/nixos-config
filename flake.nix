@@ -196,6 +196,7 @@
         kharbranth = nixosSystem "x86_64-linux" "kharbranth" [ nixos-hardware.nixosModules.lenovo-thinkpad-t14s ];
         kholinar = nixosSystem "x86_64-linux" "kholinar" [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
         marabethia = nixosSystem "x86_64-linux" "marabethia" [ ];
+        purelake = nixosSystem "x86_64-linux" "purelake" [ ];
       };
       lsShells = builtins.readDir ./shells;
       shellFiles = builtins.filter (name: lsShells.${name} == "regular") (builtins.attrNames lsShells);

@@ -27,7 +27,6 @@ jobs:
           endpoint: https://attic.chvp.be
           cache: chvp
           token: '${{ secrets.ATTIC_AUTH_TOKEN }}'
-          skip-push: true
       - run: nix flake update
         id: update
       - name: Build and cache elendel
@@ -49,6 +48,11 @@ jobs:
         run: |
           nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
           nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
+        if: ${{ steps.update.conclusion == 'success' }}
+      - name: Build and cache purelake
+        run: |
+          nix build -L --no-link .#nixosConfigurations.purelake.config.system.build.toplevel
+          nix eval --json ".#nixosConfigurations.purelake.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
       - name: Commit and push
         uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0

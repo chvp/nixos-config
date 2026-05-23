@@ -3,15 +3,17 @@ let
   kharbranth = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBNnO7to/xHVcUIi+CUd3WuOB3A22sPIQoTlx2zPTnXv";
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   marabethia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUP1r937+PLiqdyUuqbYoyAs04/2AxuXS13grU+fvpA";
+  purelake = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/wEzBoikJGi1RFQkmaE3/D/A/fBEuYCGl68MF9O4Bh";
   thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/sIkgf7aYX/JcWWp/dCHgq7sJ5WDYYyWSn3DvkW4gB";
   nixosHosts = [
     elendel
     kharbranth
     kholinar
     marabethia
+    purelake
   ];
   hosts = nixosHosts ++ [ thaylen-city ];
-  nixosPersonals = [ kharbranth kholinar ];
+  nixosPersonals = [ kharbranth kholinar purelake ];
   personals = nixosPersonals ++ [ thaylen-city ];
   servers = [
     elendel
@@ -82,6 +84,7 @@ in
   "secrets/files/wireguard/kharbranth.privkey.age".publicKeys = [ kharbranth ] ++ users;
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/marabethia.privkey.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/files/wireguard/purelake.privkey.age".publicKeys = [ purelake ] ++ users;
   "secrets/files/wireguard/thaylen-city.privkey.age".publicKeys = [ thaylen-city ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
 
