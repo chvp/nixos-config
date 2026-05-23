@@ -43,7 +43,7 @@ let
         then
           pkill -SIGUSR1 foot
         fi
-'');
+      '');
       shellAliases = {
         gupd = "gfa && gprom";
       };

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [ ./hardware.nix ];
@@ -17,7 +17,7 @@
         enable = true;
         wireless-interface = "wlp8s0";
         wired-interfaces = {
-          "enp9s0" = {};
+          "enp9s0" = { };
         };
       };
       nix.unfreePackages = [ "nvidia-kernel-modules" "nvidia-settings" "nvidia-x11" "google-chrome" ];
@@ -27,7 +27,7 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -80,11 +80,14 @@
     })
   ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.charlotte = {
     isNormalUser = true;
     description = "Charlotte Van Petegem";
     extraGroups = [ "networkmanager" "wheel" "video" "render" "vboxusers" ];
+  };
+
+  home-manager.users.charlotte = { ... }: {
+    services.network-manager-applet.enable = lib.mkForce false;
   };
 
   services.displayManager.autoLogin.enable = true;
