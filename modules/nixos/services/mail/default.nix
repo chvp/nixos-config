@@ -18,7 +18,7 @@ in
     ];
     mailserver = {
       enable = true;
-      stateVersion = 3;
+      stateVersion = 5;
       enableManageSieve = true;
       fqdn = "mail.vanpetegem.me";
       systemName = "vanpetegem.me";
