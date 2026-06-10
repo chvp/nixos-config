@@ -13,7 +13,16 @@
 
     services.transmission = {
       enable = true;
-      package = pkgs.transmission_4;
+      package = pkgs.transmission_4.overrideAttrs (old: rec {
+        version = "4.1.2";
+        src = pkgs.fetchFromGitHub {
+          owner = "transmission";
+          repo = "transmission";
+          tag = version;
+          hash = "sha256-FI/qH0VqhEjiN+31UCOiDLWkyucMKfH4i0bYW7lceQk=";
+          fetchSubmodules = true;
+        };
+      });
       user = "charlotte";
       group = "users";
       home = "/var/lib/transmission";
@@ -33,6 +42,7 @@
         speed-limit-down-enabled = true;
       };
     };
+
     systemd.services.transmission.serviceConfig.TimeoutStartSec = 60 * 10;
     age.secrets."files/programs/transmission/config.json" = {
       file = ../../../../secrets/files/programs/transmission/config.json.age;
