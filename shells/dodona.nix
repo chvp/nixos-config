@@ -77,7 +77,14 @@ pkgs.devshell.mkShell {
       name = "lint:all:fix";
       category = "[general commands]";
       help = "Run all linters in fix mode";
-      command = "rubocop -a; npm run lint -- --fix; npm run lint:css -- --fix; erb_lint --lint-all -a;";
+      command = ''
+         herb format
+         rubocop -a
+         npm run lint -- --fix
+         npm run lint:css -- --fix
+         herb analyze
+         herb lint --fix
+      '';
     }
   ];
   serviceGroups = {
