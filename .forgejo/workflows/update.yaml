@@ -20,7 +20,11 @@ jobs:
       - name: Set up nix
         run: |
           mkdir -p $HOME/.config/nix
-          echo "access-tokens = github.com=${{ secrets.ACCESS_TOKEN_GITHUB }}" > $HOME/.config/nix/nix.conf
+          cat <<CONFIG > $HOME/.config/nix/nix.conf
+          access-tokens = github.com=${{ secrets.ACCESS_TOKEN_GITHUB }}
+          cores = 2
+          max-jobs = 2
+          CONFIG
       - name: Set up attic
         run: attic login --set-default chvp https://attic.chvp.be "${{ secrets.ATTIC_AUTH_TOKEN }}"
       - run: nix flake update
