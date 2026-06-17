@@ -25,7 +25,7 @@
         };
         wireguard.server = true;
       };
-      nix.enableDirenv = true;
+      nix.slowGc = true;
       zfs = {
         enable = true;
         backups = [
