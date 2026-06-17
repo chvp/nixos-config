@@ -5,9 +5,6 @@ on:
     - cron: '45 */2 * * *'
   workflow_dispatch:
 
-env:
-  USER: root
-
 jobs:
   update:
     runs-on: native
