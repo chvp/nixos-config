@@ -10,23 +10,19 @@ env:
 
 jobs:
   update:
-    runs-on: docker
+    runs-on: native
     steps:
-      - uses: actions/checkout@v6
-      - name: Install sudo
-        run: apt update && apt install -y sudo
-      - name: Install nix
-        uses: https://github.com/cachix/install-nix-action@v31
-        with:
-          enable_kvm: false
-          install_options: "--daemon"
-          github_access_token: '${{ secrets.ACCESS_TOKEN_GITHUB }}'
-      - name: Attic
-        uses: https://github.com/ryanccn/attic-action@v0
-        with:
-          endpoint: https://attic.chvp.be
-          cache: chvp
-          token: '${{ secrets.ATTIC_AUTH_TOKEN }}'
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up extra git auth
+        run: |
+          git config --local "includeIf.gitdir:$(pwd)/.git.path" "$(git config --local includeIf.gitdir:$(pwd | sed 's#private/##')/.git.path)"
+      - name: Set up nix
+        run: |
+          mkdir -p $HOME/.config/nix
+          echo "access-tokens = github.com=${{ secrets.ACCESS_TOKEN_GITHUB }}" > $HOME/.config/nix/nix.conf
+      - name: Set up attic
+        run: attic login --set-default chvp https://attic.chvp.be "${{ secrets.ATTIC_AUTH_TOKEN }}"
       - run: nix flake update
         id: update
       - name: Build and cache elendel
@@ -55,10 +51,14 @@ jobs:
           nix eval --json ".#nixosConfigurations.purelake.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
         if: ${{ steps.update.conclusion == 'success' }}
       - name: Commit and push
-        uses: https://github.com/stefanzweifel/git-auto-commit-action@v7.1.0
         if: ${{ success() }}
-        with:
-          commit_message: "Update dependencies"
-          commit_user_name: "CharBOTte"
-          commit_user_email: "commit-bot@chvp.be"
-          commit_author: "CharBOTte <commit-bot@chvp.be>"
+        run: |
+          if [ "$(git status --porcelain=v1 | wc -l)" != "0" ]
+          then
+            git status --porcelain=v1
+            git add .
+            git -c "user.name=CharBOTte" -c "user.email=commit-bot@chvp.be" commit -m "Update dependencies"
+            git push origin
+          else
+            echo "Nothing to commit"
+          fi
