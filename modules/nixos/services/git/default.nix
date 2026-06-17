@@ -48,6 +48,9 @@
           createDatabase = true;
         };
         settings = {
+          admin = {
+            SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
+          };
           repository = {
             ENABLE_PUSH_CREATE_USER = true;
             ENABLE_PUSH_CREATE_ORG = true;
@@ -59,8 +62,8 @@
             HTTP_ADDR = "/run/forgejo/forgejo.socket";
           };
           service = {
-            EMAIL_DOMAIN_ALLOWLIST = "vanpetegem.be";
             ENABLE_NOTIFY_MAIL = true;
+            REGISTER_MANUAL_CONFIRM = true;
           };
           mailer = {
             ENABLED = true;
