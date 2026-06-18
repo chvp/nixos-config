@@ -395,11 +395,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781751568,
-        "narHash": "sha256-hZAbXoNA4nCSaIJJLGl/EdErFtlnAS06jEp4oO7Qp6s=",
+        "lastModified": 1781788787,
+        "narHash": "sha256-YqlTCRRhGvNjcJejPeMuHrYQ/TVhOO2MV/nEGMWb8nk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5bcff43156c0eebe68759338b7879c8e1b2e2bd0",
+        "rev": "d456f483f157d4b706416005da226234b9c116ff",
         "type": "github"
       },
       "original": {
@@ -535,11 +535,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781785623,
-        "narHash": "sha256-m1MWp7ykRFs8PWPzO1TNLkGq5peDZIDw9LgJeDY44D8=",
+        "lastModified": 1781793682,
+        "narHash": "sha256-9oLxiB7wnAsd/FZKnhG3fdIqgHSaOXchb7i/6qXnwg8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7316a09ed5668ce39d473d21f88ed238b7011730",
+        "rev": "063a292f702048106405e23e1f34cf300cc30df2",
         "type": "github"
       },
       "original": {
@@ -653,11 +653,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781703707,
-        "narHash": "sha256-AyxAvET/nlSv5xVf2Hz83rNgr1zwMiEdrPukxwLot7U=",
+        "lastModified": 1781791716,
+        "narHash": "sha256-wnZ5/E6jkAa16vDdGYOuAu3gGv+aNP7ZU3plEm/UWBo=",
         "ref": "refs/heads/main",
-        "rev": "5b26b2a1173143634db563e33c8a7dbd324f671e",
-        "revCount": 281,
+        "rev": "b83dc959988a2934043e5c3c689bc907cd467687",
+        "revCount": 284,
         "type": "git",
         "url": "https://git.chvp.be/chvp/www.chvp.be"
       },
