@@ -9,11 +9,9 @@
   config = lib.mkIf config.chvp.development.enable {
     chvp = {
       base = {
-        nix.unfreePackages = [ "ruby-mine" "ruby-mine-with-plugins" "virtualbox-extpack" "claude-code" ];
+        nix.unfreePackages = [ "ruby-mine" "ruby-mine-with-plugins" "virtualbox-extpack" ];
         zfs.homeLinks = [
           { path = "repos"; type = "cache"; }
-          { path = ".claude.json"; type = "cache"; file = true; }
-          { path = ".claude"; type = "cache"; }
           { path = ".config/JetBrains"; type = "cache"; }
           { path = ".config/github-copilot"; type = "cache"; }
           { path = ".local/share/JetBrains"; type = "cache"; }
@@ -29,7 +27,6 @@
     home-manager.users.charlotte = { ... }: {
       home.packages = [
         (inputs.nix-jetbrains-plugins.lib.buildIdeWithPlugins pkgs "ruby-mine" [ "IdeaVIM" ])
-        pkgs.claude-code
       ];
       home.file.".ideavimrc".text = ''
         set clipboard+=unnamedplus,ideaput
