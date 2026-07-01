@@ -106,9 +106,12 @@
     yt-dlp
   ];
 
-  programs.steam = {
-    enable = true;
-    protontricks.enable = true;
+  programs = {
+    fuse.enable = lib.mkForce true;
+    steam = {
+      enable = true;
+      protontricks.enable = true;
+    };
   };
 
   fileSystems."/data" = {

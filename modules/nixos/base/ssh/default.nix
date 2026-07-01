@@ -42,6 +42,7 @@ in
 {
   home-manager.users.root = { ... }: (base "/root" "root");
   home-manager.users.charlotte = { ... }: (base "/home/charlotte" "charlotte");
+  programs.fuse.enable = config.chvp.graphical.enable;
   age.secrets."files/programs/ssh/host_configuration_charlotte" = {
     file = ../../../../secrets/files/programs/ssh/host_configuration.age;
     owner = "charlotte";
