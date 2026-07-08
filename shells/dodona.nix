@@ -28,7 +28,7 @@ pkgs.devshell.mkShell {
   packages = with pkgs; [
     azure-cli
     chromedriver
-    inputs.nixpkgs-staging-next.legacyPackages.${stdenv.hostPlatform.system}.nodejs_24
+    nodejs_24
     rsync
   ];
   env = [

@@ -527,22 +527,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-staging-next": {
-      "locked": {
-        "lastModified": 1783491737,
-        "narHash": "sha256-Bd1RTAH2ostWJKaI7E7PShuAD/Yitov2Hn8dL9az+0Q=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "3aa415b2f4736271edd90b696054a4c179d189c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "staging-next",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -605,7 +589,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-staging-next": "nixpkgs-staging-next",
         "nur": "nur",
         "playwright": "playwright",
         "systems": "systems",
