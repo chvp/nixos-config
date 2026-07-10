@@ -47,6 +47,7 @@ let
     riverctl map normal Super+Shift Return spawn emacs
     riverctl map normal Super D spawn '${launcher}/bin/launcher'
     riverctl map normal None Menu spawn '${launcher}/bin/launcher'
+    riverctl map normal None XF86Tools spawn '${launcher}/bin/launcher'
 
     riverctl map normal Super C spawn ${lock}
 
@@ -116,6 +117,7 @@ let
     riverctl map normal None XF86AudioRaiseVolume spawn '${pkgs.pamixer}/bin/pamixer -i 5'
     riverctl map normal None XF86AudioLowerVolume spawn '${pkgs.pamixer}/bin/pamixer -d 5'
     riverctl map normal None XF86AudioMute spawn '${pkgs.pamixer}/bin/pamixer --toggle-mute'
+    riverctl map normal None XF86AudioMicMute spawn '${pkgs.pamixer}/bin/pamixer --default-source -t'
     riverctl map normal None XF86AudioPlay spawn '${pkgs.playerctl}/bin/playerctl play-pause'
     riverctl map normal None XF86MonBrightnessDown spawn '${pkgs.brightnessctl}/bin/brightnessctl s -- -5%'
     riverctl map normal None XF86MonBrightnessUp spawn '${pkgs.brightnessctl}/bin/brightnessctl s -- +5%'
