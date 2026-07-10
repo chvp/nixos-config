@@ -228,11 +228,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1783655057,
-        "narHash": "sha256-kNh5necxobvvAxKBxhu6CSuEt42USLsdE9sXKuEpBs0=",
+        "lastModified": 1783683723,
+        "narHash": "sha256-J0/sXU6URC6nLyCT8h09a/wlQ0JNAlwkDWFNjYXAk0c=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "c48bc3386b8f9e224157c4238cdc95d9ab06a8d3",
+        "rev": "8a07da50735e9bb7a888c296643152f04d360619",
         "type": "github"
       },
       "original": {
@@ -512,11 +512,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783680047,
-        "narHash": "sha256-PwTGmvwO8+zwqgo4bWBdlS8tz8nHcZw4xQlomyr5zvI=",
+        "lastModified": 1783686443,
+        "narHash": "sha256-1bDCyHf7pUbZ50pxSKvwPH5O+PEYH3LuFaByqk/jF8M=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "36ad0b6e8f8e28f9d8dc9c364361b7de13c69103",
+        "rev": "67cb112dceb41c410dc1d31b5c8396df64c96f5f",
         "type": "github"
       },
       "original": {
@@ -601,11 +601,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783269206,
-        "narHash": "sha256-kZ/sGQAKo54IA3qYWnEyxqagSbyhMXpNHzlv8aZqVAk=",
+        "lastModified": 1783687214,
+        "narHash": "sha256-4iK9zNZ4jXTtD2Ajwgu9XvbiNYe7+kMaQEWlDAwqvgc=",
         "owner": "chvp",
         "repo": "tetris",
-        "rev": "12eda7d2c66b410235c0a08984bdc4d25a1139ee",
+        "rev": "596ce829750d6139ef06391055eb63fa50c7647b",
         "type": "github"
       },
       "original": {
@@ -630,11 +630,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783265744,
-        "narHash": "sha256-L6lah557iOWuusZwK6/agmiNYHTyyJ4S8uP/y6pewuk=",
+        "lastModified": 1783683392,
+        "narHash": "sha256-dnAVvIty7Q9Sly162smbUv2pwGEZPlD7Ddtf7bGQ+pM=",
         "ref": "refs/heads/main",
-        "rev": "f6e14625409fc2dd9db509bcac69337ec0701dc8",
-        "revCount": 289,
+        "rev": "bd5a013fa2f71dc7fbe8876e4bd3a5d898710487",
+        "revCount": 290,
         "type": "git",
         "url": "https://git.chvp.be/chvp/www.chvp.be"
       },
