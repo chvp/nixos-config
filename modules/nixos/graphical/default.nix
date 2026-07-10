@@ -47,6 +47,8 @@
       };
     };
 
+    services.udev.packages = [ pkgs.keychron-udev-rules ];
+
     home-manager.users.charlotte = { ... }: {
       home.packages = with pkgs; [ gimp mpv kdePackages.okular ranger uni wtype google-chrome accentor-desktop ];
       systemd.user.services.accentord = {
