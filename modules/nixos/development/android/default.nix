@@ -8,6 +8,12 @@
 
   config = lib.mkIf config.chvp.development.android.enable {
     chvp.base = {
+      emacs.extraConfig = [
+        ''
+          ;; Kotlin language support
+          (use-package kotlin-ts-mode :mode "\\.kt\\'")
+        ''
+      ];
       nix.unfreePackages = [ "android-studio" ];
       zfs.homeLinks = [
         { path = ".android"; type = "cache"; }

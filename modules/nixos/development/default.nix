@@ -9,6 +9,9 @@
   config = lib.mkIf config.chvp.development.enable {
     chvp = {
       base = {
+        emacs.extraPackages = [
+          (epkgs: [ epkgs.treesit-grammars.with-all-grammars ])
+        ];
         nix.unfreePackages = [ "ruby-mine" "ruby-mine-with-plugins" "virtualbox-extpack" ];
         zfs.homeLinks = [
           { path = "repos"; type = "cache"; }
