@@ -47,7 +47,7 @@ let
     riverctl map normal Super+Shift Return spawn emacs
     riverctl map normal Super D spawn '${launcher}/bin/launcher'
     riverctl map normal None Menu spawn '${launcher}/bin/launcher'
-    riverctl map normal None XF86Tools spawn '${launcher}/bin/launcher'
+    riverctl map normal None XF86Calculator spawn 'foot zsh -ic qalc'
 
     riverctl map normal Super C spawn ${lock}
 
