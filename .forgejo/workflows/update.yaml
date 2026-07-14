@@ -25,32 +25,8 @@ jobs:
       - name: Set up attic
         run: attic login --set-default chvp https://attic.chvp.be "${{ secrets.ATTIC_AUTH_TOKEN }}"
       - run: nix flake update
-        id: update
-      - name: Build and cache elendel
-        run: |
-          nix build -L --no-link .#nixosConfigurations.elendel.config.system.build.toplevel
-          nix eval --json ".#nixosConfigurations.elendel.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.update.conclusion == 'success' }}
-      - name: Build and cache kharbranth
-        run: |
-          nix build -L --no-link .#nixosConfigurations.kharbranth.config.system.build.toplevel
-          nix eval --json ".#nixosConfigurations.kharbranth.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.update.conclusion == 'success' }}
-      - name: Build and cache kholinar
-        run: |
-          nix build -L --no-link .#nixosConfigurations.kholinar.config.system.build.toplevel
-          nix eval --json ".#nixosConfigurations.kholinar.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.update.conclusion == 'success' }}
-      - name: Build and cache marabethia
-        run: |
-          nix build -L --no-link .#nixosConfigurations.marabethia.config.system.build.toplevel
-          nix eval --json ".#nixosConfigurations.marabethia.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.update.conclusion == 'success' }}
-      - name: Build and cache purelake
-        run: |
-          nix build -L --no-link .#nixosConfigurations.purelake.config.system.build.toplevel
-          nix eval --json ".#nixosConfigurations.purelake.config.system.build.toplevel.outPath" | sed 's/"\(.*\)"/\1/' | attic push chvp --stdin
-        if: ${{ steps.update.conclusion == 'success' }}
+      - name: Build and cache all
+        run: ./build_and_cache_all.sh
       - name: Commit and push
         if: ${{ success() }}
         run: |
