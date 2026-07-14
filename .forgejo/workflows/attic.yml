@@ -22,4 +22,4 @@ jobs:
       - name: Set up attic
         run: attic login --set-default chvp https://attic.chvp.be "${{ secrets.ATTIC_AUTH_TOKEN }}"
       - name: Build and cache all
-        run: ./build_and_cache_all.sh
+        run: bash build_and_cache_all.sh

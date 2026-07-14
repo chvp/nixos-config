@@ -26,7 +26,7 @@ jobs:
         run: attic login --set-default chvp https://attic.chvp.be "${{ secrets.ATTIC_AUTH_TOKEN }}"
       - run: nix flake update
       - name: Build and cache all
-        run: ./build_and_cache_all.sh
+        run: bash build_and_cache_all.sh
       - name: Commit and push
         if: ${{ success() }}
         run: |
