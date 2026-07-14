@@ -4,12 +4,10 @@ pkgs.devshell.mkShell {
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   packages = with pkgs; [
     nodejs
-    nodePackages.typescript-language-server
-    rubyPackages_3_4.solargraph
     yarn
   ];
   language.ruby = {
-    package = pkgs.ruby_3_4;
+    package = pkgs.ruby_4_0;
     nativeDeps = [ pkgs.zlib pkgs.libffi pkgs.libyaml ];
   };
 }
