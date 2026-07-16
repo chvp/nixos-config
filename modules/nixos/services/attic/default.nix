@@ -39,7 +39,7 @@
         settings = {
           database.url = "postgresql://atticd?host=/run/postgresql&user=atticd";
           listen = "[::]:8080";
-          garbage-collection.default-retention-period = "2 months";
+          garbage-collection.default-retention-period = "1 month";
           chunking = {
             nar-size-threshold = 0;
             min-size = 65536;
