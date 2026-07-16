@@ -92,13 +92,7 @@ pkgs.devshell.mkShell {
     server-support.services = support-services;
   };
   language.ruby = {
-    package = pkgs.ruby_4_0.overrideAttrs (old: rec {
-      version = "4.0.6";
-      src = pkgs.fetchurl {
-        url = "https://cache.ruby-lang.org/pub/ruby/4.0/ruby-${version}.tar.gz";
-        hash = "sha256-g30pno993yvjGiKaen4BnTVJeYJRF5iayzsysam+Jio=";
-      };
-    });
+    package = pkgs.ruby_4_0;
     nativeDeps = [ pkgs.libmysqlclient pkgs.openssl pkgs.zlib pkgs.libffi pkgs.libyaml ];
   };
 }
