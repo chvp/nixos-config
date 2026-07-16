@@ -37,7 +37,7 @@
         enable = true;
         environmentFile = config.age.secrets."passwords/services/atticd".path;
         settings = {
-          database.url = "postgresql://%2Frun%2Fpostgresql/atticd";
+          database.url = "postgresql://atticd?host=/run/postgresql&user=atticd";
           listen = "[::]:8080";
           garbage-collection.default-retention-period = "2 months";
           chunking = {
