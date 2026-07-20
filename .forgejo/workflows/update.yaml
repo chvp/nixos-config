@@ -10,7 +10,7 @@ jobs:
     runs-on: native
     steps:
       - name: Checkout
-        uses: actions/checkout@v7.0.0
+        uses: actions/checkout@v7.0.1
       - name: Set up extra git auth
         run: |
           git config --local "includeIf.gitdir:$(pwd)/.git.path" "$(git config --local includeIf.gitdir:$(pwd | sed 's#private/##')/.git.path)"
