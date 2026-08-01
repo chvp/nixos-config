@@ -15,9 +15,6 @@
     nodejs_24
     yarn
   ];
-  env = [
-    { name = "PLAYWRIGHT_BROWSERS_PATH"; value = "${pkgs.playwright.browsers-chromium.override { withChromiumHeadlessShell = true; }}"; }
-  ];
   language.ruby = {
     package = pkgs.ruby_3_3;
     nativeDeps = [ ];

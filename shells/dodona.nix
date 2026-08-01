@@ -37,7 +37,6 @@ pkgs.devshell.mkShell {
     { name = "TEST_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_test"; }
     { name = "NODE_ENV"; value = "development"; }
     { name = "PUPPETEER_EXECUTABLE_PATH"; value = "${pkgs.ungoogled-chromium.outPath}/bin/chromium"; }
-    { name = "PLAYWRIGHT_BROWSERS_PATH"; value = "${pkgs.playwright.browsers-chromium.override { withChromiumHeadlessShell = true; }}"; }
   ];
   commands = [
     {
