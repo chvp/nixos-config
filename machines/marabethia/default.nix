@@ -42,12 +42,6 @@
             location = "elendel.vanpetegem.me";
           }
           {
-            path = "zroot/safe/services/entrance-exam";
-            remotePath = "zdata/recv/marabethia/safe/services/entrance-exam";
-            fast = true;
-            location = "elendel.vanpetegem.me";
-          }
-          {
             path = "zroot/safe/services/forgejo";
             remotePath = "zdata/recv/marabethia/safe/services/forgejo";
             fast = true;
@@ -98,7 +92,6 @@
         enable = true;
         runner.enable = true;
       };
-      entrance-exam.enable = true;
       mail.enable = true;
       matrix.enable = true;
       mumble.enable = true;

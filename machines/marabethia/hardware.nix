@@ -69,10 +69,6 @@
       device = "zroot/local/services/docker";
       fsType = "zfs";
     };
-    "/var/lib/entrance-exam" = {
-      device = "zroot/safe/services/entrance-exam";
-      fsType = "zfs";
-    };
     "/var/lib/forgejo" = {
       device = "zroot/safe/services/forgejo";
       fsType = "zfs";

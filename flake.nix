@@ -55,14 +55,6 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    entrance-exam = {
-      url = "git+https://git.chvp.be/chvp/entrance-exam";
-      inputs = {
-        devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
@@ -108,7 +100,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-desktop, accentor-web, agenix, devshell, emacs-overlay, entrance-exam, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
+  outputs = inputs@{ self, nixpkgs, accentor, accentor-api, accentor-desktop, accentor-web, agenix, devshell, emacs-overlay, flake-utils, home-manager, nix-index-database, nixos-hardware, nixos-mailserver, nur, tetris, www-chvp-be, ... }:
     let
       patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
       # Avoid IFD if there are no patches
@@ -132,7 +124,6 @@
         www-chvp-be.overlays.default
         (self: super: {
           accentor-desktop = accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
-          entrance-exam = entrance-exam.packages.${self.stdenv.hostPlatform.system}.default;
           tetris = tetris.packages.${self.stdenv.hostPlatform.system}.default;
         })
       ];

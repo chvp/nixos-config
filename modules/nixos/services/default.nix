@@ -6,7 +6,6 @@
     ./attic
     ./containers
     ./data-access
-    ./entrance-exam
     ./git
     ./mail
     ./matrix
