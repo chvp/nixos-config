@@ -78,12 +78,12 @@ pkgs.devshell.mkShell {
       category = "[general commands]";
       help = "Run all linters in fix mode";
       command = ''
-         herb format
-         rubocop -a
-         npm run lint -- --fix
-         npm run lint:css -- --fix
-         herb analyze
-         herb lint --fix
+        herb format
+        rubocop -a
+        npm run lint -- --fix
+        npm run lint:css -- --fix
+        herb analyze
+        herb lint --fix
       '';
     }
   ];

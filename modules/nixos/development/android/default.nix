@@ -14,17 +14,7 @@
           (use-package kotlin-ts-mode :mode "\\.kt\\'")
         ''
       ];
-      nix.unfreePackages = [ "android-studio" ];
-      zfs.homeLinks = [
-        { path = ".android"; type = "cache"; }
-        { path = ".config/Google"; type = "cache"; }
-        { path = ".local/share/Google"; type = "cache"; }
-        { path = ".cache/Google"; type = "cache"; }
-      ];
-    };
-
-    home-manager.users.charlotte = { ... }: {
-      home.packages = [ pkgs.android-studio ];
+      zfs.homeLinks = [{ path = ".android"; type = "cache"; }];
     };
 
     environment.systemPackages = with pkgs; [ android-tools ];
