@@ -115,7 +115,7 @@
           allowSubstitutes = true;
         })
       );
-      overlays = [
+      overlay = (self: super: super.lib.foldl' (acc: elem: super.lib.recursiveUpdate acc (elem self super)) { } [
         agenix.overlays.default
         accentor.overlays.default
         devshell.overlays.default
@@ -126,31 +126,34 @@
           accentor-desktop = accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
           tetris = tetris.packages.${self.stdenv.hostPlatform.system}.default;
         })
-      ];
-      modules = [
-        accentor.nixosModules.default
-        agenix.nixosModules.default
-        home-manager.nixosModules.default
-        nixos-mailserver.nixosModules.default
-        nix-index-database.nixosModules.nix-index
-        ./modules
-      ];
+      ]);
+      module = { ... }: {
+        imports = [
+          accentor.nixosModules.default
+          agenix.nixosModules.default
+          home-manager.nixosModules.default
+          nixos-mailserver.nixosModules.default
+          nix-index-database.nixosModules.nix-index
+          ./modules
+        ];
+      };
       nixosSystem = system: name: extraModules:
         let
           nixpkgs = nixpkgsForSystem system;
-          lib = (import nixpkgs { inherit overlays system; }).lib;
+          lib = (import nixpkgs { inherit system; overlays = [ overlay ]; }).lib;
         in
         inputs.nixpkgs.lib.nixosSystem {
           inherit lib system;
           specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
-          modules = modules ++ extraModules ++ [
+          modules = [ module ] ++ extraModules ++ [
             ({ config, ... }:
               {
                 _module.args = { inherit inputs; };
                 nixpkgs = {
                   pkgs = import nixpkgs {
-                    inherit overlays system;
+                    inherit system;
+                    overlays = [ overlay ];
                     config = {
                       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
                       permittedInsecurePackages = [ "olm-3.2.16" ];
@@ -179,7 +182,7 @@
       shellNames = builtins.map (filename: builtins.head (builtins.split "\\." filename)) shellFiles;
       systemAttrs = flake-utils.lib.eachDefaultSystem (system:
         let
-          pkgs = import (nixpkgsForSystem system) { inherit overlays system; };
+          pkgs = import (nixpkgsForSystem system) { inherit system; overlays = [ overlay ]; };
           lib = pkgs.lib;
           nameToValue = name: import (./shells + "/${name}.nix") { inherit lib pkgs inputs system; };
         in
@@ -188,5 +191,9 @@
         }
       );
     in
-    systemAttrs // { inherit nixosConfigurations; };
+    systemAttrs // {
+      inherit nixosConfigurations;
+      nixosModules.default = module;
+      overlays.default = overlay;
+    };
 }
