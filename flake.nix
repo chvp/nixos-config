@@ -127,16 +127,13 @@
           tetris = tetris.packages.${self.stdenv.hostPlatform.system}.default;
         })
       ];
-      commonModules = [
-        ./modules/shared
-      ];
-      nixosModules = [
+      modules = [
         accentor.nixosModules.default
         agenix.nixosModules.default
         home-manager.nixosModules.default
         nixos-mailserver.nixosModules.default
         nix-index-database.nixosModules.nix-index
-        ./modules/nixos
+        ./modules
       ];
       nixosSystem = system: name: extraModules:
         let
@@ -147,7 +144,7 @@
           inherit lib system;
           specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
-          modules = commonModules ++ nixosModules ++ extraModules ++ [
+          modules = modules ++ extraModules ++ [
             ({ config, ... }:
               {
                 _module.args = { inherit inputs; };

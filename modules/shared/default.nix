@@ -1,9 +1,0 @@
-{ ... }:
-
-{
-  imports = [
-    ./base
-    ./development
-    ./programs
-  ];
-}
