@@ -317,7 +317,7 @@
   :demand t
   :after cape
   ;; This is not very nice, but let's just assume that development machines have my nixos-config checked out
-  :custom (tempel-path "~/repos/nixos-config/modules/shared/base/emacs/snippets/*.eld")
+  :custom (tempel-path "~/repos/nixos-config/modules/base/emacs/snippets/*.eld")
   :general
   (lmap
     "t i" '(tempel-insert :which-key "Insert template")
