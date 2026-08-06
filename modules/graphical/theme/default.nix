@@ -146,38 +146,40 @@ in
           dbusserver = true;
           portal = true;
         };
-        darkModeScripts = {
+        scripts = {
           emacs = ''
-            emacsclient --eval "(chvp--dark-mode)"
+            emacsclient --eval "(chvp--$1-mode)"
           '';
           gtk = ''
-            mmsg dispatch spawn,"${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
-            mmsg dispatch spawn,"${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Dark-Compact-Catppuccin"
+            theme=$(echo $1 | tr "dl" "DL")
+            ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$1'"
+            ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-$theme-Compact-Catppuccin
           '';
-          river = ''
-            ln -sf ~/.config/mango/frappe.conf ~/.config/mango/theme.conf
+          mango = ''
+            if [ "$1" = "light" ]
+            then
+              ln -sf ~/.config/mango/latte.conf ~/.config/mango/theme.conf
+            else
+              ln -sf ~/.config/mango/frappe.conf ~/.config/mango/theme.conf
+            fi
             mmsg dispatch reload_config
           '';
-          terminal = ''
-            pkill -SIGUSR1 foot
+          foot = ''
+            if [ "$1" = "light" ]
+            then
+              pkill -SIGUSR2 foot
+            else
+              pkill -SIGUSR1 foot
+            fi
           '';
         };
-        lightModeScripts = {
-          emacs = ''
-            emacsclient --eval "(chvp--light-mode)"
-          '';
-          gtk = ''
-            mmsg dispatch spawn,"${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-light'\""
-            mmsg dispatch spawn,"${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Light-Compact-Catppuccin"
-          '';
-          river = ''
-            ln -sf ~/.config/mango/latte.conf ~/.config/mango/theme.conf
-            mmsg dispatch reload_config
-          '';
-          terminal = ''
-            pkill -SIGUSR2 foot
-          '';
+      };
+      systemd.user.services.darkman = {
+        Unit = {
+          Wants = [ "xdg-desktop-portal-gtk.service" ];
+          After = [ "xdg-desktop-portal-gtk.service" ];
         };
+        Install.WantedBy = lib.mkForce [ "tray.target" ];
       };
     };
   };
