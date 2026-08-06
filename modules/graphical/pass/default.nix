@@ -27,15 +27,15 @@
       systemd.user.services.keepassxc = {
         Unit = {
           Description = "KeepassXC startup";
-          PartOf = [ "river-session.target" ];
+          PartOf = [ "mango-session.target" ];
           Wants = [ "waybar.service" ];
-          After = [ "river-session.target" "waybar.service" ];
+          After = [ "mango-session.target" "waybar.service" ];
         };
         Service = {
           ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
           Restart = "always";
         };
-        Install.WantedBy = [ "river-session.target" ];
+        Install.WantedBy = [ "mango-session.target" ];
       };
     };
   };

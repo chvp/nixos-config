@@ -1,7 +1,70 @@
 { config, lib, pkgs, ... }:
 
 let
-  gtkTheme = pkgs.colloid-gtk-theme.override { themeVariants = [ "orange" ]; colorVariants = [ "light" "dark" ]; sizeVariants = [ "compact" ]; tweaks = [ "catppuccin" ]; };
+  catppuccin-light-colors-css = ''
+    @define-color catppuccin_rosewater #dc8a78;
+    @define-color catppuccin_flamingo #dd7878;
+    @define-color catppuccin_pink #ea76cb;
+    @define-color catppuccin_mauve #8839ef;
+    @define-color catppuccin_red #d20f39;
+    @define-color catppuccin_maroon #e64553;
+    @define-color catppuccin_peach #fe640b;
+    @define-color catppuccin_yellow #df8e1d;
+    @define-color catppuccin_green #40a02b;
+    @define-color catppuccin_teal #179299;
+    @define-color catppuccin_sky #04a5e5;
+    @define-color catppuccin_sapphire #209fb5;
+    @define-color catppuccin_blue #1e66f5;
+    @define-color catppuccin_lavender #7287fd;
+    @define-color catppuccin_text #4c4f69;
+    @define-color catppuccin_subtext1 #5c5f77;
+    @define-color catppuccin_subtext0 #6c6f85;
+    @define-color catppuccin_overlay2 #7c7f93;
+    @define-color catppuccin_overlay1 #8c8fa1;
+    @define-color catppuccin_overlay0 #9ca0b0;
+    @define-color catppuccin_surface2 #acb0be;
+    @define-color catppuccin_surface1 #bcc0cc;
+    @define-color catppuccin_surface0 #ccd0da;
+    @define-color catppuccin_base #eff1f5;
+    @define-color catppuccin_mantle #e6e9ef;
+    @define-color catppuccin_crust #dce0e8;
+  '';
+  catppuccin-dark-colors-css = ''
+    @define-color catppuccin_rosewater #f2d5cf;
+    @define-color catppuccin_flamingo #eebebe;
+    @define-color catppuccin_pink #f4b8e4;
+    @define-color catppuccin_mauve #ca9ee6;
+    @define-color catppuccin_red #e78284;
+    @define-color catppuccin_maroon #ea999c;
+    @define-color catppuccin_peach #ef9f76;
+    @define-color catppuccin_yellow #e5c890;
+    @define-color catppuccin_green #a6d189;
+    @define-color catppuccin_teal #81c8be;
+    @define-color catppuccin_sky #99d1db;
+    @define-color catppuccin_sapphire #85c1dc;
+    @define-color catppuccin_blue #8caaee;
+    @define-color catppuccin_lavender #babbf1;
+    @define-color catppuccin_text #c6d0f5;
+    @define-color catppuccin_subtext1 #b5bfe2;
+    @define-color catppuccin_subtext0 #a5adce;
+    @define-color catppuccin_overlay2 #949cbb;
+    @define-color catppuccin_overlay1 #838ba7;
+    @define-color catppuccin_overlay0 #737994;
+    @define-color catppuccin_surface2 #626880;
+    @define-color catppuccin_surface1 #51576d;
+    @define-color catppuccin_surface0 #414559;
+    @define-color catppuccin_base #303446;
+    @define-color catppuccin_mantle #292c3c;
+    @define-color catppuccin_crust #232634;
+  '';
+  gtkTheme = (pkgs.colloid-gtk-theme.override { themeVariants = [ "orange" ]; colorVariants = [ "light" "dark" ]; sizeVariants = [ "compact" ]; tweaks = [ "catppuccin" ]; }).overrideAttrs (old: {
+    postInstall = ''
+      echo '${catppuccin-light-colors-css}' >> $out/share/themes/Colloid-Orange-Light-Compact-Catppuccin/gtk-3.0/gtk.css
+      echo '${catppuccin-light-colors-css}' >> $out/share/themes/Colloid-Orange-Light-Compact-Catppuccin/gtk-4.0/gtk.css
+      echo '${catppuccin-dark-colors-css}' >> $out/share/themes/Colloid-Orange-Dark-Compact-Catppuccin/gtk-3.0/gtk.css
+      echo '${catppuccin-dark-colors-css}' >> $out/share/themes/Colloid-Orange-Dark-Compact-Catppuccin/gtk-4.0/gtk.css
+    '';
+  });
 in
 {
   options.chvp.graphical.theme.enable = lib.mkOption {
@@ -10,10 +73,6 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.theme.enable {
-    chvp.base.zfs.homeLinks = [
-      { path = ".config/qt5ct"; type = "cache"; }
-      { path = ".config/qt6ct"; type = "cache"; }
-    ];
     fonts = {
       fontDir.enable = true;
       fontconfig = {
@@ -61,47 +120,9 @@ in
           name = "Noto Sans";
           size = 10;
         };
-        gtk3.extraCss = ''
-          /* No (default) titlebar on wayland */
-          headerbar.titlebar.default-decoration {
-            background: transparent;
-            padding: 0;
-            margin: 0 0 -17px 0;
-            border: 0;
-            min-height: 0;
-            font-size: 0;
-            box-shadow: none;
-          }
-
-          /* rm -rf window shadows */
-          window.csd,             /* gtk4? */
-          window.csd decoration { /* gtk3 */
-            box-shadow: none;
-          }
-        '';
-        gtk4 = {
-          extraCss = ''
-            /* No (default) titlebar on wayland */
-            headerbar.titlebar.default-decoration {
-              background: transparent;
-              padding: 0;
-              margin: 0 0 -17px 0;
-              border: 0;
-              min-height: 0;
-              font-size: 0;
-              box-shadow: none;
-            }
-
-            /* rm -rf window shadows */
-            window.csd,             /* gtk4? */
-            window.csd decoration { /* gtk3 */
-              box-shadow: none;
-            }
-          '';
-          theme = {
-            package = gtkTheme;
-            name = "Colloid-Orange-Light-Compact-Catppuccin";
-          };
+        gtk4.theme = {
+          package = gtkTheme;
+          name = "Colloid-Orange-Light-Compact-Catppuccin";
         };
         iconTheme = {
           package = pkgs.kdePackages.breeze-icons;
@@ -114,11 +135,7 @@ in
       };
       qt = {
         enable = true;
-        platformTheme.name = "qtct";
-        style = {
-          name = "darkly";
-          package = pkgs.darkly;
-        };
+        platformTheme.name = "gtk3";
       };
       services.darkman = {
         enable = true;
@@ -134,18 +151,12 @@ in
             emacsclient --eval "(chvp--dark-mode)"
           '';
           gtk = ''
-            ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-            ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Dark-Compact-Catppuccin
+            mmsg dispatch spawn,"${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-dark'\""
+            mmsg dispatch spawn,"${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Dark-Compact-Catppuccin"
           '';
           river = ''
-            riverctl background-color 0x626880
-            riverctl border-color-focused 0x99d1db
-            riverctl border-color-unfocused 0x232634
-            riverctl border-color-urgent 0xf4b8e4
-          '';
-          qt = ''
-            sed -i "s/Latte/Frappe/" ~/.config/qt5ct/qt5ct.conf
-            sed -i "s/Latte/Frappe/" ~/.config/qt6ct/qt6ct.conf
+            ln -sf ~/.config/mango/frappe.conf ~/.config/mango/theme.conf
+            mmsg dispatch reload_config
           '';
           terminal = ''
             pkill -SIGUSR1 foot
@@ -156,18 +167,12 @@ in
             emacsclient --eval "(chvp--light-mode)"
           '';
           gtk = ''
-            ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-            ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Light-Compact-Catppuccin
+            mmsg dispatch spawn,"${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-light'\""
+            mmsg dispatch spawn,"${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-Light-Compact-Catppuccin"
           '';
           river = ''
-            riverctl background-color 0xacb0be
-            riverctl border-color-focused 0x04e5e5
-            riverctl border-color-unfocused 0xdce0e8
-            riverctl border-color-urgent 0xea76cb
-          '';
-          qt = ''
-            sed -i "s/Frappe/Latte/" ~/.config/qt5ct/qt5ct.conf
-            sed -i "s/Frappe/Latte/" ~/.config/qt6ct/qt6ct.conf
+            ln -sf ~/.config/mango/latte.conf ~/.config/mango/theme.conf
+            mmsg dispatch reload_config
           '';
           terminal = ''
             pkill -SIGUSR2 foot

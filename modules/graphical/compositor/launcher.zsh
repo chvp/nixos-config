@@ -10,7 +10,7 @@ emoji_options() {
 
 emoji() {
   char=$(echo -n "$1" | sed "s/^\([^ ]*\) .*/\1/")
-  riverctl spawn "echo -n $char | @wl-clipboard@/bin/wl-copy --foreground"
+  mmsg dispatch spawn_shell,"echo -n $char | @wl-clipboard@/bin/wl-copy --foreground"
 }
 
 nrun_options() {
@@ -18,7 +18,7 @@ nrun_options() {
 }
 
 nrun() {
-   riverctl spawn "@nix@/bin/nix run nixpkgs\#$1"
+   mmsg dispatch spawn,"@nix@/bin/nix run nixpkgs\#$1"
 }
 
 run_options() {
@@ -26,7 +26,7 @@ run_options() {
 }
 
 run() {
-  riverctl spawn $1
+  mmsg dispatch spawn,"$1"
 }
 
 trun_options() {
@@ -34,7 +34,7 @@ trun_options() {
 }
 
 trun() {
-    riverctl spawn "@foot@/bin/foot zsh -ic $1"
+    mmsg dispatch spawn,"@foot@/bin/foot zsh -ic $1"
 }
 
 systemctl_options() {
