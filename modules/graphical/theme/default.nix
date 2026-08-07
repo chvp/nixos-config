@@ -152,8 +152,8 @@ in
           '';
           gtk = ''
             theme=$(echo $1 | tr "dl" "DL")
-            ${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$1'"
-            ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-$theme-Compact-Catppuccin
+            mmsg dispatch spawn,"${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme \"'prefer-$1'\""
+            mmsg dispatch spawn,"${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface gtk-theme Colloid-Orange-$theme-Compact-Catppuccin"
           '';
           mango = ''
             if [ "$1" = "light" ]
