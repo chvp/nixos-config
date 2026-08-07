@@ -124,6 +124,16 @@ let
     mousebind = super,btn_left,moveresize,curmove
     mousebind = super,btn_right,moveresize,curresize
 
+    bind = none,XF86MonBrightnessUp,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
+    bind = none,XF86MonBrightnessDown,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
+    bind = none,XF86AudioRaiseVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%+
+    bind = none,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%-
+    bind = none,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_SINK@ toggle
+    bind = none,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_SOURCE@ toggle
+    bind = none,XF86AudioNext,spawn,${pkgs.playerctl}/bin/playerctl next
+    bind = none,XF86AudioPlay,spawn,${pkgs.playerctl}/bin/playerctl play-pause
+    bind = none,XF86AudioPrev,spawn,${pkgs.playerctl}/bin/playerctl previous
+
     bind = none,Print,spawn,${screenshot}/bin/screenshot
     bind = alt,Print,spawn,${screenshot}/bin/screenshot -d
     bind = shift,Print,spawn,${screenshot}/bin/screenshot -r
@@ -170,17 +180,6 @@ let
     bind = super+ctrl+shift,7,toggletag,7,0
     bind = super+ctrl+shift,8,toggletag,8,0
     bind = super+ctrl+shift,9,toggletag,9,0
-
-    # xf86-keys
-    bind = none,XF86MonBrightnessUp,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
-    bind = none,XF86MonBrightnessDown,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
-    bind = none,XF86AudioRaiseVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%+
-    bind = none,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%-
-    bind = none,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_SINK@ toggle
-    bind = none,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_SOURCE@ toggle
-    bind = none,XF86AudioNext,spawn,${pkgs.playerctl}/bin/playerctl next
-    bind = none,XF86AudioPlay,spawn,${pkgs.playerctl}/bin/playerctl play-pause
-    bind = none,XF86AudioPrev,spawn,${pkgs.playerctl}/bin/playerctl previous
 
     # misc
     no_border_when_single = 1
