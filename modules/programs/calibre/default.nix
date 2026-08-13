@@ -11,7 +11,7 @@
       { path = ".config/calibre"; type = "cache"; }
     ];
     home-manager.users.charlotte = { ... }: {
-      home.packages = [ (pkgs.calibre.override { ffmpeg = pkgs.ffmpeg_8; }) ];
+      home.packages = [ pkgs.calibre ];
     };
     services.udisks2.enable = true;
   };
