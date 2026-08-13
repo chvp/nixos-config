@@ -18,5 +18,5 @@
     pkgs.agenix
     pkgs.nixos-rebuild
     pkgs.nixpkgs-fmt
-  ] ++ lib.optional pkgs.stdenv.isDarwin inputs.darwin.packages.${system}.default;
+  ];
 }
