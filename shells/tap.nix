@@ -3,6 +3,8 @@ pkgs.devshell.mkShell {
   name = "Tap";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   packages = with pkgs; [
+    chromedriver
+    ungoogled-chromium
     nodejs_24
     yarn
     sqlite
