@@ -16,7 +16,7 @@
   ];
 
   services.postgresql = {
-    package = pkgs.postgresql_17;
+    package = pkgs.postgresql_18;
     dataDir = "/var/lib/postgresql/${config.services.postgresql.package.psqlSchema}";
   };
 }
