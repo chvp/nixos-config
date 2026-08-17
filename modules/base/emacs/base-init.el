@@ -179,6 +179,8 @@
   (comp-deferred-compilation nil "Don't do native-comp at runtime")
   (project-vc-merge-submodules nil "Don't consider submodules as the same project")
   :config
+  ;; Don't auto-install treesit grammars
+  (setq treesit-auto-install-grammar nil)
   (defun font-settings ()
     "Setup font settings."
     (when window-system
