@@ -128,7 +128,20 @@
             inherit system;
             overlays = [ overlay ];
             config = {
-              allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "nvidia-kernel-modules" "nvidia-settings" "nvidia-x11" "google-chrome" "slack" "steam" "steam-original" "steam-runtime" "steam-run" "steam-unwrapped" "google-chrome" "minecraft-launcher" "minecraft-server" ];
+              allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+                "google-chrome"
+                "minecraft-launcher"
+                "minecraft-server"
+                "nvidia-kernel-modules"
+                "nvidia-settings"
+                "nvidia-x11"
+                "slack"
+                "steam"
+                "steam-original"
+                "steam-run"
+                "steam-runtime"
+                "steam-unwrapped"
+              ];
               permittedInsecurePackages = [ "olm-3.2.16" ];
             };
           };
