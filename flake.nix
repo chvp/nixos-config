@@ -7,16 +7,14 @@
       inputs = {
         api.follows = "accentor-api";
         devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
         web.follows = "accentor-web";
       };
     };
     accentor-api = {
-      url = "github:accentor/api";
+      url = "github:accentor/api?ref=chore/rework-nix-flake";
       inputs = {
         devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
@@ -24,17 +22,14 @@
       url = "github:accentor/desktop";
       inputs = {
         devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
     accentor-web = {
-      url = "github:accentor/web";
+      url = "github:accentor/web?ref=chore/rework-nix-flake";
       inputs = {
         devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
       };
     };
     agenix = {
@@ -42,22 +37,15 @@
       inputs = {
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
       };
     };
     devshell = {
       url = "github:numtide/devshell";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -80,12 +68,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    systems.url = "github:nix-systems/default";
     tetris = {
       url = "github:chvp/tetris";
       inputs = {
         devshell.follows = "devshell";
-        flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";
       };
     };
