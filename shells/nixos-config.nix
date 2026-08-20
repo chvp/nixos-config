@@ -1,4 +1,11 @@
-{ pkgs, lib, inputs, system, ... }: pkgs.devshell.mkShell {
+{ devshell
+, agenix
+, nixos-rebuild
+, nixpkgs-fmt
+, ...
+}:
+
+devshell.mkShell {
   name = "NixOS config";
   commands = [
     {
@@ -15,8 +22,8 @@
     }
   ];
   packages = [
-    pkgs.agenix
-    pkgs.nixos-rebuild
-    pkgs.nixpkgs-fmt
+    agenix
+    nixos-rebuild
+    nixpkgs-fmt
   ];
 }

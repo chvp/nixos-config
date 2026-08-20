@@ -1,4 +1,18 @@
-{ pkgs, inputs, ... }:
+{ devshell
+, inputs
+, azure-cli
+, chromedriver
+, libffi
+, libmysqlclient
+, libyaml
+, nodejs_24
+, openssl
+, rsync
+, ruby_4_0
+, ungoogled-chromium
+, zlib
+}:
+
 let
   support-services = {
     mysql.command = "mysql";
@@ -13,19 +27,10 @@ let
     };
   };
 in
-pkgs.devshell.mkShell {
+devshell.mkShell {
   name = "Dodona";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
-  devshell = {
-    motd = "";
-    startup = {
-      # Hack to make sure Rubymine doesn't use an ephemeral path from the nix store
-      "link-devshell-dir".text = ''
-        ln -snf $DEVSHELL_DIR $PRJ_DATA_DIR/devshell
-      '';
-    };
-  };
-  packages = with pkgs; [
+  packages = [
     azure-cli
     chromedriver
     nodejs_24
@@ -36,7 +41,7 @@ pkgs.devshell.mkShell {
     { name = "CACHE_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_cache"; }
     { name = "TEST_DATABASE_URL"; value = "trilogy://root:dodona@127.0.0.1:3306/dodona_test"; }
     { name = "NODE_ENV"; value = "development"; }
-    { name = "PUPPETEER_EXECUTABLE_PATH"; value = "${pkgs.ungoogled-chromium.outPath}/bin/chromium"; }
+    { name = "PUPPETEER_EXECUTABLE_PATH"; value = "${ungoogled-chromium.outPath}/bin/chromium"; }
   ];
   commands = [
     {
@@ -91,7 +96,7 @@ pkgs.devshell.mkShell {
     server-support.services = support-services;
   };
   language.ruby = {
-    package = pkgs.ruby_4_0;
-    nativeDeps = [ pkgs.libmysqlclient pkgs.openssl pkgs.zlib pkgs.libffi pkgs.libyaml ];
+    package = ruby_4_0;
+    nativeDeps = [ libmysqlclient openssl zlib libffi libyaml ];
   };
 }

@@ -1,4 +1,17 @@
-{ pkgs, inputs, ... }: pkgs.devshell.mkShell {
+{ devshell
+, lib
+, inputs
+, cmake
+, libyaml
+, nodejs
+, openssl
+, postgresql_14
+, ruby_4_0
+, yarn
+, zlib
+}:
+
+devshell.mkShell {
   name = "Gamification 2";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   env = [
@@ -45,7 +58,7 @@
       '';
     }
   ];
-  packages = with pkgs; [
+  packages = [
     cmake
     nodejs
     (lib.lowPrio postgresql_14)
@@ -57,7 +70,7 @@
     jobs.command = "bin/jobs start";
   };
   language.ruby = {
-    package = pkgs.ruby_4_0;
-    nativeDeps = [ pkgs.postgresql_14 pkgs.zlib pkgs.openssl pkgs.libyaml ];
+    package = ruby_4_0;
+    nativeDeps = [ postgresql_14 zlib openssl libyaml ];
   };
 }

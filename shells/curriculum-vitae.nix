@@ -1,8 +1,13 @@
-{ pkgs, ... }:
+{ devshell
+, texliveFull
+, gnumake
+, pandoc
+, ...
+}:
 
-pkgs.devshell.mkShell {
+devshell.mkShell {
   name = "Curriculum vitae";
-  packages = with pkgs; [
+  packages = [
     texliveFull
     gnumake
     pandoc

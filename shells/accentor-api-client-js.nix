@@ -1,4 +1,9 @@
-{ pkgs, ... }: pkgs.devshell.mkShell {
+{ devshell
+, nodejs
+, ...
+}:
+
+devshell.mkShell {
   name = "Accentor API client in JavaScript";
-  packages = with pkgs; [ nodejs yarn ];
+  packages = [ nodejs ];
 }

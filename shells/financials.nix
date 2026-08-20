@@ -1,8 +1,12 @@
-{ pkgs, ... }:
+{ devshell
+, python3
+, hledger
+, ...
+}:
 
-pkgs.devshell.mkShell {
+devshell.mkShell {
   name = "Financials";
-  packages = with pkgs; [
+  packages = [
     (python3.withPackages (ps: [ ps.requests ps.python-dateutil ]))
     hledger
   ];

@@ -1,17 +1,29 @@
-{ pkgs, inputs, ... }:
-pkgs.devshell.mkShell {
+{ devshell
+, inputs
+, chromedriver
+, imagemagick
+, libffi
+, libmysqlclient
+, libyaml
+, nodejs_24
+, ruby_4_0
+, sqlite
+, ungoogled-chromium
+, zlib
+}:
+
+devshell.mkShell {
   name = "Tap";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
-  packages = with pkgs; [
+  packages = [
     chromedriver
-    ungoogled-chromium
-    nodejs_24
-    yarn
-    sqlite
     imagemagick
+    nodejs_24
+    sqlite
+    ungoogled-chromium
   ];
   language.ruby = {
-    package = pkgs.ruby_4_0;
-    nativeDeps = [ pkgs.zlib pkgs.libffi pkgs.libyaml pkgs.libmysqlclient ];
+    package = ruby_4_0;
+    nativeDeps = [ zlib libffi libyaml libmysqlclient ];
   };
 }
