@@ -11,7 +11,6 @@
       zfs.homeLinks = [
         { path = ".config/Slack"; type = "cache"; }
       ];
-      nix.unfreePackages = [ "slack" ];
     };
 
     home-manager.users.charlotte = { pkgs, ... }: {

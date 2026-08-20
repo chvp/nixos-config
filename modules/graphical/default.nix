@@ -23,7 +23,6 @@
     users.users.charlotte.extraGroups = [ "input" "video" ];
     chvp = {
       base = {
-        nix.unfreePackages = [ "google-chrome" ];
         zfs.homeLinks = [
           { path = ".config/qalculate"; type = "cache"; }
           { path = ".cache/accentor"; type = "cache"; }

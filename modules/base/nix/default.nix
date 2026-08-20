@@ -24,11 +24,6 @@ in
       default = false;
       example = true;
     };
-    # Used in /flake.nix, since we have to use it at nixpkgs import time
-    unfreePackages = lib.mkOption {
-      default = [ ];
-      example = [ "teams" ];
-    };
   };
 
   config = {

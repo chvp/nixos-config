@@ -124,7 +124,15 @@
       nixosSystem = system: name: extraModules:
         let
           nixpkgs = nixpkgsForSystem system;
-          lib = (import nixpkgs { inherit system; overlays = [ overlay ]; }).lib;
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ overlay ];
+            config = {
+              allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "nvidia-kernel-modules" "nvidia-settings" "nvidia-x11" "google-chrome" "slack" "steam" "steam-original" "steam-runtime" "steam-run" "steam-unwrapped" "google-chrome" "minecraft-launcher" "minecraft-server" ];
+              permittedInsecurePackages = [ "olm-3.2.16" ];
+            };
+          };
+          lib = pkgs.lib;
         in
         inputs.nixpkgs.lib.nixosSystem {
           inherit lib system;
@@ -135,14 +143,7 @@
               {
                 _module.args = { inherit inputs; };
                 nixpkgs = {
-                  pkgs = import nixpkgs {
-                    inherit system;
-                    overlays = [ overlay ];
-                    config = {
-                      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) config.chvp.base.nix.unfreePackages;
-                      permittedInsecurePackages = [ "olm-3.2.16" ];
-                    };
-                  };
+                  inherit pkgs;
                   flake.source = lib.mkForce "${nixpkgs}";
                 };
                 networking.hostName = name;

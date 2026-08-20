@@ -13,7 +13,6 @@
     };
     services.pipewire.alsa.support32Bit = true;
     chvp.base = {
-      nix.unfreePackages = [ "steam" "steam-original" "steam-runtime" "steam-run" "steam-unwrapped" ];
       zfs.homeLinks = [
         { path = ".paradoxlauncher"; type = "cache"; }
         { path = ".steam"; type = "cache"; }

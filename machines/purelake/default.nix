@@ -20,7 +20,6 @@
           "enp9s0" = { };
         };
       };
-      nix.unfreePackages = [ "nvidia-kernel-modules" "nvidia-settings" "nvidia-x11" "google-chrome" ];
     };
     games.enable = true;
     graphical.enable = false;
