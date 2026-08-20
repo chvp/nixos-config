@@ -8,9 +8,6 @@
         "devshell": [
           "devshell"
         ],
-        "flake-utils": [
-          "flake-utils"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -19,11 +16,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787229896,
-        "narHash": "sha256-s6u5hhuI1TTqrn/xS14yUMsKMO9xC6iCbE9r0pzGwB4=",
+        "lastModified": 1787230873,
+        "narHash": "sha256-rR7v0e8z6PAl6vrEmrurFAB2aVkT0cGnLjHbsMLcEgM=",
         "owner": "accentor",
         "repo": "flake",
-        "rev": "0151919c46fce09cc753f7daca65d1452027aa06",
+        "rev": "11ecb343e7f85094adbdbb49e9c5291c13e11a75",
         "type": "github"
       },
       "original": {
@@ -101,11 +98,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786897654,
-        "narHash": "sha256-AGLOwMIOTZcHfVIH3ngbNmOiegF7kkWx1Yc4EzuiMhE=",
+        "lastModified": 1787230177,
+        "narHash": "sha256-TMSh3POqyJBSLHLGAOgn6EMiIjSKs/UbHkXznj6/RDE=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "0982fc31824aa7b9e1fe37db2d06bbae67dccdaf",
+        "rev": "d6adca24621c2395ffc599ed02490d38562e39af",
         "type": "github"
       },
       "original": {
@@ -443,11 +440,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787229269,
-        "narHash": "sha256-9INqyxpgcEPJ/o8MAGCUxEWpjLdLiFexw8bQIIAVutg=",
+        "lastModified": 1787236987,
+        "narHash": "sha256-O+ZcJei29Mr68O/OsihbE/K2B44j7WeKHnzQZaYG7YQ=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "fdcf1222053e4788436e68125ac1a0487cfdc6e0",
+        "rev": "3c90d01a41ce51c22b0ee6ab1fce5f37b2448c49",
         "type": "github"
       },
       "original": {
@@ -502,11 +499,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787229232,
-        "narHash": "sha256-TkO1lwP5zhV8esiIKPK3kgXrfLmk961sBDO8a+H7wQI=",
+        "lastModified": 1787233724,
+        "narHash": "sha256-tk9xxyAze9ilHF5VkAgK3rAddmc9NiA8+R+nX6CH2kw=",
         "owner": "chvp",
         "repo": "tetris",
-        "rev": "8630fb149b8dadf43c00d2eda2b4b47128de0a62",
+        "rev": "cec981a3b30f46670a9363e34e48dc55ba5da027",
         "type": "github"
       },
       "original": {
