@@ -36,8 +36,6 @@
             "x-scheme-handler/http" = [ "firefox.desktop" ];
             "x-scheme-handler/https" = [ "firefox.desktop" ];
             "x-scheme-handler/unknown" = [ "firefox.desktop" ];
-
-            "x-scheme-handler/msteams" = [ "teams.desktop" ];
           };
         };
         userDirs = {

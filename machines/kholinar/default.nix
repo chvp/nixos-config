@@ -42,8 +42,6 @@
       eid.enable = true;
       element.enable = true;
       hledger.enable = true;
-      slack.enable = true;
-      teams.enable = true;
       torrents.enable = true;
     };
   };

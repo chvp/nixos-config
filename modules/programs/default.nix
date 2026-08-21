@@ -10,8 +10,6 @@ in
     ./element
     ./hledger
     ./htop
-    ./slack
-    ./teams
     ./torrents
   ];
 
