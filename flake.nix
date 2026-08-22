@@ -12,7 +12,7 @@
       };
     };
     accentor-api = {
-      url = "github:accentor/api?ref=chore/rework-nix-flake";
+      url = "github:accentor/api";
       inputs = {
         devshell.follows = "devshell";
         nixpkgs.follows = "nixpkgs";
@@ -26,7 +26,7 @@
       };
     };
     accentor-web = {
-      url = "github:accentor/web?ref=chore/rework-nix-flake";
+      url = "github:accentor/web";
       inputs = {
         devshell.follows = "devshell";
         nixpkgs.follows = "nixpkgs";

@@ -40,16 +40,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1787236069,
-        "narHash": "sha256-KNonKF/pT64mL82qqRciJ3n3S9ALaPPpRklKdR4/LmQ=",
+        "lastModified": 1787394954,
+        "narHash": "sha256-P6nBvokfFg7K9u3vF9O0cbCY7vw41OSg0GyeM9i2DoQ=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "bcb47949905e9c70c3abf3d87adbf95eb9dacc39",
+        "rev": "20e935a871384428e135498eca69a744e99b74ae",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
-        "ref": "chore/rework-nix-flake",
         "repo": "api",
         "type": "github"
       }
@@ -87,16 +86,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1787234271,
-        "narHash": "sha256-ES+exR0O24W8NIM3Goi8sgwtZgALJnuiAIq0TKlEtbk=",
+        "lastModified": 1787387505,
+        "narHash": "sha256-OFrHAykAH3Ea9S76HNFQaChNRtQScIucM0RIoL0LQLU=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "0eb61b5875213ef83b2263f65fa1c4f0105c7e4a",
+        "rev": "1b6160fa74d67606762435604b918675fbf9fefe",
         "type": "github"
       },
       "original": {
         "owner": "accentor",
-        "ref": "chore/rework-nix-flake",
         "repo": "web",
         "type": "github"
       }
