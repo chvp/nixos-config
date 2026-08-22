@@ -135,7 +135,6 @@
                 "nvidia-kernel-modules"
                 "nvidia-settings"
                 "nvidia-x11"
-                "slack"
                 "steam"
                 "steam-original"
                 "steam-run"
