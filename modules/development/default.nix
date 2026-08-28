@@ -55,9 +55,8 @@
                 (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
                 (defun chvp--eglot-capf ()
                   (setq-local completion-at-point-functions
-                              (list (cape-super-capf
-                                     #'eglot-completion-at-point
-                                     #'tempel-complete)
+                              (list #'eglot-completion-at-point
+                                    #'tempel-complete
                                     #'cape-file
                                     #'dabbrev-capf
                                     #'cape-line)))
