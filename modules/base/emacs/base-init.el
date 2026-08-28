@@ -120,6 +120,23 @@
     )
   )
 
+;; Theming
+(use-package catppuccin-theme
+  :custom (catppuccin-flavor 'latte)
+  :config
+  (load-theme 'catppuccin :no-confirm)
+  (defun chvp--dark-mode ()
+    (interactive)
+    (progn
+      (setq catppuccin-flavor 'frappe)
+      (load-theme 'catppuccin :no-confirm)))
+  (defun chvp--light-mode ()
+    (interactive)
+    (progn
+      (setq catppuccin-flavor 'latte)
+      (load-theme 'catppuccin :no-confirm)))
+  )
+
 ;; Autocomplete
 (use-package corfu
   :diminish (corfu-mode)
@@ -228,23 +245,6 @@
   (minibuffer-local-map "M-a" 'marginalia-cycle)
   )
 
-;; Theming
-(use-package catppuccin-theme
-  :custom (catppuccin-flavor 'latte)
-  :config
-  (load-theme 'catppuccin :no-confirm)
-  (defun chvp--dark-mode ()
-    (interactive)
-    (progn
-      (setq catppuccin-flavor 'frappe)
-      (load-theme 'catppuccin :no-confirm)))
-  (defun chvp--light-mode ()
-    (interactive)
-    (progn
-      (setq catppuccin-flavor 'latte)
-      (load-theme 'catppuccin :no-confirm)))
-  )
-
 (use-package no-littering
   :custom
   (user-emacs-directory (expand-file-name "~/.cache/emacs/") "Don't put files into .emacs.d")
@@ -324,6 +324,24 @@
   (lmap
     "t i" '(tempel-insert :which-key "Insert template")
     )
+  )
+
+;; Better undo
+(use-package undo-fu
+  :custom
+  (undo-fu-ignore-keyboard-quit t "Non-linear behaviour needs an explicit call")
+  (evil-undo-system 'undo-fu "Tell evil to use undo-fu")
+  (undo-limit 67108864 "Store much more undo information (64MiB)")
+  (undo-strong-limit 100663296 "Store much more undo information (96MiB)")
+  (undo-outer-limit 1006632960 "Store much more undo information (960MiB)")
+  )
+
+(use-package undo-fu-session
+  :init
+  (undo-fu-session-global-mode)
+  :custom
+  (undo-fu-session-compression 'zst "Use zst compression for the undo files")
+  (undo-fu-session-file-limit 10000 "Start removing old undo files after 10000 files")
   )
 
 ;; List item selection interface
