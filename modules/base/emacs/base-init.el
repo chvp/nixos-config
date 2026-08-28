@@ -357,6 +357,9 @@
   :custom (vertico-prescient-enable-filtering nil "`orderless' manages the filtering part.")
   :config (vertico-prescient-mode 1))
 
+;; Visualize undo tree
+(use-package vundo)
+
 ;; Show keybindings
 (use-package which-key
   :diminish (which-key-mode)
