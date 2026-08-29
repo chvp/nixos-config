@@ -2,20 +2,22 @@ let
   elendel = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZU5fDbqEkllipbknJy/Dm3Fcicb5gscVzmsFG/9RoA";
   kholinar = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOL8MzChayhcVTfZvE3/ExwXpq2+LbihjzUVlKeIGoOL";
   marabethia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUP1r937+PLiqdyUuqbYoyAs04/2AxuXS13grU+fvpA";
+  oa = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE50JEBWmeB3S80XkhD945rQeS8OvewzeP4rqx8EJrQX";
   purelake = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG/wEzBoikJGi1RFQkmaE3/D/A/fBEuYCGl68MF9O4Bh";
-  thaylen-city = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/sIkgf7aYX/JcWWp/dCHgq7sJ5WDYYyWSn3DvkW4gB";
   nixosHosts = [
     elendel
     kholinar
     marabethia
+    oa
     purelake
   ];
-  hosts = nixosHosts ++ [ thaylen-city ];
+  hosts = nixosHosts;
   nixosPersonals = [
     kholinar
+    oa
     purelake
   ];
-  personals = nixosPersonals ++ [ thaylen-city ];
+  personals = nixosPersonals;
   servers = [
     elendel
     marabethia
@@ -24,6 +26,7 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDb17zAg3zwvdYHNZqXSGYKseCz5281Ha6oOYPbwFYD"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJLsSFEi4CGpkWIJxXJC78bhibrBRxClBbpS9n7PQGYL"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINVNXuXhJvixUAeRhtFxK1tRyf+Z6lbkSiq6kEEpndoX"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEcLs+MCijduiPveXE36lShA6gQxxVUIhwha3+laR67A"
   ];
   users = charlotte;
 in
