@@ -157,6 +157,7 @@
           inherit lib system;
           specialArgs = {
             modulesPath = toString (nixpkgs + "/nixos/modules");
+            unstablePkgs = pkgs;
           };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
           modules = [

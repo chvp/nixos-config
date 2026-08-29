@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  unstablePkgs,
   ...
 }:
 
@@ -32,16 +33,16 @@ let
     export _JAVA_AWT_WM_NONREPARENTING=1
     if [ "$DBUS_SESSION_BUS_ADDRESS" ]; then
         export DBUS_SESSION_BUS_ADDRESS
-        exec ${pkgs.mango}/bin/mango
+        exec ${unstablePkgs.mango}/bin/mango
     else
-        exec ${pkgs.dbus}/bin/dbus-run-session ${pkgs.mango}/bin/mango
+        exec ${pkgs.dbus}/bin/dbus-run-session ${unstablePkgs.mango}/bin/mango
     fi
   '';
   mango = pkgs.symlinkJoin {
-    name = "mango-${pkgs.mango.version}";
+    name = "mango-${unstablePkgs.mango.version}";
     paths = [
       baseWrapper
-      pkgs.mango
+      unstablePkgs.mango
     ];
     strictDeps = false;
     nativeBuildInputs = with pkgs; [
@@ -66,7 +67,7 @@ let
         WAYLAND_DISPLAY="$(${pkgs.findutils}/bin/find /run/user/$UID -mindepth 1 -maxdepth 1 -type s -name wayland-\*)"
         if [ -S "WAYLAND_DISPLAY" ]
         then
-        ${pkgs.mango}/bin/mmsg dispatch reload_config
+        ${unstablePkgs.mango}/bin/mmsg dispatch reload_config
         fi
     fi
   '';
