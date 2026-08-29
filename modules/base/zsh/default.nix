@@ -38,7 +38,7 @@ let
           nix shell nixpkgs#$drv -c $@
         }
 
-      '' + (lib.optionalString (home == config.users.users.charlotte.home && config.chvp.graphical.compositor.enable) ''
+      '' + (lib.optionalString (home == config.users.users.${username}.home && config.chvp.graphical.compositor.enable) ''
         if [ "$(darkman get)" = "dark" ]
         then
           pkill -SIGUSR1 foot
@@ -47,7 +47,7 @@ let
       shellAliases = {
         gupd = "gfa && gprom";
       };
-      sessionVariables = { DEFAULT_USER = "charlotte"; };
+      sessionVariables = { DEFAULT_USER = username; };
       oh-my-zsh = {
         enable = true;
         plugins = [

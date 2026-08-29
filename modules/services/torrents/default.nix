@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.services.torrents = {
     enable = lib.mkOption {
@@ -14,7 +17,7 @@
     services.transmission = {
       enable = true;
       package = pkgs.transmission_4;
-      user = "charlotte";
+      user = username;
       group = "users";
       home = "/var/lib/transmission";
       openRPCPort = false;
@@ -37,7 +40,7 @@
     systemd.services.transmission.serviceConfig.TimeoutStartSec = 60 * 10;
     age.secrets."files/programs/transmission/config.json" = {
       file = ../../../secrets/files/programs/transmission/config.json.age;
-      owner = "charlotte";
+      owner = username;
     };
   };
 }

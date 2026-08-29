@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.games.mumble.enable = lib.mkOption {
     default = false;
@@ -12,7 +15,7 @@
       { path = ".local/share/Mumble"; type = "cache"; }
     ];
 
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = {
       home.packages = with pkgs; [ mumble ];
     };
   };

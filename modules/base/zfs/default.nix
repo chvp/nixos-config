@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.base.zfs = {
     enable = lib.mkOption {
@@ -114,8 +117,8 @@
     system.activationScripts =
       let
         ensureSystemExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "${path}"'') config.chvp.base.zfs.ensureSystemExists);
-        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "/home/charlotte/${path}"'') config.chvp.base.zfs.ensureHomeExists);
-        ensureHomePermissionsScript = lib.concatStringsSep "\n" (map (path: ''chown charlotte:users /home/charlotte/${path}'') config.chvp.base.zfs.ensureHomeExists);
+        ensureHomeExistsScript = lib.concatStringsSep "\n" (map (path: ''mkdir -p "/home/${username}/${path}"'') config.chvp.base.zfs.ensureHomeExists);
+        ensureHomePermissionsScript = lib.concatStringsSep "\n" (map (path: ''chown ${username}:users /home/${username}/${path}'') config.chvp.base.zfs.ensureHomeExists);
       in
       {
         ensureSystemPathsExist = {
@@ -124,14 +127,14 @@
         };
         ensureHomePathsExist = {
           text = ''
-            mkdir -p /home/charlotte/
+            mkdir -p /home/${username}/
             ${ensureHomeExistsScript}
           '';
         };
         agenixInstall.deps = [ "ensureSystemPathsExist" "ensureHomePathsExist" ];
         ensureHomePermissionsScript = {
           text = ''
-            chown charlotte:users /home/charlotte
+            chown ${username}:users /home/${username}
             ${ensureHomePermissionsScript}
           '';
           deps = [ "agenixInstall" "users" "groups" ];
@@ -172,10 +175,10 @@
           serviceConfig = {
             RemainAfterExit = "yes";
             Type = "oneshot";
-            User = "charlotte";
+            User = "${username}";
             Group = "users";
             UMask = "0077";
-            WorkingDirectory = "/home/charlotte";
+            WorkingDirectory = "/home/${username}";
           };
           unitConfig = {
             DefaultDependencies = "no";
@@ -202,8 +205,8 @@
         config.chvp.base.zfs.systemLinks) ++
       (map
         (location: {
-          what = "/${location.type}/home/charlotte/${location.path}";
-          where = "/home/charlotte/${location.path}";
+          what = "/${location.type}/home/${username}/${location.path}";
+          where = "/home/${username}/${location.path}";
           type = "none";
           options = "bind";
           after = [ "local-fs.target" "make-home-links-destinations.service" ];

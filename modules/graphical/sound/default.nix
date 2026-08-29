@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.graphical.sound.enable = lib.mkOption {
     default = false;
@@ -11,7 +14,7 @@
       { path = ".local/state/wireplumber"; type = "cache"; }
     ];
 
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = { ... }: {
       home.packages = with pkgs; [
         pavucontrol
         qjackctl

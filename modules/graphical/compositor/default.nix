@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
+  username = config.chvp.username;
   launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
@@ -184,8 +185,8 @@ let
     # misc
     no_border_when_single = 1
     cursor_hide_on_keypress = 1
-    cursor_theme = ${config.home-manager.users.charlotte.home.pointerCursor.name}
-    cursor_size = ${toString config.home-manager.users.charlotte.home.pointerCursor.size}
+    cursor_theme = ${config.home-manager.users.${username}.home.pointerCursor.name}
+    cursor_size = ${toString config.home-manager.users.${username}.home.pointerCursor.size}
 
     exec-once = ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_SESSION_TYPE XCURSOR_SIZE QT_QPA_PLATFORM_THEME QT_STYLE_OVERRIDE QT_PLUGIN_PATH QTWEBKIT_PLUGIN_PATH GDK_PIXBUF_MODULE_FILE XDG_DATA_DIRS GIO_EXTRA_MODULES PATH
     exec-once = systemctl --user start mango-session.target
@@ -247,7 +248,7 @@ in
             };
             initial_session = {
               command = "${mango-run}";
-              user = "charlotte";
+              user = username;
             };
           };
       };
@@ -261,7 +262,7 @@ in
         "org.freedesktop.impl.portal.Screencast" = "wlr";
       };
     };
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = {
       home.packages = [
         mango
         color-picker

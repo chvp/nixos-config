@@ -99,11 +99,11 @@ in
     home-manager = {
       useGlobalPkgs = true;
       users = {
-        charlotte = { ... }: {
-          systemd.user.sessionVariables = config.home-manager.users.charlotte.home.sessionVariables;
+        ${username} = {
+          systemd.user.sessionVariables = config.home-manager.users.${username}.home.sessionVariables;
           home.stateVersion = config.chvp.homeStateVersion;
         };
-        root = { ... }: {
+        root = {
           home.stateVersion = config.chvp.homeStateVersion;
         };
       };
@@ -127,7 +127,7 @@ in
         enable = true;
         extraRules = [
           {
-            users = [ "charlotte" ];
+            users = [ username ];
             noPass = true;
             cmd = "nix-collect-garbage";
             runAs = "root";
@@ -148,7 +148,7 @@ in
         ${username} = {
           description = "Charlotte Van Petegem";
           isNormalUser = true;
-          home = "/home/charlotte";
+          home = "/home/${username}";
           extraGroups = [ "systemd-journal" ];
           hashedPasswordFile = config.age.secrets."passwords/users/charlotte".path;
           shell = pkgs.zsh;

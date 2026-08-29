@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.development.android.enable = lib.mkOption {
     default = false;
@@ -18,6 +21,6 @@
     };
 
     environment.systemPackages = with pkgs; [ android-tools ];
-    users.users.charlotte.extraGroups = [ "adbusers" "dialout" "uucp" ];
+    users.users.${username}.extraGroups = [ "adbusers" "dialout" "uucp" ];
   };
 }

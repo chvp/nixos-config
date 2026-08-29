@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+  in
 {
   options.chvp.graphical.pass.enable = lib.mkOption {
     default = false;
@@ -22,7 +25,7 @@
       ''
     ];
 
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = { ... }: {
       home.packages = [ pkgs.keepassxc ];
       systemd.user.services.keepassxc = {
         Unit = {

@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
+  username = config.chvp.username;
   ff2mpv-host = pkgs.stdenv.mkDerivation rec {
     pname = "ff2mpv";
     version = "4.0.0";
@@ -39,7 +40,7 @@ in
       { path = ".config/mozilla"; type = "data"; }
       { path = ".cache/mozilla"; type = "cache"; }
     ];
-    home-manager.users.charlotte = { config, ... }: {
+    home-manager.users.${username} = { config, ... }: {
       programs.firefox = {
         enable = true;
         configPath = "${config.xdg.configHome}/mozilla/firefox";
@@ -74,7 +75,7 @@ in
           settings = {
             "browser.aboutConfig.showWarning" = false;
             "browser.contentblocking.category" = "custom";
-            "browser.download.dir" = "/home/charlotte/downloads";
+            "browser.download.dir" = "/home/${username}/downloads";
             "browser.newtabpage.enabled" = false;
             "browser.safebrowsing.malware.enabled" = false;
             "browser.safebrowsing.phishing.enabled" = false;

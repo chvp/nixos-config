@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.graphical.gnupg = {
     enable = lib.mkOption {
@@ -24,10 +27,10 @@
       enable = true;
       pinentryPackage = pkgs."pinentry-${config.chvp.graphical.gnupg.pinentryFlavor}";
     };
-    home-manager.users.charlotte = { lib, ... }: {
+    home-manager.users.${username} = { lib, ... }: {
       home.activation.fixPermissionsCommands = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        mkdir -p /home/charlotte/.gnupg
-        chmod u=rwX,go= /home/charlotte/.gnupg
+        mkdir -p /home/${username}/.gnupg
+        chmod u=rwX,go= /home/${username}/.gnupg
       '';
       programs.gpg.enable = true;
       services.gpg-agent = {

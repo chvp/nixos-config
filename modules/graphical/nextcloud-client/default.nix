@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.graphical.nextcloud-client.enable = lib.mkOption {
     default = false;
@@ -12,7 +15,7 @@
       { path = ".local/share/Nextcloud"; type = "cache"; }
       { path = "sync"; type = "cache"; }
     ];
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = {
       services.nextcloud-client = {
         enable = true;
         startInBackground = true;

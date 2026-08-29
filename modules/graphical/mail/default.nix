@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.graphical.mail.enable = lib.mkOption {
     default = false;
@@ -11,7 +14,7 @@
       { path = ".cache/thunderbird"; type = "cache"; }
       { path = ".thunderbird"; type = "cache"; }
     ];
-    home-manager.users.charlotte = { lib, ... }: {
+    home-manager.users.${username} = {
       home.packages = [ pkgs.thunderbird ];
     };
   };

@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
+  username = config.chvp.username;
   catppuccin-light-colors-css = ''
     @define-color catppuccin_rosewater #dc8a78;
     @define-color catppuccin_flamingo #dd7878;
@@ -97,7 +98,7 @@ in
     };
 
     programs.dconf.enable = true;
-    home-manager.users.charlotte = { pkgs, lib, ... }: {
+    home-manager.users.${username} = {
       home.packages = [
         pkgs.catppuccin-cursors.latteLight
         # Also install dark mode to profile for darkman

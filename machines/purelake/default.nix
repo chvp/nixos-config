@@ -4,6 +4,9 @@
 
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   imports = [ ./hardware.nix ];
 
@@ -79,18 +82,18 @@
     })
   ];
 
-  users.users.charlotte = {
+  users.users.${username} = {
     isNormalUser = true;
     description = "Charlotte Van Petegem";
     extraGroups = [ "networkmanager" "wheel" "video" "render" "vboxusers" ];
   };
 
-  home-manager.users.charlotte = { ... }: {
+  home-manager.users.${username} = { ... }: {
     services.network-manager-applet.enable = lib.mkForce false;
   };
 
   services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "charlotte";
+  services.displayManager.autoLogin.user = username;
 
   programs.firefox.enable = true;
 

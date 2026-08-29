@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.development.docker.enable = lib.mkOption {
     default = false;
@@ -15,6 +18,6 @@
 
     environment.systemPackages = [ pkgs.docker-compose ];
 
-    users.users.charlotte.extraGroups = [ "docker" ];
+    users.users.${username}.extraGroups = [ "docker" ];
   };
 }

@@ -1,5 +1,8 @@
 { config, lib, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.services.data-access.enable = lib.mkOption {
     default = false;
@@ -97,7 +100,7 @@
     };
     age.secrets."data-access/authorized_keys" = {
       file = ../../../secrets/data-access/authorized_keys.age;
-      owner = "charlotte";
+      owner = username;
       path = "/run/data-access/data_authorized_keys";
       symlink = false;
     };
@@ -110,7 +113,7 @@
     };
     age.secrets."data-access/create_torrent" = {
       file = ../../../secrets/data-access/create_torrent.age;
-      owner = "charlotte";
+      owner = username;
       path = "/run/data-access/create_torrent";
       symlink = false;
     };

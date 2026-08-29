@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.services.accentor.enable = lib.mkOption {
     default = false;
@@ -25,7 +28,7 @@
     };
 
     security.doas.extraRules = [{
-      users = [ "charlotte" ];
+      users = [ username ];
       noPass = true;
       cmd = "accentor-console";
       runAs = "accentor";

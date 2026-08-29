@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.base.network.mobile = {
     enable = lib.mkOption {
@@ -18,46 +21,13 @@
 
   config = with config.chvp.base.network.mobile; lib.mkIf enable {
     environment.systemPackages = [ pkgs.wpa_supplicant_gui ];
-    users.users.charlotte.extraGroups = [ "networkmanager" ];
+    users.users.${username}.extraGroups = [ "networkmanager" ];
     networking = {
       networkmanager = {
         enable = true;
         ensureProfiles = {
           environmentFiles = [ config.age.secrets."passwords/networks.age".path ];
-          profiles = {
-            "MeetDistrict Member" = {
-              "802-1x" = {
-                ca-cert = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-                domain-suffix-match = "services.meetdistrict.com";
-                eap = "peap;";
-                identity = "$USER_MEETDISTRICT";
-                password = "$PASS_MEETDISTRICT";
-                phase2-auth = "mschapv2";
-              };
-              connection = {
-                id = "MeetDistrict Member";
-                interface-name = config.chvp.base.network.mobile.wireless-interface;
-                type = "wifi";
-                uuid = "f8f1ee59-caf5-4c73-b0ef-bb4c3a667ce9";
-              };
-              ipv4 = {
-                method = "auto";
-              };
-              ipv6 = {
-                addr-gen-mode = "default";
-                method = "auto";
-              };
-              proxy = { };
-              wifi = {
-                mode = "infrastructure";
-                ssid = "MeetDistrict Member";
-              };
-              wifi-security = {
-                auth-alg = "open";
-                key-mgmt = "wpa-eap";
-              };
-            };
-          } // (lib.mapAttrs
+          profiles = lib.mapAttrs
             (name: value: {
               connection = {
                 id = name;
@@ -94,12 +64,12 @@
               werknet = { psk = "$PSK_WERKNET"; uuid = "363a064d-b829-4f18-9976-a0910ec1ba60"; };
               "Zeus Event 5G" = { psk = "$PSK_ZEUS"; uuid = "a9d45b71-4482-4192-8108-83911d6843a7"; };
               "Zeus WPI" = { psk = "$PSK_ZEUS"; uuid = "78a8ab49-1228-4d4c-bfe6-d8c8d482b78f"; };
-            });
+            };
         };
       };
     };
 
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = { ... }: {
       services.network-manager-applet.enable = true;
     };
 

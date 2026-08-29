@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.programs.element.enable = lib.mkOption {
     default = false;
@@ -12,8 +15,6 @@
       { path = ".local/share/nheko"; type = "data"; }
       { path = ".cache/nheko"; type = "cache"; }
     ];
-    home-manager.users.charlotte = { ... }: {
-      home.packages = [ pkgs.nheko ];
-    };
+    home-manager.users.${username}.home.packages = [ pkgs.nheko ];
   };
 }

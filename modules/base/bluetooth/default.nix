@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.base.bluetooth.enable = lib.mkOption {
     default = false;
@@ -12,8 +15,8 @@
     hardware.bluetooth.enable = true;
     services.blueman.enable = true;
 
-    home-manager.users.charlotte = lib.mkIf config.chvp.graphical.enable ({ ... }: {
+    home-manager.users.${username} = lib.mkIf config.chvp.graphical.enable {
       services.blueman-applet.enable = true;
-    });
+    };
   };
 }

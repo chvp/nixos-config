@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.games.minecraft = {
     client = lib.mkOption {
@@ -13,7 +16,7 @@
   };
 
   config = lib.mkIf (config.chvp.games.minecraft.client || config.chvp.games.minecraft.server) {
-    home-manager.users.charlotte = lib.mkIf config.chvp.games.minecraft.client ({ ... }: {
+    home-manager.users.${username} = lib.mkIf config.chvp.games.minecraft.client ({
       home.packages = [ pkgs.minecraft ];
     });
     chvp.base.zfs.homeLinks = lib.optional config.chvp.games.minecraft.client { path = ".minecraft"; type = "cache"; };

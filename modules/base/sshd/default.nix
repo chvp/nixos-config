@@ -1,5 +1,8 @@
 { config, lib, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   chvp.base.zfs = {
     ensureSystemExists = [ "${config.chvp.dataPrefix}/etc/ssh" ];
@@ -24,8 +27,8 @@
   };
   age.secrets."authorized_keys/charlotte" = {
     file = ../../../secrets/authorized_keys/charlotte.age;
-    owner = "charlotte";
-    path = "/home/charlotte/.ssh/authorized_keys";
+    owner = username;
+    path = "/home/${username}/.ssh/authorized_keys";
     symlink = false;
   };
 }

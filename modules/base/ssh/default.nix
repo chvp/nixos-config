@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 let
+  username = config.chvp.username;
   ssh = pkgs.symlinkJoin {
     name = "ssh";
     paths = [
@@ -41,11 +42,11 @@ let
 in
 {
   home-manager.users.root = { ... }: (base "/root" "root");
-  home-manager.users.charlotte = { ... }: (base "/home/charlotte" "charlotte");
+  home-manager.users.${username} = { ... }: (base "/home/${username}" username);
   programs.fuse.enable = config.chvp.graphical.enable;
   age.secrets."files/programs/ssh/host_configuration_charlotte" = {
     file = ../../../secrets/files/programs/ssh/host_configuration.age;
-    owner = "charlotte";
+    owner = username;
   };
   age.secrets."files/programs/ssh/host_configuration_root" = {
     file = ../../../secrets/files/programs/ssh/host_configuration.age;

@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+  in
 {
   options.chvp.graphical.terminal.enable = lib.mkOption {
     default = false;
@@ -7,7 +10,7 @@
   };
 
   config = lib.mkIf config.chvp.graphical.terminal.enable {
-    home-manager.users.charlotte = { pkgs, ... }: {
+    home-manager.users.${username} = {
       home.packages = [ pkgs.foot ];
       programs.foot = {
         enable = true;

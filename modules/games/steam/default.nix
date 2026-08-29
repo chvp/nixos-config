@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.games.steam.enable = lib.mkOption {
     default = false;
@@ -21,7 +24,7 @@
       ];
     };
 
-    home-manager.users.charlotte = { pkgs, ... }: {
+    home-manager.users.${username} = {
       home.packages = [ pkgs.steam pkgs.protontricks pkgs.wine ];
     };
   };

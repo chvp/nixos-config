@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+  in
 {
   imports = [
     ./compositor
@@ -20,7 +23,7 @@
   };
 
   config = lib.mkIf config.chvp.graphical.enable {
-    users.users.charlotte.extraGroups = [ "input" "video" ];
+    users.users.${username}.extraGroups = [ "input" "video" ];
     chvp = {
       base = {
         zfs.homeLinks = [
@@ -48,7 +51,7 @@
 
     services.udev.packages = [ pkgs.keychron-udev-rules ];
 
-    home-manager.users.charlotte = { ... }: {
+    home-manager.users.${username} = { ... }: {
       home.packages = with pkgs; [ gimp mpv kdePackages.okular ranger uni wtype google-chrome accentor-desktop ];
       services.polkit-gnome.enable = true;
       systemd.user.services.accentord = {

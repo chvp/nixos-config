@@ -1,5 +1,8 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = config.chvp.username;
+in
 {
   options.chvp.graphical.xdg.enable = lib.mkOption {
     default = false;
@@ -17,7 +20,7 @@
       { path = "videos"; type = "data"; }
     ];
 
-    home-manager.users.charlotte = { pkgs, ... }: {
+    home-manager.users.${username} = { pkgs, ... }: {
       home.packages = with pkgs; [ xdg-user-dirs xdg-utils ];
       xdg = {
         enable = true;
