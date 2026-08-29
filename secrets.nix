@@ -39,9 +39,6 @@ in
 
   "secrets/passwords/networks.age".publicKeys = nixosPersonals ++ users;
 
-  "secrets/files/programs/vpn/local.age".publicKeys = personals ++ users;
-  "secrets/files/programs/vpn/global.age".publicKeys = personals ++ users;
-
   "secrets/passwords/services/accentor.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/passwords/services/atticd.age".publicKeys = [ marabethia ] ++ users;
