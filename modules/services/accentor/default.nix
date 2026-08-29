@@ -38,7 +38,7 @@ in
         runAs = "accentor";
         commands = [
           {
-            command = "accentor-console";
+            command = "/run/current-system/sw/bin/accentor-console";
             options = [ "NOPASSWD" ];
           }
         ];

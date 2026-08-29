@@ -136,21 +136,21 @@ in
 
     security = {
       sudo = {
-        enable = false;
+        enable = true;
         extraRules = [
           {
             users = [ username ];
             runAs = "root";
             commands = [
               {
-                command = "nix-collect-garbage";
+                command = "/run/current-system/sw/bin/nix-collect-garbage";
                 options = [ "NOPASSWD" ];
               }
             ];
           }
         ];
       };
-      pam.services.sudo.fprintAuth = true;
+      pam.services.sudo.fprintAuth = config.services.fprintd.enable;
       polkit.enable = true;
     };
 
