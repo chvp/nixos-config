@@ -92,20 +92,19 @@ in
       });
     };
 
-    home-manager.users.${username} =
-      lib.recursiveUpdate {
-        home.packages = [
-          pkgs.cachix
-          pkgs.attic-client
-        ];
-        programs = {
-          command-not-found.enable = false;
-          nix-index = {
-            enable = true;
-            package = config.programs.nix-index.package;
-          };
+    home-manager.users.${username} = lib.recursiveUpdate {
+      home.packages = [
+        pkgs.cachix
+        pkgs.attic-client
+      ];
+      programs = {
+        command-not-found.enable = false;
+        nix-index = {
+          enable = true;
+          package = config.programs.nix-index.package;
         };
-      } (lib.optionalAttrs config.chvp.base.nix.enableDirenv baseDirenv);
+      };
+    } (lib.optionalAttrs config.chvp.base.nix.enableDirenv baseDirenv);
 
   };
 }
