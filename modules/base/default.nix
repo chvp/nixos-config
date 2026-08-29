@@ -46,10 +46,20 @@ in
       default = "charlotte";
       example = "charlotte.vanpetegem";
     };
+    base = {
+      setupAutoUpgrade = lib.mkOption {
+        default = true;
+        example = false;
+      };
+      setupUsers = lib.mkOption {
+        default = true;
+        example = false;
+      };
+    };
   };
 
   config = {
-    system.autoUpgrade = {
+    system.autoUpgrade = lib.mkIf config.chvp.base.setupAutoUpgrade {
       enable = true;
       flake = "git+https://git.chvp.be/chvp/nixos-config";
       dates = "2:00";
@@ -63,8 +73,6 @@ in
         upper = "05:00";
       };
     };
-
-    boot.kernelParams = [ "mitigations=off" ];
 
     console = {
       colors = [
@@ -127,18 +135,22 @@ in
     };
 
     security = {
-      sudo.enable = false;
-      doas = {
-        enable = true;
+      sudo = {
+        enable = false;
         extraRules = [
           {
             users = [ username ];
-            noPass = true;
-            cmd = "nix-collect-garbage";
             runAs = "root";
+            commands = [
+              {
+                command = "nix-collect-garbage";
+                options = [ "NOPASSWD" ];
+              }
+            ];
           }
         ];
       };
+      pam.services.sudo.fprintAuth = true;
       polkit.enable = true;
     };
 
@@ -146,7 +158,7 @@ in
 
     system.stateVersion = config.chvp.systemStateVersion;
 
-    users = {
+    users = lib.mkIf config.chvp.base.setupUsers {
       mutableUsers = false;
       defaultUserShell = pkgs.zsh;
       users = {

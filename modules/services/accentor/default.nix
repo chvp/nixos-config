@@ -32,12 +32,16 @@ in
       };
     };
 
-    security.doas.extraRules = [
+    security.sudo.extraRules = [
       {
         users = [ username ];
-        noPass = true;
-        cmd = "accentor-console";
         runAs = "accentor";
+        commands = [
+          {
+            command = "accentor-console";
+            options = [ "NOPASSWD" ];
+          }
+        ];
       }
     ];
 
