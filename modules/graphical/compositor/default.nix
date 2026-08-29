@@ -12,7 +12,7 @@ let
     inherit pkgs;
     stdenv = pkgs.stdenv;
   };
-  color-picker = import ./color-picker.nix { inherit pkgs; };
+  color-picker = import ./color-picker.nix { inherit pkgs unstablePkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
   lock = pkgs.writeShellScript "lock" ''
     if [ "$(${pkgs.darkman}/bin/darkman get)" == "light" ]
