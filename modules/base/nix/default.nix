@@ -22,6 +22,10 @@ in
       default = true;
       example = false;
     };
+    enableGc = lib.mkOption {
+      default = true;
+      example = false;
+    };
     slowGc = lib.mkOption {
       default = false;
       example = true;
@@ -30,7 +34,7 @@ in
 
   config = {
     nix = {
-      gc = {
+      gc = lib.mkIf config.chvp.base.nix.enableGc {
         automatic = true;
         dates = if config.chvp.base.nix.slowGc then "weekly" else "hourly";
         options = "--delete-older-than 7d";
