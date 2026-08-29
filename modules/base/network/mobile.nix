@@ -111,9 +111,7 @@ in
         };
       };
 
-      home-manager.users.${username} = { ... }: {
-        services.network-manager-applet.enable = true;
-      };
+      home-manager.users.${username}.services.network-manager-applet.enable = true;
 
       age.secrets."passwords/networks.age".file = ../../../secrets/passwords/networks.age;
     };

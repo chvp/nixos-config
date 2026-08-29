@@ -99,7 +99,7 @@ in
     ];
   };
 
-  home-manager.users.${username} = { ... }: {
+  home-manager.users.${username} = {
     services.network-manager-applet.enable = lib.mkForce false;
   };
 

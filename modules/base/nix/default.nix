@@ -93,7 +93,6 @@ in
     };
 
     home-manager.users.${username} =
-      { ... }:
       lib.recursiveUpdate {
         home.packages = [
           pkgs.cachix

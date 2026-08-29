@@ -36,7 +36,7 @@ in
       ''
     ];
 
-    home-manager.users.${username} = { ... }: {
+    home-manager.users.${username} = {
       home.packages = [ pkgs.keepassxc ];
       systemd.user.services.keepassxc = {
         Unit = {

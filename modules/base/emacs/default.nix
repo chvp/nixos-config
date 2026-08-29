@@ -48,7 +48,7 @@ in
         type = "cache";
       }
     ];
-    home-manager.users.${username} = { ... }: {
+    home-manager.users.${username} = {
       home = {
         file = {
           ".emacs.d/init.el".text = config.chvp.base.emacs.fullConfig;

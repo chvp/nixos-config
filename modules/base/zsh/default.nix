@@ -103,7 +103,7 @@ in
   // {
     home-manager.users = builtins.foldl' (a: b: a // b) { } (
       builtins.map (name: {
-        "${name}" = { ... }: (base config.users.users.${name}.home);
+        "${name}" = (base config.users.users.${name}.home);
       }) config.chvp.base.zsh.usersToConfigure
     );
   };

@@ -122,7 +122,7 @@
           })
         ]
       );
-      module = { ... }: {
+      module = {
         imports = [
           inputs.accentor.nixosModules.default
           inputs.agenix.nixosModules.default
