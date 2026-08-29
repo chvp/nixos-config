@@ -42,6 +42,10 @@ let
 in
 {
   options.chvp.base.network.wireguard = {
+    enable = lib.mkOption {
+      default = true;
+      example = false;
+    };
     server = lib.mkOption {
       default = false;
       example = true;
@@ -60,7 +64,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf config.chvp.base.network.wireguard.enable {
     networking.firewall = {
       allowedUDPPorts = lib.optional config.chvp.base.network.wireguard.server 51820;
       allowedTCPPorts = lib.optional config.chvp.base.network.wireguard.server 8080;
