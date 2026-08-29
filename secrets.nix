@@ -96,7 +96,6 @@ in
   "secrets/files/wireguard/kholinar.privkey.age".publicKeys = [ kholinar ] ++ users;
   "secrets/files/wireguard/marabethia.privkey.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/wireguard/purelake.privkey.age".publicKeys = [ purelake ] ++ users;
-  "secrets/files/wireguard/thaylen-city.privkey.age".publicKeys = [ thaylen-city ] ++ users;
   "secrets/files/wireguard/psk.age".publicKeys = hosts ++ users;
 
   "secrets/data-access/ssh_host_rsa_key.age".publicKeys = [ elendel ] ++ users;

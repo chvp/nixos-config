@@ -31,11 +31,6 @@ let
       privkeyFile = config.age.secrets."files/wireguard/purelake.privkey".path;
       ip = "10.240.0.6";
     };
-    thaylen-city = {
-      pubkey = "O0q2/W7dRM4LvAL9MSDZqAbGSzqi8AHLVl1sJsRDsUY=";
-      privkeyFile = config.age.secrets."files/wireguard/thaylen-city.privkey".path;
-      ip = "10.240.0.5";
-    };
   };
   subnet = "10.240.0.0/24";
   pskFile = config.age.secrets."files/wireguard/psk".path;
