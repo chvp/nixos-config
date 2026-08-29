@@ -31,7 +31,6 @@ in
   config =
     with config.chvp.base.network.mobile;
     lib.mkIf enable {
-      environment.systemPackages = [ pkgs.wpa_supplicant_gui ];
       users.users.${username}.extraGroups = [ "networkmanager" ];
       networking = {
         networkmanager = {
