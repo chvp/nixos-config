@@ -52,11 +52,13 @@ in
           isReadOnly = true;
         };
       };
-      forwardPorts = [{
-        containerPort = 22;
-        hostPort = 2002;
-        protocol = "tcp";
-      }];
+      forwardPorts = [
+        {
+          containerPort = 22;
+          hostPort = 2002;
+          protocol = "tcp";
+        }
+      ];
       privateNetwork = true;
       hostAddress = "192.168.100.10";
       hostAddress6 = "fc00::1";

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -37,8 +42,14 @@ in
 
   config = lib.mkIf config.chvp.graphical.firefox.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/mozilla"; type = "data"; }
-      { path = ".cache/mozilla"; type = "cache"; }
+      {
+        path = ".config/mozilla";
+        type = "data";
+      }
+      {
+        path = ".cache/mozilla";
+        type = "cache";
+      }
     ];
     home-manager.users.${username} = { config, ... }: {
       programs.firefox = {
@@ -54,9 +65,15 @@ in
           DisablePocket = true;
           DisableTelemetry = true;
           DisableFirefoxAccounts = true;
-          FirefoxHome = { Pocket = false; Snippets = false; };
+          FirefoxHome = {
+            Pocket = false;
+            Snippets = false;
+          };
           OfferToSaveLogins = false;
-          UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
+          UserMessaging = {
+            SkipOnboarding = true;
+            ExtensionRecommendations = false;
+          };
         };
         profiles.default = {
           extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [

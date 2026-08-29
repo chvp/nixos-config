@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -27,12 +32,14 @@ in
       };
     };
 
-    security.doas.extraRules = [{
-      users = [ username ];
-      noPass = true;
-      cmd = "accentor-console";
-      runAs = "accentor";
-    }];
+    security.doas.extraRules = [
+      {
+        users = [ username ];
+        noPass = true;
+        cmd = "accentor-console";
+        runAs = "accentor";
+      }
+    ];
 
     age.secrets."passwords/services/accentor" = {
       file = ../../../secrets/passwords/services/accentor.age;

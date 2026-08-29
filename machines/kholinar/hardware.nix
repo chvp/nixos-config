@@ -1,4 +1,10 @@
-{ config, lib, pkgs, modulesPath, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -9,13 +15,18 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "nvme" "sd_mod" "thunderbolt" "usb_storage" "xhci_pci" ];
+      availableKernelModules = [
+        "nvme"
+        "sd_mod"
+        "thunderbolt"
+        "usb_storage"
+        "xhci_pci"
+      ];
       kernelModules = [ "i915" ];
     };
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
   };
-
 
   fileSystems."/" = {
     device = "rpool/local/root";
@@ -50,7 +61,10 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/E13E-B160";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   swapDevices = [

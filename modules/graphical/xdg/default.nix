@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -11,17 +16,41 @@ in
 
   config = lib.mkIf config.chvp.graphical.xdg.enable {
     chvp.base.zfs.homeLinks = [
-      { path = "desktop"; type = "data"; }
-      { path = "documents"; type = "data"; }
-      { path = "downloads"; type = "cache"; }
-      { path = "music"; type = "data"; }
-      { path = "pictures"; type = "cache"; }
-      { path = "templates"; type = "data"; }
-      { path = "videos"; type = "data"; }
+      {
+        path = "desktop";
+        type = "data";
+      }
+      {
+        path = "documents";
+        type = "data";
+      }
+      {
+        path = "downloads";
+        type = "cache";
+      }
+      {
+        path = "music";
+        type = "data";
+      }
+      {
+        path = "pictures";
+        type = "cache";
+      }
+      {
+        path = "templates";
+        type = "data";
+      }
+      {
+        path = "videos";
+        type = "data";
+      }
     ];
 
     home-manager.users.${username} = { pkgs, ... }: {
-      home.packages = with pkgs; [ xdg-user-dirs xdg-utils ];
+      home.packages = with pkgs; [
+        xdg-user-dirs
+        xdg-utils
+      ];
       xdg = {
         enable = true;
         # Some applications overwrite mimeapps.list with an identical file

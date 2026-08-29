@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.chvp.services.matrix.enable = lib.mkOption {
@@ -29,17 +34,28 @@
         settings = {
           server_name = "vanpetegem.me";
           public_baseurl = "https://matrix.vanpetegem.me";
-          listeners = [{
-            port = 8448;
-            bind_addresses = [ "::1" "127.0.0.1" ];
-            type = "http";
-            tls = false;
-            x_forwarded = true;
-            resources = [
-              { names = [ "client" ]; compress = true; }
-              { names = [ "federation" ]; compress = false; }
-            ];
-          }];
+          listeners = [
+            {
+              port = 8448;
+              bind_addresses = [
+                "::1"
+                "127.0.0.1"
+              ];
+              type = "http";
+              tls = false;
+              x_forwarded = true;
+              resources = [
+                {
+                  names = [ "client" ];
+                  compress = true;
+                }
+                {
+                  names = [ "federation" ];
+                  compress = false;
+                }
+              ];
+            }
+          ];
           url_preview_enabled = true;
           enable_metrics = false;
           enable_registration = false;
@@ -86,10 +102,19 @@
       mautrix-whatsapp = {
         description = "Matrix <-> WhatsApp bridge";
         wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" "postgresql.service" "matrix-synapse.service" ];
-        requires = [ "postgresql.service" "matrix-synapse.service" ];
+        after = [
+          "network.target"
+          "postgresql.service"
+          "matrix-synapse.service"
+        ];
+        requires = [
+          "postgresql.service"
+          "matrix-synapse.service"
+        ];
         upholds = [ "matrix-synapse.service" ];
-        script = "${pkgs.mautrix-whatsapp}/bin/mautrix-whatsapp --config ${config.age.secrets."files/services/mautrix-whatsapp/config.yml".path}";
+        script = "${pkgs.mautrix-whatsapp}/bin/mautrix-whatsapp --config ${
+          config.age.secrets."files/services/mautrix-whatsapp/config.yml".path
+        }";
         serviceConfig = {
           User = "mautrix-whatsapp";
           Group = "mautrix-whatsapp";

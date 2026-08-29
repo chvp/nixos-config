@@ -1,22 +1,29 @@
-{ devshell
-, lib
-, inputs
-, cmake
-, libyaml
-, nodejs
-, openssl
-, postgresql_14
-, ruby_4_0
-, yarn
-, zlib
+{
+  devshell,
+  lib,
+  inputs,
+  cmake,
+  libyaml,
+  nodejs,
+  openssl,
+  postgresql_14,
+  ruby_4_0,
+  yarn,
+  zlib,
 }:
 
 devshell.mkShell {
   name = "Gamification 2";
   imports = [ "${inputs.devshell}/extra/language/ruby.nix" ];
   env = [
-    { name = "PGDATA"; eval = "$PRJ_DATA_DIR/postgres"; }
-    { name = "DATABASE_HOST"; eval = "$PGDATA"; }
+    {
+      name = "PGDATA";
+      eval = "$PRJ_DATA_DIR/postgres";
+    }
+    {
+      name = "DATABASE_HOST";
+      eval = "$PGDATA";
+    }
   ];
   commands = [
     {
@@ -71,6 +78,11 @@ devshell.mkShell {
   };
   language.ruby = {
     package = ruby_4_0;
-    nativeDeps = [ postgresql_14 zlib openssl libyaml ];
+    nativeDeps = [
+      postgresql_14
+      zlib
+      openssl
+      libyaml
+    ];
   };
 }

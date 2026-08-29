@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -11,9 +16,18 @@ in
 
   config = lib.mkIf config.chvp.programs.element.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/nheko"; type = "data"; }
-      { path = ".local/share/nheko"; type = "data"; }
-      { path = ".cache/nheko"; type = "cache"; }
+      {
+        path = ".config/nheko";
+        type = "data";
+      }
+      {
+        path = ".local/share/nheko";
+        type = "data";
+      }
+      {
+        path = ".cache/nheko";
+        type = "cache";
+      }
     ];
     home-manager.users.${username}.home.packages = [ pkgs.nheko ];
   };

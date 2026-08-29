@@ -21,6 +21,9 @@ in
 
 {
   config.home-manager.users = builtins.foldl' (a: b: a // b) { } (
-    builtins.map (name: { "${name}" = base; }) [ username "root" ]
+    builtins.map (name: { "${name}" = base; }) [
+      username
+      "root"
+    ]
   );
 }

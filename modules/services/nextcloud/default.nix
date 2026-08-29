@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.chvp.services.nextcloud.enable = lib.mkOption {
@@ -7,7 +12,10 @@
   };
   config = lib.mkIf config.chvp.services.nextcloud.enable {
     chvp.base.zfs.systemLinks = [
-      { path = "/var/lib/redis-nextcloud"; type = "cache"; }
+      {
+        path = "/var/lib/redis-nextcloud";
+        type = "cache";
+      }
     ];
     services = {
       nextcloud = {

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -17,15 +22,31 @@ in
     services.pipewire.alsa.support32Bit = true;
     chvp.base = {
       zfs.homeLinks = [
-        { path = ".paradoxlauncher"; type = "cache"; }
-        { path = ".steam"; type = "cache"; }
-        { path = ".local/share/Steam"; type = "cache"; }
-        { path = ".local/share/Paradox Interactive"; type = "cache"; }
+        {
+          path = ".paradoxlauncher";
+          type = "cache";
+        }
+        {
+          path = ".steam";
+          type = "cache";
+        }
+        {
+          path = ".local/share/Steam";
+          type = "cache";
+        }
+        {
+          path = ".local/share/Paradox Interactive";
+          type = "cache";
+        }
       ];
     };
 
     home-manager.users.${username} = {
-      home.packages = [ pkgs.steam pkgs.protontricks pkgs.wine ];
+      home.packages = [
+        pkgs.steam
+        pkgs.protontricks
+        pkgs.wine
+      ];
     };
   };
 }

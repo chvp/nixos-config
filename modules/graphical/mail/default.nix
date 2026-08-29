@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -11,8 +16,14 @@ in
 
   config = lib.mkIf config.chvp.graphical.mail.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".cache/thunderbird"; type = "cache"; }
-      { path = ".thunderbird"; type = "cache"; }
+      {
+        path = ".cache/thunderbird";
+        type = "cache";
+      }
+      {
+        path = ".thunderbird";
+        type = "cache";
+      }
     ];
     home-manager.users.${username} = {
       home.packages = [ pkgs.thunderbird ];

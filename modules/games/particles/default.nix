@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   particles = pkgs.fetchgit {
@@ -13,12 +18,14 @@ in
   };
 
   config = lib.mkIf config.chvp.games.particles.server {
-    chvp.services.nginx.hosts = [{
-      fqdn = "particles.vanpetegem.me";
-      options = {
-        root = "${particles}/public";
-        locations."/".index = "index.html";
-      };
-    }];
+    chvp.services.nginx.hosts = [
+      {
+        fqdn = "particles.vanpetegem.me";
+        options = {
+          root = "${particles}/public";
+          locations."/".index = "index.html";
+        };
+      }
+    ];
   };
 }

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -10,7 +15,12 @@ in
   };
 
   config = lib.mkIf config.chvp.base.bluetooth.enable {
-    chvp.base.zfs.systemLinks = [{ path = "/var/lib/bluetooth"; type = "cache"; }];
+    chvp.base.zfs.systemLinks = [
+      {
+        path = "/var/lib/bluetooth";
+        type = "cache";
+      }
+    ];
 
     hardware.bluetooth.enable = true;
     services.blueman.enable = true;

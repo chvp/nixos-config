@@ -1,8 +1,9 @@
-{ devshell
-, texliveFull
-, gnumake
-, pandoc
-, ...
+{
+  devshell,
+  texliveFull,
+  gnumake,
+  pandoc,
+  ...
 }:
 
 devshell.mkShell {

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -11,8 +16,14 @@ in
 
   config = lib.mkIf config.chvp.games.mumble.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/Mumble"; type = "cache"; }
-      { path = ".local/share/Mumble"; type = "cache"; }
+      {
+        path = ".config/Mumble";
+        type = "cache";
+      }
+      {
+        path = ".local/share/Mumble";
+        type = "cache";
+      }
     ];
 
     home-manager.users.${username} = {

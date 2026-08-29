@@ -1,10 +1,11 @@
-{ devshell
-, inputs
-, libffi
-, libyaml
-, nodejs
-, ruby_4_0
-, zlib
+{
+  devshell,
+  inputs,
+  libffi,
+  libyaml,
+  nodejs,
+  ruby_4_0,
+  zlib,
 }:
 
 devshell.mkShell {
@@ -13,6 +14,10 @@ devshell.mkShell {
   packages = [ nodejs ];
   language.ruby = {
     package = ruby_4_0;
-    nativeDeps = [ zlib libffi libyaml ];
+    nativeDeps = [
+      zlib
+      libffi
+      libyaml
+    ];
   };
 }

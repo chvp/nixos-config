@@ -17,18 +17,36 @@
     group = "sftponly";
     hashedPasswordFile = "/run/secrets/readonly_password_file";
   };
-  users.groups.sftponly = { gid = 10000; };
-  environment.systemPackages = [ pkgs.rsync pkgs.mktorrent (pkgs.writeShellScriptBin "create_torrent" ". /run/secrets/create_torrent") ];
+  users.groups.sftponly = {
+    gid = 10000;
+  };
+  environment.systemPackages = [
+    pkgs.rsync
+    pkgs.mktorrent
+    (pkgs.writeShellScriptBin "create_torrent" ". /run/secrets/create_torrent")
+  ];
   security.sudo.enable = false;
   services.openssh = {
     enable = true;
     hostKeys = [
-      { bits = 4096; path = "/run/secrets/ssh_host_rsa_key"; type = "rsa"; }
-      { path = "/run/secrets/ssh_host_ed25519_key"; type = "ed25519"; }
+      {
+        bits = 4096;
+        path = "/run/secrets/ssh_host_rsa_key";
+        type = "rsa";
+      }
+      {
+        path = "/run/secrets/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
     ];
     settings = {
       HostKeyAlgorithms = "+ssh-rsa";
-      Macs = [ "hmac-sha2-512-etm@openssh.com" "hmac-sha2-256-etm@openssh.com" "umac-128-etm@openssh.com" "hmac-sha2-512" ];
+      Macs = [
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "umac-128-etm@openssh.com"
+        "hmac-sha2-512"
+      ];
       PermitRootLogin = "no";
     };
     extraConfig = ''

@@ -84,33 +84,44 @@
     };
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     let
-      patches = builtins.map (patch: ./patches + "/${patch}") (builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches)));
-      # Avoid IFD if there are no patches
-      nixpkgsForSystem = system: if patches == [ ] then inputs.nixpkgs else
-      (
-        ((import inputs.nixpkgs { inherit system; }).pkgs.applyPatches {
-          inherit patches;
-          name = "nixpkgs-patched-${inputs.nixpkgs.shortRev}";
-          src = inputs.nixpkgs;
-        }).overrideAttrs (old: {
-          preferLocalBuild = false;
-          allowSubstitutes = true;
-        })
+      patches = builtins.map (patch: ./patches + "/${patch}") (
+        builtins.filter (x: x != ".keep") (builtins.attrNames (builtins.readDir ./patches))
       );
-      overlay = (self: super: super.lib.foldl' (acc: elem: super.lib.recursiveUpdate acc (elem self super)) { } [
-        inputs.agenix.overlays.default
-        inputs.accentor.overlays.default
-        inputs.devshell.overlays.default
-        inputs.emacs-overlay.overlays.default
-        inputs.nur.overlays.default
-        inputs.www-chvp-be.overlays.default
-        (self: super: {
-          accentor-desktop = inputs.accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
-          tetris = inputs.tetris.packages.${self.stdenv.hostPlatform.system}.default;
-        })
-      ]);
+      # Avoid IFD if there are no patches
+      nixpkgsForSystem =
+        system:
+        if patches == [ ] then
+          inputs.nixpkgs
+        else
+          (
+            ((import inputs.nixpkgs { inherit system; }).pkgs.applyPatches {
+              inherit patches;
+              name = "nixpkgs-patched-${inputs.nixpkgs.shortRev}";
+              src = inputs.nixpkgs;
+            }).overrideAttrs
+            (old: {
+              preferLocalBuild = false;
+              allowSubstitutes = true;
+            })
+          );
+      overlay = (
+        self: super:
+        super.lib.foldl' (acc: elem: super.lib.recursiveUpdate acc (elem self super)) { } [
+          inputs.agenix.overlays.default
+          inputs.accentor.overlays.default
+          inputs.devshell.overlays.default
+          inputs.emacs-overlay.overlays.default
+          inputs.nur.overlays.default
+          inputs.www-chvp-be.overlays.default
+          (self: super: {
+            accentor-desktop = inputs.accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
+            tetris = inputs.tetris.packages.${self.stdenv.hostPlatform.system}.default;
+          })
+        ]
+      );
       module = { ... }: {
         imports = [
           inputs.accentor.nixosModules.default
@@ -121,26 +132,29 @@
           ./modules
         ];
       };
-      nixosSystem = system: name: extraModules:
+      nixosSystem =
+        system: name: extraModules:
         let
           nixpkgs = nixpkgsForSystem system;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ overlay ];
             config = {
-              allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-                "google-chrome"
-                "minecraft-launcher"
-                "minecraft-server"
-                "nvidia-kernel-modules"
-                "nvidia-settings"
-                "nvidia-x11"
-                "steam"
-                "steam-original"
-                "steam-run"
-                "steam-runtime"
-                "steam-unwrapped"
-              ];
+              allowUnfreePredicate =
+                pkg:
+                builtins.elem (lib.getName pkg) [
+                  "google-chrome"
+                  "minecraft-launcher"
+                  "minecraft-server"
+                  "nvidia-kernel-modules"
+                  "nvidia-settings"
+                  "nvidia-x11"
+                  "steam"
+                  "steam-original"
+                  "steam-run"
+                  "steam-runtime"
+                  "steam-unwrapped"
+                ];
               permittedInsecurePackages = [ "olm-3.2.16" ];
             };
           };
@@ -148,10 +162,17 @@
         in
         inputs.nixpkgs.lib.nixosSystem {
           inherit lib system;
-          specialArgs = { modulesPath = toString (nixpkgs + "/nixos/modules"); };
+          specialArgs = {
+            modulesPath = toString (nixpkgs + "/nixos/modules");
+          };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
-          modules = [ module ] ++ extraModules ++ [
-            ({ config, ... }:
+          modules = [
+            module
+          ]
+          ++ extraModules
+          ++ [
+            (
+              { config, ... }:
               {
                 _module.args = { inherit inputs; };
                 nixpkgs = {
@@ -161,15 +182,22 @@
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // { nixpkgs = { flake = nixpkgs; }; };
+                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // {
+                    nixpkgs = {
+                      flake = nixpkgs;
+                    };
+                  };
                 };
-              })
+              }
+            )
             ./machines/${name}
           ];
         };
       nixosConfigurations = {
         elendel = nixosSystem "x86_64-linux" "elendel" [ ];
-        kholinar = nixosSystem "x86_64-linux" "kholinar" [ inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series ];
+        kholinar = nixosSystem "x86_64-linux" "kholinar" [
+          inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
+        ];
         marabethia = nixosSystem "x86_64-linux" "marabethia" [ ];
         purelake = nixosSystem "x86_64-linux" "purelake" [ ];
       };
@@ -181,12 +209,17 @@
       inherit nixosConfigurations;
       nixosModules.default = module;
       overlays.default = overlay;
-      devShells = builtins.mapAttrs
-        (system: pkgs':
-          let
-            pkgs = pkgs'.extend overlay;
-          in
-          builtins.listToAttrs (builtins.map (name: { inherit name; value = pkgs.callPackage (./shells + "/${name}.nix") { inputs = inputs; }; }) shellNames))
-        inputs.nixpkgs.legacyPackages;
+      devShells = builtins.mapAttrs (
+        system: pkgs':
+        let
+          pkgs = pkgs'.extend overlay;
+        in
+        builtins.listToAttrs (
+          builtins.map (name: {
+            inherit name;
+            value = pkgs.callPackage (./shells + "/${name}.nix") { inputs = inputs; };
+          }) shellNames
+        )
+      ) inputs.nixpkgs.legacyPackages;
     };
 }

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.chvp.services.attic.enable = lib.mkOption {
@@ -53,10 +58,12 @@
         };
       };
       postgresql = {
-        ensureUsers = [{
-          name = "atticd";
-          ensureDBOwnership = true;
-        }];
+        ensureUsers = [
+          {
+            name = "atticd";
+            ensureDBOwnership = true;
+          }
+        ];
         ensureDatabases = [ "atticd" ];
       };
     };

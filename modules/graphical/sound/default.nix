@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -11,7 +16,10 @@ in
 
   config = lib.mkIf config.chvp.graphical.sound.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".local/state/wireplumber"; type = "cache"; }
+      {
+        path = ".local/state/wireplumber";
+        type = "cache";
+      }
     ];
 
     home-manager.users.${username} = { ... }: {

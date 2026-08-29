@@ -1,8 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
-  launcher = import ./launcher.nix { inherit pkgs; stdenv = pkgs.stdenv; };
+  launcher = import ./launcher.nix {
+    inherit pkgs;
+    stdenv = pkgs.stdenv;
+  };
   color-picker = import ./color-picker.nix { inherit pkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
   lock = pkgs.writeShellScript "lock" ''
@@ -31,10 +39,20 @@ let
   '';
   mango = pkgs.symlinkJoin {
     name = "mango-${pkgs.mango.version}";
-    paths = [ baseWrapper pkgs.mango ];
+    paths = [
+      baseWrapper
+      pkgs.mango
+    ];
     strictDeps = false;
-    nativeBuildInputs = with pkgs; [ makeWrapper wrapGAppsHook3 ];
-    buildInputs = with pkgs; [ gdk-pixbuf glib gtk3 ];
+    nativeBuildInputs = with pkgs; [
+      makeWrapper
+      wrapGAppsHook3
+    ];
+    buildInputs = with pkgs; [
+      gdk-pixbuf
+      glib
+      gtk3
+    ];
     dontWrapGApps = true;
     postBuild = ''
       gappsWrapperArgsHook
@@ -202,7 +220,8 @@ in
   config = lib.mkIf config.chvp.graphical.compositor.enable {
     nixpkgs.overlays = [
       (self: super: {
-        waybar = super.waybar.overrideAttrs (old:
+        waybar = super.waybar.overrideAttrs (
+          old:
           let
             libcava = rec {
               version = "1.0.0";
@@ -229,7 +248,8 @@ in
               popd
             '';
             buildInputs = old.buildInputs ++ [ pkgs.modemmanager ];
-          });
+          }
+        );
       })
     ];
     services = {
@@ -256,7 +276,10 @@ in
     security.pam.services.swaylock.fprintAuth = true;
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr ];
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-wlr
+      ];
       config.preferred = {
         default = "gtk";
         "org.freedesktop.impl.portal.Screencast" = "wlr";
@@ -278,10 +301,25 @@ in
               spacing = 2;
               modules-left = [ "mango/workspaces" ];
               modules-center = [ "mango/window" ];
-              modules-right = [ "idle_inhibitor" "network#wlp192s0" "battery" "backlight" "custom/notification" "pulseaudio" "clock" "tray" ];
+              modules-right = [
+                "idle_inhibitor"
+                "network#wlp192s0"
+                "battery"
+                "backlight"
+                "custom/notification"
+                "pulseaudio"
+                "clock"
+                "tray"
+              ];
               backlight = {
                 format = "{percent}% {icon}";
-                format-icons = [ "🌑" "🌒" "🌓" "🌔" "🌕" ];
+                format-icons = [
+                  "🌑"
+                  "🌒"
+                  "🌓"
+                  "🌔"
+                  "🌕"
+                ];
                 on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl s -- +5%";
                 on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl s -- -5%";
               };
@@ -295,7 +333,13 @@ in
                 format-charging = "{capacity}% ";
                 format-plugged = "";
                 format-alt = "{time} {icon}";
-                format-icons = [ "" "" "" "" "" ];
+                format-icons = [
+                  ""
+                  ""
+                  ""
+                  ""
+                  ""
+                ];
               };
               clock.format = " {:%a %d/%m %H:%M}";
               "custom/notification" = {
@@ -347,7 +391,11 @@ in
                   phone = "";
                   portable = "";
                   car = "";
-                  default = [ "" "" "" ];
+                  default = [
+                    ""
+                    ""
+                    ""
+                  ];
                 };
                 on-click = "${pkgs.pamixer}/bin/pamixer -t";
                 on-click-right = "${pkgs.pamixer}/bin/pamixer --default-source -t";
@@ -441,7 +489,12 @@ in
               profile = {
                 name = "home-undocked";
                 outputs = [
-                  { criteria = "BOE 0x0BCA"; position = "0,0"; mode = "2256x1504"; scale = 1.0; }
+                  {
+                    criteria = "BOE 0x0BCA";
+                    position = "0,0";
+                    mode = "2256x1504";
+                    scale = 1.0;
+                  }
                 ];
               };
             }
@@ -449,8 +502,18 @@ in
               profile = {
                 name = "home-docked";
                 outputs = [
-                  { criteria = "BOE 0x0BCA"; position = "0,0"; mode = "2256x1504"; scale = 1.0; }
-                  { criteria = "LG Electronics LG ULTRAFINE 411NTJJ2F300"; position = "2256,0"; mode = "3840x2160"; scale = 1.0; }
+                  {
+                    criteria = "BOE 0x0BCA";
+                    position = "0,0";
+                    mode = "2256x1504";
+                    scale = 1.0;
+                  }
+                  {
+                    criteria = "LG Electronics LG ULTRAFINE 411NTJJ2F300";
+                    position = "2256,0";
+                    mode = "3840x2160";
+                    scale = 1.0;
+                  }
                 ];
               };
             }
@@ -461,8 +524,15 @@ in
           enable = true;
           events."before-sleep" = "${lock}";
           timeouts = [
-            { timeout = 150; command = "${pkgs.wlopm}/bin/wlopm --off '*'"; resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'"; }
-            { timeout = 300; command = "${lock}"; }
+            {
+              timeout = 150;
+              command = "${pkgs.wlopm}/bin/wlopm --off '*'";
+              resumeCommand = "${pkgs.wlopm}/bin/wlopm --on '*'";
+            }
+            {
+              timeout = 300;
+              command = "${lock}";
+            }
           ];
         };
         swaync = {
@@ -472,7 +542,13 @@ in
             control-center-margin-bottom = 16;
             control-center-margin-right = 16;
             hide-on-action = false;
-            widgets = [ "mpris" "inhibitors" "title" "dnd" "notifications" ];
+            widgets = [
+              "mpris"
+              "inhibitors"
+              "title"
+              "dnd"
+              "notifications"
+            ];
           };
         };
       };
@@ -527,4 +603,4 @@ in
       wayland.systemd.target = "mango-session.target";
     };
   };
-}  
+}

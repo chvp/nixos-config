@@ -1,4 +1,10 @@
-{ config, inputs, lib, pkgs, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -35,7 +41,7 @@
                 :mode ("\\.r\\'" . ess-r-mode)
                 :mode ("\\.R\\'" . ess-r-mode)
               )
-          
+
               ;; Language server support
               (use-package eglot
                 :demand t
@@ -67,7 +73,7 @@
                 :mode ("\\.fs\\'" . forth-mode)
                 :mode ("\\.fb\\'" . forth-block-mode)
               )
-          
+
               ;; Markdown syntax support
               (use-package markdown-mode
                 :commands (markdown-mode gfm-mode)
@@ -92,7 +98,7 @@
               (use-package python-mode
                 :mode "\\.py\\'"
               )
-          
+
               ;; Ruby language support
               (use-package ruby-mode
                :ensure nil ;; Included with emacs
@@ -162,7 +168,7 @@
                           "\\)*"
                           "\\s-*>\n"))                  ; The end of the tag
               )
-          
+
               ;; HTML (and HTML template) support
               (use-package web-mode
                 :mode "\\.html\\'"
@@ -177,7 +183,12 @@
             ''
           ];
         };
-        zfs.homeLinks = [{ path = "repos"; type = "cache"; }];
+        zfs.homeLinks = [
+          {
+            path = "repos";
+            type = "cache";
+          }
+        ];
       };
       development = {
         docker.enable = lib.mkDefault true;

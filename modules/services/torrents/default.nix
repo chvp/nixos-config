@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -12,7 +17,12 @@ in
   };
 
   config = lib.mkIf config.chvp.services.torrents.enable {
-    chvp.services.nginx.hosts = [{ fqdn = "transmission.vanpetegem.me"; basicProxy = "http://localhost:9091"; }];
+    chvp.services.nginx.hosts = [
+      {
+        fqdn = "transmission.vanpetegem.me";
+        basicProxy = "http://localhost:9091";
+      }
+    ];
 
     services.transmission = {
       enable = true;

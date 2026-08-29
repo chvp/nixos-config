@@ -1,8 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
-  in
+in
 {
   options.chvp.graphical.pass.enable = lib.mkOption {
     default = false;
@@ -11,8 +16,14 @@ let
 
   config = lib.mkIf config.chvp.graphical.pass.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/keepassxc"; type = "data"; }
-      { path = ".cache/keepassxc"; type = "cache"; }
+      {
+        path = ".config/keepassxc";
+        type = "data";
+      }
+      {
+        path = ".cache/keepassxc";
+        type = "cache";
+      }
     ];
 
     chvp.base.emacs.extraConfig = [
@@ -32,7 +43,10 @@ let
           Description = "KeepassXC startup";
           PartOf = [ "mango-session.target" ];
           Wants = [ "waybar.service" ];
-          After = [ "mango-session.target" "waybar.service" ];
+          After = [
+            "mango-session.target"
+            "waybar.service"
+          ];
         };
         Service = {
           ExecStart = "${pkgs.keepassxc}/bin/keepassxc";

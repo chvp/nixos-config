@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -11,9 +16,18 @@ in
 
   config = lib.mkIf config.chvp.graphical.nextcloud-client.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".config/Nextcloud"; type = "cache"; }
-      { path = ".local/share/Nextcloud"; type = "cache"; }
-      { path = "sync"; type = "cache"; }
+      {
+        path = ".config/Nextcloud";
+        type = "cache";
+      }
+      {
+        path = ".local/share/Nextcloud";
+        type = "cache";
+      }
+      {
+        path = "sync";
+        type = "cache";
+      }
     ];
     home-manager.users.${username} = {
       services.nextcloud-client = {

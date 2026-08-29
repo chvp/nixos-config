@@ -1,6 +1,7 @@
-{ devshell
-, nodejs
-, ...
+{
+  devshell,
+  nodejs,
+  ...
 }:
 
 devshell.mkShell {

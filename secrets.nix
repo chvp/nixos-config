@@ -11,7 +11,10 @@ let
     purelake
   ];
   hosts = nixosHosts ++ [ thaylen-city ];
-  nixosPersonals = [ kholinar purelake ];
+  nixosPersonals = [
+    kholinar
+    purelake
+  ];
   personals = nixosPersonals ++ [ thaylen-city ];
   servers = [
     elendel
@@ -42,7 +45,10 @@ in
 
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
-  "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [
+    marabethia
+  ]
+  ++ users;
   "secrets/passwords/services/mail/forgejo_at_robbevp.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/git_at_chvp.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/hallo_at_estherdereys.be.age".publicKeys = [ marabethia ] ++ users;
@@ -52,9 +58,15 @@ in
   "secrets/passwords/services/mail/noreply_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/postbot_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [
+    marabethia
+  ]
+  ++ users;
   "secrets/passwords/services/mail/robbe_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
+  "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [
+    marabethia
+  ]
+  ++ users;
   "secrets/passwords/services/ssmtp-pass.age".publicKeys = nixosHosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;

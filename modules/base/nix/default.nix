@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   baseDirenv = {
@@ -64,31 +69,44 @@ in
             :mode "\\.nix\\'"
             )
         ''
-      ] ++ lib.optional config.chvp.base.nix.enableDirenv ''
+      ]
+      ++ lib.optional config.chvp.base.nix.enableDirenv ''
         ;; Direnv integration in emacs.
         (use-package direnv
           :config (direnv-mode)
           )
       '';
       zfs.homeLinks = [
-        { path = ".config/cachix"; type = "cache"; }
-        { path = ".config/attic"; type = "cache"; }
-      ] ++ (lib.optional config.chvp.base.nix.enableDirenv { path = ".local/share/direnv"; type = "cache"; });
+        {
+          path = ".config/cachix";
+          type = "cache";
+        }
+        {
+          path = ".config/attic";
+          type = "cache";
+        }
+      ]
+      ++ (lib.optional config.chvp.base.nix.enableDirenv {
+        path = ".local/share/direnv";
+        type = "cache";
+      });
     };
 
-    home-manager.users.${username} = { ... }:
-      lib.recursiveUpdate
-        {
-          home.packages = [ pkgs.cachix pkgs.attic-client ];
-          programs = {
-            command-not-found.enable = false;
-            nix-index = {
-              enable = true;
-              package = config.programs.nix-index.package;
-            };
+    home-manager.users.${username} =
+      { ... }:
+      lib.recursiveUpdate {
+        home.packages = [
+          pkgs.cachix
+          pkgs.attic-client
+        ];
+        programs = {
+          command-not-found.enable = false;
+          nix-index = {
+            enable = true;
+            package = config.programs.nix-index.package;
           };
-        }
-        (lib.optionalAttrs config.chvp.base.nix.enableDirenv baseDirenv);
+        };
+      } (lib.optionalAttrs config.chvp.base.nix.enableDirenv baseDirenv);
 
   };
 }

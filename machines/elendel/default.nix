@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [ ./hardware.nix ];
@@ -14,7 +19,9 @@
     enable = true;
     networks."enp7s0" = {
       enable = true;
-      matchConfig = { Name = "enp7s0"; };
+      matchConfig = {
+        Name = "enp7s0";
+      };
       address = [
         "37.27.113.55/26"
         "2a01:4f9:3070:2382::/64"

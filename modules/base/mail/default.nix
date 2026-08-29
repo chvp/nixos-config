@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.msmtp = {
@@ -7,7 +12,9 @@
       auth = true;
       from = "webmaster@vanpetegem.me";
       host = "mail.vanpetegem.me";
-      passwordeval = ''${pkgs.coreutils}/bin/cat ${config.age.secrets."passwords/services/ssmtp-pass".path}'';
+      passwordeval = "${pkgs.coreutils}/bin/cat ${
+        config.age.secrets."passwords/services/ssmtp-pass".path
+      }";
       port = 465;
       tls = true;
       tls_starttls = false;
@@ -17,5 +24,6 @@
     setSendmail = true;
   };
 
-  age.secrets."passwords/services/ssmtp-pass".file = ../../../secrets/passwords/services/ssmtp-pass.age;
+  age.secrets."passwords/services/ssmtp-pass".file =
+    ../../../secrets/passwords/services/ssmtp-pass.age;
 }

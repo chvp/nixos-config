@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -17,10 +22,19 @@ in
           (use-package kotlin-ts-mode :mode "\\.kt\\'")
         ''
       ];
-      zfs.homeLinks = [{ path = ".android"; type = "cache"; }];
+      zfs.homeLinks = [
+        {
+          path = ".android";
+          type = "cache";
+        }
+      ];
     };
 
     environment.systemPackages = with pkgs; [ android-tools ];
-    users.users.${username}.extraGroups = [ "adbusers" "dialout" "uucp" ];
+    users.users.${username}.extraGroups = [
+      "adbusers"
+      "dialout"
+      "uucp"
+    ];
   };
 }

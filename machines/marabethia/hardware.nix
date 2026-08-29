@@ -9,14 +9,28 @@
         enable = true;
         efiSupport = true;
         mirroredBoots = [
-          { devices = [ "nodev" ]; path = "/boot/ESP0"; }
-          { devices = [ "nodev" ]; path = "/boot/ESP1"; }
+          {
+            devices = [ "nodev" ];
+            path = "/boot/ESP0";
+          }
+          {
+            devices = [ "nodev" ];
+            path = "/boot/ESP1";
+          }
         ];
       };
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+      availableKernelModules = [
+        "xhci_pci"
+        "ehci_pci"
+        "ahci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "sr_mod"
+      ];
     };
     kernelModules = [ "kvm-intel" ];
   };
@@ -50,12 +64,18 @@
     "/boot/ESP0" = {
       device = "/dev/disk/by-uuid/1779-70F4";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
     "/boot/ESP1" = {
       device = "/dev/disk/by-uuid/179D-4050";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
     "/var/dkim" = {
       device = "zroot/safe/services/dkim";

@@ -1,8 +1,9 @@
-{ devshell
-, agenix
-, nixos-rebuild
-, nixpkgs-fmt
-, ...
+{
+  devshell,
+  agenix,
+  nixfmt,
+  nixos-rebuild,
+  ...
 }:
 
 devshell.mkShell {
@@ -23,7 +24,7 @@ devshell.mkShell {
   ];
   packages = [
     agenix
+    nixfmt
     nixos-rebuild
-    nixpkgs-fmt
   ];
 }

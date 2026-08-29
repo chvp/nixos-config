@@ -30,7 +30,10 @@
   };
 
   config = lib.mkIf config.chvp.services.nginx.enable {
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
     security.acme = {
       certs."vanpetegem.me" = {
         dnsProvider = "ovh";
@@ -53,7 +56,10 @@
       owner = "acme";
     };
     chvp.base.zfs.systemLinks = [
-      { type = "data"; path = "/var/lib/acme"; }
+      {
+        type = "data";
+        path = "/var/lib/acme";
+      }
     ];
     services.nginx = {
       enable = true;
@@ -61,22 +67,23 @@
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
-      virtualHosts = builtins.listToAttrs
-        (map
-          (elem: {
-            name = elem.fqdn;
-            value = {
-              forceSSL = true;
-              useACMEHost = "vanpetegem.me";
-              locations."/" = lib.mkIf (builtins.hasAttr "basicProxy" elem) {
-                proxyPass = elem.basicProxy;
-                extraConfig = ''
-                  proxy_set_header X-Forwarded-Ssl on;
-                '' + (elem.extraProxySettings or "");
-              };
-            } // (elem.options or { });
-          })
-          config.chvp.services.nginx.hosts);
+      virtualHosts = builtins.listToAttrs (
+        map (elem: {
+          name = elem.fqdn;
+          value = {
+            forceSSL = true;
+            useACMEHost = "vanpetegem.me";
+            locations."/" = lib.mkIf (builtins.hasAttr "basicProxy" elem) {
+              proxyPass = elem.basicProxy;
+              extraConfig = ''
+                proxy_set_header X-Forwarded-Ssl on;
+              ''
+              + (elem.extraProxySettings or "");
+            };
+          }
+          // (elem.options or { });
+        }) config.chvp.services.nginx.hosts
+      );
     };
     users.users = {
       nginx.extraGroups = [ "acme" ];

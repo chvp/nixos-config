@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -21,7 +26,10 @@ in
 
   config = lib.mkIf config.chvp.graphical.gnupg.enable {
     chvp.base.zfs.homeLinks = [
-      { path = ".gnupg"; type = "data"; }
+      {
+        path = ".gnupg";
+        type = "data";
+      }
     ];
     programs.gnupg.agent = {
       enable = true;

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -10,7 +15,12 @@ in
   };
 
   config = lib.mkIf config.chvp.programs.torrents.enable {
-    chvp.base.zfs.homeLinks = [{ path = ".config/transmission-remote-gtk"; type = "data"; }];
+    chvp.base.zfs.homeLinks = [
+      {
+        path = ".config/transmission-remote-gtk";
+        type = "data";
+      }
+    ];
 
     home-manager.users.${username}.home.packages = with pkgs; [ transmission-remote-gtk ];
   };

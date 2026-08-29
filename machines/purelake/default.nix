@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -85,7 +90,13 @@ in
   users.users.${username} = {
     isNormalUser = true;
     description = "Charlotte Van Petegem";
-    extraGroups = [ "networkmanager" "wheel" "video" "render" "vboxusers" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "render"
+      "vboxusers"
+    ];
   };
 
   home-manager.users.${username} = { ... }: {

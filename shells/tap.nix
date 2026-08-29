@@ -1,15 +1,16 @@
-{ devshell
-, inputs
-, chromedriver
-, imagemagick
-, libffi
-, libmysqlclient
-, libyaml
-, nodejs_24
-, ruby_4_0
-, sqlite
-, ungoogled-chromium
-, zlib
+{
+  devshell,
+  inputs,
+  chromedriver,
+  imagemagick,
+  libffi,
+  libmysqlclient,
+  libyaml,
+  nodejs_24,
+  ruby_4_0,
+  sqlite,
+  ungoogled-chromium,
+  zlib,
 }:
 
 devshell.mkShell {
@@ -24,6 +25,11 @@ devshell.mkShell {
   ];
   language.ruby = {
     package = ruby_4_0;
-    nativeDeps = [ zlib libffi libyaml libmysqlclient ];
+    nativeDeps = [
+      zlib
+      libffi
+      libyaml
+      libmysqlclient
+    ];
   };
 }

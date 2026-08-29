@@ -9,13 +9,25 @@
         enable = true;
         efiSupport = true;
         mirroredBoots = [
-          { devices = [ "nodev" ]; path = "/boot/ESP0"; }
-          { devices = [ "nodev" ]; path = "/boot/ESP1"; }
+          {
+            devices = [ "nodev" ];
+            path = "/boot/ESP0";
+          }
+          {
+            devices = [ "nodev" ];
+            path = "/boot/ESP1";
+          }
         ];
       };
       efi.canTouchEfiVariables = true;
     };
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+      "usbhid"
+      "sd_mod"
+    ];
     kernelModules = [ "kvm-amd" ];
   };
 
@@ -52,12 +64,18 @@
     "/boot/ESP0" = {
       device = "/dev/disk/by-uuid/DA42-87E1";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
     "/boot/ESP1" = {
       device = "/dev/disk/by-uuid/DA6B-6F76";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
     };
     "/var/lib/accentor" = {
       device = "zroot/safe/services/accentor";

@@ -1,15 +1,18 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   username = config.chvp.username;
   ssh = pkgs.symlinkJoin {
     name = "ssh";
     paths = [
-      (
-        pkgs.writeShellScriptBin "ssh" ''
-          export TERM=xterm-256color
-          ${pkgs.openssh}/bin/ssh "$@"
-        ''
-      )
+      (pkgs.writeShellScriptBin "ssh" ''
+        export TERM=xterm-256color
+        ${pkgs.openssh}/bin/ssh "$@"
+      '')
       pkgs.openssh
     ];
   };

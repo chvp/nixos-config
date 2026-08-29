@@ -31,7 +31,9 @@
       networks = with config.chvp.base.network.ovh; {
         "${publicInterface}" = {
           enable = true;
-          matchConfig = { Name = "${publicInterface}"; };
+          matchConfig = {
+            Name = "${publicInterface}";
+          };
           address = [
             "${publicIPV4.ip}/24"
             "${publicIPV6.ip}/64"

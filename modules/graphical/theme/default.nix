@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
@@ -58,14 +63,24 @@ let
     @define-color catppuccin_mantle #292c3c;
     @define-color catppuccin_crust #232634;
   '';
-  gtkTheme = (pkgs.colloid-gtk-theme.override { themeVariants = [ "orange" ]; colorVariants = [ "light" "dark" ]; sizeVariants = [ "compact" ]; tweaks = [ "catppuccin" ]; }).overrideAttrs (old: {
-    postInstall = ''
-      echo '${catppuccin-light-colors-css}' >> $out/share/themes/Colloid-Orange-Light-Compact-Catppuccin/gtk-3.0/gtk.css
-      echo '${catppuccin-light-colors-css}' >> $out/share/themes/Colloid-Orange-Light-Compact-Catppuccin/gtk-4.0/gtk.css
-      echo '${catppuccin-dark-colors-css}' >> $out/share/themes/Colloid-Orange-Dark-Compact-Catppuccin/gtk-3.0/gtk.css
-      echo '${catppuccin-dark-colors-css}' >> $out/share/themes/Colloid-Orange-Dark-Compact-Catppuccin/gtk-4.0/gtk.css
-    '';
-  });
+  gtkTheme =
+    (pkgs.colloid-gtk-theme.override {
+      themeVariants = [ "orange" ];
+      colorVariants = [
+        "light"
+        "dark"
+      ];
+      sizeVariants = [ "compact" ];
+      tweaks = [ "catppuccin" ];
+    }).overrideAttrs
+      (old: {
+        postInstall = ''
+          echo '${catppuccin-light-colors-css}' >> $out/share/themes/Colloid-Orange-Light-Compact-Catppuccin/gtk-3.0/gtk.css
+          echo '${catppuccin-light-colors-css}' >> $out/share/themes/Colloid-Orange-Light-Compact-Catppuccin/gtk-4.0/gtk.css
+          echo '${catppuccin-dark-colors-css}' >> $out/share/themes/Colloid-Orange-Dark-Compact-Catppuccin/gtk-3.0/gtk.css
+          echo '${catppuccin-dark-colors-css}' >> $out/share/themes/Colloid-Orange-Dark-Compact-Catppuccin/gtk-4.0/gtk.css
+        '';
+      });
 in
 {
   options.chvp.graphical.theme.enable = lib.mkOption {
@@ -81,9 +96,18 @@ in
         defaultFonts = {
           emoji = [ "Noto Color Emoji" ];
           # The Tinos and Amiro fonts overlap with Font Awesome's codepoints, so make sure we give Font Awesome a higher priority.
-          monospace = [ "Hack" "Hack Nerd Font" ];
-          sansSerif = [ "Noto Sans" "NotoSans Nerd Font" ];
-          serif = [ "Noto Serif" "NotoSerif Nerd Font" ];
+          monospace = [
+            "Hack"
+            "Hack Nerd Font"
+          ];
+          sansSerif = [
+            "Noto Sans"
+            "NotoSans Nerd Font"
+          ];
+          serif = [
+            "Noto Serif"
+            "NotoSerif Nerd Font"
+          ];
         };
       };
       packages = with pkgs; [

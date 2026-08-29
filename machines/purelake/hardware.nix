@@ -1,4 +1,10 @@
-{ config, lib, modulesPath, pkgs, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -9,15 +15,31 @@
       efi.canTouchEfiVariables = true;
     };
     initrd = {
-      availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "ahci"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+      ];
       kernelModules = [ ];
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = [ "kvm-amd" "nvidia" "nvidia_uvm" "nvidia_modeset" "nvidia_drm" ];
-    blacklistedKernelModules = [ "nouveau" "amdgpu" ];
+    kernelModules = [
+      "kvm-amd"
+      "nvidia"
+      "nvidia_uvm"
+      "nvidia_modeset"
+      "nvidia_drm"
+    ];
+    blacklistedKernelModules = [
+      "nouveau"
+      "amdgpu"
+    ];
     kernelParams = [ "nvidia-drm.fbdev=1" ];
     extraModulePackages = [ ];
-    extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
+    extraModprobeConfig = "options bluetooth disable_ertm=1 ";
   };
 
   fileSystems."/" = {
@@ -28,7 +50,10 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/FE25-6729";
     fsType = "vfat";
-    options = [ "fmask=0022" "dmask=0022" ];
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
   swapDevices = [ ];

@@ -1,8 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   username = config.chvp.username;
-  in
+in
 {
   options.chvp.graphical.terminal.enable = lib.mkOption {
     default = false;

@@ -14,6 +14,11 @@ in
   ];
 
   home-manager.users.${username} = {
-    home.packages = with pkgs; [ jq xan yt-dlp libqalculate ];
+    home.packages = with pkgs; [
+      jq
+      xan
+      yt-dlp
+      libqalculate
+    ];
   };
 }
