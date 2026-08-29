@@ -123,14 +123,7 @@
         ]
       );
       module = {
-        imports = [
-          inputs.accentor.nixosModules.default
-          inputs.agenix.nixosModules.default
-          inputs.home-manager.nixosModules.default
-          inputs.nixos-mailserver.nixosModules.default
-          inputs.nix-index-database.nixosModules.nix-index
-          ./modules
-        ];
+        imports = [ ./modules ];
       };
       nixosSystem =
         system: name: extraModules:
@@ -167,6 +160,11 @@
           };
           baseModules = import (nixpkgs + "/nixos/modules/module-list.nix");
           modules = [
+            inputs.accentor.nixosModules.default
+            inputs.agenix.nixosModules.default
+            inputs.home-manager.nixosModules.default
+            inputs.nixos-mailserver.nixosModules.default
+            inputs.nix-index-database.nixosModules.nix-index
             module
           ]
           ++ extraModules
