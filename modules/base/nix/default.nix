@@ -76,8 +76,9 @@ in
       ]
       ++ lib.optional config.chvp.base.nix.enableDirenv ''
         ;; Direnv integration in emacs.
-        (use-package direnv
-          :config (direnv-mode)
+        (use-package envrc
+          :hook (after-init . envrc-global-mode)
+          :custom (envrc-async t "Run envrc async to not block emacs")
           )
       '';
       zfs.homeLinks = [
