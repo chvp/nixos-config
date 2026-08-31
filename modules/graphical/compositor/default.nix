@@ -488,10 +488,10 @@ in
           settings = [
             {
               profile = {
-                name = "home-undocked";
+                name = "undocked";
                 outputs = [
                   {
-                    criteria = "BOE 0x0BCA";
+                    criteria = "eDP-1";
                     position = "0,0";
                     mode = "2256x1504";
                     scale = 1.0;
@@ -504,7 +504,7 @@ in
                 name = "home-docked";
                 outputs = [
                   {
-                    criteria = "BOE 0x0BCA";
+                    criteria = "eDP-1";
                     position = "0,0";
                     mode = "2256x1504";
                     scale = 1.0;
@@ -513,6 +513,31 @@ in
                     criteria = "LG Electronics LG ULTRAFINE 411NTJJ2F300";
                     position = "2256,0";
                     mode = "3840x2160";
+                    scale = 1.0;
+                  }
+                ];
+              };
+            }
+            {
+              profile = {
+                name = "work-docked";
+                outputs = [
+                  {
+                    criteria = "Dell Inc. DELL U2424H 77926Z3";
+                    position = "0,0";
+                    mode = "1920x1080";
+                    scale = 1.0;
+                  }
+                  {
+                    criteria = "Dell Inc. DELL U2424H 8R926Z3";
+                    position = "1920,0";
+                    mode = "1920x1080";
+                    scale = 1.0;
+                  }
+                  {
+                    criteria = "eDP-1";
+                    position = "3840,0";
+                    mode = "2256x1504";
                     scale = 1.0;
                   }
                 ];
