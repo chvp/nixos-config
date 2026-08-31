@@ -79,6 +79,7 @@ in
         (use-package envrc
           :hook (after-init . envrc-global-mode)
           :custom (envrc-async t "Run envrc async to not block emacs")
+          :diminish (envrc-mode)
           :general
           (lmap
             "ea" '(envrc-allow :which-key "Allow .envrc")
