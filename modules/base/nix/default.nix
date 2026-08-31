@@ -79,7 +79,13 @@ in
         (use-package envrc
           :hook (after-init . envrc-global-mode)
           :custom (envrc-async t "Run envrc async to not block emacs")
+          :general
+          (lmap
+            "ea" '(envrc-allow :which-key "Allow .envrc")
+            "ed" '(envrc-deny :which-key "Deny .envrc")
+            "er" '(envrc-reload :which-key "Reload env")
           )
+        )
       '';
       zfs.homeLinks = [
         {
