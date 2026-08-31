@@ -41,7 +41,7 @@ in
       systemd.user.services.keepassxc = {
         Unit = {
           Description = "KeepassXC startup";
-          PartOf = [ "mango-session.target" ];
+          PartOf = [ "tray.target" ];
           Wants = [ "waybar.service" ];
           After = [
             "mango-session.target"
@@ -52,7 +52,7 @@ in
           ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
           Restart = "always";
         };
-        Install.WantedBy = [ "mango-session.target" ];
+        Install.WantedBy = [ "tray.target" ];
       };
     };
   };
