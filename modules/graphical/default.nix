@@ -73,6 +73,7 @@ in
         gimp
         mpv
         kdePackages.okular
+        kdePackages.dolphin
         ranger
         uni
         wtype
