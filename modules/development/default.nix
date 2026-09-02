@@ -113,7 +113,10 @@
               ;; Rust language support
               (use-package rust-mode
                 :mode "\\.rs\\'"
+                :hook (flycheck-mode . flycheck-rust-setup)
               )
+
+              (use-package flycheck-rust)
 
               ;; TypeScript language support
               (use-package typescript-mode
