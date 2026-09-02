@@ -58,10 +58,9 @@
                 )
                 :hook (eglot-managed-mode . chvp--eglot-capf)
                 :config
-                (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
                 (defun chvp--eglot-capf ()
                   (setq-local completion-at-point-functions
-                              (list #'eglot-completion-at-point
+                              (list (cape-capf-buster #'eglot-completion-at-point #'string-prefix-p)
                                     #'tempel-complete
                                     #'cape-file
                                     #'dabbrev-capf
