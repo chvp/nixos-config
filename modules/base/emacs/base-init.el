@@ -220,13 +220,6 @@
   (column-number-mode)
   )
 
-(use-package emacs-on-linux
-  :ensure nil ;; Not a real package, but a place to collect global settings for linux
-  :demand t
-  :config
-  ;; Make sure DISPLAY is set correctly in env.
-  )
-
 ;; Linting
 (use-package flycheck
   :config
