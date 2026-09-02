@@ -58,6 +58,7 @@
                 )
                 :hook (eglot-managed-mode . chvp--eglot-capf)
                 :config
+                (global-flycheck-eglot-mode)
                 (defun chvp--eglot-capf ()
                   (setq-local completion-at-point-functions
                               (list (cape-capf-buster #'eglot-completion-at-point #'string-prefix-p)
