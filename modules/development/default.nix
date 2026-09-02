@@ -56,8 +56,9 @@
                   "SPC n" '(flymake-goto-next-error :which-key "Next error")
                   "SPC p" '(flymake-goto-prev-error :which-key "Previous error")
                 )
-                :hook (eglot-managed-mode . chvp--eglot-capf)
-                :config
+                :hook
+                (eglot-managed-mode . chvp--eglot-capf)
+                :init
                 (global-flycheck-eglot-mode)
                 (defun chvp--eglot-capf ()
                   (setq-local completion-at-point-functions
