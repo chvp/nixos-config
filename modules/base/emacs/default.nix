@@ -268,10 +268,6 @@ in
     };
     home-manager.users.${username} = {
       home = {
-        file = {
-          ".emacs.d/init.el".text = fullInit;
-          ".emacs.d/early-init.el".source = ./early-init.el;
-        };
         packages = [
           (pkgs.writeShellScriptBin "emacs" ''${package}/bin/emacsclient -c "$@"'')
           (pkgs.writeShellScriptBin "emacsclient" ''${package}/bin/emacsclient "$@"'')
@@ -285,6 +281,10 @@ in
         client.enable = true;
         socketActivation.enable = true;
         package = package;
+      };
+      xdg.configFile = {
+        "emacs/init.el".text = fullInit;
+        "emacs/early-init.el".source = ./early-init.el;
       };
     };
   };
