@@ -53,8 +53,8 @@
                   "SPC F" '(eglot-format :which-key "Format buffer")
                   "SPC r" '(eglot-rename :which-key "Rename symbol")
                   "SPC a" '(eglot-code-actions :which-key "Relevant local actions")
-                  "SPC n" '(flymake-goto-next-error :which-key "Next error")
-                  "SPC p" '(flymake-goto-prev-error :which-key "Previous error")
+                  "SPC n" '(flycheck-next-error :which-key "Next error")
+                  "SPC p" '(flycheck-prev-error :which-key "Previous error")
                 )
                 :init
                 (global-flycheck-eglot-mode)
