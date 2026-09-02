@@ -16,12 +16,16 @@ in
 
   config = lib.mkIf config.chvp.development.android.enable {
     chvp.base = {
-      emacs.extraConfig = [
-        ''
-          ;; Kotlin language support
-          (use-package kotlin-ts-mode :mode "\\.kt\\'")
-        ''
-      ];
+      emacs.config = {
+        kotlin-ts-mode = lib.hm.dag.entryAnywhere {
+          packages = (epkgs: [ epkgs.kotlin-ts-mode ]);
+          elisp = ''
+            ;; Kotlin language support
+            (require 'kotlin-ts-mode)
+            (add-to-list 'auto-mode-alist '("\\.kt\\'" . kotlin-ts-mode))
+          '';
+        };
+      };
       zfs.homeLinks = [
         {
           path = ".android";

@@ -26,15 +26,12 @@ in
       }
     ];
 
-    chvp.base.emacs.extraConfig = [
-      ''
-        (use-package secrets
-         :ensure nil
-         :custom
-         (auth-sources '(default))
-         )
-      ''
-    ];
+    chvp.base.emacs.config.secrets = lib.hm.dag.entryAnywhere {
+      elisp = ''
+        (setopt auth-sources '(default))
+        (require 'secrets)
+      '';
+    };
 
     home-manager.users.${username} = {
       home.packages = [ pkgs.keepassxc ];

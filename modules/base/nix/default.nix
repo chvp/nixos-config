@@ -66,14 +66,35 @@ in
     programs.command-not-found.enable = false;
 
     chvp.base = {
-      emacs.extraConfig = [
-        ''
-          ;; Nix syntax support
-          (use-package nix-mode
-            :mode "\\.nix\\'"
-            )
-        ''
-      ];
+      emacs = {
+        config = {
+          nix-mode = lib.hm.dag.entryAnywhere {
+            packages = epkgs: [ epkgs.nix-mode ];
+            elisp = ''
+              ;; Nix syntax support
+              (require 'nix-mode)
+              (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+            '';
+          };
+        };
+        lateConfig = lib.mkIf config.chvp.base.nix.enableDirenv {
+          envrc = lib.hm.dag.entryAfter [ "general" ] {
+            packages = epkgs: [ epkgs.envrc ];
+            elisp = ''
+              (setopt envrc-async 3)
+              (require 'envrc)
+              (envrc-global-mode)
+              (diminish 'envrc-mode)
+              (lmap
+                "e"  '("envrc" . nil)
+                "ea" '("Allow .envrc" . envrc-allow)
+                "ed" '("Deny .envrc" . envrc-deny)
+                "er" '("Reload env" . envrc-reload)
+              )
+            '';
+          };
+        };
+      };
       zfs.homeLinks = [
         {
           path = ".config/cachix";

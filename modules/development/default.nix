@@ -22,125 +22,114 @@
     chvp = {
       base = {
         emacs = {
-          extraPackages = [
-            (epkgs: [ epkgs.treesit-grammars.with-all-grammars ])
-          ];
-          extraConfig = [
-            ''
-              ;; Editorconfig
-              (use-package editorconfig
-                :diminish (editorconfig-mode)
-                :config
+          config = {
+            editorconfig = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.editorconfig ];
+              elisp = ''
+                (require 'editorconfig)
                 (editorconfig-mode 1)
-              )
-
-              ;; R syntax support
-              (use-package ess
-                :init
-                (load "ess-autoloads")
-                :mode ("\\.r\\'" . ess-r-mode)
-                :mode ("\\.R\\'" . ess-r-mode)
-              )
-
-              ;; Language server support
-              (use-package eglot
-                :demand t
-                :general
+                (diminish 'editorconfig-mode)
+              '';
+            };
+            eglot = lib.hm.dag.entryAfter [ "flycheck" "general" "vue-mode" ] {
+              packages = epkgs: [ epkgs.eglot ];
+              elisp = ''
+                (require 'eglot)
+                (global-flycheck-eglot-mode)
                 (lmap
                   :keymaps '(prog-mode-map vue-mode-map)
-                  "SPC s" '(eglot :which-key "Add buffer to eglot")
-                  "SPC f" '(eglot-format :which-key "Format region")
-                  "SPC F" '(eglot-format :which-key "Format buffer")
-                  "SPC r" '(eglot-rename :which-key "Rename symbol")
-                  "SPC a" '(eglot-code-actions :which-key "Relevant local actions")
-                  "SPC n" '(flycheck-next-error :which-key "Next error")
-                  "SPC p" '(flycheck-prev-error :which-key "Previous error")
+                  "SPC s" '("Add buffer to eglot" . eglot)
+                  "SPC f" '("Format region" . eglot-format)
+                  "SPC F" '("Format buffer" . eglot-format)
+                  "SPC r" '("Rename symbol" . eglot-rename)
+                  "SPC a" '("Relevant local actions" . eglot-code-actions)
+                  "SPC n" '("Next error" . flycheck-next-error)
+                  "SPC p" '("Previous error" . flycheck-prev-error)
                 )
-                :init
-                (global-flycheck-eglot-mode)
                 (defun chvp--eglot-capf ()
                   (setq-local completion-at-point-functions
-                              (list (cape-capf-buster #'eglot-completion-at-point #'string-prefix-p)
-                                    #'tempel-complete
-                                    #'cape-file
-                                    #'dabbrev-capf
-                                    #'cape-line)))
-                :hook
-                (eglot-managed-mode . chvp--eglot-capf)
-              )
-
-              ;; Direnv integration in emacs.
-              (use-package envrc
-                :hook (after-init . envrc-global-mode)
-                :custom (envrc-async 3 "Tell envrc to block emacs for 3 seconds max")
-                :diminish (envrc-mode)
-                :general
-                (lmap
-                  "ea" '(envrc-allow :which-key "Allow .envrc")
-                  "ed" '(envrc-deny :which-key "Deny .envrc")
-                  "er" '(envrc-reload :which-key "Reload env")
-                )
-              )
-
-              ;; Forth syntax support
-              (use-package forth-mode
-                :mode ("\\.fs\\'" . forth-mode)
-                :mode ("\\.fb\\'" . forth-block-mode)
-              )
-
-              ;; Markdown syntax support
-              (use-package markdown-mode
-                :commands (markdown-mode gfm-mode)
-                :mode ("README\\.md\\'" . gfm-mode)
-                :mode ("\\.md\\'" . markdown-mode)
-                :mode ("\\.markdown\\'" . markdown-mode)
-              )
-
-              ;; Haskell language support
-              (use-package haskell-mode
-                :mode "\\.hs\\'"
-                :config
+                                (list (cape-capf-buster #'eglot-completion-at-point #'string-prefix-p)
+                                      #'tempel-complete
+                                      #'cape-file
+                                      #'dabbrev-capf
+                                      #'cape-line)))
+                (add-hook 'eglot-managed-mode-hook #'chvp--eglot-capf)
+              '';
+            };
+            haskell-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.haskell-mode ];
+              elisp = ''
+                (require 'haskell-mode)
                 (require 'haskell-doc)
-              )
-
-              ;; Folding
-              (use-package origami
-                :hook (prog-mode . origami-mode)
-              )
-
-              ;; Python syntax support
-              (use-package python-mode
-                :mode "\\.py\\'"
-              )
-
-              ;; Ruby language support
-              (use-package ruby-mode
-               :ensure nil ;; Included with emacs
-               :mode "\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'"
-               :mode "\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'"
-               :custom
-               (ruby-insert-encoding-magic-comment nil "Don't insert encoding magic comment")
-               :config
-               (add-to-list 'eglot-server-programs `(ruby-mode . ("ruby-lsp")))
-              )
-
-              ;; Rust language support
-              (use-package rust-mode
-                :demand t
-                :mode "\\.rs\\'"
-              )
-
-              ;; TypeScript language support
-              (use-package typescript-mode
-                :mode "\\.ts\\'"
-              )
-
-              ;; Vue language support
-              (use-package vue-mode
-                :mode "\\.vue\\'"
-                :custom
-                (mmm-submode-decoration-level 0 "Don't color submodes differently")
-                :config
+                (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
+              '';
+            };
+            markdown = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.markdown-mode ];
+              elisp = ''
+                (require 'markdown-mode)
+                (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
+                (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+                (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+              '';
+            };
+            origami = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.origami ];
+              elisp = ''
+                (require 'origami)
+                (add-hook 'prog-mode-hook #'origami-mode)
+              '';
+            };
+            python-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.python-mode ];
+              elisp = ''
+                (require 'python-mode)
+                (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+              '';
+            };
+            r = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.ess ];
+              elisp = ''
+                (require 'ess-r-mode)
+                (add-to-list 'auto-mode-alist '("\\.r\\'" . ess-r-mode))
+                (add-to-list 'auto-mode-alist '("\\.R\\'" . ess-r-mode))
+              '';
+            };
+            ruby-mode = lib.hm.dag.entryAfter [ "eglot" ] {
+              elisp = ''
+                (setopt ruby-insert-encoding-magic-comment nil)
+                (require 'ruby-mode)
+                (add-to-list 'auto-mode-alist '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
+                (add-to-list 'auto-mode-alist '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
+                (add-to-list 'eglot-server-programs `(ruby-mode . ("ruby-lsp")))
+              '';
+            };
+            rust-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.rust-mode ];
+              elisp = ''
+                (require 'rust-mode)
+                (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+              '';
+            };
+            treesitter = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.treesit-grammars.with-all-grammars ];
+              elisp = ''
+                (setq treesit-auto-install-grammar nil)
+              '';
+            };
+            typescript-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.typescript-mode ];
+              elisp = ''
+                (require 'typescript-mode)
+                (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+              '';
+            };
+            vue-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.vue-mode ];
+              elisp = ''
+                (setopt mmm-submode-decoration-level 0)
+                (require 'vue-mode)
+                (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
                 (defun vue-eglot-init-options ()
                   (let ((tsdk-path "${pkgs.typescript}/lib/node_modules/typescript/lib"))
                     `(:typescript (:tsdk ,tsdk-path
@@ -182,21 +171,25 @@
                           "\\|\\(?:\\s-+setup\\)"       ; The optional "setup" attribute
                           "\\)*"
                           "\\s-*>\n"))                  ; The end of the tag
-              )
-
-              ;; HTML (and HTML template) support
-              (use-package web-mode
-                :mode "\\.html\\'"
-                :mode "\\.html\\.erb\\'"
-              )
-
-              ;; YAML syntax support
-              (use-package yaml-mode
-                :mode "\\.yml\\'"
-                :mode "\\.yaml\\'"
-              )
-            ''
-          ];
+              '';
+            };
+            web-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.web-mode ];
+              elisp = ''
+                (require 'web-mode)
+                (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+                (add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . web-mode))
+              '';
+            };
+            yaml-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.yaml-mode ];
+              elisp = ''
+                (require 'yaml-mode)
+                (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+                (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+              '';
+            };
+          };
         };
         zfs.homeLinks = [
           {

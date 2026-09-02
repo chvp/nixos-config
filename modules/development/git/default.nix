@@ -27,48 +27,47 @@ in
   };
 
   config = lib.mkIf config.chvp.development.git.enable {
-    chvp.base.emacs.extraConfig = [
-      ''
-        ;; Magit GitHub/GitLab integration
-        (use-package forge
-          :after magit)
-
-        ;; Git integration
-        (use-package magit
-          :init
+    chvp.base.emacs.config = {
+      forge = lib.hm.dag.entryAfter [ "magit" ] {
+        packages = epkgs: [ epkgs.forge ];
+        elisp = ''
+          (require 'forge)
+        '';
+      };
+      magit = lib.hm.dag.entryAfter [ "general" ] {
+        packages = epkgs: [ epkgs.magit ];
+        elisp = ''
           (setq forge-add-default-bindings nil)
-          :general
+          (require 'magit)
           (lmap
-            "g" '(:ignore t :which-key "git")
-            "gs" '(magit-status :which-key "status")
+            "g"  '("git" . nil)
+            "gs" '("status". magit-status)
           )
-        )
-
-        ;; Project management
-        (use-package project
-          :custom
-          (project-switch-commands
-            '(
-              (project-find-file "find file")
-              (consult-ripgrep "find regexp" ?r)
-              (project-eshell "eshell")
-            )
-            "Change default actions when switching project"
-          )
-          :general
+        '';
+      };
+      project = lib.hm.dag.entryAfter [ "general" "consult" ] {
+        packages = epkgs: [ epkgs.project ];
+        elisp = ''
+          (setopt project-vc-merge-submodules nil)
+          (setopt project-switch-commands
+                  '(
+                    (project-find-file "find file")
+                    (consult-ripgrep "find regexp" ?r)
+                    (project-eshell "eshell")))
+          (require 'project)
           (lmap
-            "p"  '(:ignore t :which-key "project")
-            "pf" '(project-find-file :which-key "find")
-            "pp" '(project-switch-project :which-key "switch")
-            "pr" '(project-query-replace-regexp :which-key "replace")
+            "p"  '("project" . nil)
+            "pf" '("find" . project-find-file)
+            "pp" '("switch" . project-switch-project)
+            "pr" '("replace" . project-query-replace-regexp)
             "ps" '(consult-ripgrep :search "incsearch")
-            "pS" '(project-find-regexp :which-key "search")
-            "p!" '(project-shell-command :which-key "command")
-            "p&" '(project-async-shell-command :which-key "task")
+            "pS" '("search" . project-find-regexp)
+            "p!" '("command" . project-shell-command)
+            "p&" '("task" . project-async-shell-command)
           )
-        )
-      ''
-    ];
+        '';
+      };
+    };
     home-manager.users.${username} = {
       programs.git = {
         enable = true;

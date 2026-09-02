@@ -151,7 +151,7 @@
               permittedInsecurePackages = [ "olm-3.2.16" ];
             };
           };
-          lib = pkgs.lib;
+          lib = import (inputs.home-manager + "/modules/lib/stdlib-extended.nix") pkgs.lib;
         in
         inputs.nixpkgs.lib.nixosSystem {
           inherit lib system;
