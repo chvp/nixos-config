@@ -78,7 +78,7 @@ in
         ;; Direnv integration in emacs.
         (use-package envrc
           :hook (after-init . envrc-global-mode)
-          :custom (envrc-async t "Run envrc async to not block emacs")
+          :custom (envrc-async 3 "Tell envrc to block emacs for 3 seconds max")
           :diminish (envrc-mode)
           :general
           (lmap
