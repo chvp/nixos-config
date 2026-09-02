@@ -27,6 +27,6 @@
   )
 
 (lmap
-  "o"  '("org" . nil)
+  "o"  '(:ignore t :which-key "org")
   "oo" '("find file" . chvp--find-file-in-org-directory)
   )

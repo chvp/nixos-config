@@ -17,29 +17,29 @@
 (lmap
   ""     nil ;; Unbind SPC, I don't use it for navigation anyway.
 
-  "SPC"  '("mode" . nil)
+  "SPC"  '(:ignore t :which-key "mode")
 
   ":"    '("eval" . eval-expression)
 
-  "b"    '("buffer" . nil)
+  "b"    '(:ignore t :which-key "buffer")
   "bd"   '("kill" . chvp--kill-current-buffer)
   "br"   '("rename" . rename-buffer)
 
-  "f"    '("file" . nil)
+  "f"    '(:ignore t :which-key "file")
   "ff"   '("find" . find-file)
   "fs"   '("save" save-buffer)
 
-  "h"    '("help" . nil)
+  "h"    '(:ignore t :which-key "help")
   "hb"   '("binding" . describe-bindings)
   "hf"   '("function" . describe-function)
   "hv"   '("variable" . describe-variable)
 
-  "q"    '("quit" . nil)
+  "q"    '(:ignore t :which-key "quit")
   "qq"   '("quit" . delete-frame)
 
-  "s"    '("search" . nil)
+  "s"    '(:ignore t :which-key "search")
 
-  "w"    '("window" . nil)
+  "w"    '(:ignore t :which-key "window")
   "wv"   '("split vertical" . split-window-vertically)
   "ws"   '("split horizontal" . split-window-horizontally)
   "wd"   '("delete" . delete-window)

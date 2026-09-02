@@ -82,7 +82,7 @@ in
               (setopt avy-style 'pre)
               (require 'avy)
               (lmap
-                "j" '("jump" . nil)
+                "j"  '(:ignore t :which-key "jump")
                 "jc" '("character" . avy-goto-char)
                 "j2" '("2 character sequence" . avy-goto-char-2)
                 "jl" '("line" . avy-goto-line)
@@ -201,7 +201,7 @@ in
               (setopt tempel-path "${./snippets}")
               (require 'tempel)
               (lmap
-                "t"  '("template" . nil)
+                "t"  '(:ignore t :which-key "template")
                 "ti" '("insert" . tempel-insert)
               )
             '';
@@ -272,9 +272,7 @@ in
           (pkgs.writeShellScriptBin "emacs" ''${package}/bin/emacsclient -c "$@"'')
           (pkgs.writeShellScriptBin "emacsclient" ''${package}/bin/emacsclient "$@"'')
         ];
-        sessionVariables = {
-          EDITOR = "emacs";
-        };
+        sessionVariables.EDITOR = "emacs";
       };
       services.emacs = {
         enable = true;

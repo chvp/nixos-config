@@ -40,7 +40,7 @@ in
           (setq forge-add-default-bindings nil)
           (require 'magit)
           (lmap
-            "g"  '("git" . nil)
+            "g"  '(:ignore t :which-key "git")
             "gs" '("status". magit-status)
           )
         '';
@@ -56,7 +56,7 @@ in
                     (project-eshell "eshell")))
           (require 'project)
           (lmap
-            "p"  '("project" . nil)
+            "p"  '(:ignore t :which-key "project")
             "pf" '("find" . project-find-file)
             "pp" '("switch" . project-switch-project)
             "pr" '("replace" . project-query-replace-regexp)

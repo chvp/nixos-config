@@ -86,7 +86,7 @@ in
               (envrc-global-mode)
               (diminish 'envrc-mode)
               (lmap
-                "e"  '("envrc" . nil)
+                "e"  '(:ignore t :which-key "envrc")
                 "ea" '("Allow .envrc" . envrc-allow)
                 "ed" '("Deny .envrc" . envrc-deny)
                 "er" '("Reload env" . envrc-reload)
