@@ -73,21 +73,7 @@ in
             :mode "\\.nix\\'"
             )
         ''
-      ]
-      ++ lib.optional config.chvp.base.nix.enableDirenv ''
-        ;; Direnv integration in emacs.
-        (use-package envrc
-          :hook (after-init . envrc-global-mode)
-          :custom (envrc-async 3 "Tell envrc to block emacs for 3 seconds max")
-          :diminish (envrc-mode)
-          :general
-          (lmap
-            "ea" '(envrc-allow :which-key "Allow .envrc")
-            "ed" '(envrc-deny :which-key "Deny .envrc")
-            "er" '(envrc-reload :which-key "Reload env")
-          )
-        )
-      '';
+      ];
       zfs.homeLinks = [
         {
           path = ".config/cachix";

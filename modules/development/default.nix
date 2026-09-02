@@ -56,8 +56,6 @@
                   "SPC n" '(flymake-goto-next-error :which-key "Next error")
                   "SPC p" '(flymake-goto-prev-error :which-key "Previous error")
                 )
-                :hook
-                (eglot-managed-mode . chvp--eglot-capf)
                 :init
                 (global-flycheck-eglot-mode)
                 (defun chvp--eglot-capf ()
@@ -67,7 +65,22 @@
                                     #'cape-file
                                     #'dabbrev-capf
                                     #'cape-line)))
-                              )
+                :hook
+                (eglot-managed-mode . chvp--eglot-capf)
+              )
+
+              ;; Direnv integration in emacs.
+              (use-package envrc
+                :hook (after-init . envrc-global-mode)
+                :custom (envrc-async 3 "Tell envrc to block emacs for 3 seconds max")
+                :diminish (envrc-mode)
+                :general
+                (lmap
+                  "ea" '(envrc-allow :which-key "Allow .envrc")
+                  "ed" '(envrc-deny :which-key "Deny .envrc")
+                  "er" '(envrc-reload :which-key "Reload env")
+                )
+              )
 
               ;; Forth syntax support
               (use-package forth-mode
@@ -113,11 +126,9 @@
 
               ;; Rust language support
               (use-package rust-mode
+                :demand t
                 :mode "\\.rs\\'"
-                :hook (flycheck-mode . flycheck-rust-setup)
               )
-
-              (use-package flycheck-rust)
 
               ;; TypeScript language support
               (use-package typescript-mode

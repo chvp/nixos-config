@@ -222,6 +222,7 @@
 
 ;; Linting
 (use-package flycheck
+  :commands (global-flycheck-eglot-mode)
   :config
   (global-flycheck-annotate-mode)
   :custom (flycheck-checker-error-threshold 10000 "Set error threshold a lot higher")
