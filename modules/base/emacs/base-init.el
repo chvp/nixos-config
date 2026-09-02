@@ -339,7 +339,8 @@
   )
 
 (use-package undo-fu-session
-  :init
+  :demand t
+  :config
   (undo-fu-session-global-mode)
   :custom
   (undo-fu-session-compression 'zst "Use zst compression for the undo files")
