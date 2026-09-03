@@ -22,6 +22,9 @@
 (add-hook 'emacs-startup-hook #'chvp--restore-gc)
 (add-hook 'minibuffer-exit-hook #'chvp--restore-gc)
 
+;; Nix precompiles everything
+(setq native-comp-jit-compilation nil)
+
 ;; Nix manages our packages
 (setq package-enable-at-startup nil)
 

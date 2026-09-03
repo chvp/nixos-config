@@ -9,7 +9,6 @@
 (setopt fill-column 80)
 (setopt create-lockfiles nil)
 (setopt inhibit-startup-screen t)
-(setopt native-comp-jit-compilation nil)
 
 (defun chvp--font-settings ()
   "Setup font settings."
