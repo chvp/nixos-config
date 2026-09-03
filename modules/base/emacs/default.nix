@@ -198,7 +198,7 @@ in
           tempel = dag.entryAfter [ "cape" "general" ] {
             packages = epkgs: [ epkgs.tempel ];
             elisp = ''
-              (setopt tempel-path "${./snippets}")
+              (setopt tempel-path "${./snippets}/*.eld")
               (require 'tempel)
               (lmap
                 "t"  '(:ignore t :which-key "template")
