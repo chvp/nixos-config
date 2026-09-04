@@ -91,15 +91,6 @@ in
               )
             '';
           };
-          better-defaults = dag.entryAnywhere {
-            packages = epkgs: [ epkgs.better-defaults ];
-            elisp = ''
-              ;; Better defaults that aren't defaults for some reason
-              (require 'better-defaults)
-              ;; But don't enable ido-mode...
-              (ido-mode nil)
-            '';
-          };
           cape = dag.entryAnywhere {
             packages = epkgs: [ epkgs.cape ];
             elisp = builtins.readFile ./cape.el;
@@ -140,14 +131,21 @@ in
               (require 'diminish)
             '';
           };
-          emacs = dag.entryAnywhere {
+          emacs = dag.entryAfter [ "diminish" ] {
+            packages = epkgs: [
+              (pkgs.aspellWithDicts (dicts: [
+                dicts.en
+                dicts.nb
+                dicts.nl
+              ]))
+            ];
             elisp = builtins.readFile ./emacs.el;
           };
           flycheck = dag.entryAfter [ "diminish" ] {
             packages = epkgs: [ epkgs.flycheck ];
             elisp = builtins.readFile ./flycheck.el;
           };
-          evil = dag.entryAnywhere {
+          evil = dag.entryAfter [ "diminish" ] {
             packages = epkgs: [
               epkgs.evil
               epkgs.evil-collection
@@ -160,6 +158,7 @@ in
               (evil-mode 1)
               (require 'evil-collection)
               (evil-collection-init)
+              (diminish 'evil-collection-unimpaired-mode)
             '';
           };
           general = dag.entryAfter [ "evil" ] {
@@ -224,6 +223,12 @@ in
               (setopt undo-fu-session-file-limit 10000) ;; Start removing old undo files after 10000 files
               (require 'undo-fu-session)
               (undo-fu-session-global-mode)
+            '';
+          };
+          uniquify = dag.entryAnywhere {
+            elisp = ''
+              (setopt uniquify-buffer-name-style 'post-forward)
+              (require 'uniquify)
             '';
           };
           vertico = dag.entryAfter [ "diminish" ] {
