@@ -24,9 +24,7 @@
         emacs = {
           config = {
             editorconfig = lib.hm.dag.entryAnywhere {
-              packages = epkgs: [ epkgs.editorconfig ];
               elisp = ''
-                (require 'editorconfig)
                 (editorconfig-mode 1)
                 (diminish 'editorconfig-mode)
               '';
