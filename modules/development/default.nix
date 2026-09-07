@@ -71,13 +71,6 @@
                 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
               '';
             };
-            origami = lib.hm.dag.entryAnywhere {
-              packages = epkgs: [ epkgs.origami ];
-              elisp = ''
-                (require 'origami)
-                (add-hook 'prog-mode-hook #'origami-mode)
-              '';
-            };
             python-mode = lib.hm.dag.entryAnywhere {
               packages = epkgs: [ epkgs.python-mode ];
               elisp = ''
