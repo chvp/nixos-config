@@ -15,6 +15,7 @@
         ediff-window-setup-function 'ediff-setup-windows-plain
         fill-column 80
         frame-resize-pixelwise t
+        global-auto-revert-mode t
         indent-tabs-mode nil
         horizontal-scroll-bar nil
         inhibit-startup-screen t
@@ -36,9 +37,22 @@
         visible-bell t
         window-resize-pixelwise t)
 
-(diminish 'auto-revert-mode)
-(diminish 'flyspell-mode)
-(diminish 'flyspell-prog-mode)
+(defun chvp--diminish-flyspell-mode ()
+  "Diminish `flyspell-mode' when it's enabled."
+  (diminish 'flyspell-mode)
+  (remove-hook 'flyspell-mode-hook #'chvp--diminish-flyspell-mode)
+  )
+
+(defun chvp--diminish-flyspell-prog-mode ()
+  "Diminish `flyspell-prog-mode' when it's enabled."
+  (diminish 'flyspell-prog-mode)
+  (remove-hook 'flyspell-prog-mode-hook #'chvp--diminish-flyspell-prog-mode)
+  )
+
+(add-hook 'flyspell-mode-hook #'chvp--diminish-flyspell-mode)
+(add-hook 'flyspell-prog-mode-hook #'chvp--diminish-flyspell-prog-mode)
+(diminish 'autorevert-mode)
+(diminish 'eldoc-mode)
 
 (defun chvp--font-settings ()
   "Setup font settings."
