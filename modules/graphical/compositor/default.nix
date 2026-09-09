@@ -144,7 +144,7 @@ let
     mousebind = super,btn_left,moveresize,curmove
     mousebind = super,btn_right,moveresize,curresize
 
-    bind = none,XF86MonBrightnessUp,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
+    bind = none,XF86MonBrightnessUp,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- +5%
     bind = none,XF86MonBrightnessDown,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
     bind = none,XF86AudioRaiseVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%+
     bind = none,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%-
