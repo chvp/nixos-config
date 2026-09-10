@@ -75,7 +75,7 @@
               packages = epkgs: [ epkgs.python-mode ];
               elisp = ''
                 (require 'python-mode)
-                (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+                (add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
               '';
             };
             r = lib.hm.dag.entryAnywhere {
@@ -90,16 +90,16 @@
               elisp = ''
                 (setopt ruby-insert-encoding-magic-comment nil)
                 (require 'ruby-mode)
-                (add-to-list 'auto-mode-alist '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-mode))
-                (add-to-list 'auto-mode-alist '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-mode))
-                (add-to-list 'eglot-server-programs `(ruby-mode . ("ruby-lsp")))
+                (add-to-list 'auto-mode-alist '("\\.\\(?:cap\\|gemspec\\|irbrc\\|gemrc\\|rake\\|rb\\|ru\\|thor\\)\\'" . ruby-ts-mode))
+                (add-to-list 'auto-mode-alist '("\\(?:Brewfile\\|Capfile\\|Gemfile\\(?:\\.[a-zA-Z0-9._-]+\\)?\\|[rR]akefile\\)\\'" . ruby-ts-mode))
+                (add-to-list 'eglot-server-programs `(ruby-ts-mode . ("ruby-lsp")))
               '';
             };
             rust-mode = lib.hm.dag.entryAnywhere {
               packages = epkgs: [ epkgs.rust-mode ];
               elisp = ''
                 (require 'rust-mode)
-                (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+                (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
               '';
             };
             treesitter = lib.hm.dag.entryAnywhere {
@@ -112,7 +112,7 @@
               packages = epkgs: [ epkgs.typescript-mode ];
               elisp = ''
                 (require 'typescript-mode)
-                (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+                (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
               '';
             };
             vue-mode = lib.hm.dag.entryAnywhere {
@@ -176,8 +176,8 @@
               packages = epkgs: [ epkgs.yaml-mode ];
               elisp = ''
                 (require 'yaml-mode)
-                (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
-                (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+                (add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-ts-mode))
+                (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-ts-mode))
               '';
             };
           };
