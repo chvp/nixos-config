@@ -28,7 +28,6 @@ in
         (require 'ledger-mode)
         (advice-add 'ledger-complete-at-point :around #'cape-wrap-nonexclusive)
         (add-to-list 'auto-mode-alist '("\\.journal\\'" . ledger-mode))
-
       '';
     };
 
