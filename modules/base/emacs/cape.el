@@ -1,4 +1,3 @@
-;; Handy completion-at-point-functions
 (require 'cape)
 (defun chvp--setup-capfs ()
   (add-hook 'completion-at-point-functions #'tempel-complete -50 t)

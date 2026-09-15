@@ -169,6 +169,7 @@ in
             ];
             elisp = ''
               ;; Vim keybindings in emacs
+              (setopt evil-want-fine-undo t)
               (setopt evil-want-integration t)
               (setopt evil-want-keybinding nil)
               (require 'evil)
