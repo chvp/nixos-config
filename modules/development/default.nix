@@ -62,6 +62,14 @@
                 (add-to-list 'auto-mode-alist '("\\.hs\\'" . haskell-mode))
               '';
             };
+            jenkinsfile-mode = lib.hm.dag.entryAnywhere {
+              packages = epkgs: [ epkgs.jenkinsfile-mode ];
+              elisp = ''
+                (require 'jenkinsfile-mode)
+                (add-to-list 'auto-mode-alist '("Jenkinsfile\\'" . jenkinsfile-mode))
+                (add-to-list 'auto-mode-alist '("JenkinsfileSCM\\'" . jenkinsfile-mode))
+              '';
+            };
             markdown = lib.hm.dag.entryAnywhere {
               packages = epkgs: [ epkgs.markdown-mode ];
               elisp = ''
