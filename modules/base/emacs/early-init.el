@@ -1,4 +1,4 @@
-;;; early-init --- My emacs early init file
+;;; early-init --- My emacs early init file  -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 (defun chvp--reduce-gc ()

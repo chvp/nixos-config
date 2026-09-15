@@ -33,7 +33,7 @@ let
   mergedConfig = {
     prelude = dag.entryAnywhere {
       elisp = ''
-        ;;; init --- My emacs init file
+        ;;; init --- My emacs init file -*- lexical-binding: t -*-
         ;;; Commentary:
         ;;; Code:
       '';
