@@ -7,7 +7,9 @@
 (add-hook 'prog-mode-hook #'hl-line-mode)
 (add-hook 'text-mode-hook #'hl-line-mode)
 
-(setopt backup-by-copying t
+(setopt auto-revert-avoid-polling t
+        auto-revert-check-vc-info t
+        backup-by-copying t
         column-number-mode t
         completion-ignore-case t
         create-lockfiles nil
@@ -16,12 +18,16 @@
         fill-column 80
         frame-resize-pixelwise t
         global-auto-revert-mode t
+        global-hl-line-sticky-flag 'window
         indent-tabs-mode nil
         horizontal-scroll-bar nil
         inhibit-startup-screen t
+        initial-major-mode 'fundamental-mode
+        line-number-mode t
         menu-bar-mode nil
         mode-line-compact 'long
         mouse-yank-at-point t
+        project-mode-line t
         read-buffer-completion-ignore-case t
         read-file-name-completion-ignore-case t
         require-final-newline t
@@ -29,12 +35,18 @@
         save-place-mode t
         scroll-bar-mode nil
         search-default-mode t
+        sentence-end-double-space nil
         shell-command-prompt-show-cwd t
         show-paren-mode t
+        show-paren-style 'expression
+        show-paren-context-when-offscreen 'overlay
         tool-bar-mode nil
+        treesit-enabled-modes t
+        treesit-font-lock-level 3
         use-short-answers t
         view-read-only t
         visible-bell t
+        window-combination-resize t
         window-resize-pixelwise t)
 
 (defun chvp--diminish-flyspell-mode ()
