@@ -1,10 +1,8 @@
-(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 (add-hook 'prog-mode-hook #'hl-line-mode)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
-(add-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'electric-pair-mode)
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'text-mode-hook #'hl-line-mode)
