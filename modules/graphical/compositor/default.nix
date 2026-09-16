@@ -273,6 +273,7 @@ in
             };
           };
       };
+      speechd.enable = false;
     };
     security.pam.services.swaylock.fprintAuth = true;
     xdg.portal = {
