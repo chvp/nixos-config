@@ -1,10 +1,12 @@
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
-(add-hook 'text-mode-hook #'display-line-numbers-mode)
 (add-hook 'prog-mode-hook #'electric-pair-mode)
-(add-hook 'text-mode-hook #'electric-pair-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
-(add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'prog-mode-hook #'hs-minor-mode)
+
+(add-hook 'text-mode-hook #'display-line-numbers-mode)
+(add-hook 'text-mode-hook #'electric-pair-mode)
+(add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'text-mode-hook #'hl-line-mode)
 
 (setopt auto-revert-avoid-polling t
@@ -60,8 +62,15 @@
   (remove-hook 'flyspell-prog-mode-hook #'chvp--diminish-flyspell-prog-mode)
   )
 
+(defun chvp--diminish-hs-minor-mode ()
+  "Diminish `hs-minor-mode' when it's enabled."
+  (diminish 'hs-minor-mode)
+  (remove-hook 'hs-minor-mode-hook #'chvp--diminish-hs-minor-mode)
+  )
+
 (add-hook 'flyspell-mode-hook #'chvp--diminish-flyspell-mode)
 (add-hook 'flyspell-prog-mode-hook #'chvp--diminish-flyspell-prog-mode)
+(add-hook 'hs-minor-mode-hook #'chvp--diminish-hs-minor-mode)
 (diminish 'autorevert-mode)
 (diminish 'eldoc-mode)
 
