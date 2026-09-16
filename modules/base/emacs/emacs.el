@@ -38,7 +38,6 @@
         sentence-end-double-space nil
         shell-command-prompt-show-cwd t
         show-paren-mode t
-        show-paren-style 'expression
         show-paren-context-when-offscreen 'overlay
         tool-bar-mode nil
         treesit-enabled-modes t
