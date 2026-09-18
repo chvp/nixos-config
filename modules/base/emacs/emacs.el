@@ -13,6 +13,7 @@
         column-number-mode t
         completion-ignore-case t
         create-lockfiles nil
+        dabbrev-case-replace nil
         dired-auto-revert-buffer t
         ediff-window-setup-function 'ediff-setup-windows-plain
         fill-column 80
