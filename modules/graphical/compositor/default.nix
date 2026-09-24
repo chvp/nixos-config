@@ -138,8 +138,8 @@ let
     bind = super+shift,k,exchange_stack_client,previous
     bind = super,h,focusmon,left
     bind = super,l,focusmon,right
-    bind = super+shift,h,tagmon,left,1
-    bind = super+shift,l,tagmon,right,1
+    bind = super+shift,h,tagmon,left,0
+    bind = super+shift,l,tagmon,right,0
 
     mousebind = super,btn_left,moveresize,curmove
     mousebind = super,btn_right,moveresize,curresize
