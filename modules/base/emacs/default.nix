@@ -9,24 +9,26 @@ let
   enhanceEntry = after: before: name: entry: {
     before = entry.before ++ before;
     after = entry.after ++ after;
-    data = entry.data //(
-      if entry.data ? "elisp" then
-        {
-          elisp = ''
-            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-            ;; Begin section ${name}
-            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-          ''
-          + entry.data.elisp
-          + ''
-            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-            ;; End section ${name}
-            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-          '';
-        }
-      else
-        { }
-    );
+    data =
+      entry.data
+      // (
+        if entry.data ? "elisp" then
+          {
+            elisp = ''
+              ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+              ;; Begin section ${name}
+              ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            ''
+            + entry.data.elisp
+            + ''
+              ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+              ;; End section ${name}
+              ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            '';
+          }
+        else
+          { }
+      );
   };
   username = config.chvp.username;
   dag = lib.hm.dag;

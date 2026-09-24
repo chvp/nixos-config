@@ -102,10 +102,10 @@
               name = "nixpkgs-patched-${inputs.nixpkgs.shortRev}";
               src = inputs.nixpkgs;
             }).overrideAttrs
-            (old: {
-              preferLocalBuild = false;
-              allowSubstitutes = true;
-            })
+              (old: {
+                preferLocalBuild = false;
+                allowSubstitutes = true;
+              })
           );
       overlay = (
         self: super:
