@@ -69,37 +69,44 @@ in
       };
     };
     home-manager.users.${username} = {
-      programs.git = {
-        enable = true;
-        lfs.enable = true;
-        signing = {
-          format = "ssh";
-          key = sshKeyFile;
-          signByDefault = true;
+      programs = {
+        gh = {
+          enable = true;
+          hosts."github.com".user = "chvp";
+          settings.git_protocol = "ssh";
         };
-        settings = {
-          branch.autoSetupRebase = "always";
-          fetch.prune = true;
-          github.user = "chvp";
-          init.defaultBranch = "main";
-          merge.conflictStyle = "diff3";
-          pull.rebase = true;
-          push.autoSetupRemote = true;
-          rebase.autoStash = true;
-          rerere.enabled = true;
-          user = {
-            email = config.chvp.development.git.email;
-            name = "Charlotte Van Petegem";
+        git = {
+          enable = true;
+          lfs.enable = true;
+          signing = {
+            format = "ssh";
+            key = sshKeyFile;
+            signByDefault = true;
           };
+          settings = {
+            branch.autoSetupRebase = "always";
+            fetch.prune = true;
+            github.user = "chvp";
+            init.defaultBranch = "main";
+            merge.conflictStyle = "diff3";
+            pull.rebase = true;
+            push.autoSetupRemote = true;
+            rebase.autoStash = true;
+            rerere.enabled = true;
+            user = {
+              email = config.chvp.development.git.email;
+              name = "Charlotte Van Petegem";
+            };
+          };
+          ignores = [
+            ".DS_Store"
+            ".data"
+            ".direnv"
+            ".envrc"
+            ".idea"
+            ".dir-locals.el"
+          ];
         };
-        ignores = [
-          ".DS_Store"
-          ".data"
-          ".direnv"
-          ".envrc"
-          ".idea"
-          ".dir-locals.el"
-        ];
       };
     };
   };
