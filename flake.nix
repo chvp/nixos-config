@@ -107,21 +107,18 @@
                 allowSubstitutes = true;
               })
           );
-      overlay = (
-        self: super:
-        super.lib.foldl' (acc: elem: super.lib.recursiveUpdate acc (elem self super)) { } [
-          inputs.agenix.overlays.default
-          inputs.accentor.overlays.default
-          inputs.devshell.overlays.default
-          inputs.emacs-overlay.overlays.default
-          inputs.nur.overlays.default
-          inputs.www-chvp-be.overlays.default
-          (self: super: {
-            accentor-desktop = inputs.accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
-            tetris = inputs.tetris.packages.${self.stdenv.hostPlatform.system}.default;
-          })
-        ]
-      );
+      overlay = inputs.nixpkgs.lib.composeManyExtensions [
+        inputs.agenix.overlays.default
+        inputs.accentor.overlays.default
+        inputs.devshell.overlays.default
+        inputs.emacs-overlay.overlays.default
+        inputs.nur.overlays.default
+        inputs.www-chvp-be.overlays.default
+        (self: super: {
+          accentor-desktop = inputs.accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
+          tetris = inputs.tetris.packages.${self.stdenv.hostPlatform.system}.default;
+        })
+      ];
       module = {
         imports = [ ./modules ];
       };
