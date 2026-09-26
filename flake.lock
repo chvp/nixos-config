@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790407813,
-        "narHash": "sha256-MOqtgNgR3lbhgLNkGfPsxCBMrPQqoF8qKopQZHuXmvE=",
+        "lastModified": 1790439405,
+        "narHash": "sha256-6HpkPq1LA7/s2QjFY6sA4SspynIQhV98/KS0IYp4PFc=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "57e28048b503aff449c6d8d56f2fadd1d4caa929",
+        "rev": "5bfc7ed70529c69a7c9cd3e879de7688754119ab",
         "type": "github"
       },
       "original": {
@@ -110,11 +110,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790433397,
-        "narHash": "sha256-RhMIXszL/StdWAP8/LuaR0vAyqWI+ruOqGJufjHERZg=",
+        "lastModified": 1790441135,
+        "narHash": "sha256-oKs+kC5OKcLvr0k+TE9/8JnDXG7o4DD0ymQ4EaPxKN8=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "de100bf1ce85e3626889b9bf3aa22becad89b2f7",
+        "rev": "c34d0c9cc935bfd2cfca2189146c3fc6d22ce734",
         "type": "github"
       },
       "original": {
@@ -168,16 +168,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1744478979,
-        "narHash": "sha256-dyN+teG9G82G+m+PX/aSAagkC+vUv0SgUw3XkPhQodQ=",
-        "owner": "lnl7",
+        "lastModified": 1783744694,
+        "narHash": "sha256-2cp6N3rrwnGYLTx9l6N+NI+kwrCWxvJUbj5WJhvB29A=",
+        "owner": "nix-darwin",
         "repo": "nix-darwin",
-        "rev": "43975d782b418ebf4969e9ccba82466728c2851b",
+        "rev": "c3e90c89649b07d1a96e4b9dd6cd0d6e44b91a74",
         "type": "github"
       },
       "original": {
-        "owner": "lnl7",
-        "ref": "master",
+        "owner": "nix-darwin",
+        "ref": "nix-darwin-26.05",
         "repo": "nix-darwin",
         "type": "github"
       }
@@ -405,11 +405,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790433077,
-        "narHash": "sha256-pDNgioF5WwfbhajVeSZQtO2ETzm94AAtI8CLjad7f+0=",
+        "lastModified": 1790440964,
+        "narHash": "sha256-D3aQ8IyNjqEUwDDHVugJhEN37CeSy/EvDzrT7MKvLi4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "675b85e2bf089436fafeedc8ced8b91a8a99af72",
+        "rev": "51c6bb8682f6192af8b966f20d53183f2f374bbc",
         "type": "github"
       },
       "original": {
