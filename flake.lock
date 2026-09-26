@@ -107,15 +107,14 @@
         ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "systems": "systems"
+        ]
       },
       "locked": {
-        "lastModified": 1790425413,
-        "narHash": "sha256-wSGavnb6MM/koc2MUiWspqI6eIGFUTQg1c1tArrjAWs=",
+        "lastModified": 1790433397,
+        "narHash": "sha256-RhMIXszL/StdWAP8/LuaR0vAyqWI+ruOqGJufjHERZg=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "cdf882ac4ce2da7a91d23ee9e06e852e915cdc64",
+        "rev": "de100bf1ce85e3626889b9bf3aa22becad89b2f7",
         "type": "github"
       },
       "original": {
@@ -211,11 +210,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1790426620,
-        "narHash": "sha256-HYphXHRqQziufP+e3Y8xQ6aSFBrMkYISmpSsiYLEBgs=",
+        "lastModified": 1790428453,
+        "narHash": "sha256-07k6Xcma1NUTWS2pAx4MNnEdrAZ0fqh4kaqwhJKzqF0=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "3e6fc71d2c7e3c13795f2d0ad483584b5e5122ee",
+        "rev": "871ff6677d7edd57458eed388eaa5774a016ad52",
         "type": "github"
       },
       "original": {
@@ -406,11 +405,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790426303,
-        "narHash": "sha256-EnVNLTqufOJwUBWg7G3Ia/dKhMfMzWS2JU5ky0Mg7sw=",
+        "lastModified": 1790433077,
+        "narHash": "sha256-pDNgioF5WwfbhajVeSZQtO2ETzm94AAtI8CLjad7f+0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "aacad8f8f3afbd5e387d206c2e1018f24689512c",
+        "rev": "675b85e2bf089436fafeedc8ced8b91a8a99af72",
         "type": "github"
       },
       "original": {
@@ -436,21 +435,6 @@
         "nur": "nur",
         "tetris": "tetris",
         "www-chvp-be": "www-chvp-be"
-      }
-    },
-    "systems": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
       }
     },
     "tetris": {
