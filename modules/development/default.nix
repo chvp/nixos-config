@@ -70,6 +70,11 @@
                 (add-to-list 'auto-mode-alist '("JenkinsfileSCM\\'" . jenkinsfile-mode))
               '';
             };
+            json-mode = lib.hm.dag.entryAnywhere {
+              elisp = ''
+                (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+              '';
+            };
             markdown = lib.hm.dag.entryAnywhere {
               packages = epkgs: [ epkgs.markdown-mode ];
               elisp = ''
