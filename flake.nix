@@ -36,6 +36,13 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    de-lijst = {
+      url = "git+https://git.chvp.be/chvp/de-lijst";
+      inputs = {
+        devshell.follows = "devshell";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -113,6 +120,7 @@
         inputs.www-chvp-be.overlays.default
         (self: super: {
           accentor-desktop = inputs.accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
+          de-lijst = inputs.de-lijst.packages.${self.stdenv.hostPlatform.system}.default;
           tetris = inputs.tetris.packages.${self.stdenv.hostPlatform.system}.default;
         })
       ];

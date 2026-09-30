@@ -93,6 +93,7 @@
     };
     services = {
       attic.enable = true;
+      de-lijst.enable = true;
       git = {
         enable = true;
         runner.enable = true;

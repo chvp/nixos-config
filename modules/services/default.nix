@@ -11,6 +11,7 @@
     ./attic
     ./containers
     ./data-access
+    ./de-lijst
     ./git
     ./mail
     ./matrix

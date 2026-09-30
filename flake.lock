@@ -156,6 +156,51 @@
         "type": "github"
       }
     },
+    "bundix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "de-lijst",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762235257,
+        "narHash": "sha256-QyXFgaXQETr9BmwUbWM/2EtF+my6Arpt71xItZy3NL8=",
+        "owner": "inscapist",
+        "repo": "bundix",
+        "rev": "2233b24084316b4de1d55321483554f457a09cfc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "inscapist",
+        "repo": "bundix",
+        "type": "github"
+      }
+    },
+    "de-lijst": {
+      "inputs": {
+        "bundix": "bundix_2",
+        "devshell": [
+          "devshell"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790775936,
+        "narHash": "sha256-XqLIlCwMUSqyzw4nPgT/HZireGCpmp9PYLLa7Yi3aUc=",
+        "ref": "refs/heads/main",
+        "rev": "c2cdd35d3a3449163008d4f507c91a9100d7ad3d",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/de-lijst"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/de-lijst"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -399,6 +444,7 @@
         "accentor-desktop": "accentor-desktop",
         "accentor-web": "accentor-web",
         "agenix": "agenix",
+        "de-lijst": "de-lijst",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",

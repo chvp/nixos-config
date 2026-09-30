@@ -43,6 +43,8 @@ in
 
   "secrets/passwords/services/atticd.age".publicKeys = [ marabethia ] ++ users;
 
+  "secrets/passwords/services/de-lijst.age".publicKeys = [ marabethia ] ++ users;
+
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age".publicKeys = [
