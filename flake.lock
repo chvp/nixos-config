@@ -188,11 +188,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790820167,
-        "narHash": "sha256-u+OSqYbP7j8yqIyHMIWg1ptum7PVmaHd+dH/kWTmfkE=",
+        "lastModified": 1790913759,
+        "narHash": "sha256-33RflKwV1uD98WRH53lLUQRU7LZuljm39iXKibH1Uzg=",
         "ref": "refs/heads/main",
-        "rev": "250bf5001ffda1088fa8ab2b2da3a7b84c1bdd4b",
-        "revCount": 14,
+        "rev": "2d16ee1d8675eaec02a15b8f5cb22a25b5121725",
+        "revCount": 16,
         "type": "git",
         "url": "https://git.chvp.be/chvp/de-lijst"
       },
@@ -424,11 +424,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790916161,
-        "narHash": "sha256-PAktXOJriOXcmhU7a49b8urxJi1l1DMom3vmDC6D49E=",
+        "lastModified": 1790923011,
+        "narHash": "sha256-joPLyB6RCEfHDmHck9qLMyQ58X7MWid+ZNxUFv0AvMg=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "5d72a0c237addb5926defd19023ff57a324ffccc",
+        "rev": "13f119d2db6c7e57e490c5d52af388dcfb219e77",
         "type": "github"
       },
       "original": {
