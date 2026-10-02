@@ -69,6 +69,11 @@ let
             echo master
             return 1
           }
+
+          alias grbmb='git rebase $(git merge-base HEAD $(git_main_branch))'
+          alias grbmba='git rebase $(git merge-base HEAD $(git_main_branch)) --autosquash'
+          alias grbmbi='git rebase $(git merge-base HEAD $(git_main_branch)) --interactive'
+          alias grbmbia='git rebase $(git merge-base HEAD $(git_main_branch)) --interactive --autosquash'
         ''
         + (lib.optionalString
           (home == config.users.users.${username}.home && config.chvp.graphical.compositor.enable)
