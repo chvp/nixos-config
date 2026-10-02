@@ -220,8 +220,8 @@ in
 
   config = lib.mkIf config.chvp.graphical.compositor.enable {
     nixpkgs.overlays = [
-      (self: super: {
-        waybar = super.waybar.overrideAttrs (
+      (final: prev: {
+        waybar = prev.waybar.overrideAttrs (
           old:
           let
             libcava = rec {

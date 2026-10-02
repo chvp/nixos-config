@@ -118,10 +118,10 @@
         inputs.emacs-overlay.overlays.default
         inputs.nur.overlays.default
         inputs.www-chvp-be.overlays.default
-        (self: super: {
-          accentor-desktop = inputs.accentor-desktop.packages.${self.stdenv.hostPlatform.system}.default;
-          de-lijst = inputs.de-lijst.packages.${self.stdenv.hostPlatform.system}.default;
-          tetris = inputs.tetris.packages.${self.stdenv.hostPlatform.system}.default;
+        (final: prev: {
+          accentor-desktop = inputs.accentor-desktop.packages.${final.stdenv.hostPlatform.system}.default;
+          de-lijst = inputs.de-lijst.packages.${final.stdenv.hostPlatform.system}.default;
+          tetris = inputs.tetris.packages.${final.stdenv.hostPlatform.system}.default;
         })
       ];
       module = {

@@ -74,8 +74,8 @@ in
   };
 
   nixpkgs.overlays = [
-    (self: super: {
-      linux-firmware = super.linux-firmware.overrideAttrs (old: rec {
+    (final: prev: {
+      linux-firmware = prev.linux-firmware.overrideAttrs (old: rec {
         version = "20250509";
         src = pkgs.fetchFromGitLab {
           owner = "kernel-firmware";
