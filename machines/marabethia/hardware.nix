@@ -85,10 +85,6 @@
       device = "zroot/local/services/attic";
       fsType = "zfs";
     };
-    "/var/lib/docker" = {
-      device = "zroot/local/services/docker";
-      fsType = "zfs";
-    };
     "/var/lib/forgejo" = {
       device = "zroot/safe/services/forgejo";
       fsType = "zfs";

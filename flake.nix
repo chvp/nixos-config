@@ -55,6 +55,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -172,6 +176,7 @@
             inputs.accentor.nixosModules.default
             inputs.agenix.nixosModules.default
             inputs.home-manager.nixosModules.default
+            inputs.microvm.nixosModules.host
             inputs.nixos-mailserver.nixosModules.default
             inputs.nix-index-database.nixosModules.nix-index
             module

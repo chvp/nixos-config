@@ -96,7 +96,7 @@
       de-lijst.enable = true;
       git = {
         enable = true;
-        runner.enable = true;
+        native-runner.enable = true;
       };
       mail.enable = true;
       matrix.enable = true;

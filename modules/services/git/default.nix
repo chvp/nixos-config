@@ -11,7 +11,10 @@
     example = true;
   };
 
-  imports = [ ./runner.nix ];
+  imports = [
+    ./docker-runner.nix
+    ./native-runner.nix
+  ];
 
   config = lib.mkIf config.chvp.services.git.enable {
     chvp.services.nginx.hosts = [
