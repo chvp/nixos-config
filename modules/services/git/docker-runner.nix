@@ -80,7 +80,10 @@
               fixed-cidr-v6 = "fd00::/80";
               ipv6 = true;
             };
-            autoPrune.enable = true;
+            autoPrune = {
+              enable = true;
+              dates = "hourly";
+            };
           };
         };
       };
