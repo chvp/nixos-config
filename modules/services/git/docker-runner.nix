@@ -42,7 +42,7 @@
             volumes = [
               {
                 autoCreate = true;
-                image = "${config.chvp.dataPrefix}/var/lib/actions-runner/containers.image";
+                image = "/var/lib/microvms/actions-runner/containers.image";
                 label = "containers";
                 mountPoint = "/var/lib/docker";
                 size = 20 * 1024;
