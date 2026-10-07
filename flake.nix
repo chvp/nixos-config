@@ -194,11 +194,7 @@
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry = (builtins.mapAttrs (name: v: { flake = v; }) inputs) // {
-                    nixpkgs = {
-                      flake = nixpkgs;
-                    };
-                  };
+                  registry.nixpkgs.flake = nixpkgs;
                 };
               }
             )
