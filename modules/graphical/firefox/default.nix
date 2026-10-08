@@ -76,7 +76,7 @@ in
           };
         };
         profiles.default = {
-          extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          extensions.packages = with pkgs.firefox-addons; [
             belgium-eid
             consent-o-matic
             cookie-autodelete

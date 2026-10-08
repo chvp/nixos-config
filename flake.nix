@@ -72,8 +72,8 @@
       url = "github:nixos/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur = {
-      url = "github:nix-community/NUR";
+    rycee-nur-expressions = {
+      url = "gitlab:rycee/nur-expressions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     tetris = {
@@ -120,9 +120,9 @@
         inputs.accentor.overlays.default
         inputs.devshell.overlays.default
         inputs.emacs-overlay.overlays.default
-        inputs.nur.overlays.default
         inputs.www-chvp-be.overlays.default
         (final: prev: {
+          firefox-addons = inputs.rycee-nur-expressions.legacyPackages.${final.stdenv.hostPlatform.system}.firefox-addons;
           accentor-desktop = inputs.accentor-desktop.packages.${final.stdenv.hostPlatform.system}.default;
           de-lijst = inputs.de-lijst.packages.${final.stdenv.hostPlatform.system}.default;
           tetris = inputs.tetris.packages.${final.stdenv.hostPlatform.system}.default;
