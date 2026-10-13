@@ -81,19 +81,19 @@ let
     animations = 0
 
     # appearance
-    gappih = 0
-    gappiv = 0
-    gappoh = 0
-    gappov = 0
+    gap_inner_horizontal = 0
+    gap_inner_vertical = 0
+    gap_outer_horizontal = 0
+    gap_outer_vertical = 0
     scratchpad_width_ratio = 0.8
     scratchpad_height_ratio = 0.9
-    borderpx = 1
+    border_px = 1
     source-optional = ./theme.conf
 
     # keyboard
     repeat_rate = 25
     repeat_delay = 600
-    numlockon = 1
+    numlock_on = 1
     xkb_rules_layout = us
     xkb_rules_variant = altgr-intl
     xkb_rules_options = compose:caps
@@ -106,17 +106,17 @@ let
     button_map = 0
 
     # layouts
-    tagrule = id:1,layout_name:tile
-    tagrule = id:2,layout_name:tile
-    tagrule = id:3,layout_name:tile
-    tagrule = id:4,layout_name:tile
-    tagrule = id:5,layout_name:tile
-    tagrule = id:6,layout_name:tile
-    tagrule = id:7,layout_name:tile
-    tagrule = id:8,layout_name:tile
-    tagrule = id:9,layout_name:tile
+    tag_rule = id:1,layout_name:tile
+    tag_rule = id:2,layout_name:tile
+    tag_rule = id:3,layout_name:tile
+    tag_rule = id:4,layout_name:tile
+    tag_rule = id:5,layout_name:tile
+    tag_rule = id:6,layout_name:tile
+    tag_rule = id:7,layout_name:tile
+    tag_rule = id:8,layout_name:tile
+    tag_rule = id:9,layout_name:tile
     new_is_master = 0
-    default_mfact = 0.60
+    default_master_factor = 0.60
 
     # keybinds
     bind = super,r,reload_config
@@ -207,9 +207,9 @@ let
     cursor_theme = ${config.home-manager.users.${username}.home.pointerCursor.name}
     cursor_size = ${toString config.home-manager.users.${username}.home.pointerCursor.size}
 
-    exec-once = ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_SESSION_TYPE XCURSOR_SIZE QT_QPA_PLATFORM_THEME QT_STYLE_OVERRIDE QT_PLUGIN_PATH QTWEBKIT_PLUGIN_PATH GDK_PIXBUF_MODULE_FILE XDG_DATA_DIRS GIO_EXTRA_MODULES PATH
-    exec-once = systemctl --user start mango-session.target
-    exec-once = systemctl --user start tray.target
+    exec_once = ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_SESSION_TYPE XCURSOR_SIZE QT_QPA_PLATFORM_THEME QT_STYLE_OVERRIDE QT_PLUGIN_PATH QTWEBKIT_PLUGIN_PATH GDK_PIXBUF_MODULE_FILE XDG_DATA_DIRS GIO_EXTRA_MODULES PATH
+    exec_once = systemctl --user start mango-session.target
+    exec_once = systemctl --user start tray.target
   '';
 in
 {
