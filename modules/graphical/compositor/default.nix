@@ -598,31 +598,31 @@ in
         };
         "mango/latte.conf" = {
           text = ''
-            rootcolor = 0xeff1f5ff
-            bordercolor = 0xdce0e8ff
-            dropcolor = 0x8839ef80
-            splitcolor = 0x179299ff
-            focuscolor = 0xfe640bff
-            maximizescreencolor = 0x40a02bff
-            urgentcolor = 0xd20f39ff
-            scratchpadcolor = 0x179299ff
-            globalcolor = 0x7287fdff
-            overlaycolor = 0xdf8e1dff
+            root_color = 0xeff1f5ff
+            border_color = 0xdce0e8ff
+            drop_color = 0x8839ef80
+            split_color = 0x179299ff
+            focus_color = 0xfe640bff
+            maximized_screen_color = 0x40a02bff
+            urgent_color = 0xd20f39ff
+            scratchpad_color = 0x179299ff
+            global_color = 0x7287fdff
+            overlay_color = 0xdf8e1dff
           '';
           onChange = reload-config;
         };
         "mango/frappe.conf" = {
           text = ''
-            rootcolor = 0x303446ff
-            bordercolor = 0x232634ff
-            dropcolor = 0xca9ee680
-            splitcolor = 0x81c8beff
-            focuscolor = 0xef9f76ff
-            maximizescreencolor = 0xa6d189ff
-            urgentcolor = 0xe78284ff
-            scratchpadcolor = 0x81c8beff
-            globalcolor = 0xbabbf1ff
-            overlaycolor = 0xe5c890ff
+            root_color = 0x303446ff
+            border_color = 0x232634ff
+            drop_color = 0xca9ee680
+            split_color = 0x81c8beff
+            focus_color = 0xef9f76ff
+            maximized_screen_color = 0xa6d189ff
+            urgent_color = 0xe78284ff
+            scratchpad_color = 0x81c8beff
+            global_color = 0xbabbf1ff
+            overlay_color = 0xe5c890ff
           '';
           onChange = reload-config;
         };
