@@ -188,11 +188,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791986683,
-        "narHash": "sha256-OP6zGxAOW6K5A7ckpvifhFNGm5gNf27Q7uO7Z5CUL0s=",
+        "lastModified": 1791987052,
+        "narHash": "sha256-RchVMgeOwjlZAkp10q4F8VRIAhcCAu/hheSe48XD/DQ=",
         "ref": "refs/heads/main",
-        "rev": "9f674355845ef8a42da3d057a62ccf9f662a64a9",
-        "revCount": 34,
+        "rev": "574883164807692e712e053cb5b8d73edbd08ab3",
+        "revCount": 36,
         "type": "git",
         "url": "https://git.chvp.be/chvp/de-lijst"
       },
@@ -229,11 +229,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1791984121,
-        "narHash": "sha256-fDxM2AE6/42l3NnQsHR6Qt1+PgCcuhz2HUE9Gw54wEs=",
+        "lastModified": 1791987143,
+        "narHash": "sha256-8+UUOTY0FrrzCBMUo6utoWCYvGdCslIqqaQWBS6x9V8=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "3689dd283a1f2f8655d226a21ac86e5eed5fad6b",
+        "rev": "fa8fd6756f3bb1526f9434e4f9c442499e3c183f",
         "type": "github"
       },
       "original": {
