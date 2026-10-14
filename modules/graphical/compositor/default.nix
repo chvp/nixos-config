@@ -118,15 +118,42 @@ let
     };
 
     rule.tag_rule = [
-      ({ id = 1; layout_name = "tile"; })
-      ({ id = 2; layout_name = "tile"; })
-      ({ id = 3; layout_name = "tile"; })
-      ({ id = 4; layout_name = "tile"; })
-      ({ id = 5; layout_name = "tile"; })
-      ({ id = 6; layout_name = "tile"; })
-      ({ id = 7; layout_name = "tile"; })
-      ({ id = 8; layout_name = "tile"; })
-      ({ id = 9; layout_name = "tile"; })
+      ({
+        id = 1;
+        layout_name = "tile";
+      })
+      ({
+        id = 2;
+        layout_name = "tile";
+      })
+      ({
+        id = 3;
+        layout_name = "tile";
+      })
+      ({
+        id = 4;
+        layout_name = "tile";
+      })
+      ({
+        id = 5;
+        layout_name = "tile";
+      })
+      ({
+        id = 6;
+        layout_name = "tile";
+      })
+      ({
+        id = 7;
+        layout_name = "tile";
+      })
+      ({
+        id = 8;
+        layout_name = "tile";
+      })
+      ({
+        id = 9;
+        layout_name = "tile";
+      })
     ];
 
     bind.default = {

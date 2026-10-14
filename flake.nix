@@ -122,7 +122,8 @@
         inputs.emacs-overlay.overlays.default
         inputs.www-chvp-be.overlays.default
         (final: prev: {
-          firefox-addons = inputs.rycee-nur-expressions.legacyPackages.${final.stdenv.hostPlatform.system}.firefox-addons;
+          firefox-addons =
+            inputs.rycee-nur-expressions.legacyPackages.${final.stdenv.hostPlatform.system}.firefox-addons;
           accentor-desktop = inputs.accentor-desktop.packages.${final.stdenv.hostPlatform.system}.default;
           de-lijst = inputs.de-lijst.packages.${final.stdenv.hostPlatform.system}.default;
           tetris = inputs.tetris.packages.${final.stdenv.hostPlatform.system}.default;
