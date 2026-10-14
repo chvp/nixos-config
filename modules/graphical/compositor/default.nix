@@ -102,7 +102,7 @@ let
     tap_to_click = 1
     tap_and_drag = 1
     drag_lock = 1
-    disable_while_typing = 1
+    trackpad_disable_while_typing = 1
     button_map = 0
 
     # layouts
