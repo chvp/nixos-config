@@ -71,146 +71,149 @@ let
         fi
     fi
   '';
-  mango-config = ''
-    # window effect
-    blur = 0
-    shadows = 0
-    border_radius = 0
-    focused_opacity = 1.0
-    unfocused_opacity = 1.0
-    animations = 0
+  mango-config = (pkgs.formats.toml { }).generate "mango-config" {
+    global = {
+      blur = 0;
+      shadows = 0;
+      border_radius = 0;
+      focused_opacity = 1.0;
+      unfocused_opacity = 1.0;
+      animations = 0;
+      gap_inner_horizontal = 0;
+      gap_inner_vertical = 0;
+      gap_outer_horizontal = 0;
+      gap_outer_vertical = 0;
+      scratchpad_width_ratio = 0.8;
+      scratchpad_height_ratio = 0.9;
+      border_px = 1;
 
-    # appearance
-    gap_inner_horizontal = 0
-    gap_inner_vertical = 0
-    gap_outer_horizontal = 0
-    gap_outer_vertical = 0
-    scratchpad_width_ratio = 0.8
-    scratchpad_height_ratio = 0.9
-    border_px = 1
-    source-optional = ./theme.conf
+      repeat_rate = 25;
+      repeat_delay = 600;
+      numlock_on = 1;
+      xkb_rules_layout = "us";
+      xkb_rules_variant = "altgr-intl";
+      xkb_rules_options = "compose:caps";
 
-    # keyboard
-    repeat_rate = 25
-    repeat_delay = 600
-    numlock_on = 1
-    xkb_rules_layout = us
-    xkb_rules_variant = altgr-intl
-    xkb_rules_options = compose:caps
+      tap_to_click = 1;
+      tap_and_drag = 1;
+      drag_lock = 1;
+      trackpad_disable_while_typing = 1;
+      button_map = 0;
 
-    # touchpad
-    tap_to_click = 1
-    tap_and_drag = 1
-    drag_lock = 1
-    trackpad_disable_while_typing = 1
-    button_map = 0
+      new_is_master = 0;
+      default_master_factor = 0.60;
 
-    # layouts
-    tag_rule = id:1,layout_name:tile
-    tag_rule = id:2,layout_name:tile
-    tag_rule = id:3,layout_name:tile
-    tag_rule = id:4,layout_name:tile
-    tag_rule = id:5,layout_name:tile
-    tag_rule = id:6,layout_name:tile
-    tag_rule = id:7,layout_name:tile
-    tag_rule = id:8,layout_name:tile
-    tag_rule = id:9,layout_name:tile
-    new_is_master = 0
-    default_master_factor = 0.60
+      no_border_when_single = 1;
+      cursor_hide_on_keypress = 1;
+      cursor_theme = config.home-manager.users.${username}.home.pointerCursor.name;
+      cursor_size = config.home-manager.users.${username}.home.pointerCursor.size;
 
-    # keybinds
-    bind = super,r,reload_config
-    bind = super,Return,spawn,foot
-    bind = super+shift,Return,spawn,emacs
-    bind = super,d,spawn,${launcher}/bin/launcher
-    bind = none,Menu,spawn,${launcher}/bin/launcher
-    bind = none,XF86Calculator,spawn,foot zsh -ic qalc
-    bind = super,c,spawn,${lock}
+      exec_once = [
+        "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_SESSION_TYPE XCURSOR_SIZE QT_QPA_PLATFORM_THEME QT_STYLE_OVERRIDE QT_PLUGIN_PATH QTWEBKIT_PLUGIN_PATH GDK_PIXBUF_MODULE_FILE XDG_DATA_DIRS GIO_EXTRA_MODULES PATH"
+        "systemctl --user start mango-session.target"
+        "systemctl --user start tray.target"
+      ];
 
-    bind = super+shift,c,killclient
-    bind = super,f,zoom
-    bind = super+shift,f,togglefullscreen
-    bind = super,space,togglefloating
-    bind = super+ctrl,f,togglefakefullscreen
-    bind = super,j,focusstack,next
-    bind = super,k,focusstack,previous
-    bind = super+shift,j,exchange_stack_client,next
-    bind = super+shift,k,exchange_stack_client,previous
-    bind = super,h,focusmon,left
-    bind = super,l,focusmon,right
-    bind = super+shift,h,tagmon,left,0
-    bind = super+shift,l,tagmon,right,0
+      source-optional = [ "./theme.toml" ];
+    };
 
-    mousebind = super,btn_left,moveresize,curmove
-    mousebind = super,btn_right,moveresize,curresize
+    rule.tag_rule = [
+      ({ id = 1; layout_name = "tile"; })
+      ({ id = 2; layout_name = "tile"; })
+      ({ id = 3; layout_name = "tile"; })
+      ({ id = 4; layout_name = "tile"; })
+      ({ id = 5; layout_name = "tile"; })
+      ({ id = 6; layout_name = "tile"; })
+      ({ id = 7; layout_name = "tile"; })
+      ({ id = 8; layout_name = "tile"; })
+      ({ id = 9; layout_name = "tile"; })
+    ];
 
-    bind = none,XF86MonBrightnessUp,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- +5%
-    bind = none,XF86MonBrightnessDown,spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%
-    bind = none,XF86AudioRaiseVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%+
-    bind = none,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_SINK@ 5%-
-    bind = none,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_SINK@ toggle
-    bind = none,XF86AudioMicMute,spawn,wpctl set-mute @DEFAULT_SOURCE@ toggle
-    bind = none,XF86AudioNext,spawn,${pkgs.playerctl}/bin/playerctl next
-    bind = none,XF86AudioPlay,spawn,${pkgs.playerctl}/bin/playerctl play-pause
-    bind = none,XF86AudioPrev,spawn,${pkgs.playerctl}/bin/playerctl previous
+    bind.default = {
+      "super+r" = "reload_config";
+      "super+return" = "spawn,foot";
+      "super+shift+return" = "spawn,emacs";
+      "super+d" = "spawn,${launcher}/bin/launcher";
+      "none+Menu" = "spawn,${launcher}/bin/launcher";
+      "none+XF86Calculator" = "spawn,foot zsh -ic qalc";
+      "super+c" = "spawn,${lock}";
 
-    bind = none,Print,spawn,${screenshot}/bin/screenshot
-    bind = alt,Print,spawn,${screenshot}/bin/screenshot -d
-    bind = shift,Print,spawn,${screenshot}/bin/screenshot -r
-    bind = alt+shift,Print,spawn,${screenshot}/bin/screenshot -r -d
-    bind = ctrl,Print,spawn,${screenshot}/bin/screenshot -f
-    bind = ctrl+alt,Print,spawn,${screenshot}/bin/screenshot -f -d
+      "super+shift+c" = "killclient";
+      "super+f" = "zoom";
+      "super+shift+f" = "togglefullscreen";
+      "super+space" = "togglefloating";
+      "super+ctrl+f" = "togglefakefullscreen";
+      "super+j" = "focusstack,next";
+      "super+k" = "focusstack,previous";
+      "super+shift+j" = "exchange_stack_client,next";
+      "super+shift+k" = "exchange_stack_client,previous";
+      "super+h" = "focusmon,left";
+      "super+l" = "focusmon,right";
+      "super+shift+h" = "tagmon,left,0";
+      "super+shift+l" = "tagmon,right,0";
 
-    # tags
-    bind = super,0,view,0,0
-    bind = super,1,view,1,0
-    bind = super,2,view,2,0
-    bind = super,3,view,3,0
-    bind = super,4,view,4,0
-    bind = super,5,view,5,0
-    bind = super,6,view,6,0
-    bind = super,7,view,7,0
-    bind = super,8,view,8,0
-    bind = super,9,view,9,0
-    bind = super+ctrl,1,toggleview,1,0
-    bind = super+ctrl,2,toggleview,2,0
-    bind = super+ctrl,3,toggleview,3,0
-    bind = super+ctrl,4,toggleview,4,0
-    bind = super+ctrl,5,toggleview,5,0
-    bind = super+ctrl,6,toggleview,6,0
-    bind = super+ctrl,7,toggleview,7,0
-    bind = super+ctrl,8,toggleview,8,0
-    bind = super+ctrl,9,toggleview,9,0
-    bind = super+shift,0,tagsilent,1|2|3|4|5|6|7|8|9,0
-    bind = super+shift,1,tagsilent,1,0
-    bind = super+shift,2,tagsilent,2,0
-    bind = super+shift,3,tagsilent,3,0
-    bind = super+shift,4,tagsilent,4,0
-    bind = super+shift,5,tagsilent,5,0
-    bind = super+shift,6,tagsilent,6,0
-    bind = super+shift,7,tagsilent,7,0
-    bind = super+shift,8,tagsilent,8,0
-    bind = super+shift,9,tagsilent,9,0
-    bind = super+ctrl+shift,1,toggletag,1,0
-    bind = super+ctrl+shift,2,toggletag,2,0
-    bind = super+ctrl+shift,3,toggletag,3,0
-    bind = super+ctrl+shift,4,toggletag,4,0
-    bind = super+ctrl+shift,5,toggletag,5,0
-    bind = super+ctrl+shift,6,toggletag,6,0
-    bind = super+ctrl+shift,7,toggletag,7,0
-    bind = super+ctrl+shift,8,toggletag,8,0
-    bind = super+ctrl+shift,9,toggletag,9,0
+      "none+XF86MonBrightnessUp" = "spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- +5%";
+      "none+XF86MonBrightnessDown" = "spawn,${pkgs.brightnessctl}/bin/brightnessctl s -- -5%";
+      "none+XF86AudioRaiseVolume" = "spawn,wpctl set-volume @DEFAULT_SINK@ 5%+";
+      "none+XF86AudioLowerVolume" = "spawn,wpctl set-volume @DEFAULT_SINK@ 5%-";
+      "none+XF86AudioMute" = "spawn,wpctl set-mute @DEFAULT_SINK@ toggle";
+      "none+XF86AudioMicMute" = "spawn,wpctl set-mute @DEFAULT_SOURCE@ toggle";
+      "none+XF86AudioNext" = "spawn,${pkgs.playerctl}/bin/playerctl next";
+      "none+XF86AudioPlay" = "spawn,${pkgs.playerctl}/bin/playerctl play-pause";
+      "none+XF86AudioPrev" = "spawn,${pkgs.playerctl}/bin/playerctl previous";
 
-    # misc
-    no_border_when_single = 1
-    cursor_hide_on_keypress = 1
-    cursor_theme = ${config.home-manager.users.${username}.home.pointerCursor.name}
-    cursor_size = ${toString config.home-manager.users.${username}.home.pointerCursor.size}
+      "none+Print" = "spawn,${screenshot}/bin/screenshot";
+      "alt+Print" = "spawn,${screenshot}/bin/screenshot -d";
+      "shift+Print" = "spawn,${screenshot}/bin/screenshot -r";
+      "alt+shift+Print" = "spawn,${screenshot}/bin/screenshot -r -d";
+      "ctrl+Print" = "spawn,${screenshot}/bin/screenshot -f";
+      "ctrl+alt+Print" = "spawn,${screenshot}/bin/screenshot -f -d";
 
-    exec_once = ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY XDG_SESSION_TYPE XCURSOR_SIZE QT_QPA_PLATFORM_THEME QT_STYLE_OVERRIDE QT_PLUGIN_PATH QTWEBKIT_PLUGIN_PATH GDK_PIXBUF_MODULE_FILE XDG_DATA_DIRS GIO_EXTRA_MODULES PATH
-    exec_once = systemctl --user start mango-session.target
-    exec_once = systemctl --user start tray.target
-  '';
+      "super+0" = "view,0,0";
+      "super+1" = "view,1,0";
+      "super+2" = "view,2,0";
+      "super+3" = "view,3,0";
+      "super+4" = "view,4,0";
+      "super+5" = "view,5,0";
+      "super+6" = "view,6,0";
+      "super+7" = "view,7,0";
+      "super+8" = "view,8,0";
+      "super+9" = "view,9,0";
+      "super+ctrl+1" = "toggleview,1,0";
+      "super+ctrl+2" = "toggleview,2,0";
+      "super+ctrl+3" = "toggleview,3,0";
+      "super+ctrl+4" = "toggleview,4,0";
+      "super+ctrl+5" = "toggleview,5,0";
+      "super+ctrl+6" = "toggleview,6,0";
+      "super+ctrl+7" = "toggleview,7,0";
+      "super+ctrl+8" = "toggleview,8,0";
+      "super+ctrl+9" = "toggleview,9,0";
+      "super+shift+0" = "tagsilent,1|2|3|4|5|6|7|8|9,0";
+      "super+shift+1" = "tagsilent,1,0";
+      "super+shift+2" = "tagsilent,2,0";
+      "super+shift+3" = "tagsilent,3,0";
+      "super+shift+4" = "tagsilent,4,0";
+      "super+shift+5" = "tagsilent,5,0";
+      "super+shift+6" = "tagsilent,6,0";
+      "super+shift+7" = "tagsilent,7,0";
+      "super+shift+8" = "tagsilent,8,0";
+      "super+shift+9" = "tagsilent,9,0";
+      "super+ctrl+shift+1" = "toggletag,1,0";
+      "super+ctrl+shift+2" = "toggletag,2,0";
+      "super+ctrl+shift+3" = "toggletag,3,0";
+      "super+ctrl+shift+4" = "toggletag,4,0";
+      "super+ctrl+shift+5" = "toggletag,5,0";
+      "super+ctrl+shift+6" = "toggletag,6,0";
+      "super+ctrl+shift+7" = "toggletag,7,0";
+      "super+ctrl+shift+8" = "toggletag,8,0";
+      "super+ctrl+shift+9" = "toggletag,9,0";
+    };
+
+    mousebind.default = {
+      "super+btn_left" = "moveresize,curmove";
+      "super+btn_right" = "moveresize,curresize";
+    };
+  };
 in
 {
   options.chvp.graphical.compositor.enable = lib.mkOption {
@@ -592,12 +595,13 @@ in
         };
       };
       xdg.configFile = {
-        "mango/config.conf" = {
-          text = mango-config;
+        "mango/config.toml" = {
+          source = mango-config;
           onChange = reload-config;
         };
-        "mango/latte.conf" = {
+        "mango/latte.toml" = {
           text = ''
+            [global]
             root_color = 0xeff1f5ff
             border_color = 0xdce0e8ff
             drop_color = 0x8839ef80
@@ -611,8 +615,9 @@ in
           '';
           onChange = reload-config;
         };
-        "mango/frappe.conf" = {
+        "mango/frappe.toml" = {
           text = ''
+            [global]
             root_color = 0x303446ff
             border_color = 0x232634ff
             drop_color = 0xca9ee680

@@ -183,9 +183,9 @@ in
           mango = ''
             if [ "$1" = "light" ]
             then
-              ln -sf ~/.config/mango/latte.conf ~/.config/mango/theme.conf
+              ln -sf ~/.config/mango/latte.toml ~/.config/mango/theme.toml
             else
-              ln -sf ~/.config/mango/frappe.conf ~/.config/mango/theme.conf
+              ln -sf ~/.config/mango/frappe.toml ~/.config/mango/theme.toml
             fi
             mmsg dispatch reload_config
           '';
