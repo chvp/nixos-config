@@ -88,6 +88,7 @@
     "/var/lib/nixos" = {
       device = "zroot/safe/services/nixos";
       fsType = "zfs";
+      neededForBoot = true;
     };
     "/var/lib/postgresql" = {
       device = "zroot/safe/services/postgresql";
