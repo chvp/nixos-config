@@ -109,10 +109,6 @@
       device = "zroot/safe/services/postgresql";
       fsType = "zfs";
     };
-    "/var/lib/private/forgejo-runner" = {
-      device = "zroot/local/services/forgejo-runner";
-      fsType = "zfs";
-    };
     "/var/sieve" = {
       device = "zroot/safe/services/sieve";
       fsType = "zfs";
