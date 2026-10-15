@@ -62,6 +62,12 @@
             location = "marabethia.vanpetegem.me";
           }
           {
+            path = "zroot/safe/services/nixos";
+            remotePath = "zroot/recv/elendel/safe/services/nixos";
+            fast = true;
+            location = "marabethia.vanpetegem.me";
+          }
+          {
             path = "zroot/safe/services/postgresql";
             remotePath = "zroot/recv/elendel/safe/services/postgresql";
             fast = true;

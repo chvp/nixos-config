@@ -85,6 +85,10 @@
       device = "zdata/local/services/accentor-transcode-cache";
       fsType = "zfs";
     };
+    "/var/lib/nixos" = {
+      device = "zroot/safe/services/nixos";
+      fsType = "zfs";
+    };
     "/var/lib/postgresql" = {
       device = "zroot/safe/services/postgresql";
       fsType = "zfs";

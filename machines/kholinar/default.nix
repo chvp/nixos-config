@@ -34,6 +34,12 @@
         ];
         rootDataset = "rpool/local/root";
         rootPool = "rpool";
+        systemLinks = [
+          {
+            path = "/var/lib/nixos";
+            type = "data";
+          }
+        ];
       };
     };
     development = {
