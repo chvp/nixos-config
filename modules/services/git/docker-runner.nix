@@ -53,26 +53,16 @@
           services.openssh.settings.PermitRootLogin = "yes";
           services.gitea-actions-runner = {
             package = pkgs.forgejo-runner;
-            instances.global-1 = {
+            instances = lib.genAttrs (lib.genList (i: "global-${i}") 4) (name: {
               enable = true;
+              inherit name;
               url = "https://git.chvp.be";
               labels = [ "docker:docker://node:lts" ];
-              name = "global-1";
               tokenFile = "/run/secrets/token-file";
               settings = {
                 container.enable_ipv6 = true;
               };
-            };
-            instances.global-2 = {
-              enable = true;
-              url = "https://git.chvp.be";
-              labels = [ "docker:docker://node:lts" ];
-              name = "global-2";
-              tokenFile = "/run/secrets/token-file";
-              settings = {
-                container.enable_ipv6 = true;
-              };
-            };
+            });
           };
           virtualisation.docker = {
             enable = true;
