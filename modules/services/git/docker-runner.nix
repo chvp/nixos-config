@@ -51,18 +51,20 @@
           };
           system.stateVersion = config.chvp.stateVersion;
           services.openssh.settings.PermitRootLogin = "yes";
-          services.gitea-actions-runner = {
-            package = pkgs.forgejo-runner;
-            instances = lib.genAttrs (lib.genList (i: "global-${lib.toString i}") 4) (name: {
-              enable = true;
-              inherit name;
-              url = "https://git.chvp.be";
-              labels = [ "docker:docker://node:lts" ];
-              tokenFile = "/run/secrets/token-file";
-              settings = {
-                container.enable_ipv6 = true;
+          services.forgejo-runner.instances."global-0" = {
+            enable = true;
+            secrets.server.connections."git.chvp.be".token_url = "/run/secrets/global-0-token-file";
+            settings = {
+              container.enable_ipv6 = true;
+              runner = {
+                capacity = 4;
+                labels = [ "docker:docker://node:lts" ];
               };
-            });
+              server.connections."git.chvp.be" = {
+                url = "https://git.chvp.be";
+                uuid = "53fadc8b-d9ef-4188-9316-0915ab18272a";
+              };
+            };
           };
           virtualisation.docker = {
             enable = true;
@@ -79,9 +81,9 @@
       };
     };
 
-    age.secrets."passwords/services/git/token-file" = {
-      file = ../../../secrets/passwords/services/git/token-file.age;
-      path = "/run/actions-runner/token-file";
+    age.secrets."passwords/services/git/global-0-token-file" = {
+      file = ../../../secrets/passwords/services/git/global-0-token-file.age;
+      path = "/run/actions-runner/global-0-token-file";
       owner = "microvm";
       symlink = false;
     };

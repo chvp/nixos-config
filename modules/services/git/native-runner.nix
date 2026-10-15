@@ -12,34 +12,35 @@
   };
 
   config = lib.mkIf config.chvp.services.git.native-runner.enable {
-    services.gitea-actions-runner = {
-      package = pkgs.forgejo-runner;
-      instances = lib.genAttrs (lib.genList (i: "chvp-${lib.toString i}") 2) (name: {
-        enable = true;
-        inherit name;
-        url = "https://git.chvp.be";
-        hostPackages = with pkgs; [
-          attic-client
-          bash
-          coreutils
-          curl
-          gawk
-          gitMinimal
-          gnused
-          nix
-          nodejs
-          wget
-        ];
-        labels = [ "native:host" ];
-        tokenFile = config.age.secrets."passwords/services/git/personal-token-file".path;
-        settings = {
-          container.enable_ipv6 = true;
+    services.forgejo-runner.instances."chvp-personal-0" = {
+      enable = true;
+      hostPackages = with pkgs; [
+        attic-client
+        bash
+        coreutils
+        curl
+        gawk
+        gitMinimal
+        gnused
+        nix
+        nodejs
+        wget
+      ];
+      secrets.server.connections."git.chvp.be".token_url =
+        config.age.secrets."passwords/services/git/chvp-personal-0-token-file".path;
+      settings = {
+        runner = {
+          capacity = 2;
+          labels = [ "native:host" ];
         };
-      });
+        server.connections."git.chvp.be" = {
+          url = "https://git.chvp.be";
+          uuid = "1b5b0fd5-0515-4eb9-90ad-eb55f00df673";
+        };
+      };
     };
 
-    age.secrets."passwords/services/git/personal-token-file" = {
-      file = ../../../secrets/passwords/services/git/personal-token-file.age;
-    };
+    age.secrets."passwords/services/git/chvp-personal-0-token-file".file =
+      ../../../secrets/passwords/services/git/chvp-personal-0-token-file.age;
   };
 }
