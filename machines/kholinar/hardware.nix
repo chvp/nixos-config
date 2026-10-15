@@ -58,6 +58,12 @@
     neededForBoot = true;
   };
 
+  fileSystems."/var/lib/nixos" = {
+    device = "rpool/local/var-lib-nixos";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/E13E-B160";
     fsType = "vfat";
