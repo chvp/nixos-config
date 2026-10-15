@@ -14,7 +14,7 @@
   config = lib.mkIf config.chvp.services.git.native-runner.enable {
     services.gitea-actions-runner = {
       package = pkgs.forgejo-runner;
-      instances = lib.genAttrs (lib.genList (i: "chvp-${i}") 2) (name: {
+      instances = lib.genAttrs (lib.genList (i: "chvp-${lib.toString i}") 2) (name: {
         enable = true;
         inherit name;
         url = "https://git.chvp.be";

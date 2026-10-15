@@ -53,7 +53,7 @@
           services.openssh.settings.PermitRootLogin = "yes";
           services.gitea-actions-runner = {
             package = pkgs.forgejo-runner;
-            instances = lib.genAttrs (lib.genList (i: "global-${i}") 4) (name: {
+            instances = lib.genAttrs (lib.genList (i: "global-${lib.toString i}") 4) (name: {
               enable = true;
               inherit name;
               url = "https://git.chvp.be";
