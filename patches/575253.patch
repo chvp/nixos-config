@@ -1,0 +1,130 @@
+diff --git a/pkgs/by-name/ma/matrix-synapse-unwrapped/authlib.patch b/pkgs/by-name/ma/matrix-synapse-unwrapped/authlib.patch
+new file mode 100644
+index 0000000000000..9ad9ccb14aead
+--- /dev/null
++++ b/pkgs/by-name/ma/matrix-synapse-unwrapped/authlib.patch
+@@ -0,0 +1,70 @@
++From a4cfd7d7420409c1ab22e83c4f9d196644f02c83 Mon Sep 17 00:00:00 2001
++From: Andrew Morgan <andrew@amorgan.xyz>
++Date: Thu, 8 Oct 2026 18:58:11 +0100
++Subject: [PATCH] Maintain support for integer `sub`
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++This was allowed before authlib 1.7, and we even had a regression test
++for it. In 1.7.0, authlib migrated its OAuth/OIDC internals to
++`joserfc`: https://github.com/authlib/authlib/pull/852
++
++Authlib’s old `JWTClaims.validate_sub()` did not enforce the `sub`
++claim’s type, whereas joserfc's validator does. And that requirement is
++consistent with the JWT/OIDC spec.
++
++Keep the old behaviour in place to ensure we don't break any setups.
++---
++ synapse/handlers/oidc.py | 31 ++++++++++++++++++++++++++++++-
++ 1 file changed, 30 insertions(+), 1 deletion(-)
++
++diff --git a/synapse/handlers/oidc.py b/synapse/handlers/oidc.py
++index 09b19056a72..9a5b58ffcf5 100644
++--- a/synapse/handlers/oidc.py
+++++ b/synapse/handlers/oidc.py
++@@ -1051,7 +1051,8 @@ async def _parse_id_token(self, token: Token, nonce: str) -> CodeIDToken:
++         claims = await self._verify_jwt(
++             alg_values=alg_values,
++             token=id_token,
++-            claims_cls=CodeIDToken,
+++            # Use a custom verification class that allows int `sub` fields.
+++            claims_cls=_CodeIDTokenWithIntegerSubject,
++             claims_options=claims_options,
++             claims_params=claims_params,
++         )
++@@ -1521,6 +1522,34 @@ async def handle_backchannel_logout(
++         finish_request(request)
++ 
++ 
+++class _CodeIDTokenWithIntegerSubject(CodeIDToken):  # type: ignore[misc]
+++    """Preserve compatibility with providers that issue integer `sub` fields."""
+++
+++    def validate(self, now: int | None = None, leeway: int = 0) -> None:
+++        """"""
+++        subject = self.get("sub")
+++
+++        if type(subject) is not int:
+++            # Validate the typical way.
+++            super().validate(now, leeway)
+++            return
+++
+++        # Convert the `sub` field to a string.
+++        #
+++        # OIDC requires a string subject, but Authlib before 1.7 accepted integers.
+++        # The original token's signature has already been verified by jwt.decode.
+++        self["sub"] = str(subject)
+++
+++        try:
+++            # Try validating with a str `sub`.
+++            # If validation still fails, the exception will still bubble up.
+++            super().validate(now, leeway)
+++        finally:
+++            # Preserve the original value for custom mapping providers and anything
+++            # else.
+++            self["sub"] = subject
+++
+++
++ class LogoutToken(JWTClaims):  # type: ignore[misc]
++     """
++     Holds and verify claims of a logout token, as per
+diff --git a/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix b/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix
+index e92614a9cfac9..1c1400388b053 100644
+--- a/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix
++++ b/pkgs/by-name/ma/matrix-synapse-unwrapped/package.nix
+@@ -14,19 +14,25 @@
+ 
+ python3Packages.buildPythonApplication rec {
+   pname = "matrix-synapse";
+-  version = "1.162.0";
++  version = "1.163.0";
+   pyproject = true;
+ 
+   src = fetchFromGitHub {
+     owner = "element-hq";
+     repo = "synapse";
+     rev = "v${version}";
+-    hash = "sha256-hDsbD0FU3fXR5mLRyoIP4qCC4pJKUu/js1Xe7je7DDo=";
++    hash = "sha256-SYqI8FYQOzDmdrSrdYJmkqFWTepNvpBPNncJOXDpXdY=";
+   };
+ 
++  patches = [
++    # fix compatibility with authlib authlib 1.7+
++    # https://github.com/element-hq/synapse/pull/20330
++    ./authlib.patch
++  ];
++
+   cargoDeps = rustPlatform.fetchCargoVendor {
+     inherit pname version src;
+-    hash = "sha256-BYDW01vrtifxfrFw+bayhAkwXXqzOx7jMd7zHBPnHbA=";
++    hash = "sha256-0pQAseSE9cbQsGzZ1vLrHGt4+FKvqTr0bR3JhQuKPtc=";
+   };
+ 
+   build-system =
+@@ -110,7 +116,7 @@ python3Packages.buildPythonApplication rec {
+       systemd-python
+     ];
+     url-preview = [
+-      lxml
++      beautifulsoup4
+     ];
+     sentry = [
+       sentry-sdk
+@@ -127,6 +133,11 @@ python3Packages.buildPythonApplication rec {
+     ];
+   };
+ 
++  pythonRemoveDeps = [
++    # part of saml2 extra but unused at runtime
++    "lxml-stubs"
++  ];
++
+   nativeCheckInputs = [
+     openssl
+   ]
