@@ -70,7 +70,7 @@
       ];
     };
     "/boot/ESP1" = {
-      device = "/dev/disk/by-uuid/179D-4050";
+      device = "/dev/disk/by-uuid/FBCD-0E68";
       fsType = "vfat";
       options = [
         "fmask=0022"
@@ -122,7 +122,7 @@
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/4662d37a-236f-451c-a2ec-521a19aa0e55"; }
-    { device = "/dev/disk/by-uuid/31260b02-0867-4721-bc06-24b415c57f36"; }
+    { device = "/dev/disk/by-uuid/07d09b34-d231-48c3-ad12-aefdb25bbb12"; }
   ];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
