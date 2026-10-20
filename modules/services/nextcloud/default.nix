@@ -27,11 +27,7 @@
         package = pkgs.nextcloud35;
         caching.redis = true;
         configureRedis = true;
-        config = {
-          dbtype = "pgsql";
-          adminuser = "admin";
-          adminpassFile = config.age.secrets."passwords/services/nextcloud-admin".path;
-        };
+        config.dbtype = "pgsql";
         database.createLocally = true;
         settings = {
           mail_smtpmode = "sendmail";
@@ -47,10 +43,6 @@
           fastcgi_send_timeout 10m;
         '';
       };
-    };
-    age.secrets."passwords/services/nextcloud-admin" = {
-      file = ../../../secrets/passwords/services/nextcloud-admin.age;
-      owner = "nextcloud";
     };
   };
 }

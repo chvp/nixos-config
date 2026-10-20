@@ -83,8 +83,6 @@ in
 
   "secrets/passwords/services/murmur.age".publicKeys = [ marabethia ] ++ users;
 
-  "secrets/passwords/services/nextcloud-admin.age".publicKeys = [ marabethia ] ++ users;
-
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = nixosHosts ++ users;
