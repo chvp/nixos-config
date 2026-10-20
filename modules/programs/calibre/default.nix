@@ -21,7 +21,7 @@ in
         type = "cache";
       }
     ];
-    home-manager.users.${username}.home.packages = [ pkgs.calibre ];
+    home-manager.users.${username}.home.packages = [ (pkgs.calibre.override { speechSupport = false; }) ];
     services.udisks2.enable = true;
   };
 }
