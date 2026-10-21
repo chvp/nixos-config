@@ -19,10 +19,10 @@
     ];
     services = {
       nextcloud = {
+        enable = false;
         home = "/var/lib/nextcloud";
         https = true;
         hostName = "nextcloud.vanpetegem.me";
-        enable = true;
         autoUpdateApps.enable = true;
         package = pkgs.nextcloud35;
         caching.redis = true;
