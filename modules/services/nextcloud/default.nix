@@ -19,7 +19,7 @@
     ];
     services = {
       nextcloud = {
-        enable = false;
+        enable = true;
         home = "/var/lib/nextcloud";
         https = true;
         hostName = "nextcloud.vanpetegem.me";
