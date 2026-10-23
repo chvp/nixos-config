@@ -78,9 +78,6 @@ in
         };
         postfix.filter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(mail=%s))";
       };
-      aliases = {
-        "@chvp.be"
-      };
       accounts = {
         "charlotte@vanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/charlotte@vanpetegem.be".path;
