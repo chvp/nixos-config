@@ -32,6 +32,10 @@
         settings = {
           mail_smtpmode = "sendmail";
           mail_domain = "vanpetegem.me";
+          user_oidc = {
+            single_logout = false;
+            disable_account_creation = true;
+          };
         };
       };
       nginx.virtualHosts."nextcloud.vanpetegem.me" = {

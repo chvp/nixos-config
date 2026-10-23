@@ -53,6 +53,12 @@
             location = "elendel.vanpetegem.me";
           }
           {
+            path = "zroot/safe/services/kanidm";
+            remotePath = "zdata/recv/marabethia/safe/services/kanidm";
+            fast = true;
+            location = "elendel.vanpetegem.me";
+          }
+          {
             path = "zroot/safe/services/mail";
             remotePath = "zdata/recv/marabethia/safe/services/mail";
             fast = true;
@@ -164,6 +170,7 @@
         }
         { fqdn = "www.vanpetegem.me"; }
       ];
+      sso.enable = true;
     };
   };
   programs.msmtp.enable = false;

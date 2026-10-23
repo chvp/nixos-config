@@ -97,6 +97,10 @@
       device = "zroot/safe/services/mail";
       fsType = "zfs";
     };
+    "/var/lib/kanidm" = {
+      device = "zroot/safe/services/kanidm";
+      fsType = "zfs";
+    };
     "/var/lib/matrix-synapse" = {
       device = "zroot/safe/services/matrix-synapse";
       fsType = "zfs";

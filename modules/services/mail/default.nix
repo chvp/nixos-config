@@ -60,6 +60,27 @@ in
         "vanpetegem.me"
       ];
       localDnsResolver = false;
+      ldap = {
+        enable = true;
+        uris = [ "ldaps://sso.vanpetegem.be" ];
+        attributes = {
+          username = "name";
+          uuid = "uuid";
+        };
+        base = "dc=sso,dc=vanpetegem,dc=be";
+        bind = {
+          dn = "dn=token";
+          passwordFile = config.age.secrets."passwords/services/mail/mailserver-ldap-token".path;
+        };
+        dovecot = {
+          passFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(name=%{user}))";
+          userFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(|(mail=%{user}|name=%{user})))";
+        };
+        postfix.filter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(mail=%s))";
+      };
+      aliases = {
+        "@chvp.be"
+      };
       accounts = {
         "charlotte@vanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/charlotte@vanpetegem.be".path;
@@ -220,6 +241,8 @@ in
     '';
 
     age.secrets = {
+      "passwords/services/mail/mailserver-ldap-token".file =
+        ../../../secrets/passwords/services/mail/mailserver-ldap-token.age;
       "passwords/services/mail/charlotte@vanpetegem.be".file =
         ../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age;
       "passwords/services/mail/forgejo@robbevp.be".file =

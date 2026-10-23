@@ -18,6 +18,7 @@
     ./mumble
     ./nextcloud
     ./nginx
+    ./sso
     ./torrents
   ];
 
