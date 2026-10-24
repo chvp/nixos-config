@@ -81,20 +81,17 @@ in
         forceImportRoot = false;
         requestEncryptionCredentials = config.chvp.base.zfs.encrypted;
       };
-      initrd.systemd = {
-        enable = true;
-        services.rollback = {
-          description = "Rollback root filesystem to a pristine state on boot";
-          wantedBy = [ "initrd.target" ];
-          after = [ "zfs-import-${config.chvp.base.zfs.rootPool}.service" ];
-          before = [ "sysroot.mount" ];
-          path = with pkgs; [ zfs ];
-          unitConfig.DefaultDependencies = "no";
-          serviceConfig.Type = "oneshot";
-          script = ''
-            ${config.boot.zfs.package}/bin/zfs rollback -r ${config.chvp.base.zfs.rootDataset}@blank && echo "  >> >> rollback complete << <<"
-          '';
-        };
+      initrd.systemd.services.rollback = {
+        description = "Rollback root filesystem to a pristine state on boot";
+        wantedBy = [ "initrd.target" ];
+        after = [ "zfs-import-${config.chvp.base.zfs.rootPool}.service" ];
+        before = [ "sysroot.mount" ];
+        path = with pkgs; [ zfs ];
+        unitConfig.DefaultDependencies = "no";
+        serviceConfig.Type = "oneshot";
+        script = ''
+          ${config.boot.zfs.package}/bin/zfs rollback -r ${config.chvp.base.zfs.rootDataset}@blank && echo "  >> >> rollback complete << <<"
+        '';
       };
     };
 
