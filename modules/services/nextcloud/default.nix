@@ -20,7 +20,7 @@
       ];
       services.nginx.hosts = [
         {
-          fqdn = "collabora.vaneptegem.me";
+          fqdn = "collabora.vanpetegem.me";
           basicProxy = "http://[::1]:9980";
           extraProxyOptions.proxyWebsockets = true;
         }
