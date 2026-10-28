@@ -73,13 +73,16 @@
           value = {
             forceSSL = true;
             useACMEHost = "vanpetegem.me";
-            locations."/" = lib.mkIf (builtins.hasAttr "basicProxy" elem) {
-              proxyPass = elem.basicProxy;
-              extraConfig = ''
-                proxy_set_header X-Forwarded-Ssl on;
-              ''
-              + (elem.extraProxySettings or "");
-            };
+            locations."/" = lib.mkIf (builtins.hasAttr "basicProxy" elem) (
+              {
+                proxyPass = elem.basicProxy;
+                extraConfig = ''
+                  proxy_set_header X-Forwarded-Ssl on;
+                ''
+                + (elem.extraProxySettings or "");
+              }
+              // (elem.extraProxyOptions or { })
+            );
           }
           // (elem.options or { });
         }) config.chvp.services.nginx.hosts

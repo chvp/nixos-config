@@ -11,13 +11,41 @@
     example = true;
   };
   config = lib.mkIf config.chvp.services.nextcloud.enable {
-    chvp.base.zfs.systemLinks = [
-      {
-        path = "/var/lib/redis-nextcloud";
-        type = "cache";
-      }
-    ];
+    chvp = {
+      base.zfs.systemLinks = [
+        {
+          path = "/var/lib/redis-nextcloud";
+          type = "cache";
+        }
+      ];
+      services.nginx.hosts = [
+        {
+          fqdn = "collabora.vaneptegem.me";
+          basicProxy = "http://[::1]:9980";
+          extraProxyOptions.proxyWebsockets = true;
+        }
+      ];
+    };
     services = {
+      collabora-online = {
+        enable = true;
+        port = 9980;
+        settings = {
+          ssl = {
+            enable = false;
+            termination = true;
+          };
+          net = {
+            listen = "loopback";
+            post_allow.host = [ "::1" ];
+          };
+          storage.wopi = {
+            "@allow" = true;
+            host = [ "nextcloud.vanpetegem.me" ];
+          };
+          server_name = "collabora.vanpetegem.me";
+        };
+      };
       nextcloud = {
         enable = true;
         home = "/var/lib/nextcloud";
