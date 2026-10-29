@@ -6,10 +6,8 @@ FAILED=0
 
 for system in $(ls machines)
 do
-    if nix build -L --no-link ".#nixosConfigurations.$system.config.system.build.toplevel"
+    if ! nix build -L --no-link --print-out-paths ".#nixosConfigurations.$system.config.system.build.toplevel" | xargs attic push chvp
     then
-        nix eval --raw ".#nixosConfigurations.$system.config.system.build.toplevel.outPath" | attic push chvp --stdin
-    else
         FAILED=1
     fi
 done
@@ -17,10 +15,8 @@ done
 for shell in $(ls shells)
 do
     shell="${shell%.nix}"
-    if nix build -L --no-link ".#devShells.x86_64-linux.$shell"
+    if ! nix build -L --no-link --print-out-paths ".#devShells.x86_64-linux.$shell" | xargs attic push chvp
     then
-        nix eval --raw ".#devShells.x86_64-linux.$shell.outPath" | attic push chvp --stdin
-    else
         FAILED=1
     fi
 done
