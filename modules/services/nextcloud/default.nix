@@ -27,8 +27,14 @@
       ];
     };
     networking.hosts = {
-      "127.0.0.1" = ["nextcloud.vanpetegem.me" "collabora.vanpetegem.me"];
-      "::1" = ["nextcloud.vanpetegem.me" "collabora.vanpetegem.me"];
+      "127.0.0.1" = [
+        "nextcloud.vanpetegem.me"
+        "collabora.vanpetegem.me"
+      ];
+      "::1" = [
+        "nextcloud.vanpetegem.me"
+        "collabora.vanpetegem.me"
+      ];
     };
     services = {
       collabora-online = {
