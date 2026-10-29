@@ -7,8 +7,7 @@ shift 1
 
 if [ "$1" == "cache" ]
 then
-    nix build -L --no-link .#nixosConfigurations.$hostname.config.system.build.toplevel
-    nix eval --raw ".#nixosConfigurations.$hostname.config.system.build.toplevel.outPath" | attic push chvp --stdin
+    nix build -L --no-link --print-out-paths .#nixosConfigurations.$hostname.config.system.build.toplevel | xargs attic push chvp
 else
     nixos-rebuild --flake .#$hostname --target-host root@$hostname -s "$@"
 fi
