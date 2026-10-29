@@ -104,6 +104,7 @@ let
       default_master_factor = 0.60;
 
       no_border_when_single = 1;
+      border_resize_size = 2;
       cursor_hide_on_keypress = 1;
       cursor_theme = config.home-manager.users.${username}.home.pointerCursor.name;
       cursor_size = config.home-manager.users.${username}.home.pointerCursor.size;
