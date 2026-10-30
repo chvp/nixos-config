@@ -26,10 +26,9 @@ in
 
     services.transmission = {
       enable = true;
-      package = pkgs.transmission_4.overrideAttrs (old: rec {
+      package = pkgs.transmission_4.overrideAttrs (old: {
         version = "4.1.3";
         src = old.src.overrideAttrs (oldSrc: {
-          inherit version;
           hash = "sha256-4349gc7+1k0y5CwHTQe8bLQsuNW5w7pckR0MCeulIEE=";
         });
       });
