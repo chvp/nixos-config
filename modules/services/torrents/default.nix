@@ -26,7 +26,13 @@ in
 
     services.transmission = {
       enable = true;
-      package = pkgs.transmission_4;
+      package = pkgs.transmission_4.overrideAttrs (old: rec {
+        version = "4.1.3";
+        src = old.src.overrideAttrs (oldSrc: {
+          inherit version;
+          hash = "sha256-4349gc7+1k0y5CwHTQe8bLQsuNW5w7pckR0MCeulIEE=";
+        });
+      });
       user = username;
       group = "users";
       home = "/var/lib/transmission";
