@@ -60,7 +60,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
+      url = "gitlab:chvp/nixos-mailserver?ref=feat/ldap-mail-aliases";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";

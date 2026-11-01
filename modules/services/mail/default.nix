@@ -62,7 +62,7 @@ in
       localDnsResolver = false;
       ldap = {
         enable = true;
-        uris = [ "ldaps://sso.vanpetegem.be" ];
+        uris = [ "ldap://localhost:1636" ];
         attributes = {
           username = "name";
           uuid = "uuid";
@@ -74,19 +74,15 @@ in
         };
         dovecot = {
           passFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(name=%{user}))";
-          userFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(|(mail=%{user}|name=%{user})))";
+          userFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(|(mail=%{user})(name=%{user})))";
         };
-        postfix.filter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(mail=%s))";
+        postfix = {
+          accountFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(mail=%s))";
+          aliasFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(mailAlias=%s))";
+          allowedAddressesFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(|(mail=%s)(mailAlias=%s)))";
+        };
       };
       accounts = {
-        "charlotte@vanpetegem.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/charlotte@vanpetegem.be".path;
-          aliases = [
-            "@chvp.be"
-            "@cvpetegem.be"
-            "charlotte@vanpetegem.me"
-          ];
-        };
         "huis@vanpetegem.me".hashedPasswordFile =
           config.age.secrets."passwords/services/mail/huis@vanpetegem.me".path;
         "peter@vanpetegem.me".hashedPasswordFile =
@@ -135,10 +131,6 @@ in
             "@vanpetegem.be"
           ];
         };
-        "webmaster@vanpetegem.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/webmaster@vanpetegem.be".path;
-          aliases = [ "webmaster@vanpetegem.me" ];
-        };
       };
       indexDir = "/var/lib/dovecot/indices";
       fullTextSearch = {
@@ -167,11 +159,7 @@ in
         };
       };
       aliases = {
-        "android@accentor.tech" = [ "charlotte@vanpetegem.be" ];
-        "team@accentor.tech" = [
-          "charlotte@vanpetegem.be"
-          "robbe@vanpetegem.be"
-        ];
+        "team@accentor.tech" = [ "robbe@vanpetegem.be" ];
       };
       forwards = {
         "info@toekomstlabo.be" = "robbe+toekomstlabo@robbevanpetegem.be";
@@ -240,8 +228,6 @@ in
     age.secrets = {
       "passwords/services/mail/mailserver-ldap-token".file =
         ../../../secrets/passwords/services/mail/mailserver-ldap-token.age;
-      "passwords/services/mail/charlotte@vanpetegem.be".file =
-        ../../../secrets/passwords/services/mail/charlotte_at_vanpetegem.be.age;
       "passwords/services/mail/forgejo@robbevp.be".file =
         ../../../secrets/passwords/services/mail/forgejo_at_robbevp.be.age;
       "passwords/services/mail/git@chvp.be".file =
@@ -264,8 +250,6 @@ in
         ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
       "passwords/services/mail/robbe@vanpetegem.be".file =
         ../../../secrets/passwords/services/mail/robbe_at_vanpetegem.be.age;
-      "passwords/services/mail/webmaster@vanpetegem.be".file =
-        ../../../secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age;
     };
   };
 }

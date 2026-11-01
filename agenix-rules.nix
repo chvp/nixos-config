@@ -66,10 +66,6 @@ in
   ]
   ++ users;
   "secrets/passwords/services/mail/robbe_at_vanpetegem.be.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/passwords/services/mail/webmaster_at_vanpetegem.be.age".publicKeys = [
-    marabethia
-  ]
-  ++ users;
   "secrets/passwords/services/ssmtp-pass.age".publicKeys = nixosHosts ++ users;
 
   "secrets/passwords/services/acme.age".publicKeys = servers ++ users;

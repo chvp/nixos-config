@@ -45,5 +45,24 @@
       '';
       reloadServices = [ "kanidm.service" ];
     };
+
+    systemd = {
+      services.ldap-mail-alias-enhancer = {
+        enable = true;
+        description = "LDAP mailAlias enhancing proxy";
+        wants = [ "kanidm.target" ];
+        after = [ "kanidm.target" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          DynamicUser = true;
+          StateDirectory = "ldap-mail-alias-enhancer";
+          WorkingDirectory = "/var/lib/ldap-mail-alias-enhancer";
+          ExecStart = "${(pkgs.python3.withPackages (ps: with ps; [ twisted ldaptor ]))}/bin/twistd -ny ${./ldap-mail-alias-enhance.py}";
+        };
+      };
+      tmpfiles.rules = [
+        "d /var/lib/ldap-mail-alias-enhancer 1700 root root -"
+      ];
+    };
   };
 }
