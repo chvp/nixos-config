@@ -124,13 +124,6 @@ in
           hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
           sendOnly = true;
         };
-        "postbot@vanpetegem.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/postbot@vanpetegem.be".path;
-          aliases = [
-            "@vanpetegem.me"
-            "@vanpetegem.be"
-          ];
-        };
       };
       indexDir = "/var/lib/dovecot/indices";
       fullTextSearch = {
@@ -158,10 +151,11 @@ in
           special_use = "\\Sent";
         };
       };
-      aliases = {
-        "team@accentor.tech" = [ "robbe@vanpetegem.be" ];
-      };
       forwards = {
+        "team@accentor.tech" = [
+          "charlotte@vanpetegem.be"
+          "robbe@vanpetegem.be"
+        ];
         "info@toekomstlabo.be" = "robbe+toekomstlabo@robbevanpetegem.be";
       };
       rejectRecipients = [
@@ -173,6 +167,7 @@ in
         "rudy@vanpetegem.be"
         "sarina@vanpetegem.be"
         "sabrina@vanpetegem.be"
+        "noreply@vanpetegem.me"
       ];
       rejectSender = [
         "junjunggaming07@gmail.com"
@@ -244,8 +239,6 @@ in
         ../../../secrets/passwords/services/mail/noreply_at_vanpetegem.me.age;
       "passwords/services/mail/peter@vanpetegem.me".file =
         ../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
-      "passwords/services/mail/postbot@vanpetegem.be".file =
-        ../../../secrets/passwords/services/mail/postbot_at_vanpetegem.be.age;
       "passwords/services/mail/robbe@robbevanpetegem.be".file =
         ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
       "passwords/services/mail/robbe@vanpetegem.be".file =
