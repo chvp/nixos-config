@@ -87,13 +87,6 @@ in
           config.age.secrets."passwords/services/mail/huis@vanpetegem.me".path;
         "peter@vanpetegem.me".hashedPasswordFile =
           config.age.secrets."passwords/services/mail/peter@vanpetegem.me".path;
-        "robbe@vanpetegem.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@vanpetegem.be".path;
-          aliases = [
-            "robbe.nb@vanpetegem.me"
-            "robbe@vanpetegem.me"
-          ];
-        };
         "robbe@robbevanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@robbevanpetegem.be".path;
           aliases = [ "@robbevanpetegem.be" ];
@@ -149,10 +142,6 @@ in
         };
       };
       forwards = {
-        "team@accentor.tech" = [
-          "charlotte@vanpetegem.be"
-          "robbe@vanpetegem.be"
-        ];
         "info@toekomstlabo.be" = "robbe+toekomstlabo@robbevanpetegem.be";
       };
       rejectRecipients = [
@@ -236,8 +225,6 @@ in
         ../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
       "passwords/services/mail/robbe@robbevanpetegem.be".file =
         ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
-      "passwords/services/mail/robbe@vanpetegem.be".file =
-        ../../../secrets/passwords/services/mail/robbe_at_vanpetegem.be.age;
     };
   };
 }
