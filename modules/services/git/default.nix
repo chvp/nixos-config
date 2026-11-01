@@ -78,7 +78,7 @@
             PROTOCOL = "smtps";
             SMTP_ADDR = "mail.vanpetegem.me";
             SMPT_PORT = 465;
-            USER = "git@chvp.be";
+            USER = "git_chvp_sa";
             FROM = "Git <git@chvp.be>";
           };
           "email.incoming" = {
@@ -86,7 +86,7 @@
             REPLY_TO_ADDRESS = "git+%{token}@chvp.be";
             HOST = "mail.vanpetegem.me";
             PORT = 993;
-            USERNAME = "git@chvp.be";
+            USERNAME = "git_chvp_sa";
             USE_TLS = true;
           };
           session = {

@@ -117,9 +117,6 @@ in
         "forgejo@robbevp.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/forgejo@robbevp.be".path;
         };
-        "git@chvp.be" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/git@chvp.be".path;
-        };
         "noreply@vanpetegem.me" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
           sendOnly = true;
@@ -225,8 +222,6 @@ in
         ../../../secrets/passwords/services/mail/mailserver-ldap-token.age;
       "passwords/services/mail/forgejo@robbevp.be".file =
         ../../../secrets/passwords/services/mail/forgejo_at_robbevp.be.age;
-      "passwords/services/mail/git@chvp.be".file =
-        ../../../secrets/passwords/services/mail/git_at_chvp.be.age;
       "passwords/services/mail/hallo@estherdereys.be".file =
         ../../../secrets/passwords/services/mail/hallo_at_estherdereys.be.age;
       "passwords/services/mail/hallo@robbe.be".file =
