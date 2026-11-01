@@ -99,6 +99,10 @@
         rootPool = "zroot";
       };
     };
+    development = {
+      enable = true;
+      docker.enable = false;
+    };
     games = {
       particles.server = true;
       tetris.server = true;
