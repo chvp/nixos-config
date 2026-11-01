@@ -195,7 +195,7 @@
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry.nixpkgs.flake = inputs.nixpkgs;
+                  registry.nixpkgs.flake = lib.mkForce inputs.nixpkgs;
                 };
               }
             )
