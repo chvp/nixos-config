@@ -14,6 +14,10 @@ alias_map = {
     b"@cvpetegem.be": b"charlotte@vanpetegem.be",
     b"charlotte@vanpetegem.me": b"charlotte@vanpetegem.be",
 
+    b"robbe@vanpetegem.me": b"robbe@vanpetegem.be",
+    b"robbe.nb@vanpetegem.be": b"robbe@vanpetegem.be",
+    b"robbe.nb@vanpetegem.me": b"robbe@vanpetegem.be",
+
     b"team@accentor.tech": [
         b"charlotte@vanpetegem.be",
         b"robbe@vanpetegem.be",
