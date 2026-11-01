@@ -195,7 +195,7 @@
                 networking.hostName = name;
                 nix = {
                   extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry.nixpkgs.flake = nixpkgs;
+                  registry.nixpkgs.flake = inputs.nixpkgs;
                 };
               }
             )
