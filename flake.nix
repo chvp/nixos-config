@@ -193,13 +193,7 @@
                   flake.source = lib.mkForce "${nixpkgs}";
                 };
                 networking.hostName = name;
-                nix = {
-                  extraOptions = "extra-experimental-features = nix-command flakes";
-                  registry.nixpkgs = {
-                    flake = inputs.nixpkgs;
-                    to.path = "${inputs.nixpkgs}";
-                  };
-                };
+                nix.extraOptions = "extra-experimental-features = nix-command flakes";
               }
             )
             ./machines/${name}
