@@ -13,11 +13,11 @@ let
       aliases ? [ ],
       primary ? false,
       server ? "mail.vanpetegem.me",
+      userName ? address,
     }:
     {
-      inherit address aliases;
+      inherit address aliases userName;
       thunderbird.enable = true;
-      userName = address;
       realName = "Charlotte Van Petegem";
       primary = lib.mkDefault primary;
       flavor = "plain";
@@ -70,13 +70,20 @@ in
             address = "charlotte@vanpetegem.be";
             aliases = [ "charlotte@vanpetegem.me" ];
             primary = true;
+            userName = "chvp";
           };
-          Postbot = mkThunderbirdAccount { address = "postbot@vanpetegem.be"; };
+          Postbot = mkThunderbirdAccount {
+            address = "postbot@vanpetegem.be";
+            userName = "postbot";
+          };
           Posteo = mkThunderbirdAccount {
             address = "chvp@posteo.net";
             server = "posteo.de";
           };
-          Webmaster = mkThunderbirdAccount { address = "webmaster@vanpetegem.be"; };
+          Webmaster = mkThunderbirdAccount {
+            address = "webmaster@vanpetegem.be";
+            userName = "webmaster";
+          };
         };
         calendar.accounts = {
           Personal = mkCaldavAccount {
