@@ -31,7 +31,12 @@
     services = {
       matrix-synapse = {
         enable = true;
-        extras = [ "systemd" "postgres" "url-preview" "oidc" ];
+        extras = [
+          "systemd"
+          "postgres"
+          "url-preview"
+          "oidc"
+        ];
         settings = {
           server_name = "vanpetegem.me";
           public_baseurl = "https://matrix.vanpetegem.me";

@@ -27,6 +27,11 @@ devshell.mkShell {
     agenix
     nixfmt
     nixos-rebuild
-    (python3.withPackages (ps: with ps; [ twisted ldaptor ]))
+    (python3.withPackages (
+      ps: with ps; [
+        twisted
+        ldaptor
+      ]
+    ))
   ];
 }
