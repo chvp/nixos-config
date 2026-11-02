@@ -14,7 +14,7 @@ devshell.mkShell {
       name = "format-all";
       category = "general commands";
       help = "Format all nix files in the project";
-      command = "find $PRJ_ROOT -type f -name '*.nix' -print0 | xargs -0 nixpkgs-fmt";
+      command = "find $PRJ_ROOT -type f -name '*.nix' -print0 | xargs -0 nixfmt";
     }
     {
       name = "fetchpatch";
