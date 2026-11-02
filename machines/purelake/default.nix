@@ -73,20 +73,6 @@ in
     pulse.enable = true;
   };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      linux-firmware = prev.linux-firmware.overrideAttrs (old: rec {
-        version = "20250509";
-        src = pkgs.fetchFromGitLab {
-          owner = "kernel-firmware";
-          repo = "linux-firmware";
-          tag = version;
-          hash = "sha256-0FrhgJQyCeRCa3s0vu8UOoN0ZgVCahTQsSH0o6G6hhY=";
-        };
-      });
-    })
-  ];
-
   users.users.${username} = {
     isNormalUser = true;
     description = "Charlotte Van Petegem";
