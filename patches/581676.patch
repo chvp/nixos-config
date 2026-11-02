@@ -47,11 +47,11 @@ index 0000000000000..69513af1ca596
 +}
 diff --git a/pkgs/servers/kanidm/provision-patches/1_12/oauth2-basic-secret-modify.patch b/pkgs/servers/kanidm/provision-patches/1_12/oauth2-basic-secret-modify.patch
 new file mode 100644
-index 0000000000000..1b0d9b17a8f7f
+index 0000000000000..9bdcccbf26375
 --- /dev/null
 +++ b/pkgs/servers/kanidm/provision-patches/1_12/oauth2-basic-secret-modify.patch
 @@ -0,0 +1,159 @@
-+From 72dd46e271333ab26245f5e4194bcd5b712798a6 Mon Sep 17 00:00:00 2001
++From ae7fa9831086149120d6c3e679b5e1bb1840129f Mon Sep 17 00:00:00 2001
 +From: oddlama <oddlama@oddlama.org>
 +Date: Fri, 1 May 2026 15:01:05 +0200
 +Subject: [PATCH 1/2] oauth2 basic secret modify
@@ -181,7 +181,7 @@ index 0000000000000..1b0d9b17a8f7f
 +     patch,
 +     path = "/v1/oauth2/{rs_name}",
 +diff --git a/server/lib/src/server/migrations.rs b/server/lib/src/server/migrations.rs
-+index 17ece65b1..8944cc421 100644
++index 17ece65b1..f262e5041 100644
 +--- a/server/lib/src/server/migrations.rs
 ++++ b/server/lib/src/server/migrations.rs
 +@@ -224,6 +224,22 @@ impl QueryServer {
@@ -193,14 +193,14 @@ index 0000000000000..1b0d9b17a8f7f
 ++            UUID_IDM_ACP_OAUTH2_MANAGE_V1,
 ++            &ModifyList::new_append(
 ++                Attribute::AcpCreateAttr,
-++                Attribute::OAuth2RsBasicSecret.into(),
+++                Value::new_iutf8n(Attribute::OAuth2RsBasicSecret.as_str()),
 ++            ),
 ++        )?;
 ++        write_txn.internal_modify_uuid(
 ++            UUID_IDM_ACP_OAUTH2_MANAGE_V1,
 ++            &ModifyList::new_append(
 ++                Attribute::AcpModifyPresentAttr,
-++                Attribute::OAuth2RsBasicSecret.into(),
+++                Value::new_iutf8n(Attribute::OAuth2RsBasicSecret.as_str()),
 ++            ),
 ++        )?;
 ++
@@ -212,11 +212,11 @@ index 0000000000000..1b0d9b17a8f7f
 +
 diff --git a/pkgs/servers/kanidm/provision-patches/1_12/recover-account.patch b/pkgs/servers/kanidm/provision-patches/1_12/recover-account.patch
 new file mode 100644
-index 0000000000000..c0dd1c7abda96
+index 0000000000000..5d4cb01466a3f
 --- /dev/null
 +++ b/pkgs/servers/kanidm/provision-patches/1_12/recover-account.patch
 @@ -0,0 +1,128 @@
-+From ec31c7db2de77439a16b39f90e7fed8635f4c179 Mon Sep 17 00:00:00 2001
++From 6f22986e0d5fd7dc27a23d4d56befd58ce753d7c Mon Sep 17 00:00:00 2001
 +From: oddlama <oddlama@oddlama.org>
 +Date: Fri, 1 May 2026 15:01:14 +0200
 +Subject: [PATCH 2/2] recover account
