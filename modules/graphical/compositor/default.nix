@@ -162,6 +162,10 @@ let
           is_floating = 1;
           title = "KeePassXC - Passkey credentials";
         })
+        ({
+          is_floating = 1;
+          title = "KeePassXC - Browser Access Request";
+        })
       ];
     };
 
