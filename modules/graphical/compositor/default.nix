@@ -118,44 +118,52 @@ let
       source-optional = [ "./theme.toml" ];
     };
 
-    rule.tag_rule = [
-      ({
-        id = 1;
-        layout_name = "tile";
-      })
-      ({
-        id = 2;
-        layout_name = "tile";
-      })
-      ({
-        id = 3;
-        layout_name = "tile";
-      })
-      ({
-        id = 4;
-        layout_name = "tile";
-      })
-      ({
-        id = 5;
-        layout_name = "tile";
-      })
-      ({
-        id = 6;
-        layout_name = "tile";
-      })
-      ({
-        id = 7;
-        layout_name = "tile";
-      })
-      ({
-        id = 8;
-        layout_name = "tile";
-      })
-      ({
-        id = 9;
-        layout_name = "tile";
-      })
-    ];
+    rule = {
+      tag_rule = [
+        ({
+          id = 1;
+          layout_name = "tile";
+        })
+        ({
+          id = 2;
+          layout_name = "tile";
+        })
+        ({
+          id = 3;
+          layout_name = "tile";
+        })
+        ({
+          id = 4;
+          layout_name = "tile";
+        })
+        ({
+          id = 5;
+          layout_name = "tile";
+        })
+        ({
+          id = 6;
+          layout_name = "tile";
+        })
+        ({
+          id = 7;
+          layout_name = "tile";
+        })
+        ({
+          id = 8;
+          layout_name = "tile";
+        })
+        ({
+          id = 9;
+          layout_name = "tile";
+        })
+      ];
+      window_rule = [
+        ({
+          is_floating = 1;
+          title = "KeePassXC - Passkey credentials";
+        })
+      ];
+    };
 
     bind.default = {
       "super+r" = "reload_config";
