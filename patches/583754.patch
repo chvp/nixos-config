@@ -1,5 +1,5 @@
 diff --git a/pkgs/by-name/wa/waybar/package.nix b/pkgs/by-name/wa/waybar/package.nix
-index e1a58ed3d5109..9e0dea9ea35a4 100644
+index e1a58ed3d5109..90709245b16ea 100644
 --- a/pkgs/by-name/wa/waybar/package.nix
 +++ b/pkgs/by-name/wa/waybar/package.nix
 @@ -25,6 +25,7 @@
@@ -10,15 +10,26 @@ index e1a58ed3d5109..9e0dea9ea35a4 100644
    ncurses,
    ninja,
    pipewire,
-@@ -65,6 +66,7 @@
+@@ -51,6 +52,7 @@
+   gpsSupport ? true,
+   inputSupport ? true,
+   jackSupport ? true,
++  mangoSupport ? true,
+   mpdSupport ? true,
+   mprisSupport ? stdenv.hostPlatform.isLinux,
+   niriSupport ? true,
+@@ -63,8 +65,10 @@
+   systemdSupport ? lib.meta.availableOn stdenv.hostPlatform systemdMinimal,
+   traySupport ? true,
    udevSupport ? true,
++  umbrielSupport ? true,
    upowerSupport ? true,
    wireplumberSupport ? true,
 +  wwanSupport ? true,
    withMediaPlayer ? mprisSupport && false,
    nix-update-script,
  }:
-@@ -72,7 +74,7 @@
+@@ -72,7 +76,7 @@
  let
    libcava =
      let
@@ -27,7 +38,7 @@ index e1a58ed3d5109..9e0dea9ea35a4 100644
      in
      {
        inherit version;
-@@ -80,20 +82,20 @@ let
+@@ -80,20 +84,20 @@ let
        src = fetchFromGitHub {
          owner = "LukashonakV";
          repo = "cava";
@@ -52,7 +63,7 @@ index e1a58ed3d5109..9e0dea9ea35a4 100644
    };
  
    postUnpack = lib.optionalString cavaSupport ''
-@@ -150,6 +152,7 @@ stdenv.mkDerivation (finalAttrs: {
+@@ -150,6 +154,7 @@ stdenv.mkDerivation (finalAttrs: {
    ++ lib.optional udevSupport udev
    ++ lib.optional upowerSupport upower
    ++ lib.optional wireplumberSupport wireplumber
@@ -60,7 +71,7 @@ index e1a58ed3d5109..9e0dea9ea35a4 100644
    ++ lib.optional (cavaSupport || pipewireSupport) pipewire
    ++ lib.optional (!stdenv.hostPlatform.isLinux) libinotify-kqueue;
  
-@@ -177,6 +180,7 @@ stdenv.mkDerivation (finalAttrs: {
+@@ -177,10 +182,13 @@ stdenv.mkDerivation (finalAttrs: {
        "tests" = runTests;
        "upower_glib" = upowerSupport;
        "wireplumber" = wireplumberSupport;
@@ -68,3 +79,9 @@ index e1a58ed3d5109..9e0dea9ea35a4 100644
      })
      ++ (lib.mapAttrsToList lib.mesonBool {
        "experimental" = experimentalPatches;
++      "mango" = mangoSupport;
+       "niri" = niriSupport;
++      "umbriel" = umbrielSupport;
+     });
+ 
+   env = lib.optionalAttrs systemdSupport {
