@@ -262,40 +262,6 @@ in
   };
 
   config = lib.mkIf config.chvp.graphical.compositor.enable {
-    nixpkgs.overlays = [
-      (final: prev: {
-        waybar = prev.waybar.overrideAttrs (
-          old:
-          let
-            libcava = rec {
-              version = "1.0.0";
-              src = pkgs.fetchFromGitHub {
-                owner = "LukashonakV";
-                repo = "cava";
-                # NOTE: Needs to match the cava.wrap
-                tag = "${version}";
-                hash = "sha256-0r5aAmTs+FcmS501tNYKxG9H+Pq6i32BDRBEjWW6M74=";
-              };
-            };
-          in
-          {
-            src = pkgs.fetchFromGitHub {
-              owner = "Alexays";
-              repo = "Waybar";
-              rev = "084d87401d0a91182c16aa7e5f674a7dde767185";
-              hash = "sha256-POvwObPOp6O14n6KYWNLp2Y3paunA5f8U1NCaodNFcc=";
-            };
-            postUnpack = ''
-              pushd "$sourceRoot"
-              cp -R --no-preserve=mode,ownership ${libcava.src} subprojects/cava-${libcava.version}
-              patchShebangs .
-              popd
-            '';
-            buildInputs = old.buildInputs ++ [ pkgs.modemmanager ];
-          }
-        );
-      })
-    ];
     services = {
       dbus.packages = with pkgs; [ dconf ];
       greetd = {
@@ -341,6 +307,7 @@ in
       programs = {
         waybar = {
           enable = true;
+          package = unstablePkgs.waybar;
           settings = {
             mainBar = {
               spacing = 2;
