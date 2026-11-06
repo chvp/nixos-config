@@ -4,7 +4,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "automerge": true,
-    "schedule": [ ]
+    "schedule": [ "* */4 * * *" ]
   },
   "nix": {
     "enabled": true
