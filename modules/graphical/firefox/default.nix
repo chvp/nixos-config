@@ -57,7 +57,7 @@ in
         configPath = "${config.xdg.configHome}/mozilla/firefox";
         package = ffPackage;
         nativeMessagingHosts = [
-          pkgs.keepassxc
+          pkgs.chipass
           ff2mpv-host
         ];
         policies = {

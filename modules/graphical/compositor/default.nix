@@ -160,11 +160,11 @@ let
       window_rule = [
         ({
           is_floating = 1;
-          title = "KeePassXC - Passkey credentials";
+          title = "ChiPass - Passkey credentials";
         })
         ({
           is_floating = 1;
-          title = "KeePassXC - Browser Access Request";
+          title = "ChiPass - Browser Access Request";
         })
       ];
     };
