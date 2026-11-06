@@ -17,11 +17,11 @@ in
   config = lib.mkIf config.chvp.graphical.pass.enable {
     chvp.base.zfs.homeLinks = [
       {
-        path = ".config/chipass";
+        path = ".config/keepassxc";
         type = "data";
       }
       {
-        path = ".cache/chipass";
+        path = ".cache/keepassxc";
         type = "cache";
       }
     ];
@@ -37,7 +37,7 @@ in
       home.packages = [ pkgs.chipass ];
       systemd.user.services.chipass = {
         Unit = {
-          Description = "Chipass startup";
+          Description = "ChiPass startup";
           PartOf = [ "tray.target" ];
           Wants = [ "waybar.service" ];
           After = [
@@ -46,7 +46,7 @@ in
           ];
         };
         Service = {
-          ExecStart = "${pkgs.chipass}/bin/chipass";
+          ExecStart = "${pkgs.chipass}/bin/ChiPass";
           Restart = "always";
         };
         Install.WantedBy = [ "tray.target" ];
