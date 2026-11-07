@@ -118,10 +118,6 @@
       device = "zroot/safe/services/postgresql";
       fsType = "zfs";
     };
-    "/var/sieve" = {
-      device = "zroot/safe/services/sieve";
-      fsType = "zfs";
-    };
   };
 
   swapDevices = [

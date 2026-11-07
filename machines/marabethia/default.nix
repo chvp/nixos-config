@@ -88,12 +88,6 @@
             fast = true;
             location = "elendel.vanpetegem.me";
           }
-          {
-            path = "zroot/safe/services/sieve";
-            remotePath = "zdata/recv/marabethia/safe/services/sieve";
-            fast = true;
-            location = "elendel.vanpetegem.me";
-          }
         ];
         rootDataset = "zroot/local/root";
         rootPool = "zroot";
