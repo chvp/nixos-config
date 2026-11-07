@@ -70,6 +70,7 @@
         settings = {
           mail_smtpmode = "sendmail";
           mail_domain = "vanpetegem.me";
+          trashbin_retention_obligation = "auto, 30";
           user_oidc = {
             single_logout = false;
             disable_account_creation = true;
