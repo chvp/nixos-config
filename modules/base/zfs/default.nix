@@ -109,14 +109,14 @@ in
                 if elem.fast then
                   "1hour=>15min,1day=>1hour,1week=>1day,4week=>1week"
                 else
-                  "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
+                  "1day=>1hour,1week=>1day,4week=>1week,1year=>4week";
               timestampFormat = "%Y-%m-%d--%H%M%SZ";
               destinations."${elem.location}" = {
                 plan =
                   if elem.fast then
-                    "1day=>1hour,1week=>1day,4week=>1week,1year=>4week,10year=>1year"
+                    "1day=>1hour,1week=>1day,4week=>1week,1year=>4week"
                   else
-                    "1day=>1hour,1week=>1day,4week=>1week,1year=>1month,10year=>6month";
+                    "1day=>1hour,1week=>1day,4week=>1week,1year=>4week";
                 host = "${elem.location}";
                 dataset = elem.remotePath;
               };
