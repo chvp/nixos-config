@@ -90,7 +90,7 @@ in
             init.defaultBranch = "main";
             merge.conflictStyle = "diff3";
             pull.rebase = true;
-            push.autoSetupRemote = true;
+            pusd.default = "current";
             rebase.autoStash = true;
             rerere.enabled = true;
             user = {
