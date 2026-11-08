@@ -27,9 +27,9 @@ in
     services.transmission = {
       enable = true;
       package = pkgs.transmission_4.overrideAttrs (old: {
-        version = "4.1.3";
+        version = "4.1.4";
         src = old.src.overrideAttrs (oldSrc: {
-          hash = "sha256-4349gc7+1k0y5CwHTQe8bLQsuNW5w7pckR0MCeulIEE=";
+          hash = "sha256-gkb0Hl+ZVBhQCQSMapllRhoz4uK/lSv6o+Abpvxpyrs=";
         });
       });
       user = username;

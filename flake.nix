@@ -6,7 +6,6 @@
       url = "github:accentor/flake";
       inputs = {
         api.follows = "accentor-api";
-        devshell.follows = "devshell";
         nixpkgs.follows = "nixpkgs";
         web.follows = "accentor-web";
       };
@@ -20,10 +19,7 @@
     };
     accentor-desktop = {
       url = "github:accentor/desktop";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     accentor-web = {
       url = "github:accentor/web";
@@ -79,10 +75,7 @@
     };
     tetris = {
       url = "github:chvp/tetris";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     www-chvp-be = {
       url = "git+https://git.chvp.be/chvp/www.chvp.be";
@@ -116,16 +109,16 @@
       overlay = inputs.nixpkgs.lib.composeManyExtensions [
         inputs.agenix.overlays.default
         inputs.accentor.overlays.default
+        inputs.accentor-desktop.overlays.default
         inputs.devshell.overlays.default
+        inputs.de-lijst.overlays.default
         inputs.emacs-overlay.overlays.default
+        inputs.entrance-exam.overlays.default
+        inputs.tetris.overlays.default
         inputs.www-chvp-be.overlays.default
         (final: prev: {
           firefox-addons =
             inputs.rycee-nur-expressions.legacyPackages.${final.stdenv.hostPlatform.system}.firefox-addons;
-          accentor-desktop = inputs.accentor-desktop.packages.${final.stdenv.hostPlatform.system}.default;
-          de-lijst = inputs.de-lijst.packages.${final.stdenv.hostPlatform.system}.default;
-          entrance-exam = inputs.entrance-exam.packages.${final.stdenv.hostPlatform.system}.default;
-          tetris = inputs.tetris.packages.${final.stdenv.hostPlatform.system}.default;
         })
       ];
       module = {
