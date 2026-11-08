@@ -38,10 +38,7 @@
     };
     de-lijst = {
       url = "git+https://git.chvp.be/chvp/de-lijst";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     devshell = {
       url = "github:numtide/devshell";

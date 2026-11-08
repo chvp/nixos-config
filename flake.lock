@@ -156,43 +156,18 @@
         "type": "github"
       }
     },
-    "bundix_2": {
-      "inputs": {
-        "nixpkgs": [
-          "de-lijst",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1762235257,
-        "narHash": "sha256-QyXFgaXQETr9BmwUbWM/2EtF+my6Arpt71xItZy3NL8=",
-        "owner": "inscapist",
-        "repo": "bundix",
-        "rev": "2233b24084316b4de1d55321483554f457a09cfc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "inscapist",
-        "repo": "bundix",
-        "type": "github"
-      }
-    },
     "de-lijst": {
       "inputs": {
-        "bundix": "bundix_2",
-        "devshell": [
-          "devshell"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794011152,
-        "narHash": "sha256-8d0ug2vfyxoa6Ji14OfhKJic+3orQ1rsZDd5tmY0jI8=",
+        "lastModified": 1794106661,
+        "narHash": "sha256-kmB08cpgjWGUmfiuQIdrEM2T4+ps5yZQUqXY7YlNB7A=",
         "ref": "refs/heads/main",
-        "rev": "98bdc2eb787ee7fc00d3e7d480d7a149b6df6e7d",
-        "revCount": 80,
+        "rev": "1df7d0623c8dc4eec2a246972cbe23616cc20f02",
+        "revCount": 82,
         "type": "git",
         "url": "https://git.chvp.be/chvp/de-lijst"
       },
