@@ -177,27 +177,6 @@
         "type": "github"
       }
     },
-    "bundix_3": {
-      "inputs": {
-        "nixpkgs": [
-          "entrance-exam",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1762235257,
-        "narHash": "sha256-QyXFgaXQETr9BmwUbWM/2EtF+my6Arpt71xItZy3NL8=",
-        "owner": "inscapist",
-        "repo": "bundix",
-        "rev": "2233b24084316b4de1d55321483554f457a09cfc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "inscapist",
-        "repo": "bundix",
-        "type": "github"
-      }
-    },
     "de-lijst": {
       "inputs": {
         "bundix": "bundix_2",
@@ -265,20 +244,16 @@
     },
     "entrance-exam": {
       "inputs": {
-        "bundix": "bundix_3",
-        "devshell": [
-          "devshell"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794098824,
-        "narHash": "sha256-/haq5oqczx2jL2fWbb4D7jsig+69vjvc6DkaTvn/q6U=",
+        "lastModified": 1794103986,
+        "narHash": "sha256-7VR8kgsXPk4rnwA29DwiF1vpivFlSGWtFoR83k2H8cs=",
         "ref": "refs/heads/main",
-        "rev": "b2718a9cd94994b350d6c025e6976aabd6a326c6",
-        "revCount": 51,
+        "rev": "e805c7d3a6bab64f47e56ab5ed7b55ab30315f52",
+        "revCount": 53,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },

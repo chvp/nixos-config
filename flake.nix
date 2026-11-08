@@ -53,10 +53,7 @@
     };
     entrance-exam = {
       url = "git+https://git.chvp.be/chvp/entrance-exam";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
