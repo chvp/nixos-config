@@ -51,6 +51,13 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    entrance-exam = {
+      url = "git+https://git.chvp.be/chvp/entrance-exam";
+      inputs = {
+        devshell.follows = "devshell";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -126,6 +133,7 @@
             inputs.rycee-nur-expressions.legacyPackages.${final.stdenv.hostPlatform.system}.firefox-addons;
           accentor-desktop = inputs.accentor-desktop.packages.${final.stdenv.hostPlatform.system}.default;
           de-lijst = inputs.de-lijst.packages.${final.stdenv.hostPlatform.system}.default;
+          entrance-exam = inputs.entrance-exam.packages.${final.stdenv.hostPlatform.system}.default;
           tetris = inputs.tetris.packages.${final.stdenv.hostPlatform.system}.default;
         })
       ];

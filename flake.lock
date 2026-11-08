@@ -177,6 +177,27 @@
         "type": "github"
       }
     },
+    "bundix_3": {
+      "inputs": {
+        "nixpkgs": [
+          "entrance-exam",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762235257,
+        "narHash": "sha256-QyXFgaXQETr9BmwUbWM/2EtF+my6Arpt71xItZy3NL8=",
+        "owner": "inscapist",
+        "repo": "bundix",
+        "rev": "2233b24084316b4de1d55321483554f457a09cfc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "inscapist",
+        "repo": "bundix",
+        "type": "github"
+      }
+    },
     "de-lijst": {
       "inputs": {
         "bundix": "bundix_2",
@@ -240,6 +261,30 @@
         "owner": "nix-community",
         "repo": "emacs-overlay",
         "type": "github"
+      }
+    },
+    "entrance-exam": {
+      "inputs": {
+        "bundix": "bundix_3",
+        "devshell": [
+          "devshell"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794098824,
+        "narHash": "sha256-/haq5oqczx2jL2fWbb4D7jsig+69vjvc6DkaTvn/q6U=",
+        "ref": "refs/heads/main",
+        "rev": "b2718a9cd94994b350d6c025e6976aabd6a326c6",
+        "revCount": 51,
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/entrance-exam"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.chvp.be/chvp/entrance-exam"
       }
     },
     "flake-compat": {
@@ -427,6 +472,7 @@
         "de-lijst": "de-lijst",
         "devshell": "devshell",
         "emacs-overlay": "emacs-overlay",
+        "entrance-exam": "entrance-exam",
         "home-manager": "home-manager",
         "microvm": "microvm",
         "nix-index-database": "nix-index-database",

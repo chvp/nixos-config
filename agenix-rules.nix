@@ -45,6 +45,8 @@ in
 
   "secrets/passwords/services/de-lijst.age".publicKeys = [ marabethia ] ++ users;
 
+  "secrets/passwords/services/entrance-exam.age".publicKeys = [ marabethia ] ++ users;
+
   "secrets/files/services/phone-push-url.age".publicKeys = hosts ++ users;
 
   "secrets/passwords/services/mail/mailserver-ldap-token.age".publicKeys = [ marabethia ] ++ users;

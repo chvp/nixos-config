@@ -12,6 +12,7 @@
     ./containers
     ./data-access
     ./de-lijst
+    ./entrance-exam
     ./git
     ./mail
     ./matrix
