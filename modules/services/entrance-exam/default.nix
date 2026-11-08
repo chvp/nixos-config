@@ -15,6 +15,7 @@
       env = {
         BOOTSNAP_READONLY = "TRUE";
         PIDFILE = "/run/entrance-exam/server.pid";
+        PORT = "3001";
         RACK_ENV = "production";
         RAILS_ENV = "production";
         RAILS_LOG_TO_STDOUT = "yes";
@@ -86,7 +87,7 @@
               tryFiles = "$uri @app";
             };
             "@app" = {
-              proxyPass = "http://localhost:3000";
+              proxyPass = "http://localhost:3001";
               extraConfig = ''
                 proxy_set_header X-Forwarded-Ssl on;
                 client_max_body_size 40M;
