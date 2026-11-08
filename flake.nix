@@ -86,10 +86,7 @@
     };
     www-chvp-be = {
       url = "git+https://git.chvp.be/chvp/www.chvp.be";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

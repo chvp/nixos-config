@@ -495,19 +495,16 @@
     },
     "www-chvp-be": {
       "inputs": {
-        "devshell": [
-          "devshell"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794047062,
-        "narHash": "sha256-bnN1ooJFL65pPQHuAUiSnvE/zXWK9Keb6RVnPbmihck=",
+        "lastModified": 1794147626,
+        "narHash": "sha256-/8JiS2s25DyK+YmnXERm978ezAQF56FNhgznEzY077g=",
         "ref": "refs/heads/main",
-        "rev": "cb8f22b376a15a5aaa64b41b3b85cf3715dd217a",
-        "revCount": 363,
+        "rev": "6672ae6ddb5a990b617682d2cdda4bb67c3e85f9",
+        "revCount": 365,
         "type": "git",
         "url": "https://git.chvp.be/chvp/www.chvp.be"
       },
