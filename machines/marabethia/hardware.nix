@@ -122,6 +122,10 @@
       device = "zroot/safe/services/postgresql";
       fsType = "zfs";
     };
+    "/var/log" = {
+      device = "zroot/local/log";
+      fsType = "zfs";
+    };
   };
 
   swapDevices = [
