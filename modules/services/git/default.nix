@@ -56,6 +56,10 @@
           createDatabase = true;
         };
         settings = {
+          actions = {
+            ARTIFACT_RETENTION_DAYS = 30;
+            LOG_RETENTION_DAYS = 30;
+          };
           admin = {
             SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
           };
