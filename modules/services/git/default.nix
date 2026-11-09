@@ -64,6 +64,7 @@
             SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
           };
           repository = {
+            DISABLE_DOWNLOAD_SOURCE_ARCHIVES = true;
             ENABLE_PUSH_CREATE_USER = true;
             ENABLE_PUSH_CREATE_ORG = true;
           };
