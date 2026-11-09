@@ -85,6 +85,10 @@
       device = "zdata/local/services/accentor-transcode-cache";
       fsType = "zfs";
     };
+    "/var/lib/jellyfin" = {
+      device = "zroot/safe/services/jellyfin";
+      fsType = "zfs";
+    };
     "/var/lib/nixos" = {
       device = "zroot/safe/services/nixos";
       fsType = "zfs";
@@ -96,6 +100,10 @@
     };
     "/var/lib/transmission" = {
       device = "zroot/safe/services/transmission";
+      fsType = "zfs";
+    };
+    "/var/log" = {
+      device = "zroot/local/log";
       fsType = "zfs";
     };
   };

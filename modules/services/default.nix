@@ -14,6 +14,7 @@
     ./de-lijst
     ./entrance-exam
     ./git
+    ./jellyfin
     ./mail
     ./matrix
     ./mumble
