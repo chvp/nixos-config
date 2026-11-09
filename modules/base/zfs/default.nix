@@ -114,7 +114,7 @@ in
               destinations."${elem.location}" = {
                 plan =
                   if elem.fast then
-                    "1day=>1hour,1week=>1day,4week=>1week,1year=>4week"
+                    "1day=>1hour,1week=>1day,4week=>1week,3months=>4week"
                   else
                     "1day=>1hour,1week=>1day,4week=>1week,1year=>4week";
                 host = "${elem.location}";
