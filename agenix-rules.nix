@@ -76,10 +76,10 @@ in
   "secrets/passwords/services/murmur.age".publicKeys = [ marabethia ] ++ users;
 
   "secrets/passwords/services/data-basic-auth.age".publicKeys = [ elendel ] ++ users;
+  "secrets/passwords/services/torrents-basic-auth.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = nixosHosts ++ users;
 
-  "secrets/files/programs/transmission/config.json.age".publicKeys = [ elendel ] ++ users;
 
   "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ marabethia ] ++ users;
