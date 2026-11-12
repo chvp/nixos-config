@@ -32,6 +32,7 @@
         read-buffer-completion-ignore-case t
         read-file-name-completion-ignore-case t
         require-final-newline t
+        safe-local-variable-values '((smie-indent-basic . 2) (smie-indent-basic . 4))
         savehist-mode t
         save-place-mode t
         scroll-bar-mode nil
