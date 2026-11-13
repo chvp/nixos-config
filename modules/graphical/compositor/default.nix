@@ -652,7 +652,7 @@ in
             chooser_type=dmenu
             chooser_cmd=${lib.getExe wrappedBemenu}
           '';
-          onChange = "systemctl --user restart xdg-desktop-portal-wlr.service";
+          onChange = "${lib.getExe' pkgs.systemd "systemctl"} --user restart xdg-desktop-portal-wlr.service";
         };
       };
       wayland.systemd.target = "mango-session.target";
