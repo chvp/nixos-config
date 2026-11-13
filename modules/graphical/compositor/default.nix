@@ -8,9 +8,17 @@
 
 let
   username = config.chvp.username;
+  wrappedBemenu = pkgs.writeShellScriptBin "bemenu" ''
+    if [[ "$(${lib.getExe pkgs.darkman} get)" == "dark" ]]
+    then
+      export BEMENU_OPTS='--fb "#303446" --ff "#c6d0f5" --nb "#303446" --nf "#c6d0f5" --tb "#303446" --hb "#303446" --tf "#e78284" --hf "#e5c890" --af "#c6d0f5" --ab "#303446"'
+    else
+      export BEMENU_OPTS='--fb "#eff1f5" --ff "#4c4f69" --nb "#eff1f5" --nf "#4c4f69" --tb "#eff1f5" --hb "#eff1f5" --tf "#d20f39" --hf "#df8e1d" --af "#4c4f69" --ab "#eff1f5"'
+    fi
+    ${lib.getExe pkgs.bemenu} -w -l 40 -p select -n --counter always -P '*'
+  '';
   launcher = import ./launcher.nix {
-    inherit pkgs;
-    stdenv = pkgs.stdenv;
+    inherit pkgs wrappedBemenu;
   };
   color-picker = import ./color-picker.nix { inherit pkgs unstablePkgs; };
   screenshot = import ./screenshot.nix { inherit pkgs; };
@@ -67,7 +75,7 @@ let
         WAYLAND_DISPLAY="$(${pkgs.findutils}/bin/find /run/user/$UID -mindepth 1 -maxdepth 1 -type s -name wayland-\*)"
         if [ -S "WAYLAND_DISPLAY" ]
         then
-        ${unstablePkgs.mango}/bin/mmsg dispatch reload_config
+          ${unstablePkgs.mango}/bin/mmsg dispatch reload_config
         fi
     fi
   '';
@@ -637,6 +645,14 @@ in
             overlay_color = 0xe5c890ff
           '';
           onChange = reload-config;
+        };
+        "xdg-desktop-portal-wlr/config" = {
+          text = ''
+            [screencast]
+            chooser_type=dmenu
+            chooser_cmd=${lib.getExe wrappedBemenu}
+          '';
+          onChange = "systemctl --user restart xdg-desktop-portal-wlr.service";
         };
       };
       wayland.systemd.target = "mango-session.target";

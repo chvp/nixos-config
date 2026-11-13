@@ -1,8 +1,7 @@
-{ pkgs, stdenv }:
+{ pkgs, wrappedBemenu }:
 let
   script = pkgs.replaceVars ./launcher.zsh {
     inherit (pkgs)
-      bemenu
       darkman
       foot
       nix
@@ -10,6 +9,7 @@ let
       wl-clipboard
       zsh
       ;
+    bemenu = wrappedBemenu;
   };
 in
 pkgs.runCommand "launcher" { } ''
