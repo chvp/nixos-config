@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794160267,
-        "narHash": "sha256-U7BYIgvu61KsvrDX+kXB8MDiQxgc2vVjKoR5/Pj4mSM=",
+        "lastModified": 1794600821,
+        "narHash": "sha256-degz1LExa8AqwGPPi8ZmFwJl866J6oiRsHaAXpYuwaM=",
         "owner": "accentor",
         "repo": "flake",
-        "rev": "2d6ba854b22b145426d359f602cd1d9f38d19a90",
+        "rev": "2f147ea13bc47662001eccaf459bd5b60b487d6e",
         "type": "github"
       },
       "original": {
@@ -37,11 +37,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793994728,
-        "narHash": "sha256-s/je9ZUUZvLraw6lFqepA8YDk+Ou9dUehgBAA8pNy3c=",
+        "lastModified": 1794600729,
+        "narHash": "sha256-UiWj9DNO39td60GAqeI4DCyUNw1Xm1KDNTCwmzwdVFM=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "488044eb07db3209102adce9b366e4dc2f9e7f01",
+        "rev": "86626c1ea737cd5e50cc08e8b5023c1633415874",
         "type": "github"
       },
       "original": {
@@ -80,11 +80,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794039478,
-        "narHash": "sha256-qqe8DNkDxuGvsjAxh3+JKFpMsG2DeSf+XWojEoyM3vQ=",
+        "lastModified": 1794601274,
+        "narHash": "sha256-19fVQjDa6ak4BLixvoL0n4tLSlfbjvSNyYb1SCPhiJY=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "51dd3f53b855466526986454d84148a4c578c265",
+        "rev": "19e3600248d78552c480ec0813e57da4fc42dbc0",
         "type": "github"
       },
       "original": {
@@ -218,11 +218,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794599732,
-        "narHash": "sha256-gm9Zf+HGevd7sGyV1iEfd1LPfXv35yuL0Z0Ye42B4ss=",
+        "lastModified": 1794600418,
+        "narHash": "sha256-3o9Ol7hAfW5rj9r7SEZ0h4VlaTiNKzkDM+RYzydzV2I=",
         "ref": "refs/heads/main",
-        "rev": "c085c0fa2d11b252b3f0a6544f336749ce2e7a47",
-        "revCount": 62,
+        "rev": "423851013e735bb29a605e2d3804994af9a2ebf2",
+        "revCount": 63,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },
