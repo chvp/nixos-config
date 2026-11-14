@@ -57,11 +57,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794158814,
-        "narHash": "sha256-/odfs5qG6rppcmaM+LUmShTrCpPzcxPp5s5NLmbk6XM=",
+        "lastModified": 1794640256,
+        "narHash": "sha256-muMYWu1qq9IsXoJT8MqNyqm3aaEytgAPpT/zOT7+QjY=",
         "owner": "accentor",
         "repo": "desktop",
-        "rev": "a88bfd2f1046baf77857e3cc5259cf4603d40bad",
+        "rev": "3a9152f59c255318df0920af1bcb4540182b35a7",
         "type": "github"
       },
       "original": {
@@ -80,11 +80,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794601721,
-        "narHash": "sha256-UjOJExuqtxZUSZKTHKi5FFDhUNN3XkU3ig6tiwudeyo=",
+        "lastModified": 1794640292,
+        "narHash": "sha256-jWzpHxD3xLeDit/Lo3WR0yTkdbucf6MI9jpLt73TZPE=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "3ec18c21ebdc7db8ffdeec41d6e13581f1a4f00e",
+        "rev": "62b7ed04a58bd5518ac559b164c29ac6ad753bda",
         "type": "github"
       },
       "original": {
@@ -157,11 +157,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794600101,
-        "narHash": "sha256-9Fd8OruDTL7/BX1dKGyu+VVMG9Zc+vR/9oIhL2oyEso=",
+        "lastModified": 1794615830,
+        "narHash": "sha256-5uNp16MtQhZj/ny6uABGPtx96uC8Ur78tDiHPXRZo/U=",
         "ref": "refs/heads/main",
-        "rev": "cee28cecbbd650858b1fa3a4ba40904bf1f0edcb",
-        "revCount": 92,
+        "rev": "fce53479fb369d0e695ac592c50c23c7d9aac316",
+        "revCount": 93,
         "type": "git",
         "url": "https://git.chvp.be/chvp/de-lijst"
       },
@@ -198,11 +198,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1794585524,
-        "narHash": "sha256-TQCuJv27nJFlkX8tQ0A5eeK194OlkhJaHKAxB+1HBCE=",
+        "lastModified": 1794632654,
+        "narHash": "sha256-iADgbwK1z/sUGz0uOeVlK5kX90wrgulhsbxMA6L8ntY=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "fe6d779d60725c83a056946d3cfd08d99bedfdbe",
+        "rev": "3b97e5988d7ec152e346a94198923bf543ca586c",
         "type": "github"
       },
       "original": {
@@ -218,11 +218,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794600418,
-        "narHash": "sha256-3o9Ol7hAfW5rj9r7SEZ0h4VlaTiNKzkDM+RYzydzV2I=",
+        "lastModified": 1794615882,
+        "narHash": "sha256-SDEQxhYvy2pB10DVN1Vo1aOdEnggO1Sit5bziK3scsI=",
         "ref": "refs/heads/main",
-        "rev": "423851013e735bb29a605e2d3804994af9a2ebf2",
-        "revCount": 63,
+        "rev": "78a3b7a75df514579cdf6193b6987b4a42959dd1",
+        "revCount": 64,
         "type": "git",
         "url": "https://git.chvp.be/chvp/entrance-exam"
       },
@@ -392,11 +392,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1794165970,
-        "narHash": "sha256-XuAV2cUwaod3Bt4XFVqiXz3v1w2ex16W6Sv4S7EWres=",
+        "lastModified": 1794552581,
+        "narHash": "sha256-qXFIqA6FCcx7XeDzw0ZNlkDT9UiCzrNDwK8RuU8RcHM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac588ef1c914865dad517b337ea0eb9694a4021c",
+        "rev": "f1e5c356f35d07e7b71a6b5e6c9338e0b029e0c0",
         "type": "github"
       },
       "original": {
@@ -471,11 +471,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794599873,
-        "narHash": "sha256-lcgOB7KOECvFydbMIn5lztVQdXsROQUyug8JPNvTLrs=",
+        "lastModified": 1794640141,
+        "narHash": "sha256-23A8Nff5zarJ+M2grLfSOfdQZFRJj7YdDSfZY9/A7J0=",
         "owner": "chvp",
         "repo": "tetris",
-        "rev": "fb80d5e26c0eefc9b3918d1007ea74d17dec6ebb",
+        "rev": "a22a67aa7494151f042ba29f629755654cb73bbc",
         "type": "github"
       },
       "original": {
