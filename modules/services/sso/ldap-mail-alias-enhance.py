@@ -19,6 +19,8 @@ alias_map = {
 
     b"huis@vanpetegem.me": b"huis@vanpetegem.be",
 
+    b"noreply@vanpetegem.me": b"noreply@vanpetegem.be",
+
     b"peter@vanpetegem.me": b"peter@vanpetegem.be",
 
     b"robbe@vanpetegem.me": b"robbe@vanpetegem.be",
