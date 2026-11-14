@@ -52,7 +52,7 @@ def replaceMailAliasInFilter(filter):
         return filter
     return filter
 
-class LoggingProxy(ProxyBase):
+class MailAlias(ProxyBase):
     def handleBeforeForwardRequest(self, request, controls, reply):
         if not isinstance(request, pureldap.LDAPSearchRequest):
             return defer.succeed((request, controls))
@@ -60,7 +60,7 @@ class LoggingProxy(ProxyBase):
         return defer.succeed((request, controls))
 
 
-class LoggingProxyService(Service):
+class MailAliasService(Service):
     endpointStr = "tcp:1636"
     proxiedEndpointStr = 'ssl:sso.vanpetegem.be:636'
 
@@ -75,7 +75,7 @@ class LoggingProxyService(Service):
             LDAPClient)
 
         def buildProtocol():
-            proto = LoggingProxy()
+            proto = MailAlias()
             proto.clientConnector = clientConnector
             proto.use_tls = use_tls
             return proto
@@ -98,5 +98,5 @@ class LoggingProxyService(Service):
 
 
 application = Application("Logging LDAP Proxy")
-service = LoggingProxyService()
+service = MailAliasService()
 service.setServiceParent(application)
