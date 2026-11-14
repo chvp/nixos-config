@@ -85,8 +85,6 @@ in
       accounts = {
         "huis@vanpetegem.me".hashedPasswordFile =
           config.age.secrets."passwords/services/mail/huis@vanpetegem.me".path;
-        "peter@vanpetegem.me".hashedPasswordFile =
-          config.age.secrets."passwords/services/mail/peter@vanpetegem.me".path;
         "robbe@robbevanpetegem.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/robbe@robbevanpetegem.be".path;
           aliases = [ "@robbevanpetegem.be" ];
@@ -109,10 +107,6 @@ in
         # Service accounts
         "forgejo@robbevp.be" = {
           hashedPasswordFile = config.age.secrets."passwords/services/mail/forgejo@robbevp.be".path;
-        };
-        "noreply@vanpetegem.me" = {
-          hashedPasswordFile = config.age.secrets."passwords/services/mail/noreply@vanpetegem.me".path;
-          sendOnly = true;
         };
       };
       indexDir = "/var/lib/dovecot/indices";
@@ -219,10 +213,6 @@ in
         ../../../secrets/passwords/services/mail/huis_at_vanpetegem.me.age;
       "passwords/services/mail/info@eenstweedrie.be".file =
         ../../../secrets/passwords/services/mail/info_at_eenstweedrie.be.age;
-      "passwords/services/mail/noreply@vanpetegem.me".file =
-        ../../../secrets/passwords/services/mail/noreply_at_vanpetegem.me.age;
-      "passwords/services/mail/peter@vanpetegem.me".file =
-        ../../../secrets/passwords/services/mail/peter_at_vanpetegem.me.age;
       "passwords/services/mail/robbe@robbevanpetegem.be".file =
         ../../../secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age;
     };

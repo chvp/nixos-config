@@ -55,8 +55,6 @@ in
   "secrets/passwords/services/mail/hallo_at_robbe.be.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/huis_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/info_at_eenstweedrie.be.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/passwords/services/mail/noreply_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
-  "secrets/passwords/services/mail/peter_at_vanpetegem.me.age".publicKeys = [ marabethia ] ++ users;
   "secrets/passwords/services/mail/robbe_at_robbevanpetegem.be.age".publicKeys = [
     marabethia
   ]
