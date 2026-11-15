@@ -17,12 +17,12 @@ alias_map = {
     b"@estherdereys.be": b"hallo@estherdereys.be",
     b"@eenstweedrie.be": b"info@eenstweedrie.be",
 
-    b"huis@vanpetegem.me": b"huis@vanpetegem.be",
-
     b"noreply@vanpetegem.me": b"noreply@vanpetegem.be",
 
     b"peter@vanpetegem.me": b"peter@vanpetegem.be",
 
+    b"huis@vanpetegem.be": b"hallo@robbe.be",
+    b"huis@vanpetegem.me": b"hallo@robbe.be",
     b"robbe@vanpetegem.me": b"robbe@vanpetegem.be",
     b"robbe.nb@vanpetegem.be": b"robbe@vanpetegem.be",
     b"robbe.nb@vanpetegem.me": b"robbe@vanpetegem.be",
