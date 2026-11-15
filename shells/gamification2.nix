@@ -6,7 +6,7 @@
   libyaml,
   nodejs,
   openssl,
-  postgresql_14,
+  postgresql_18,
   ruby_4_0,
   yarn,
   zlib,
@@ -68,7 +68,7 @@ devshell.mkShell {
   packages = [
     cmake
     nodejs
-    (lib.lowPrio postgresql_14)
+    (lib.lowPrio postgresql_18)
     yarn
   ];
   serviceGroups.server.services = {
@@ -79,7 +79,7 @@ devshell.mkShell {
   language.ruby = {
     package = ruby_4_0;
     nativeDeps = [
-      postgresql_14
+      postgresql_18
       zlib
       openssl
       libyaml
