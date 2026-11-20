@@ -12,10 +12,7 @@
     };
     accentor-api = {
       url = "github:accentor/api";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     accentor-desktop = {
       url = "github:accentor/desktop";
@@ -23,10 +20,7 @@
     };
     accentor-web = {
       url = "github:accentor/web";
-      inputs = {
-        devshell.follows = "devshell";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix = {
       url = "github:ryantm/agenix";
