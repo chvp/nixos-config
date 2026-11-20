@@ -84,7 +84,10 @@ in
             signByDefault = true;
           };
           settings = {
-            branch.autoSetupRebase = "always";
+            branch = {
+              autoSetupMerge = false;
+              autoSetupRebase = "always";
+            };
             fetch.prune = true;
             github.user = "chvp";
             init.defaultBranch = "main";
