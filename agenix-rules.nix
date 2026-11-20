@@ -78,7 +78,6 @@ in
 
   "secrets/files/programs/ssh/host_configuration.age".publicKeys = nixosHosts ++ users;
 
-
   "secrets/files/services/matrix-synapse/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/mautrix-whatsapp/config.yml.age".publicKeys = [ marabethia ] ++ users;
   "secrets/files/services/mautrix-whatsapp/registration.yml.age".publicKeys = [ marabethia ] ++ users;

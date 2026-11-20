@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   options.chvp.services.entrance-exam.enable = lib.mkOption {
@@ -26,9 +31,9 @@
         RUBY_ENABLE_YJIT = "1";
         SOLID_QUEUE_IN_PUMA = "1";
       };
-      exports = lib.concatStringsSep
-        "\n"
-        (lib.mapAttrsToList (name: value: "export ${name}=\"${value}\"") env);
+      exports = lib.concatStringsSep "\n" (
+        lib.mapAttrsToList (name: value: "export ${name}=\"${value}\"") env
+      );
       console = pkgs.writeShellScriptBin "entrance-exam-console" ''
         ${exports}
         export $(cat ${environmentFile} | xargs)
@@ -44,7 +49,10 @@
       '';
     in
     {
-      environment.systemPackages = [ console shell ];
+      environment.systemPackages = [
+        console
+        shell
+      ];
       systemd.tmpfiles.rules = [
         "d /run/entrance-exam 0755 entrance-exam entrance-exam -"
         "d ${home}/storage 0755 entrance-exam entrance-exam -"
@@ -54,7 +62,10 @@
           after = [ "network.target" ];
           wantedBy = [ "multi-user.target" ];
           environment = env;
-          path = [ gemsPackage gemsPackage.wrappedRuby ];
+          path = [
+            gemsPackage
+            gemsPackage.wrappedRuby
+          ];
           serviceConfig = {
             EnvironmentFile = environmentFile;
             Type = "simple";
