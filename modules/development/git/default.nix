@@ -95,6 +95,7 @@ in
             pull.rebase = true;
             push.default = "current";
             rebase.autoStash = true;
+            remote.pushDefault = "origin";
             rerere.enabled = true;
             user = {
               email = config.chvp.development.git.email;
