@@ -28,20 +28,16 @@
     },
     "accentor-api": {
       "inputs": {
-        "bundix": "bundix",
-        "devshell": [
-          "devshell"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794600729,
-        "narHash": "sha256-UiWj9DNO39td60GAqeI4DCyUNw1Xm1KDNTCwmzwdVFM=",
+        "lastModified": 1795163908,
+        "narHash": "sha256-cJCwgVifGqDd8UkDiIFjHEFfft58wnILE1n8tzeYx9s=",
         "owner": "accentor",
         "repo": "api",
-        "rev": "86626c1ea737cd5e50cc08e8b5023c1633415874",
+        "rev": "f382ba1c4bae24a8ca536d65623c27bd5c5c80fd",
         "type": "github"
       },
       "original": {
@@ -72,19 +68,16 @@
     },
     "accentor-web": {
       "inputs": {
-        "devshell": [
-          "devshell"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1794640292,
-        "narHash": "sha256-jWzpHxD3xLeDit/Lo3WR0yTkdbucf6MI9jpLt73TZPE=",
+        "lastModified": 1795163893,
+        "narHash": "sha256-Ox3PVwrm2TnYoDFxOxdSQ5cLwjP8/dkuvIPriZjk8FA=",
         "owner": "accentor",
         "repo": "web",
-        "rev": "62b7ed04a58bd5518ac559b164c29ac6ad753bda",
+        "rev": "7582d1f473fa896546eb899eb582bb5baf702678",
         "type": "github"
       },
       "original": {
@@ -127,27 +120,6 @@
         "owner": "simple-nixos-mailserver",
         "repo": "blobs",
         "type": "gitlab"
-      }
-    },
-    "bundix": {
-      "inputs": {
-        "nixpkgs": [
-          "accentor-api",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1762235257,
-        "narHash": "sha256-QyXFgaXQETr9BmwUbWM/2EtF+my6Arpt71xItZy3NL8=",
-        "owner": "inscapist",
-        "repo": "bundix",
-        "rev": "2233b24084316b4de1d55321483554f457a09cfc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "inscapist",
-        "repo": "bundix",
-        "type": "github"
       }
     },
     "de-lijst": {
