@@ -163,41 +163,48 @@ in
       x509.useACMEHost = "vanpetegem.me";
     };
 
-    services.dovecot2.settings = {
-      sieve_extensions = {
-        editheader = true;
-        regex = true;
-      };
-      "sieve_script customspamfilter" = {
-        path = pkgs.writeText "custom-spam.sieve" ''
-          require ["fileinto", "regex"];
+    services = {
+      dovecot2.settings = {
+        sieve_extensions = {
+          editheader = true;
+          regex = true;
+        };
+        "sieve_script customspamfilter" = {
+          path = pkgs.writeText "custom-spam.sieve" ''
+            require ["fileinto", "regex"];
 
-          if anyof(
-            # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
-            address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
-            address :regex "From" "[a-z\d]+@tiscali.it",
-            header :contains "From" ["jakubbielec", "Jakub Bielec"],
-            # Stop any mail pretending to be from itsme not from their official domains
-            allof(
-              header :contains "From" "itsme",
-              not address :matches :domain "from" ["*itsme.be", "*itsme-id.com"]
-            )
-          ) {
-              fileinto "Junk";
-              stop;
-          }
-        '';
-        type = "after";
+            if anyof(
+              # Freshdesk is often used to sent spam from emails like `support@info5813.freshdesk.com`
+              address :regex "From" "[a-z\d]+@[a-z\d]+\.freshdesk\.com",
+              address :regex "From" "[a-z\d]+@tiscali.it",
+              header :contains "From" ["jakubbielec", "Jakub Bielec"],
+              # Stop any mail pretending to be from itsme not from their official domains
+              allof(
+                header :contains "From" "itsme",
+                not address :matches :domain "from" ["*itsme.be", "*itsme-id.com"]
+              )
+            ) {
+                fileinto "Junk";
+                stop;
+            }
+          '';
+          type = "after";
+        };
+      };
+
+      rspamd.extraConfig = ''
+        actions {
+          reject = null;
+          add_header = 5;
+          greylist = 4;
+        }
+      '';
+
+      unbound = {
+        enable = true;
+        resolveLocalQueries = true;
       };
     };
-
-    services.rspamd.extraConfig = ''
-      actions {
-        reject = null;
-        add_header = 5;
-        greylist = 4;
-      }
-    '';
 
     age.secrets = {
       "passwords/services/mail/mailserver-ldap-token".file =
