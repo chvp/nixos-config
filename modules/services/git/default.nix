@@ -61,6 +61,7 @@
             LOG_RETENTION_DAYS = 30;
           };
           admin = {
+            EXTERNAL_USER_DISABLE_FEATURES = "manage_password";
             SEND_NOTIFICATION_EMAIL_ON_NEW_USER = true;
           };
           repository = {
@@ -75,8 +76,9 @@
             HTTP_ADDR = "/run/forgejo/forgejo.socket";
           };
           service = {
+            ALLOW_ONLY_EXTERNAL_REGISTRATION = true;
+            ENABLE_INTERNAL_SIGNIN = false;
             ENABLE_NOTIFY_MAIL = true;
-            REGISTER_MANUAL_CONFIRM = true;
           };
           mailer = {
             ENABLED = true;
