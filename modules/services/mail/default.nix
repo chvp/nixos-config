@@ -42,7 +42,6 @@ in
     mailserver = {
       enable = true;
       stateVersion = 5;
-      enableManageSieve = true;
       fqdn = "mail.vanpetegem.me";
       systemName = "vanpetegem.me";
       systemDomain = "mail.vanpetegem.me";
@@ -81,6 +80,7 @@ in
           allowedAddressesFilter = "(&(memberof=spn=mail_users@sso.vanpetegem.be,dc=sso,dc=vanpetegem,dc=be)(|(mail=%s)(mailAlias=%s)))";
         };
       };
+      listeners.manageSieve.enable = true;
       accounts = {
         "huis@vanpetegem.me".hashedPasswordFile =
           config.age.secrets."passwords/services/mail/huis@vanpetegem.me".path;
@@ -200,6 +200,7 @@ in
         }
       '';
 
+      resolved.enable = false;
       unbound = {
         enable = true;
         resolveLocalQueries = true;
