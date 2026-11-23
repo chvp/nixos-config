@@ -59,7 +59,6 @@ in
         "vanpetegem.be"
         "vanpetegem.me"
       ];
-      localDnsResolver = false;
       ldap = {
         enable = true;
         uris = [ "ldap://localhost:1636" ];
