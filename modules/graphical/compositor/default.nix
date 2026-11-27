@@ -311,6 +311,7 @@ in
         screenshot
         pkgs.wl-clipboard
         pkgs.wl-mirror
+        pkgs.wlr-randr
       ];
       programs = {
         waybar = {

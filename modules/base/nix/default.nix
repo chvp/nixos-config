@@ -108,7 +108,7 @@ in
     };
 
     home-manager.users.${username} = lib.recursiveUpdate {
-      home.packages = [ pkgs.attic-client ];
+      home.packages = [ pkgs.attic-client pkgs.nix-output-monitor pkgs.nix-top ];
       programs = {
         command-not-found.enable = false;
         nix-index = {
