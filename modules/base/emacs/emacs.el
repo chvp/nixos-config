@@ -51,7 +51,9 @@
         window-resize-pixelwise t)
 
 (setq custom-file "~/.config/emacs/custom.el")
-(load custom-file)
+(if (file-exists-p (expand-file-name custom-file))
+    (load custom-file)
+  )
 
 (defun chvp--diminish-flyspell-mode ()
   "Diminish `flyspell-mode' when it's enabled."
