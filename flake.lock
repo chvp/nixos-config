@@ -93,11 +93,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792507013,
-        "narHash": "sha256-8tKjSQajD3mUND1GaAuaWTcuyUpgcGsh5V+l4ibzC7U=",
+        "lastModified": 1795823210,
+        "narHash": "sha256-yPlK2RCDORlzdflKxIudPZ1fspEGTvHxrdUl54R1mOk=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "5e5b88a0c8e56f291a108c2fe9934054d9745b2e",
+        "rev": "60b6a60f2503f93d131b74c2f7f8600dc6ffbb28",
         "type": "github"
       },
       "original": {
@@ -351,11 +351,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1795772528,
-        "narHash": "sha256-LM64qR9QdRlncqHnH0HJl1d1Y4MIrgyUp5vKQMWy0tc=",
-        "rev": "7387b85bd88ea125935fc231d98dbeec84ca33da",
+        "lastModified": 1795806733,
+        "narHash": "sha256-YN3L1AO3ZkKXkiaggC7x9I1UjOCqWvew/I3BHkBO6OY=",
+        "rev": "0c08d75a1e6735054cfad1a121a4a7083dfe9034",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-27.05pre1131378.7387b85bd88e/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-27.05pre1131632.0c08d75a1e67/nixexprs.tar.zst"
       },
       "original": {
         "type": "tarball",
